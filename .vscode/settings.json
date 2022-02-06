@@ -45,11 +45,11 @@
         "**/*.unity":true,
         "build/":true,
         "Build/":true,
-        "Library/":true,
-        "library/":true,
+        "Library/":false,
+        "library/":false,
         "obj/":true,
         "Obj/":true,
-        "ProjectSettings/":true,
+        "ProjectSettings/":false,
         "temp/":true,
         "Temp/":true
     }

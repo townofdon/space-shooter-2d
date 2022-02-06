@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NukeShockwave
+  - NukeEdge
+  - NukeCore
+  - NukeRadius
+  - EnemyShip
+  - DisruptorRing
   layers:
   - Default
   - TransparentFX
@@ -11,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - FX
   - 
   - 
   - 
@@ -38,6 +44,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 578443963
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 381646693
+    locked: 0
+  - name: FX
+    uniqueID: 244279707
     locked: 0
