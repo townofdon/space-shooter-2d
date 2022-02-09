@@ -26,7 +26,6 @@ namespace Player {
 
         // components
         CircleCollider2D col;
-        Collider2D[] colliders;
         Rigidbody2D rb;
         Animator shipFlashEffect;
 
@@ -53,10 +52,9 @@ namespace Player {
             col = Utils.GetRequiredComponent<CircleCollider2D>(gameObject);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
             shipFlashEffect = Utils.GetRequiredComponent<Animator>(shipFlash);
-            colliders = transform.GetComponentsInChildren<Collider2D>();
             // init
-            // health = startHealth;
             ResetHealth();
+            SetColliders();
             RegisterDamageCallbacks(OnDeath, OnDamageTaken);
 
             // TODO: REMOVE
@@ -95,6 +93,10 @@ namespace Player {
         }
 
         void OnTriggerEnter2D(Collider2D other) {
+            if (other.tag == UTag.NukeShockwave) {
+                TriggerShockwaveBlast(other.transform.position);
+                return;
+            }
             DamageReceiver actor = other.GetComponent<DamageReceiver>();
             if (actor == null) return;
             if (actor.rigidbody == null) return;
@@ -111,12 +113,6 @@ namespace Player {
             // billiards effect - whatever object is moving faster transfers the velocity to the other rigidbody
             this.rb.velocity         += rb.velocity.normalized * otherMagnitude * collideThrowbackFromVelocity;
             actor.rigidbody.velocity += actor.rigidbody.velocity.normalized * selfMagnitude * collideThrowbackFromVelocity;
-        }
-
-        void IgnoreCollider(Collider2D other) {
-            foreach (var collider in colliders) {
-                Physics2D.IgnoreCollision(other, collider);
-            }
         }
 
         void TriggerShockwaveBlast(Vector3 shockwaveOrigin) {
@@ -156,6 +152,7 @@ namespace Player {
 
         IEnumerator HullDamageAnimation() {
             if (damageCoroutine != null) StopCoroutine(damageCoroutine);
+            StartCoroutine(GameFeel.ShakeScreen(Camera.main, 0.15f, 0.05f));
             shipFlash.SetActive(true);
             yield return new WaitForSeconds(hitRecoveryTime);
             shipFlash.SetActive(false);
@@ -164,6 +161,8 @@ namespace Player {
         }
 
         IEnumerator DeathAnimation() {
+            if (damageCoroutine != null) StopCoroutine(damageCoroutine);
+            StartCoroutine(GameFeel.ShakeScreen(Camera.main, 0.3f, 0.2f));
             // TODO: PLAY PRELIMINARY DEATH SOUND
             ship.SetActive(false);
             yield return HullDamageAnimation();

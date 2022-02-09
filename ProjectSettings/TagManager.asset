@@ -10,6 +10,8 @@ TagManager:
   - NukeRadius
   - EnemyShip
   - DisruptorRing
+  - Laser
+  - Bullet
   layers:
   - Default
   - TransparentFX

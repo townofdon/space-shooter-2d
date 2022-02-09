@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageType: 5
   _baseDamage: 75
+  _damageVariance: 0
   _shieldEffectiveness: 1
   _shieldedHealthEffectiveness: 0.5
   _unshieldedHealthEffectiveness: 1

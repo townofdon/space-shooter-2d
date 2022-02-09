@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Core;
 using Damage;
+using Weapons;
 
 namespace Game {
 
@@ -14,8 +15,15 @@ namespace Game {
         [SerializeField] List<DamageClass> _damageClasses = new List<DamageClass>();
         Dictionary<DamageType, DamageClass> _damageClassLookup = new Dictionary<DamageType, DamageClass>();
 
+        [SerializeField] List<WeaponClass> _weaponClasses = new List<WeaponClass>();
+        Dictionary<WeaponType, WeaponClass> _weaponClassLookup = new Dictionary<WeaponType, WeaponClass>();
+
         public DamageClass GetDamageClass(DamageType damageType) {
             return _damageClassLookup[damageType];
+        }
+
+        public WeaponClass GetWeaponClass(WeaponType weaponType) {
+            return _weaponClassLookup[weaponType];
         }
 
         // singleton
@@ -25,21 +33,30 @@ namespace Game {
         void Awake() {
             _current = Utils.ManageSingleton<GameManager>(_current, this);
             SetupDamageClasses();
+            SetupWeaponClasses();
         }
 
         public void SetupDamageClasses() {
             foreach (var damageClass in _damageClasses) {
                 _damageClassLookup.Add(damageClass.damageType, damageClass);
             }
-
-            // assert all damage classes present
             foreach(DamageType damageType in System.Enum.GetValues(typeof(DamageType))) {
                 try {
-                    // note - the dictionary lookup itself will fail, which is fine
-                    if (_damageClassLookup[damageType] == null) {
-                        string name = System.Enum.GetName(typeof(DamageType), damageType);
-                        Debug.LogError("ERR: damage type \"" + name + "\" was not loaded");
-                    }
+                    // note - the dictionary lookup will fail if missing
+                    _damageClassLookup[damageType] = _damageClassLookup[damageType];
+                } catch (System.Exception e) {
+                    Debug.LogException(e);
+                }
+            }
+        }
+
+        public void SetupWeaponClasses() {
+            foreach (var weaponClass in _weaponClasses) {
+                _weaponClassLookup.Add(weaponClass.weaponType, weaponClass);
+            }
+            foreach(WeaponType weaponType in System.Enum.GetValues(typeof(WeaponType))) {
+                try {
+                    _weaponClassLookup[weaponType] = _weaponClassLookup[weaponType];
                 } catch (System.Exception e) {
                     Debug.LogException(e);
                 }

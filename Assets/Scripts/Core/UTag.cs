@@ -9,5 +9,8 @@ namespace Core
         public const string NukeCore = "NukeCore";
         public const string NukeEdge = "NukeEdge";
         public const string EnemyShip = "EnemyShip";
+        public const string DisruptorRing = "DisruptorRing";
+        public const string Laser = "Laser";
+        public const string Bullet = "Bullet";
     }
 }

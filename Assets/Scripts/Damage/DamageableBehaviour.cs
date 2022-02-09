@@ -23,6 +23,8 @@ namespace Damage {
         [SerializeField] System.Action _onDeath;
 
         // cached
+        System.Guid _uuid = System.Guid.NewGuid();
+        protected Collider2D[] colliders;
         DamageClass damageClass;
 
         // state
@@ -33,15 +35,11 @@ namespace Damage {
         float _healthDamageThisFrame = 0f;
         float _shieldDamageThisFrame = 0f;
 
-        // TODO: REMOVE
-        // float _shieldedHealthDamage = 0f;
-        // float _shieldDamage = 1f;
-        // float _unshieldedHealthDamage = 1f;
-
         float _timeShieldHit = 0f;
         bool _isRechargingShield = false;
 
         // getters
+        public System.Guid uuid => _uuid;
         public bool isAlive => _isAlive;
         public float health => _health;
         public float shield => _shield;
@@ -86,15 +84,26 @@ namespace Damage {
             _timeHit = 0f;
         }
 
+        protected void SetColliders() {
+            colliders = transform.GetComponentsInChildren<Collider2D>(true);
+            _EnableColliders();
+        }
+
+        public void IgnoreCollider(Collider2D other) {
+            foreach (var collider in colliders) {
+                Physics2D.IgnoreCollision(other, collider);
+            }
+        }
+
         public bool DrainShield(float amount) {
             if (!_isAlive) return false;
-
             if (_shield > 0f && amount > 0f) {
                 _timeShieldHit = 1f;
                 InvokeCallback(_onShieldDrained, amount, true);
             }
             _shield = Mathf.Max(_shield - amount, 0f);
 
+            // TODO: REMOVE
             Debug.Log("shield >> " + _shield);
 
             return true;
@@ -148,8 +157,21 @@ namespace Damage {
 
         private void _Die() {
             _isAlive = false;
+            _DisableColliders();
             InvokeCallback(_onDeath);
             if (_destroyOnDeath) Destroy(gameObject);
+        }
+
+        private void _EnableColliders() {
+            foreach (var collider in colliders) {
+                collider.enabled = true;
+            }
+        }
+
+        private void _DisableColliders() {
+            foreach (var collider in colliders) {
+                collider.enabled = false;
+            }
         }
 
         // CALLBACK STUFF

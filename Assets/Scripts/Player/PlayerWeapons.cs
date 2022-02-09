@@ -1,51 +1,81 @@
 using UnityEngine;
 using Core;
 using Weapons;
+using Game;
+using Damage;
 
 namespace Player
-{
-
-    enum WeaponType {
-        Nuke,
-        Laser,
-        MachineGun,
-        DisruptorRing
-    }
+{    
 
     public class PlayerWeapons : MonoBehaviour
     {
         [Header("Weapon Settings")][Space]
-        [SerializeField] WeaponType startingWeapon = WeaponType.Nuke;
+        [SerializeField] WeaponType startingWeapon = WeaponType.Laser;
+        [SerializeField] float aimMaxAngle = 30f;
 
-        [Header("Nuke")][Space]
-        [SerializeField] GameObject nuke;
-        [SerializeField] float nukeCooldownTime = 1f;
+        [Header("Gun Objects")][Space]
+        [SerializeField] GameObject mainGuns;
+        [SerializeField] GameObject sideGuns;
+        [SerializeField] GameObject rearGuns;
+
+        [Header("Gun Locations")][Space]
+        [SerializeField] Transform mainGunL;
+        [SerializeField] Transform mainGunR;
+        [SerializeField] Transform sideGunL;
+        [SerializeField] Transform sideGunR;
+        [SerializeField] Transform rearGunL;
+        [SerializeField] Transform rearGunR;
 
         [Header("DisruptorRing")][Space]
-        [SerializeField] GameObject disruptorRing;
-        [SerializeField] float disruptorRingShieldDrain = 25f;
+        [SerializeField] GameObject disruptorRingEffect;
 
         // components
         PlayerGeneral player;
         PlayerInputHandler input;
+
+        // cached
+        WeaponClass laser;
+        WeaponClass machineGun;
+        WeaponClass disruptorRing;
+        WeaponClass nuke;
 
         // state
         WeaponType currentWeapon;
         bool didSwitchWeapon = false;
         float timeDeployingNextWeapon = 0f;
 
+        // state - general weapons
+        float firingTime = 0f;
+        float burstCooldown = 0f;
+        int burstStep = 0;
+        int firingCycle = 0;
+
+        // state - machineGun
+        int machineGunAmmo = 100;
+
         // state - nuke
-        float nukeTime = 0f;
+        int nukeAmmo = 10;
+        float nukeFiringTime = 0f;
 
         void Start()
         {
-            AppIntegrity.AssertPresent<GameObject>(nuke);
-            AppIntegrity.AssertPresent<GameObject>(disruptorRing);
+            AppIntegrity.AssertPresent<GameObject>(disruptorRingEffect);
+            AppIntegrity.AssertPresent<GameObject>(mainGunL);
+            AppIntegrity.AssertPresent<GameObject>(mainGunR);
+            AppIntegrity.AssertPresent<GameObject>(sideGunL);
+            AppIntegrity.AssertPresent<GameObject>(sideGunR);
+            AppIntegrity.AssertPresent<GameObject>(rearGunL);
+            AppIntegrity.AssertPresent<GameObject>(rearGunR);
             input = Utils.GetRequiredComponent<PlayerInputHandler>(gameObject);
             player = Utils.GetRequiredComponent<PlayerGeneral>(gameObject);
+            laser = GameManager.current.GetWeaponClass(WeaponType.Laser);
+            machineGun = GameManager.current.GetWeaponClass(WeaponType.MachineGun);
+            disruptorRing = GameManager.current.GetWeaponClass(WeaponType.DisruptorRing);
+            nuke = GameManager.current.GetWeaponClass(WeaponType.Nuke);
             // init
             currentWeapon = startingWeapon;
-            nukeTime = 0f;
+            firingTime = 0f;
+            nukeFiringTime = 0f;
         }
 
         void Update()
@@ -61,30 +91,95 @@ namespace Player
             if (!player.isAlive) return;
             if (!input.isFirePressed) return;
             if (timeDeployingNextWeapon > 0f) return;
+            if (burstCooldown > 0f) return;
 
-            if (currentWeapon == WeaponType.Nuke && nukeTime <= 0) {
-                Object.Instantiate(nuke, transform.position, new Quaternion(0f,0f,0f,0f));
-                nukeTime = nukeCooldownTime;
+            if (currentWeapon == WeaponType.Laser && firingTime <= 0) {
+                FireProjectile(laser.prefab, mainGunL.position, mainGunL.rotation, laser.lifetime);
+                FireProjectile(laser.prefab, mainGunR.position, mainGunR.rotation, laser.lifetime);
+                if (sideGuns.activeSelf) {
+                    FireProjectile(laser.prefab, sideGunL.position, sideGunL.rotation, laser.lifetime);
+                    FireProjectile(laser.prefab, sideGunR.position, sideGunR.rotation, laser.lifetime);
+                }
+                if (rearGuns.activeSelf) {
+                    FireProjectile(laser.prefab, rearGunL.position, rearGunL.rotation, laser.lifetime);
+                    FireProjectile(laser.prefab, rearGunR.position, rearGunR.rotation, laser.lifetime);
+                }
+                burstStep++;
+                if (burstStep >= laser.burst) {
+                    burstCooldown = laser.burstInterval;
+                    burstStep = 0;
+                }
+                firingTime = laser.firingRate;
+            }
+
+            if (currentWeapon == WeaponType.MachineGun && firingTime <= 0) {
+                if (machineGunAmmo > 0 || machineGun.infiniteAmmo) {
+                    if (firingCycle % 2 == 0) FireProjectile(machineGun.prefab, mainGunL.position, mainGunL.rotation, machineGun.lifetime);
+                    if (firingCycle % 2 == 1) FireProjectile(machineGun.prefab, mainGunR.position, mainGunR.rotation, machineGun.lifetime);
+                    machineGunAmmo--;
+                    burstStep++;
+                }
+                if (sideGuns.activeSelf && (machineGunAmmo > 0 || machineGun.infiniteAmmo)) {
+                    if (firingCycle % 2 == 1) FireProjectile(machineGun.prefab, sideGunL.position, sideGunL.rotation, machineGun.lifetime);
+                    if (firingCycle % 2 == 0) FireProjectile(machineGun.prefab, sideGunR.position, sideGunR.rotation, machineGun.lifetime);
+                    machineGunAmmo--;
+                }
+                if (rearGuns.activeSelf && (machineGunAmmo > 0 || machineGun.infiniteAmmo)) {
+                    if (firingCycle % 2 == 1) FireProjectile(machineGun.prefab, rearGunL.position, rearGunL.rotation, machineGun.lifetime);
+                    if (firingCycle % 2 == 0) FireProjectile(machineGun.prefab, rearGunR.position, rearGunR.rotation, machineGun.lifetime);
+                    machineGunAmmo--;
+                }
+                if (burstStep >= machineGun.burst) {
+                    burstCooldown = machineGun.burstInterval;
+                    burstStep = 0;
+                }
+                firingTime = machineGun.firingRate;
+                firingCycle++;
+            }
+
+            if (currentWeapon == WeaponType.Nuke && nukeFiringTime <= 0) {
+                if (nukeAmmo > 0 || nuke.infiniteAmmo) {
+                    FireProjectile(nuke.prefab, transform.position, Quaternion.identity, nuke.lifetime);
+                    nukeFiringTime = nuke.firingRate;
+                    nukeAmmo -= 1;
+                } else {
+                    // TODO: PLAY SOUND
+                }
             }
 
             if (currentWeapon == WeaponType.DisruptorRing) {
                 if (player.shield > 0f) {
-                    disruptorRing.SetActive(true);
-                    player.DrainShield(disruptorRingShieldDrain * Time.deltaTime);
+                    disruptorRingEffect.SetActive(true);
+                    player.DrainShield(disruptorRing.shieldDrain * Time.deltaTime);
                 } else {
-                    disruptorRing.SetActive(false);
+                    disruptorRingEffect.SetActive(false);
                 }
             }
+
+            if (firingCycle > 99) firingCycle = 0;
+        }
+
+        void FireProjectile(GameObject prefab, Vector3 position, Quaternion rotation, float lifetime) {
+            Quaternion aim = Quaternion.AngleAxis(-input.look.x * aimMaxAngle, Vector3.forward);
+            GameObject instance = Object.Instantiate(prefab, position, aim * rotation);
+            DamageDealer damager = instance.GetComponent<DamageDealer>();
+            Collider2D collider = instance.GetComponent<Collider2D>();
+            if (collider != null) player.IgnoreCollider(instance.GetComponent<Collider2D>());
+            if (damager != null) damager.SetIgnoreTag(UTag.Player);
+            Destroy(instance, lifetime);
         }
 
         void DeactivateWeapons() {
-            if (currentWeapon == WeaponType.DisruptorRing) {
-                disruptorRing.SetActive(false);
-            }
+            firingTime = 0f;
+            burstStep = 0;
+            burstCooldown = 0f;
+            disruptorRingEffect.SetActive(false);
         }
 
         void TickTimers() {
-            nukeTime = Mathf.Clamp(nukeTime - Time.deltaTime, 0f, nukeCooldownTime);
+            firingTime = Mathf.Max(firingTime - Time.deltaTime, 0f);
+            nukeFiringTime = Mathf.Max(nukeFiringTime - Time.deltaTime, 0f);
+            burstCooldown = Mathf.Max(burstCooldown - Time.deltaTime, 0f);
             timeDeployingNextWeapon = Mathf.Max(timeDeployingNextWeapon - Time.deltaTime, 0f);
         }
 
@@ -103,13 +198,21 @@ namespace Player
 
             switch (currentWeapon)
             {
+                case WeaponType.Laser:
+                    currentWeapon = WeaponType.MachineGun;
+                    timeDeployingNextWeapon = machineGun.deploymentTime;
+                    break;
+                case WeaponType.MachineGun:
+                    currentWeapon = WeaponType.Nuke;
+                    timeDeployingNextWeapon = nuke.deploymentTime;
+                    break;
                 case WeaponType.Nuke:
                     currentWeapon = WeaponType.DisruptorRing;
-                    timeDeployingNextWeapon = 0.5f;
+                    timeDeployingNextWeapon = disruptorRing.deploymentTime;
                     break;
                 case WeaponType.DisruptorRing:
-                    currentWeapon = WeaponType.Nuke;
-                    timeDeployingNextWeapon = 0.25f;
+                    currentWeapon = WeaponType.Laser;
+                    timeDeployingNextWeapon = laser.deploymentTime;
                     break;
                 default:
                     break;

@@ -29,7 +29,7 @@ namespace Core {
     * - must initialize upon app start
     */
 
-    enum ULayerType {
+    public enum ULayerType {
         Default,
         UI,
         FX,

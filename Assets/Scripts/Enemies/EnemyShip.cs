@@ -11,7 +11,6 @@ namespace Enemies {
     {
         [Header("Components")][Space]
         [SerializeField] GameObject ship;
-        [SerializeField] GameObject colliders;
         [SerializeField] GameObject explosion;
 
         [Header("Movement")][Space]
@@ -22,19 +21,17 @@ namespace Enemies {
 
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(ship);
-            AppIntegrity.AssertPresent<GameObject>(colliders);
             AppIntegrity.AssertPresent<GameObject>(explosion);
 
             ResetHealth();
+            SetColliders();
             RegisterDamageCallbacks(OnDeath, OnDamageTaken);
             ship.SetActive(true);
-            colliders.SetActive(true);
         }
 
         void Update() {
             TickHealth();
         }
-
 
         void OnDamageTaken(float amount) {
             // Debug.Log("enemy_damage=" + amount + " health=" + health);
@@ -49,7 +46,6 @@ namespace Enemies {
         IEnumerator DeathAnimation() {
             Instantiate(explosion, transform);
             ship.SetActive(false);
-            colliders.SetActive(false);
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
 

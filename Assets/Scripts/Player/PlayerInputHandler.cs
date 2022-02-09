@@ -8,17 +8,24 @@ namespace Player {
     {
         // cached
         Vector2 _move;
+        Vector2 _look;
         bool _isFirePressed = false;
         bool _isBoostPressed = false;
         bool _isSwitchWeaponPressed = false;
 
         public Vector2 move => _move;
+        public Vector2 look => _look;
         public bool isFirePressed => _isFirePressed;
         public bool isBoostPressed => _isBoostPressed;
         public bool isSwitchWeaponPressed => _isSwitchWeaponPressed;
 
         void OnMove(InputValue value) {
             _move = value.Get<Vector2>();
+        }
+
+        void OnLook(InputValue value) {
+            _look = value.Get<Vector2>();
+            Debug.Log(_look);
         }
 
         void OnFire(InputValue value) {

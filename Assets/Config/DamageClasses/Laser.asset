@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: 
   _damageType: 2
-  _baseDamage: 10
+  _baseDamage: 30
+  _damageVariance: 3.7
   _shieldEffectiveness: 1
   _shieldedHealthEffectiveness: 0
   _unshieldedHealthEffectiveness: 0.25
+  _playerEffectiveness: 1
+  _enemyEffectiveness: 1
+  _environmentEffectiveness: 1
+  _npcEffectiveness: 1
