@@ -26218,7 +26218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 50
-  _hitRecoveryTime: 0.2
+  _hitRecoveryTime: 0.05
   _destroyOnDeath: 0
   _maxShield: 100
   _shieldWaitTime: 3
@@ -26242,6 +26242,31 @@ MonoBehaviour:
   - {fileID: 5316389522214553761}
   - {fileID: 5316389521695733010}
   - {fileID: 5316389522306815037}
+  damageSound:
+    soundName: PlayerDamage
+    clips:
+    - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
+    - {fileID: 8300000, guid: 9110c62ef46cad44db77ae0b96721dbf, type: 3}
+    - {fileID: 8300000, guid: ddb4aa71b5f1b304cad599a3bee4ccdf, type: 3}
+    - {fileID: 8300000, guid: b8010007e5d50014c9388ab4369d2c33, type: 3}
+    - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
+    volume: 0.551
+    pitch: 1
+    loop: 0
+    oneShot: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.229
+  deathSound:
+    soundName: PlayerDeath
+    clips:
+    - {fileID: 8300000, guid: 7506493630befce48b1ad9e57294c46a, type: 3}
+    - {fileID: 8300000, guid: bf7c6c85221cb3441b871bd5170a0307, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    oneShot: 0
+    volumeVariance: 0.1
+    pitchVariance: 0.1
 --- !u!114 &5316389521978419112
 MonoBehaviour:
   m_ObjectHideFlags: 0

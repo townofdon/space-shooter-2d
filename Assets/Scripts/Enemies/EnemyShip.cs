@@ -25,7 +25,7 @@ namespace Enemies {
 
             ResetHealth();
             SetColliders();
-            RegisterDamageCallbacks(OnDeath, OnDamageTaken);
+            RegisterHealthCallbacks(OnDeath, OnHealthDamaged, Utils.__NOOP__);
             ship.SetActive(true);
         }
 
@@ -33,7 +33,7 @@ namespace Enemies {
             TickHealth();
         }
 
-        void OnDamageTaken(float amount) {
+        void OnHealthDamaged(float amount, DamageType damageType) {
             // Debug.Log("enemy_damage=" + amount + " health=" + health);
             // TODO: FLASH ENEMY SPRITE
             // TODO: PLAY DAMAGE SOUND

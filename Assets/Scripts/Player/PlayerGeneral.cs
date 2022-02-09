@@ -3,6 +3,7 @@ using UnityEngine;
 using Core;
 using Damage;
 using Game;
+using Audio;
 
 namespace Player {
 
@@ -23,6 +24,10 @@ namespace Player {
         [SerializeField] GameObject ship;
         [SerializeField] GameObject shipFlash;
         [SerializeField] GameObject[] shipParts;
+
+        [Header("Audio")][Space]
+        [SerializeField] Sound damageSound;
+        [SerializeField] Sound deathSound;
 
         // components
         CircleCollider2D col;
@@ -55,7 +60,13 @@ namespace Player {
             // init
             ResetHealth();
             SetColliders();
-            RegisterDamageCallbacks(OnDeath, OnDamageTaken);
+            RegisterHealthCallbacks(OnDeath, OnHealthDamaged, Utils.__NOOP__);
+            RegisterShieldCallbacks(OnShieldDepleted, OnShieldDamage, OnShieldDrain, OnShieldRechargeStart, OnShieldRechargeComplete);
+            damageSound.Init(gameObject);
+            deathSound.Init(gameObject);
+
+            // TODO: REMOVE
+            // StartCoroutine(damageSound.RealtimeEditorInspection());
 
             // TODO: REMOVE
             input = Utils.GetRequiredComponent<PlayerInputHandler>(gameObject);
@@ -85,7 +96,7 @@ namespace Player {
                 // TODO: STOP PLAYING SOUND
             }
 
-            if (isRechardingShield) {
+            if (isRechargingShield) {
                 // TODO: PLAY SHIELD RECHARGE SOUND
             } else {
                 // TODO: STOP PLAYING SOUND
@@ -125,12 +136,24 @@ namespace Player {
             }
         }
 
-        void OnDamageTaken(float amount) {
+        void OnHealthDamaged(float amount, DamageType damageType) {
             Debug.Log("player_damage=" + amount + " HP=" + health + " SHIELD=" + shield);
             StartCoroutine(GameFeel.PauseTime(hitPauseDuration, hitPauseTimescale));
-            if (shield <= 0f) damageCoroutine = StartCoroutine(HullDamageAnimation());
-            // TODO: PLAY DAMAGE SOUND
+            damageCoroutine = StartCoroutine(HullDamageAnimation());
+            
+            // TODO: PLAY DIFFERENT SOUNDS PER DAMAGE TYPE
+            damageSound.Play();
         }
+
+        void OnShieldDepleted() {}
+        void OnShieldDamage(float _amount) {
+            StartCoroutine(GameFeel.PauseTime(hitPauseDuration, hitPauseTimescale));
+            // TODO: REPLACE SOUND
+            damageSound.Play();
+        }
+        void OnShieldDrain(float _amount) {}
+        void OnShieldRechargeStart() {}
+        void OnShieldRechargeComplete() {}
 
         void BreakShipApart() {
             GameObject go = new GameObject("BrokenShipParts");
@@ -148,6 +171,7 @@ namespace Player {
 
         void OnDeath() {
             deathCoroutine = StartCoroutine(DeathAnimation());
+            deathSound.Play();
         }
 
         IEnumerator HullDamageAnimation() {

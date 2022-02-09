@@ -17,10 +17,14 @@ namespace Damage {
         [SerializeField] float _shieldRechargeTime = 1f;
 
         // Action callbacks can be set via the Editor OR via RegisterCallbacks()
-        [SerializeField] System.Action<float> _onShieldDrained;
-        [SerializeField] System.Action<float> _onHealthTaken;
-        [SerializeField] System.Action<float> _onDamageTaken;
         [SerializeField] System.Action _onDeath;
+        [SerializeField] System.Action<float> _onHealthTaken;
+        [SerializeField] System.Action<float, DamageType> _onHealthDamage;
+        [SerializeField] System.Action _onShieldDepleted;
+        [SerializeField] System.Action<float> _onShieldDamage;
+        [SerializeField] System.Action<float> _onShieldDrain;
+        [SerializeField] System.Action _onShieldRechargeStart;
+        [SerializeField] System.Action _onShieldRechargeComplete;
 
         // cached
         System.Guid _uuid = System.Guid.NewGuid();
@@ -35,6 +39,7 @@ namespace Damage {
         float _healthDamageThisFrame = 0f;
         float _shieldDamageThisFrame = 0f;
 
+        float _prevShield = 0f;
         float _timeShieldHit = 0f;
         bool _isRechargingShield = false;
 
@@ -44,7 +49,7 @@ namespace Damage {
         public float health => _health;
         public float shield => _shield;
         public float timeHit => _timeHit;
-        public bool isRechardingShield => _isRechargingShield;
+        public bool isRechargingShield => _isRechargingShield;
         public float hitRecoveryTime => _hitRecoveryTime;
 
         protected void TickHealth() {
@@ -53,28 +58,38 @@ namespace Damage {
 
             // recharge shield
             if (_timeShieldHit <= 0f && _shield < _maxShield) {
+                // NOTE - may also find it useful to add an `_onShieldRechargeStep` callback method at some point if needed for UI updates, etc.
+                if (!_isRechargingShield) InvokeCallback(_onShieldRechargeStart, true);
                 _isRechargingShield = true;
                 _shield = Mathf.Min(_shield + _maxShield * (Time.deltaTime / _shieldRechargeTime), _maxShield);
                 Debug.Log("recharge_shield >> " + _shield);
             } else {
+                if (_isRechargingShield && _shield == _maxShield) InvokeCallback(_onShieldRechargeComplete, true);
                 _isRechargingShield = false;
             }
         }
 
-        protected void RegisterDamageCallbacks(System.Action onDeath, System.Action<float> onDamageTaken, System.Action<float> onHealthTaken, System.Action<float> onShieldDrained) {
+        protected void RegisterHealthCallbacks(
+            System.Action onDeath,
+            System.Action<float, DamageType> onHealthDamage,
+            System.Action<float> onHealthTaken
+        ) {
             _onDeath = onDeath;
-            _onDamageTaken = onDamageTaken;
-            _onHealthTaken = onHealthTaken;
-            _onShieldDrained = onShieldDrained;
-        }
-        protected void RegisterDamageCallbacks(System.Action onDeath, System.Action<float> onDamageTaken, System.Action<float> onHealthTaken) {
-            _onDeath = onDeath;
-            _onDamageTaken = onDamageTaken;
+            _onHealthDamage = onHealthDamage;
             _onHealthTaken = onHealthTaken;
         }
-        protected void RegisterDamageCallbacks(System.Action onDeath, System.Action<float> onDamageTaken) {
-            _onDeath = onDeath;
-            _onDamageTaken = onDamageTaken;
+        protected void RegisterShieldCallbacks(
+            System.Action onShieldDepleted,
+            System.Action<float> onShieldDamage,
+            System.Action<float> onShieldDrain,
+            System.Action onShieldRechargeStart,
+            System.Action onShieldRechargeComplete
+        ) {
+            _onShieldDepleted = onShieldDepleted;
+            _onShieldDamage = onShieldDamage;
+            _onShieldDrain = onShieldDrain;
+            _onShieldRechargeStart = onShieldRechargeStart;
+            _onShieldRechargeComplete = onShieldRechargeComplete;
         }
 
         protected void ResetHealth() {
@@ -99,7 +114,7 @@ namespace Damage {
             if (!_isAlive) return false;
             if (_shield > 0f && amount > 0f) {
                 _timeShieldHit = 1f;
-                InvokeCallback(_onShieldDrained, amount, true);
+                InvokeCallback(_onShieldDrain, amount, true);
             }
             _shield = Mathf.Max(_shield - amount, 0f);
 
@@ -139,14 +154,23 @@ namespace Damage {
                 _shieldDamageThisFrame *= damageClass.enemyEffectiveness;
             }
 
+            if (_healthDamageThisFrame > 0f) {
+                InvokeCallback(_onHealthDamage, _healthDamageThisFrame, damageType);
+            }
+            if (_shieldDamageThisFrame > 0f && _shield > 0f) {
+                InvokeCallback(_onShieldDamage, _shieldDamageThisFrame, true);
+            }
+
             _health -= _healthDamageThisFrame;
             _shield = Mathf.Max(_shield - _shieldDamageThisFrame, 0f);
             _timeHit = _hitRecoveryTime;
             _timeShieldHit = 1f;
 
-            if (amount > 0f) {
-                InvokeCallback(_onDamageTaken, _healthDamageThisFrame);
+            if (_shield == 0f && _prevShield > _shield) {
+                InvokeCallback(_onShieldDepleted, true);
             }
+
+            _prevShield = _shield;
 
             if (_health <= 0f) {
                 if (_isAlive) _Die();
@@ -176,16 +200,23 @@ namespace Damage {
 
         // CALLBACK STUFF
 
-        private void InvokeCallback(System.Action action) {
+        private void InvokeCallback(System.Action action, bool ignoreMissingCallback = false) {
             if (action != null) {
                 action.Invoke();
-            } else {
+            } else if (!ignoreMissingCallback) {
                 Debug.LogError("WARN: a callback was null in DamageableBehaviour - something's not hooked up correctly.");
             }
         }
         private void InvokeCallback(System.Action<float> action, float amount, bool ignoreMissingCallback = false) {
             if (action != null) {
                 action.Invoke(amount);
+            } else if (!ignoreMissingCallback) {
+                Debug.LogError("WARN: a callback was null in DamageableBehaviour - something's not hooked up correctly.");
+            }
+        }
+        private void InvokeCallback(System.Action<float, DamageType> action, float amount, DamageType damageType, bool ignoreMissingCallback = false) {
+            if (action != null) {
+                action.Invoke(amount, damageType);
             } else if (!ignoreMissingCallback) {
                 Debug.LogError("WARN: a callback was null in DamageableBehaviour - something's not hooked up correctly.");
             }
