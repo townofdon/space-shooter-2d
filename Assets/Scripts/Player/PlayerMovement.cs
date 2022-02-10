@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Core;
+using Audio;
 
 namespace Player {
 
@@ -27,6 +28,9 @@ namespace Player {
         [SerializeField] float screenPadRight = 0f;
         [SerializeField] float screenPadTop = 0f;
         [SerializeField] float screenPadBottom = 0f;
+
+        [Header("Audio")][Space]
+        [SerializeField] LoopableSound thrustSound;
 
         // components
         Rigidbody2D rb;
@@ -65,6 +69,7 @@ namespace Player {
             initialDrag = rb.drag;
             minBounds = Camera.main.ViewportToWorldPoint(new Vector2(0f, 0f));
             maxBounds = Camera.main.ViewportToWorldPoint(new Vector2(1f, 1f));
+            thrustSound.Init(this);
         }
 
         void Update() {
@@ -81,8 +86,10 @@ namespace Player {
             bool hasMoveInput = Mathf.Abs(input.move.x) > Mathf.Epsilon || Mathf.Abs(input.move.y) > Mathf.Epsilon;
             if (player.isAlive && hasMoveInput) {
                 throttle += Time.deltaTime / throttleUpTime;
+                thrustSound.Play();
             } else {
                 throttle -= Time.deltaTime / throttleDownTime;
+                thrustSound.Stop();
             }
             throttle = Mathf.Clamp(throttle, 0f, 1f);
         }

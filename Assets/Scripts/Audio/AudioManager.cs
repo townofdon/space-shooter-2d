@@ -37,7 +37,7 @@ namespace Audio
             // set up audio sources for all sounds
             foreach (Sound s in sounds)
             {
-                s.Init(gameObject, soundFXMix);
+                s.Init(this, soundFXMix);
             }
 
             // // set up audio sources for all music tracks
@@ -47,7 +47,7 @@ namespace Audio
             // }
 
             // set up audio source for null sound
-            nullSound.Init(gameObject, soundFXMix);
+            nullSound.Init(this, soundFXMix);
         }
 
         // Start is called before the first frame update

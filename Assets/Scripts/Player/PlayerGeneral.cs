@@ -62,8 +62,8 @@ namespace Player {
             SetColliders();
             RegisterHealthCallbacks(OnDeath, OnHealthDamaged, Utils.__NOOP__);
             RegisterShieldCallbacks(OnShieldDepleted, OnShieldDamage, OnShieldDrain, OnShieldRechargeStart, OnShieldRechargeComplete);
-            damageSound.Init(gameObject);
-            deathSound.Init(gameObject);
+            damageSound.Init(this);
+            deathSound.Init(this);
 
             // TODO: REMOVE
             // StartCoroutine(damageSound.RealtimeEditorInspection());

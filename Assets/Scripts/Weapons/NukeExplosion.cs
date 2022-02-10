@@ -19,12 +19,15 @@ namespace Weapons
 
         [Header("Components")][Space]
         [SerializeField] GameObject nukeShockwave;
+        [SerializeField] GameObject nukeShockwave2;
         [SerializeField] CircleCollider2D nukeCore;
         [SerializeField] ParticleSystem shockwaveParticle;
+        [SerializeField] ParticleSystem shockwaveParticle2;
         [SerializeField] SpriteRenderer spriteRenderer;
 
         // cached
         ParticleSystem.MinMaxCurve curve;
+        float secondShockwaveDelay = 1f;
         float startSize = 1f;
         float size = 1f;
         float lifetime = 1f;
@@ -38,10 +41,12 @@ namespace Weapons
 
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(nukeShockwave);
+            AppIntegrity.AssertPresent<GameObject>(nukeShockwave2);
             AppIntegrity.AssertPresent<CircleCollider2D>(nukeCore);
             AppIntegrity.AssertPresent<ParticleSystem>(shockwaveParticle);
+            AppIntegrity.AssertPresent<ParticleSystem>(shockwaveParticle2);
             AppIntegrity.AssertPresent<SpriteRenderer>(spriteRenderer);
-
+            secondShockwaveDelay = shockwaveParticle2.main.startDelay.constant;
             curve = shockwaveParticle.sizeOverLifetime.size;
             startSize = shockwaveParticle.main.startSize.constant;
             lifetime = shockwaveParticle.main.startLifetime.constant;
@@ -58,6 +63,10 @@ namespace Weapons
             scale.x = size;
             scale.y = size;
             nukeShockwave.transform.localScale = scale;
+            size = Mathf.Max(startSize * colliderMultiple * curve.Evaluate((t - secondShockwaveDelay) / lifetime), 0f);
+            scale.x = size;
+            scale.y = size;
+            nukeShockwave2.transform.localScale = scale;
             t += Time.deltaTime;
 
             if (t < timeCausingDamage) BlastRadius();
@@ -66,6 +75,11 @@ namespace Weapons
         void BlastRadius() {
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, nukeCoreRadius);
             foreach (var hit in hits) {
+                Projectile projectile = hit.GetComponent<Projectile>();
+                if (projectile != null || hit.tag == UTag.Bullet || hit.tag == UTag.Laser) {
+                    Destroy(hit.gameObject);
+                    return;
+                }
                 DamageReceiver actor = hit.GetComponent<DamageReceiver>();
                 if (actor != null) {
                     hitDist = hit.transform.position - transform.position;

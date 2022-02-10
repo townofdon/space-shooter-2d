@@ -25,7 +25,6 @@ namespace Player {
 
         void OnLook(InputValue value) {
             _look = value.Get<Vector2>();
-            Debug.Log(_look);
         }
 
         void OnFire(InputValue value) {

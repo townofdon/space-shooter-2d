@@ -1,5 +1,4 @@
 using System.Collections;
-using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -8,57 +7,52 @@ using Core;
 namespace Audio
 {
 
-    [Serializable]
-    public class Sound
+    [System.Serializable]
+    public class Sound : BaseSound
     {
         [SerializeField] string soundName;
         [SerializeField] AudioClip[] clips;
-
-        [SerializeField][Range(0f, 1f)] float volume = 0.7f;
-        [SerializeField][Range(.1f, 3f)] float pitch = 1f;
-        [SerializeField] bool loop = false;
-        [SerializeField] bool oneShot = false;
-        [SerializeField][Range(0f, 0.5f)] float volumeVariance = 0.1f;
-        [SerializeField][Range(0f, 0.5f)] float pitchVariance = 0.1f;
+        [SerializeField] bool oneShot = true;
 
         [HideInInspector]
         AudioSource source;
-        
+
         // getters
         public string name => soundName;
         public AudioClip Clip => clips[currentClipIndex];
-        public bool isPlaying => source != null && source.isPlaying;
+        public override bool isPlaying => source != null && source.isPlaying;
 
         // state
         float volumeFadeStart = 0f;
         Timer fadeTimer = new Timer();
         int currentClipIndex = 0;
 
-        public void Init(GameObject gameObject, AudioMixerGroup mix = null)
+        public override void Init(MonoBehaviour script, AudioMixerGroup mix = null)
         {
             // nullSound.SetSource(gameObject.AddComponent<AudioSource>(), soundFXMix);
-            source = gameObject.AddComponent<AudioSource>();
+            source = script.gameObject.AddComponent<AudioSource>();
             source.volume = volume;
             source.pitch = pitch;
-            source.loop = loop;
+            source.loop = false;
             source.clip = clips[0];
             source.playOnAwake = false;
             source.outputAudioMixerGroup = mix;
-            AppIntegrity.AssertNonEmptyString(soundName);
+            source.ignoreListenerPause = ignoreListenerPause;
             AppIntegrity.AssertPresent<AudioClip>(clips[0]);
+
+            script.StartCoroutine(RealtimeEditorInspection());
         }
 
-        public void Play()
+        public override void Play()
         {
             ValidateSound();
-            if (loop || !oneShot)
-            {
+            if (oneShot) {
+                UpdateVariance();
+                source.PlayOneShot(clips[currentClipIndex]);
+            } else {
                 if (source.isPlaying) return;
                 UpdateVariance();
                 source.Play();
-            } else {
-                UpdateVariance();
-                source.PlayOneShot(clips[currentClipIndex]);
             }
         }
 
@@ -69,7 +63,7 @@ namespace Audio
             AudioSource.PlayClipAtPoint(clips[currentClipIndex], location, volume);
         }
 
-        public void Stop()
+        public override void Stop()
         {
             ValidateSound();
             source.Stop();
@@ -88,6 +82,17 @@ namespace Audio
         void ValidateSound() {
             if (source == null) {
                 throw new UnityException("Audio.Sound: \"" + soundName + "\" has no source");
+            }
+        }
+
+        protected override IEnumerator RealtimeEditorInspection() {
+            while (true) {
+                yield return new WaitForSecondsRealtime(1f);
+                if (!realtimeEditorInspect) continue;
+                if (source == null) continue;
+
+                source.volume = volume;
+                source.pitch = pitch;
             }
         }
 
@@ -154,17 +159,6 @@ namespace Audio
         // {
         //     source.volume = volume;
         // }
-
-        public IEnumerator RealtimeEditorInspection() {
-            while (true) {
-                yield return new WaitForSecondsRealtime(1f);
-                if (source == null) continue;
-
-                source.volume = volume;
-                source.pitch = pitch;
-                source.loop = loop;
-            }
-        }
     }
 }
 

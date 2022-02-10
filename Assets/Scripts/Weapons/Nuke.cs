@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Core;
+using Audio;
 
 namespace Weapons
 {
@@ -13,6 +14,10 @@ namespace Weapons
         [SerializeField] Vector2 defaultDirection = Vector2.up;
         [SerializeField] GameObject nukeExplosion;
         [SerializeField] Gradient lifetimeColor;
+
+        [Header("Audio")][Space]
+        [SerializeField] Sound anticipationSound;
+        [SerializeField] Sound explosionSound;
 
         // cached
         Rigidbody2D rb;
@@ -34,6 +39,10 @@ namespace Weapons
             currentTime = 0f;
             sr.enabled = true;
             direction = defaultDirection;
+
+            anticipationSound.Init(this);
+            explosionSound.Init(this);
+            anticipationSound.Play();
         }
 
         void Update() {
@@ -56,11 +65,11 @@ namespace Weapons
             if (sploded) yield return null;
             sploded = true;
             sr.enabled = false;
+            explosionSound.Play();
             splosion = Object.Instantiate(nukeExplosion, transform.position, new Quaternion(0f,0f,0f,0f));
             // TODO: USE OBJECT POOLING SYSTEM
-            yield return new WaitForSeconds(7f);
-            Destroy(splosion);
-            Destroy(gameObject);
+            Destroy(splosion, 7f);
+            Destroy(gameObject, 7f);
         }
 
         public void SetDirection(Vector2 _direction) {

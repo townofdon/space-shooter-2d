@@ -26243,6 +26243,13 @@ MonoBehaviour:
   - {fileID: 5316389521695733010}
   - {fileID: 5316389522306815037}
   damageSound:
+    volume: 0.551
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.229
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
     soundName: PlayerDamage
     clips:
     - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
@@ -26250,23 +26257,20 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ddb4aa71b5f1b304cad599a3bee4ccdf, type: 3}
     - {fileID: 8300000, guid: b8010007e5d50014c9388ab4369d2c33, type: 3}
     - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
-    volume: 0.551
-    pitch: 1
-    loop: 0
     oneShot: 1
-    volumeVariance: 0.1
-    pitchVariance: 0.229
   deathSound:
+    volume: 0.7
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
     soundName: PlayerDeath
     clips:
     - {fileID: 8300000, guid: 7506493630befce48b1ad9e57294c46a, type: 3}
     - {fileID: 8300000, guid: bf7c6c85221cb3441b871bd5170a0307, type: 3}
-    volume: 0.7
-    pitch: 1
-    loop: 0
     oneShot: 0
-    volumeVariance: 0.1
-    pitchVariance: 0.1
 --- !u!114 &5316389521978419112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26305,6 +26309,17 @@ MonoBehaviour:
   screenPadRight: 0.5
   screenPadTop: 2
   screenPadBottom: 2
+  thrustSound:
+    volume: 0.25
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 1
+    mixerGroup: {fileID: 0}
+    clipHead: {fileID: 8300000, guid: 5e1a127f36bbc2147a05b1360e574ffe, type: 3}
+    clipLoop: {fileID: 8300000, guid: 17ec2e7a8aad1f04cb8ba95d34ddb6cf, type: 3}
+    clipTail: {fileID: 8300000, guid: dec33a6bcb68d0b40ae63f40da5d87bf, type: 3}
 --- !u!114 &5316389521978419115
 MonoBehaviour:
   m_ObjectHideFlags: 0

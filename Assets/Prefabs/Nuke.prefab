@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffaa654ffaef6a4582f3ae68f53d78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuseTime: 1.2
+  fuseTime: 1.3
   finalAnimSpeed: 10
   moveSpeed: 3
   defaultDirection: {x: 0, y: 1}
@@ -174,3 +174,29 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 4
+  anticipationSound:
+    volume: 0.351
+    pitch: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.11
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    soundName: 
+    clips:
+    - {fileID: 8300000, guid: 035651b0a6c5f5f4aa787f873763d76e, type: 3}
+    oneShot: 1
+  explosionSound:
+    volume: 0.7
+    pitch: 1
+    volumeVariance: 0.11
+    pitchVariance: 0.304
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    soundName: 
+    clips:
+    - {fileID: 8300000, guid: c2edad0108051194dbe5fd1a2f2f2ae5, type: 3}
+    - {fileID: 8300000, guid: 120284d3d1223f946a8026e715162b5f, type: 3}
+    - {fileID: 8300000, guid: 681090e3fbcabf64f9995e36332496e1, type: 3}
+    oneShot: 1
