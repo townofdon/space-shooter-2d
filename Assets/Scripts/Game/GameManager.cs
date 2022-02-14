@@ -8,6 +8,21 @@ using Weapons;
 
 namespace Game {
 
+    public enum GameMode {
+        Battle,
+        FreeRoam,
+        Docked,
+    }
+
+    struct GameState {
+        GameMode _mode;
+
+        public GameState(GameMode mode = GameMode.Battle) : this() {
+            _mode = mode;
+        }
+
+        public GameMode mode { get; set; }
+    }
 
     public class GameManager : MonoBehaviour
     {
@@ -17,6 +32,10 @@ namespace Game {
 
         [SerializeField] List<WeaponClass> _weaponClasses = new List<WeaponClass>();
         Dictionary<WeaponType, WeaponClass> _weaponClassLookup = new Dictionary<WeaponType, WeaponClass>();
+
+        GameState state = new GameState();
+
+        public GameMode gameMode => state.mode;
 
         public DamageClass GetDamageClass(DamageType damageType) {
             return _damageClassLookup[damageType];
@@ -52,7 +71,7 @@ namespace Game {
 
         public void SetupWeaponClasses() {
             foreach (var weaponClass in _weaponClasses) {
-                _weaponClassLookup.Add(weaponClass.weaponType, weaponClass);
+                _weaponClassLookup.Add(weaponClass.type, weaponClass);
             }
             foreach(WeaponType weaponType in System.Enum.GetValues(typeof(WeaponType))) {
                 try {

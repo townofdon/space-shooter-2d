@@ -10,7 +10,8 @@ namespace Audio
     [System.Serializable]
     public class Sound : BaseSound
     {
-        [SerializeField] string soundName;
+        [SerializeField][Range(0f, 0.5f)] protected float volumeVariance = 0.1f;
+        [SerializeField][Range(0f, 0.5f)] protected float pitchVariance = 0.1f;
         [SerializeField] AudioClip[] clips;
         [SerializeField] bool oneShot = true;
 
@@ -29,6 +30,7 @@ namespace Audio
 
         public override void Init(MonoBehaviour script, AudioMixerGroup mix = null)
         {
+            if (clips.Length == 0) return;
             // nullSound.SetSource(gameObject.AddComponent<AudioSource>(), soundFXMix);
             source = script.gameObject.AddComponent<AudioSource>();
             source.volume = volume;
@@ -45,27 +47,27 @@ namespace Audio
 
         public override void Play()
         {
-            ValidateSound();
+            if (!ValidateSound()) return;
             if (oneShot) {
                 UpdateVariance();
                 source.PlayOneShot(clips[currentClipIndex]);
             } else {
-                if (source.isPlaying) return;
                 UpdateVariance();
+                source.Stop();
                 source.Play();
             }
         }
 
         public void PlayAtLocation(Vector3 location)
         {
-            ValidateSound();
+            if (!ValidateSound()) return;
             UpdateVariance();
             AudioSource.PlayClipAtPoint(clips[currentClipIndex], location, volume);
         }
 
         public override void Stop()
         {
-            ValidateSound();
+            if (!ValidateSound()) return;
             source.Stop();
         }
 
@@ -79,10 +81,11 @@ namespace Audio
             source.pitch = Utils.RandomVariance(pitch, pitchVariance, 0f, 1f);
         }
 
-        void ValidateSound() {
-            if (source == null) {
-                throw new UnityException("Audio.Sound: \"" + soundName + "\" has no source");
+        bool ValidateSound() {
+            if (clips.Length == 0 || source == null) {
+                return false;
             }
+            return true;
         }
 
         protected override IEnumerator RealtimeEditorInspection() {

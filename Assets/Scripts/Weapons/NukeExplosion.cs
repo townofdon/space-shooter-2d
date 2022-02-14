@@ -55,6 +55,7 @@ namespace Weapons
             nukeCore.enabled = false;
             t = 0f;
 
+            StartCoroutine(GameFeel.ShakeGamepad(0.75f, 1f, 1f));
             StartCoroutine(NukeFX());
         }
 

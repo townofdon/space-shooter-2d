@@ -20,6 +20,8 @@ namespace Player {
 
         [Header("Components")][Space]
         [SerializeField] ParticleSystem shieldEffect;
+        [SerializeField] ParticleSystem shieldLostEffect;
+        [SerializeField] ParticleSystem shieldRechargeEffect;
         [SerializeField] GameObject playerExplosion;
         [SerializeField] GameObject ship;
         [SerializeField] GameObject shipFlash;
@@ -28,17 +30,20 @@ namespace Player {
         [Header("Audio")][Space]
         [SerializeField] Sound damageSound;
         [SerializeField] Sound deathSound;
+        [SerializeField] Sound ricochetSound;
+        [SerializeField] LoopableSound shieldSound;
+        [SerializeField] Sound shieldLostSound;
+        [SerializeField] LoopableSound shieldAlarmSound;
+        [SerializeField] Sound shieldRechargeSound;
 
         // components
         CircleCollider2D col;
         Rigidbody2D rb;
         Animator shipFlashEffect;
 
-        // TODO: REMOVE
-        PlayerInputHandler input;
-
         // cached
         GameObject splosion;
+        Coroutine shakeGamepadCoroutine;
         Coroutine damageCoroutine;
         Coroutine deathCoroutine;
 
@@ -64,43 +69,46 @@ namespace Player {
             RegisterShieldCallbacks(OnShieldDepleted, OnShieldDamage, OnShieldDrain, OnShieldRechargeStart, OnShieldRechargeComplete);
             damageSound.Init(this);
             deathSound.Init(this);
+            shieldSound.Init(this);
+            shieldLostSound.Init(this);
+            shieldAlarmSound.Init(this);
+            shieldRechargeSound.Init(this);
+            GameFeel.ResetGamepadShake();
+        }
 
-            // TODO: REMOVE
-            // StartCoroutine(damageSound.RealtimeEditorInspection());
-
-            // TODO: REMOVE
-            input = Utils.GetRequiredComponent<PlayerInputHandler>(gameObject);
+        void OnDestroy() {
+            GameFeel.ResetGamepadShake();    
         }
 
         void Update() {
             HandleShields();
             TickHealth();
 
-            // TODO: REMOVE
-            if (input.isDeadPressed) TakeDamage(20f);
-
             // move the splosion along the same trajectory as the player's previous heading
             if (splosion != null) splosion.GetComponent<Rigidbody2D>().velocity = rb.velocity * 0.25f;
         }
 
         void HandleShields() {
+            if (!isAlive) return;
             if (shield > 0f && timeHit > 0f) {
                 if (!shieldEffect.isPlaying) shieldEffect.Play();
+                shieldSound.Play();
             } else {
                 shieldEffect.Stop();
+                shieldSound.Stop();
             }
 
             if (shield <= 0f) {
-                // TODO: PLAY SHIELD WARNING SOUND
+                shieldAlarmSound.Play();
             } else {
-                // TODO: STOP PLAYING SOUND
+                shieldAlarmSound.Stop();
             }
 
-            if (isRechargingShield) {
-                // TODO: PLAY SHIELD RECHARGE SOUND
-            } else {
-                // TODO: STOP PLAYING SOUND
-            }
+            // if (isRechargingShield) {
+            //     shieldRechargeSound.Play();
+            // } else {
+            //     shieldRechargeSound.Stop();
+            // }
         }
 
         void OnTriggerEnter2D(Collider2D other) {
@@ -138,6 +146,8 @@ namespace Player {
 
         void OnHealthDamaged(float amount, DamageType damageType) {
             Debug.Log("player_damage=" + amount + " HP=" + health + " SHIELD=" + shield);
+            if (shakeGamepadCoroutine != null) StopCoroutine(shakeGamepadCoroutine);
+            shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(0.1f, 1f, 1f));
             StartCoroutine(GameFeel.PauseTime(hitPauseDuration, hitPauseTimescale));
             damageCoroutine = StartCoroutine(HullDamageAnimation());
             
@@ -145,15 +155,30 @@ namespace Player {
             damageSound.Play();
         }
 
-        void OnShieldDepleted() {}
-        void OnShieldDamage(float _amount) {
-            StartCoroutine(GameFeel.PauseTime(hitPauseDuration, hitPauseTimescale));
-            // TODO: REPLACE SOUND
-            damageSound.Play();
+        void OnShieldDepleted() {
+            shieldLostSound.Play();
+            shieldLostEffect.Stop();
+            shieldLostEffect.Play();
         }
-        void OnShieldDrain(float _amount) {}
-        void OnShieldRechargeStart() {}
-        void OnShieldRechargeComplete() {}
+        void OnShieldDamage(float amount) {
+            shieldRechargeSound.Stop();
+            if (shakeGamepadCoroutine != null) StopCoroutine(shakeGamepadCoroutine);
+            shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(0.1f, 0.5f, 0.5f));
+            StartCoroutine(GameFeel.PauseTime(hitPauseDuration, hitPauseTimescale));
+        }
+        void OnShieldDrain(float _amount) {
+                shieldRechargeSound.Stop();
+                shieldRechargeEffect.Stop();
+        }
+        void OnShieldRechargeStart() {
+                shieldRechargeSound.Play();
+                shieldRechargeEffect.Stop();
+                shieldRechargeEffect.Play();
+        }
+        void OnShieldRechargeComplete() {
+                shieldRechargeSound.Stop();
+                shieldRechargeEffect.Stop();
+        }
 
         void BreakShipApart() {
             GameObject go = new GameObject("BrokenShipParts");
@@ -170,8 +195,14 @@ namespace Player {
         }
 
         void OnDeath() {
+            if (shakeGamepadCoroutine != null) StopCoroutine(shakeGamepadCoroutine);
+            shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(1.2f, 1f, 1f));
             deathCoroutine = StartCoroutine(DeathAnimation());
             deathSound.Play();
+            shieldEffect.Stop();
+            shieldSound.Stop();
+            shieldAlarmSound.Stop();
+            shieldRechargeSound.Stop();
         }
 
         IEnumerator HullDamageAnimation() {

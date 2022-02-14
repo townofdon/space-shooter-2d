@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e285858156083c4b9a1de23e961f840, type: 3}
   m_Name: Disruptor
   m_EditorClassIdentifier: 
-  _damageType: 5
+  _damageType: 6
   _baseDamage: 75
   _damageVariance: 0
   _shieldEffectiveness: 1

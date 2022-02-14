@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e285858156083c4b9a1de23e961f840, type: 3}
   m_Name: Laser
   m_EditorClassIdentifier: 
-  _damageType: 2
+  _damageType: 3
   _baseDamage: 30
-  _damageVariance: 3.7
+  _damageVariance: 5
   _shieldEffectiveness: 1
   _shieldedHealthEffectiveness: 0
   _unshieldedHealthEffectiveness: 0.25

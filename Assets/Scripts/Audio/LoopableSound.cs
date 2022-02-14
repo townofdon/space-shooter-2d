@@ -6,7 +6,7 @@ using Core;
 
 namespace Audio
 {
-    enum PlayCursor {
+    public enum PlayCursor {
         Stopped,
         Head,
         Loop,
@@ -20,6 +20,8 @@ namespace Audio
         [SerializeField] AudioClip clipLoop;
         [SerializeField] AudioClip clipTail;
 
+        [SerializeField] bool playLoopToEnd = false;
+
         AudioSource sourceHead;
         AudioSource sourceLoop;
         AudioSource sourceTail;
@@ -29,9 +31,8 @@ namespace Audio
         double clipHeadDuration = 0.0;
         double clipLoopDuration = 0.0;
         double clipTailDuration = 0.0;
-        // TODO: REMOVE
-        // double timeLoopStart = 0.0;
-        // double timeLoopEnd = 0.0;
+        double timeLoopStartScheduled = 0.0;
+        double timeLoopEndScheduled = 0.0;
         MonoBehaviour _script;
         Coroutine playCoroutine;
 
@@ -39,9 +40,10 @@ namespace Audio
         PlayCursor cursor = PlayCursor.Head;
         double timePlaying = 0.0;
         double nextStartTime = 0.0;
-        bool startButtonPressed = false;
+        bool playButtonPressed = false;
 
-        public override bool isPlaying => startButtonPressed;
+        public override bool isPlaying => playButtonPressed;
+        public PlayCursor Cursor => cursor;
 
         public override void Init(MonoBehaviour script, AudioMixerGroup mix = null)
         {
@@ -51,7 +53,7 @@ namespace Audio
             if (clipHead != null) {
                 sourceHead = script.gameObject.AddComponent<AudioSource>();
                 SetSource(clipHead, sourceHead, false);
-                this.clipHeadDuration = GetClipDuration(clipHead);
+                clipHeadDuration = GetClipDuration(clipHead);
             }
             if (clipLoop != null) {
                 sourceLoop = script.gameObject.AddComponent<AudioSource>();
@@ -64,12 +66,7 @@ namespace Audio
                 clipTailDuration = GetClipDuration(clipTail);
             }
 
-            AppIntegrity.AssertPresent<AudioClip>(clipLoop);
-
             script.StartCoroutine(RealtimeEditorInspection());
-
-            // This gets the exact duration of the first clip, note that you have to cast the samples value as a double
-            double clipHeadDuration = (double)sourceHead.clip.samples / sourceHead.clip.frequency;
         }
 
         void SetSource(AudioClip clip, AudioSource source, bool loop) {
@@ -83,64 +80,61 @@ namespace Audio
         }
 
         public override void Play() {
-            // if head exists, start playing head --> time T0
-                // queue up loop to start playing at time T1 (PlayScheduled)
-            // else start playing loop --> T0 == T1
+            if (!ValidateSound()) return;
+            if (playButtonPressed) return;
 
-            // while (keep playing loop)
-                // do nothing
-                // if Stop signal is received, enqueue tail if exists to start playing at time T2
-                // prepare loop to stop playing at time T2
-
-            // let tail play through
-            // If Play() signal received:
-                // stop Tail immediately
-                // start from beginning state
-
-            if (startButtonPressed) return;
-
-            if (sourceHead.isPlaying) sourceHead.Stop();
-            if (sourceLoop.isPlaying) sourceLoop.Stop();
-            if (sourceTail.isPlaying) sourceTail.Stop();
+            if (sourceHead != null && sourceHead.isPlaying) sourceHead.Stop();
+            if (sourceLoop != null && sourceLoop.isPlaying) sourceLoop.Stop();
+            if (sourceTail != null && sourceTail.isPlaying) sourceTail.Stop();
 
             if (playCoroutine != null) _script.StopCoroutine(playCoroutine);
             playCoroutine = _script.StartCoroutine(IPlay());
         }
 
         IEnumerator IPlay() {
-            startButtonPressed = true;
+            playButtonPressed = true;
 
             if (sourceHead != null) {
                 cursor = PlayCursor.Head;
+                timeLoopStartScheduled = AudioSettings.dspTime + dspStartDelay + clipHeadDuration;
                 sourceHead.PlayScheduled(AudioSettings.dspTime + dspStartDelay);
-                sourceLoop.PlayScheduled(AudioSettings.dspTime + dspStartDelay + clipHeadDuration);
+                sourceLoop.PlayScheduled(timeLoopStartScheduled);
 
-                while (sourceHead.isPlaying) yield return null;
+                while (playButtonPressed && sourceHead.isPlaying) yield return null;
 
-                cursor = PlayCursor.Loop;
+                sourceHead.Stop();
+                if (playButtonPressed) cursor = PlayCursor.Loop;
             } else {
                 cursor = PlayCursor.Loop;
-                sourceLoop.PlayScheduled(AudioSettings.dspTime + dspStartDelay);
+                timeLoopStartScheduled = AudioSettings.dspTime + dspStartDelay;
+                sourceLoop.PlayScheduled(timeLoopStartScheduled);
             }
 
-            while (startButtonPressed) yield return null;
+            while (playButtonPressed) yield return null;
 
-            // do not wait until loop end; start playing tail immediately
-            sourceLoop.SetScheduledEndTime(AudioSettings.dspTime + dspStartDelay);
-
-            if (sourceTail != null) {
-                cursor = PlayCursor.Tail;
-                sourceTail.PlayScheduled(AudioSettings.dspTime + dspStartDelay);
-
-                while (sourceTail.isPlaying) yield return null;
+            if (cursor == PlayCursor.Loop && playLoopToEnd) {
+                int numFullCycles = GetNumFullLoopCycles();
+                timeLoopEndScheduled = timeLoopStartScheduled + clipLoopDuration * numFullCycles;
+            } else {
+                // do not wait until loop end; start playing tail immediately
+                timeLoopEndScheduled = AudioSettings.dspTime + dspStartDelay;
             }
+
+            sourceLoop.SetScheduledEndTime(timeLoopEndScheduled);
+            if (sourceTail != null) sourceTail.PlayScheduled(timeLoopEndScheduled);
+
+            while (sourceLoop.isPlaying) yield return null;
+
+            cursor = PlayCursor.Tail;
+            
+            while (sourceTail != null && sourceTail.isPlaying) yield return null;
 
             cursor = PlayCursor.Stopped;
             playCoroutine = null;
         }
 
         public override void Stop() {
-            startButtonPressed = false;
+            playButtonPressed = false;
         }
 
         protected override IEnumerator RealtimeEditorInspection() {
@@ -163,8 +157,21 @@ namespace Audio
             }
         }
 
+        bool ValidateSound() {
+            if (sourceLoop == null) {
+                return false;
+            }
+            return true;
+        }
+
         double GetClipDuration(AudioClip clip) {
             return (double)clip.samples / clip.frequency;
+        }
+
+        // calculate timeLoopEnd based on amount of time has elapsed since timeLoopStart, vs. per the clipLoopDuration
+        // e.g. what the number of cycles would be if the loop had finished
+        int GetNumFullLoopCycles() {
+            return Mathf.Min(1, Mathf.CeilToInt((float)((AudioSettings.dspTime - timeLoopStartScheduled) / clipLoopDuration)));
         }
     }
 }

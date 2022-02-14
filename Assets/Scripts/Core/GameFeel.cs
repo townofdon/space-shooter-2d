@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using XInputDotNetPure;
 
 namespace Core
 {    
@@ -22,6 +23,16 @@ namespace Core
             Time.timeScale = timeScale;
             yield return new WaitForSecondsRealtime(duration);
             Time.timeScale = 1f;
+        }
+
+        public static IEnumerator ShakeGamepad(float duration = 0.1f, float leftMotor = 0.5f, float rightMotor = 0.5f) {
+            GamePad.SetVibration(0, leftMotor, rightMotor);
+            yield return new WaitForSecondsRealtime(duration);
+            GamePad.SetVibration(0, 0, 0);
+        }
+
+        public static void ResetGamepadShake() {
+            GamePad.SetVibration(0, 0, 0);
         }
     }
 }

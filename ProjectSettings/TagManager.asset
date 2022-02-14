@@ -12,6 +12,7 @@ TagManager:
   - DisruptorRing
   - Laser
   - Bullet
+  - Explosion
   layers:
   - Default
   - TransparentFX

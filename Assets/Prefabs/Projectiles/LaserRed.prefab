@@ -203,10 +203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 2
+  damageType: 3
   baseDamageMultiplier: 1
   damageInterval: 1
-  destroyOnDamage: 1
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -231,6 +230,59 @@ MonoBehaviour:
   turnSpeed: 0
   lifetime: 10
   initialHeading: {x: 0, y: 1, z: 0}
+  numCollisionsMax: 2
+  ricochetProbability: 0.05
+  ricochetAngle: 60
+  ricochetVariance: 30
+  explosive: 0
+  explosionLifetime: 5
+  impactLifetime: 1
+  explosionFX: {fileID: 0}
+  impactFX: {fileID: 0}
+  impulseSound:
+    soundName: Laser7
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    volumeVariance: 0.11
+    pitchVariance: 0.141
+    clips: []
+    oneShot: 1
+  thrustSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    clipHead: {fileID: 0}
+    clipLoop: {fileID: 0}
+    clipTail: {fileID: 0}
+    playLoopToEnd: 0
+  impactSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
+  destroyedSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
 --- !u!1 &3150394155521847567
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ MonoBehaviour:
   _baseDamage: 10
   _damageVariance: 3.2
   _shieldEffectiveness: 1
-  _shieldedHealthEffectiveness: 1
-  _unshieldedHealthEffectiveness: 0.25
+  _shieldedHealthEffectiveness: 0.247
+  _unshieldedHealthEffectiveness: 1
   _playerEffectiveness: 0.1
   _enemyEffectiveness: 1
   _environmentEffectiveness: 0.1

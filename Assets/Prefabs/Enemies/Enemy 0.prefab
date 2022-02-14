@@ -365,15 +365,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300e0f69b5f078a4eac7c5976bb91400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageableType: 1
   _maxHealth: 50
   _hitRecoveryTime: 0
   _destroyOnDeath: 0
   _maxShield: 0
-  _shieldWaitTime: 3
-  _shieldRechargeTime: 1
+  _shieldWaitTime: 5
+  _shieldRechargeTime: 4
   ship: {fileID: 8051936151853671948}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
   _turnSpeed: 2
+  damageSound:
+    soundName: EnemyDamage
+    volume: 0
+    pitch: 0.92
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    volumeVariance: 0.221
+    pitchVariance: 0.389
+    clips:
+    - {fileID: 8300000, guid: 9f9b58c4eaff5fa4a9eb5551104f5afb, type: 3}
+    - {fileID: 8300000, guid: 79c1fb287e211164e9e9982a8ec6cb08, type: 3}
+    - {fileID: 8300000, guid: c7dc102d17e050b4696d09d35fa2cf3b, type: 3}
+    - {fileID: 8300000, guid: c66d9363eb3afe640b2734340aeb973f, type: 3}
+    oneShot: 1
+  deathSound:
+    soundName: 
+    volume: 0.801
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    volumeVariance: 0.073
+    pitchVariance: 0.3
+    clips:
+    - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
+    - {fileID: 8300000, guid: 9110c62ef46cad44db77ae0b96721dbf, type: 3}
+    - {fileID: 8300000, guid: ddb4aa71b5f1b304cad599a3bee4ccdf, type: 3}
+    - {fileID: 8300000, guid: b8010007e5d50014c9388ab4369d2c33, type: 3}
+    - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
+    oneShot: 1
 --- !u!114 &-989283550689626629
 MonoBehaviour:
   m_ObjectHideFlags: 0

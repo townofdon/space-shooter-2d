@@ -17,6 +17,10 @@ namespace Player {
         [SerializeField] float throttleUpTime = 0.75f;
         [SerializeField] float throttleDownTime = 2f;
 
+        [Header("Aiming / Rotation")][Space]
+        [SerializeField] float aimMaxAngle = 30f;
+        [SerializeField] float aimSpeed = 1f;
+
         [Header("Boost")][Space]
         [SerializeField] float boostThrust = 100f;
         [SerializeField] float boostCooldownTime = 5f;
@@ -49,6 +53,10 @@ namespace Player {
         Vector2 currentThrust;
         float throttle = 0f;
 
+        // state - aim
+        float currentAngle = 0f;
+        Quaternion aim = Quaternion.identity;
+
         // state - boost
         bool canBoost = true;
         Vector2 currentBoost;
@@ -78,6 +86,7 @@ namespace Player {
 
         void FixedUpdate() {
             HandleMove();
+            HandleRotate();
             HandleBoost();
             HandleBounds();
         }
@@ -99,6 +108,13 @@ namespace Player {
             currentThrust.x = GetThrustComponent(input.move.x, rb.velocity.x);
             currentThrust.y = GetThrustComponent(input.move.y, rb.velocity.y);
             rb.AddForce(currentThrust);
+        }
+
+        void HandleRotate() {
+            if (currentAngle < input.look.x * aimMaxAngle) currentAngle = Mathf.Round(Mathf.Clamp(currentAngle + aimSpeed * Time.deltaTime, -aimMaxAngle, aimMaxAngle));
+            if (currentAngle > input.look.x * aimMaxAngle) currentAngle = Mathf.Round(Mathf.Clamp(currentAngle - aimSpeed * Time.deltaTime, -aimMaxAngle, aimMaxAngle));
+            aim = Quaternion.AngleAxis(-currentAngle, Vector3.forward);
+            transform.rotation = aim;
         }
 
         void HandleBounds() {

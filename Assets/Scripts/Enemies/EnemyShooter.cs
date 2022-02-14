@@ -45,6 +45,8 @@ namespace Enemies
             burstCooldown.SetDuration(weapon.burstInterval);
 
             ammo = weapon.startingAmmo;
+            weapon.shotSound.Init(this);
+            weapon.effectSound.Init(this);
 
             StartCoroutine(PressAndReleaseTrigger());
         }
@@ -68,6 +70,8 @@ namespace Enemies
             if (weapon.infiniteAmmo || ammo > 0) {
                 foreach (var gun in guns) {    
                     FireProjectile(weapon.prefab, gun.position, gun.rotation);
+                    weapon.shotSound.Play();
+                    weapon.effectSound.Play();
                 }
                 return true;
             } else {
@@ -95,6 +99,7 @@ namespace Enemies
 
         void AfterNoFire() {
             overheated.TickReversed();
+            weapon.effectSound.Stop();
         }
 
         void FireProjectile(GameObject prefab, Vector3 position, Quaternion rotation) {

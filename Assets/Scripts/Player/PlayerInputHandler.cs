@@ -10,14 +10,18 @@ namespace Player {
         Vector2 _move;
         Vector2 _look;
         bool _isFirePressed = false;
+        bool _isFire2Pressed = false;
         bool _isBoostPressed = false;
         bool _isSwitchWeaponPressed = false;
+        bool _isSwitchWeapon2Pressed = false;
 
         public Vector2 move => _move;
         public Vector2 look => _look;
         public bool isFirePressed => _isFirePressed;
+        public bool isFire2Pressed => _isFire2Pressed;
         public bool isBoostPressed => _isBoostPressed;
         public bool isSwitchWeaponPressed => _isSwitchWeaponPressed;
+        public bool isSwitchWeapon2Pressed => _isSwitchWeapon2Pressed;
 
         void OnMove(InputValue value) {
             _move = value.Get<Vector2>();
@@ -31,6 +35,10 @@ namespace Player {
             _isFirePressed = value.isPressed;
         }
 
+        void OnFireSecondary(InputValue value) {
+            _isFire2Pressed = value.isPressed;
+        }
+
         void OnBoost(InputValue value) {
             _isBoostPressed = value.isPressed;
         }
@@ -39,18 +47,15 @@ namespace Player {
             _isSwitchWeaponPressed = value.isPressed;
         }
 
+        void OnSwitchSecondaryWeapon(InputValue value) {
+            _isSwitchWeapon2Pressed = value.isPressed;
+        }
 
         // TODO: REMOVE ACTION
         void OnReset(InputValue value) {
             if (value.isPressed) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
-        }
-
-        // TODO: REMOVE ACTION
-        public bool isDeadPressed = false;
-        void OnDie(InputValue value) {
-            isDeadPressed = value.isPressed;
         }
     }
 }

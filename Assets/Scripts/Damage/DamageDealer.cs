@@ -14,8 +14,6 @@ namespace Damage
         [Header("Damage Settings")][Space]
         [SerializeField] DamageType damageType = DamageType.Default;
         [SerializeField][Range(0f, 10f)] float baseDamageMultiplier = 1f;
-        [SerializeField][Range(0f, 2f)] float damageInterval = 0.2f;
-        [SerializeField] bool destroyOnDamage = false;
 
         [Header("Circlecast Settings")][Space]
         [SerializeField] bool preferCirclecast = false;
@@ -29,6 +27,10 @@ namespace Damage
         [SerializeField] LayerMask ignoreLayers;
         [SerializeField] string ignoreTag;
         [SerializeField] List<Collider2D> ignoreColliders = new List<Collider2D>();
+
+        // callbacks
+        System.Action<DamageableType> onHit;
+        System.Action onDeath;
 
         // cached
         Collider2D _collider;
@@ -53,6 +55,11 @@ namespace Damage
 
         public void SetIgnoreTag(string tag) {
             ignoreTag = tag;
+        }
+
+        public void RegisterCallbacks(System.Action<DamageableType> OnHit, System.Action OnDeath) {
+            onHit = OnHit;
+            onDeath = OnDeath;
         }
 
         void Start() {
@@ -115,12 +122,16 @@ namespace Damage
             //     return;
             // }
             DamageReceiver actor = other.GetComponent<DamageReceiver>();
-            if (actor == null) return;
-            if (ignoreUUID != null && ignoreUUID == actor.uuid) return;
-            if (actor.TakeDamage(damageClass.baseDamage * baseDamageMultiplier, damageType)) {
-                hitThisFrame = true;
-                damageWaitTime = damageInterval;
-                if (destroyOnDamage) Destroy(gameObject);
+            if (actor == null) {
+                // InvokeCallback(onHit, DamageableType.Default);
+                Debug.Log("no_actor");
+            } else {
+                Debug.Log("actor_found");
+                if (ignoreUUID != null && ignoreUUID == actor.uuid) return;
+                if (actor.TakeDamage(damageClass.baseDamage * baseDamageMultiplier, damageType)) {
+                    hitThisFrame = true;
+                }
+                InvokeCallback(onHit, actor.damageableType);
             }
         }
 
@@ -131,7 +142,7 @@ namespace Damage
                         GameManager.current.GetWeaponClass(Weapons.WeaponType.DisruptorRing).shieldDrain * 0.25f
                     );
                 }
-                Destroy(other.gameObject);
+                InvokeCallback(onDeath);
             }
         }
 
@@ -152,6 +163,15 @@ namespace Damage
         void IgnoreColliders() {
             foreach (var ignoreCollider in ignoreColliders) {
                 Physics2D.IgnoreCollision(_collider, ignoreCollider);
+            }
+        }
+
+        void InvokeCallback(System.Action callback) {
+            if (callback != null) callback.Invoke();
+        }
+        void InvokeCallback(System.Action<DamageableType> callback, DamageableType damageableType) {
+            if (callback != null) {
+                callback.Invoke(damageableType);
             }
         }
     }

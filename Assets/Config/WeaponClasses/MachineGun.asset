@@ -20,9 +20,32 @@ MonoBehaviour:
   _cooldownTime: 0.05
   _firingRate: 0.04
   _burst: 9
-  _burstInterval: 0.3
+  _burstInterval: 0.2
   _deploymentTime: 0.5
   _teardownTime: 0
   _prefab: {fileID: 1916144924080233305, guid: 8ec2a941b8f23024aab2e106bf751081, type: 3}
   _lifetime: 10
+  _shotSound:
+    soundName: MachineGunSingle
+    volume: 0
+    pitch: 0.1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    volumeVariance: 0.053
+    pitchVariance: 0.09
+    clips:
+    - {fileID: 8300000, guid: 3d96d732b7ce8ef40a45c8466ca0faac, type: 3}
+    oneShot: 1
+  _effectSound:
+    soundName: MachineGunLoop
+    volume: 0.57
+    pitch: 0.84
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 1
+    mixerGroup: {fileID: 0}
+    clipHead: {fileID: 0}
+    clipLoop: {fileID: 8300000, guid: c9129cd6c299bd84a82d7edc08b61198, type: 3}
+    clipTail: {fileID: 0}
+    playLoopToEnd: 1
   _shieldDrain: 0

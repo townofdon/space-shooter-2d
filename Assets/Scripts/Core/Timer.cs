@@ -19,11 +19,12 @@ namespace Core
         public Timer(TimerDirection direction = TimerDirection.Decrement, TimerStep step = TimerStep.DeltaTime) {
             _direction = direction;
             _step = step;
+            _duration = 1f;
             _value = 0f;
             End(); // set timer value to end cursor
         }
 
-        float _value;
+        float _value = 0f;
         float _duration = 1f;
         TimerDirection _direction = TimerDirection.Decrement;
         TimerStep _step = TimerStep.DeltaTime;
@@ -40,10 +41,11 @@ namespace Core
         }
 
         public void SetDuration(float duration, float value = 0f) {
-            if (_duration <= 0f) {
+            if (duration <= 0f) {
                 _turnedOn = false;
                 End();
             }
+            _turnedOn = true;
             _duration = duration;
             _value = Mathf.Clamp01(value);
         }

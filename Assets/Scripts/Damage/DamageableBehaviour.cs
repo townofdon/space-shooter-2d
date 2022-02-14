@@ -4,8 +4,19 @@ using UnityEngine;
 
 namespace Damage {
 
+    public enum DamageableType {
+        Default,
+        Ship,
+        Shield,
+        Station,
+        Rock,
+    }
+
     public class DamageableBehaviour : MonoBehaviour
     {
+        [Header("General Settings")][Space]
+        [SerializeField] DamageableType _damageableType = DamageableType.Default;
+
         [Header("Health Settings")][Space]
         [SerializeField] float _maxHealth = 50f;
         [SerializeField] float _hitRecoveryTime = 0.2f;
@@ -34,7 +45,7 @@ namespace Damage {
         // state
         bool _isAlive = true;
         float _health = 50f;
-        float _shield = 100f;
+        float _shield = 0f;
         float _timeHit = 0f;
         float _healthDamageThisFrame = 0f;
         float _shieldDamageThisFrame = 0f;
@@ -51,10 +62,15 @@ namespace Damage {
         public float timeHit => _timeHit;
         public bool isRechargingShield => _isRechargingShield;
         public float hitRecoveryTime => _hitRecoveryTime;
+        public bool hasShieldCapability => _maxShield > 0f;
+        public DamageableType damageableType => (hasShieldCapability && _shield > 0f) ? DamageableType.Shield : _damageableType;
 
         protected void TickHealth() {
+            if (!_isAlive) return;
             _timeHit = Mathf.Clamp(_timeHit - Time.deltaTime, 0f, _hitRecoveryTime);
             _timeShieldHit = Mathf.Clamp(_timeShieldHit - Time.deltaTime / _shieldWaitTime, 0f, _shieldWaitTime);
+
+            if (!hasShieldCapability) return;
 
             // recharge shield
             if (_timeShieldHit <= 0f && _shield < _maxShield) {
@@ -157,7 +173,7 @@ namespace Damage {
             if (_healthDamageThisFrame > 0f) {
                 InvokeCallback(_onHealthDamage, _healthDamageThisFrame, damageType);
             }
-            if (_shieldDamageThisFrame > 0f && _shield > 0f) {
+            if (_shieldDamageThisFrame > 0f && _shield > 0f && hasShieldCapability) {
                 InvokeCallback(_onShieldDamage, _shieldDamageThisFrame, true);
             }
 
@@ -166,7 +182,7 @@ namespace Damage {
             _timeHit = _hitRecoveryTime;
             _timeShieldHit = 1f;
 
-            if (_shield == 0f && _prevShield > _shield) {
+            if (_shield == 0f && _prevShield > _shield && hasShieldCapability) {
                 InvokeCallback(_onShieldDepleted, true);
             }
 

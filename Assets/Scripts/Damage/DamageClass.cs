@@ -5,6 +5,7 @@ namespace Damage
     public enum DamageType {
       Default,
       Collision,
+      Explosion,
       Laser,
       Bullet,
       Nuke,

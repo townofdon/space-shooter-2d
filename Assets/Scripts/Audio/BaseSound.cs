@@ -9,16 +9,17 @@ namespace Audio
     [Serializable]
     public abstract class BaseSound
     {
+        [SerializeField] protected string soundName;
         [SerializeField][Range(0f, 1f)] protected float volume = 0.7f;
         [SerializeField][Range(.1f, 3f)] protected float pitch = 1f;
-        [SerializeField][Range(0f, 0.5f)] protected float volumeVariance = 0.1f;
-        [SerializeField][Range(0f, 0.5f)] protected float pitchVariance = 0.1f;
         [SerializeField] protected bool ignoreListenerPause = false; // see - https://gamedevbeginner.com/10-unity-audio-tips-that-you-wont-find-in-the-tutorials/#audiolistener_pause
         [SerializeField] protected bool realtimeEditorInspect = false;
         [SerializeField] protected AudioMixerGroup mixerGroup = null;
 
         // getters
         public abstract bool isPlaying { get; }
+        public float Volume => volume;
+        public float Pitch => pitch;
 
         // public methods
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Core;
 using Damage;
+using Audio;
 
 namespace Enemies {
 
@@ -16,6 +17,10 @@ namespace Enemies {
         [Header("Movement")][Space]
         [SerializeField] float _turnSpeed = 2f;
 
+        [Header("Audio")][Space]
+        [SerializeField] Sound damageSound;
+        [SerializeField] Sound deathSound;
+
         // getters
         public float turnSpeed => _turnSpeed;
 
@@ -27,6 +32,8 @@ namespace Enemies {
             SetColliders();
             RegisterHealthCallbacks(OnDeath, OnHealthDamaged, Utils.__NOOP__);
             ship.SetActive(true);
+            damageSound.Init(this);
+            deathSound.Init(this);
         }
 
         void Update() {
@@ -37,9 +44,11 @@ namespace Enemies {
             // Debug.Log("enemy_damage=" + amount + " health=" + health);
             // TODO: FLASH ENEMY SPRITE
             // TODO: PLAY DAMAGE SOUND
+            damageSound.Play();
         }
 
         void OnDeath() {
+            deathSound.Play();
             StartCoroutine(DeathAnimation());
         }
 

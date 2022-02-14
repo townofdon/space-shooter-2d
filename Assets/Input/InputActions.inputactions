@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "FireSecondary",
+                    "type": "Value",
+                    "id": "fdd03542-99f9-4408-a238-957c3dd09a9c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Boost",
                     "type": "Button",
                     "id": "62ffdd18-3780-46f3-b7e7-862137c725b8",
@@ -54,15 +63,6 @@
                     "name": "Reset",
                     "type": "Button",
                     "id": "900b9448-1d92-4fe6-a3bb-f143b10d9db7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Die",
-                    "type": "Button",
-                    "id": "3d07d8cf-88ab-4e7d-b609-7d463f3b4809",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -183,7 +183,7 @@
                 {
                     "name": "",
                     "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
-                    "path": "<Pointer>/delta",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Touch",
@@ -292,23 +292,45 @@
                 },
                 {
                     "name": "",
-                    "id": "94bb8512-3de0-49b7-a657-22b2fbc49bbd",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "Press(behavior=2)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Die",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e75af7fb-7b22-4594-ad27-fb8224ea50bc",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SwitchWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c29799f5-efff-49ea-8cc2-96ec667f1bdf",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef2213a9-b087-4267-a56a-527437a8cec3",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab4c6a0c-8204-45c4-85b2-81476f73db9f",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireSecondary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageClasses:
+  - {fileID: 11400000, guid: 589fc9b356d3fba4f88cbe5045382369, type: 2}
   - {fileID: 11400000, guid: 80b3dff4d4396a841b839f8229fd1b95, type: 2}
   - {fileID: 11400000, guid: 1badc5b7226860e4a9322dc6f5038f02, type: 2}
-  - {fileID: 11400000, guid: 589fc9b356d3fba4f88cbe5045382369, type: 2}
+  - {fileID: 11400000, guid: 2cb9a68f49a4f354e9c50696f3bcb030, type: 2}
   - {fileID: 11400000, guid: a3189a7789224464f83d7e72d58f6068, type: 2}
   - {fileID: 11400000, guid: 75f5ec9714d2e8d46831301011a93cbb, type: 2}
   - {fileID: 11400000, guid: 19ddc4e0cad1fa54089eb6696c73b021, type: 2}
