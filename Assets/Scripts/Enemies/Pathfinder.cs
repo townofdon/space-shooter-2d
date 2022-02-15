@@ -9,6 +9,7 @@ namespace Enemies {
     {
         [SerializeField] Vector2 offscreenPosition = new Vector2(100f, -100f);
         [SerializeField] float waypointTriggerRadius = 0.25f;
+        [SerializeField] bool debug = false;
 
         // components
         EnemyShip enemy;
@@ -23,36 +24,33 @@ namespace Enemies {
         int wayPointIndex = 0;
         Vector3 velocity; // the direction we're currently moving
         Vector3 heading; // the direction we want to go this frame
-        Vector3 target; // the ultimate direction we want to go
+        Vector3 optimalHeading; // the direction we need to go this frame accounting for velocity
+        Vector3 target; // the ultimate destination
         bool hasCrossedHeadingX = false;
         bool hasCrossedHeadingY = false;
-
-        void Init() {
-             if (_wave != null) {
-                 wayPointIndex = 0;
-                _wayPoints = _wave.GetWaypoints();
-                transform.position = _wayPoints[wayPointIndex].position;
-                InitHeading();
-                UpdateTarget();
-            } else {
-                transform.position = offscreenPosition;
-            }
-        }
 
         void Start() {
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-
             Init();
         }
 
         void FixedUpdate() {
-            // CheckForVelocityChange();
-            if (enemy.timeHit <= 0) {
-                FollowPath();
+            FollowPath();
+        }
+        
+        void Init() {
+             if (_wave != null) {
+                _wayPoints = _wave.GetWaypoints();
+                wayPointIndex = 0;
+                hasCrossedHeadingX = false;
+                hasCrossedHeadingY = false;
+                transform.position = _wayPoints[wayPointIndex].position;
+                InitHeading();
+                UpdateTarget();
             } else {
-                velocity = rb.velocity;
+                transform.position = offscreenPosition;
             }
         }
 
@@ -66,12 +64,16 @@ namespace Enemies {
             }
         }
 
-        // void CheckForVelocityChange() {
-        //     if (Vector3.Distance(rb.velocity, velocity) > 0.1f) velocity = rb.velocity;
-        //     if (Vector3.Angle(rb.velocity, velocity) > 0.1f) {
-        //         velocity = rb.velocity;
-        //     }
-        // }
+        void TargetNextWaypoint() {
+            wayPointIndex++;
+            hasCrossedHeadingX = false;
+            hasCrossedHeadingY = false;
+            if (wayPointIndex >= _wayPoints.Count) {
+                Init();
+            } else {
+                UpdateTarget();
+            }
+        }
 
         void FollowPath() {
             if (!enemy.isAlive) return;
@@ -83,31 +85,35 @@ namespace Enemies {
 
             if (_wave == null || _wayPoints.Count == 0) return;
 
-            if (wayPointIndex < _wayPoints.Count) {
-                // rotate the enemy so that it turns smoothly
-                // heading = Vector3.MoveTowards(heading, (target - transform.position).normalized, enemy.turnSpeed * Time.fixedDeltaTime).normalized;
-                heading = Vector3.RotateTowards(heading, (target - transform.position).normalized, 2f * enemy.turnSpeed * 2f * Mathf.PI * Time.fixedDeltaTime, enemy.turnSpeed * Time.fixedDeltaTime).normalized;
-                // ease into velocity to accommodate other physics forces
-                velocity = Vector3.MoveTowards(velocity, heading * _wave.moveSpeed, 2f * _wave.moveSpeed * Time.fixedDeltaTime);
-                rb.velocity = velocity;
+            if (wayPointIndex >= _wayPoints.Count) return;
 
-                // we keep track of separate axis crossings to avoid circling around a waypoint indefinitely
-                if (Mathf.Abs(target.x - transform.position.x) <= waypointTriggerRadius) hasCrossedHeadingX = true;
-                if (Mathf.Abs(target.y - transform.position.y) <= waypointTriggerRadius) hasCrossedHeadingY = true;
-                if (hasCrossedHeadingX && hasCrossedHeadingY) {
-                    wayPointIndex++;
-                    hasCrossedHeadingX = false;
-                    hasCrossedHeadingY = false;
-                    UpdateTarget();
-                }
-            } else {
-                Destroy(gameObject);
+            // rotate the enemy so that it turns smoothly
+            heading = Vector3.RotateTowards(heading, (target - transform.position).normalized, 2f * enemy.turnSpeed * 2f * Mathf.PI * Time.fixedDeltaTime, enemy.turnSpeed * Time.fixedDeltaTime).normalized;
+
+            // vector maths
+            optimalHeading = (heading * enemy.moveSpeed - (Vector3)rb.velocity).normalized;
+            rb.AddForce(optimalHeading * enemy.accel);
+            if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && rb.velocity.magnitude > enemy.moveSpeed) {
+                rb.velocity *= ( 1f - Time.fixedDeltaTime * 1.5f);
             }
+
+            // we keep track of separate axis crossings to avoid circling around a waypoint indefinitely
+            if (Mathf.Abs(target.x - transform.position.x) <= waypointTriggerRadius) hasCrossedHeadingX = true;
+            if (Mathf.Abs(target.y - transform.position.y) <= waypointTriggerRadius) hasCrossedHeadingY = true;
+            if (hasCrossedHeadingX && hasCrossedHeadingY) TargetNextWaypoint();
         }
 
         public void SetWave(WaveConfigSO wave) {
             _wave = wave;
             Init();
+        }
+
+        void OnDrawGizmos() {
+            if (!debug) return;
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(transform.position, transform.position + heading);
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, transform.position + optimalHeading);
         }
 
 
@@ -129,19 +135,29 @@ namespace Enemies {
         //   For bumps, hits and such, I added a check to determine if the cached v is different from
         //   the current v, and if so, update the cached v (this will ease the velocity delta).
 
+        // void OldCalcs() {
+        //     // ease into velocity to accommodate other physics forces
+        //     velocity = Vector3.MoveTowards(velocity, heading * enemy.moveSpeed, 2f * enemy.moveSpeed * Time.fixedDeltaTime);
+        //     // direct assignment
+        //     rb.velocity = velocity;
+        //     // alt method: trying to constantly accel up to a limit
+        //     if (rb.velocity.magnitude < enemy.moveSpeed) {
+        //         // rb.AddForce(heading * enemy.moveSpeed * 2f * rb.mass);
+        //         rb.AddForce(velocity * 1.75f * rb.mass);
+        //     }
+        // }
+
         // // see: https://www.calculatorsoup.com/calculators/physics/velocity-calculator-vuas.php
         // // also, pretty sure this is the calculation that sebastian lague used
         // // (final_velocity ** 2 + initial_velocity ** 2) / displacement * 2
         // // also, displacement cannot be zero
         // void CalcVelocity() {
         //     float delta = (
-        //         Mathf.Pow(_wave.moveSpeed, 2f) -
+        //         Mathf.Pow(enemy.moveSpeed * GetDragInverse(), 2f) -
         //         Mathf.Pow(Mathf.Max(rb.velocity.magnitude, 2f), 2f)
         //     ) / (2 * Mathf.Max(rb.velocity.magnitude, 2f));
-
-        //     Debug.Log("delta=" + delta + " >> velocity=" + rb.velocity.magnitude);
-
-        //     rb.AddForce(heading * delta);
+        //     Debug.Log("delta=" + delta + " >> velocity=" + rb.velocity.magnitude + " >> drag^-1=" + GetDragInverse());
+        //     rb.AddForce(heading * delta * GetDragInverse() * rb.mass);
         // }
 
         // // THIS METHOD INVERSES UNITY'S DRAG CALCULATION:
@@ -154,7 +170,7 @@ namespace Enemies {
         // }
 
         // // void CalcVelocity() {
-        // //     float requiredSpeed = GetRequiredVelocityChange(_wave.moveSpeed, rb.drag);
+        // //     float requiredSpeed = GetRequiredVelocityChange(enemy.moveSpeed, rb.drag);
         // //     float currentSpeed = GetRequiredVelocityChange(rb.velocity.magnitude, rb.drag);
         // //     float delta = requiredSpeed - Mathf.Min(currentSpeed, requiredSpeed);
         // //     Vector2 force = heading.normalized * delta;

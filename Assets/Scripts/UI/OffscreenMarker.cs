@@ -36,6 +36,11 @@ namespace UI
         Vector3 markerPositionWorld;
         Coroutine removeFiringFlag;
 
+        public void Disable() {
+            gameObject.SetActive(false);
+            marker.enabled = false;
+            target = null;
+        }
         public void FlagEnemy() {
             BeforeFlag();
             marker.color = enemyFlag;

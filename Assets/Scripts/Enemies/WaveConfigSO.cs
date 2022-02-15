@@ -9,7 +9,6 @@ namespace Enemies {
     {
         [SerializeField] List<GameObject> enemies;
         [SerializeField] Transform path;
-        [SerializeField] float _moveSpeed = 5f;
         [SerializeField] float _spawnInterval = 1f;
         [SerializeField][Range(0f, 2f)] float spawnTimeVariance = 0f;
         [SerializeField] float _minSpawnInterval = 1f;
@@ -17,7 +16,6 @@ namespace Enemies {
         [SerializeField] bool _waitUntilFinished = false;
 
         // getters
-        public float moveSpeed => _moveSpeed;
         public int enemyCount => enemies.Count;
         public float spawnInterval => GetSpawnInterval();
         public float delayBeforeSpawn => _delayBeforeSpawn;

@@ -17,7 +17,6 @@ MonoBehaviour:
   - {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
   - {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
   path: {fileID: 9015369940256492741, guid: 4d2dbd99a17b8ef47b8758f35beb022a, type: 3}
-  _moveSpeed: 5
   _spawnInterval: 1
   spawnTimeVariance: 0.15
   _minSpawnInterval: 0.5
