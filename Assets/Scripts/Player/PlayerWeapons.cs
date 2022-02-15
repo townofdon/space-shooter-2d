@@ -1,50 +1,19 @@
 using UnityEngine;
 using Core;
 using Weapons;
-using Game;
 using Damage;
 
 namespace Player
 {
-    struct WeaponState {
-        public WeaponState(WeaponType weaponType = WeaponType.Laser) {
-            current = weaponType;
-            prev = null;
-            deploying = new Core.Timer();
-            firing = new Core.Timer();
-            burstCooldown = new Core.Timer();
-            didSwitch = false;
-            burstStep = 0;
-            firingCycle = 0;
-        }
-        public WeaponType current { get; set; }
-        public System.Nullable<WeaponType> prev { get; set; }
-        public bool didSwitch { get; set; }
-        public Core.Timer deploying { get; set; }
-        public Core.Timer firing { get; set; }
-        public Core.Timer burstCooldown { get; set; }
-        public int burstStep { get; set; }
-        public int firingCycle { get; set; }
-
-        public void Set(WeaponClass weapon) {
-            prev = current;
-            current = weapon.type;
-            burstStep = weapon.burst;
-            firingCycle = 0;
-            burstCooldown.SetDuration(weapon.burstInterval);
-            deploying.SetDuration(weapon.deploymentTime);
-            firing.SetDuration(weapon.firingRate);
-            burstCooldown.End();
-            firing.End();
-        }
-    }
 
     public class PlayerWeapons : MonoBehaviour
     {
-        [Header("Weapon Settings")][Space]
-        [SerializeField] WeaponType startingPrimaryWeapon = WeaponType.Laser;
-        [SerializeField] WeaponType startingSecondaryWeapon = WeaponType.Nuke;
-        [SerializeField] float aimMaxAngle = 30f;
+        [Header("Weapon Classes")][Space]
+        [SerializeField] WeaponClass laser;
+        [SerializeField] WeaponClass machineGun;
+        [SerializeField] WeaponClass disruptorRing;
+        [SerializeField] WeaponClass missile;
+        [SerializeField] WeaponClass nuke;
 
         [Header("Gun Objects")][Space]
         [SerializeField] GameObject mainGuns;
@@ -67,25 +36,13 @@ namespace Player
         PlayerInputHandler input;
 
         // cached
-        WeaponClass laser;
-        WeaponClass machineGun;
-        WeaponClass disruptorRing;
-        WeaponClass nuke;
 
         // state
-        WeaponState primaryWeapon = new WeaponState(WeaponType.Laser);
-        WeaponState secondaryWeapon = new WeaponState(WeaponType.Nuke);
-
-        // WeaponType primaryWeapon;
-        // WeaponType secondaryWeapon;
-        // bool didSwitchWeapon = false;
-        // float timeDeployingNextWeapon = 0f;
-
-        // // state - general weapons
-        // float firingTime = 0f;
-        // float burstCooldown = 0f;
-        // int burstStep = 0;
-        // int firingCycle = 0;
+        WeaponClass primaryWeapon;
+        WeaponClass secondaryWeapon;
+        bool didSwitchPrimaryWeapon;
+        bool didSwitchSecondaryWeapon;
+        bool didReloadPrimary;
 
         // state - machineGun
         int machineGunAmmo = 100;
@@ -105,31 +62,52 @@ namespace Player
             AppIntegrity.AssertPresent<GameObject>(rearGunR);
             input = Utils.GetRequiredComponent<PlayerInputHandler>(gameObject);
             player = Utils.GetRequiredComponent<PlayerGeneral>(gameObject);
-            laser = GameManager.current.GetWeaponClass(WeaponType.Laser);
-            machineGun = GameManager.current.GetWeaponClass(WeaponType.MachineGun);
-            disruptorRing = GameManager.current.GetWeaponClass(WeaponType.DisruptorRing);
-            nuke = GameManager.current.GetWeaponClass(WeaponType.Nuke);
-            // init
-            primaryWeapon.Set(GameManager.current.GetWeaponClass(startingPrimaryWeapon));
-            secondaryWeapon.Set(GameManager.current.GetWeaponClass(startingSecondaryWeapon));
-            nukeFiringTime = 0f;
-            // init sounds
-            InitSound(laser);
-            InitSound(machineGun);
-            InitSound(disruptorRing);
-            InitSound(nuke);
+            InitWeapon(laser);
+            InitWeapon(machineGun);
+            InitWeapon(disruptorRing);
+            InitWeapon(missile);
+            InitWeapon(nuke);
+            primaryWeapon = laser;
+            secondaryWeapon = nuke;
+        }
+
+        void InitWeapon(WeaponClass weapon) {
+            AppIntegrity.AssertPresent<WeaponClass>(weapon);
+            weapon.Init();
+            weapon.shotSound.Init(this);
+            weapon.effectSound.Init(this);
+            weapon.RegisterCallbacks(OnReloadWeapon, OnOutOfAmmo);
         }
 
         void Update()
         {
-            HandleFirePrimary();
-            HandleFireSecondary();
+            if (FirePrimary()) {
+                AfterPrimaryFire();
+            } else {
+                AfterPrimaryNoFire();
+            }
+            if (FireSecondary()) {
+                AfterSecondaryFire();
+            } else {
+                AfterSecondaryNoFire();
+            }
+
             TickTimers();
             HandleSwitchPrimaryWeapon();
             HandleSwitchSecondaryWeapon();
+            HandleReloadPrimary();
 
-            if (!player.isAlive || !input.isFirePressed || primaryWeapon.deploying.active) DeactivatePrimaryWeapons();
-            if (primaryWeapon.burstCooldown.active) OnBurstCooldownPrimary();
+            // TODO: REMOVE
+            HandleTempUpgrade();
+        }
+
+        // TODO: REMOVE
+        bool didUpgrade = false;
+        void HandleTempUpgrade() {
+            if (!input.isUpgradePressed) { didUpgrade = false; return; }
+            if (didUpgrade) return;
+            didUpgrade = true;
+            primaryWeapon.Upgrade();
         }
 
         void InitSound(WeaponClass weapon) {
@@ -137,192 +115,197 @@ namespace Player
             weapon.effectSound.Init(this);
         }
 
-        void HandleFirePrimary() {
-            if (!player.isAlive) return;
-            if (!input.isFirePressed) return;
-            if (primaryWeapon.deploying.active) return;
-            if (primaryWeapon.burstCooldown.active) return;
+        bool FirePrimary() {
+            if (!player.isAlive) return false;
+            if (!input.isFirePressed) return false;
+            if (!primaryWeapon.CanFire()) return false;
 
-            if (primaryWeapon.current == WeaponType.Laser && !primaryWeapon.firing.active) {
+            if (primaryWeapon.type == WeaponType.Laser) {
                 laser.shotSound.Play();
-                FireProjectile(laser.prefab, mainGunL.position, mainGunL.rotation, laser.lifetime);
-                FireProjectile(laser.prefab, mainGunR.position, mainGunR.rotation, laser.lifetime);
+                FireProjectile(laser, mainGunL.position, mainGunL.rotation);
+                FireProjectile(laser, mainGunR.position, mainGunR.rotation);
                 if (sideGuns.activeSelf) {
-                    FireProjectile(laser.prefab, sideGunL.position, sideGunL.rotation, laser.lifetime);
-                    FireProjectile(laser.prefab, sideGunR.position, sideGunR.rotation, laser.lifetime);
+                    FireProjectile(laser, sideGunL.position, sideGunL.rotation);
+                    FireProjectile(laser, sideGunR.position, sideGunR.rotation);
                 }
                 if (rearGuns.activeSelf) {
-                    FireProjectile(laser.prefab, rearGunL.position, rearGunL.rotation, laser.lifetime);
-                    FireProjectile(laser.prefab, rearGunR.position, rearGunR.rotation, laser.lifetime);
+                    FireProjectile(laser, rearGunL.position, rearGunL.rotation);
+                    FireProjectile(laser, rearGunR.position, rearGunR.rotation);
                 }
-                primaryWeapon.burstStep++;
-                if (primaryWeapon.burstStep >= laser.burst) {
-                    primaryWeapon.burstCooldown.Start();
-                    // burstCooldown = laser.burstInterval;
-                    primaryWeapon.burstStep = 0;
-                }
-                // firingTime = laser.firingRate;
-                primaryWeapon.firing.Start();
-            }
 
-            if (primaryWeapon.current == WeaponType.MachineGun && !primaryWeapon.firing.active) {
-                // machineGun.shotSound.Play();
+                return true;
+            }
+            
+            if (primaryWeapon.type == WeaponType.MachineGun) {
                 machineGun.effectSound.Play();
-                if (machineGunAmmo > 0 || machineGun.infiniteAmmo) {
-                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun.prefab, mainGunL.position, mainGunL.rotation, machineGun.lifetime);
-                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun.prefab, mainGunR.position, mainGunR.rotation, machineGun.lifetime);
-                    machineGunAmmo--;
-                    primaryWeapon.burstStep++;
+                if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, mainGunL.position, mainGunL.rotation);
+                if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, mainGunR.position, mainGunR.rotation);
+                if (sideGuns.activeSelf) {
+                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, sideGunL.position, sideGunL.rotation);
+                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, sideGunR.position, sideGunR.rotation);
                 }
-                if (sideGuns.activeSelf && (machineGunAmmo > 0 || machineGun.infiniteAmmo)) {
-                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun.prefab, sideGunL.position, sideGunL.rotation, machineGun.lifetime);
-                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun.prefab, sideGunR.position, sideGunR.rotation, machineGun.lifetime);
-                    machineGunAmmo--;
+                if (rearGuns.activeSelf) {
+                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, rearGunL.position, rearGunL.rotation);
+                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, rearGunR.position, rearGunR.rotation);
                 }
-                if (rearGuns.activeSelf && (machineGunAmmo > 0 || machineGun.infiniteAmmo)) {
-                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun.prefab, rearGunL.position, rearGunL.rotation, machineGun.lifetime);
-                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun.prefab, rearGunR.position, rearGunR.rotation, machineGun.lifetime);
-                    machineGunAmmo--;
-                }
-                if (primaryWeapon.burstStep >= machineGun.burst) {
-                    // burstCooldown = machineGun.burstInterval;
-                    primaryWeapon.burstCooldown.Start();
-                    primaryWeapon.burstStep = 0;
-                }
-                // firingTime = machineGun.firingRate;
-                primaryWeapon.firing.Start();
-                primaryWeapon.firingCycle++;
+                return true;
             }
 
-            if (primaryWeapon.current == WeaponType.DisruptorRing) {
+            if (primaryWeapon.type == WeaponType.DisruptorRing) {
                 if (player.shield > 0f) {
                     disruptorRing.effectSound.Play();
                     disruptorRingEffect.SetActive(true);
                     player.DrainShield(disruptorRing.shieldDrain * Time.deltaTime);
+                    return true;
                 } else {
                     disruptorRingEffect.SetActive(false);
                     disruptorRing.effectSound.Stop();
+                    return false;
                 }
             }
 
-            if (primaryWeapon.firingCycle > 99) primaryWeapon.firingCycle = 0;
+            return false;
         }
 
-        void HandleFireSecondary() {
-            if (!player.isAlive) return;
-            if (!input.isFire2Pressed) return;
-            if (secondaryWeapon.deploying.active) return;
-            if (secondaryWeapon.burstCooldown.active) return;
+        void AfterPrimaryFire() {
+            primaryWeapon.AfterFire();
+        }
+        void AfterPrimaryNoFire() {
+            primaryWeapon.AfterNoFire();
+            StopPrimaryFX();
+        }
 
-            if (secondaryWeapon.current == WeaponType.Nuke && nukeFiringTime <= 0) {
-                if (nukeAmmo > 0 || nuke.infiniteAmmo) {
-                    FireProjectile(nuke.prefab, transform.position, Quaternion.identity, nuke.lifetime);
-                    nukeFiringTime = nuke.firingRate;
-                    nukeAmmo -= 1;
-                } else {
-                    // TODO: PLAY SOUND
-                }
+        void StopPrimaryFX() {
+            disruptorRingEffect.SetActive(false);
+            disruptorRing.effectSound.Stop();
+            if (!primaryWeapon.firing) machineGun.effectSound.Stop();
+        }
+
+        bool FireSecondary() {
+            if (!player.isAlive) return false;
+            if (!input.isFire2Pressed) return false;
+            if (!secondaryWeapon.CanFire()) return false;
+
+            if (secondaryWeapon.type == WeaponType.Nuke) {
+                FireProjectile(nuke, transform.position, transform.rotation);
+                return true;
             }
+
+            if (secondaryWeapon.type == WeaponType.Missile) {
+                if (secondaryWeapon.firingCycle % 2 == 0) FireProjectile(missile, mainGunL.position, mainGunL.rotation);
+                if (secondaryWeapon.firingCycle % 2 == 1) FireProjectile(missile, mainGunR.position, mainGunR.rotation);
+                return true;
+            }
+
+            return false;
         }
 
-        void FireProjectile(GameObject prefab, Vector3 position, Quaternion rotation, float lifetime) {
+        void AfterSecondaryFire() {
+            secondaryWeapon.AfterFire();
+        }
+        void AfterSecondaryNoFire() {
+            secondaryWeapon.AfterNoFire();
+            StopSecondaryFX();
+        }
+
+        void StopSecondaryFX() {
+            // add any sound / fx stops here
+        }
+
+        void FireProjectile(WeaponClass weapon, Vector3 position, Quaternion rotation) {
             // Quaternion aim = Quaternion.AngleAxis(-input.look.x * aimMaxAngle, Vector3.forward);
             // GameObject instance = Object.Instantiate(prefab, position, aim * rotation);
-            GameObject instance = Object.Instantiate(prefab, position, rotation);
+            GameObject instance = Object.Instantiate(weapon.prefab, position, rotation);
             DamageDealer damager = instance.GetComponent<DamageDealer>();
             Collider2D collider = instance.GetComponent<Collider2D>();
             if (collider != null) player.IgnoreCollider(instance.GetComponent<Collider2D>());
-            if (damager != null) damager.SetIgnoreTag(UTag.Player);
-            Destroy(instance, lifetime);
-        }
-
-        void DeactivatePrimaryWeapons() {
-            // firingTime = 0f;
-            // burstStep = 0;
-            // burstCooldown = 0f;
-            primaryWeapon.firing.End();
-            primaryWeapon.burstStep = 0;
-            primaryWeapon.burstCooldown.End();
-            disruptorRingEffect.SetActive(false);
-            disruptorRing.effectSound.Stop();
-            machineGun.effectSound.Stop();
-        }
-
-        void OnBurstCooldownPrimary() {
-            machineGun.effectSound.Stop();
+            if (damager != null) {
+                damager.SetIgnoreTag(UTag.Player);
+                damager.SetDamageMultiplier(weapon.damageMultiplier);
+            }
         }
 
         void TickTimers() {
-            nukeFiringTime = Mathf.Max(nukeFiringTime - Time.deltaTime, 0f);
-            // firingTime = Mathf.Max(firingTime - Time.deltaTime, 0f);
-            // burstCooldown = Mathf.Max(burstCooldown - Time.deltaTime, 0f);
-            // timeDeployingNextWeapon = Mathf.Max(timeDeployingNextWeapon - Time.deltaTime, 0f);
-            primaryWeapon.firing.Tick();
-            primaryWeapon.burstCooldown.Tick();
-            primaryWeapon.deploying.Tick();
-            secondaryWeapon.firing.Tick();
-            secondaryWeapon.burstCooldown.Tick();
-            secondaryWeapon.deploying.Tick();
+            laser.TickTimers();
+            machineGun.TickTimers();
+            disruptorRing.TickTimers();
+            missile.TickTimers();
+            nuke.TickTimers();
         }
 
         void HandleSwitchPrimaryWeapon() {
             if (!player.isAlive) return;
-            if (!input.isSwitchWeaponPressed) { primaryWeapon.didSwitch = false; return; }
-            if (primaryWeapon.didSwitch) return;
+            if (!input.isSwitchWeaponPressed) { didSwitchPrimaryWeapon = false; return; }
+            if (didSwitchPrimaryWeapon) return;
 
             // TODO: PLAY DEPLOYMENT SOUND - UNIQ TO EACH WEAPON?
-            // TODO: ADD SCRIPTABLE OBJECTS FOR WEAPON TYPES
             // TODO: ANIMATE OUT CURRENT WEAPON - USE AN ANIMATOR
             // TODO: ANIMATE IN NEXT WEAPON - USE AN ANIMATOR
 
-            primaryWeapon.didSwitch = true;
+            didSwitchPrimaryWeapon = true;
 
-            switch (primaryWeapon.current)
+            switch (primaryWeapon.type)
             {
                 case WeaponType.Laser:
-                    // primaryWeapon = WeaponType.MachineGun;
-                    // timeDeployingNextWeapon = machineGun.deploymentTime;
-                    primaryWeapon.Set(machineGun);
+                    primaryWeapon = machineGun;
                     break;
                 case WeaponType.MachineGun:
-                    // primaryWeapon = WeaponType.DisruptorRing;
-                    // timeDeployingNextWeapon = nuke.deploymentTime;
-                    primaryWeapon.Set(disruptorRing);
+                    primaryWeapon = disruptorRing;
                     break;
                 case WeaponType.DisruptorRing:
-                default:
-                    // primaryWeapon = WeaponType.Laser;
-                    // timeDeployingNextWeapon = laser.deploymentTime;
-                    primaryWeapon.Set(laser);
+                    primaryWeapon = laser;
                     break;
+                default:
+                    Debug.LogError("Unsupported primary weapon type: " + primaryWeapon.type);
+                    return;
             }
 
-            if (primaryWeapon.current != primaryWeapon.prev) primaryWeapon.deploying.Start();
+            primaryWeapon.Deploy();
+            StopPrimaryFX();
         }
 
         void HandleSwitchSecondaryWeapon() {
             if (!player.isAlive) return;
-            if (!input.isSwitchWeaponPressed) { secondaryWeapon.didSwitch = false; return; }
-            if (secondaryWeapon.didSwitch) return;
+            if (!input.isSwitchWeapon2Pressed) { didSwitchSecondaryWeapon = false; return; }
+            if (didSwitchSecondaryWeapon) return;
 
             // TODO: PLAY DEPLOYMENT SOUND - UNIQ TO EACH WEAPON?
-            // TODO: ADD SCRIPTABLE OBJECTS FOR WEAPON TYPES
 
-            secondaryWeapon.didSwitch = true;
+            didSwitchSecondaryWeapon = true;
 
-            switch (secondaryWeapon.current)
+            switch (secondaryWeapon.type)
             {
                 case WeaponType.Nuke:
-                    // secondaryWeapon = WeaponType.Bomb;
-                    // timeDeployingNextWeapon = disruptorRing.deploymentTime;
+                    secondaryWeapon = missile;
+                    break;
+                case WeaponType.Missile:
+                    secondaryWeapon = nuke;
                     break;
                 default:
-                    secondaryWeapon.Set(nuke);
-                    break;
+                    Debug.LogError("Unsupported secondary weapon type: " + primaryWeapon.type);
+                    return;
             }
 
-            if (secondaryWeapon.current != secondaryWeapon.prev) secondaryWeapon.deploying.Start();
+            secondaryWeapon.Deploy();
+            StopSecondaryFX();
+        }
+
+        void HandleReloadPrimary() {
+            if (!player.isAlive) return;
+            if (!input.isReloadPressed) { didReloadPrimary = false; return; }
+            didReloadPrimary = true;
+            primaryWeapon.Reload();
+        }
+
+        // NOTE - "OnReload" name clashed with PlayerInputHandler method
+        void OnReloadWeapon(WeaponType weaponType) {
+            // TODO: ADD SOUND PER WEAPON TYPE
+            Debug.Log("reloading_" + weaponType);
+        }
+
+        void OnOutOfAmmo(WeaponType weaponType) {
+            // TODO: ADD SOUND PER WEAPON TYPE
+            Debug.Log(weaponType + " Out of ammo :(");
         }
     }
 }
-

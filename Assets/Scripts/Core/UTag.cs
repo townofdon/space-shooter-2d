@@ -12,5 +12,6 @@ namespace Core
         public const string DisruptorRing = "DisruptorRing";
         public const string Laser = "Laser";
         public const string Bullet = "Bullet";
+        public const string Explosion = "Explosion";
     }
 }

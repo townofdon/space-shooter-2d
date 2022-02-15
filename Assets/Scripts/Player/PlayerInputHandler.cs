@@ -11,6 +11,7 @@ namespace Player {
         Vector2 _look;
         bool _isFirePressed = false;
         bool _isFire2Pressed = false;
+        bool _isReloadPressed = false;
         bool _isBoostPressed = false;
         bool _isSwitchWeaponPressed = false;
         bool _isSwitchWeapon2Pressed = false;
@@ -19,6 +20,7 @@ namespace Player {
         public Vector2 look => _look;
         public bool isFirePressed => _isFirePressed;
         public bool isFire2Pressed => _isFire2Pressed;
+        public bool isReloadPressed => _isReloadPressed;
         public bool isBoostPressed => _isBoostPressed;
         public bool isSwitchWeaponPressed => _isSwitchWeaponPressed;
         public bool isSwitchWeapon2Pressed => _isSwitchWeapon2Pressed;
@@ -39,6 +41,10 @@ namespace Player {
             _isFire2Pressed = value.isPressed;
         }
 
+        void OnReload(InputValue value) {
+            _isReloadPressed = value.isPressed;
+        }
+
         void OnBoost(InputValue value) {
             _isBoostPressed = value.isPressed;
         }
@@ -47,7 +53,7 @@ namespace Player {
             _isSwitchWeaponPressed = value.isPressed;
         }
 
-        void OnSwitchSecondaryWeapon(InputValue value) {
+        void OnSwitchSecondary(InputValue value) {
             _isSwitchWeapon2Pressed = value.isPressed;
         }
 
@@ -56,6 +62,11 @@ namespace Player {
             if (value.isPressed) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+        }
+
+        public bool isUpgradePressed = false;
+        void OnTempUpgrade(InputValue value) {
+            isUpgradePressed = value.isPressed;
         }
     }
 }

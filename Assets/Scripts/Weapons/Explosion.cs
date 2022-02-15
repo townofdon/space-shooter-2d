@@ -3,6 +3,7 @@ using UnityEngine;
 
 using Core;
 using Damage;
+using Audio;
 
 namespace Weapons
 {
@@ -17,18 +18,20 @@ namespace Weapons
         [SerializeField] float damageEnd = 10f;
         [SerializeField] float damageAtEdge = 0.25f;
         [SerializeField] float blastForce = 5f;
+        [SerializeField] float lifetime = 10f;
 
-        [Header("Components")][Space]
-        [SerializeField] ParticleSystem splosion;
-        [SerializeField] GameObject nukeShockwave2;
-        [SerializeField] new CircleCollider2D collider;
+        [Header("Audio")][Space]
+        [SerializeField] Sound splosion;
+
+
+        // components
+        new CircleCollider2D collider;
 
         // cached
         ParticleSystem.MinMaxCurve curve;
         float secondShockwaveDelay = 1f;
         float startSize = 1f;
         float size = 1f;
-        float lifetime = 1f;
         float blastRadius = 1f;
         Vector3 scale;
 
@@ -38,14 +41,16 @@ namespace Weapons
         float t = 0f;
 
         void Start() {
-            AppIntegrity.AssertPresent<CircleCollider2D>(collider);
-            AppIntegrity.AssertPresent<ParticleSystem>(splosion);
-
+            collider = GetComponent<CircleCollider2D>();
+            blastRadius = collider.radius;
             collider.enabled = false;
             t = 0f;
 
-            StartCoroutine(GameFeel.ShakeGamepad(0.75f, 1f, 1f));
-            StartCoroutine(NukeFX());
+            splosion.Init(this);
+            splosion.Play();
+            StartCoroutine(GameFeel.ShakeGamepad(0.25f, 0.25f, 0.25f));
+            StartCoroutine(GameFeel.ShakeScreen(Camera.main, 0.1f, 0.1f));
+            Destroy(gameObject, lifetime);
         }
 
         void Update() {
@@ -55,7 +60,7 @@ namespace Weapons
         }
 
         void BlastRadius() {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, blastRadius);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, blastRadius * 3f);
             foreach (var hit in hits) {
                 Projectile projectile = hit.GetComponent<Projectile>();
                 if (projectile != null || hit.tag == UTag.Bullet || hit.tag == UTag.Laser) {
@@ -64,6 +69,12 @@ namespace Weapons
                 }
                 DamageReceiver actor = hit.GetComponent<DamageReceiver>();
                 if (actor != null) {
+                    // push the actor away from the center of the blast
+                    if (actor.rigidbody) {
+                        blastDirection = (actor.rigidbody.transform.position - transform.position);
+                        actor.rigidbody.AddForce(blastDirection.normalized * (1f / blastDirection.magnitude) * blastForce);
+                    }
+
                     hitDist = hit.transform.position - transform.position;
                     if (hitDist.magnitude > blastRadius) return;
 
@@ -74,19 +85,8 @@ namespace Weapons
                         Mathf.Lerp(1f, damageAtEdge, hitDist.magnitude / blastRadius),
                         DamageType.Explosion
                     );
-
-                    // push the actor away from the center of the blast
-                    if (actor.rigidbody) {
-                        blastDirection = (actor.rigidbody.transform.position - transform.position);
-                        actor.rigidbody.AddForce(blastDirection.normalized * (1f / blastDirection.magnitude) * blastForce);
-                    }
                 }
             }
-        }
-
-        IEnumerator NukeFX() {
-            yield return GameFeel.PauseTime(0.15f, 0.1f);
-            yield return GameFeel.ShakeScreen(Camera.main);
         }
     }
 }

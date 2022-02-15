@@ -14668,9 +14668,24 @@ MonoBehaviour:
   damageEnd: 5
   damageAtEdge: 0.25
   blastForce: 5
-  splosion: {fileID: 0}
-  nukeShockwave2: {fileID: 0}
-  collider: {fileID: 0}
+  lifetime: 10
+  splosion:
+    soundName: Splode
+    volume: 0.764
+    pitch: 0.89
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips:
+    - {fileID: 8300000, guid: 2b90036558cedf043966c9eae1113951, type: 3}
+    - {fileID: 8300000, guid: 5c731abfb2a6ab14e80fbfc4c39b8a74, type: 3}
+    oneShot: 1
 --- !u!1 &547358974142009884
 GameObject:
   m_ObjectHideFlags: 0

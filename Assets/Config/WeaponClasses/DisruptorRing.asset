@@ -13,18 +13,7 @@ MonoBehaviour:
   m_Name: DisruptorRing
   m_EditorClassIdentifier: 
   _weaponType: 3
-  _startingAmmo: 100
-  _infiniteAmmo: 1
-  _overheats: 0
-  _overheatTime: 1
-  _cooldownTime: 0
-  _firingRate: 0
-  _burst: 0
-  _burstInterval: 0
-  _deploymentTime: 0.5
-  _teardownTime: 0
-  _prefab: {fileID: 0}
-  _lifetime: 10
+  _weaponName: Disruptor Field
   _shotSound:
     soundName: 
     volume: 0.7
@@ -32,6 +21,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 10
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -43,8 +36,115 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 10
+    maxFalloffDistance: 50
     clipHead: {fileID: 8300000, guid: a8b93234090105549be38672bacb0c40, type: 3}
     clipLoop: {fileID: 8300000, guid: 3b6726c9178fbfa42abb3067aa29160d, type: 3}
     clipTail: {fileID: 8300000, guid: fdfc55d4d99ad534b9dd6a8ec46aaeba, type: 3}
     playLoopToEnd: 0
-  _shieldDrain: 25
+  baseSettings:
+    _assetClass: Prototype
+    _damageMultiplier: 1
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 0
+    _reloadTime: 0
+    _magazineCapacity: 0
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 0}
+    _shieldDrain: 30
+    _cost: 0
+  upgrades:
+  - _assetClass: Mark I
+    _damageMultiplier: 1.1
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 0
+    _reloadTime: 0
+    _magazineCapacity: 0
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 0}
+    _shieldDrain: 20
+    _cost: 0
+  - _assetClass: Mark II
+    _damageMultiplier: 1.2
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 0
+    _reloadTime: 0
+    _magazineCapacity: 0
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 0}
+    _shieldDrain: 17
+    _cost: 0
+  - _assetClass: Mark III
+    _damageMultiplier: 1.4
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 0
+    _reloadTime: 0
+    _magazineCapacity: 0
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 0}
+    _shieldDrain: 15
+    _cost: 0
+  - _assetClass: Mark IV
+    _damageMultiplier: 1.5
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 0
+    _reloadTime: 0
+    _magazineCapacity: 0
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 0}
+    _shieldDrain: 10
+    _cost: 0
+  - _assetClass: Mark V
+    _damageMultiplier: 3
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 0
+    _reloadTime: 0
+    _magazineCapacity: 0
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 0}
+    _shieldDrain: 5
+    _cost: 0

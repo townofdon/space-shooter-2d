@@ -14612,6 +14612,20 @@ MonoBehaviour:
   damageEnd: 30
   damageAtEdge: 0.2
   blastForce: 2
-  splosion: {fileID: 0}
-  nukeShockwave2: {fileID: 0}
-  collider: {fileID: 0}
+  lifetime: 10
+  splosion:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips:
+    - {fileID: 8300000, guid: 4dbc7606b7d8a9f4586eff61f6a46089, type: 3}
+    oneShot: 1

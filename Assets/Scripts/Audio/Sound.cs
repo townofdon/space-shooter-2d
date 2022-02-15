@@ -40,6 +40,12 @@ namespace Audio
             source.playOnAwake = false;
             source.outputAudioMixerGroup = mix;
             source.ignoreListenerPause = ignoreListenerPause;
+
+            // 3d settings
+            source.spread = spread;
+            source.spatialBlend = spatialBlend;
+            source.minDistance = minFalloffDistance;
+            source.maxDistance = maxFalloffDistance;
             AppIntegrity.AssertPresent<AudioClip>(clips[0]);
 
             script.StartCoroutine(RealtimeEditorInspection());
@@ -96,6 +102,12 @@ namespace Audio
 
                 source.volume = volume;
                 source.pitch = pitch;
+
+                // 3d settings
+                source.spread = spread;
+                source.spatialBlend = spatialBlend;
+                source.minDistance = minFalloffDistance;
+                source.maxDistance = maxFalloffDistance;
             }
         }
 

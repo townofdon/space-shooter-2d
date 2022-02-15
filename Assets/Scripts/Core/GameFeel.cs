@@ -7,6 +7,10 @@ namespace Core
 
     public static class GameFeel
     {
+        // TODO: ADD VOID METHODS FOR ALL METHODS BELOW;
+        //       CHANGE IEnumerator METHODS TO INameOfMethod
+        //       CANCEL PREVIOUS COROUTINE IF PRESENT - KEEP TRACK OF ALL COROUTINE STATES
+
         public static IEnumerator ShakeScreen(Camera camera, float duration = 0.3f, float magnitude = 0.5f) {
             // set initial position
             Vector3 initialPosition = camera.transform.position;

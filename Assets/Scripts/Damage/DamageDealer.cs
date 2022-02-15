@@ -3,6 +3,7 @@ using UnityEngine;
 
 using Game;
 using Core;
+using Weapons;
 
 namespace Damage
 {
@@ -45,6 +46,7 @@ namespace Damage
         bool passedSafeDistance = false;
         bool hitThisFrame = false; // prevent multiple hits in the same frame
         float damageWaitTime = 0f; // prevent damage spamming -> spread over time interval
+        float upgradeDamageMultiplier = 1f;
 
         // getters
         new public Collider2D collider => _collider;
@@ -55,6 +57,10 @@ namespace Damage
 
         public void SetIgnoreTag(string tag) {
             ignoreTag = tag;
+        }
+
+        public void SetDamageMultiplier(float value) {
+            upgradeDamageMultiplier = value;
         }
 
         public void RegisterCallbacks(System.Action<DamageableType> OnHit, System.Action OnDeath) {
@@ -117,18 +123,12 @@ namespace Damage
                 HandleHitOtherProjectile(other);
                 return;
             }
-            // if (other.tag == UTag.DisruptorRing) {
-            //     HandleHitOtherDisruptorRing(other);
-            //     return;
-            // }
             DamageReceiver actor = other.GetComponent<DamageReceiver>();
             if (actor == null) {
                 // InvokeCallback(onHit, DamageableType.Default);
-                Debug.Log("no_actor");
             } else {
-                Debug.Log("actor_found");
                 if (ignoreUUID != null && ignoreUUID == actor.uuid) return;
-                if (actor.TakeDamage(damageClass.baseDamage * baseDamageMultiplier, damageType)) {
+                if (actor.TakeDamage(damageClass.baseDamage * baseDamageMultiplier * upgradeDamageMultiplier, damageType)) {
                     hitThisFrame = true;
                 }
                 InvokeCallback(onHit, actor.damageableType);
@@ -136,29 +136,19 @@ namespace Damage
         }
 
         void HandleHitOtherProjectile(Collider2D other) {
-            if (this.damageType == DamageType.Disruptor) {
+            if (this.tag == UTag.DisruptorRing || this.damageType == DamageType.Disruptor) {
                 if (parentActor != null) {
                     parentActor.DrainShield(
                         GameManager.current.GetWeaponClass(Weapons.WeaponType.DisruptorRing).shieldDrain * 0.25f
                     );
                 }
+                Projectile projectile = other.GetComponent<Projectile>();
+                if (projectile != null) projectile.OnDeath();
+            }
+            if (this.tag == UTag.Explosion || this.damageType == DamageType.Explosion) {
                 InvokeCallback(onDeath);
             }
         }
-
-        // void HandleHitOtherDisruptorRing(Collider2D other) {
-        //     if (this.tag == UTag.NukeCore ||
-        //         this.tag == UTag.DisruptorRing) return;
-        //     DamageReceiver actor = other.GetComponent<DamageReceiver>();
-        //     if (actor == null) return;
-        //     if (ignoreUUID != null && ignoreUUID == actor.uuid) return;
-        //     if (tag == UTag.Laser || damageType == DamageType.Laser) {
-        //         actor.DrainShield(GameManager.current.GetWeaponClass(Weapons.WeaponType.DisruptorRing).shieldDrain * 0.25f);
-        //     }
-        //     if (damageType == DamageType.Laser || damageType == DamageType.Bullet) {
-        //         Destroy(gameObject);
-        //     }
-        // }
 
         void IgnoreColliders() {
             foreach (var ignoreCollider in ignoreColliders) {

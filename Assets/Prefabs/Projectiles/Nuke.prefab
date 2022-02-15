@@ -143,7 +143,7 @@ MonoBehaviour:
   fuseTime: 1.3
   finalAnimSpeed: 10
   moveSpeed: 3
-  defaultDirection: {x: 0, y: 1}
+  defaultHeading: {x: 0, y: 1}
   nukeExplosion: {fileID: 5441939292386623249, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}
   lifetimeColor:
     serializedVersion: 2
@@ -175,26 +175,34 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 4
   anticipationSound:
+    soundName: NukeSweep
     volume: 0.351
     pitch: 1
-    volumeVariance: 0.1
-    pitchVariance: 0.11
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
-    soundName: 
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.11
     clips:
     - {fileID: 8300000, guid: 035651b0a6c5f5f4aa787f873763d76e, type: 3}
     oneShot: 1
   explosionSound:
-    volume: 0.7
+    soundName: NukeSplode
+    volume: 1
     pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 1
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 50
     volumeVariance: 0.11
     pitchVariance: 0.304
-    ignoreListenerPause: 0
-    realtimeEditorInspect: 0
-    mixerGroup: {fileID: 0}
-    soundName: 
     clips:
     - {fileID: 8300000, guid: c2edad0108051194dbe5fd1a2f2f2ae5, type: 3}
     - {fileID: 8300000, guid: 120284d3d1223f946a8026e715162b5f, type: 3}

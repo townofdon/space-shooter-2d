@@ -30,7 +30,6 @@ namespace Player {
         [Header("Audio")][Space]
         [SerializeField] Sound damageSound;
         [SerializeField] Sound deathSound;
-        [SerializeField] Sound ricochetSound;
         [SerializeField] LoopableSound shieldSound;
         [SerializeField] Sound shieldLostSound;
         [SerializeField] LoopableSound shieldAlarmSound;

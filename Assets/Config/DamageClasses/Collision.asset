@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Collision
   m_EditorClassIdentifier: 
   _damageType: 1
-  _baseDamage: 10
+  _baseDamage: 2
   _damageVariance: 3.2
   _shieldEffectiveness: 1
-  _shieldedHealthEffectiveness: 0.247
+  _shieldedHealthEffectiveness: 0.05
   _unshieldedHealthEffectiveness: 1
-  _playerEffectiveness: 0.1
+  _playerEffectiveness: 0.818
   _enemyEffectiveness: 1
   _environmentEffectiveness: 0.1
   _npcEffectiveness: 1

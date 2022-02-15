@@ -15,6 +15,10 @@ namespace Audio
         [SerializeField] protected bool ignoreListenerPause = false; // see - https://gamedevbeginner.com/10-unity-audio-tips-that-you-wont-find-in-the-tutorials/#audiolistener_pause
         [SerializeField] protected bool realtimeEditorInspect = false;
         [SerializeField] protected AudioMixerGroup mixerGroup = null;
+        [SerializeField][Range(0f, 1f)] protected float spatialBlend = 1f;
+        [SerializeField][Range(0f, 360f)] protected float spread = 180f;
+        [SerializeField][Range(1f, 20f)] protected float minFalloffDistance = 20f;
+        [SerializeField][Range(5f, 100f)] protected float maxFalloffDistance = 40f;
 
         // getters
         public abstract bool isPlaying { get; }

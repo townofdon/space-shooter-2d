@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3097973963924462876}
   - component: {fileID: 5484847743466961028}
   m_Layer: 0
-  m_Name: LaserBlue
+  m_Name: LaserBlue 1
   m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.16963053, y: 0.7467263}
+  m_Size: {x: 0.16963053, y: 1.1829634}
   m_Direction: 0
 --- !u!50 &8661837291738327277
 Rigidbody2D:
@@ -68,7 +68,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -225,26 +225,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168224b7bf0a97247898722e8c1045c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 50
-  turnSpeed: 0
+  moveSpeed: 70
+  turnSpeed: 5
   lifetime: 10
   initialHeading: {x: 0, y: 1, z: 0}
   numCollisionsMax: 1
   ricochetProbability: 0.2
   ricochetAngle: 60
   ricochetVariance: 20
+  outOfRange: 20
   explosive: 0
   explosionLifetime: 5
   impactLifetime: 1
   explosionFX: {fileID: 0}
   impactFX: {fileID: 0}
   impulseSound:
-    soundName: LaserShot
+    soundName: 
     volume: 0.7
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.215
     clips: []
@@ -256,6 +261,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
@@ -267,6 +276,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.5
     clips:
@@ -280,6 +293,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.135
     pitchVariance: 0.5
     clips:
@@ -292,6 +309,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -303,6 +324,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -333,7 +358,7 @@ Transform:
   m_GameObject: {fileID: 1916144925046824998}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1916144924080233307}

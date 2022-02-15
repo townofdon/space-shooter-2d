@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SwitchSecondary",
+                    "type": "Value",
+                    "id": "bc08c74e-7451-4c9c-aa06-6ef9e3ef15ab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Reset",
                     "type": "Button",
                     "id": "900b9448-1d92-4fe6-a3bb-f143b10d9db7",
@@ -67,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Value",
+                    "id": "1f9562eb-458c-4901-8b30-9e40e85548a8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TempUpgrade",
+                    "type": "Value",
+                    "id": "4a05f292-d9c2-441e-8c1d-00861975cc70",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -270,17 +297,6 @@
                 },
                 {
                     "name": "",
-                    "id": "706192d0-562f-4f58-9e2a-c7e33ce14f38",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "42f97311-f599-41d4-ac46-be3ee407c7df",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -293,7 +309,7 @@
                 {
                     "name": "",
                     "id": "e75af7fb-7b22-4594-ad27-fb8224ea50bc",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Gamepad",
@@ -331,6 +347,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "FireSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa5f3a9b-9717-47cf-b0dd-6a758d66ec7d",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "087b0944-0c29-4c28-998e-1a5a927e8aa7",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11c1b4a4-2d0c-4a78-8317-3094e21a52bc",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f03f15a2-8cfa-45b4-bc9d-ea27179ba59f",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af217056-e928-495b-b994-72078460c8f1",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TempUpgrade",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

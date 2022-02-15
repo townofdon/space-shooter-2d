@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e870b1e6f637c1d43bf3964a85f7f593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 1
+  weapon: {fileID: 11400000, guid: 64bdf2d990497204a9af057bc5bad994, type: 2}
   guns:
   - {fileID: 797570748302554224}
   triggerHoldTime: 0.5

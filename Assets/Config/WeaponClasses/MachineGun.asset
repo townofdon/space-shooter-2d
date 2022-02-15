@@ -13,18 +13,7 @@ MonoBehaviour:
   m_Name: MachineGun
   m_EditorClassIdentifier: 
   _weaponType: 2
-  _startingAmmo: 100
-  _infiniteAmmo: 1
-  _overheats: 0
-  _overheatTime: 1
-  _cooldownTime: 0.05
-  _firingRate: 0.04
-  _burst: 9
-  _burstInterval: 0.2
-  _deploymentTime: 0.5
-  _teardownTime: 0
-  _prefab: {fileID: 1916144924080233305, guid: 8ec2a941b8f23024aab2e106bf751081, type: 3}
-  _lifetime: 10
+  _weaponName: PDCs
   _shotSound:
     soundName: MachineGunSingle
     volume: 0
@@ -32,6 +21,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 10
+    maxFalloffDistance: 50
     volumeVariance: 0.053
     pitchVariance: 0.09
     clips:
@@ -44,8 +37,64 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 1
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: c9129cd6c299bd84a82d7edc08b61198, type: 3}
     clipTail: {fileID: 0}
     playLoopToEnd: 1
-  _shieldDrain: 0
+  baseSettings:
+    _assetClass: Raptor I
+    _damageMultiplier: 1
+    _startingAmmo: 100
+    _infiniteAmmo: 1
+    _reloads: 1
+    _reloadTime: 1.5
+    _magazineCapacity: 50
+    _firingRate: 0.05
+    _burstMax: 0
+    _burstInterval: 0.2
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 1916144924080233305, guid: 8ec2a941b8f23024aab2e106bf751081, type: 3}
+    _shieldDrain: 0
+    _cost: 0
+  upgrades:
+  - _assetClass: Raptor II
+    _damageMultiplier: 1.1
+    _startingAmmo: 100
+    _infiniteAmmo: 1
+    _reloads: 1
+    _reloadTime: 1.4
+    _magazineCapacity: 60
+    _firingRate: 0.05
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 1916144924080233305, guid: 1e301ad3856b6d04b862fb6e17525025, type: 3}
+    _shieldDrain: 0
+    _cost: 0
+  - _assetClass: Raptor III
+    _damageMultiplier: 1.4
+    _startingAmmo: 100
+    _infiniteAmmo: 1
+    _reloads: 1
+    _reloadTime: 1.3
+    _magazineCapacity: 70
+    _firingRate: 0.05
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 1916144924080233305, guid: 6b413e70f4a4396489c7fba9a023d66c, type: 3}
+    _shieldDrain: 0
+    _cost: 0

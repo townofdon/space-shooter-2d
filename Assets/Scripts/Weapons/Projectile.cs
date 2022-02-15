@@ -19,6 +19,7 @@ namespace Weapons
         [SerializeField][Range(0f, 1f)] float ricochetProbability = 0.2f;
         [SerializeField][Range(0f, 180f)] float ricochetAngle = 60f;
         [SerializeField][Range(0f, 90f)] float ricochetVariance = 20f;
+        [SerializeField] float outOfRange = 20f;
 
         [Header("Effects")][Space]
         [SerializeField] bool explosive = false;
@@ -35,13 +36,16 @@ namespace Weapons
         [SerializeField] Sound ricochetSound;
         [SerializeField] Sound destroyedSound;
 
-        // cached
+        // components
         BoxCollider2D box;
         CircleCollider2D circle;
         CapsuleCollider2D capsule;
         SpriteRenderer sr;
         TrailRenderer tr;
         Rigidbody2D rb;
+
+        // cached
+        Vector3 startingPosition;
         Vector3 heading;
         Vector3 velocity;
         Transform target;
@@ -65,6 +69,7 @@ namespace Weapons
             heading = Quaternion.AngleAxis(transform.rotation.eulerAngles.z, Vector3.forward) * heading;
             velocity = heading * moveSpeed;
             target = null;
+            startingPosition = transform.position;
 
             impulseSound.Init(this);
             thrustSound.Init(this);
@@ -91,10 +96,12 @@ namespace Weapons
         }
 
         void Update() {
+            if (!isAlive) return;
             UpdateHeading();
             if (rb == null) MoveViaTransform();
             t += Time.deltaTime;
             if (t > lifetime) OnDeath();
+            if ((transform.position - startingPosition).magnitude > outOfRange) OnDeath();
         }
 
         void FixedUpdate() {
@@ -118,14 +125,17 @@ namespace Weapons
         }
 
         void MoveViaTransform() {
+            if (!isAlive) return;
             transform.position += velocity * Time.deltaTime;
         }
 
         void MoveViaRigidbody() {
+            if (!isAlive) return;
             rb.velocity = velocity;
         }
 
         void OnHit(DamageableType damageableType) {
+            if (!isAlive) return;
             numCollisions++;
             if (damageableType == DamageableType.Shield) {
                 impactShieldSound.Play();
@@ -144,6 +154,7 @@ namespace Weapons
         }
 
         void Ricochet() {
+            if (!isAlive) return;
             ricochetSound.Play();
             heading = -heading;
             Quaternion ricochet = GetRicochet();
@@ -153,7 +164,9 @@ namespace Weapons
             transform.position += heading * height;
         }
 
-        void OnDeath() {
+        public void OnDeath() {
+            if (!isAlive) return;
+            isAlive = false;
             destroyedSound.Play();
             thrustSound.Stop();
             StartCoroutine(IDeath());

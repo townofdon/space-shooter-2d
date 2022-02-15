@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b88cfe901e14b84b82d3af28e10b3b4, type: 3}
+  m_Name: Missile
+  m_EditorClassIdentifier: 
+  _weaponType: 5
+  _shotSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
+  _effectSound:
+    soundName: 
+    volume: 0.906
+    pitch: 0.5
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 1
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 271
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    clipHead: {fileID: 0}
+    clipLoop: {fileID: 0}
+    clipTail: {fileID: 0}
+    playLoopToEnd: 0
+  baseSettings:
+    _damageMultiplier: 1
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 1
+    _reloadTime: 1.2
+    _magazineCapacity: 2
+    _firingRate: 0.2
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
+    _shieldDrain: 0
+  upgrades: []

@@ -3,16 +3,16 @@ using System.Collections;
 using UnityEngine;
 
 using Core;
-using Game;
 using Weapons;
 using Damage;
 
 namespace Enemies
 {
+    [RequireComponent(typeof(EnemyShip))]
 
     public class EnemyShooter : MonoBehaviour
     {
-        [SerializeField] WeaponType weaponType = WeaponType.LaserRed;
+        [SerializeField] WeaponClass weapon;
         [SerializeField] List<Transform> guns = new List<Transform>();
         [SerializeField][Range(0f, 10f)] float triggerHoldTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerReleaseTime = 1f;
@@ -21,34 +21,22 @@ namespace Enemies
         // Components
         EnemyShip enemy;
 
-        // cached
-        WeaponClass weapon;
-
         // state
         Timer triggerHeld = new Timer();
         Timer triggerReleased = new Timer();
-        Timer firingTime = new Timer();
-        Timer cooldown = new Timer();
-        Timer burstCooldown = new Timer();
-        Timer overheated = new Timer();
-        int burstStep = 0;
-        int ammo = 0;
 
         void Start() {
-            AppIntegrity.AssertPresent<WeaponType>(weaponType);
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
-            weapon = GameManager.current.GetWeaponClass(weaponType);
+            InitWeapon();
+            StartCoroutine(PressAndReleaseTrigger());
+        }
 
-            firingTime.SetDuration(weapon.firingRate);
-            cooldown.SetDuration(weapon.cooldownTime);
-            overheated.SetDuration(weapon.overheatTime);
-            burstCooldown.SetDuration(weapon.burstInterval);
-
-            ammo = weapon.startingAmmo;
+        void InitWeapon() {
+            AppIntegrity.AssertPresent<WeaponClass>(weapon);
+            weapon = weapon.Clone();
+            weapon.Init();
             weapon.shotSound.Init(this);
             weapon.effectSound.Init(this);
-
-            StartCoroutine(PressAndReleaseTrigger());
         }
 
         void Update() {
@@ -57,48 +45,28 @@ namespace Enemies
             } else {
                 AfterNoFire();
             }
-            TickTimers();
+            weapon.TickTimers();
         }
 
         bool Fire() {
             if (!enemy.isAlive) return false;
             if (!triggerHeld.active) return false;
-            if (firingTime.active) return false;
-            if (burstCooldown.active) return false;
-            if (weapon.overheats && cooldown.active) return false;
+            if (!weapon.CanFire()) return false;
 
-            if (weapon.infiniteAmmo || ammo > 0) {
-                foreach (var gun in guns) {    
-                    FireProjectile(weapon.prefab, gun.position, gun.rotation);
-                    weapon.shotSound.Play();
-                    weapon.effectSound.Play();
-                }
-                return true;
-            } else {
-                return false;
+            foreach (var gun in guns) {    
+                FireProjectile(weapon.prefab, gun.position, gun.rotation);
+                weapon.shotSound.Play();
+                weapon.effectSound.Play();
             }
+            return true;
         }
 
         void AfterFire() {
-            if (!weapon.infiniteAmmo) ammo--;
-            if (weapon.overheats) {
-                overheated.Tick();
-                if (overheated.tEnd) {
-                    cooldown.Start();
-                    overheated.Start();
-                }
-            }
-
-            firingTime.Start();
-            burstStep++;
-            if (burstStep >= weapon.burst) {
-                burstCooldown.Start();
-                burstStep = 0;
-            }
+            weapon.AfterFire();
         }
 
         void AfterNoFire() {
-            overheated.TickReversed();
+            weapon.AfterNoFire();
             weapon.effectSound.Stop();
         }
 
@@ -108,15 +76,6 @@ namespace Enemies
             Collider2D collider = instance.GetComponent<Collider2D>();
             if (collider != null) enemy.IgnoreCollider(instance.GetComponent<Collider2D>());
             if (damager != null) damager.SetIgnoreUUID(enemy.uuid);
-            Destroy(instance, weapon.lifetime);
-        }
-
-        void TickTimers() {
-            firingTime.Tick();
-            cooldown.Tick();
-            burstCooldown.Tick();
-            triggerHeld.Tick();
-            triggerReleased.Tick();
         }
 
         IEnumerator PressAndReleaseTrigger() {

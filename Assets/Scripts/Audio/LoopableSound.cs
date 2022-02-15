@@ -70,6 +70,7 @@ namespace Audio
         }
 
         void SetSource(AudioClip clip, AudioSource source, bool loop) {
+            if (source == null) return;
             source.volume = volume;
             source.pitch = pitch;
             source.loop = loop;
@@ -77,6 +78,11 @@ namespace Audio
             source.playOnAwake = false;
             source.ignoreListenerPause = ignoreListenerPause;
             source.outputAudioMixerGroup = mixerGroup;
+            // 3d settings
+            source.spread = spread;
+            source.spatialBlend = spatialBlend;
+            source.minDistance = minFalloffDistance;
+            source.maxDistance = maxFalloffDistance;
         }
 
         public override void Play() {

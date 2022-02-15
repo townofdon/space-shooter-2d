@@ -13,16 +13,43 @@ MonoBehaviour:
   m_Name: Nuke
   m_EditorClassIdentifier: 
   _weaponType: 4
-  _startingAmmo: 10
-  _infiniteAmmo: 1
-  _overheats: 0
-  _overheatTime: 1
-  _cooldownTime: 1
-  _firingRate: 1
-  _burst: 0
-  _burstInterval: 0
-  _deploymentTime: 0.5
-  _teardownTime: 0
-  _prefab: {fileID: 6411006964417785918, guid: c21db27f042e279499be883f02544470, type: 3}
-  _lifetime: 10
-  _shieldDrain: 0
+  _shotSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
+  _effectSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    clipHead: {fileID: 0}
+    clipLoop: {fileID: 0}
+    clipTail: {fileID: 0}
+    playLoopToEnd: 0
+  baseSettings:
+    _damageMultiplier: 1
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 1
+    _autoReload: 1
+    _reloadTime: 2
+    _magazineCapacity: 1
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 6411006964417785918, guid: c21db27f042e279499be883f02544470, type: 3}
+    _shieldDrain: 0
+  upgrades: []

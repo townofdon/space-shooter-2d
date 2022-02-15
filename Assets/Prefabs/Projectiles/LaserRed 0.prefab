@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3097973963924462876}
   - component: {fileID: 5484847743466961028}
   m_Layer: 0
-  m_Name: LaserRed
+  m_Name: LaserRed 0
   m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -205,7 +205,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 3
   baseDamageMultiplier: 1
-  damageInterval: 1
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -244,8 +243,12 @@ MonoBehaviour:
     volume: 0.7
     pitch: 1
     ignoreListenerPause: 0
-    realtimeEditorInspect: 0
+    realtimeEditorInspect: 1
     mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 10
+    maxFalloffDistance: 50
     volumeVariance: 0.11
     pitchVariance: 0.141
     clips: []
@@ -257,6 +260,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
@@ -268,6 +275,40 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
+  impactShieldSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
+  ricochetSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -279,6 +320,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []

@@ -13,25 +13,17 @@ MonoBehaviour:
   m_Name: LaserRed
   m_EditorClassIdentifier: 
   _weaponType: 1
-  _startingAmmo: 100
-  _infiniteAmmo: 1
-  _overheats: 0
-  _overheatTime: 1
-  _cooldownTime: 0
-  _firingRate: 0.1
-  _burst: 3
-  _burstInterval: 0.7
-  _deploymentTime: 0
-  _teardownTime: 0
-  _prefab: {fileID: 1916144924080233305, guid: 3111cc7728a164f4f9880e2d00d4c78d, type: 3}
-  _lifetime: 10
   _shotSound:
-    soundName: 
+    soundName: LazerRed
     volume: 0.565
     pitch: 0.6
     ignoreListenerPause: 0
     realtimeEditorInspect: 1
     mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 290
+    minFalloffDistance: 10
+    maxFalloffDistance: 40
     volumeVariance: 0.271
     pitchVariance: 0.5
     clips:
@@ -45,8 +37,28 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
-  _shieldDrain: 0
+  baseSettings:
+    _damageMultiplier: 1
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 0
+    _reloadTime: 0
+    _magazineCapacity: 0
+    _firingRate: 0.1
+    _burstMax: 3
+    _burstInterval: 0.5
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _prefab: {fileID: 1916144924080233305, guid: 3111cc7728a164f4f9880e2d00d4c78d, type: 3}
+    _shieldDrain: 0
+  upgrades: []

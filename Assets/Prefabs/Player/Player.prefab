@@ -5027,7 +5027,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 5
   baseDamageMultiplier: 1
-  damageInterval: 0.2
   preferCirclecast: 1
   raycast: 0
   minSafeDistance: 10
@@ -35886,6 +35885,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.229
     clips:
@@ -35902,6 +35905,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -35915,6 +35922,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 59e876a918970904f8f2576933a82bcb, type: 3}
     clipTail: {fileID: 0}
@@ -35926,6 +35937,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -35938,6 +35953,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 385be5042d7e73749ad8852f0345012e, type: 3}
     clipTail: {fileID: 0}
@@ -35949,6 +35968,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0
     pitchVariance: 0
     clips:
@@ -36000,6 +36023,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 1
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     clipHead: {fileID: 8300000, guid: 5e1a127f36bbc2147a05b1360e574ffe, type: 3}
     clipLoop: {fileID: 8300000, guid: 17ec2e7a8aad1f04cb8ba95d34ddb6cf, type: 3}
     clipTail: {fileID: 8300000, guid: dec33a6bcb68d0b40ae63f40da5d87bf, type: 3}
@@ -36016,9 +36043,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabddd98da22e77478c249ebc12e8538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPrimaryWeapon: 0
-  startingSecondaryWeapon: 0
-  aimMaxAngle: 15
+  laser: {fileID: 11400000, guid: 1eed027b1f728ff4eaeb8b6a9b46da46, type: 2}
+  machineGun: {fileID: 11400000, guid: 152165e57ca196e46a78a1de221f4ebb, type: 2}
+  disruptorRing: {fileID: 11400000, guid: 629baa710498d6f438cdb57bc748cf4f, type: 2}
+  missile: {fileID: 11400000, guid: 942ee69a4aae60441a760fcfad5519fc, type: 2}
+  nuke: {fileID: 11400000, guid: 2cce19c6bf4b83941a51bdb1687a3252, type: 2}
   mainGuns: {fileID: 5316389522153779636}
   sideGuns: {fileID: 5316389521787693538}
   rearGuns: {fileID: 5316389521971274008}

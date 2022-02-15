@@ -11,7 +11,7 @@ namespace Weapons
         [SerializeField] float fuseTime = 3f;
         [SerializeField] float finalAnimSpeed = 10f;
         [SerializeField] float moveSpeed = 5f;
-        [SerializeField] Vector2 defaultDirection = Vector2.up;
+        [SerializeField] Vector2 defaultHeading = Vector2.up;
         [SerializeField] GameObject nukeExplosion;
         [SerializeField] Gradient lifetimeColor;
 
@@ -25,7 +25,7 @@ namespace Weapons
         Animator anim;
 
         // state
-        Vector2 direction = Vector2.up;
+        Vector2 heading = Vector2.up;
         float currentTime = 0f;
         bool sploded = false;
         GameObject splosion;
@@ -38,7 +38,8 @@ namespace Weapons
             // init
             currentTime = 0f;
             sr.enabled = true;
-            direction = defaultDirection;
+            heading = defaultHeading;
+            heading = Quaternion.AngleAxis(transform.rotation.eulerAngles.z, Vector3.forward) * heading;
 
             anticipationSound.Init(this);
             explosionSound.Init(this);
@@ -46,7 +47,7 @@ namespace Weapons
         }
 
         void Update() {
-            rb.velocity = Vector2.Lerp(direction.normalized * moveSpeed, Vector2.zero, EasedTime());
+            rb.velocity = Vector2.Lerp(heading.normalized * moveSpeed, Vector2.zero, EasedTime());
             anim.speed = Mathf.Lerp(1f, finalAnimSpeed, EasedTime());
             sr.color = lifetimeColor.Evaluate(EasedTime());
 
@@ -73,9 +74,9 @@ namespace Weapons
         }
 
         public void SetDirection(Vector2 _direction) {
-            direction = _direction.magnitude > 0.1f
+            heading = _direction.magnitude > 0.1f
                 ? _direction.normalized
-                : defaultDirection;
+                : defaultHeading;
         }
     }
 }

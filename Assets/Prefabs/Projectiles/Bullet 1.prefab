@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3097973963924462876}
   - component: {fileID: 5484847743466961028}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -187,7 +187,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 4
   baseDamageMultiplier: 1
-  damageInterval: 0.2
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -208,14 +207,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168224b7bf0a97247898722e8c1045c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 40
+  moveSpeed: 60
   turnSpeed: 0
   lifetime: 10
   initialHeading: {x: 0, y: 1, z: 0}
   numCollisionsMax: 2
-  ricochetProbability: 0.25
+  ricochetProbability: 0.3
   ricochetAngle: 65
   ricochetVariance: 40
+  outOfRange: 20
   explosive: 0
   explosionLifetime: 5
   impactLifetime: 1
@@ -228,6 +228,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.288
     pitchVariance: 0.055
     clips: []
@@ -239,17 +243,25 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
   impactSound:
-    soundName: 
+    soundName: BulletImpact
     volume: 0.331
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 1
     mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.167
     pitchVariance: 0.336
     clips:
@@ -257,12 +269,16 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c66d9363eb3afe640b2734340aeb973f, type: 3}
     oneShot: 1
   impactShieldSound:
-    soundName: 
+    soundName: ShieldImpact
     volume: 0.21
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.164
     pitchVariance: 0.5
     clips:
@@ -275,6 +291,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 1
     mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 360
+    minFalloffDistance: 20
+    maxFalloffDistance: 50
     volumeVariance: 0.122
     pitchVariance: 0.425
     clips:
@@ -294,6 +314,10 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
+    spatialBlend: 0.5
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 50
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
