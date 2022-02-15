@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Core;
 using Audio;
+using Game;
 
 namespace Player {
 
@@ -118,10 +117,12 @@ namespace Player {
         }
 
         void HandleBounds() {
-            transform.position =  new Vector2(
-                Mathf.Clamp(transform.position.x, minBounds.x + screenPadLeft, maxBounds.x - screenPadRight),
-                Mathf.Clamp(transform.position.y, minBounds.y + screenPadBottom, maxBounds.y - screenPadTop)
-            );
+            if (GameManager.current.gameMode == GameMode.Battle) {
+                transform.position = new Vector2(
+                    Mathf.Clamp(transform.position.x, minBounds.x + screenPadLeft, maxBounds.x - screenPadRight),
+                    Mathf.Clamp(transform.position.y, minBounds.y + screenPadBottom, maxBounds.y - screenPadTop)
+                );
+            }
         }
 
         void HandleBoost() {
