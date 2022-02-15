@@ -122,7 +122,7 @@ MonoBehaviour:
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
-    _firingRate: 0.1
+    _firingRate: 0.15
     _burstMax: 0
     _burstInterval: 0
     _overheats: 0

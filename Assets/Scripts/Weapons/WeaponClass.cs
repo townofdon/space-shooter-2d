@@ -174,6 +174,7 @@ namespace Weapons
         public bool equipped => _equipped;
         public int ammo => _ammo;
         public int ammoInClip => GetAmmoLeftInClip();
+        public int ammoInClipDisplayed => _ammoInClipDisplayed;
         public bool hasAmmo => infiniteAmmo || (HasAmmo() && HasAmmoLeftInClip());
         public int firingCycle => _firingCycle;
         public bool deploying => _deploying.active;
@@ -185,6 +186,7 @@ namespace Weapons
 
         // STATE
         [System.NonSerialized]
+        bool initialized;
         int _upgradeLevel = -1;
         bool _equipped = false; // does the actor have this weapon?
         int _ammo = 0;
@@ -205,11 +207,10 @@ namespace Weapons
         System.Action<WeaponType> _onOutOfAmmo;
 
         public void Init(bool equipped = true) {
-            _upgradeLevel = -1;
-            ResetState();
-        }
-
-        void ResetState() {
+            if (!initialized) {
+                _upgradeLevel = -1;
+                initialized = true;
+            }
             _equipped = equipped;
             _ammo = startingAmmo;
             _burstStep = 0;
@@ -239,11 +240,11 @@ namespace Weapons
             if (!CanUpgrade) return;
             Debug.Log("upgrading_" + _weaponType + " >> " + assetClass);
             _upgradeLevel += 1;
-            ResetState();
+            Init();
         }
 
         public void UpgradeTo(int levelZeroIndexed) {
-            ResetState();
+            Init();
             _upgradeLevel = Mathf.Clamp(levelZeroIndexed, -1, upgrades.Count - 1);
         }
 
@@ -291,6 +292,7 @@ namespace Weapons
                 _burstStep = 0;
             }
             if (reloads && _firingCycle >= magazineCapacity) {
+                _ammoInClipDisplayed = GetAmmoLeftInClip();
                 Reload();
             }
             if (!reloads && _firingCycle > 99) {

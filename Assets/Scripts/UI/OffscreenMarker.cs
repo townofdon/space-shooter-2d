@@ -4,15 +4,24 @@ using UnityEngine.UI;
 
 namespace UI
 {
+
+    enum FlagType {
+        Enemy,
+        Incoming,
+        Friendly,
+        Info,
+    }
     
     public class OffscreenMarker : MonoBehaviour
     {
         [SerializeField] Image marker;
         [SerializeField] Transform target;
+        [SerializeField] FlagType flag;
         [SerializeField] Color enemyFlag;
         [SerializeField] Color dangerFlag;
         [SerializeField] Color infoFlag;
         [SerializeField] Color friendlyFlag;
+        [SerializeField] bool debug = false;
 
         Vector2 minBounds;
         Vector2 maxBounds;
@@ -28,23 +37,25 @@ namespace UI
         Coroutine removeFiringFlag;
 
         public void FlagEnemy() {
+            BeforeFlag();
             marker.color = enemyFlag;
         }
-        public void FlagEnemyFiring() {
-            if (removeFiringFlag != null) StopCoroutine(removeFiringFlag);
-            marker.color = dangerFlag;
-            removeFiringFlag = StartCoroutine(IRemoveFiringFlag());
-        }
         public void FlagIncoming() {
+            BeforeFlag();
             marker.color = dangerFlag;
+            if (flag == FlagType.Enemy) removeFiringFlag = StartCoroutine(IRemoveFiringFlag());
+        }
+        public void FlagInfo() {
+            BeforeFlag();
+            marker.color = infoFlag;
         }
         public void FlagFriendly() {
+            BeforeFlag();
             marker.color = friendlyFlag;
         }
 
-        IEnumerator IRemoveFiringFlag() {
-            yield return new WaitForSeconds(2f);
-            marker.color = enemyFlag;
+        void BeforeFlag() {
+            if (removeFiringFlag != null) StopCoroutine(removeFiringFlag);
         }
 
         void Start() {
@@ -56,10 +67,7 @@ namespace UI
             aspectRatio = Camera.main.aspect;
             markerPosition = marker.rectTransform.position;
             marker.enabled = false;
-            marker.color = enemyFlag;
-
-            Debug.Log(minBoundsWorld);
-            Debug.Log(maxBoundsWorld);
+            InitFlag();
         }
 
         void Update() {
@@ -73,6 +81,29 @@ namespace UI
             } else {
                 marker.enabled = false;
             }
+        }
+
+        void InitFlag() {
+            switch (flag) {
+                case FlagType.Incoming:
+                    marker.color = dangerFlag;
+                    break;
+                case FlagType.Friendly:
+                    marker.color = friendlyFlag;
+                    break;
+                case FlagType.Info:
+                    marker.color = infoFlag;
+                    break;
+                case FlagType.Enemy:
+                default:
+                    marker.color = enemyFlag;
+                    break;
+            }
+        }
+
+        IEnumerator IRemoveFiringFlag() {
+            yield return new WaitForSeconds(0.5f);
+            marker.color = enemyFlag;
         }
 
         bool IsTrackedOutsideScreen() {
@@ -113,6 +144,23 @@ namespace UI
 
         Quaternion GetMarkerRotation() {
             return Quaternion.FromToRotation(Vector2.up, rotateTowards);
+        }
+
+        void OnGUI()
+        {
+            if (!debug) return;
+            if (GUILayout.Button("Flag Enemy")) {
+                FlagEnemy();
+            }
+            if (GUILayout.Button("Flag Incoming")) {
+                FlagIncoming();
+            }
+            if (GUILayout.Button("Flag Info")) {
+                FlagInfo();
+            }
+            if (GUILayout.Button("Flag Friendly")) {
+                FlagFriendly();
+            }
         }
     }
 }
