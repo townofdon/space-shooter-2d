@@ -28,5 +28,10 @@ namespace Damage
             if (actor == null) return false;
             return actor.DrainShield(amount);
         }
+
+        public void TakeImpactForce(Vector3 incomingVelocity, float incomingMass, float throwbackForceMultiplier = 0f) {
+            if (actor == null || rb == null) return;
+            rb.AddForce(incomingVelocity * incomingMass * throwbackForceMultiplier, ForceMode2D.Impulse);
+        }
     }
 }

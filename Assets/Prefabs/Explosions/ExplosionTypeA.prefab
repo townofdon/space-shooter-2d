@@ -14664,9 +14664,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeCausingDamage: 0.5
-  damageBegin: 50
+  damageBegin: 60
   damageEnd: 5
-  damageAtEdge: 0.25
+  damageAtEdge: 0.5
   blastForce: 5
   lifetime: 10
   splosion:

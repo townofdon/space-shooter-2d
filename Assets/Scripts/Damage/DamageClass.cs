@@ -38,6 +38,11 @@ namespace Damage
         public float enemyEffectiveness => _enemyEffectiveness;
         public float environmentEffectiveness => _environmentEffectiveness;
         public float npcEffectiveness => _npcEffectiveness;
+        
+        [Header("Physics")][Space]
+        [SerializeField][Range(0f, 10f)] float _throwbackForceMultiplier = 0f;
+        
+        public float throwbackForceMultiplier => _throwbackForceMultiplier;
 
         public float GetBaseDamage() {
             return Mathf.Max(0f, _baseDamage + UnityEngine.Random.Range(-_damageVariance / 2, _damageVariance / 2));

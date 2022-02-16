@@ -167,6 +167,7 @@ namespace Weapons
         public void OnDeath() {
             if (!isAlive) return;
             isAlive = false;
+            if (damageDealer != null) damageDealer.enabled = false;
             destroyedSound.Play();
             thrustSound.Stop();
             StartCoroutine(IDeath());

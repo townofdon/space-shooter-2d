@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageType: 1
   _baseDamage: 2
-  _damageVariance: 3.2
+  _damageVariance: 0.5
   _shieldEffectiveness: 1
   _shieldedHealthEffectiveness: 0.05
   _unshieldedHealthEffectiveness: 1
@@ -22,3 +22,4 @@ MonoBehaviour:
   _enemyEffectiveness: 1
   _environmentEffectiveness: 0.1
   _npcEffectiveness: 1
+  _throwbackForceMultiplier: 2

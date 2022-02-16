@@ -60,37 +60,38 @@ namespace Weapons
         }
 
         void BlastRadius() {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, blastRadius * 3f);
-            foreach (var hit in hits) {
-                Projectile projectile = hit.GetComponent<Projectile>();
-                if (projectile != null) {
-                    projectile.OnDeath();
-                    return;
-                }
-                Rocket rocket = hit.GetComponent<Rocket>();
-                if (rocket != null) {
-                    rocket.OnDeath();
-                    return;
-                }
-                DamageReceiver actor = hit.GetComponent<DamageReceiver>();
-                if (actor != null) {
-                    // push the actor away from the center of the blast
-                    if (actor.rigidbody) {
-                        blastDirection = (actor.rigidbody.transform.position - transform.position);
-                        actor.rigidbody.AddForce(blastDirection.normalized * (1f / blastDirection.magnitude) * blastForce);
-                    }
+            foreach (var hit in Physics2D.OverlapCircleAll(transform.position, blastRadius * 3f)) OnHit(hit);
+        }
 
-                    hitDist = hit.transform.position - transform.position;
-                    if (hitDist.magnitude > blastRadius) return;
-
-                    actor.TakeDamage(
-                        // damage amount per time
-                        Mathf.Lerp(damageBegin, damageEnd, t / timeCausingDamage) *
-                        // account for distance from explosion center
-                        Mathf.Lerp(1f, damageAtEdge, hitDist.magnitude / blastRadius),
-                        DamageType.Explosion
-                    );
+        void OnHit(Collider2D hit) {
+            Projectile projectile = hit.GetComponent<Projectile>();
+            if (projectile != null) {
+                projectile.OnDeath();
+                return;
+            }
+            Rocket rocket = hit.GetComponent<Rocket>();
+            if (rocket != null) {
+                rocket.OnDeath();
+                return;
+            }
+            DamageReceiver actor = hit.GetComponent<DamageReceiver>();
+            if (actor != null) {
+                // push the actor away from the center of the blast
+                if (actor.rigidbody) {
+                    blastDirection = (actor.rigidbody.transform.position - transform.position);
+                    actor.rigidbody.AddForce(blastDirection.normalized * (1f / blastDirection.magnitude) * blastForce);
                 }
+
+                hitDist = hit.transform.position - transform.position;
+                if (hitDist.magnitude > blastRadius) return;
+
+                actor.TakeDamage(
+                    // damage amount per time
+                    Mathf.Lerp(damageBegin, damageEnd, t / timeCausingDamage) *
+                    // account for distance from explosion center
+                    Mathf.Lerp(1f, damageAtEdge, hitDist.magnitude / blastRadius),
+                    DamageType.Explosion
+                );
             }
         }
     }

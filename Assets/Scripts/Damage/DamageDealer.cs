@@ -25,6 +25,7 @@ namespace Damage
         float minSafeDistance = 2f;
 
         [Header("Ignore Settings")][Space]
+        [SerializeField] bool ignoreParentUUID = true;
         [SerializeField] LayerMask ignoreLayers;
         [SerializeField] string ignoreTag;
         [SerializeField] List<Collider2D> ignoreColliders = new List<Collider2D>();
@@ -34,6 +35,7 @@ namespace Damage
         System.Action onDeath;
 
         // cached
+        Rigidbody2D rb;
         Collider2D _collider;
         DamageableBehaviour parentActor;
         DamageClass damageClass;
@@ -69,10 +71,15 @@ namespace Damage
         }
 
         void Start() {
+            rb = GetComponentInParent<Rigidbody2D>();
             parentActor = GetComponentInParent<DamageableBehaviour>();
             damageClass = GameManager.current.GetDamageClass(damageType);
             prevPosition = transform.position;
             initPosition = transform.position;
+
+            if (ignoreParentUUID && parentActor!= null && parentActor.uuid != null) {
+                SetIgnoreUUID(parentActor.uuid);
+            }
 
             if (preferCirclecast) {
                 _collider = Utils.GetRequiredComponent<CircleCollider2D>(gameObject);
@@ -115,6 +122,7 @@ namespace Damage
         }
 
         void HandleColliderHit(Collider2D other) {
+            if (!enabled) return;
             if (damageWaitTime > 0f) return;
             if (!passedSafeDistance && hitThisFrame) return;
             if (!passedSafeDistance && ignoreTag == other.tag) return;
@@ -128,8 +136,15 @@ namespace Damage
                 // InvokeCallback(onHit, DamageableType.Default);
             } else {
                 if (ignoreUUID != null && ignoreUUID == actor.uuid) return;
+                if (damageType == DamageType.Collision) {
+                    HandleJarringCollision(actor);
+                    return;
+                }
                 if (actor.TakeDamage(damageClass.baseDamage * baseDamageMultiplier * upgradeDamageMultiplier, damageType)) {
                     hitThisFrame = true;
+                }
+                if (rb != null) {
+                    actor.TakeImpactForce(rb.velocity, rb.mass, damageClass.throwbackForceMultiplier);
                 }
                 InvokeCallback(onHit, actor.damageableType);
             }
@@ -148,6 +163,27 @@ namespace Damage
             if (this.tag == UTag.Explosion || this.damageType == DamageType.Explosion) {
                 InvokeCallback(onDeath);
             }
+        }
+
+        void HandleJarringCollision(DamageReceiver actor) {
+            if (damageType != DamageType.Collision) return;
+            if (actor == null) return;
+            if (actor.rigidbody == null) return;
+            if (rb == null) return;
+            float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
+            float collisionMagnitude = (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
+            // a very inelastic collision
+            Vector3 forceToSelf = (actor.rigidbody.velocity - rb.velocity);
+            Vector3 forceToActor = (rb.velocity - actor.rigidbody.velocity);
+            rb.AddForce(forceToSelf, ForceMode2D.Impulse);
+            actor.rigidbody.AddForce(forceToActor * damageClass.throwbackForceMultiplier, ForceMode2D.Impulse);
+            float damageToActor = collisionDamage * collisionMagnitude * Mathf.Max(1f, (rb.mass / actor.rigidbody.mass) * 0.05f);
+            actor.TakeDamage(damageToActor * baseDamageMultiplier, DamageType.Collision);
+        }
+        void HandleJarringCollision(Collider2D other) {
+            if (damageType != DamageType.Collision) return;
+            DamageReceiver actor = other.gameObject.GetComponent<DamageReceiver>();
+            HandleJarringCollision(actor);
         }
 
         void IgnoreColliders() {

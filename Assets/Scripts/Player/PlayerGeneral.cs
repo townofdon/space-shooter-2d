@@ -115,6 +115,10 @@ namespace Player {
                 TriggerShockwaveBlast(other.transform.position);
                 return;
             }
+            if (other.tag == UTag.Asteroid) {
+                // ignore - will deal with asteroid in OnCollisionEnter2D
+                return;
+            }
             DamageReceiver actor = other.GetComponent<DamageReceiver>();
             if (actor == null) return;
             if (actor.rigidbody == null) return;
@@ -133,6 +137,18 @@ namespace Player {
             actor.rigidbody.velocity += actor.rigidbody.velocity.normalized * selfMagnitude * collideThrowbackFromVelocity;
         }
 
+        // void OnCollisionEnter2D(Collision2D other) {
+        //     DamageReceiver actor = other.gameObject.GetComponent<DamageReceiver>();
+        //     if (actor == null) return;
+        //     if (actor.rigidbody == null) return;
+        //     float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
+        //     float collisionMagnitude = (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
+        //     float damageToPlayer = collisionDamage * collisionMagnitude * (actor.rigidbody.mass / rb.mass);
+        //     float damageToActor = collisionDamage * collisionMagnitude * (rb.mass / actor.rigidbody.mass);
+        //     actor.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision);
+        //     this.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision);
+        // }
+
         void TriggerShockwaveBlast(Vector3 shockwaveOrigin) {
             Vector3 dir = transform.position - shockwaveOrigin;
             float force = blastThrowback * (4f / (dir.magnitude + 4f));
@@ -144,7 +160,6 @@ namespace Player {
         }
 
         void OnHealthDamaged(float amount, DamageType damageType) {
-            Debug.Log("player_damage=" + amount + " HP=" + health + " SHIELD=" + shield);
             if (shakeGamepadCoroutine != null) StopCoroutine(shakeGamepadCoroutine);
             shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(0.1f, 1f, 1f));
             StartCoroutine(GameFeel.PauseTime(hitPauseDuration, hitPauseTimescale));
@@ -231,5 +246,3 @@ namespace Player {
         }
     }
 }
-
-

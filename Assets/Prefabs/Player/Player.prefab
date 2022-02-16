@@ -5025,7 +5025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 5
+  damageType: 6
   baseDamageMultiplier: 1
   preferCirclecast: 1
   raycast: 0
@@ -24755,7 +24755,7 @@ GameObject:
   - component: {fileID: 1440120796447821290}
   m_Layer: 0
   m_Name: ShieldRecharge
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29607,7 +29607,7 @@ GameObject:
   - component: {fileID: 6302041473631903954}
   m_Layer: 0
   m_Name: ShieldLost
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34503,7 +34503,7 @@ GameObject:
   - component: {fileID: 4883680674908443311}
   m_Layer: 0
   m_Name: WingR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34897,7 +34897,7 @@ GameObject:
   - component: {fileID: 2363828978451154750}
   m_Layer: 0
   m_Name: BeamL
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35001,7 +35001,7 @@ GameObject:
   - component: {fileID: 5316389521314479214}
   m_Layer: 0
   m_Name: Scratches
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35118,9 +35118,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389521527404502}
   - component: {fileID: 5316389521527404503}
+  - component: {fileID: 4895612855257811383}
   m_Layer: 0
   m_Name: L
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35158,6 +35159,18 @@ CircleCollider2D:
   m_Offset: {x: -0.1629847, y: 0.0597609}
   serializedVersion: 2
   m_Radius: 0.3533136
+--- !u!114 &4895612855257811383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389521527404501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5316389521557159622
 GameObject:
   m_ObjectHideFlags: 0
@@ -35358,9 +35371,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389521768776257}
   - component: {fileID: 5316389521768776258}
+  - component: {fileID: 6436365057156684379}
   m_Layer: 0
   m_Name: R
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35398,6 +35412,18 @@ CircleCollider2D:
   m_Offset: {x: 0.1629847, y: 0.0597609}
   serializedVersion: 2
   m_Radius: 0.3533136
+--- !u!114 &6436365057156684379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389521768776256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5316389521773242211
 GameObject:
   m_ObjectHideFlags: 0
@@ -35411,7 +35437,7 @@ GameObject:
   - component: {fileID: 6071589307695167622}
   m_Layer: 0
   m_Name: BeamR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35515,7 +35541,7 @@ GameObject:
   - component: {fileID: 5316389521787693539}
   m_Layer: 0
   m_Name: AngleGuns
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35632,7 +35658,7 @@ GameObject:
   - component: {fileID: 5316389521841358786}
   m_Layer: 0
   m_Name: Guns
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35703,7 +35729,7 @@ GameObject:
   - component: {fileID: 5316389521971274009}
   m_Layer: 0
   m_Name: RearGuns
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35851,12 +35877,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageableType: 1
+  debug: 0
   _maxHealth: 50
   _hitRecoveryTime: 0.05
   _destroyOnDeath: 0
   _maxShield: 100
   _shieldWaitTime: 3
   _shieldRechargeTime: 2.5
+  defaultMaterial: {fileID: 0}
+  damageFlashMaterial: {fileID: 0}
+  damageFlashDuration: 0
+  damageSpriteTarget: {fileID: 0}
   blastThrowback: 6
   collideThrowback: 4
   collideThrowbackFromVelocity: 0.3
@@ -35989,6 +36020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede1a5f8579b3014080755d4a133a861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUpgradePressed: 0
 --- !u!114 &5316389521978419114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36165,7 +36197,7 @@ GameObject:
   - component: {fileID: 5316389522153779637}
   m_Layer: 0
   m_Name: MainGuns
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36198,7 +36230,7 @@ GameObject:
   - component: {fileID: 5316389522184798503}
   m_Layer: 0
   m_Name: Ship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36220,6 +36252,7 @@ Transform:
   - {fileID: 5316389521527404502}
   - {fileID: 5316389522214553762}
   - {fileID: 5316389521841358786}
+  - {fileID: 9063816284739448290}
   m_Father: {fileID: 5316389521978419118}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -36404,7 +36437,7 @@ GameObject:
   - component: {fileID: 5643776550650706115}
   m_Layer: 0
   m_Name: Engine
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36509,7 +36542,7 @@ GameObject:
   - component: {fileID: 5316389522230486307}
   m_Layer: 0
   m_Name: RailGun
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36563,7 +36596,7 @@ GameObject:
   - component: {fileID: 5316389522262259973}
   m_Layer: 0
   m_Name: Cockpit
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37091,7 +37124,7 @@ GameObject:
   - component: {fileID: 8551335378418928994}
   m_Layer: 0
   m_Name: WingL
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37597,7 +37630,7 @@ GameObject:
   - component: {fileID: 2564386746714250004}
   m_Layer: 0
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42454,6 +42487,67 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!1 &7499296936792533789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9063816284739448290}
+  - component: {fileID: 7491358581505251025}
+  - component: {fileID: 4449883374324643654}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9063816284739448290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499296936792533789}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5316389522184798503}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &7491358581505251025
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499296936792533789}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.03}
+  serializedVersion: 2
+  m_Radius: 0.45
+--- !u!114 &4449883374324643654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499296936792533789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7818966363607592163
 GameObject:
   m_ObjectHideFlags: 0
@@ -42465,7 +42559,7 @@ GameObject:
   - component: {fileID: 1867671198146079528}
   m_Layer: 0
   m_Name: SpawnPoints
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

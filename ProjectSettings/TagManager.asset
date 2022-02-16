@@ -13,6 +13,7 @@ TagManager:
   - Laser
   - Bullet
   - Explosion
+  - Asteroid
   layers:
   - Default
   - TransparentFX

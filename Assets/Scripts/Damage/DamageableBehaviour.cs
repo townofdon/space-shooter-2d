@@ -1,6 +1,8 @@
+using System.Collections;
+using UnityEngine;
+
 using Core;
 using Game;
-using UnityEngine;
 
 namespace Damage {
 
@@ -16,6 +18,7 @@ namespace Damage {
     {
         [Header("General Settings")][Space]
         [SerializeField] DamageableType _damageableType = DamageableType.Default;
+        [SerializeField] bool debug = false;
 
         [Header("Health Settings")][Space]
         [SerializeField] float _maxHealth = 50f;
@@ -26,6 +29,12 @@ namespace Damage {
         [SerializeField] float _maxShield = 0f;
         [SerializeField] float _shieldWaitTime = 3f;
         [SerializeField] float _shieldRechargeTime = 1f;
+        
+        [Header("Damage FX")][Space]
+        [SerializeField] Material defaultMaterial;
+        [SerializeField] Material damageFlashMaterial;
+        [SerializeField] float damageFlashDuration = 0.1f;
+        [SerializeField] SpriteRenderer damageSpriteTarget;
 
         // Action callbacks can be set via the Editor OR via RegisterCallbacks()
         [SerializeField] System.Action _onDeath;
@@ -78,7 +87,6 @@ namespace Damage {
                 if (!_isRechargingShield) InvokeCallback(_onShieldRechargeStart, true);
                 _isRechargingShield = true;
                 _shield = Mathf.Min(_shield + _maxShield * (Time.deltaTime / _shieldRechargeTime), _maxShield);
-                Debug.Log("recharge_shield >> " + _shield);
             } else {
                 if (_isRechargingShield && _shield == _maxShield) InvokeCallback(_onShieldRechargeComplete, true);
                 _isRechargingShield = false;
@@ -169,9 +177,14 @@ namespace Damage {
                 _healthDamageThisFrame *= damageClass.enemyEffectiveness;
                 _shieldDamageThisFrame *= damageClass.enemyEffectiveness;
             }
+            if (gameObject.tag == UTag.Asteroid) {
+                _healthDamageThisFrame *= damageClass.environmentEffectiveness;
+                _shieldDamageThisFrame *= damageClass.environmentEffectiveness;
+            }
 
             if (_healthDamageThisFrame > 0f) {
                 InvokeCallback(_onHealthDamage, _healthDamageThisFrame, damageType);
+                DamageFlash();
             }
             if (_shieldDamageThisFrame > 0f && _shield > 0f && hasShieldCapability) {
                 InvokeCallback(_onShieldDamage, _shieldDamageThisFrame, true);
@@ -195,6 +208,17 @@ namespace Damage {
             return true;
         }
 
+        private void DamageFlash() {
+            if (damageFlashDuration <= 0 || defaultMaterial == null || damageFlashMaterial == null || damageSpriteTarget == null) return;
+            StartCoroutine(IDamageFlash());
+        }
+
+        private IEnumerator IDamageFlash() {
+            damageSpriteTarget.material = damageFlashMaterial;
+            yield return new WaitForSeconds(damageFlashDuration);
+            damageSpriteTarget.material = defaultMaterial;
+        }
+
         private void _Die() {
             _isAlive = false;
             _DisableColliders();
@@ -209,8 +233,9 @@ namespace Damage {
         }
 
         private void _DisableColliders() {
+            if (colliders == null) return;
             foreach (var collider in colliders) {
-                collider.enabled = false;
+                if (collider != null) collider.enabled = false;
             }
         }
 
@@ -236,6 +261,12 @@ namespace Damage {
             } else if (!ignoreMissingCallback) {
                 Debug.LogError("WARN: a callback was null in DamageableBehaviour - something's not hooked up correctly.");
             }
+        }
+
+        private void OnGUI() {
+            if (!debug) return;
+            GUILayout.TextField("health=" + health.ToString());
+            GUILayout.TextField("shield=" + shield.ToString());
         }
     }
 }
