@@ -98,12 +98,16 @@ namespace Weapons
         [SerializeField][Range(0f, 10f)] float _overheatTime = 0f;
         [SerializeField][Range(0f, 10f)] float _cooldownTime = 0f;
         [SerializeField][Range(0f, 10f)] float _deploymentTime = .5f;
+        
+        [Header("Physics")][Space]
+        [SerializeField] float _launchForce = 0f;
+        [SerializeField] float _recoil = 0f;
 
         [Header("Prefab Settings")][Space]
         [SerializeField] GameObject _prefab;
 
         [Header("Side Effects")][Space]
-        [SerializeField] float _shieldDrain = 0;
+        [SerializeField] float _shieldDrain = 0f;
 
         [Header("Cost")][Space]
         [SerializeField] int _cost = 0;
@@ -122,6 +126,8 @@ namespace Weapons
         public bool reloads => _reloads;
         public int magazineCapacity => _magazineCapacity;
         public float reloadTime => _reloadTime;
+        public float recoil => _recoil;
+        public float launchForce => _launchForce;
         public GameObject prefab => _prefab;
         public float shieldDrain => _shieldDrain;
     }
@@ -156,6 +162,8 @@ namespace Weapons
         public bool infiniteAmmo => current.infiniteAmmo;
         public bool overheats => current.overheats;
         public int magazineCapacity => current.magazineCapacity;
+        public float recoil => current.recoil;
+        public float launchForce => current.launchForce;
         public GameObject prefab => current.prefab;
         public float shieldDrain => current.shieldDrain;
 

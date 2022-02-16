@@ -34,8 +34,7 @@ namespace Player
         // components
         PlayerGeneral player;
         PlayerInputHandler input;
-
-        // cached
+        Rigidbody2D rb;
 
         // state
         WeaponClass primaryWeapon;
@@ -43,13 +42,6 @@ namespace Player
         bool didSwitchPrimaryWeapon;
         bool didSwitchSecondaryWeapon;
         bool didReloadPrimary;
-
-        // state - machineGun
-        int machineGunAmmo = 100;
-
-        // state - nuke
-        int nukeAmmo = 10;
-        float nukeFiringTime = 0f;
 
         void Start()
         {
@@ -62,6 +54,7 @@ namespace Player
             AppIntegrity.AssertPresent<GameObject>(rearGunR);
             input = Utils.GetRequiredComponent<PlayerInputHandler>(gameObject);
             player = Utils.GetRequiredComponent<PlayerGeneral>(gameObject);
+            rb = GetComponent<Rigidbody2D>();
             InitWeapon(laser);
             InitWeapon(machineGun);
             InitWeapon(disruptorRing);
@@ -222,6 +215,17 @@ namespace Player
             if (damager != null) {
                 damager.SetIgnoreTag(UTag.Player);
                 damager.SetDamageMultiplier(weapon.damageMultiplier);
+            }
+            // recoil
+            if (rb != null) {
+                rb.AddForce(-transform.up * weapon.recoil, ForceMode2D.Impulse);
+            }
+            // launch rocket
+            if (weapon.type == WeaponType.Missile) {
+                Rocket rocket = instance.GetComponent<Rocket>();
+                if (rocket != null) {
+                    rocket.Launch(transform.up * weapon.launchForce);
+                }
             }
         }
 

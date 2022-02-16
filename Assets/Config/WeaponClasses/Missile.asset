@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Missile
   m_EditorClassIdentifier: 
   _weaponType: 5
+  _weaponName: Missile
   _shotSound:
     soundName: 
     volume: 0.7
@@ -44,8 +45,9 @@ MonoBehaviour:
     clipTail: {fileID: 0}
     playLoopToEnd: 0
   baseSettings:
+    _assetClass: Tomcat I
     _damageMultiplier: 1
-    _startingAmmo: 0
+    _startingAmmo: 100
     _infiniteAmmo: 1
     _reloads: 1
     _reloadTime: 1.2
@@ -57,6 +59,9 @@ MonoBehaviour:
     _overheatTime: 0
     _cooldownTime: 0
     _deploymentTime: 0.5
+    _launchForce: 15
+    _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
     _shieldDrain: 0
+    _cost: 0
   upgrades: []

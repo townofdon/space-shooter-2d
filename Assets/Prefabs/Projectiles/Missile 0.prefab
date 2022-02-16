@@ -196,14 +196,14 @@ MonoBehaviour:
   moveSpeed: 10
   accel: 5
   turnSpeed: 1
-  startDelay: 1
+  startDelay: 0.25
+  launchDrag: 5
   lifetime: 10
   initialHeading: {x: 0, y: 1, z: 0}
   outOfRange: 14
-  explosive: 0
-  explosionLifetime: 5
   thrustFX: {fileID: 1329884247295841544}
   explosion: {fileID: 547358973900262000, guid: 1191d5bf8165270409cce2311db38d77, type: 3}
+  explosionLifetime: 5
   impulseSound:
     soundName: 
     volume: 0.7
@@ -368,7 +368,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5180,7 +5180,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -9994,7 +9994,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:

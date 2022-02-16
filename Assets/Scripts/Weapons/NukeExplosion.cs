@@ -77,8 +77,13 @@ namespace Weapons
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, nukeCoreRadius);
             foreach (var hit in hits) {
                 Projectile projectile = hit.GetComponent<Projectile>();
-                if (projectile != null || hit.tag == UTag.Bullet || hit.tag == UTag.Laser) {
-                    Destroy(hit.gameObject);
+                if (projectile != null) {
+                    projectile.OnDeath();
+                    return;
+                }
+                Rocket rocket = hit.GetComponent<Rocket>();
+                if (rocket != null) {
+                    rocket.OnDeath();
                     return;
                 }
                 DamageReceiver actor = hit.GetComponent<DamageReceiver>();

@@ -13,16 +13,16 @@ namespace Weapons
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float accel = 5f;
         [SerializeField] float turnSpeed = 1f;
-        [SerializeField] float startDelay = 0.5f;
+        [SerializeField] float startDelay = 0.25f;
+        [SerializeField] float launchDrag = 1f;
         [SerializeField] float lifetime = 10f;
         [SerializeField] Vector3 initialHeading = Vector3.up;
         [SerializeField] float outOfRange = 20f;
 
         [Header("Effects")][Space]
-        [SerializeField] bool explosive = false;
-        [SerializeField] float explosionLifetime = 5f;
         [SerializeField] ParticleSystem thrustFX;
         [SerializeField] GameObject explosion;
+        [SerializeField] float explosionLifetime = 5f;
 
         [Header("Audio")][Space]
         [SerializeField] Sound impulseSound;
@@ -48,9 +48,14 @@ namespace Weapons
         bool isAlive = true;
         float t = 0;
         float height = 0.5f;
+        Vector2 launchForce;
 
         public void SetTarget(Transform _target) {
             target = _target;
+        }
+
+        public void Launch(Vector2 force) {
+            launchForce = force;
         }
 
         void Init() {
@@ -64,9 +69,7 @@ namespace Weapons
 
             impulseSound.Init(this);
             thrustSound.Init(this);
-
             impulseSound.Play();
-            thrustSound.Play();
 
             AppIntegrity.AssertPresent<DamageDealer>(damageDealer);
             damageDealer.RegisterCallbacks(OnHit, OnDeath);
@@ -81,18 +84,13 @@ namespace Weapons
             capsule = GetComponent<CapsuleCollider2D>();
             damageDealer = GetComponent<DamageDealer>();
             Init();
-        }
-
-        void Activate() {
-          if (thrustFX != null && !thrustFX.isPlaying) thrustFX.Play();
-          thrustSound.Play();
-          isThrusting = true;
+            OnLaunch();
         }
 
         void Update() {
             UpdateHeading();
-            if (rb == null) MoveViaTransform();
             t += Time.deltaTime;
+            if (rb == null) MoveViaTransform();
             if (t > startDelay) Activate();
             if (t > lifetime) OnDeath();
             if ((transform.position - startingPosition).magnitude > outOfRange) OnDeath();
@@ -100,6 +98,19 @@ namespace Weapons
 
         void FixedUpdate() {
             if (rb != null) MoveViaRigidbody();
+        }
+
+        void OnLaunch() {
+            if (rb == null) return;
+            rb.drag = launchDrag;
+            rb.AddForce(launchForce + rb.velocity, ForceMode2D.Impulse);
+        }
+
+        void Activate() {
+          if (thrustFX != null && !thrustFX.isPlaying) thrustFX.Play();
+          thrustSound.Play();
+          isThrusting = true;
+          if (rb != null) rb.drag = 0f;
         }
 
         void UpdateHeading() {
@@ -126,7 +137,13 @@ namespace Weapons
 
         void MoveViaRigidbody() {
             if (!isThrusting || !isAlive) return;
-            rb.velocity = velocity;
+            // rb.velocity = velocity;
+            rb.drag = 0f;
+            rb.AddForce(heading * accel);
+            if (rb.velocity.magnitude > moveSpeed) {
+                // apply drag if over speed limit
+                rb.velocity *= ( 1f - Time.fixedDeltaTime * 1.5f);
+            }
         }
 
         void OnHit(DamageableType damageableType) {
@@ -134,7 +151,7 @@ namespace Weapons
             OnDeath();
         }
 
-        void OnDeath() {
+        public void OnDeath() {
             if (!isAlive) return;
 
             isAlive = false;

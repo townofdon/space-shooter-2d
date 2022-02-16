@@ -58,13 +58,10 @@ namespace Enemies
         Coroutine battle;
 
         public void OnEnemyDeath() {
-            Debug.Log("AN ENEMY JUST DIED!!! HURRAHH!");
-
             numEnemiesAlive = Mathf.Max(0, numEnemiesAlive - 1);
         }
 
         public void BattleFinished() {
-            Debug.Log("BATTLE FINISHED");
             if (OnBattleFinished != null) OnBattleFinished.Raise();
         }
 
