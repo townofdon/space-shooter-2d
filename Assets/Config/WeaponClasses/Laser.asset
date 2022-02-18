@@ -45,6 +45,21 @@ MonoBehaviour:
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
+  _reloadSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
   baseSettings:
     _assetClass: COBRA I
     _damageMultiplier: 1
@@ -54,15 +69,32 @@ MonoBehaviour:
     _reloadTime: 0
     _magazineCapacity: 0
     _firingRate: 0.2
-    _burstMax: 5
+    _burstMax: 0
     _burstInterval: 0.15
     _overheats: 0
     _overheatTime: 0
     _cooldownTime: 0
     _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: ee50d1ee6f7d4154396f4b41d98475e9, type: 3}
     _shieldDrain: 0
     _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   upgrades:
   - _assetClass: COBRA II
     _damageMultiplier: 1.2
@@ -72,15 +104,32 @@ MonoBehaviour:
     _reloadTime: 0
     _magazineCapacity: 0
     _firingRate: 0.2
-    _burstMax: 5
+    _burstMax: 0
     _burstInterval: 0.15
     _overheats: 0
     _overheatTime: 0
     _cooldownTime: 0
     _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 7740262aaef2bb04387b291288442365, type: 3}
     _shieldDrain: 0
     _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   - _assetClass: VYPER III
     _damageMultiplier: 1.5
     _startingAmmo: 0
@@ -89,15 +138,32 @@ MonoBehaviour:
     _reloadTime: 0
     _magazineCapacity: 0
     _firingRate: 0.18
-    _burstMax: 5
+    _burstMax: 0
     _burstInterval: 0.15
     _overheats: 0
     _overheatTime: 0
     _cooldownTime: 0
     _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 78e35a5914ef53542b6ace38cb363ebc, type: 3}
     _shieldDrain: 0
     _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   - _assetClass: VYPER IV
     _damageMultiplier: 1.5
     _startingAmmo: 0
@@ -106,15 +172,32 @@ MonoBehaviour:
     _reloadTime: 0
     _magazineCapacity: 0
     _firingRate: 0.18
-    _burstMax: 5
+    _burstMax: 0
     _burstInterval: 0.15
     _overheats: 0
     _overheatTime: 0
     _cooldownTime: 0
     _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 78e35a5914ef53542b6ace38cb363ebc, type: 3}
     _shieldDrain: 0
     _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   - _assetClass: HYPERION V
     _damageMultiplier: 3
     _startingAmmo: 0
@@ -129,6 +212,23 @@ MonoBehaviour:
     _overheatTime: 0
     _cooldownTime: 0
     _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: be67dfab09195ad46a0ed4752d0e6e13, type: 3}
     _shieldDrain: 0
     _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1

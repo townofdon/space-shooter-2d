@@ -111,6 +111,9 @@ namespace Weapons
 
         [Header("Cost")][Space]
         [SerializeField] int _cost = 0;
+        
+        [Header("Override Audio")][Space]
+        [SerializeField] Sound _reloadSound;
 
         public string assetClass => _assetClass;
         public float damageMultiplier => _damageMultiplier;
@@ -130,6 +133,7 @@ namespace Weapons
         public float launchForce => _launchForce;
         public GameObject prefab => _prefab;
         public float shieldDrain => _shieldDrain;
+        public Sound reloadSound => _reloadSound;
     }
 
     [CreateAssetMenu(fileName = "WeaponClass", menuName = "ScriptableObjects/WeaponClass", order = 0)]
@@ -141,6 +145,7 @@ namespace Weapons
         [Header("Audio Settings")][Space]
         [SerializeField] Sound _shotSound;
         [SerializeField] LoopableSound _effectSound;
+        [SerializeField] Sound _reloadSound;
 
         [SerializeField] WeaponSettings baseSettings = new WeaponSettings();
         [SerializeField] List<WeaponSettings> upgrades = new List<WeaponSettings>();
@@ -149,14 +154,16 @@ namespace Weapons
         bool CanUpgrade => _upgradeLevel < upgrades.Count - 1;
         int CurrentUpgradeLevel => _upgradeLevel + 1;
         int MaxUpgradeLevel => upgrades.Count;
-
+        List<Sound> _upgradeSounds = new List<Sound>();
+        
         // PUBLIC SETTINGS
-
         public WeaponType type => _weaponType;
         public string weaponName => _weaponName;
+        public int upgradeLevel => _upgradeLevel;
         public string assetClass => current.assetClass;
         public Sound shotSound => _shotSound;
         public LoopableSound effectSound => _effectSound;
+        public Sound reloadSound => current.reloadSound.hasSource ? current.reloadSound : _reloadSound;
         public float damageMultiplier => current.damageMultiplier;
         public int startingAmmo => current.startingAmmo;
         public bool infiniteAmmo => current.infiniteAmmo;
@@ -166,6 +173,7 @@ namespace Weapons
         public float launchForce => current.launchForce;
         public GameObject prefab => current.prefab;
         public float shieldDrain => current.shieldDrain;
+        public List<Sound> upgradeSounds => _upgradeSounds;
 
         // PRIVATE SETTINGS
 
@@ -209,6 +217,7 @@ namespace Weapons
         Timer _burstCooldown = new Timer();
         Timer _outOfAmmoNotifyTimer = new Timer();
         bool _backpackReloading = false;
+        bool _didNotifyOutOfAmmo = false;
 
         // CALLBACKS
         System.Action<WeaponType> _onReload;
@@ -218,6 +227,7 @@ namespace Weapons
             if (!initialized) {
                 _upgradeLevel = -1;
                 initialized = true;
+                PopulateUpgradeSounds();
             }
             _equipped = equipped;
             _ammo = startingAmmo;
@@ -258,6 +268,7 @@ namespace Weapons
 
         public void Deploy() {
             _firing.End();
+            _burstStep = 0;
             if (_backpackReloading) {
                 _reloading.End();
                 _backpackReloading = false;
@@ -272,17 +283,22 @@ namespace Weapons
             if (prevAmmo <= 0) Reload();
         }
 
-        public bool CanFire() {
+        public bool ShouldFire(bool isButtonPressed) {
+            if (!isButtonPressed && _burstStep <= 0) {
+                _didNotifyOutOfAmmo = false;
+                return false;
+            }
             if (_firing.active) return false;
             if (_deploying.active) return false;
             if (reloads && _reloading.active) return false;
-            if (burstMax > 0 && _burstCooldown.active) return false;
             if (overheats && _cooldown.active) return false;
+            if (burstMax > 0 && _burstCooldown.active) return false;
             if (reloads && !HasAmmoLeftInClip()) return false;
             if (!HasAmmo()) {
-                if (!_outOfAmmoNotifyTimer.active) {
+                _burstStep = 0;
+                if (!_didNotifyOutOfAmmo) {
+                    _didNotifyOutOfAmmo = true;
                     InvokeCallback(_onOutOfAmmo);
-                    _outOfAmmoNotifyTimer.Start();
                 }
                 return false;
             }
@@ -291,13 +307,16 @@ namespace Weapons
 
         public void AfterFire() {
             _firingCycle++;
-            _burstStep++;
             if (!infiniteAmmo) {
                 _ammo = Mathf.Max(_ammo - 1, 0);
             }
-            if (burstMax > 0 && _burstStep >= burstMax) {
-                _burstCooldown.Start();
-                _burstStep = 0;
+            // handle burst
+            if (burstMax > 0) {
+                _burstStep++;
+                if (_burstStep >= burstMax) {
+                    _burstCooldown.Start();
+                    _burstStep = 0;
+                }
             }
             if (reloads && _firingCycle >= magazineCapacity) {
                 _ammoInClipDisplayed = GetAmmoLeftInClip();
@@ -309,6 +328,7 @@ namespace Weapons
             if (overheats) {
                 _overheated.Tick();
                 if (_overheated.tEnd) {
+                    _burstStep = 0;
                     _cooldown.Start();
                     _overheated.Start();
                 }
@@ -324,6 +344,7 @@ namespace Weapons
                 return;
             }
             _firingCycle = 0;
+            _burstStep = 0;
             _reloading.Start();
 
             InvokeCallback(_onReload);
@@ -377,6 +398,15 @@ namespace Weapons
         void InvokeCallback(System.Action<WeaponType> action) {
             if (action != null) {
                 action.Invoke(_weaponType);
+            }
+        }
+
+        void PopulateUpgradeSounds() {
+            _upgradeSounds.Clear();
+            foreach (var upgrade in upgrades) {
+                if (upgrade.reloadSound.hasClip) {
+                    _upgradeSounds.Add(upgrade.reloadSound);
+                }
             }
         }
     }

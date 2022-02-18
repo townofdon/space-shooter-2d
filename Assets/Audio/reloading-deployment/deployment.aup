@@ -1,0 +1,154 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="deployment_data" version="1.3.0" audacityversion="2.3.3" sel0="0.0000000000" sel1="0.0000000000" vpos="880" h="0.0000000000" zoom="972.9691435768" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="Software" value="Edison"/>
+	</tags>
+	<wavetrack name="126548__nnus__nnus-forklift-noise1" isSelected="0" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="0.354813" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="38633">
+				<waveblock start="0">
+					<simpleblockfile filename="e08083f7.au" len="38633" min="-0.168767" max="0.145477" rms="0.041627"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="126548__nnus__nnus-forklift-noise1" isSelected="0" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="0.354813" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="38633">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808266.au" len="38633" min="-0.168767" max="0.145477" rms="0.041627"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="448394__lordforklift__fuze-switch-flick" isSelected="0" height="91" minimized="0" channel="2" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="4993">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808050.au" len="4993" min="-0.237498" max="0.246041" rms="0.075623"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="0.11321995" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="18128">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808307.au" len="6112" min="-0.000006" max="0.000003" rms="0.000002"/>
+				</waveblock>
+				<waveblock start="6112">
+					<simpleblockfile filename="e0808a98.au" len="12016" min="-0.210079" max="0.195563" rms="0.036014"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="336556__humanoide9000__camera-lens-servo" isSelected="0" height="93" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="48000" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.39406250" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="15491">
+				<waveblock start="0">
+					<simpleblockfile filename="e080833b.au" len="15491" min="-0.214028" max="0.220181" rms="0.063017"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="336556__humanoide9000__camera-lens-servo" isSelected="0" height="93" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="48000" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.39406250" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="15491">
+				<waveblock start="0">
+					<simpleblockfile filename="e08087ec.au" len="15491" min="-0.230401" max="0.215897" rms="0.063568"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="336556__humanoide9000__camera-lens-servo" isSelected="0" height="90" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="48000" gain="0.141254" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="18146">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808b05.au" len="18146" min="-0.289523" max="0.333037" rms="0.062167"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="0.37804167" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="23902">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808532.au" len="23902" min="-0.329662" max="0.292694" rms="0.069487"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="336556__humanoide9000__camera-lens-servo" isSelected="0" height="90" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="48000" gain="0.141254" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="18146">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808ff2.au" len="18146" min="-0.337947" max="0.365265" rms="0.079094"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="0.37804167" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="23902">
+				<waveblock start="0">
+					<simpleblockfile filename="e080876f.au" len="23902" min="-0.401816" max="0.37031" rms="0.085851"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="338067__gregorquendel__laser-charge" isSelected="0" height="91" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="0.354813" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="37849">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808419.au" len="37849" min="-0.214063" max="0.205034" rms="0.040804"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="338067__gregorquendel__laser-charge" isSelected="0" height="91" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="0.354813" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="37849">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808a78.au" len="37849" min="-0.207717" max="0.200861" rms="0.044394"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="338067__gregorquendel__laser-charge" isSelected="0" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="44100" gain="0.177828" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="11748">
+				<waveblock start="0">
+					<simpleblockfile filename="e08084bd.au" len="11748" min="-0.373755" max="0.373755" rms="0.191599"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="338067__gregorquendel__laser-charge" isSelected="0" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="44100" gain="0.177828" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="11748">
+				<waveblock start="0">
+					<simpleblockfile filename="e08084e7.au" len="11748" min="-0.373755" max="0.373755" rms="0.195835"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="448394__lordforklift__fuze-switch-flick" isSelected="1" height="150" minimized="0" channel="2" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="5651">
+				<waveblock start="0">
+					<simpleblockfile filename="e080897c.au" len="5651" min="-0.815805" max="0.877172" rms="0.096289"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

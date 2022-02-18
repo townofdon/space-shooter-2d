@@ -2,6 +2,7 @@ using UnityEngine;
 using Core;
 using Weapons;
 using Damage;
+using Audio;
 
 namespace Player
 {
@@ -30,6 +31,9 @@ namespace Player
 
         [Header("DisruptorRing")][Space]
         [SerializeField] GameObject disruptorRingEffect;
+
+        [Header("Audio")][Space]
+        [SerializeField] Sound switchWeaponSound;
 
         // components
         PlayerGeneral player;
@@ -62,6 +66,7 @@ namespace Player
             InitWeapon(nuke);
             primaryWeapon = laser;
             secondaryWeapon = nuke;
+            switchWeaponSound.Init(this);
         }
 
         void InitWeapon(WeaponClass weapon) {
@@ -69,7 +74,9 @@ namespace Player
             weapon.Init();
             weapon.shotSound.Init(this);
             weapon.effectSound.Init(this);
+            weapon.reloadSound.Init(this);
             weapon.RegisterCallbacks(OnReloadWeapon, OnOutOfAmmo);
+            foreach (var upgradeSound in weapon.upgradeSounds) upgradeSound.Init(this);
         }
 
         void Update()
@@ -101,6 +108,7 @@ namespace Player
             if (didUpgrade) return;
             didUpgrade = true;
             primaryWeapon.Upgrade();
+            secondaryWeapon.Upgrade();
         }
 
         void InitSound(WeaponClass weapon) {
@@ -110,22 +118,20 @@ namespace Player
 
         bool FirePrimary() {
             if (!player.isAlive) return false;
-            if (!input.isFirePressed) return false;
-            if (!primaryWeapon.CanFire()) return false;
+            if (!primaryWeapon.ShouldFire(input.isFirePressed)) return false;
 
             if (primaryWeapon.type == WeaponType.Laser) {
                 laser.shotSound.Play();
                 FireProjectile(laser, mainGunL.position, mainGunL.rotation);
                 FireProjectile(laser, mainGunR.position, mainGunR.rotation);
                 if (sideGuns.activeSelf) {
-                    FireProjectile(laser, sideGunL.position, sideGunL.rotation);
-                    FireProjectile(laser, sideGunR.position, sideGunR.rotation);
+                    FireProjectile(laser, sideGunL.position, sideGunL.rotation, false);
+                    FireProjectile(laser, sideGunR.position, sideGunR.rotation, false);
                 }
                 if (rearGuns.activeSelf) {
-                    FireProjectile(laser, rearGunL.position, rearGunL.rotation);
-                    FireProjectile(laser, rearGunR.position, rearGunR.rotation);
+                    FireProjectile(laser, rearGunL.position, rearGunL.rotation, false);
+                    FireProjectile(laser, rearGunR.position, rearGunR.rotation, false);
                 }
-
                 return true;
             }
             
@@ -134,12 +140,12 @@ namespace Player
                 if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, mainGunL.position, mainGunL.rotation);
                 if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, mainGunR.position, mainGunR.rotation);
                 if (sideGuns.activeSelf) {
-                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, sideGunL.position, sideGunL.rotation);
-                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, sideGunR.position, sideGunR.rotation);
+                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, sideGunL.position, sideGunL.rotation, false);
+                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, sideGunR.position, sideGunR.rotation, false);
                 }
                 if (rearGuns.activeSelf) {
-                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, rearGunL.position, rearGunL.rotation);
-                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, rearGunR.position, rearGunR.rotation);
+                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, rearGunL.position, rearGunL.rotation, false);
+                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, rearGunR.position, rearGunR.rotation, false);
                 }
                 return true;
             }
@@ -176,8 +182,11 @@ namespace Player
 
         bool FireSecondary() {
             if (!player.isAlive) return false;
-            if (!input.isFire2Pressed) return false;
-            if (!secondaryWeapon.CanFire()) return false;
+            if (!secondaryWeapon.ShouldFire(input.isFire2Pressed)) return false;
+
+            if (!secondaryWeapon.reloading) {
+                secondaryWeapon.reloadSound.Stop();
+            }
 
             if (secondaryWeapon.type == WeaponType.Nuke) {
                 FireProjectile(nuke, transform.position, transform.rotation);
@@ -185,8 +194,16 @@ namespace Player
             }
 
             if (secondaryWeapon.type == WeaponType.Missile) {
+                missile.shotSound.Play();
                 if (secondaryWeapon.firingCycle % 2 == 0) FireProjectile(missile, mainGunL.position, mainGunL.rotation);
                 if (secondaryWeapon.firingCycle % 2 == 1) FireProjectile(missile, mainGunR.position, mainGunR.rotation);
+                // // kinda hacky, but needed to fire the missiles off faster to give the player a chance to not have missiles blow up in their face... which kinda sucks
+                // if (secondaryWeapon.upgradeLevel > 1) {
+                //     FireProjectile(missile, mainGunL.position, mainGunL.rotation);
+                //     // manually increment firing counter state
+                //     secondaryWeapon.AfterFire();
+                //     FireProjectile(missile, mainGunR.position, mainGunR.rotation);
+                // }
                 return true;
             }
 
@@ -203,9 +220,10 @@ namespace Player
 
         void StopSecondaryFX() {
             // add any sound / fx stops here
+            if (!secondaryWeapon.reloading) secondaryWeapon.reloadSound.Stop();
         }
 
-        void FireProjectile(WeaponClass weapon, Vector3 position, Quaternion rotation) {
+        void FireProjectile(WeaponClass weapon, Vector3 position, Quaternion rotation, bool shouldRecoil = true) {
             // Quaternion aim = Quaternion.AngleAxis(-input.look.x * aimMaxAngle, Vector3.forward);
             // GameObject instance = Object.Instantiate(prefab, position, aim * rotation);
             GameObject instance = Object.Instantiate(weapon.prefab, position, rotation);
@@ -217,16 +235,26 @@ namespace Player
                 damager.SetDamageMultiplier(weapon.damageMultiplier);
             }
             // recoil
-            if (rb != null) {
+            if (shouldRecoil && rb != null) {
                 rb.AddForce(-transform.up * weapon.recoil, ForceMode2D.Impulse);
             }
             // launch rocket
             if (weapon.type == WeaponType.Missile) {
                 Rocket rocket = instance.GetComponent<Rocket>();
                 if (rocket != null) {
-                    rocket.Launch(transform.up * weapon.launchForce);
+                    rocket.Launch(GetRocketLaunchVector(weapon) * GetRocketLaunchForce(weapon));
                 }
             }
+        }
+
+        Vector3 GetRocketLaunchVector(WeaponClass weapon) {
+            return transform.up
+                + (weapon.firingCycle % 2 == 0 ? -transform.right : transform.right)
+                * Mathf.Max(0.05f, 0.2f * Mathf.Floor(weapon.firingCycle / 2f));
+        }
+
+        float GetRocketLaunchForce(WeaponClass weapon) {
+            return weapon.launchForce + Mathf.Floor(weapon.firingCycle / 2f) * 7.5f;
         }
 
         void TickTimers() {
@@ -242,9 +270,11 @@ namespace Player
             if (!input.isSwitchWeaponPressed) { didSwitchPrimaryWeapon = false; return; }
             if (didSwitchPrimaryWeapon) return;
 
-            // TODO: PLAY DEPLOYMENT SOUND - UNIQ TO EACH WEAPON?
+            switchWeaponSound.Play();
             // TODO: ANIMATE OUT CURRENT WEAPON - USE AN ANIMATOR
             // TODO: ANIMATE IN NEXT WEAPON - USE AN ANIMATOR
+
+            primaryWeapon.reloadSound.Stop();
 
             didSwitchPrimaryWeapon = true;
 
@@ -273,6 +303,7 @@ namespace Player
             if (!input.isSwitchWeapon2Pressed) { didSwitchSecondaryWeapon = false; return; }
             if (didSwitchSecondaryWeapon) return;
 
+            secondaryWeapon.reloadSound.Stop();
             // TODO: PLAY DEPLOYMENT SOUND - UNIQ TO EACH WEAPON?
 
             didSwitchSecondaryWeapon = true;
@@ -305,6 +336,13 @@ namespace Player
         void OnReloadWeapon(WeaponType weaponType) {
             // TODO: ADD SOUND PER WEAPON TYPE
             Debug.Log("reloading_" + weaponType);
+
+            if (weaponType == primaryWeapon.type) {
+                primaryWeapon.reloadSound.Play();
+            }
+            if (weaponType == secondaryWeapon.type) {
+                secondaryWeapon.reloadSound.Play();
+            }
         }
 
         void OnOutOfAmmo(WeaponType weaponType) {

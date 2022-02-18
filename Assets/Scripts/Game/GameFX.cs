@@ -14,6 +14,7 @@ namespace Game
         float speedModifier = 1f;
 
         public void HandleBattleFinished() {
+            Debug.Log("YOU WIN!");
             StartCoroutine(IWarpOnBattleFinished());
         }
 

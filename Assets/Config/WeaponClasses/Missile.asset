@@ -16,18 +16,19 @@ MonoBehaviour:
   _weaponName: Missile
   _shotSound:
     soundName: 
-    volume: 0.7
+    volume: 0.33
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
-    spatialBlend: 1
-    spread: 180
+    spatialBlend: 0
+    spread: 0
     minFalloffDistance: 20
     maxFalloffDistance: 40
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    clips: []
+    volumeVariance: 0.151
+    pitchVariance: 0.262
+    clips:
+    - {fileID: 8300000, guid: d00a2e02396e7784d8b6c97526ac0121, type: 3}
     oneShot: 1
   _effectSound:
     soundName: 
@@ -44,24 +45,156 @@ MonoBehaviour:
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
+  _reloadSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
   baseSettings:
     _assetClass: Tomcat I
     _damageMultiplier: 1
     _startingAmmo: 100
     _infiniteAmmo: 1
     _reloads: 1
-    _reloadTime: 1.2
+    _reloadTime: 2
     _magazineCapacity: 2
-    _firingRate: 0.2
-    _burstMax: 0
+    _firingRate: 0.1
+    _burstMax: 2
     _burstInterval: 0
     _overheats: 0
     _overheatTime: 0
     _cooldownTime: 0
     _deploymentTime: 0.5
-    _launchForce: 15
-    _recoil: 0
+    _launchForce: 50
+    _recoil: 3
     _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
     _shieldDrain: 0
     _cost: 0
-  upgrades: []
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
+  upgrades:
+  - _assetClass: TOMCAT II
+    _damageMultiplier: 1.1
+    _startingAmmo: 100
+    _infiniteAmmo: 1
+    _reloads: 1
+    _reloadTime: 2
+    _magazineCapacity: 4
+    _firingRate: 0.1
+    _burstMax: 4
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _launchForce: 50
+    _recoil: 2
+    _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
+    _shieldDrain: 0
+    _cost: 1000
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
+  - _assetClass: TOMCAT III
+    _damageMultiplier: 1.1
+    _startingAmmo: 100
+    _infiniteAmmo: 1
+    _reloads: 1
+    _reloadTime: 2
+    _magazineCapacity: 6
+    _firingRate: 0.075
+    _burstMax: 6
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _launchForce: 50
+    _recoil: 2
+    _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
+    _shieldDrain: 0
+    _cost: 1000
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
+  - _assetClass: HELLCAT IV
+    _damageMultiplier: 1.5
+    _startingAmmo: 100
+    _infiniteAmmo: 1
+    _reloads: 1
+    _reloadTime: 2
+    _magazineCapacity: 8
+    _firingRate: 0.05
+    _burstMax: 8
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.2
+    _launchForce: 40
+    _recoil: 3
+    _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
+    _shieldDrain: 0
+    _cost: 1000
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1

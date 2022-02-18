@@ -43,6 +43,8 @@ namespace Audio
         bool playButtonPressed = false;
 
         public override bool isPlaying => playButtonPressed;
+        public override bool hasClip => clipLoop != null;
+        public override bool hasSource => sourceLoop != null;
         public PlayCursor Cursor => cursor;
 
         public override void Init(MonoBehaviour script, AudioMixerGroup mix = null)
@@ -100,7 +102,7 @@ namespace Audio
         IEnumerator IPlay() {
             playButtonPressed = true;
 
-            if (sourceHead != null) {
+            if (sourceHead != null && sourceHead.enabled) {
                 cursor = PlayCursor.Head;
                 timeLoopStartScheduled = AudioSettings.dspTime + dspStartDelay + clipHeadDuration;
                 sourceHead.PlayScheduled(AudioSettings.dspTime + dspStartDelay);
@@ -127,7 +129,7 @@ namespace Audio
             }
 
             sourceLoop.SetScheduledEndTime(timeLoopEndScheduled);
-            if (sourceTail != null) sourceTail.PlayScheduled(timeLoopEndScheduled);
+            if (sourceTail != null && sourceTail.enabled) sourceTail.PlayScheduled(timeLoopEndScheduled);
 
             while (sourceLoop.isPlaying) yield return null;
 
