@@ -50,8 +50,7 @@ namespace Enemies
 
         bool Fire() {
             if (!enemy.isAlive) return false;
-            if (!triggerHeld.active) return false;
-            if (!weapon.CanFire()) return false;
+            if (!weapon.ShouldFire(triggerHeld.active)) return false;
 
             foreach (var gun in guns) {    
                 FireProjectile(weapon.prefab, gun.position, gun.rotation);
