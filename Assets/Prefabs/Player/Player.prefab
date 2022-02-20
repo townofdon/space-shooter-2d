@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 144090537}
   - component: {fileID: 144090536}
   - component: {fileID: 144090535}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShipFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 415421437}
   - component: {fileID: 1927937975361985847}
   - component: {fileID: 2553109525966398664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DisruptorRing
   m_TagString: DisruptorRing
   m_Icon: {fileID: 0}
@@ -5048,7 +5048,7 @@ GameObject:
   - component: {fileID: 570598340}
   - component: {fileID: 570598342}
   - component: {fileID: 570598341}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ring (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9946,7 +9946,7 @@ GameObject:
   - component: {fileID: 633664188}
   - component: {fileID: 633664190}
   - component: {fileID: 633664189}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ring (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14844,7 +14844,7 @@ GameObject:
   - component: {fileID: 863001082}
   - component: {fileID: 863001084}
   - component: {fileID: 863001083}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ring (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19742,7 +19742,7 @@ GameObject:
   - component: {fileID: 1626606000}
   - component: {fileID: 1626606002}
   - component: {fileID: 1626606001}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ActiveRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24580,7 +24580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1827260024}
   - component: {fileID: 1827260025}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24664,7 +24664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9213522713101341583}
   - component: {fileID: 8199896992250943661}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SideGunL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24721,7 +24721,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 715774023688552227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RearGunL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24754,7 +24754,7 @@ GameObject:
   - component: {fileID: 6750015954742156125}
   - component: {fileID: 2511720650173199793}
   - component: {fileID: 1440120796447821290}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShieldRecharge
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -29573,7 +29573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236381227170700464}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RearGunR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29606,7 +29606,7 @@ GameObject:
   - component: {fileID: 1882728099864682945}
   - component: {fileID: 3368911211538164238}
   - component: {fileID: 6302041473631903954}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShieldLost
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -34417,7 +34417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389520628440875}
   - component: {fileID: 5316389520628440916}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RailGunSupport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34502,7 +34502,7 @@ GameObject:
   - component: {fileID: 5316389520736407414}
   - component: {fileID: 5316389520736407415}
   - component: {fileID: 4883680674908443311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WingR
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -34606,7 +34606,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389520798936032}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Damage20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34643,7 +34643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389520870631099}
   - component: {fileID: 5316389520870631076}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34727,7 +34727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389521128155712}
   - component: {fileID: 5316389521128155713}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AngleGunR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34811,7 +34811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389521197369589}
   - component: {fileID: 5316389521197369590}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RearGunL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34896,7 +34896,7 @@ GameObject:
   - component: {fileID: 5316389521223937191}
   - component: {fileID: 5316389521223937184}
   - component: {fileID: 2363828978451154750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BeamL
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35000,7 +35000,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389521314479214}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Scratches
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35035,7 +35035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389521433469106}
   - component: {fileID: 5316389521433469107}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35120,7 +35120,7 @@ GameObject:
   - component: {fileID: 5316389521527404502}
   - component: {fileID: 5316389521527404503}
   - component: {fileID: 4895612855257811383}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: L
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35182,7 +35182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389521557159623}
   - component: {fileID: 5316389521557159616}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch1 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35267,7 +35267,7 @@ GameObject:
   - component: {fileID: 5316389521695733011}
   - component: {fileID: 5316389521695733020}
   - component: {fileID: 5965875637972207999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35373,7 +35373,7 @@ GameObject:
   - component: {fileID: 5316389521768776257}
   - component: {fileID: 5316389521768776258}
   - component: {fileID: 6436365057156684379}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: R
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35436,7 +35436,7 @@ GameObject:
   - component: {fileID: 5316389521773242220}
   - component: {fileID: 5316389521773242221}
   - component: {fileID: 6071589307695167622}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BeamR
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35540,7 +35540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389521787693539}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AngleGuns
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35574,7 +35574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389521827669737}
   - component: {fileID: 5316389521827669738}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35657,7 +35657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389521841358786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Guns
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35692,7 +35692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389521931733400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Damage30
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35728,7 +35728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389521971274009}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RearGuns
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35769,7 +35769,7 @@ GameObject:
   - component: {fileID: 5316389521978419114}
   - component: {fileID: 5316389521978419115}
   - component: {fileID: 1689767547919250669}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -36129,7 +36129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522038010525}
   - component: {fileID: 5316389522038010526}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36212,7 +36212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389522153779637}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainGuns
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -36245,7 +36245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389522184798503}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ship
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -36283,7 +36283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522191606433}
   - component: {fileID: 5316389522191606434}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36367,7 +36367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522198960108}
   - component: {fileID: 5316389522198960109}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36452,7 +36452,7 @@ GameObject:
   - component: {fileID: 5316389522214553762}
   - component: {fileID: 5316389522214553763}
   - component: {fileID: 5643776550650706115}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Engine
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -36557,7 +36557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522230486306}
   - component: {fileID: 5316389522230486307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RailGun
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -36611,7 +36611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522262259972}
   - component: {fileID: 5316389522262259973}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cockpit
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -36696,7 +36696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522276816739}
   - component: {fileID: 5316389522276816748}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RailGunFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36780,7 +36780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522281284007}
   - component: {fileID: 5316389522281284000}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36865,7 +36865,7 @@ GameObject:
   - component: {fileID: 5316389522306815038}
   - component: {fileID: 5316389522306815039}
   - component: {fileID: 5794692790455388946}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36970,7 +36970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522326147462}
   - component: {fileID: 5316389522326147463}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37054,7 +37054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522384494035}
   - component: {fileID: 5316389522384494044}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RearGunR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37139,7 +37139,7 @@ GameObject:
   - component: {fileID: 5316389522427673564}
   - component: {fileID: 5316389522427673565}
   - component: {fileID: 8551335378418928994}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WingL
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -37243,7 +37243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316389522484429942}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Damage10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37277,7 +37277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522551193489}
   - component: {fileID: 5316389522551193490}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AngleGunL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37361,7 +37361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522641404025}
   - component: {fileID: 5316389522641404026}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch1 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37445,7 +37445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522694406176}
   - component: {fileID: 5316389522694406177}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37529,7 +37529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316389522725947080}
   - component: {fileID: 5316389522725947081}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scratch1 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37612,7 +37612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2338567127275812030}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainGunL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37645,7 +37645,7 @@ GameObject:
   - component: {fileID: 5304120585127011827}
   - component: {fileID: 5185491018674316405}
   - component: {fileID: 2564386746714250004}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shield
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -42456,7 +42456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5287294100866309877}
   - component: {fileID: 2616086458535066825}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SideGunR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42515,7 +42515,7 @@ GameObject:
   - component: {fileID: 9063816284739448290}
   - component: {fileID: 7491358581505251025}
   - component: {fileID: 4449883374324643654}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -42574,7 +42574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867671198146079528}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpawnPoints
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -42611,7 +42611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8610477816647854270}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainGunR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

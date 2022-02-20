@@ -15,6 +15,7 @@ namespace Enemies
         WaitUntilEnemiesDestroyed,
         WaitUntilWaveSpawnFinished,
         ArbitraryEvent,
+        EventLabel,
         // ChangeMusic,
     }
 
@@ -22,6 +23,7 @@ namespace Enemies
     class BattleEvent {
         [SerializeField] bool skip;
         [SerializeField] BattleEventType type;
+        [SerializeField] string eventLabel;
         // could be a wave, a formation, a boss, incoming asteroids etc.
         [SerializeField] WaveConfigSO wave;
         [SerializeField] GameObject formation;
@@ -36,6 +38,7 @@ namespace Enemies
         [SerializeField] Color fieldColorBoss;
         [SerializeField] Color fieldColorWait;
         [SerializeField] Color fieldColorEvent;
+        [SerializeField] Color fieldColorLabel;
 
         public bool Skip => skip;
         public BattleEventType Type => type;
@@ -59,11 +62,13 @@ namespace Enemies
         [SerializeField] Color _fieldColorBoss;
         [SerializeField] Color _fieldColorWait;
         [SerializeField] Color _fieldColorEvent;
+        [SerializeField] Color _fieldColorLabel;
         public static Color fieldColorWave;
         public static Color fieldColorFormation;
         public static Color fieldColorBoss;
         public static Color fieldColorWait;
         public static Color fieldColorEvent;
+        public static Color fieldColorLabel;
         public void OnBeforeSerialize() {}
         public void OnAfterDeserialize() {
             fieldColorWave = _fieldColorWave;
@@ -71,6 +76,7 @@ namespace Enemies
             fieldColorBoss = _fieldColorBoss;
             fieldColorWait = _fieldColorWait;
             fieldColorEvent = _fieldColorEvent;
+            fieldColorLabel = _fieldColorLabel;
         }
 
         int numEnemiesAlive = 0;
@@ -102,6 +108,9 @@ namespace Enemies
                 {
                     if (battleEvent.Skip) { battleEventIndex++; continue; }
                     switch (battleEvent.Type) {
+                        case BattleEventType.EventLabel:
+                            // inspector only
+                            break;
                         case BattleEventType.Wave:
                             if (battleEvent.Wave != null) {
                                 currentWaveSpawn = StartCoroutine(SpawnEnemies(battleEvent.Wave));
@@ -153,6 +162,11 @@ namespace Enemies
             }
         }
 
+        void OnGUI() {
+            if (!debug) return;
+            GUILayout.TextField("Event " + battleEventIndex);
+            GUILayout.TextField(numEnemiesAlive.ToString());
+        }
 
         // handy enumerator code below
 
@@ -224,11 +238,5 @@ namespace Enemies
         //         waveInterval -= 0.5f;
         //     }
         // }
-
-        void OnGUI() {
-            if (!debug) return;
-            GUILayout.TextField("Event " + battleEventIndex);
-            GUILayout.TextField(numEnemiesAlive.ToString());
-        }
     }
 }

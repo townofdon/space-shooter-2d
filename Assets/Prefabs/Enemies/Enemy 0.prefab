@@ -291,10 +291,10 @@ GameObject:
   - component: {fileID: 3069773519157843583}
   - component: {fileID: 6345534374152751471}
   - component: {fileID: -519819148312312317}
-  - component: {fileID: -7985184236057419129}
-  - component: {fileID: -989283550689626629}
   - component: {fileID: -796834167629268376}
   - component: {fileID: -906403239232441182}
+  - component: {fileID: -7985184236057419129}
+  - component: {fileID: -989283550689626629}
   m_Layer: 0
   m_Name: Enemy 0
   m_TagString: EnemyShip
@@ -357,6 +357,57 @@ MonoBehaviour:
   offscreenPosition: {x: 100, y: -100}
   waypointTriggerRadius: 0.25
   debug: 0
+--- !u!114 &-796834167629268376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387282363394425764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e049535c5e0fc59418bc248b3f575408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shockwaveVelocity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.75
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: -0.75
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shockwaveDuration: 1
+--- !u!114 &-906403239232441182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387282363394425764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenLifetime: 10
+  outsideBoundsPadding: 1
 --- !u!114 &-7985184236057419129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,63 +489,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e870b1e6f637c1d43bf3964a85f7f593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialFiringMode: 0
+  initialAimMode: 1
   weapon: {fileID: 11400000, guid: 64bdf2d990497204a9af057bc5bad994, type: 2}
   guns:
   - {fileID: 797570748302554224}
   triggerHoldTime: 0.5
   triggerReleaseTime: 1
   triggerTimeVariance: 0.26
---- !u!114 &-796834167629268376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6387282363394425764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e049535c5e0fc59418bc248b3f575408, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shockwaveVelocity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.75
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: -0.75
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  shockwaveDuration: 1
---- !u!114 &-906403239232441182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6387282363394425764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offscreenLifetime: 10
-  outsideScreenPadding: 1
 --- !u!1 &7385283391187530371
 GameObject:
   m_ObjectHideFlags: 0

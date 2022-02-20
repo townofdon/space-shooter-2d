@@ -33,6 +33,7 @@ namespace Core {
         Default,
         UI,
         FX,
+        Player,
     }
 
     public static class ULayer
@@ -40,6 +41,7 @@ namespace Core {
         public static ULayerMaskItem Default => layerMaskItems[ULayerType.Default.ToString()];
         public static ULayerMaskItem UI => layerMaskItems[ULayerType.UI.ToString()];
         public static ULayerMaskItem FX => layerMaskItems[ULayerType.FX.ToString()];
+        public static ULayerMaskItem Player => layerMaskItems[ULayerType.Player.ToString()];
 
         static Dictionary<string, ULayerMaskItem> layerMaskItems = new Dictionary<string, ULayerMaskItem>();
         static bool initialized = false;

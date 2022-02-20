@@ -75,7 +75,7 @@ namespace Player
             weapon.shotSound.Init(this);
             weapon.effectSound.Init(this);
             weapon.reloadSound.Init(this);
-            weapon.RegisterCallbacks(OnReloadWeapon, OnOutOfAmmo);
+            weapon.RegisterCallbacks(OnReloadWeapon, OnOutOfAmmoAlarm, OnOutOfAmmoGunClick);
             foreach (var upgradeSound in weapon.upgradeSounds) upgradeSound.Init(this);
         }
 
@@ -334,9 +334,6 @@ namespace Player
 
         // NOTE - "OnReload" name clashed with PlayerInputHandler method
         void OnReloadWeapon(WeaponType weaponType) {
-            // TODO: ADD SOUND PER WEAPON TYPE
-            Debug.Log("reloading_" + weaponType);
-
             if (weaponType == primaryWeapon.type) {
                 primaryWeapon.reloadSound.Play();
             }
@@ -345,9 +342,16 @@ namespace Player
             }
         }
 
-        void OnOutOfAmmo(WeaponType weaponType) {
-            // TODO: ADD SOUND PER WEAPON TYPE
+        void OnOutOfAmmoAlarm(WeaponType weaponType) {
+            // TODO: PLAY SOUND
+            // outOfAmmoSound.Play();
             Debug.Log(weaponType + " Out of ammo :(");
+        }
+
+        void OnOutOfAmmoGunClick(WeaponType weaponType) {
+            // TODO: PLAY SOUND
+            // outOfAmmoGunClickSound.Play();
+            Debug.Log(weaponType + " *cliccckkk");
         }
     }
 }

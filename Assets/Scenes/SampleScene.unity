@@ -180,6 +180,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc2aeee6009bc014487938b94c728121, type: 3}
+--- !u!1001 &388790049
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: aimMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: aimSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: firingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_Name
+      value: Enemy 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
 --- !u!1001 &430262357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -581,7 +654,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleEvents:
   - skip: 0
+    type: 7
+    eventLabel: First Wave
+    wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 1
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    fieldColorWave: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorFormation: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
+  - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 043f989b02596254f848d9211c86306d, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -595,8 +686,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 5
+    eventLabel: 
     wave: {fileID: 11400000, guid: 043f989b02596254f848d9211c86306d, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -610,8 +703,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -625,8 +720,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 4
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -640,8 +737,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -655,8 +754,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 5
+    eventLabel: 
     wave: {fileID: 11400000, guid: 043f989b02596254f848d9211c86306d, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -670,8 +771,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 043f989b02596254f848d9211c86306d, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -685,8 +788,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 4
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -700,8 +805,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -715,8 +822,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0.4811321, g: 0.038581353, b: 0.16279931, a: 0}
     fieldColorWait: {r: 0.59820193, g: 0.74509805, b: 0.5803922, a: 1}
     fieldColorEvent: {r: 0.42271298, g: 0.14117646, b: 0.77254903, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 043f989b02596254f848d9211c86306d, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -730,8 +839,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -745,8 +856,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -760,8 +873,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 043f989b02596254f848d9211c86306d, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -775,8 +890,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -790,8 +907,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -805,8 +924,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 043f989b02596254f848d9211c86306d, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -820,8 +941,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -835,8 +958,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -850,8 +975,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 043f989b02596254f848d9211c86306d, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -865,8 +992,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -880,8 +1009,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 4
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -895,8 +1026,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -910,8 +1043,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -925,8 +1060,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -940,8 +1077,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -955,8 +1094,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -970,8 +1111,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -985,8 +1128,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -1000,8 +1145,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -1015,8 +1162,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 3
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -1030,8 +1179,10 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   - skip: 0
     type: 0
+    eventLabel: 
     wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
@@ -1045,6 +1196,92 @@ MonoBehaviour:
     fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
     fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
     fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
+  - skip: 0
+    type: 4
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 1
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    fieldColorWave: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorFormation: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
+  - skip: 0
+    type: 7
+    eventLabel: Max sauce
+    wave: {fileID: 11400000, guid: 740842a85e868db48b02298a5eab3a3e, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 1
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    fieldColorWave: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorFormation: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
+  - skip: 0
+    type: 0
+    eventLabel: Max sauce
+    wave: {fileID: 11400000, guid: d972c03405c284d468b84915b947e7c4, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 1
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    fieldColorWave: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorFormation: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
+  - skip: 0
+    type: 0
+    eventLabel: Max sauce
+    wave: {fileID: 11400000, guid: 68438860f2f363a41a4c814411a27f8c, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 1
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    fieldColorWave: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorFormation: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
+  - skip: 0
+    type: 0
+    eventLabel: Max sauce
+    wave: {fileID: 11400000, guid: 44492f5bd9ae2344196656ee2a21325e, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 1
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    fieldColorWave: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorFormation: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorBoss: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorWait: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorEvent: {r: 0, g: 0, b: 0, a: 0}
+    fieldColorLabel: {r: 0, g: 0, b: 0, a: 0}
   loopIndefinitely: 0
   debug: 0
   OnBattleFinished: {fileID: 11400000, guid: 9008bf901472b3a4891baa2d01f49a77, type: 2}
@@ -1053,6 +1290,7 @@ MonoBehaviour:
   _fieldColorBoss: {r: 1, g: 0.15733539, b: 0.054901958, a: 1}
   _fieldColorWait: {r: 0.32502466, g: 0.31959775, b: 0.3584906, a: 1}
   _fieldColorEvent: {r: 0.42271298, g: 0.14117646, b: 0.77254903, a: 1}
+  _fieldColorLabel: {r: 1, g: 0.5280086, b: 0, a: 1}
 --- !u!4 &1318690699
 Transform:
   m_ObjectHideFlags: 0
@@ -1287,63 +1525,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58c87b253d607d841910950664356f45, type: 3}
---- !u!1001 &4642657473320473351
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251928, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
-      propertyPath: m_Name
-      value: Mine 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
 --- !u!1001 &5316389521414684692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1429,60 +1610,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e300754f9b9aae4e8cf3247ce696f79, type: 3}
---- !u!1001 &5800098975356326192
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_Name
-      value: MineShielded 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1157459284806702523, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}

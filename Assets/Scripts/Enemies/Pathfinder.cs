@@ -29,6 +29,11 @@ namespace Enemies {
         bool hasCrossedHeadingX = false;
         bool hasCrossedHeadingY = false;
 
+        public void SetWave(WaveConfigSO wave) {
+            _wave = wave;
+            Init();
+        }
+
         void Start() {
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
@@ -39,18 +44,19 @@ namespace Enemies {
         void FixedUpdate() {
             FollowPath();
         }
-        
+
         void Init() {
-             if (_wave != null) {
+            if (_wave != null && enemy != null) {
                 _wayPoints = _wave.GetWaypoints();
                 wayPointIndex = 0;
                 hasCrossedHeadingX = false;
                 hasCrossedHeadingY = false;
                 transform.position = _wayPoints[wayPointIndex].position;
+                // the first waypoint is the spawn point, so thus the first target should be the second waypoint
+                wayPointIndex++;
                 InitHeading();
                 UpdateTarget();
-            } else {
-                transform.position = offscreenPosition;
+                rb.velocity = heading * enemy.moveSpeed;
             }
         }
 
@@ -101,11 +107,6 @@ namespace Enemies {
             if (Mathf.Abs(target.x - transform.position.x) <= waypointTriggerRadius) hasCrossedHeadingX = true;
             if (Mathf.Abs(target.y - transform.position.y) <= waypointTriggerRadius) hasCrossedHeadingY = true;
             if (hasCrossedHeadingX && hasCrossedHeadingY) TargetNextWaypoint();
-        }
-
-        public void SetWave(WaveConfigSO wave) {
-            _wave = wave;
-            Init();
         }
 
         void OnDrawGizmos() {

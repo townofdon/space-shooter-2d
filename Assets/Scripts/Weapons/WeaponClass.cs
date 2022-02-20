@@ -141,6 +141,7 @@ namespace Weapons
         [Header("Weapon Settings")][Space]
         [SerializeField] WeaponType _weaponType = WeaponType.Laser;
         [SerializeField] string _weaponName;
+        [SerializeField] float _effectiveRange = 10f;
 
         [Header("Audio Settings")][Space]
         [SerializeField] Sound _shotSound;
@@ -159,6 +160,7 @@ namespace Weapons
         // PUBLIC SETTINGS
         public WeaponType type => _weaponType;
         public string weaponName => _weaponName;
+        public float effectiveRange => _effectiveRange;
         public int upgradeLevel => _upgradeLevel;
         public string assetClass => current.assetClass;
         public Sound shotSound => _shotSound;
@@ -217,11 +219,12 @@ namespace Weapons
         Timer _burstCooldown = new Timer();
         Timer _outOfAmmoNotifyTimer = new Timer();
         bool _backpackReloading = false;
-        bool _didNotifyOutOfAmmo = false;
+        bool _didGunClickOutOfAmmo = false;
 
         // CALLBACKS
         System.Action<WeaponType> _onReload;
         System.Action<WeaponType> _onOutOfAmmo;
+        System.Action<WeaponType> _onOutOfAmmoGunClick;
 
         public void Init(bool equipped = true) {
             if (!initialized) {
@@ -249,9 +252,10 @@ namespace Weapons
             if (overheats) _overheated.Start(); // overheated gets ticked manually
         }
 
-        public void RegisterCallbacks(System.Action<WeaponType> OnReload, System.Action<WeaponType> OnOutOfAmmo) {
+        public void RegisterCallbacks(System.Action<WeaponType> OnReload, System.Action<WeaponType> OnOutOfAmmo, System.Action<WeaponType> OnOutOfAmmoGunClick) {
             _onReload = OnReload;
             _onOutOfAmmo = OnOutOfAmmo;
+            _onOutOfAmmoGunClick = OnOutOfAmmoGunClick;
         }
 
         public void Upgrade() {
@@ -285,7 +289,7 @@ namespace Weapons
 
         public bool ShouldFire(bool isButtonPressed) {
             if (!isButtonPressed && _burstStep <= 0) {
-                _didNotifyOutOfAmmo = false;
+                _didGunClickOutOfAmmo = false;
                 return false;
             }
             if (_firing.active) return false;
@@ -296,9 +300,9 @@ namespace Weapons
             if (reloads && !HasAmmoLeftInClip()) return false;
             if (!HasAmmo()) {
                 _burstStep = 0;
-                if (!_didNotifyOutOfAmmo) {
-                    _didNotifyOutOfAmmo = true;
-                    InvokeCallback(_onOutOfAmmo);
+                if (!_didGunClickOutOfAmmo) {
+                    _didGunClickOutOfAmmo = true;
+                    InvokeCallback(_onOutOfAmmoGunClick);
                 }
                 return false;
             }
@@ -309,6 +313,9 @@ namespace Weapons
             _firingCycle++;
             if (!infiniteAmmo) {
                 _ammo = Mathf.Max(_ammo - 1, 0);
+                if (_ammo <= 0) {
+                    InvokeCallback(_onOutOfAmmo);
+                }
             }
             // handle burst
             if (burstMax > 0) {

@@ -147,10 +147,6 @@ namespace Damage {
                 InvokeCallback(_onShieldDrain, amount, true);
             }
             _shield = Mathf.Max(_shield - amount, 0f);
-
-            // TODO: REMOVE
-            Debug.Log("shield >> " + _shield);
-
             return true;
         }
 

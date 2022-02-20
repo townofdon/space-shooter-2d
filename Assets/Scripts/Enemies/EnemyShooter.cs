@@ -5,30 +5,67 @@ using UnityEngine;
 using Core;
 using Weapons;
 using Damage;
+using Player;
 
 namespace Enemies
 {
+    public enum EnemyAimMode {
+        AlwaysAimDown,
+        AimAtPlayer,
+        RotateTowardsPlayer,
+    }
+
+    public enum EnemyFiringMode {
+        AlwaysFiring,
+        OnlyFireWhenPlayerInLineOfSight,
+    }
+
     [RequireComponent(typeof(EnemyShip))]
 
     public class EnemyShooter : MonoBehaviour
     {
+        [SerializeField] bool debug = false;
+        [SerializeField] EnemyFiringMode firingMode;
+        [SerializeField] EnemyAimMode aimMode;
         [SerializeField] WeaponClass weapon;
         [SerializeField] List<Transform> guns = new List<Transform>();
+        [SerializeField][Range(0f, 3f)] float aimSpeed = 2f;
+        [SerializeField][Range(0f, 180f)] float maxAimAngle = 30f;
         [SerializeField][Range(0f, 10f)] float triggerHoldTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerReleaseTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerTimeVariance = 0f;
 
         // Components
+        Rigidbody2D rb;
         EnemyShip enemy;
+        PlayerGeneral player;
+        CircleCollider2D circle;
 
         // state
         Timer triggerHeld = new Timer();
         Timer triggerReleased = new Timer();
 
+        // state - aiming
+        Vector2 aimVector = Vector2.down;
+        float aimAngle = 0f;
+        Quaternion aim = Quaternion.identity;
+        float shipRadius = 1f;
+
+        // state - OnlyFireWhenPlayerInLineOfSight
+        bool isPlayerInScopes = false;
+        Vector3 vectorToPlayer;
+        Collider2D overlapHit = null;
+        System.Nullable<RaycastHit2D> lineOfSightHit = null;
+
         void Start() {
+            rb = GetComponent<Rigidbody2D>();
+            circle = GetComponentInChildren<CircleCollider2D>();
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
+            player = FindObjectOfType<PlayerGeneral>();
             InitWeapon();
             StartCoroutine(PressAndReleaseTrigger());
+            // init
+            if (circle != null) shipRadius = circle.radius + 1f;
         }
 
         void InitWeapon() {
@@ -46,10 +83,73 @@ namespace Enemies
                 AfterNoFire();
             }
             weapon.TickTimers();
+            HandleFiringBehaviour();
+            HandleAimBehaviour();
+        }
+
+        void HandleFiringBehaviour() {
+            switch (firingMode)
+            {
+                case EnemyFiringMode.OnlyFireWhenPlayerInLineOfSight:
+                    isPlayerInScopes = CheckPlayerWithinScopes();
+                    break;
+                case EnemyFiringMode.AlwaysFiring:
+                default:
+                    // this enemy is just plain dumb, or maybe really upset
+                    isPlayerInScopes = true;
+                    break;
+            }
+        }
+
+        bool CheckPlayerWithinScopes() {
+            if (player == null) return false;
+            // if player is close to ship & within maxAngle
+            if (vectorToPlayer.magnitude < shipRadius && Vector2.Angle(transform.rotation * aim * -transform.up, vectorToPlayer) <= maxAimAngle) return true;
+            // if player is outside of ship's range
+            if (vectorToPlayer.magnitude > weapon.effectiveRange) return false;
+            if (CheckRaycastHit(transform.position + vectorToPlayer.normalized * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position + transform.right * 0.5f + vectorToPlayer.normalized * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position + transform.right + vectorToPlayer.normalized * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position - transform.right * 0.5f + vectorToPlayer.normalized * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position - transform.right + vectorToPlayer.normalized * shipRadius)) return true;
+            return false;
+        }
+
+        bool CheckRaycastHit(Vector3 origin) {
+            lineOfSightHit = Physics2D.Raycast(origin, vectorToPlayer.normalized, vectorToPlayer.magnitude * 1.5f);
+            return lineOfSightHit != null && lineOfSightHit?.transform?.tag != UTag.EnemyShip;
+        }
+
+        void HandleAimBehaviour() {
+            if (player == null) return;
+            vectorToPlayer = player.transform.position - transform.position;
+            switch (aimMode)
+            {
+                case EnemyAimMode.AimAtPlayer:
+                    CalculateAim();
+                    transform.rotation = Quaternion.identity;
+                    aim = Quaternion.AngleAxis(Mathf.Clamp(aimAngle, -maxAimAngle, maxAimAngle), Vector3.forward);
+                    break;
+                case EnemyAimMode.RotateTowardsPlayer:
+                    CalculateAim();
+                    transform.rotation = Quaternion.AngleAxis(aimAngle, Vector3.forward);
+                    aim = Quaternion.identity;
+                    break;
+                case EnemyAimMode.AlwaysAimDown:
+                default:
+                    aim = Quaternion.identity;
+                    break;
+            }
+        }
+
+        void CalculateAim() {
+            aimVector = Vector2.MoveTowards(aimVector, vectorToPlayer.normalized, aimSpeed * Time.deltaTime);
+            aimAngle = Vector2.SignedAngle(Vector2.down, aimVector);
         }
 
         bool Fire() {
             if (!enemy.isAlive) return false;
+            if (!isPlayerInScopes) return false;
             if (!weapon.ShouldFire(triggerHeld.active)) return false;
 
             foreach (var gun in guns) {    
@@ -70,11 +170,15 @@ namespace Enemies
         }
 
         void FireProjectile(GameObject prefab, Vector3 position, Quaternion rotation) {
-            GameObject instance = Object.Instantiate(prefab, position, rotation);
+            GameObject instance = Object.Instantiate(prefab, position, rotation * aim);
             DamageDealer damager = instance.GetComponent<DamageDealer>();
             Collider2D collider = instance.GetComponent<Collider2D>();
             if (collider != null) enemy.IgnoreCollider(instance.GetComponent<Collider2D>());
             if (damager != null) damager.SetIgnoreUUID(enemy.uuid);
+            if (rb != null) {
+                Rigidbody2D rbInstance = instance.GetComponent<Rigidbody2D>();
+                rbInstance.velocity += rb.velocity;
+            }
         }
 
         IEnumerator PressAndReleaseTrigger() {
@@ -83,7 +187,18 @@ namespace Enemies
                 triggerReleased.SetDuration(Mathf.Max(triggerReleaseTime + UnityEngine.Random.Range(-triggerTimeVariance / 2, triggerTimeVariance), 0.1f));
                 yield return triggerHeld.StartAndWaitUntilFinished();
                 yield return triggerReleased.StartAndWaitUntilFinished();
+                while (!isPlayerInScopes) yield return null;
             }
+        }
+
+        void OnDrawGizmos() {
+            if (!debug) return;
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawRay(transform.position, vectorToPlayer);
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, aim * Vector2.down);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawRay(transform.position, transform.rotation * Vector2.down);
         }
     }
 }

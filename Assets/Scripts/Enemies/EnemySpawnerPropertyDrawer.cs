@@ -14,6 +14,7 @@ namespace Enemies {
     
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             EditorGUI.BeginProperty(position, label, property);
+            SerializedProperty eventLabel = property.FindPropertyRelative("eventLabel");
             SerializedProperty type = property.FindPropertyRelative("type");
             SerializedProperty wave = property.FindPropertyRelative("wave");
             SerializedProperty boss = property.FindPropertyRelative("boss");
@@ -29,6 +30,7 @@ namespace Enemies {
             SerializedProperty fieldColorFormation = property.FindPropertyRelative("fieldColorFormation");
             SerializedProperty fieldColorWait = property.FindPropertyRelative("fieldColorWait");
             SerializedProperty fieldColorEvent = property.FindPropertyRelative("fieldColorEvent");
+            SerializedProperty fieldColorLabel = property.FindPropertyRelative("fieldColorLabel");
 
             // BACKGROUND
             isStriped = !isStriped;
@@ -60,6 +62,9 @@ namespace Enemies {
                 case BattleEventType.ArbitraryEvent:
                     EditorGUI.DrawRect(position, EnemySpawner.fieldColorEvent);
                     break;
+                case BattleEventType.EventLabel:
+                    EditorGUI.DrawRect(position, EnemySpawner.fieldColorLabel);
+                    break;
                 default:
                     break;
             }
@@ -80,11 +85,16 @@ namespace Enemies {
             // Rect c8 = new Rect();
             // Rect c9 = new Rect();
 
-            EditorGUI.LabelField(labelPosition, label);
-            EditorGUI.PropertyField(titlePosition, type, GUIContent.none);
-            EditorGUI.LabelField(c0, "Skip");
-            EditorGUI.PropertyField(c1, skip, GUIContent.none);
-            
+            if ((BattleEventType)type.enumValueIndex == BattleEventType.EventLabel) {
+                EditorGUI.PropertyField(labelPosition, type, GUIContent.none);
+                EditorGUI.PropertyField(titlePosition, eventLabel, GUIContent.none);
+            } else {
+                EditorGUI.LabelField(labelPosition, label);
+                EditorGUI.PropertyField(titlePosition, type, GUIContent.none);
+                EditorGUI.LabelField(c0, "Skip");
+                EditorGUI.PropertyField(c1, skip, GUIContent.none);
+            }
+
             switch ((BattleEventType)type.enumValueIndex)
             {
                 case BattleEventType.Wave:
@@ -121,6 +131,8 @@ namespace Enemies {
             {
                 case BattleEventType.ArbitraryEvent:
                     return (rowHeight + padding * 2) * 7;
+                case BattleEventType.EventLabel:
+                    return (rowHeight + padding * 2) * 2;
                 case BattleEventType.Wave:
                 case BattleEventType.Boss:
                 case BattleEventType.Formation:
