@@ -101,6 +101,7 @@ MonoBehaviour:
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
+  ignoreParentUUID: 1
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -188,6 +189,7 @@ GameObject:
   - component: {fileID: 1023591117905801295}
   - component: {fileID: 1023591117905801293}
   - component: {fileID: 1023591117905801294}
+  - component: {fileID: 2594697919812158398}
   m_Layer: 0
   m_Name: Asteroid 0
   m_TagString: Asteroid
@@ -274,6 +276,52 @@ MonoBehaviour:
   - {fileID: 6267110387283208365, guid: 3468ee19e0f1cac47821001a3f1d0f7f, type: 3}
   - {fileID: 5346947312078079096, guid: 4d0ef2b5e6e48bd499ca5dc4776b9fa0, type: 3}
   explodeFX: {fileID: 1023591116532559400}
+--- !u!114 &2594697919812158398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023591117905801292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e049535c5e0fc59418bc248b3f575408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shockwaveVelocity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 7.375259
+      outSlope: 7.375259
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.031815585
+    - serializedVersion: 3
+      time: 0.12159547
+      value: 0.77021587
+      inSlope: 0.16572563
+      outSlope: 0.16572563
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.3622486
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 7.4129643
+      outSlope: 7.4129643
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.051133573
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shockwaveDuration: 1
 --- !u!1 &1023591118390252491
 GameObject:
   m_ObjectHideFlags: 0

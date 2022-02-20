@@ -147,6 +147,7 @@ namespace Core {
 
         }
 
+        public static void __NOOP__(float num, Damage.DamageType damageType) {}
         public static void __NOOP__(float num) {}
         public static void __NOOP__() {}
     }

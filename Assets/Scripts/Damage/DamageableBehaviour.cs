@@ -36,6 +36,7 @@ namespace Damage {
         [SerializeField] float damageFlashDuration = 0.1f;
         [SerializeField] SpriteRenderer damageSpriteTarget;
 
+        [Header("Events / Callbacks")][Space]
         // Action callbacks can be set via the Editor OR via RegisterCallbacks()
         [SerializeField] System.Action _onDeath;
         [SerializeField] System.Action<float> _onHealthTaken;
@@ -45,6 +46,11 @@ namespace Damage {
         [SerializeField] System.Action<float> _onShieldDrain;
         [SerializeField] System.Action _onShieldRechargeStart;
         [SerializeField] System.Action _onShieldRechargeComplete;
+
+        public delegate void DamageAction();
+        public event DamageAction OnDeathEvent;
+        public event DamageAction OnShieldHitEvent;
+        public event DamageAction OnShieldDepletedEvent;
 
         // cached
         System.Guid _uuid = System.Guid.NewGuid();
@@ -160,6 +166,13 @@ namespace Damage {
         public bool TakeDamage(float amount, DamageType damageType = DamageType.Default) {
             if (!_isAlive || _timeHit > 0f) return false;
 
+            if (damageType == DamageType.Instakill) {
+                _health = Mathf.Min(0f, _health - amount);
+                _shield = 0f;
+                _Die();
+                return true;
+            }
+
             damageClass = GameManager.current.GetDamageClass(damageType);
 
             // determine damage for health, shield
@@ -188,6 +201,7 @@ namespace Damage {
             }
             if (_shieldDamageThisFrame > 0f && _shield > 0f && hasShieldCapability) {
                 InvokeCallback(_onShieldDamage, _shieldDamageThisFrame, true);
+                if (OnShieldHitEvent != null) OnShieldHitEvent();
             }
 
             _health -= _healthDamageThisFrame;
@@ -197,6 +211,7 @@ namespace Damage {
 
             if (_shield == 0f && _prevShield > _shield && hasShieldCapability) {
                 InvokeCallback(_onShieldDepleted, true);
+                if (OnShieldDepletedEvent != null) OnShieldDepletedEvent();
             }
 
             _prevShield = _shield;
@@ -224,6 +239,7 @@ namespace Damage {
             _DisableColliders();
             InvokeCallback(_onDeath);
             if (_destroyOnDeath) Destroy(gameObject);
+            if (OnDeathEvent != null) OnDeathEvent();
         }
 
         private void _EnableColliders() {

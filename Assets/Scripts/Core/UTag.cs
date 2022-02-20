@@ -14,5 +14,6 @@ namespace Core
         public const string Bullet = "Bullet";
         public const string Explosion = "Explosion";
         public const string Asteroid = "Asteroid";
+        public const string Mine = "Mine";
     }
 }

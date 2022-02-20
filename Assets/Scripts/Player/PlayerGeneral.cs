@@ -119,6 +119,10 @@ namespace Player {
                 // ignore - will deal with asteroid in OnCollisionEnter2D
                 return;
             }
+            if (other.tag == UTag.Mine) {
+                // ignore - can go through mines
+                return;
+            }
             DamageReceiver actor = other.GetComponent<DamageReceiver>();
             if (actor == null) return;
             if (actor.rigidbody == null) return;

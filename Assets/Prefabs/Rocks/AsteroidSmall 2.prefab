@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 3779440291743971708}
   - component: {fileID: 3779440291743971709}
   - component: {fileID: 3779440291743971710}
+  - component: {fileID: -5229191268552919587}
   m_Layer: 0
   m_Name: AsteroidSmall 2
   m_TagString: Asteroid
@@ -144,6 +145,43 @@ MonoBehaviour:
   startRotation: 360
   pieces: []
   explodeFX: {fileID: 4591862536936171469}
+--- !u!114 &-5229191268552919587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3779440291743971711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e049535c5e0fc59418bc248b3f575408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shockwaveVelocity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.75
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: -0.75
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shockwaveDuration: 1
 --- !u!1 &3779440292081912994
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +347,7 @@ MonoBehaviour:
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
+  ignoreParentUUID: 1
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 0

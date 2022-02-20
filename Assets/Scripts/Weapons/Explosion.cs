@@ -65,10 +65,10 @@ namespace Weapons
 
         void OnHit(Collider2D hit) {
             Projectile projectile = hit.GetComponent<Projectile>();
-            if (projectile != null) {
-                projectile.OnDeath();
-                return;
-            }
+            // if (projectile != null) {
+            //     projectile.OnDeath();
+            //     return;
+            // }
             Rocket rocket = hit.GetComponent<Rocket>();
             if (rocket != null) {
                 rocket.OnDeath();
@@ -92,6 +92,7 @@ namespace Weapons
                     Mathf.Lerp(1f, damageAtEdge, hitDist.magnitude / blastRadius),
                     DamageType.Explosion
                 );
+                return;
             }
         }
     }

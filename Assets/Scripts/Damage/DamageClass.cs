@@ -10,6 +10,7 @@ namespace Damage
       Bullet,
       Nuke,
       Disruptor,
+      Instakill,
     }
 
     [CreateAssetMenu(fileName = "DamageClass", menuName = "ScriptableObjects/DamageClass", order = 0)]
