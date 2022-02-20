@@ -25,6 +25,7 @@ namespace Physics
       void Awake() {
           rb = GetComponentInParent<Rigidbody2D>();
           shockwavePositionTimer.SetDuration(shockwaveDuration);
+          shockwavePositionTimer.End();
           if (rb != null) initialVelocity = rb.velocity;
       }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   _damageType: 4
-  _baseDamage: 10
+  _baseDamage: 0
   _damageVariance: 2.1
   _shieldEffectiveness: 0.25
   _shieldedHealthEffectiveness: 0
