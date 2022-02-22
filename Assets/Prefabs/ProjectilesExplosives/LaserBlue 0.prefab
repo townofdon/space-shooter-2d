@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1981903283364865897}
   - component: {fileID: 3097973963924462876}
   - component: {fileID: 5484847743466961028}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LaserBlue 0
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -208,6 +208,7 @@ MonoBehaviour:
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
+  ignoreParentUUID: 1
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 96
@@ -233,6 +234,7 @@ MonoBehaviour:
   ricochetProbability: 0.2
   ricochetAngle: 60
   ricochetVariance: 20
+  outOfRange: 20
   explosive: 0
   explosionLifetime: 5
   impactLifetime: 1
@@ -341,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1916144925046825001}
   - component: {fileID: 1916144925046825000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: laserBlue07
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -97,6 +97,26 @@ MonoBehaviour:
   startRotation: 360
   pieces: []
   explodeFX: {fileID: 7114757968744735552}
+  rockExplodeSound:
+    soundName: RockSplode
+    volume: 0.5
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 360
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips:
+    - {fileID: 8300000, guid: 5b8e7481c4fd987479f74f152826e552, type: 3}
+    - {fileID: 8300000, guid: 4cd0b25957bfb9d4fa715ba1a60c5f95, type: 3}
+    - {fileID: 8300000, guid: cf88369f275286449844b290f710f131, type: 3}
+    - {fileID: 8300000, guid: 0c68e7618f293ea47a59e1174a5f9805, type: 3}
+    - {fileID: 8300000, guid: 1722cb2d0843fce4199e46413cd60b60, type: 3}
+    oneShot: 0
 --- !u!114 &1017874495148844606
 MonoBehaviour:
   m_ObjectHideFlags: 0

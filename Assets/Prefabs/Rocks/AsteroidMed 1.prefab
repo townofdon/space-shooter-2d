@@ -355,6 +355,23 @@ MonoBehaviour:
   - {fileID: 1769902560214721743, guid: 262756ee14be89048b79a7fce6398846, type: 3}
   - {fileID: 229167021844105397, guid: fc2aeee6009bc014487938b94c728121, type: 3}
   explodeFX: {fileID: 7231032824619259078}
+  rockExplodeSound:
+    soundName: RockSplodeMed
+    volume: 0.3
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 360
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.235
+    pitchVariance: 0.258
+    clips:
+    - {fileID: 8300000, guid: 4d76e0810ca8059448a7f384b06872ea, type: 3}
+    - {fileID: 8300000, guid: 63854b81dc4fe5443bb0165ec9c09f10, type: 3}
+    oneShot: 1
 --- !u!114 &-6707671243880467742
 MonoBehaviour:
   m_ObjectHideFlags: 0

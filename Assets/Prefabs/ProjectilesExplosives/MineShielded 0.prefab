@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShieldLost
       objectReference: {fileID: 0}
+    - target: {fileID: 5751875350081642007, guid: 287e99d9d8af95641a8378d991f220ab, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6983756308205243177, guid: 287e99d9d8af95641a8378d991f220ab, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -133,6 +137,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield
       objectReference: {fileID: 0}
+    - target: {fileID: 2609212056811701810, guid: aca84d9fd9b2fd44984a895337c0a677, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aca84d9fd9b2fd44984a895337c0a677, type: 3}
 --- !u!198 &5909513716411347501 stripped
@@ -202,6 +210,10 @@ PrefabInstance:
     - target: {fileID: 8006292096349439843, guid: 67f519d59b505ae4797ae3c3ac1f2b66, type: 3}
       propertyPath: m_Name
       value: ShieldRecharge
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006292096349439843, guid: 67f519d59b505ae4797ae3c3ac1f2b66, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67f519d59b505ae4797ae3c3ac1f2b66, type: 3}

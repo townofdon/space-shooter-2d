@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: LaserRed
   m_EditorClassIdentifier: 
   _weaponType: 1
+  _weaponName: 
+  _effectiveRange: 15
   _shotSound:
     soundName: LazerRed
     volume: 0.565
@@ -45,7 +47,23 @@ MonoBehaviour:
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
+  _reloadSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
   baseSettings:
+    _assetClass: 
     _damageMultiplier: 1
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -59,6 +77,24 @@ MonoBehaviour:
     _overheatTime: 0
     _cooldownTime: 0
     _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 3111cc7728a164f4f9880e2d00d4c78d, type: 3}
     _shieldDrain: 0
+    _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   upgrades: []

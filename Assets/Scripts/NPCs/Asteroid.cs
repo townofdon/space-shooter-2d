@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Core;
 using Damage;
+using Audio;
 
 namespace NPCs
 {
@@ -16,6 +17,7 @@ namespace NPCs
         [SerializeField][Range(0f, 1080f)] float startRotation = 360f;
         [SerializeField] List<GameObject> pieces = new List<GameObject>();
         [SerializeField] ParticleSystem explodeFX;
+        [SerializeField] Sound rockExplodeSound;
 
         // cached
         SpriteRenderer sr;
@@ -29,6 +31,7 @@ namespace NPCs
             ResetHealth();
             SetColliders();
             RegisterHealthCallbacks(OnDeath, OnHealthDamage, Utils.__NOOP__);
+            rockExplodeSound.Init(this);
         }
 
         void Update() {
@@ -40,6 +43,7 @@ namespace NPCs
             // stop dat spinning
             rb.angularVelocity = 0f;
             SpawnDebris();
+            rockExplodeSound.Play();
             StartCoroutine(IDeathFX());
         }
 
@@ -60,6 +64,7 @@ namespace NPCs
                 explodeFX.Play();
                 while (explodeFX.isPlaying) yield return null;
             }
+            while (rockExplodeSound.isPlaying) yield return null;
             Destroy(gameObject);
         }
     }

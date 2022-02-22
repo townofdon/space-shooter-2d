@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 547358973177784917}
   - component: {fileID: 547358973177784919}
   - component: {fileID: 547358973177784918}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4881,7 +4881,7 @@ GameObject:
   - component: {fileID: 547358973771076524}
   - component: {fileID: 547358973771076526}
   - component: {fileID: 547358973771076525}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9762,7 +9762,7 @@ GameObject:
   - component: {fileID: 547358973900262005}
   - component: {fileID: 547358973900262004}
   - component: {fileID: 547358973900262003}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExplosionTypeA
   m_TagString: Explosion
   m_Icon: {fileID: 0}
@@ -14697,7 +14697,7 @@ GameObject:
   - component: {fileID: 547358974142009885}
   - component: {fileID: 547358974142009887}
   - component: {fileID: 547358974142009886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shrapnel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19567,7 +19567,7 @@ GameObject:
   - component: {fileID: 547358974706336652}
   - component: {fileID: 547358974706336654}
   - component: {fileID: 547358974706336653}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ParticleSystemParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}

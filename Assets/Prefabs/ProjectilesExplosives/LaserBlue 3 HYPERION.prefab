@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1981903283364865897}
   - component: {fileID: 3097973963924462876}
   - component: {fileID: 5484847743466961028}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LaserBlue 3 HYPERION
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -208,6 +208,7 @@ MonoBehaviour:
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
+  ignoreParentUUID: 1
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 96
@@ -342,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4130020690505053123}
   - component: {fileID: 5036602127479505498}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: laserGreen11
   m_TagString: Untagged
   m_Icon: {fileID: 0}

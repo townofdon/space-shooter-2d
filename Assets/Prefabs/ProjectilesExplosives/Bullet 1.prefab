@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4904614527025975964}
   - component: {fileID: 3097973963924462876}
   - component: {fileID: 5484847743466961028}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -190,6 +190,7 @@ MonoBehaviour:
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
+  ignoreParentUUID: 1
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 96
@@ -332,7 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3833444837701586854}
   - component: {fileID: 9045127016357035955}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bullet04
   m_TagString: Untagged
   m_Icon: {fileID: 0}

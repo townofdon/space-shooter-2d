@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4642657472844445238}
   - component: {fileID: 4642657472844445236}
   - component: {fileID: 4642657472844445237}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: mine-01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6445558338947623653}
   - component: {fileID: -2522919158053661408}
   - component: {fileID: 4642657472974251940}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mine 0
   m_TagString: Mine
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offscreenLifetime: 10
-  outsideScreenPadding: 1
+  outsideBoundsPadding: 1
 --- !u!114 &4642657472974251940
 MonoBehaviour:
   m_ObjectHideFlags: 0

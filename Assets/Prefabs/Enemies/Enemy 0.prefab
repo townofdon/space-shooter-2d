@@ -489,14 +489,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e870b1e6f637c1d43bf3964a85f7f593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialFiringMode: 0
-  initialAimMode: 1
+  debug: 0
+  firingMode: 0
+  aimMode: 0
   weapon: {fileID: 11400000, guid: 64bdf2d990497204a9af057bc5bad994, type: 2}
   guns:
   - {fileID: 797570748302554224}
+  aimSpeed: 2
+  maxAimAngle: 30
   triggerHoldTime: 0.5
   triggerReleaseTime: 1
   triggerTimeVariance: 0.26
+  targetableLayers:
+    serializedVersion: 2
+    m_Bits: 129
 --- !u!1 &7385283391187530371
 GameObject:
   m_ObjectHideFlags: 0

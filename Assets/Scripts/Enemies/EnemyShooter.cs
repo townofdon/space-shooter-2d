@@ -34,6 +34,7 @@ namespace Enemies
         [SerializeField][Range(0f, 10f)] float triggerHoldTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerReleaseTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerTimeVariance = 0f;
+        [SerializeField] LayerMask targetableLayers;
 
         // Components
         Rigidbody2D rb;
@@ -53,9 +54,11 @@ namespace Enemies
 
         // state - OnlyFireWhenPlayerInLineOfSight
         bool isPlayerInScopes = false;
+        bool isAnotherEnemyInTheWay = false;
         Vector3 vectorToPlayer;
         Collider2D overlapHit = null;
         System.Nullable<RaycastHit2D> lineOfSightHit = null;
+        RaycastHit2D[] lineOfSightHits = new RaycastHit2D[2];
 
         void Start() {
             rb = GetComponent<Rigidbody2D>();
@@ -66,6 +69,8 @@ namespace Enemies
             StartCoroutine(PressAndReleaseTrigger());
             // init
             if (circle != null) shipRadius = circle.radius + 1f;
+
+            Debug.Log(shipRadius);
         }
 
         void InitWeapon() {
@@ -107,17 +112,24 @@ namespace Enemies
             if (vectorToPlayer.magnitude < shipRadius && Vector2.Angle(transform.rotation * aim * -transform.up, vectorToPlayer) <= maxAimAngle) return true;
             // if player is outside of ship's range
             if (vectorToPlayer.magnitude > weapon.effectiveRange) return false;
-            if (CheckRaycastHit(transform.position + vectorToPlayer.normalized * shipRadius)) return true;
-            if (CheckRaycastHit(transform.position + transform.right * 0.5f + vectorToPlayer.normalized * shipRadius)) return true;
-            if (CheckRaycastHit(transform.position + transform.right + vectorToPlayer.normalized * shipRadius)) return true;
-            if (CheckRaycastHit(transform.position - transform.right * 0.5f + vectorToPlayer.normalized * shipRadius)) return true;
-            if (CheckRaycastHit(transform.position - transform.right + vectorToPlayer.normalized * shipRadius)) return true;
+            isAnotherEnemyInTheWay = false;
+            if (CheckRaycastHit(transform.position + aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position + transform.right * 0.5f + aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position + transform.right + aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position - transform.right * 0.5f + aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position - transform.right + aim * Vector2.down * shipRadius)) return true;
             return false;
         }
 
         bool CheckRaycastHit(Vector3 origin) {
-            lineOfSightHit = Physics2D.Raycast(origin, vectorToPlayer.normalized, vectorToPlayer.magnitude * 1.5f);
-            return lineOfSightHit != null && lineOfSightHit?.transform?.tag != UTag.EnemyShip;
+            if (isAnotherEnemyInTheWay) return false;
+            int hits = Physics2D.RaycastNonAlloc(origin, aim * Vector2.down, lineOfSightHits, vectorToPlayer.magnitude * 1.5f, targetableLayers);
+            for (int i = 0; i < hits; i++)
+            {
+                if (lineOfSightHits[i].transform.tag == UTag.EnemyShip) { isAnotherEnemyInTheWay = true; return false; }
+                if (lineOfSightHits[i].transform.tag == UTag.Player) return true;
+            }
+            return false;
         }
 
         void HandleAimBehaviour() {
@@ -137,6 +149,7 @@ namespace Enemies
                     break;
                 case EnemyAimMode.AlwaysAimDown:
                 default:
+                    transform.rotation = Quaternion.identity;
                     aim = Quaternion.identity;
                     break;
             }

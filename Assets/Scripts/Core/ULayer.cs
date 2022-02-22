@@ -34,6 +34,8 @@ namespace Core {
         UI,
         FX,
         Player,
+        Explosions,
+        Projectiles,
     }
 
     public static class ULayer
@@ -42,6 +44,8 @@ namespace Core {
         public static ULayerMaskItem UI => layerMaskItems[ULayerType.UI.ToString()];
         public static ULayerMaskItem FX => layerMaskItems[ULayerType.FX.ToString()];
         public static ULayerMaskItem Player => layerMaskItems[ULayerType.Player.ToString()];
+        public static ULayerMaskItem Explosions => layerMaskItems[ULayerType.Explosions.ToString()];
+        public static ULayerMaskItem Projectiles => layerMaskItems[ULayerType.Projectiles.ToString()];
 
         static Dictionary<string, ULayerMaskItem> layerMaskItems = new Dictionary<string, ULayerMaskItem>();
         static bool initialized = false;

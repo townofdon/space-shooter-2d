@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8893220175965875745}
   - component: {fileID: 6188857973420737548}
   - component: {fileID: 5502201751053826459}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: OuterRing (1)
   m_TagString: NukeShockwave
   m_Icon: {fileID: 0}
@@ -4889,7 +4889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2632368534061045005}
   - component: {fileID: 3413496525859798021}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: CoreCollider
   m_TagString: NukeEdge
   m_Icon: {fileID: 0}
@@ -4937,7 +4937,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4612878801253251896}
   - component: {fileID: 9194510030643777096}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Shockwave (1)
   m_TagString: NukeShockwave
   m_Icon: {fileID: 0}
@@ -5021,7 +5021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5838424098714071438}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Core
   m_TagString: NukeCore
   m_Icon: {fileID: 0}
@@ -5054,7 +5054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2959025252386211965}
   - component: {fileID: 1516618120719383463}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ShockwaveCollider
   m_TagString: NukeShockwave
   m_Icon: {fileID: 0}
@@ -5103,7 +5103,7 @@ GameObject:
   - component: {fileID: 5441939291679982217}
   - component: {fileID: 5441939291679982219}
   - component: {fileID: 5441939291679982216}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: CoreFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10009,7 +10009,7 @@ GameObject:
   - component: {fileID: 5441939291867706910}
   - component: {fileID: 5441939291867706896}
   - component: {fileID: 5441939291867706897}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: InnerCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14857,7 +14857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5441939292386623248}
   - component: {fileID: 5978668443108018080}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: NukeExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14918,7 +14918,7 @@ GameObject:
   - component: {fileID: 5441939292450381313}
   - component: {fileID: 5441939292450381315}
   - component: {fileID: 5441939292450381312}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: MainParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19819,7 +19819,7 @@ GameObject:
   - component: {fileID: 5441939292500747341}
   - component: {fileID: 5441939292500747343}
   - component: {fileID: 5441939292500747340}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: StableCore
   m_TagString: NukeRadius
   m_Icon: {fileID: 0}
@@ -24690,7 +24690,7 @@ GameObject:
   - component: {fileID: 5441939292510958017}
   - component: {fileID: 5441939292510958030}
   - component: {fileID: 5441939292510958031}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: OuterRing
   m_TagString: NukeShockwave
   m_Icon: {fileID: 0}
@@ -29569,7 +29569,7 @@ GameObject:
   - component: {fileID: 5441939293623937578}
   - component: {fileID: 5441939293623937580}
   - component: {fileID: 5441939293623937581}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ScreenFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34474,7 +34474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9003751624626257070}
   - component: {fileID: 5389075835079680515}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Shockwave
   m_TagString: NukeShockwave
   m_Icon: {fileID: 0}
@@ -34559,7 +34559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4378397097837367976}
   - component: {fileID: 5065628257544381842}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ShockwaveCollider
   m_TagString: NukeShockwave
   m_Icon: {fileID: 0}

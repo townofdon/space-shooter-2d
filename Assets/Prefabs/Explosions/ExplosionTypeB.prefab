@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8618738011371378587}
   - component: {fileID: 8618738011371378585}
   - component: {fileID: 8618738011371378586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4890,7 +4890,7 @@ GameObject:
   - component: {fileID: 8618738012115884180}
   - component: {fileID: 8618738012115884178}
   - component: {fileID: 8618738012115884179}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9771,7 +9771,7 @@ GameObject:
   - component: {fileID: 8618738012250842397}
   - component: {fileID: 8618738012250842398}
   - component: {fileID: 8618738012250842399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExplosionTypeB
   m_TagString: Explosion
   m_Icon: {fileID: 0}
