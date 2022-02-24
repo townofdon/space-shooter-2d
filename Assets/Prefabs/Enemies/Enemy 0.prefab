@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: -906403239232441182}
   - component: {fileID: -7985184236057419129}
   - component: {fileID: -989283550689626629}
+  - component: {fileID: 5131740026465409543}
   m_Layer: 0
   m_Name: Enemy 0
   m_TagString: EnemyShip
@@ -356,7 +357,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offscreenPosition: {x: 100, y: -100}
   waypointTriggerRadius: 0.25
-  debug: 0
 --- !u!114 &-796834167629268376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +503,60 @@ MonoBehaviour:
   targetableLayers:
     serializedVersion: 2
     m_Bits: 129
+--- !u!114 &5131740026465409543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387282363394425764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ade4ad00672354980895a4a1c4daf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  turnSpeed: 8
+  moveSpeed: 5
+  accel: 10
+  kamikaze: 0
+  dodgeIncoming: 0
+  driftXMag: 0
+  driftXFreq: 0.01
+  driftXOffset: 0
+  driftYMag: 0
+  driftYFreq: 0.01
+  driftYOffset: 0
+  engineSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    clipHead: {fileID: 0}
+    clipLoop: {fileID: 0}
+    clipTail: {fileID: 0}
+    playLoopToEnd: 0
+  agroSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    clipHead: {fileID: 0}
+    clipLoop: {fileID: 0}
+    clipTail: {fileID: 0}
+    playLoopToEnd: 0
 --- !u!1 &7385283391187530371
 GameObject:
   m_ObjectHideFlags: 0

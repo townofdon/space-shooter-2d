@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Core;
 using UnityEngine;
@@ -9,11 +8,10 @@ namespace Enemies {
     {
         [SerializeField] Vector2 offscreenPosition = new Vector2(100f, -100f);
         [SerializeField] float waypointTriggerRadius = 0.25f;
-        [SerializeField] bool debug = false;
 
         // components
         EnemyShip enemy;
-        Rigidbody2D rb;
+        EnemyMovement movement;
 
         // cached
         List<Transform> _wayPoints;
@@ -22,10 +20,7 @@ namespace Enemies {
 
         // state
         int wayPointIndex = 0;
-        Vector3 velocity; // the direction we're currently moving
-        Vector3 heading; // the direction we want to go this frame
-        Vector3 optimalHeading; // the direction we need to go this frame accounting for velocity
-        Vector3 target; // the ultimate destination
+        Vector3 target;
         bool hasCrossedHeadingX = false;
         bool hasCrossedHeadingY = false;
 
@@ -36,8 +31,7 @@ namespace Enemies {
 
         void Start() {
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
-            rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
-            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            movement = Utils.GetRequiredComponent<EnemyMovement>(gameObject);
             Init();
         }
 
@@ -54,19 +48,15 @@ namespace Enemies {
                 transform.position = _wayPoints[wayPointIndex].position;
                 // the first waypoint is the spawn point, so thus the first target should be the second waypoint
                 wayPointIndex++;
-                InitHeading();
                 UpdateTarget();
-                rb.velocity = heading * enemy.moveSpeed;
+                movement.SetImmediateVelocity(1f);
             }
-        }
-
-        void InitHeading() {
-            heading = (_wayPoints[wayPointIndex].position - transform.position).normalized;
         }
 
         void UpdateTarget() {
             if (wayPointIndex < _wayPoints.Count) {
                 target = _wayPoints[wayPointIndex].position;
+                movement.SetTarget(target);
             }
         }
 
@@ -83,25 +73,11 @@ namespace Enemies {
 
         void FollowPath() {
             if (!enemy.isAlive) return;
-
-            if (enemy.timeHit > 0) {
-                velocity = rb.velocity;
-                return;
-            }
+            if (enemy.timeHit > 0) return;
 
             if (_wave == null || _wayPoints.Count == 0) return;
 
             if (wayPointIndex >= _wayPoints.Count) return;
-
-            // rotate the enemy so that it turns smoothly
-            heading = Vector3.RotateTowards(heading, (target - transform.position).normalized, 2f * enemy.turnSpeed * 2f * Mathf.PI * Time.fixedDeltaTime, enemy.turnSpeed * Time.fixedDeltaTime).normalized;
-
-            // vector maths
-            optimalHeading = (heading * enemy.moveSpeed - (Vector3)rb.velocity).normalized;
-            rb.AddForce(optimalHeading * enemy.accel);
-            if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && rb.velocity.magnitude > enemy.moveSpeed) {
-                rb.velocity *= ( 1f - Time.fixedDeltaTime * 1.5f);
-            }
 
             // we keep track of separate axis crossings to avoid circling around a waypoint indefinitely
             if (Mathf.Abs(target.x - transform.position.x) <= waypointTriggerRadius) hasCrossedHeadingX = true;
@@ -109,13 +85,7 @@ namespace Enemies {
             if (hasCrossedHeadingX && hasCrossedHeadingY) TargetNextWaypoint();
         }
 
-        void OnDrawGizmos() {
-            if (!debug) return;
-            Gizmos.color = Color.white;
-            Gizmos.DrawLine(transform.position, transform.position + heading);
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, transform.position + optimalHeading);
-        }
+        
 
 
         // PHYSICS STUFF

@@ -21,6 +21,9 @@ namespace Weapons
         [SerializeField][Range(0f, 90f)] float ricochetVariance = 20f;
         [SerializeField] float outOfRange = 20f;
 
+        [Header("Behaviour")][Space]
+        [SerializeField][Range(0f, 1f)][Tooltip("Higher number = less notify enemy incoming")] float stealthFactor = 0f;
+
         [Header("Effects")][Space]
         [SerializeField] bool explosive = false;
         [SerializeField] float explosionLifetime = 5f;
@@ -101,6 +104,7 @@ namespace Weapons
             if (rb == null) MoveViaTransform();
             t += Time.deltaTime;
             if (t > lifetime) OnDeath();
+            if (!Utils.IsObjectOnScreen(gameObject)) OnDeath();
             if ((transform.position - startingPosition).magnitude > outOfRange) OnDeath();
         }
 

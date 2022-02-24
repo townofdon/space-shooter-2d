@@ -17,21 +17,12 @@ namespace Enemies {
         [SerializeField] GameObject explosion;
 
         [Header("Movement")][Space]
-        [SerializeField] float _turnSpeed = 4f;
-        [SerializeField] float _moveSpeed = 5f;
-        [SerializeField] float _accel = 10f;
-
         [Header("Audio")][Space]
         [SerializeField] Sound damageSound;
         [SerializeField] Sound deathSound;
 
         [Header("Events")][Space]
         [SerializeField] GameEvent OnEnemyDeath;
-
-        // getters
-        public float turnSpeed => _turnSpeed;
-        public float moveSpeed => _moveSpeed;
-        public float accel => _accel;
 
         // components
         Rigidbody2D rb;

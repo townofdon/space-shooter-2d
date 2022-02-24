@@ -69,8 +69,6 @@ namespace Enemies
             StartCoroutine(PressAndReleaseTrigger());
             // init
             if (circle != null) shipRadius = circle.radius + 1f;
-
-            Debug.Log(shipRadius);
         }
 
         void InitWeapon() {
@@ -162,6 +160,7 @@ namespace Enemies
 
         bool Fire() {
             if (!enemy.isAlive) return false;
+            if (!Utils.IsObjectOnScreen(gameObject)) return false;
             if (!isPlayerInScopes) return false;
             if (!weapon.ShouldFire(triggerHeld.active)) return false;
 
