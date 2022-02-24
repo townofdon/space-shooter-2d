@@ -147,8 +147,7 @@ namespace Core {
 
         }
 
-        public static bool IsObjectOnScreen(GameObject obj, Camera camera = null, float offscreenPadding = 1f)
-        {
+        public static bool IsObjectOnScreen(GameObject obj, Camera camera = null, float offscreenPadding = 1f) {
             if (camera == null) camera = Camera.main;
             Vector2 _minBoundsWorld = camera.ViewportToWorldPoint(Vector2.zero) - (Vector3)Vector2.one * offscreenPadding;
             Vector2 _maxBoundsWorld = camera.ViewportToWorldPoint(Vector2.one) + (Vector3)Vector2.one * offscreenPadding;
@@ -157,6 +156,15 @@ namespace Core {
                 obj.transform.position.x < _maxBoundsWorld.x &&
                 obj.transform.position.y > _minBoundsWorld.y &&
                 obj.transform.position.y < _maxBoundsWorld.y;
+        }
+
+        public static bool IsObjectHeadingAwayFromCenterScreen(GameObject obj, Rigidbody2D rb, Camera camera = null) {
+            if (camera == null) camera = Camera.main;
+            if (obj.transform.position.x > camera.transform.position.x && rb.velocity.x > 0) return true;
+            if (obj.transform.position.x < camera.transform.position.x && rb.velocity.x < 0) return true;
+            if (obj.transform.position.y > camera.transform.position.y && rb.velocity.y > 0) return true;
+            if (obj.transform.position.y < camera.transform.position.y && rb.velocity.y < 0) return true;
+            return false;
         }
 
         public static Vector2 GetScreenSize(Camera camera, float padding = 0f) {

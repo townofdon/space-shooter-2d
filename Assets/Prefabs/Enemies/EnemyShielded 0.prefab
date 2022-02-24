@@ -250,6 +250,14 @@ PrefabInstance:
       propertyPath: _maxShield
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: firingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -519819148312312317, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Enabled
       value: 1

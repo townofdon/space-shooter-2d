@@ -59,7 +59,7 @@ namespace Enemies {
             damageSound.Play();
         }
 
-        void OnDeath() {
+        public void OnDeath() {
             RemoveMarker();
             OnEnemyDeath.Raise();
             rb.drag = originalDrag; // to make it seem like it was there all along

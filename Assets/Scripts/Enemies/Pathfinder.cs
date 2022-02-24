@@ -4,9 +4,22 @@ using UnityEngine;
 
 namespace Enemies {
 
+    enum PathfinderTargetMode {
+        Waypoints,
+        Heading,
+    }
+
+    enum PathfinderLoopMode {
+        Teleport,
+        Circular,
+        Destroy,
+    }
+
     public class Pathfinder : MonoBehaviour
     {
-        [SerializeField] Vector2 offscreenPosition = new Vector2(100f, -100f);
+        [SerializeField] PathfinderTargetMode targetMode;
+        [SerializeField] PathfinderLoopMode loopMode;
+        // [SerializeField] PathfinderTargetMode mode;
         [SerializeField] float waypointTriggerRadius = 0.25f;
 
         // components
@@ -20,6 +33,7 @@ namespace Enemies {
 
         // state
         int wayPointIndex = 0;
+        Vector3 lastOrigin;
         Vector3 target;
         bool hasCrossedHeadingX = false;
         bool hasCrossedHeadingY = false;
@@ -42,12 +56,11 @@ namespace Enemies {
         void Init() {
             if (_wave != null && enemy != null) {
                 _wayPoints = _wave.GetWaypoints();
-                wayPointIndex = 0;
+                // the first waypoint is the spawn point, so thus the first target should be the second waypoint
+                wayPointIndex = 1;
                 hasCrossedHeadingX = false;
                 hasCrossedHeadingY = false;
-                transform.position = _wayPoints[wayPointIndex].position;
-                // the first waypoint is the spawn point, so thus the first target should be the second waypoint
-                wayPointIndex++;
+                transform.position = _wayPoints[0].position;
                 UpdateTarget();
                 movement.SetImmediateVelocity(1f);
             }
@@ -56,16 +69,23 @@ namespace Enemies {
         void UpdateTarget() {
             if (wayPointIndex < _wayPoints.Count) {
                 target = _wayPoints[wayPointIndex].position;
-                movement.SetTarget(target);
+                lastOrigin = transform.position;
+                if (targetMode == PathfinderTargetMode.Waypoints) {
+                    movement.SetTarget(target);
+                } else {
+                    // set heading to be the vector from one waypoint to the next
+                    movement.SetHeading(GetCurrentWaypointVector().normalized);
+                }
             }
         }
 
         void TargetNextWaypoint() {
+            lastOrigin = transform.position;
             wayPointIndex++;
             hasCrossedHeadingX = false;
             hasCrossedHeadingY = false;
             if (wayPointIndex >= _wayPoints.Count) {
-                Init();
+                OnPathEnd();
             } else {
                 UpdateTarget();
             }
@@ -74,15 +94,46 @@ namespace Enemies {
         void FollowPath() {
             if (!enemy.isAlive) return;
             if (enemy.timeHit > 0) return;
-
             if (_wave == null || _wayPoints.Count == 0) return;
-
             if (wayPointIndex >= _wayPoints.Count) return;
 
-            // we keep track of separate axis crossings to avoid circling around a waypoint indefinitely
-            if (Mathf.Abs(target.x - transform.position.x) <= waypointTriggerRadius) hasCrossedHeadingX = true;
-            if (Mathf.Abs(target.y - transform.position.y) <= waypointTriggerRadius) hasCrossedHeadingY = true;
-            if (hasCrossedHeadingX && hasCrossedHeadingY) TargetNextWaypoint();
+            if (targetMode == PathfinderTargetMode.Waypoints) {
+                // we keep track of separate axis crossings to avoid circling around a waypoint indefinitely
+                if (Mathf.Abs(target.x - transform.position.x) <= waypointTriggerRadius) hasCrossedHeadingX = true;
+                if (Mathf.Abs(target.y - transform.position.y) <= waypointTriggerRadius) hasCrossedHeadingY = true;
+                if (hasCrossedHeadingX && hasCrossedHeadingY) TargetNextWaypoint();
+            }
+            if (targetMode == PathfinderTargetMode.Heading) {
+                if ((transform.position - lastOrigin).magnitude >= GetCurrentWaypointVector().magnitude) TargetNextWaypoint();
+            }
+        }
+
+        void OnPathEnd() {
+            switch (loopMode)
+            {
+                case PathfinderLoopMode.Destroy:
+                    enemy.OnDeath();
+                    break;
+                case PathfinderLoopMode.Circular:
+                    wayPointIndex = 0;
+                    UpdateTarget();
+                    break;
+                case PathfinderLoopMode.Teleport:
+                default:
+                    Init();
+                    break;
+            }
+        }
+
+        int GetPrevWaypointIndex() {
+            return wayPointIndex > 0 ? wayPointIndex - 1 : _wayPoints.Count - 1;
+        }
+
+        Vector2 GetCurrentWaypointVector() {
+            return (
+                _wayPoints[wayPointIndex].position -
+                _wayPoints[GetPrevWaypointIndex()].position
+            );
         }
 
         

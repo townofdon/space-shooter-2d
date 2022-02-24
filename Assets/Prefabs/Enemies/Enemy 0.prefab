@@ -355,7 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea0dec8cb9882c409ac4a676adf7360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offscreenPosition: {x: 100, y: -100}
+  targetMode: 1
+  loopMode: 0
   waypointTriggerRadius: 0.25
 --- !u!114 &-796834167629268376
 MonoBehaviour:
@@ -434,9 +435,6 @@ MonoBehaviour:
   damageSpriteTarget: {fileID: 8151703202600299794}
   ship: {fileID: 8051936151853671948}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
-  _turnSpeed: 8
-  _moveSpeed: 5
-  _accel: 10
   damageSound:
     soundName: EnemyDamage
     volume: 0
@@ -520,7 +518,17 @@ MonoBehaviour:
   moveSpeed: 5
   accel: 10
   kamikaze: 0
-  dodgeIncoming: 0
+  jukes: 0
+  jukeTargetedTime: 0
+  jukeTargetedVariance: 0
+  jukeSpeed: 0
+  jukeCooldown: 0
+  jukeLayerAvoid:
+    serializedVersion: 2
+    m_Bits: 0
+  avoids: 0
+  avoidSpeed: 0
+  avoidCooldown: 0
   driftXMag: 0
   driftXFreq: 0.01
   driftXOffset: 0

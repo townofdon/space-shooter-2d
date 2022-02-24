@@ -6,6 +6,11 @@ using Audio;
 
 namespace Enemies
 {
+    enum TargetMode {
+        Null,
+        Position,
+        Heading,
+    }
 
     public class EnemyMovement : MonoBehaviour
     {
@@ -48,11 +53,12 @@ namespace Enemies
         Rigidbody2D rb;
 
         // state
-        bool hasTarget = false;
+        TargetMode targetMode = TargetMode.Null;
         Vector3 heading;
-        Vector3 optimalHeading;
-        Vector3 target;
-        Vector3 targetPrev;
+        Vector3 headingAdjusted;
+        Vector3 targetHeading;
+        Vector3 targetPosition;
+        Vector3 targetPositionPrev;
 
         // state - drift
         Vector3 drift;
@@ -72,10 +78,15 @@ namespace Enemies
         RaycastHit2D hit;
 
         public void SetTarget(Vector3 value) {
-            hasTarget = true;
+            targetMode = TargetMode.Position;
             // targetPrev is set here so that when the player is destroyed the enemy craft can go back to its original path
-            targetPrev = value;
-            target = value;
+            targetPositionPrev = value;
+            targetPosition = value;
+        }
+
+        public void SetHeading(Vector3 value) {
+            targetMode = TargetMode.Heading;
+            targetHeading = value;
         }
 
         public void SetKamikaze(bool value) {
@@ -118,16 +129,17 @@ namespace Enemies
             Handlejuke();
             MoveTowardsHeading();
             ApplyDrift();
+            ApplyOffscreenBrakes();
         }
 
         void HandleTargetBehaviour() {
             if (kamikaze && player != null && player.isAlive) {
-                hasTarget = true;
-                target = player.transform.position;
+                targetMode = TargetMode.Position;
+                targetPosition = player.transform.position;
                 agroSound.Play();
                 engineSound.Stop();
             } else {
-                target = targetPrev;
+                targetPosition = targetPositionPrev;
                 engineSound.Play();
                 agroSound.Stop();
             }
@@ -146,20 +158,26 @@ namespace Enemies
 
         void MoveTowardsHeading() {
             if (!enemy.isAlive) return;
-            if (!hasTarget) return;
+            if (targetMode == TargetMode.Null) return;
             // rotate the enemy so that it turns smoothly
             heading = Vector3.RotateTowards(
                 heading,
-                (target - transform.position).normalized,
+                GetRotateTowardsTarget(),
                 2f * turnSpeed * 2f * Mathf.PI * Time.fixedDeltaTime, turnSpeed * Time.fixedDeltaTime
             ).normalized;
 
-            // vector maths
-            optimalHeading = (heading * moveSpeed - (Vector3)rb.velocity).normalized;
-            rb.AddForce(optimalHeading * accel);
+            // vector maths - compensate for rb's current velocity vs. heading
+            headingAdjusted = (heading * moveSpeed - (Vector3)rb.velocity).normalized;
+            rb.AddForce(headingAdjusted * accel);
             if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && rb.velocity.magnitude > moveSpeed) {
                 rb.velocity *= ( 1f - Time.fixedDeltaTime * 1.5f);
             }
+        }
+
+        Vector2 GetRotateTowardsTarget() {;
+            if (targetMode == TargetMode.Heading) return targetHeading;
+            if (targetMode == TargetMode.Position) return (targetPosition - transform.position).normalized;
+            return Vector2.zero;
         }
 
         void ApplyDrift() {
@@ -172,6 +190,13 @@ namespace Enemies
             // rb.velocity += (Vector2)drift;
         }
 
+        void ApplyOffscreenBrakes() {
+            if (Utils.IsObjectOnScreen(gameObject)) return;
+            if (!Utils.IsObjectHeadingAwayFromCenterScreen(gameObject, rb)) return;
+            // excuse me sir, do you know how fast you were going?
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, moveSpeed);
+        }
+
         bool CheckRaycastHazard(Vector2 direction, float distance) {
             hit = Physics2D.Raycast(transform.position, direction, distance, jukeLayerAvoid);
             return hit.collider != null;
@@ -182,7 +207,7 @@ namespace Enemies
             Gizmos.color = Color.white;
             Gizmos.DrawLine(transform.position, transform.position + heading);
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, transform.position + optimalHeading);
+            Gizmos.DrawLine(transform.position, transform.position + headingAdjusted);
         }
     }
 }
