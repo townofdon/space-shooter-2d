@@ -30,6 +30,8 @@ namespace Enemies {
         List<Transform> _wayPoints;
         WaveConfigSO _wave;
         float initialDrag;
+        Vector2 minBounds;
+        Vector2 maxBounds;
 
         // state
         int wayPointIndex = 0;
@@ -37,6 +39,7 @@ namespace Enemies {
         Vector3 target;
         bool hasCrossedHeadingX = false;
         bool hasCrossedHeadingY = false;
+        bool isOffscreen = false;
 
         public void SetWave(WaveConfigSO wave) {
             _wave = wave;
@@ -46,11 +49,13 @@ namespace Enemies {
         void Start() {
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
             movement = Utils.GetRequiredComponent<EnemyMovement>(gameObject);
+            (minBounds, maxBounds) = Utils.GetScreenBounds(Camera.main, -1f);
             Init();
         }
 
         void FixedUpdate() {
             FollowPath();
+            StayOnScreen();
         }
 
         void Init() {
@@ -66,15 +71,27 @@ namespace Enemies {
             }
         }
 
+        void SetHeading() {
+            if (isOffscreen) {
+                movement.SetHeading((GetCurrentWaypointVector().normalized + GetOffscreenCorrectionVector().normalized).normalized);
+            } else {
+                // set heading to be the vector from one waypoint to the next
+                movement.SetHeading(GetCurrentWaypointVector().normalized);
+            }
+        }
+
         void UpdateTarget() {
             if (wayPointIndex < _wayPoints.Count) {
                 target = _wayPoints[wayPointIndex].position;
                 lastOrigin = transform.position;
-                if (targetMode == PathfinderTargetMode.Waypoints) {
-                    movement.SetTarget(target);
-                } else {
-                    // set heading to be the vector from one waypoint to the next
-                    movement.SetHeading(GetCurrentWaypointVector().normalized);
+                switch(targetMode) {
+                    case PathfinderTargetMode.Heading:
+                        SetHeading();
+                        break;
+                    case PathfinderTargetMode.Waypoints:
+                    default:
+                        movement.SetTarget(target);
+                        break;
                 }
             }
         }
@@ -104,8 +121,45 @@ namespace Enemies {
                 if (hasCrossedHeadingX && hasCrossedHeadingY) TargetNextWaypoint();
             }
             if (targetMode == PathfinderTargetMode.Heading) {
-                if ((transform.position - lastOrigin).magnitude >= GetCurrentWaypointVector().magnitude) TargetNextWaypoint();
+                if ((transform.position - lastOrigin).magnitude >= GetCurrentWaypointVector().magnitude) {
+                    if (loopMode == PathfinderLoopMode.Teleport || loopMode == PathfinderLoopMode.Destroy) {
+                        // make sure enemy is offscreen before looping
+                        if (!Utils.IsObjectOnScreen(gameObject)) TargetNextWaypoint();
+                    } else {
+                        TargetNextWaypoint();
+                    }
+                }
             }
+        }
+
+        void StayOnScreen() {
+            if (targetMode != PathfinderTargetMode.Heading) return;
+            if (isOffscreen) {
+                if (!Utils.IsObjectOnScreen(gameObject)) return;
+                isOffscreen = false;
+                SetHeading();
+                return;
+            }
+            if (Utils.IsObjectOnScreen(gameObject)) return;
+            isOffscreen = true;
+            SetHeading();
+        }
+
+        Vector2 GetOffscreenCorrectionVector() {
+            // float x = 0f;
+            // float y = 0f;
+            // if      (transform.position.x > Mathf.Max(maxBounds.x, GetCurrentWaypointPosition().x)) x = -1f;
+            // else if (transform.position.x < Mathf.Min(minBounds.x, GetCurrentWaypointPosition().x)) x = 1f;
+            // if      (transform.position.y > Mathf.Max(maxBounds.y, GetCurrentWaypointPosition().y)) y = -1f;
+            // else if (transform.position.y < Mathf.Min(minBounds.y, GetCurrentWaypointPosition().y)) y = 1f;
+            // return new Vector2(x, y);
+            return new Vector2(
+                (transform.position.x > Mathf.Max(maxBounds.x, GetCurrentWaypointPosition().x)) ? -1f :
+                (transform.position.x < Mathf.Min(minBounds.x, GetCurrentWaypointPosition().x)) ? 1f :
+                0f,
+                (transform.position.y > Mathf.Max(maxBounds.y, GetCurrentWaypointPosition().y)) ? -1f :
+                (transform.position.y < Mathf.Min(minBounds.y, GetCurrentWaypointPosition().y)) ? 1f :
+                0f);
         }
 
         void OnPathEnd() {
@@ -134,6 +188,10 @@ namespace Enemies {
                 _wayPoints[wayPointIndex].position -
                 _wayPoints[GetPrevWaypointIndex()].position
             );
+        }
+
+        Vector2 GetCurrentWaypointPosition() {
+            return _wayPoints[wayPointIndex].position;
         }
 
         

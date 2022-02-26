@@ -151,10 +151,27 @@ namespace Core {
 
         }
 
+        // cached state
+        static bool hasInitializedBounds = false;
+        static Vector2 minScreenBoundsWorld;
+        static Vector2 maxScreenBoundsWorld;
+
+        public static (Vector2, Vector2) GetScreenBounds(Camera camera = null, float offscreenPadding = 1f, bool forceCalc = false) {
+            if (camera == null) camera = Camera.main;
+            if (hasInitializedBounds && !forceCalc) return (
+                minScreenBoundsWorld - Vector2.one * offscreenPadding,
+                maxScreenBoundsWorld + Vector2.one * offscreenPadding);
+            minScreenBoundsWorld = camera.ViewportToWorldPoint(Vector2.zero);
+            maxScreenBoundsWorld = camera.ViewportToWorldPoint(Vector2.one);
+            hasInitializedBounds = true;
+            return (
+                minScreenBoundsWorld - Vector2.one * offscreenPadding,
+                maxScreenBoundsWorld + Vector2.one * offscreenPadding);
+        }
+
         public static bool IsObjectOnScreen(GameObject obj, Camera camera = null, float offscreenPadding = 1f) {
             if (camera == null) camera = Camera.main;
-            Vector2 _minBoundsWorld = camera.ViewportToWorldPoint(Vector2.zero) - (Vector3)Vector2.one * offscreenPadding;
-            Vector2 _maxBoundsWorld = camera.ViewportToWorldPoint(Vector2.one) + (Vector3)Vector2.one * offscreenPadding;
+            (Vector2 _minBoundsWorld, Vector2 _maxBoundsWorld) = Utils.GetScreenBounds(camera, offscreenPadding);
             return
                 obj.transform.position.x > _minBoundsWorld.x &&
                 obj.transform.position.x < _maxBoundsWorld.x &&
