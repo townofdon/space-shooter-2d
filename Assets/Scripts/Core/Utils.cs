@@ -103,6 +103,10 @@ namespace Core {
             return Mathf.Clamp(initialValue * (1 + UnityEngine.Random.Range(-variance / 2f, variance / 2f)), min, max);
         }
 
+        public static bool RandomBool(float threshold = 0.5f) {
+            return Random.value > threshold;
+        }
+
         public static bool HasTag(GameObject gameObject, string tag) {
             Transform current = gameObject.transform;
 
