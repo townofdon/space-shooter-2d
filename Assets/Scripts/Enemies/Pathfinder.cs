@@ -27,12 +27,12 @@ namespace Enemies {
         EnemyMovement movement;
 
         // cached
-        List<Transform> _wayPoints;
+        List<Transform> _wayPoints = new List<Transform>();
         WaveConfigSO _wave;
         float initialDrag;
         Vector2 minBounds;
         Vector2 maxBounds;
-
+ 
         // state
         int wayPointIndex = 0;
         Vector3 lastOrigin;
@@ -122,7 +122,7 @@ namespace Enemies {
             }
             if (targetMode == PathfinderTargetMode.Heading) {
                 if ((transform.position - lastOrigin).magnitude >= GetCurrentWaypointVector().magnitude) {
-                    if (loopMode == PathfinderLoopMode.Teleport || loopMode == PathfinderLoopMode.Destroy) {
+                    if (IsLastWaypoint() && (loopMode == PathfinderLoopMode.Teleport || loopMode == PathfinderLoopMode.Destroy)) {
                         // make sure enemy is offscreen before looping
                         if (!Utils.IsObjectOnScreen(gameObject)) TargetNextWaypoint();
                     } else {
@@ -134,6 +134,10 @@ namespace Enemies {
 
         void StayOnScreen() {
             if (targetMode != PathfinderTargetMode.Heading) return;
+            if (!enemy.isAlive) return;
+            if (enemy.timeHit > 0) return;
+            if (_wave == null || _wayPoints.Count == 0) return;
+            if (wayPointIndex >= _wayPoints.Count) return;
             if (isOffscreen) {
                 if (!Utils.IsObjectOnScreen(gameObject)) return;
                 isOffscreen = false;
@@ -146,13 +150,6 @@ namespace Enemies {
         }
 
         Vector2 GetOffscreenCorrectionVector() {
-            // float x = 0f;
-            // float y = 0f;
-            // if      (transform.position.x > Mathf.Max(maxBounds.x, GetCurrentWaypointPosition().x)) x = -1f;
-            // else if (transform.position.x < Mathf.Min(minBounds.x, GetCurrentWaypointPosition().x)) x = 1f;
-            // if      (transform.position.y > Mathf.Max(maxBounds.y, GetCurrentWaypointPosition().y)) y = -1f;
-            // else if (transform.position.y < Mathf.Min(minBounds.y, GetCurrentWaypointPosition().y)) y = 1f;
-            // return new Vector2(x, y);
             return new Vector2(
                 (transform.position.x > Mathf.Max(maxBounds.x, GetCurrentWaypointPosition().x)) ? -1f :
                 (transform.position.x < Mathf.Min(minBounds.x, GetCurrentWaypointPosition().x)) ? 1f :
@@ -192,6 +189,10 @@ namespace Enemies {
 
         Vector2 GetCurrentWaypointPosition() {
             return _wayPoints[wayPointIndex].position;
+        }
+
+        bool IsLastWaypoint() {
+            return wayPointIndex >= _wayPoints.Count - 1;
         }
 
         

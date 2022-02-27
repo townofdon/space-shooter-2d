@@ -12,6 +12,29 @@ namespace Enemies
         Heading,
     }
 
+    enum MovementMode {
+        Waypoints,
+        ReflectOffScreenEdges,
+    }
+
+    // TODO: REMOVE
+    // [System.Serializable]
+    // public struct WobbleProps {
+    //     [SerializeField] float _accel = 0f;
+    //     [SerializeField] float _maxSpeed = 0f;
+    //     [SerializeField] float _maxDistance = 0f;
+
+    //     public WobbleProps(float accel, float maxSpeed, float maxDistance) {
+    //         _accel = accel;
+    //         _maxSpeed = maxSpeed;
+    //         _maxDistance = maxDistance;
+    //     }
+
+    //     public float accel => _accel;
+    //     public float maxSpeed => _maxSpeed;
+    //     public float maxDistance => _maxDistance;
+    // }
+
     public class EnemyMovement : MonoBehaviour
     {
         [Header("Movement")][Space]
@@ -35,13 +58,11 @@ namespace Enemies
         [SerializeField][Range(0f, 5f)] float avoidSpeed = 0f;
         [SerializeField][Range(0f, 5f)] float avoidCooldown = 0f;
 
-        [Header("Drift")][Space]
-        [SerializeField][Range(0f, 1f)] float driftXMag = 0f;
-        [SerializeField][Range(0.01f, 1f)] float driftXFreq = 0f;
-        [SerializeField][Range(0f, 2f)] float driftXOffset = 0f;
-        [SerializeField][Range(0f, 1f)] float driftYMag = 0f;
-        [SerializeField][Range(0.01f, 1f)] float driftYFreq = 0f;
-        [SerializeField][Range(0f, 2f)] float driftYOffset = 0f;
+        [Header("Wobble")][Space]
+        [SerializeField] Rigidbody2D wobbler;
+        [SerializeField] Vector2 wobbleForce;
+        [SerializeField] Vector2 wobbleMaxSpeed;
+        [SerializeField] Vector2 wobbleMaxDistance;
 
         [Header("Audio")][Space]
         [SerializeField] LoopableSound engineSound;
@@ -51,6 +72,7 @@ namespace Enemies
         PlayerGeneral player;
         EnemyShip enemy;
         Rigidbody2D rb;
+        Rigidbody2D rbWobble;
 
         // state
         TargetMode targetMode = TargetMode.Null;
@@ -60,9 +82,10 @@ namespace Enemies
         Vector3 targetPosition;
         Vector3 targetPositionPrev;
 
-        // state - drift
-        Vector3 drift;
-        float driftTime;
+        // state - wobble
+        Vector2 wobbleDir = Vector2.one;
+        Vector2 wobbleDeltaP = Vector2.zero; // diff in position
+        Vector2 wobbleDeltaV = Vector2.zero; // diff in velocity
 
         // state - juke
         bool isJuking = false;
@@ -95,7 +118,7 @@ namespace Enemies
 
         public void SetImmediateVelocity(float velocityMultiplier) {
             if (rb == null) return;
-            rb.velocity = heading * moveSpeed * velocityMultiplier;
+            rb.velocity = (heading * moveSpeed * velocityMultiplier);
         }
 
         // TODO: ADD A PLAYER_GENERAL LOOP (USE COROUTINE WHILE(TRUE) YIELD WAITFORTIME(0.2S) RAYCAST TO FIRST ENEMY SHIP -> NotifyTargeted())
@@ -117,6 +140,16 @@ namespace Enemies
             engineSound.Init(this);
             agroSound.Init(this);
             juking.SetDuration(jukeCooldown);
+            // init wobble
+            if (wobbler != null && rb != null) {
+                Rigidbody2D temp = Instantiate(wobbler, Vector3.zero, Quaternion.identity);
+                Destroy(wobbler.gameObject);
+                wobbler = temp;
+                wobbler.gravityScale = rb.gravityScale;
+                wobbler.mass = rb.mass;
+                wobbler.drag = rb.drag;
+                wobbler.angularDrag = rb.drag;
+            }
         }
 
         void Update() {
@@ -127,8 +160,8 @@ namespace Enemies
 
         void FixedUpdate() {
             Handlejuke();
+            Applywobble();
             MoveTowardsHeading();
-            ApplyDrift();
             ApplyOffscreenBrakes();
         }
 
@@ -167,11 +200,21 @@ namespace Enemies
             ).normalized;
 
             // vector maths - compensate for rb's current velocity vs. heading
-            headingAdjusted = (heading * moveSpeed - (Vector3)rb.velocity).normalized;
+            headingAdjusted = (heading * moveSpeed - (Vector3)GetCurrentVelocity()).normalized;
             rb.AddForce(headingAdjusted * accel);
-            if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && rb.velocity.magnitude > moveSpeed) {
-                rb.velocity *= ( 1f - Time.fixedDeltaTime * 1.5f);
+            if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && (rb.velocity.magnitude + Mathf.Abs(wobbleDeltaV.magnitude)) > moveSpeed) {
+                rb.velocity *= 1f - Time.fixedDeltaTime * 1.5f;
             }
+        }
+
+        Vector3 GetCurrentVelocity() {
+            if (wobbler == null) return rb.velocity;
+            return rb.velocity + wobbler.velocity;
+        }
+
+        bool IsOverSpeedLimit() {
+            if (wobbler == null) return rb.velocity.magnitude > moveSpeed;
+            return (rb.velocity + wobbler.velocity).magnitude > moveSpeed;
         }
 
         Vector2 GetRotateTowardsTarget() {;
@@ -180,14 +223,47 @@ namespace Enemies
             return Vector2.zero;
         }
 
-        void ApplyDrift() {
-            if (!enemy.isAlive || kamikaze) return;
+        // Wobble is achieved by using a "counterweight" strategy (an independent rigidbody that wobbles opposite the gameobject)
+        // When calculating wobble, we check the following (independent for each axis):
+        // - distance between the world origin and wobbler position
+        // - velocity diff between rigidbodies
+        // We then determine when to flip the wobble direction based on distance traversed
+        // Force is only applied if below the arbitrarily-set wobbleMaxSpeed
+        void Applywobble() {
+            if (wobbler == null) return;
+            if (!enemy.isAlive) {
+                Destroy(wobbler.gameObject);
+                return;
+            }
+            if (kamikaze) {
+                wobbler.transform.position = Vector3.zero;
+                return;
+            }
+            if (wobbleForce.x > 0f && wobbleMaxSpeed.x > 0f && wobbleMaxDistance.x > 0f) {
+                wobbleDeltaP.x = Mathf.Sign(wobbleDir.x) * (0f - wobbler.transform.position.x);
+                wobbleDeltaV.x = Mathf.Sign(wobbleDir.x) * (0f - wobbler.velocity.x);
+                if (wobbleDeltaP.x > wobbleMaxDistance.x) wobbleDir.x *= -1f;
+                if (wobbleDeltaV.x <= wobbleMaxSpeed.x) AddWobbleForce(Vector2.right * wobbleForce.x * wobbleDir.x);
+            }
+            if (wobbleForce.y > 0f && wobbleMaxSpeed.y > 0f && wobbleMaxDistance.y > 0f) {
+                wobbleDeltaP.y = Mathf.Sign(wobbleDir.y) * (0f - wobbler.transform.position.y);
+                wobbleDeltaV.y = Mathf.Sign(wobbleDir.y) * (0f - wobbler.velocity.y);
+                if (wobbleDeltaP.y > wobbleMaxDistance.y) wobbleDir.y *= -1f;
+                if (wobbleDeltaV.y <= wobbleMaxSpeed.y) AddWobbleForce(Vector2.up * wobbleForce.y * wobbleDir.y);
+            }
 
-            drift.x = Mathf.Cos(driftTime / driftXFreq + driftXOffset * Mathf.PI) * driftXMag;
-            drift.y = Mathf.Cos(driftTime / driftYFreq + driftYOffset * Mathf.PI) * driftYMag;
-            driftTime += Time.fixedDeltaTime;
-            transform.position += drift;
-            // rb.velocity += (Vector2)drift;
+            // wobbleForce.x = Mathf.Sign(Mathf.Cos(wobbleTime / _wobbleFreq.x + _wobbleOffset.x * Mathf.PI)) * _wobbleMag.x;
+            // wobbleForce.y = Mathf.Sign(Mathf.Cos(wobbleTime / _wobbleFreq.y + _wobbleOffset.y * Mathf.PI)) * _wobbleMag.y;
+            // wobbleTime += Time.fixedDeltaTime;
+            // wobbleTime = wobbleTime % 2f;
+            // // add velocity to the enchilada
+        }
+
+        void AddWobbleForce(Vector2 value, ForceMode2D mode = ForceMode2D.Force) {
+            if (!Utils.IsObjectOnScreen(gameObject, Camera.main, -1f)) return;
+            (Vector2 min, Vector2 max) = Utils.GetScreenBounds(Camera.main, -3f);
+            if (rb != null) rb.AddForce(value, mode);
+            if (wobbler != null) wobbler.AddForce(-value, mode);
         }
 
         void ApplyOffscreenBrakes() {
@@ -202,12 +278,20 @@ namespace Enemies
             return hit.collider != null;
         }
 
+        //
+        // DEBUG
+        //
         void OnDrawGizmos() {
             if (!debug) return;
             Gizmos.color = Color.white;
             Gizmos.DrawLine(transform.position, transform.position + heading);
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, transform.position + headingAdjusted);
+            Gizmos.color = Color.cyan;
+
+            if (rb == null) return;
+            if (wobbler == null) return;
+            Gizmos.DrawLine(transform.position, (Vector2)transform.position + rb.velocity + wobbler.velocity);
         }
     }
 }

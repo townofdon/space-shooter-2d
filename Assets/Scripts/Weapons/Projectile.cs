@@ -166,6 +166,11 @@ namespace Weapons
             velocity = heading * moveSpeed * 2f;
             transform.rotation = transform.rotation * ricochet * Quaternion.Euler(0f, 0f, 180f);
             transform.position += heading * height;
+            if (damageDealer != null) {
+                // once ricochet happens, let own bullets damage parentActor
+                damageDealer.SetIgnoreUUID(null);
+                damageDealer.SetIgnoreTag(UTag.Null);
+            }
         }
 
         public void OnDeath() {

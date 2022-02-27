@@ -53,7 +53,7 @@ namespace Damage
         // getters
         new public Collider2D collider => _collider;
 
-        public void SetIgnoreUUID(System.Guid uuid) {
+        public void SetIgnoreUUID(System.Nullable<System.Guid> uuid) {
             ignoreUUID = uuid;
         }
 
@@ -101,7 +101,7 @@ namespace Damage
             if (!preferCirclecast) return;
             Collider2D[] otherColliders = Physics2D.OverlapCircleAll(transform.position, circlecastRadius);
             foreach (var other in otherColliders) {
-                HandleColliderHit(other);
+                HandleColliderHit(other, damageType == DamageType.Disruptor);
             }
         }
 
@@ -121,7 +121,7 @@ namespace Damage
             HandleColliderHit(other);
         }
 
-        void HandleColliderHit(Collider2D other) {
+        void HandleColliderHit(Collider2D other, bool makeFramerateIndependent = false) {
             if (!enabled) return;
             if (damageWaitTime > 0f) return;
             if (!passedSafeDistance && hitThisFrame) return;
@@ -140,7 +140,7 @@ namespace Damage
                     HandleJarringCollision(actor);
                     return;
                 }
-                if (actor.TakeDamage(damageClass.baseDamage * baseDamageMultiplier * upgradeDamageMultiplier, damageType)) {
+                if (actor.TakeDamage(damageClass.baseDamage * baseDamageMultiplier * upgradeDamageMultiplier * (makeFramerateIndependent ? Time.deltaTime : 1f), damageType)) {
                     hitThisFrame = true;
                 }
                 if (rb != null) {
