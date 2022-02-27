@@ -462,6 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea0dec8cb9882c409ac4a676adf7360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 1
   targetMode: 1
   loopMode: 0
   waypointTriggerRadius: 0.25
@@ -639,7 +640,7 @@ MonoBehaviour:
   wobbler: {fileID: 4367764860853941247}
   wobbleForce: {x: 20, y: 0.1}
   wobbleMaxSpeed: {x: 5, y: 0.5}
-  wobbleMaxDistance: {x: 1, y: 0.5}
+  wobbleMaxDistance: {x: 0.5, y: 0.5}
   engineSound:
     soundName: 
     volume: 0.7

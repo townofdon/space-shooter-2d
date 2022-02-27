@@ -156,7 +156,16 @@ namespace Enemies
                         wave.GetStartingWaypoint().position,
                         Quaternion.identity,
                         transform);
-                    enemy.GetComponent<Pathfinder>().SetWave(wave);
+                    var pathFollower = enemy.GetComponent<Pathfollower>();
+                    if (pathFollower != null) {
+                        // TODO: REMOVE
+                        // pathFollower.SetPath(wave.Path);
+                        // pathFollower.Init();
+                        pathFollower.SetWaypoints(wave.GetWaypoints());
+                        pathFollower.Begin();
+                    }
+                    // TODO: REMOVE
+                    // enemy.GetComponent<Pathfollower>().SetWaypoints(wave.GetWaypoints());
                     yield return new WaitForSeconds(wave.spawnInterval);
                 }
             }

@@ -4,52 +4,93 @@ using UnityEngine;
 
 namespace Enemies {
 
-    enum PathfinderTargetMode {
+    public enum PathfinderTargetMode {
         Waypoints,
         Heading,
     }
 
-    enum PathfinderLoopMode {
+    public enum PathfinderLoopMode {
+        HaltAtEnd,
         Teleport,
         Circular,
         Destroy,
     }
 
-    public class Pathfinder : MonoBehaviour
+    public class Pathfollower : MonoBehaviour
     {
+        [SerializeField] bool debug = false;
         [SerializeField] PathfinderTargetMode targetMode;
         [SerializeField] PathfinderLoopMode loopMode;
-        // [SerializeField] PathfinderTargetMode mode;
         [SerializeField] float waypointTriggerRadius = 0.25f;
+        [SerializeField] Transform path;
 
         // components
         EnemyShip enemy;
         EnemyMovement movement;
 
         // cached
-        List<Transform> _wayPoints = new List<Transform>();
-        WaveConfigSO _wave;
+        List<Transform> waypoints = new List<Transform>();
         float initialDrag;
         Vector2 minBounds;
         Vector2 maxBounds;
  
         // state
-        int wayPointIndex = 0;
+        int waypointIndex = 0;
         Vector3 lastOrigin;
         Vector3 target;
         bool hasCrossedHeadingX = false;
         bool hasCrossedHeadingY = false;
         bool isOffscreen = false;
 
-        public void SetWave(WaveConfigSO wave) {
-            _wave = wave;
-            Init();
+        // FSM STATE
+        bool _isPathComplete = false;
+        bool _isStarted = false;
+        bool _isRunning = false;
+
+        public bool isPathComplete => _isPathComplete;
+        public bool isStarted => _isStarted;
+        public bool isRunning => _isRunning;
+        public bool hasWaypoints => waypoints.Count > 0;
+
+        public void SetTargetMode(PathfinderTargetMode mode) {
+            targetMode = mode;
+        }
+
+        public void SetLoopMode(PathfinderLoopMode mode) {
+            loopMode = mode;
+        }
+
+        public void SetWaypoints(List<Transform> waypoints) {
+            this.waypoints = new List<Transform>();
+            foreach (Transform waypoint in waypoints) this.waypoints.Add(waypoint);
+        }
+
+        public void Begin() {
+            _isStarted = true;
+            _isRunning = true;
+            _isPathComplete = false;
+        }
+
+        public void Resume() {
+            if (waypoints.Count > 0 && enemy != null) {
+                Init(GetClosestWaypointIndex(), false);
+            }
+        }
+
+        public void Halt() {
+            movement.SetHeading(Vector3.zero);
+            movement.SetTarget(transform.position);
+            _isRunning = false;
         }
 
         void Start() {
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
             movement = Utils.GetRequiredComponent<EnemyMovement>(gameObject);
             (minBounds, maxBounds) = Utils.GetScreenBounds(Camera.main, -1f);
+            if (path != null) {
+                SetWaypointsFromPath();
+                Begin();
+            }
             Init();
         }
 
@@ -58,17 +99,22 @@ namespace Enemies {
             StayOnScreen();
         }
 
-        void Init() {
-            if (_wave != null && enemy != null) {
-                _wayPoints = _wave.GetWaypoints();
-                // the first waypoint is the spawn point, so thus the first target should be the second waypoint
-                wayPointIndex = 1;
-                hasCrossedHeadingX = false;
-                hasCrossedHeadingY = false;
-                transform.position = _wayPoints[0].position;
-                UpdateTarget();
-                movement.SetImmediateVelocity(1f);
-            }
+        void Init(int initialWaypointIndex = 1, bool shouldSetImmediateVelocity = true) {
+            if (waypoints.Count <= 0) return;
+            if (enemy == null) return;
+            if (movement == null) return;
+            // the first waypoint is the spawn point, so thus the first target should be the second waypoint
+            waypointIndex = initialWaypointIndex;
+            hasCrossedHeadingX = false;
+            hasCrossedHeadingY = false;
+            UpdateTarget();
+            if (shouldSetImmediateVelocity) movement.SetImmediateVelocity(1f);
+        }
+
+        void SetWaypointsFromPath() {
+            if (path == null) return;
+            waypoints = new List<Transform>();
+            foreach (Transform child in path) waypoints.Add(child);
         }
 
         void SetHeading() {
@@ -81,27 +127,26 @@ namespace Enemies {
         }
 
         void UpdateTarget() {
-            if (wayPointIndex < _wayPoints.Count) {
-                target = _wayPoints[wayPointIndex].position;
-                lastOrigin = transform.position;
-                switch(targetMode) {
-                    case PathfinderTargetMode.Heading:
-                        SetHeading();
-                        break;
-                    case PathfinderTargetMode.Waypoints:
-                    default:
-                        movement.SetTarget(target);
-                        break;
-                }
+            if (waypointIndex >= waypoints.Count) return;
+            target = waypoints[waypointIndex].position;
+            lastOrigin = transform.position;
+            switch(targetMode) {
+                case PathfinderTargetMode.Heading:
+                    SetHeading();
+                    break;
+                case PathfinderTargetMode.Waypoints:
+                default:
+                    movement.SetTarget(target);
+                    break;
             }
         }
 
         void TargetNextWaypoint() {
             lastOrigin = transform.position;
-            wayPointIndex++;
+            waypointIndex++;
             hasCrossedHeadingX = false;
             hasCrossedHeadingY = false;
-            if (wayPointIndex >= _wayPoints.Count) {
+            if (waypointIndex >= waypoints.Count) {
                 OnPathEnd();
             } else {
                 UpdateTarget();
@@ -109,10 +154,14 @@ namespace Enemies {
         }
 
         void FollowPath() {
+            if (!_isRunning) return;
+            if (_isPathComplete) return;
+            if (enemy == null) return;
+            if (movement == null) return;
             if (!enemy.isAlive) return;
             if (enemy.timeHit > 0) return;
-            if (_wave == null || _wayPoints.Count == 0) return;
-            if (wayPointIndex >= _wayPoints.Count) return;
+            if (waypoints.Count == 0) return;
+            if (waypointIndex >= waypoints.Count) return;
 
             if (targetMode == PathfinderTargetMode.Waypoints) {
                 // we keep track of separate axis crossings to avoid circling around a waypoint indefinitely
@@ -134,10 +183,14 @@ namespace Enemies {
 
         void StayOnScreen() {
             if (targetMode != PathfinderTargetMode.Heading) return;
+            if (!_isRunning) return;
+            if (_isPathComplete) return;
+            if (enemy == null) return;
+            if (movement == null) return;
             if (!enemy.isAlive) return;
             if (enemy.timeHit > 0) return;
-            if (_wave == null || _wayPoints.Count == 0) return;
-            if (wayPointIndex >= _wayPoints.Count) return;
+            if (waypoints.Count == 0) return;
+            if (waypointIndex >= waypoints.Count) return;
             if (isOffscreen) {
                 if (!Utils.IsObjectOnScreen(gameObject)) return;
                 isOffscreen = false;
@@ -160,39 +213,74 @@ namespace Enemies {
         }
 
         void OnPathEnd() {
+            waypointIndex = 0;
             switch (loopMode)
             {
+                case PathfinderLoopMode.HaltAtEnd:
+                    _isPathComplete = true;
+                    Halt();
+                    break;
                 case PathfinderLoopMode.Destroy:
                     enemy.OnDeath();
                     break;
                 case PathfinderLoopMode.Circular:
-                    wayPointIndex = 0;
                     UpdateTarget();
                     break;
                 case PathfinderLoopMode.Teleport:
                 default:
+                    if (waypoints.Count > 0) transform.position = waypoints[0].position;
                     Init();
                     break;
             }
         }
 
         int GetPrevWaypointIndex() {
-            return wayPointIndex > 0 ? wayPointIndex - 1 : _wayPoints.Count - 1;
+            return waypointIndex > 0 ? waypointIndex - 1 : waypoints.Count - 1;
+        }
+
+        int GetClosestWaypointIndex() {
+            if (waypoints.Count <= 0) return -1;
+            if (movement == null) return -1;
+            float min = 999f;
+            float current = 999f;
+            int closestIndex = 0;
+            for (int i = 0; i < waypoints.Count; i++)
+            {
+                current = (waypoints[i].position - transform.position).magnitude;
+                if (current < min) {
+                    min = current;
+                    closestIndex = i;
+                }
+            }
+            return closestIndex;
         }
 
         Vector2 GetCurrentWaypointVector() {
             return (
-                _wayPoints[wayPointIndex].position -
-                _wayPoints[GetPrevWaypointIndex()].position
+                waypoints[waypointIndex].position -
+                waypoints[GetPrevWaypointIndex()].position
             );
         }
 
         Vector2 GetCurrentWaypointPosition() {
-            return _wayPoints[wayPointIndex].position;
+            return waypoints[waypointIndex].position;
         }
 
         bool IsLastWaypoint() {
-            return wayPointIndex >= _wayPoints.Count - 1;
+            return waypointIndex >= waypoints.Count - 1;
+        }
+
+        //
+        // DEBUG
+        //
+        void OnDrawGizmos() {
+            if (!debug) return;
+            for (int i = 0; i < waypoints.Count; i++)
+            {
+                if (i == waypointIndex) Gizmos.color = Color.green;
+                else Gizmos.color = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, 0.5f);
+                Gizmos.DrawSphere(waypoints[i].position, .2f);
+            }
         }
 
         

@@ -12,6 +12,8 @@ namespace Enemies {
         [SerializeField][Range(0f, 2f)] float spawnTimeVariance = 0f;
         [SerializeField] float _minSpawnInterval = 1f;
 
+        // TODO: ADD SERIALIZEFIELD FOR STATEMACHINE BEHAVIOR
+
         // getters
         public int enemyCount => enemies.Count;
         public float spawnInterval => GetSpawnInterval();

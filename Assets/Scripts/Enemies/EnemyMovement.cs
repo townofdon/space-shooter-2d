@@ -231,6 +231,11 @@ namespace Enemies
         // Force is only applied if below the arbitrarily-set wobbleMaxSpeed
         void Applywobble() {
             if (wobbler == null) return;
+            if (!Utils.IsObjectOnScreen(gameObject, Camera.main, -1f)) {
+                wobbler.transform.position = Vector3.zero;
+                wobbler.velocity = Vector3.zero;
+                return;
+            }
             if (!enemy.isAlive) {
                 Destroy(wobbler.gameObject);
                 return;
@@ -260,7 +265,6 @@ namespace Enemies
         }
 
         void AddWobbleForce(Vector2 value, ForceMode2D mode = ForceMode2D.Force) {
-            if (!Utils.IsObjectOnScreen(gameObject, Camera.main, -1f)) return;
             (Vector2 min, Vector2 max) = Utils.GetScreenBounds(Camera.main, -3f);
             if (rb != null) rb.AddForce(value, mode);
             if (wobbler != null) wobbler.AddForce(-value, mode);
