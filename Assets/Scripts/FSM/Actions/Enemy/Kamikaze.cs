@@ -15,7 +15,7 @@ namespace FSM
             [CreateAssetMenu(menuName = "FSM/Actions/Enemy/Kamikaze")]
             public class Kamikaze : FSMAction
             {
-                public override void Execute(BaseMachine stateMachine)
+                public override void Execute(FiniteStateMachine machine)
                 {
                     // spawn && set position from first waypoint - separate action?
                     // set path for PathFollower component
@@ -27,12 +27,12 @@ namespace FSM
                     //     navMeshAgent.SetDestination(patrolPoints.GetNext().position);
                 }
 
-                public override void OnBegin(BaseMachine stateMachine) {
-                    var enemy = stateMachine.GetComponent<EnemyShip>();
-                    var enemyMovement = stateMachine.GetComponent<EnemyMovement>();
+                public override void OnBegin(FiniteStateMachine machine) {
+                    var enemy = machine.GetComponent<EnemyShip>();
+                    var enemyMovement = machine.GetComponent<EnemyMovement>();
                     enemyMovement.SetKamikaze(true);
                 }
-                public override void OnEnd(BaseMachine stateMachine) {}
+                public override void OnEnd(FiniteStateMachine machine) {}
             }
         }
     }

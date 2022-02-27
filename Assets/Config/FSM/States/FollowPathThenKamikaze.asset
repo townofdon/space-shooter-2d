@@ -10,8 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 333e522ca9ca1ad4cbaee443d48c503f, type: 3}
-  m_Name: FollowPath
+  m_Name: FollowPathThenKamikaze
   m_EditorClassIdentifier: 
   Action:
   - {fileID: 11400000, guid: 3751586c48b06264d9e99c53b57c77e5, type: 2}
-  Transitions: []
+  Transitions:
+  - Decision: {fileID: 11400000, guid: 664fd79cf6fc9a14594e610b2687dd39, type: 2}
+    TrueState: {fileID: 11400000, guid: 83179c0f93f3828488fd64e67d326814, type: 2}
+    FalseState: {fileID: 11400000, guid: 504f74dc92e16b7498b9c947083bc856, type: 2}
+  notes: 'FollowPath -> Kamikaze
+
+
+    NOTE - don''t forget to set Pathfollower mode
+    to HaltAtEnd
+
+'

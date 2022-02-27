@@ -2,21 +2,19 @@ using UnityEngine;
 
 namespace FSM
 {
-    [CreateAssetMenu(menuName = "FSM/Transition")]
-    public sealed class Transition : ScriptableObject
+    [System.Serializable]
+    public sealed class Transition
     {
         public Decision Decision;
         public BaseState TrueState;
         public BaseState FalseState;
 
-        public void Execute(BaseMachine stateMachine)
+        public void Execute(FiniteStateMachine machine)
         {
-            if(Decision.Decide(stateMachine) && !(TrueState is RemainInState))
-                stateMachine.SetState(TrueState);
-                // stateMachine.currentState = TrueState;
+            if(Decision.Decide(machine) && !(TrueState is RemainInState))
+                machine.SetState(TrueState);
             else if(!(FalseState is RemainInState))
-                stateMachine.SetState(FalseState);
-                // stateMachine.currentState = FalseState;
+                machine.SetState(FalseState);
         }
     }
 }

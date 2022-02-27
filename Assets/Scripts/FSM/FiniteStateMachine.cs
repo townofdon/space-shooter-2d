@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FSM
 {
-    public class BaseMachine : MonoBehaviour
+    public class FiniteStateMachine : MonoBehaviour
     {
         [SerializeField] BaseState _initialState;
         Dictionary<System.Type, Component> _cachedComponents;

@@ -4,10 +4,10 @@ namespace FSM
 {
     public abstract class FSMAction : ScriptableObject
     {
-        public abstract void Execute(BaseMachine stateMachine);
+        public abstract void Execute(FiniteStateMachine machine);
 
-        public abstract void OnBegin(BaseMachine stateMachine);
+        public abstract void OnBegin(FiniteStateMachine machine);
 
-        public abstract void OnEnd(BaseMachine stateMachine);
+        public abstract void OnEnd(FiniteStateMachine machine);
     }
 }
