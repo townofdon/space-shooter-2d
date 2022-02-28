@@ -12,21 +12,21 @@ namespace FSM
 
         public void SetState(BaseState state) {
             if (state == currentState) return;
-            currentState.End(this);
+            if (currentState != null) currentState.End(this);
             currentState = state;
-            currentState.Begin(this);
+            if (currentState != null) currentState.Begin(this);
         }
 
         void Awake()
         {
             _cachedComponents = new Dictionary<System.Type, Component>();
             currentState = _initialState;
-            currentState.Begin(this);
+            if (currentState != null) currentState.Begin(this);
         }
 
         void Update()
         {
-            currentState.Execute(this);
+            if (currentState != null) currentState.Execute(this);
         }
 
         // overridden GetComponent caches component in a dictionary

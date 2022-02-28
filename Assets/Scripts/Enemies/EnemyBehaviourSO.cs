@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Enemies {
 
-    [CreateAssetMenu(menuName = "EnemyBehaviour", fileName = "ScriptableObjects/EnemyBehaviour", order = 0)]
-    public class EnemyBehaviourSO : ScriptableObject
+    // DEPRECATED
+    public class EnemyBehaviourSO
     // ,ISerializationCallbackReceiver
     {
         enum Mode {

@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
   m_Name: Wave 0
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-  - {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-  - {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-  path: {fileID: 9015369940256492741, guid: 4d2dbd99a17b8ef47b8758f35beb022a, type: 3}
+  _enemies:
+  - _enemyPrefab: {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+    _spawnOffset: {x: 0, y: 0, z: 0}
+  - _enemyPrefab: {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+    _spawnOffset: {x: 0, y: -1, z: 0}
+  - _enemyPrefab: {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+    _spawnOffset: {x: 0, y: -2, z: 0}
   _spawnInterval: 1
-  spawnTimeVariance: 0.15
+  _spawnTimeVariance: 0
   _minSpawnInterval: 0.5
-  _delayBeforeSpawn: 0
-  _waitUntilFinished: 1
+  _mode: 1
+  _spawnLocation: {fileID: 0}
+  _offset: {x: 0, y: 0, z: 0}
+  _path: {fileID: 9015369940256492741, guid: 4d2dbd99a17b8ef47b8758f35beb022a, type: 3}
+  _pathfinderLoopMode: 0
+  _initialState: {fileID: 11400000, guid: 1711a50686f22094197e2da8e0b74bc2, type: 2}

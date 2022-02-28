@@ -152,23 +152,53 @@ namespace Enemies
         IEnumerator SpawnEnemies(WaveConfigSO wave) {
             if (wave != null) {
                 for (int i = 0; i < wave.enemyCount; i++) {
-                    GameObject enemy = Instantiate(wave.GetEnemy(i),
-                        wave.GetStartingWaypoint().position,
+                    // spawn enemy
+                    GameObject enemy = Instantiate(wave.GetEnemy(i).prefab,
+                        wave.GetSpawnPosition() + wave.GetEnemy(i).spawnOffset,
                         Quaternion.identity,
                         transform);
-                    var pathFollower = enemy.GetComponent<Pathfollower>();
-                    if (pathFollower != null) {
-                        // TODO: REMOVE
-                        // pathFollower.SetPath(wave.Path);
-                        // pathFollower.Init();
-                        pathFollower.SetWaypoints(wave.GetWaypoints());
-                        pathFollower.Begin();
+                    if (wave.mode == WaveConfigSO.Mode.FollowPath) {
+                        SetEnemyPathfollow(enemy, wave.GetWaypoints(), wave.pathfinderLoopMode);
                     }
+                    SetEnemyFSM(enemy, wave.initialState);
+
                     // TODO: REMOVE
-                    // enemy.GetComponent<Pathfollower>().SetWaypoints(wave.GetWaypoints());
+                    // switch (wave.mode)
+                    // {
+                    //     case WaveConfigSO.Mode.FollowPath:
+                    //         OnEnemyPathFollow(wave.GetEnemy(i), wave.GetSpawnPosition(), wave.GetWaypoints());
+                    //         break;
+                    //     case WaveConfigSO.Mode.Spawn:
+                    //         OnEnemySpawn(wave.GetEnemy(i), wave.GetSpawnPosition());
+                    //         break;
+                    //     default:
+                    //         break;
+                    // }
                     yield return new WaitForSeconds(wave.spawnInterval);
                 }
             }
+        }
+
+        // GameObject OnEnemySpawn(WaveEnemy waveEnemy, Vector3 spawnPosition) {
+        //     GameObject enemy = Instantiate(waveEnemy.enemyPrefab,
+        //         spawnPosition + waveEnemy.spawnOffset,
+        //         Quaternion.identity,
+        //         transform);
+        //     return enemy;
+        // }
+
+        void SetEnemyPathfollow(GameObject enemy, List<Transform> waypoints, PathfinderLoopMode loopMode) {
+            var pathFollower = enemy.GetComponent<Pathfollower>();
+            if (pathFollower == null) return;
+            pathFollower.SetWaypoints(waypoints);
+            pathFollower.SetLoopMode(loopMode);
+            pathFollower.Begin();
+        }
+
+        void SetEnemyFSM(GameObject enemy, FSM.BaseState initialState) {
+            var machine = enemy.GetComponent<FSM.FiniteStateMachine>();
+            if (machine == null) return;
+            machine.SetState(initialState);
         }
 
         void OnGUI() {

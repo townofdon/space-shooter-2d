@@ -10,10 +10,10 @@ namespace Enemies {
     }
 
     public enum PathfinderLoopMode {
-        HaltAtEnd,
         Teleport,
         Circular,
         Destroy,
+        HaltAtEnd,
     }
 
     public class Pathfollower : MonoBehaviour

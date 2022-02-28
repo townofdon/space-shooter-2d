@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: -7985184236057419129}
   - component: {fileID: -989283550689626629}
   - component: {fileID: 5131740026465409543}
+  - component: {fileID: 8048362676422506553}
   m_Layer: 0
   m_Name: Enemy 0
   m_TagString: EnemyShip
@@ -466,6 +467,7 @@ MonoBehaviour:
   targetMode: 1
   loopMode: 0
   waypointTriggerRadius: 0.25
+  path: {fileID: 0}
 --- !u!114 &-796834167629268376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +673,19 @@ MonoBehaviour:
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
+--- !u!114 &8048362676422506553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387282363394425764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6541d9a67c22fdb4aa8705883d4f96d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialState: {fileID: 0}
 --- !u!1 &7385283391187530371
 GameObject:
   m_ObjectHideFlags: 0
