@@ -16,14 +16,6 @@ namespace Enemies {
             Retreat,
         }
 
-        enum Condition {
-            IsOnscreen,
-            IsOnscreenForArbitraryTime,
-            HealthAboveThreshold,
-            PathFinished,
-            WaitingForArbitraryTime,
-        }
-
         [SerializeField] Mode mode;
         [SerializeField] Transform path;
 

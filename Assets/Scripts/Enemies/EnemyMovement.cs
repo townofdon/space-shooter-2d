@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 using Core;
@@ -12,8 +13,11 @@ namespace Enemies
         Heading,
     }
 
-    enum MovementMode {
-        Waypoints,
+    public enum MovementMode {
+        Default,
+        Kamikaze,
+        MoveBetweenPoints,
+        AttackRun,
         ReflectOffScreenEdges,
     }
 
@@ -37,15 +41,26 @@ namespace Enemies
 
     public class EnemyMovement : MonoBehaviour
     {
-        [Header("Movement")][Space]
+
+        [Header("Mode")]
+        [Space]
+        [SerializeField] MovementMode mode = MovementMode.Default;
+        MovementMode modePrev = MovementMode.Default;
+        [Tooltip("Only applicable for MovementMode.MoveBetweenPoints")]
+        [SerializeField] List<Transform> movePointLocations = new List<Transform>();
+        List<Vector3> movePoints = new List<Vector3>();
+
+        [Header("Movement")]
+        [Space]
         [SerializeField] bool debug = false;
         [SerializeField] float turnSpeed = 4f;
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float accel = 10f;
 
-        [Header("Behaviour")][Space]
+        [Header("Behaviour")]
+        [Space]
         // TODO: MOVE TO EnemyBehaviour SCRIPT
-        [SerializeField] bool kamikaze = false;
+        // [SerializeField] bool kamikaze = false;
         [Tooltip("Juke left or right when targeted by player")]
         [SerializeField][Range(0f, 1f)] float jukes = 0f;
         [SerializeField][Range(0f, 2f)] float jukeTargetedTime = 0f;
@@ -58,13 +73,21 @@ namespace Enemies
         [SerializeField][Range(0f, 5f)] float avoidSpeed = 0f;
         [SerializeField][Range(0f, 5f)] float avoidCooldown = 0f;
 
-        [Header("Wobble")][Space]
+        [Header("Movement overrides when attacking")]
+        [Space]
+        [SerializeField] [Range(0f, 2f)] float atxTurnMod = 1f;
+        [SerializeField] [Range(0f, 2f)] float atxMoveMod = 1f;
+        [SerializeField] [Range(0f, 2f)] float atxAccelMod = 1f;
+
+        [Header("Wobble")]
+        [Space]
         [SerializeField] Rigidbody2D wobbler;
         [SerializeField] Vector2 wobbleForce;
         [SerializeField] Vector2 wobbleMaxSpeed;
         [SerializeField] Vector2 wobbleMaxDistance;
 
-        [Header("Audio")][Space]
+        [Header("Audio")]
+        [Space]
         [SerializeField] LoopableSound engineSound;
         [SerializeField] LoopableSound agroSound;
 
@@ -112,8 +135,26 @@ namespace Enemies
             targetHeading = value;
         }
 
-        public void SetKamikaze(bool value) {
-            kamikaze = value;
+
+        public void SetMovePoints(List<Transform> _movePoints) {
+            movePoints.Clear();
+            foreach (Transform location in _movePoints) movePoints.Add(location.position);
+        }
+
+        public void SetMovePoints(Transform movePointsParentTransform) {
+            if (movePointsParentTransform == null || movePointsParentTransform.GetChild(0) == null) return;
+            movePoints.Clear();
+            foreach (Transform child in movePointsParentTransform) movePoints.Add(child.position);
+        }
+
+        public void SetMode(MovementMode _mode) {
+            modePrev = mode;
+            mode = _mode;
+        }
+
+        public void SetKamikaze(bool shouldSetKamikazeMode) {
+            if (shouldSetKamikazeMode) SetMode(MovementMode.Kamikaze);
+            // kamikaze = value;
         }
 
         public void SetImmediateVelocity(float velocityMultiplier) {
@@ -150,6 +191,10 @@ namespace Enemies
                 wobbler.drag = rb.drag;
                 wobbler.angularDrag = rb.drag;
             }
+
+            movePoints.Clear();
+            foreach (Transform location in movePointLocations) movePoints.Add(location.position);
+            Debug.Log(movePoints.Count);
         }
 
         void Update() {
@@ -160,23 +205,141 @@ namespace Enemies
 
         void FixedUpdate() {
             Handlejuke();
-            Applywobble();
+            Wobble();
             MoveTowardsHeading();
             ApplyOffscreenBrakes();
         }
 
         void HandleTargetBehaviour() {
-            if (kamikaze && player != null && player.isAlive) {
+            switch (mode) {
+                case MovementMode.Kamikaze:
+                    ModeKamikaze();
+                    break;
+                case MovementMode.MoveBetweenPoints:
+                    ModeMoveBetweenPoints();
+                    break;
+                case MovementMode.ReflectOffScreenEdges:
+                    ModeReflectOffScreenEdges();
+                    break;
+                case MovementMode.AttackRun:
+                    ModeAttackRun();
+                    break;
+                case MovementMode.Default:
+                default:
+                    ModeDefault();
+                    break;
+            }
+            // // if (kamikaze && player != null && player.isAlive) {
+            // if (mode == MovementMode.Kamikaze && player != null && player.isAlive) {
+            //     if (player == null || !player.isAlive) { SetMode(MovementMode.Default); return; }
+            //     targetMode = TargetMode.Position;
+            //     targetPosition = player.transform.position;
+            //     agroSound.Play();
+            //     engineSound.Stop();
+            // } else if (mode == MovementMode.MoveBetweenPoints) {
+            //     ModeMoveBetweenPoints();
+            // } else if (mode == MovementMode.ReflectOffScreenEdges) {
+            // } else if (mode == MovementMode.AttackRun) {
+            // } else {
+            //     targetPosition = targetPositionPrev;
+            //     engineSound.Play();
+            //     agroSound.Stop();
+            // }
+        }
+
+        void ModeDefault() {
+            targetPosition = targetPositionPrev;
+            engineSound.Play();
+            agroSound.Stop();
+        }
+
+        void ModeKamikaze() {
+            if (player == null || !player.isAlive) {
+                SetMode(MovementMode.Default);
+                return;
+            }
+            targetMode = TargetMode.Position;
+            targetPosition = player.transform.position;
+            agroSound.Play();
+            engineSound.Stop();
+        }
+
+        #region MoveBetweenPoints
+        Vector3 moveTarget;
+        Vector3 moveTargetPrev;
+        struct HasCrossed {
+            public bool x;
+            public bool y;
+            public bool point => x && y;
+        }
+        HasCrossed hasCrossed = new HasCrossed();
+
+        void ModeMoveBetweenPoints() {
+            if (player == null || !player.isAlive || movePoints.Count == 0) {
+                SetMode(MovementMode.Default);
+                return;
+            }
+            if (moveTarget != null) {
                 targetMode = TargetMode.Position;
-                targetPosition = player.transform.position;
-                agroSound.Play();
-                engineSound.Stop();
-            } else {
-                targetPosition = targetPositionPrev;
+                targetPosition = moveTarget;
                 engineSound.Play();
                 agroSound.Stop();
+                if (Mathf.Abs(moveTarget.x - transform.position.x) < 0.25f) hasCrossed.x = true;
+                if (Mathf.Abs(moveTarget.y - transform.position.y) < 0.25f) hasCrossed.y = true;
+                if (hasCrossed.point) SetMoveTarget();
+            } else {
+                SetMoveTarget();
             }
         }
+
+        void SetMoveTarget() {
+            hasCrossed.x = false;
+            hasCrossed.y = false;
+            moveTargetPrev = transform.position;
+            moveTarget = GetNextMovePoint();
+        }
+
+        Vector3 GetNextMovePoint() {
+            if (movePoints.Count <= 0) return Vector3.zero;
+            if (movePoints.Count <= 1) return movePoints[0] == moveTarget ? moveTargetPrev : movePoints[0];
+            Vector3 newTarget;
+            int i = 0;
+            do {
+                newTarget = movePoints[UnityEngine.Random.Range(0, movePoints.Count)];
+                i++; // infinite loops are scary
+            } while (moveTarget == newTarget && i < 100);
+            Debug.Log(newTarget);
+            return newTarget;
+        }
+        #endregion MoveBetweenPoints
+
+        #region ReflectOffScreenEdges
+        void ModeReflectOffScreenEdges() { }
+        #endregion ReflectOffScreenEdges
+
+        #region AttackRun
+        Transform attackOrigin;
+        Transform attackTarget;
+        float attackProgress;
+
+        void ModeAttackRun() {
+            if (player == null || !player.isAlive) {
+                SetMode(MovementMode.Default);
+                return;
+            }
+            targetMode = TargetMode.Position;
+            // TODO: evaluate based on curve
+            targetPosition = player.transform.position + Vector3.up * 1.5f;
+            agroSound.Play();
+            engineSound.Stop();
+            // on first movement
+            if (attackOrigin == null || attackTarget == null) {
+                attackProgress = 0f;
+                attackOrigin = transform;
+                attackTarget = player.transform;
+            }
+        }
+        #endregion AttackRun
 
         void Handlejuke() {
             if (!isJuking) return;
@@ -196,13 +359,13 @@ namespace Enemies
             heading = Vector3.RotateTowards(
                 heading,
                 GetRotateTowardsTarget(),
-                2f * turnSpeed * 2f * Mathf.PI * Time.fixedDeltaTime, turnSpeed * Time.fixedDeltaTime
+                2f * GetTurnSpeed() * 2f * Mathf.PI * Time.fixedDeltaTime, GetTurnSpeed() * Time.fixedDeltaTime
             ).normalized;
 
             // vector maths - compensate for rb's current velocity vs. heading
-            headingAdjusted = (heading * moveSpeed - (Vector3)GetCurrentVelocity()).normalized;
-            rb.AddForce(headingAdjusted * accel);
-            if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && (rb.velocity.magnitude + Mathf.Abs(wobbleDeltaV.magnitude)) > moveSpeed) {
+            headingAdjusted = (heading * GetMoveSpeed() - (Vector3)GetCurrentVelocity()).normalized;
+            rb.AddForce(headingAdjusted * GetAccel());
+            if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && (rb.velocity.magnitude + wobbleDeltaV.magnitude) > GetMoveSpeed()) {
                 rb.velocity *= 1f - Time.fixedDeltaTime * 1.5f;
             }
         }
@@ -210,11 +373,6 @@ namespace Enemies
         Vector3 GetCurrentVelocity() {
             if (wobbler == null) return rb.velocity;
             return rb.velocity + wobbler.velocity;
-        }
-
-        bool IsOverSpeedLimit() {
-            if (wobbler == null) return rb.velocity.magnitude > moveSpeed;
-            return (rb.velocity + wobbler.velocity).magnitude > moveSpeed;
         }
 
         Vector2 GetRotateTowardsTarget() {;
@@ -229,7 +387,7 @@ namespace Enemies
         // - velocity diff between rigidbodies
         // We then determine when to flip the wobble direction based on distance traversed
         // Force is only applied if below the arbitrarily-set wobbleMaxSpeed
-        void Applywobble() {
+        void Wobble() {
             if (wobbler == null) return;
             if (!Utils.IsObjectOnScreen(gameObject, Camera.main, -1f)) {
                 wobbler.transform.position = Vector3.zero;
@@ -240,7 +398,7 @@ namespace Enemies
                 Destroy(wobbler.gameObject);
                 return;
             }
-            if (kamikaze) {
+            if (mode == MovementMode.Kamikaze) {
                 wobbler.transform.position = Vector3.zero;
                 return;
             }
@@ -282,6 +440,39 @@ namespace Enemies
             return hit.collider != null;
         }
 
+        float GetTurnSpeed() {
+            switch (mode) {
+                case MovementMode.Kamikaze:
+                case MovementMode.AttackRun:
+                    return turnSpeed * atxTurnMod;
+                case MovementMode.Default:
+                default:
+                    return turnSpeed;
+            }
+        }
+
+        float GetMoveSpeed() {
+            switch (mode) {
+                case MovementMode.Kamikaze:
+                case MovementMode.AttackRun:
+                    return moveSpeed * atxMoveMod;
+                case MovementMode.Default:
+                default:
+                    return moveSpeed;
+            }
+        }
+
+        float GetAccel() {
+            switch (mode) {
+                case MovementMode.Kamikaze:
+                case MovementMode.AttackRun:
+                    return accel * atxAccelMod;
+                case MovementMode.Default:
+                default:
+                    return accel;
+            }
+        }
+
         //
         // DEBUG
         //
@@ -292,6 +483,11 @@ namespace Enemies
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, transform.position + headingAdjusted);
             Gizmos.color = Color.cyan;
+
+            if (mode == MovementMode.MoveBetweenPoints) {
+                Gizmos.color = Color.yellow;
+                foreach (var point in movePoints) Gizmos.DrawCube(point, Vector3.one * .2f);
+            }
 
             if (rb == null) return;
             if (wobbler == null) return;

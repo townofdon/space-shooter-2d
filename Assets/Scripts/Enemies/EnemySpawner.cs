@@ -193,6 +193,9 @@ namespace Enemies
             pathFollower.SetWaypoints(waypoints);
             pathFollower.SetLoopMode(loopMode);
             pathFollower.Begin();
+            var enemyMovement = enemy.GetComponent<EnemyMovement>();
+            if (enemyMovement == null) return;
+            enemyMovement.SetMode(MovementMode.Default);
         }
 
         void SetEnemyFSM(GameObject enemy, FSM.BaseState initialState) {

@@ -817,24 +817,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c5c011fb3fae5f4f82bc2c54925e4f2, type: 3}
---- !u!1 &1071910851 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-  m_PrefabInstance: {fileID: 1153848482}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1071910860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071910851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6541d9a67c22fdb4aa8705883d4f96d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _initialState: {fileID: 11400000, guid: d3c2e7de5e3935d45a2c1c65ee68a49e, type: 2}
 --- !u!1001 &1103471171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -904,8 +886,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: aimMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: aimSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -989283550689626629, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -519819148312312317, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: path
@@ -913,6 +903,10 @@ PrefabInstance:
       objectReference: {fileID: 9015369940256492741, guid: 4d2dbd99a17b8ef47b8758f35beb022a, type: 3}
     - target: {fileID: -519819148312312317, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: loopMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -519819148312312317, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 861709775686829533, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
@@ -925,11 +919,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3069773519157843583, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_LocalPosition.z
@@ -964,16 +958,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5131740026465409543, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131740026465409543, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: debug
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5131740026465409543, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: wobbleForce.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5131740026465409543, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: wobbleForce.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5131740026465409543, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: wobbleMaxSpeed.x
@@ -989,10 +987,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6387282363394425764, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6865386925973252080, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048362676422506553, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1014,7 +1016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1318690698
 MonoBehaviour:
   m_ObjectHideFlags: 0

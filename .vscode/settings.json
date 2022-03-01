@@ -52,5 +52,7 @@
         "ProjectSettings/":false,
         "temp/":true,
         "Temp/":true
-    }
+    },
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false
 }
