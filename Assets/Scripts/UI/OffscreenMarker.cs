@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace UI
 {
 
-    enum FlagType {
+    public enum FlagType {
         Enemy,
         Incoming,
         Friendly,
@@ -36,6 +36,28 @@ namespace UI
         Vector3 markerPositionWorld;
         Coroutine removeFiringFlag;
 
+        public void SetTarget(Transform _target) {
+            target = _target;
+        }
+        public void SetFlagType(FlagType type) {
+            switch (type) {
+                case FlagType.Enemy:
+                    FlagEnemy();
+                    break;
+                case FlagType.Incoming:
+                    FlagIncoming();
+                    break;
+                case FlagType.Friendly:
+                    FlagFriendly();
+                    break;
+                case FlagType.Info:
+                    FlagInfo();
+                    break;
+                default:
+                    FlagEnemy();
+                    break;
+            }
+        }
         public void Disable() {
             gameObject.SetActive(false);
             marker.enabled = false;
