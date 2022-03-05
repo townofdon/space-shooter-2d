@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponType: 2
   _weaponName: PDCs
+  _effectiveRange: 10
   _shotSound:
     soundName: MachineGunSingle
     volume: 0
@@ -64,8 +65,8 @@ MonoBehaviour:
   baseSettings:
     _assetClass: Raptor I
     _damageMultiplier: 1
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _startingAmmo: 1000
+    _infiniteAmmo: 0
     _reloads: 1
     _reloadTime: 1.5
     _magazineCapacity: 50

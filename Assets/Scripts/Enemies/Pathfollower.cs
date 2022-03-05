@@ -19,6 +19,7 @@ namespace Enemies {
     public class Pathfollower : MonoBehaviour
     {
         [SerializeField] bool debug = false;
+        [SerializeField] bool activeAtStart = true;
         [SerializeField] PathfinderTargetMode targetMode;
         [SerializeField] PathfinderLoopMode loopMode;
         [SerializeField] float waypointTriggerRadius = 0.25f;
@@ -69,6 +70,7 @@ namespace Enemies {
             _isStarted = true;
             _isRunning = true;
             _isPathComplete = false;
+            movement.SetMode(MovementMode.Default);
         }
 
         public void Resume() {
@@ -87,7 +89,7 @@ namespace Enemies {
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
             movement = Utils.GetRequiredComponent<EnemyMovement>(gameObject);
             (minBounds, maxBounds) = Utils.GetScreenBounds(Camera.main, -1f);
-            if (path != null) {
+            if (path != null && activeAtStart) {
                 SetWaypointsFromPath();
                 Begin();
             }
@@ -108,7 +110,7 @@ namespace Enemies {
             hasCrossedHeadingX = false;
             hasCrossedHeadingY = false;
             UpdateTarget();
-            if (shouldSetImmediateVelocity) movement.SetImmediateVelocity(1f);
+            if (shouldSetImmediateVelocity && activeAtStart) movement.SetImmediateVelocity(1f);
         }
 
         void SetWaypointsFromPath() {

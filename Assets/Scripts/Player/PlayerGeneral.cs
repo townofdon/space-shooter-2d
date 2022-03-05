@@ -4,6 +4,7 @@ using Core;
 using Damage;
 using Game;
 using Audio;
+using UI;
 
 namespace Player {
 
@@ -34,6 +35,10 @@ namespace Player {
         [SerializeField] Sound shieldLostSound;
         [SerializeField] LoopableSound shieldAlarmSound;
         [SerializeField] Sound shieldRechargeSound;
+
+        [Header("UI")]
+        [Space]
+        [SerializeField] PlayerUI playerUI;
 
         // components
         CircleCollider2D col;
@@ -73,6 +78,7 @@ namespace Player {
             shieldAlarmSound.Init(this);
             shieldRechargeSound.Init(this);
             GameFeel.ResetGamepadShake();
+            if (playerUI != null) Instantiate(playerUI, Vector3.zero, Quaternion.identity, transform);
         }
 
         void OnDestroy() {

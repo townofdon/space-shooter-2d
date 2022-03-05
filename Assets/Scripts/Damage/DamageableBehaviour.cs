@@ -73,7 +73,9 @@ namespace Damage {
         public System.Guid uuid => _uuid;
         public bool isAlive => _isAlive;
         public float health => _health;
+        public float healthPct => _health / _maxHealth;
         public float shield => _shield;
+        public float shieldPct => _shield / _maxShield;
         public float timeHit => _timeHit;
         public bool isRechargingShield => _isRechargingShield;
         public float hitRecoveryTime => _hitRecoveryTime;

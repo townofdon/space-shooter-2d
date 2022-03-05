@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponType: 5
   _weaponName: Missile
+  _effectiveRange: 10
   _shotSound:
     soundName: 
     volume: 0.33
@@ -63,13 +64,13 @@ MonoBehaviour:
   baseSettings:
     _assetClass: Tomcat I
     _damageMultiplier: 1
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _startingAmmo: 20
+    _infiniteAmmo: 0
     _reloads: 1
-    _reloadTime: 2
+    _reloadTime: 0
     _magazineCapacity: 2
-    _firingRate: 0.1
-    _burstMax: 2
+    _firingRate: 0.4
+    _burstMax: 0
     _burstInterval: 0
     _overheats: 0
     _overheatTime: 0
@@ -98,13 +99,13 @@ MonoBehaviour:
   upgrades:
   - _assetClass: TOMCAT II
     _damageMultiplier: 1.1
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _startingAmmo: 40
+    _infiniteAmmo: 0
     _reloads: 1
-    _reloadTime: 2
-    _magazineCapacity: 4
-    _firingRate: 0.1
-    _burstMax: 4
+    _reloadTime: 0
+    _magazineCapacity: 2
+    _firingRate: 0.35
+    _burstMax: 0
     _burstInterval: 0
     _overheats: 0
     _overheatTime: 0
@@ -132,13 +133,13 @@ MonoBehaviour:
       oneShot: 1
   - _assetClass: TOMCAT III
     _damageMultiplier: 1.1
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _startingAmmo: 60
+    _infiniteAmmo: 0
     _reloads: 1
-    _reloadTime: 2
-    _magazineCapacity: 6
-    _firingRate: 0.075
-    _burstMax: 6
+    _reloadTime: 0
+    _magazineCapacity: 2
+    _firingRate: 0.2
+    _burstMax: 0
     _burstInterval: 0
     _overheats: 0
     _overheatTime: 0
@@ -166,13 +167,13 @@ MonoBehaviour:
       oneShot: 1
   - _assetClass: HELLCAT IV
     _damageMultiplier: 1.5
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _startingAmmo: 80
+    _infiniteAmmo: 0
     _reloads: 1
-    _reloadTime: 2
-    _magazineCapacity: 8
-    _firingRate: 0.05
-    _burstMax: 8
+    _reloadTime: 0
+    _magazineCapacity: 2
+    _firingRate: 0.2
+    _burstMax: 0
     _burstInterval: 0
     _overheats: 0
     _overheatTime: 0

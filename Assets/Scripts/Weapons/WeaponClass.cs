@@ -16,48 +16,6 @@ namespace Weapons
         Missile,
     }
 
-    // public struct WeaponState {
-    //     // hold all weapon state here - firing rate, ammo, cooldown time, reload, deployment, etc.
-    //     public WeaponState(
-    //         int startingAmmo,
-    //         float overheatTime,
-    //         float cooldownTime,
-    //         float firingRate,
-    //         float burstMax,
-    //         float burstInterval,
-    //         float deploymentTime,
-    //         float teardownTime,
-    //         bool reloads,
-    //         float magazineCapacity,
-    //         float reloadTime
-    //     ) {
-    //         _deploying = new Timer();
-    //         _teardown = new Timer();
-    //         _firing = new Timer();
-    //         _burst = new Timer();
-            
-    //         _deploying.SetDuration(deploymentTime);
-    //         _teardown.SetDuration(teardownTime);
-    //         _firing.SetDuration(firingRate);
-    //         _burst.SetDuration(burstInterval);
-    //     }
-
-    //     // STATE
-    //     bool _equipped = false; // does the actor have this weapon?
-    //     int _ammo = 0;
-    //     int _burstStep = 0;
-    //     int _firingCycle = 0;
-    //     Timer _deploying = new Timer();
-    //     Timer _teardown = new Timer();
-    //     Timer _firing = new Timer();
-    //     Timer _burst = new Timer();
-
-    //     public void FireStep() {
-    //         _ammo--;
-    //         _firingCycle++;
-    //     }
-    // }
-
     [System.Serializable]
     class WeaponSettings {
         public WeaponSettings() {
@@ -190,9 +148,10 @@ namespace Weapons
 
         // STATE GETTERS
         public bool equipped => _equipped;
-        public int ammo => _ammo;
+        public int ammo => GetAmmo();
         public int ammoInClip => GetAmmoLeftInClip();
         public int ammoInClipDisplayed => _ammoInClipDisplayed;
+        public int reserveAmmo => GetReserveAmmo();
         public bool hasAmmo => infiniteAmmo || (HasAmmo() && HasAmmoLeftInClip());
         public int firingCycle => _firingCycle;
         public bool deploying => _deploying.active;
@@ -390,6 +349,12 @@ namespace Weapons
         int GetAmmoLeftInClip() {
             if (!reloads) return GetAmmo();
             return Mathf.Clamp(magazineCapacity - _firingCycle, 0, GetAmmo());
+        }
+
+        int GetReserveAmmo() {
+            if (!reloads) return GetAmmo();
+            if (infiniteAmmo) return int.MaxValue;
+            return Mathf.Max(0, _ammo - _ammoInClipDisplayed);
         }
 
         bool HasAmmoLeftInClip() {

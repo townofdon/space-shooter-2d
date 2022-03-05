@@ -278,7 +278,7 @@ MonoBehaviour:
   damageSpriteTarget: {fileID: 0}
   activeAtStart: 1
   activationDelay: 0.5
-  tripTime: 0.05
+  tripTime: 0.02
   explosion: {fileID: 547358973900262000, guid: 1191d5bf8165270409cce2311db38d77, type: 3}
   shockwaveVelocity:
     serializedVersion: 2

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponType: 4
   _weaponName: 
+  _effectiveRange: 10
   _shotSound:
     soundName: 
     volume: 0.7
@@ -59,26 +60,11 @@ MonoBehaviour:
     pitchVariance: 0.1
     clips: []
     oneShot: 1
-  _longReloadSound:
-    soundName: 
-    volume: 0.495
-    pitch: 1
-    ignoreListenerPause: 0
-    realtimeEditorInspect: 0
-    mixerGroup: {fileID: 0}
-    spatialBlend: 1
-    spread: 180
-    minFalloffDistance: 20
-    maxFalloffDistance: 40
-    clipHead: {fileID: 8300000, guid: 53edc17c8d4a4e4429fb0397e21346f0, type: 3}
-    clipLoop: {fileID: 8300000, guid: 6cc716f039e94be4cb71ac6d02eba2cc, type: 3}
-    clipTail: {fileID: 8300000, guid: 9fca6f7b99a2aee4e97fd6283e0fb51e, type: 3}
-    playLoopToEnd: 0
   baseSettings:
     _assetClass: 
     _damageMultiplier: 1
-    _startingAmmo: 0
-    _infiniteAmmo: 1
+    _startingAmmo: 5
+    _infiniteAmmo: 0
     _reloads: 1
     _reloadTime: 2
     _magazineCapacity: 1
@@ -94,4 +80,19 @@ MonoBehaviour:
     _prefab: {fileID: 6411006964417785918, guid: c21db27f042e279499be883f02544470, type: 3}
     _shieldDrain: 0
     _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   upgrades: []

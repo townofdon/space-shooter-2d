@@ -60,6 +60,7 @@ namespace Weapons
         }
 
         void BlastRadius() {
+            if (t > timeCausingDamage) return;
             foreach (var hit in Physics2D.OverlapCircleAll(transform.position, blastRadius * 3f)) OnHit(hit);
         }
 
@@ -71,7 +72,9 @@ namespace Weapons
             // }
             Rocket rocket = hit.GetComponent<Rocket>();
             if (rocket != null) {
-                rocket.OnDeath();
+                hitDist = hit.transform.position - transform.position;
+                if (hitDist.magnitude > blastRadius) return;
+                StartCoroutine(BlowUpRocket(rocket));
                 return;
             }
             DamageReceiver actor = hit.GetComponent<DamageReceiver>();
@@ -94,6 +97,12 @@ namespace Weapons
                 );
                 return;
             }
+        }
+
+        IEnumerator BlowUpRocket(Rocket rocket) {
+            // wait a small amount of time in order to create the illusion of chain-reaction explosions
+            yield return new WaitForSeconds(0.1f);
+            rocket.OnDeath();
         }
     }
 }

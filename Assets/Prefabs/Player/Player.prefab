@@ -36009,6 +36009,7 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: c7887879df4ee1647b0616c157e63c14, type: 3}
     oneShot: 0
+  playerUI: {fileID: 0}
 --- !u!114 &5316389521978419112
 MonoBehaviour:
   m_ObjectHideFlags: 0

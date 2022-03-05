@@ -7,12 +7,13 @@ namespace UI {
         [SerializeField] FlagType flagType;
 
         // cached
+        GameObject instance;
         OffscreenMarker marker;
 
         void Start() {
             if (markerPrefab == null) return;
-            Instantiate(markerPrefab, transform.position, Quaternion.identity, transform);
-            marker = markerPrefab.GetComponent<OffscreenMarker>();
+            instance = Instantiate(markerPrefab, Vector3.zero, Quaternion.identity, transform);
+            marker = instance.GetComponent<OffscreenMarker>();
             if (marker == null) return;
             marker.SetTarget(transform);
             marker.SetFlagType(flagType);

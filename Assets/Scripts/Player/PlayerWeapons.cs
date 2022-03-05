@@ -43,9 +43,19 @@ namespace Player
         // state
         WeaponClass primaryWeapon;
         WeaponClass secondaryWeapon;
+        WeaponClass tertiaryWeapon;
         bool didSwitchPrimaryWeapon;
         bool didSwitchSecondaryWeapon;
         bool didReloadPrimary;
+
+        public WeaponType primaryWeaponType => primaryWeapon.type;
+        public string primaryWeaponClipAmmo => GetAmmoString(primaryWeapon.ammoInClipDisplayed);
+        public string primaryWeaponReserveAmmo => GetAmmoString(primaryWeapon.reserveAmmo, primaryWeapon.ammoInClipDisplayed == int.MaxValue);
+        public bool primaryWeaponReloading => primaryWeapon.reloading;
+        public bool primaryWeaponDeploying => primaryWeapon.deploying;
+        public WeaponType secondaryWeaponType => secondaryWeapon.type;
+        public string nukeAmmo => GetAmmoString(Mathf.Min(nuke.ammo, 99));
+        public string missileAmmo => GetAmmoString(Mathf.Min(missile.ammo, 99));
 
         void Start()
         {
@@ -66,6 +76,7 @@ namespace Player
             InitWeapon(nuke);
             primaryWeapon = laser;
             secondaryWeapon = nuke;
+            tertiaryWeapon = disruptorRing;
             switchWeaponSound.Init(this);
         }
 
@@ -90,6 +101,11 @@ namespace Player
                 AfterSecondaryFire();
             } else {
                 AfterSecondaryNoFire();
+            }
+            if (FireTertiary()) {
+                AfterTertiaryFire();
+            } else {
+                AfterTertiaryNoFire();
             }
 
             TickTimers();
@@ -118,6 +134,7 @@ namespace Player
 
         bool FirePrimary() {
             if (!player.isAlive) return false;
+            if (disruptorRingEffect.activeSelf) return false;
             if (!primaryWeapon.ShouldFire(input.isFirePressed)) return false;
 
             if (primaryWeapon.type == WeaponType.Laser) {
@@ -175,13 +192,12 @@ namespace Player
         }
 
         void StopPrimaryFX() {
-            disruptorRingEffect.SetActive(false);
-            disruptorRing.effectSound.Stop();
             if (!primaryWeapon.firing) machineGun.effectSound.Stop();
         }
 
         bool FireSecondary() {
             if (!player.isAlive) return false;
+            if (disruptorRingEffect.activeSelf) return false;
             if (!secondaryWeapon.ShouldFire(input.isFire2Pressed)) return false;
 
             if (!secondaryWeapon.reloading) {
@@ -221,6 +237,39 @@ namespace Player
         void StopSecondaryFX() {
             // add any sound / fx stops here
             if (!secondaryWeapon.reloading) secondaryWeapon.reloadSound.Stop();
+        }
+
+        bool FireTertiary() {
+            if (!player.isAlive) return false;
+            if (!tertiaryWeapon.ShouldFire(input.isMeleePressed)) return false;
+
+            if (tertiaryWeapon.type == WeaponType.DisruptorRing) {
+                if (player.shield > 0f) {
+                    disruptorRing.effectSound.Play();
+                    disruptorRingEffect.SetActive(true);
+                    player.DrainShield(disruptorRing.shieldDrain * Time.deltaTime);
+                    return true;
+                } else {
+                    disruptorRingEffect.SetActive(false);
+                    disruptorRing.effectSound.Stop();
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        void AfterTertiaryFire() {
+            tertiaryWeapon.AfterFire();
+        }
+        void AfterTertiaryNoFire() {
+            tertiaryWeapon.AfterNoFire();
+            StopTertiaryFX();
+        }
+
+        void StopTertiaryFX() {
+            disruptorRingEffect.SetActive(false);
+            disruptorRing.effectSound.Stop();
         }
 
         void FireProjectile(WeaponClass weapon, Vector3 position, Quaternion rotation, bool shouldRecoil = true) {
@@ -284,9 +333,6 @@ namespace Player
                     primaryWeapon = machineGun;
                     break;
                 case WeaponType.MachineGun:
-                    primaryWeapon = disruptorRing;
-                    break;
-                case WeaponType.DisruptorRing:
                     primaryWeapon = laser;
                     break;
                 default:
@@ -352,6 +398,11 @@ namespace Player
             // TODO: PLAY SOUND
             // outOfAmmoGunClickSound.Play();
             Debug.Log(weaponType + " *cliccckkk");
+        }
+
+        string GetAmmoString(int ammoVal, bool hideIfInfinite = false) {
+            if (ammoVal == int.MaxValue) return hideIfInfinite ? "" : "∞";
+            return ammoVal.ToString();
         }
     }
 }

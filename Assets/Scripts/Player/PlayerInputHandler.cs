@@ -11,6 +11,7 @@ namespace Player {
         Vector2 _look;
         bool _isFirePressed = false;
         bool _isFire2Pressed = false;
+        bool _isMeleePressed = false;
         bool _isReloadPressed = false;
         bool _isBoostPressed = false;
         bool _isSwitchWeaponPressed = false;
@@ -20,6 +21,7 @@ namespace Player {
         public Vector2 look => _look;
         public bool isFirePressed => _isFirePressed;
         public bool isFire2Pressed => _isFire2Pressed;
+        public bool isMeleePressed => _isMeleePressed;
         public bool isReloadPressed => _isReloadPressed;
         public bool isBoostPressed => _isBoostPressed;
         public bool isSwitchWeaponPressed => _isSwitchWeaponPressed;
@@ -39,6 +41,10 @@ namespace Player {
 
         void OnFireSecondary(InputValue value) {
             _isFire2Pressed = value.isPressed;
+        }
+
+        void OnMelee(InputValue value) {
+            _isMeleePressed = value.isPressed;
         }
 
         void OnReload(InputValue value) {
