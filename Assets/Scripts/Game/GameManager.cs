@@ -5,6 +5,7 @@ using UnityEngine;
 using Core;
 using Damage;
 using Weapons;
+using Event;
 
 namespace Game {
 
@@ -26,6 +27,7 @@ namespace Game {
 
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] EventChannelSO eventChannel;
 
         [SerializeField] List<DamageClass> _damageClasses = new List<DamageClass>();
         Dictionary<DamageType, DamageClass> _damageClassLookup = new Dictionary<DamageType, DamageClass>();
@@ -49,13 +51,22 @@ namespace Game {
         static GameManager _current;
         public static GameManager current => _current;
 
+        void OnEnable() {
+            eventChannel.OnPlayerDeath.Subscribe(OnPlayerDeath);
+        }
+
+        void OnDisable() {
+            eventChannel.OnPlayerDeath.Unsubscribe(OnPlayerDeath);
+        }
+
         void Awake() {
             _current = Utils.ManageSingleton<GameManager>(_current, this);
             SetupDamageClasses();
             SetupWeaponClasses();
+            ULayer.Init();
         }
 
-        public void SetupDamageClasses() {
+        void SetupDamageClasses() {
             foreach (var damageClass in _damageClasses) {
                 _damageClassLookup.Add(damageClass.damageType, damageClass);
             }
@@ -69,7 +80,7 @@ namespace Game {
             }
         }
 
-        public void SetupWeaponClasses() {
+        void SetupWeaponClasses() {
             foreach (var weaponClass in _weaponClasses) {
                 _weaponClassLookup.Add(weaponClass.type, weaponClass);
             }
@@ -84,6 +95,10 @@ namespace Game {
 
         public static void Cleanup() {
             Utils.CleanupSingleton<GameManager>(_current);
+        }
+
+        void OnPlayerDeath() {
+            Debug.Log("GAME MANAGER WAS NOTIFIED THAT THE PLAYER HAST DIED");
         }
     }
 }

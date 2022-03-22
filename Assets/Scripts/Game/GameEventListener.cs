@@ -19,5 +19,5 @@ namespace Game
         public void OnEventRaised() {
             Response.Invoke();
         }
-    } 
+    }
 }

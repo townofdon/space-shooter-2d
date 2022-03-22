@@ -5,6 +5,8 @@ using Damage;
 using Game;
 using Audio;
 using UI;
+using Pickups;
+using Event;
 
 namespace Player {
 
@@ -36,6 +38,10 @@ namespace Player {
         [SerializeField] LoopableSound shieldAlarmSound;
         [SerializeField] Sound shieldRechargeSound;
 
+        [Header("Events")]
+        [Space]
+        [SerializeField] EventChannelSO eventChannel;
+
         [Header("UI")]
         [Space]
         [SerializeField] PlayerUI playerUI;
@@ -51,12 +57,13 @@ namespace Player {
         Coroutine damageCoroutine;
         Coroutine deathCoroutine;
 
-        // state
-        // float health;
-        // bool isAlive = true;
-        // float timeHit = 0f;
+        void OnEnable() {
+            eventChannel.OnPlayerTakeHealth.Subscribe(HandleHealthPickup);
+        }
 
-        // public bool IsAlive => isAlive;
+        void OnDisable() {
+            eventChannel.OnPlayerTakeHealth.Unsubscribe(HandleHealthPickup);
+        }
 
         void Start() {
             AppIntegrity.AssertPresent<ParticleSystem>(shieldEffect);
@@ -169,7 +176,7 @@ namespace Player {
             }
         }
 
-        void OnHealthDamaged(float amount, DamageType damageType) {
+        void OnHealthDamaged(float amount, DamageType damageType, bool isDamageByPlayer) {
             if (shakeGamepadCoroutine != null) StopCoroutine(shakeGamepadCoroutine);
             shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(0.1f, 1f, 1f));
             StartCoroutine(GameFeel.PauseTime(hitPauseDuration, hitPauseTimescale));
@@ -204,6 +211,10 @@ namespace Player {
                 shieldRechargeEffect.Stop();
         }
 
+        void HandleHealthPickup(float value) {
+            TakeHealth(value);
+        }
+
         void BreakShipApart() {
             GameObject go = new GameObject("BrokenShipParts");
             foreach (GameObject part in shipParts) {
@@ -213,20 +224,23 @@ namespace Player {
                 rbPart.freezeRotation = false;
                 // TODO: ADD A LIL'MO RANDOMNESS
                 Vector2 direction = (part.transform.position - transform.position).normalized;
+                rbPart.velocity = rb.velocity;
                 rbPart.AddForce(direction * deathExplosiveForce + Utils.RandomVector2() * 0.5f, ForceMode2D.Impulse);
                 rbPart.AddTorque(UnityEngine.Random.Range(-deathPartTorque, deathPartTorque));
             }
         }
 
-        void OnDeath() {
+        void OnDeath(bool isDamageByPlayer) {
             if (shakeGamepadCoroutine != null) StopCoroutine(shakeGamepadCoroutine);
             shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(1.2f, 1f, 1f));
             deathCoroutine = StartCoroutine(DeathAnimation());
             deathSound.Play();
             shieldEffect.Stop();
+            shieldRechargeEffect.Stop();
             shieldSound.Stop();
             shieldAlarmSound.Stop();
             shieldRechargeSound.Stop();
+            eventChannel.OnPlayerDeath.Invoke();
         }
 
         IEnumerator HullDamageAnimation() {

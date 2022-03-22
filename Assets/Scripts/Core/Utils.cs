@@ -192,7 +192,21 @@ namespace Core {
             return camera.ViewportToWorldPoint(new Vector2(1f, 1f)) - camera.ScreenToWorldPoint(Vector3.one * padding);
         }
 
-        public static void __NOOP__(float num, Damage.DamageType damageType) {}
+        public static float AbsAngle(float signedAngle) {
+            return signedAngle >= 0f ? signedAngle % 360f : 360f + signedAngle % 360f;
+        }
+
+        public static int GetRootInstanceId(GameObject gameObject) {
+            Transform current = gameObject.transform;
+
+            while (current.transform.parent != null && current.transform.parent.tag == gameObject.tag) {
+                current = current.transform.parent;
+            }
+
+            return current.gameObject.GetInstanceID();
+        }
+
+        public static void __NOOP__(float num, Damage.DamageType damageType, bool isDamageByPlayer) { }
         public static void __NOOP__(float num) {}
         public static void __NOOP__() {}
     }

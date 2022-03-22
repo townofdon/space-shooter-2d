@@ -70,7 +70,7 @@ namespace Enemies {
             _isStarted = true;
             _isRunning = true;
             _isPathComplete = false;
-            movement.SetMode(MovementMode.Default);
+            if (movement != null) movement.SetMode(MovementMode.Default);
         }
 
         public void Resume() {
@@ -223,7 +223,7 @@ namespace Enemies {
                     Halt();
                     break;
                 case PathfinderLoopMode.Destroy:
-                    enemy.OnDeath();
+                    enemy.OnDeath(false);
                     break;
                 case PathfinderLoopMode.Circular:
                     UpdateTarget();

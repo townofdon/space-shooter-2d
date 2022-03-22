@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 using Game;
+using Event;
 
 namespace Enemies
 {
@@ -53,7 +54,8 @@ namespace Enemies
         [SerializeField] List<BattleEvent> battleEvents;
         [SerializeField] bool loopIndefinitely = false;
         [SerializeField] bool debug = false;
-        [SerializeField] GameEvent OnBattleFinished;
+        // [SerializeField] GameEvent OnBattleFinished; // old event
+        [SerializeField] EventChannelSO eventChannel;
 
         // all this nonsense just to get colours to show like I want them...
         [Header("Battle Event Colours")][Space]
@@ -84,16 +86,26 @@ namespace Enemies
         Coroutine currentWaveSpawn;
         Coroutine battle;
 
-        public void OnEnemyDeath() {
+        public void OnEnemyDeath(int instanceId, int points) {
+            Debug.Log($"ENEMY WAS KILLED - {points} points");
             numEnemiesAlive = Mathf.Max(0, numEnemiesAlive - 1);
         }
 
         public void BattleFinished() {
-            if (OnBattleFinished != null) OnBattleFinished.Raise();
+            // if (OnBattleFinished != null) OnBattleFinished.Raise();
+            eventChannel.OnWinLevel.Invoke();
         }
 
         public void StopBattle() {
             if (battle != null) StopCoroutine(battle);
+        }
+
+        void OnEnable() {
+            eventChannel.OnEnemyDeath.Subscribe(OnEnemyDeath);
+        }
+
+        void OnDisable() {
+            eventChannel.OnEnemyDeath.Unsubscribe(OnEnemyDeath);
         }
 
         void Start() {

@@ -35879,6 +35879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageableType: 1
   debug: 0
+  _invulnerable: 0
   _maxHealth: 50
   _hitRecoveryTime: 0.05
   _destroyOnDeath: 0
@@ -36009,6 +36010,7 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: c7887879df4ee1647b0616c157e63c14, type: 3}
     oneShot: 0
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   playerUI: {fileID: 0}
 --- !u!114 &5316389521978419112
 MonoBehaviour:
@@ -36092,8 +36094,9 @@ MonoBehaviour:
   rearGunL: {fileID: 715774023688552227}
   rearGunR: {fileID: 1236381227170700464}
   disruptorRingEffect: {fileID: 415421435}
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   switchWeaponSound:
-    soundName: 
+    soundName: SwitchWeapon
     volume: 0.25
     pitch: 1
     ignoreListenerPause: 0
@@ -36107,6 +36110,54 @@ MonoBehaviour:
     pitchVariance: 0.17
     clips:
     - {fileID: 8300000, guid: 75bd53d41261cc34f8bca164fb522b72, type: 3}
+    oneShot: 0
+  switchSecondaryWeaponSound:
+    soundName: SecondaryDeploy
+    volume: 0.4
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.022
+    clips:
+    - {fileID: 8300000, guid: 30e32a0be02fd4541abaaf79fd097cac, type: 3}
+    oneShot: 0
+  outOfAmmoSound:
+    soundName: OutOfAmmo
+    volume: 0.4
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0
+    clips:
+    - {fileID: 8300000, guid: e7d24c5074ff36149be35f614dd991aa, type: 3}
+    oneShot: 1
+  outOfAmmoGunClickSound:
+    soundName: GunClick
+    volume: 0.5
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.03
+    clips:
+    - {fileID: 8300000, guid: 6c879a32c4ccd6449975eb9354e53a08, type: 3}
     oneShot: 0
 --- !u!114 &1689767547919250669
 MonoBehaviour:

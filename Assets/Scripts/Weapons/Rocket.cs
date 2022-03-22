@@ -17,6 +17,7 @@ namespace Weapons
         [SerializeField] float launchDrag = 1f;
         [SerializeField] float lifetime = 10f;
         [SerializeField] Vector3 initialHeading = Vector3.up;
+        [SerializeField] float proximityDetonation = 0.5f;
         [SerializeField] float outOfRange = 20f;
 
         [Header("Effects")][Space]
@@ -42,6 +43,7 @@ namespace Weapons
         Vector3 velocity;
         Transform target;
         DamageDealer damageDealer;
+        Collider2D proximityOtherCollider;
 
         // state
         bool isThrusting = false;
@@ -98,6 +100,7 @@ namespace Weapons
 
         void FixedUpdate() {
             if (rb != null) MoveViaRigidbody();
+            HandleProximityDetonation();
         }
 
         void OnLaunch() {
@@ -144,6 +147,15 @@ namespace Weapons
                 // apply drag if over speed limit
                 rb.velocity *= ( 1f - Time.fixedDeltaTime * 1.5f);
             }
+        }
+
+        void HandleProximityDetonation() {
+            if (proximityDetonation <= 0f) return;
+            proximityOtherCollider = Physics2D.OverlapCircle(transform.position, proximityDetonation);
+            if (proximityOtherCollider == null) return;
+            if (proximityOtherCollider.tag != UTag.EnemyShip) return;
+            // at this point we done tripped the thing
+            OnDeath();
         }
 
         void OnHit(DamageableType damageableType) {

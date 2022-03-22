@@ -36,6 +36,9 @@ namespace Core {
         Player,
         Explosions,
         Projectiles,
+        Enemies,
+        Asteroids,
+        Station,
     }
 
     public static class ULayer
@@ -46,8 +49,12 @@ namespace Core {
         public static ULayerMaskItem Player => layerMaskItems[ULayerType.Player.ToString()];
         public static ULayerMaskItem Explosions => layerMaskItems[ULayerType.Explosions.ToString()];
         public static ULayerMaskItem Projectiles => layerMaskItems[ULayerType.Projectiles.ToString()];
+        public static ULayerMaskItem Enemies => layerMaskItems[ULayerType.Enemies.ToString()];
+        public static ULayerMaskItem Asteroids => layerMaskItems[ULayerType.Asteroids.ToString()];
+        public static ULayerMaskItem Station => layerMaskItems[ULayerType.Station.ToString()];
 
         static Dictionary<string, ULayerMaskItem> layerMaskItems = new Dictionary<string, ULayerMaskItem>();
+        static Dictionary<int, ULayerMaskItem> layerMaskLookup = new Dictionary<int, ULayerMaskItem>();
         static bool initialized = false;
 
         /// <summary>Initialize layers (call in Awake or Start)</summary>
@@ -57,9 +64,18 @@ namespace Core {
 
             foreach(string name in System.Enum.GetNames(typeof(ULayerType))) {
                 layerMaskItems.Add(name, new ULayerMaskItem(name) );
+                layerMaskLookup.Add(layerMaskItems[name].value, layerMaskItems[name]);
             }
 
             initialized = true;
+        }
+
+        public static ULayerMaskItem Lookup(int layer) {
+            try {
+                return layerMaskLookup[layer];
+            } catch (System.Exception) {
+                return Default;
+            }
         }
     }
 
@@ -67,15 +83,18 @@ namespace Core {
         public ULayerMaskItem(string layerName) {
             _name = layerName;
             _mask = LayerMask.GetMask(layerName);
+            _layerType = System.Enum.Parse<ULayerType>(_name);
             if (_mask == 0 && layerName != "Default") Debug.LogWarning("Warning: layer \"" + layerName + "\" may not exist");
         }
         string _name;
         int _mask;
+        ULayerType _layerType;
         public string name => _name;
         public int mask => _mask;
+        public ULayerType layerType => _layerType;
         public int value => ULayerUtils.ToLayer(_mask);
         public bool ContainsLayer(int layer) { return ULayerUtils.LayerMaskContainsLayer(_mask, layer); }
-        public override string ToString() { return _name + " | " + value + " | " + _mask; }
+        public override string ToString() { return _name + " | " + _layerType + " | " + value + " | " + _mask; }
     }
 
     public static class ULayerUtils {

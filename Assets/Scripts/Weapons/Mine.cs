@@ -138,7 +138,7 @@ namespace Weapons
             blastbackDirection = (transform.position - other.transform.position).normalized;
         }
 
-        void OnDeath() {
+        void OnDeath(bool isDamageByPlayer) {
             Explode();
         }
 

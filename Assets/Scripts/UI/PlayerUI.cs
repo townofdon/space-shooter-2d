@@ -28,6 +28,10 @@ namespace UI {
         [SerializeField] Color activeFGColor;
         [SerializeField] Color inactiveBGColor;
         [SerializeField] Color inactiveFGColor;
+        [SerializeField] Color warningActiveBGColor;
+        [SerializeField] Color warningActiveFGColor;
+        [SerializeField] Color warningInactiveBGColor;
+        [SerializeField] Color warningInactiveFGColor;
         [SerializeField] GameObject reloading;
         [SerializeField] Image nukeBG;
         [SerializeField] Image nukeIcon;
@@ -128,17 +132,17 @@ namespace UI {
             if (weapons == null) return;
             if (weapons.primaryWeaponType == Weapons.WeaponType.Laser) {
                 SetWeaponAsActive(laserBG, laserIcon, laserText);
-                SetWeaponAsInactive(pdcBG, pdcIcon, pdcText);
+                SetWeaponAsInactive(pdcBG, pdcIcon, pdcText, weapons.machineGunHasAmmo);
             } else {
-                SetWeaponAsActive(pdcBG, pdcIcon, pdcText);
+                SetWeaponAsActive(pdcBG, pdcIcon, pdcText, weapons.machineGunHasAmmo);
                 SetWeaponAsInactive(laserBG, laserIcon, laserText);
             }
             if (weapons.secondaryWeaponType == Weapons.WeaponType.Nuke) {
-                SetWeaponAsActive(nukeBG, nukeIcon, nukeText);
-                SetWeaponAsInactive(missileBG, missileIcon, missileText);
+                SetWeaponAsActive(nukeBG, nukeIcon, nukeText, weapons.nukeHasAmmo);
+                SetWeaponAsInactive(missileBG, missileIcon, missileText, weapons.missileHasAmmo);
             } else {
-                SetWeaponAsActive(missileBG, missileIcon, missileText);
-                SetWeaponAsInactive(nukeBG, nukeIcon, nukeText);
+                SetWeaponAsActive(missileBG, missileIcon, missileText, weapons.missileHasAmmo);
+                SetWeaponAsInactive(nukeBG, nukeIcon, nukeText, weapons.nukeHasAmmo);
             }
             if (weapons.primaryWeaponReloading) {
                 reloading.SetActive(true);
@@ -152,16 +156,28 @@ namespace UI {
             missileText.text = weapons.missileAmmo;
         }
 
-        void SetWeaponAsActive(Image bg = null, Image icon = null, TextMeshProUGUI text = null) {
-            if (bg != null) bg.color = activeBGColor;
-            if (icon != null) icon.color = activeFGColor;
-            if (text != null) text.color = activeFGColor;
+        void SetWeaponAsActive(Image bg = null, Image icon = null, TextMeshProUGUI text = null, bool hasAmmo = true) {
+            if (hasAmmo) {
+                if (bg != null) bg.color = activeBGColor;
+                if (icon != null) icon.color = activeFGColor;
+                if (text != null) text.color = activeFGColor;
+            } else {
+                if (bg != null) bg.color = warningActiveBGColor;
+                if (icon != null) icon.color = warningActiveFGColor;
+                if (text != null) text.color = warningActiveFGColor;
+            }
         }
 
-        void SetWeaponAsInactive(Image bg = null, Image icon = null, TextMeshProUGUI text = null) {
-            if (bg != null) bg.color = inactiveBGColor;
-            if (icon != null) icon.color = inactiveFGColor;
-            if (text != null) text.color = inactiveFGColor;
+        void SetWeaponAsInactive(Image bg = null, Image icon = null, TextMeshProUGUI text = null, bool hasAmmo = true) {
+            if (hasAmmo) {
+                if (bg != null) bg.color = inactiveBGColor;
+                if (icon != null) icon.color = inactiveFGColor;
+                if (text != null) text.color = inactiveFGColor;
+            } else {
+                if (bg != null) bg.color = warningInactiveBGColor;
+                if (icon != null) icon.color = warningInactiveFGColor;
+                if (text != null) text.color = warningInactiveFGColor;
+            }
         }
     }
 }

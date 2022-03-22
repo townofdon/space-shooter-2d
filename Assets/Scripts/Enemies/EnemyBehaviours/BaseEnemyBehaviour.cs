@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+// TODO: REMOVE
+
 namespace Enemies
 {
     public abstract class BaseEnemyBehaviour {

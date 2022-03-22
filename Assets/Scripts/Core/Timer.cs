@@ -24,7 +24,7 @@ namespace Core
             End(); // set timer value to end cursor
         }
 
-        float _value = 0f;
+        float _value = 0f; // goes from 0 to 1
         float _duration = 1f;
         TimerDirection _direction = TimerDirection.Decrement;
         TimerStep _step = TimerStep.DeltaTime;
@@ -32,6 +32,7 @@ namespace Core
         bool _turnedOn = true; // treat a timer with a duration of zero as turned off
 
         public float value => _value;
+        public float timeLeft => active ? GetTimeLeft() : 0f;
         public bool active => _turnedOn && !GetIsAtEnd();
         public bool tZero => GetIsAtStart();
         public bool tEnd => GetIsAtEnd();
@@ -97,8 +98,8 @@ namespace Core
         }
 
         public IEnumerator StartAndWaitUntilFinished(bool tickInsideCoroutine = false) {
-            Start();
-            yield return WaitUntilFinished();
+            if (!active) Start();
+            yield return WaitUntilFinished(tickInsideCoroutine);
         }
 
         // PRIVATE
@@ -119,6 +120,12 @@ namespace Core
             return _direction == TimerDirection.Increment
                 ? _value == 1f
                 : _value == 0f;
+        }
+
+        float GetTimeLeft() {
+            return _direction == TimerDirection.Increment
+                ? _duration * (1f - value)
+                : _duration * _value;
         }
 
         public override string ToString()

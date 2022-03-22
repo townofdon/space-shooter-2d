@@ -65,7 +65,7 @@ MonoBehaviour:
   baseSettings:
     _assetClass: Raptor I
     _damageMultiplier: 1
-    _startingAmmo: 1000
+    _startingAmmo: 50
     _infiniteAmmo: 0
     _reloads: 1
     _reloadTime: 1.5

@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 6267110387283208367}
   - component: {fileID: 6267110387283208364}
   - component: {fileID: -6707671243880467742}
+  - component: {fileID: 7850562250928258119}
+  - component: {fileID: -4583589472260488921}
   m_Layer: 0
   m_Name: AsteroidMed 1
   m_TagString: Asteroid
@@ -409,6 +411,34 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 1
+--- !u!114 &7850562250928258119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267110387283208365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4ca8b6f5cabae4daddc10c6f6b4a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerPrefab: {fileID: 2563741419318062698, guid: 5366983609dc2c442808bdbf36c8fcd6, type: 3}
+  flagType: 1
+--- !u!114 &-4583589472260488921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267110387283208365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenLifetime: 10
+  outsideBoundsPadding: 1
 --- !u!1001 &8169396135458978942
 PrefabInstance:
   m_ObjectHideFlags: 0

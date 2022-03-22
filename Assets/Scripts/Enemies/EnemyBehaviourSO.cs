@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: REMOVE
+
 namespace Enemies {
 
     // DEPRECATED

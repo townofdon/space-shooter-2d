@@ -19,6 +19,7 @@ namespace Damage {
         [Header("General Settings")][Space]
         [SerializeField] DamageableType _damageableType = DamageableType.Default;
         [SerializeField] bool debug = false;
+        [SerializeField] bool _invulnerable = false;
 
         [Header("Health Settings")][Space]
         [SerializeField] float _maxHealth = 50f;
@@ -38,9 +39,9 @@ namespace Damage {
 
         [Header("Events / Callbacks")][Space]
         // Action callbacks can be set via the Editor OR via RegisterCallbacks()
-        [SerializeField] System.Action _onDeath;
+        [SerializeField] System.Action<bool> _onDeath;
         [SerializeField] System.Action<float> _onHealthTaken;
-        [SerializeField] System.Action<float, DamageType> _onHealthDamage;
+        [SerializeField] System.Action<float, DamageType, bool> _onHealthDamage;
         [SerializeField] System.Action _onShieldDepleted;
         [SerializeField] System.Action<float> _onShieldDamage;
         [SerializeField] System.Action<float> _onShieldDrain;
@@ -82,6 +83,10 @@ namespace Damage {
         public bool hasShieldCapability => _maxShield > 0f;
         public DamageableType damageableType => (hasShieldCapability && _shield > 0f) ? DamageableType.Shield : _damageableType;
 
+        public void SetInvulnerable(bool value) {
+            _invulnerable = value;
+        }
+
         protected void TickHealth() {
             if (!_isAlive) return;
             _timeHit = Mathf.Clamp(_timeHit - Time.deltaTime, 0f, _hitRecoveryTime);
@@ -92,18 +97,18 @@ namespace Damage {
             // recharge shield
             if (_timeShieldHit <= 0f && _shield < _maxShield) {
                 // NOTE - may also find it useful to add an `_onShieldRechargeStep` callback method at some point if needed for UI updates, etc.
-                if (!_isRechargingShield) InvokeCallback(_onShieldRechargeStart, true);
+                if (!_isRechargingShield) InvokeCallback(_onShieldRechargeStart);
                 _isRechargingShield = true;
                 _shield = Mathf.Min(_shield + _maxShield * (Time.deltaTime / _shieldRechargeTime), _maxShield);
             } else {
-                if (_isRechargingShield && _shield == _maxShield) InvokeCallback(_onShieldRechargeComplete, true);
+                if (_isRechargingShield && _shield == _maxShield) InvokeCallback(_onShieldRechargeComplete);
                 _isRechargingShield = false;
             }
         }
 
         protected void RegisterHealthCallbacks(
-            System.Action onDeath,
-            System.Action<float, DamageType> onHealthDamage,
+            System.Action<bool> onDeath,
+            System.Action<float, DamageType, bool> onHealthDamage,
             System.Action<float> onHealthTaken
         ) {
             _onDeath = onDeath;
@@ -132,8 +137,13 @@ namespace Damage {
         }
 
         protected void SetColliders() {
-            colliders = transform.GetComponentsInChildren<Collider2D>(true);
+            colliders = GetColliders();
             _EnableColliders();
+        }
+
+        public Collider2D[] GetColliders() {
+            if (colliders != null && colliders.Length > 0) return colliders;
+            return transform.GetComponentsInChildren<Collider2D>(true);
         }
 
         public void IgnoreCollider(Collider2D other) {
@@ -146,7 +156,7 @@ namespace Damage {
             if (!_isAlive) return false;
             if (_shield > 0f && amount > 0f) {
                 _timeShieldHit = 1f;
-                InvokeCallback(_onShieldDrain, amount, true);
+                InvokeCallback(_onShieldDrain, amount);
             }
             _shield = Mathf.Max(_shield - amount, 0f);
             return true;
@@ -155,19 +165,20 @@ namespace Damage {
         public bool TakeHealth(float amount) {
             if (!_isAlive) return false;
 
-            _health += amount;
-            InvokeCallback(_onHealthTaken, amount, true);
+            _health = Mathf.Min(_health + amount, _maxHealth);
+            InvokeCallback(_onHealthTaken, amount);
 
             return true;
         }
 
-        public bool TakeDamage(float amount, DamageType damageType = DamageType.Default) {
+        public bool TakeDamage(float amount, DamageType damageType = DamageType.Default, bool isDamageByPlayer = false) {
             if (!_isAlive || _timeHit > 0f) return false;
+            if (_invulnerable) return false;
 
             if (damageType == DamageType.Instakill) {
                 _health = Mathf.Min(0f, _health - amount);
                 _shield = 0f;
-                _Die();
+                _Die(isDamageByPlayer);
                 return true;
             }
 
@@ -194,11 +205,11 @@ namespace Damage {
             }
 
             if (_healthDamageThisFrame > 0f) {
-                InvokeCallback(_onHealthDamage, _healthDamageThisFrame, damageType);
+                InvokeCallback(_onHealthDamage, _healthDamageThisFrame, damageType, isDamageByPlayer);
                 DamageFlash();
             }
             if (_shieldDamageThisFrame > 0f && _shield > 0f && hasShieldCapability) {
-                InvokeCallback(_onShieldDamage, _shieldDamageThisFrame, true);
+                InvokeCallback(_onShieldDamage, _shieldDamageThisFrame);
                 if (OnShieldHitEvent != null) OnShieldHitEvent();
             }
 
@@ -208,14 +219,14 @@ namespace Damage {
             _timeShieldHit = 1f;
 
             if (_shield == 0f && _prevShield > _shield && hasShieldCapability) {
-                InvokeCallback(_onShieldDepleted, true);
+                InvokeCallback(_onShieldDepleted);
                 if (OnShieldDepletedEvent != null) OnShieldDepletedEvent();
             }
 
             _prevShield = _shield;
 
             if (_health <= 0f) {
-                if (_isAlive) _Die();
+                if (_isAlive) _Die(isDamageByPlayer);
             }
 
             return true;
@@ -232,10 +243,10 @@ namespace Damage {
             damageSpriteTarget.material = defaultMaterial;
         }
 
-        private void _Die() {
+        private void _Die(bool isDamageByPlayer) {
             _isAlive = false;
             _DisableColliders();
-            InvokeCallback(_onDeath);
+            InvokeCallback(_onDeath, isDamageByPlayer);
             if (_destroyOnDeath) Destroy(gameObject);
             if (OnDeathEvent != null) OnDeathEvent();
         }
@@ -255,25 +266,24 @@ namespace Damage {
 
         // CALLBACK STUFF
 
-        private void InvokeCallback(System.Action action, bool ignoreMissingCallback = false) {
+        private void InvokeCallback(System.Action action) {
             if (action != null) {
                 action.Invoke();
-            } else if (!ignoreMissingCallback) {
-                Debug.LogError("WARN: a callback was null in DamageableBehaviour - something's not hooked up correctly.");
             }
         }
-        private void InvokeCallback(System.Action<float> action, float amount, bool ignoreMissingCallback = false) {
+        private void InvokeCallback(System.Action<bool> action, bool boolValue) {
+            if (action != null) {
+                action.Invoke(boolValue);
+            }
+        }
+        private void InvokeCallback(System.Action<float> action, float amount) {
             if (action != null) {
                 action.Invoke(amount);
-            } else if (!ignoreMissingCallback) {
-                Debug.LogError("WARN: a callback was null in DamageableBehaviour - something's not hooked up correctly.");
             }
         }
-        private void InvokeCallback(System.Action<float, DamageType> action, float amount, DamageType damageType, bool ignoreMissingCallback = false) {
+        private void InvokeCallback(System.Action<float, DamageType, bool> action, float amount, DamageType damageType, bool isDamageByPlayer) {
             if (action != null) {
-                action.Invoke(amount, damageType);
-            } else if (!ignoreMissingCallback) {
-                Debug.LogError("WARN: a callback was null in DamageableBehaviour - something's not hooked up correctly.");
+                action.Invoke(amount, damageType, isDamageByPlayer);
             }
         }
 

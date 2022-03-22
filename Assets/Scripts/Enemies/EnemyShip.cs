@@ -5,8 +5,9 @@ using UnityEngine;
 using Core;
 using Damage;
 using Audio;
-using Game;
 using UI;
+using Pickups;
+using Event;
 
 namespace Enemies {
 
@@ -21,14 +22,27 @@ namespace Enemies {
         [SerializeField] Sound damageSound;
         [SerializeField] Sound deathSound;
 
+        [Header("Pickups")]
+        [Space]
+        [SerializeField] PickupsSpawnConfig pickups;
+
+        [Header("Points")]
+        [Space]
+        [SerializeField] int pointsWhenKilledByPlayer = 50;
+        [SerializeField] int pointsWhenWoundedByPlayer = 10;
+
         [Header("Events")][Space]
-        [SerializeField] GameEvent OnEnemyDeath;
+        // [SerializeField] GameEvent OnEnemyDeath;
+        [SerializeField] EventChannelSO eventChannel;
 
         // components
         Rigidbody2D rb;
 
         // cached
         float originalDrag;
+
+        // state
+        bool everDamagedByPlayer = false;
 
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(ship);
@@ -52,19 +66,29 @@ namespace Enemies {
             TickHealth();
         }
 
-        void OnHealthDamaged(float amount, DamageType damageType) {
+        void OnHealthDamaged(float amount, DamageType damageType, bool isDamageByPlayer) {
+            if (isDamageByPlayer) everDamagedByPlayer = true;
             // Debug.Log("enemy_damage=" + amount + " health=" + health);
             // TODO: FLASH ENEMY SPRITE
             // TODO: PLAY DAMAGE SOUND
             damageSound.Play();
         }
 
-        public void OnDeath() {
+        public void OnDeath(bool isDamageByPlayer) {
             RemoveMarker();
-            OnEnemyDeath.Raise();
+            // OnEnemyDeath.Raise(); // old event
+            eventChannel.OnEnemyDeath.Invoke(Utils.GetRootInstanceId(gameObject), GetDeathPoints(isDamageByPlayer));
             rb.drag = originalDrag; // to make it seem like it was there all along
             deathSound.Play();
+            pickups.Spawn(transform.position, rb);
             StartCoroutine(DeathAnimation());
+
+        }
+
+        int GetDeathPoints(bool isDamageByPlayer) {
+            if (isDamageByPlayer) return pointsWhenKilledByPlayer;
+            if (everDamagedByPlayer) return pointsWhenWoundedByPlayer;
+            return 0;
         }
 
         void RemoveMarker() {

@@ -155,6 +155,7 @@ namespace Enemies
 
         void CalculateAim() {
             aimVector = Vector2.MoveTowards(aimVector, vectorToPlayer.normalized, aimSpeed * Time.deltaTime);
+            // TODO: refactor Vector2.down to `orientation` var
             aimAngle = Vector2.SignedAngle(Vector2.down, aimVector);
         }
 
@@ -195,22 +196,22 @@ namespace Enemies
 
         IEnumerator PressAndReleaseTrigger() {
             while (true) {
-                triggerHeld.SetDuration(Mathf.Max(triggerHoldTime + UnityEngine.Random.Range(-triggerTimeVariance / 2, triggerTimeVariance), 0.1f));
-                triggerReleased.SetDuration(Mathf.Max(triggerReleaseTime + UnityEngine.Random.Range(-triggerTimeVariance / 2, triggerTimeVariance), 0.1f));
-                yield return triggerHeld.StartAndWaitUntilFinished();
-                yield return triggerReleased.StartAndWaitUntilFinished();
+                triggerHeld.SetDuration(Mathf.Max(triggerHoldTime + UnityEngine.Random.Range(-triggerTimeVariance / 2f, triggerTimeVariance / 2f), 0.1f));
+                triggerReleased.SetDuration(Mathf.Max(triggerReleaseTime + UnityEngine.Random.Range(-triggerTimeVariance / 2f, triggerTimeVariance / 2f), 0.1f));
+                yield return triggerHeld.StartAndWaitUntilFinished(true);
+                yield return triggerReleased.StartAndWaitUntilFinished(true);
                 while (!isPlayerInScopes) yield return null;
             }
         }
 
         void OnDrawGizmos() {
             if (!debug) return;
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawRay(transform.position, vectorToPlayer);
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(transform.position, aim * Vector2.down);
+            // Gizmos.color = Color.cyan;
+            // Gizmos.DrawRay(transform.position, vectorToPlayer);
             Gizmos.color = Color.magenta;
             Gizmos.DrawRay(transform.position, transform.rotation * Vector2.down);
+            Gizmos.color = weapon.firing ? Color.red : Color.yellow;
+            Gizmos.DrawRay(transform.position, aim * Vector2.down);
         }
     }
 }

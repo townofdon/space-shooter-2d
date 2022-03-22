@@ -69,9 +69,9 @@ namespace Enemies
         [SerializeField][Range(0f, 5f)] float jukeCooldown = 0f;
         [SerializeField] LayerMask jukeLayerAvoid;
         [Tooltip("Avoid hazards, explosives")]
-        [SerializeField][Range(0f, 1f)] float avoids = 0f;
-        [SerializeField][Range(0f, 5f)] float avoidSpeed = 0f;
-        [SerializeField][Range(0f, 5f)] float avoidCooldown = 0f;
+        [SerializeField][Range(0f, 1f)] float avoids = 1f;
+        [SerializeField][Range(1f, 10f)] float avoidSpeedMod = 1.5f;
+        [SerializeField][Range(0.1f, 5f)] float avoidCooldown = 0.5f;
 
         [Header("Movement overrides when attacking")]
         [Space]
@@ -116,9 +116,8 @@ namespace Enemies
         float timeTargetedByPlayer = 0f;
 
         // state - avoid
-        bool isAvoiding = false;
+        Vector3 avoidanceHeading;
         Timer avoiding = new Timer();
-        GameObject avoidObject;
 
         // state - raycasts
         RaycastHit2D hit;
@@ -162,6 +161,27 @@ namespace Enemies
             rb.velocity = (heading * moveSpeed * velocityMultiplier);
         }
 
+        public void NotifySensorTriggered(Vector2 sensorDirection, ULayerType layerType) {
+            Debug.Log("SENSED: " + sensorDirection + " " + layerType);
+
+            switch (layerType) {
+                case ULayerType.Enemies:
+                    avoidanceHeading = -sensorDirection;
+                    avoiding.Start();
+                    if (rb != null) rb.AddForce(-sensorDirection * moveSpeed * 0.25f, ForceMode2D.Impulse);
+                    break;
+                case ULayerType.Asteroids:
+                // determine if avoiding (if avoids > randomFloat)
+                // try and brake first
+                // try to go around the asteroid - plot a course orthogonal to the current heading
+                case ULayerType.Station:
+                default:
+                    // do nothing
+                    break;
+                    // default:
+            }
+        }
+
         // TODO: ADD A PLAYER_GENERAL LOOP (USE COROUTINE WHILE(TRUE) YIELD WAITFORTIME(0.2S) RAYCAST TO FIRST ENEMY SHIP -> NotifyTargeted())
         public void NotifyTargeted(float duration) {
             if (juking.active) return;
@@ -181,6 +201,7 @@ namespace Enemies
             engineSound.Init(this);
             agroSound.Init(this);
             juking.SetDuration(jukeCooldown);
+            avoiding.SetDuration(avoidCooldown);
             // init wobble
             if (wobbler != null && rb != null) {
                 Rigidbody2D temp = Instantiate(wobbler, Vector3.zero, Quaternion.identity);
@@ -194,12 +215,12 @@ namespace Enemies
 
             movePoints.Clear();
             foreach (Transform location in movePointLocations) movePoints.Add(location.position);
-            Debug.Log(movePoints.Count);
         }
 
         void Update() {
             HandleTargetBehaviour();
             juking.Tick();
+            avoiding.Tick();
         }
 
 
@@ -362,8 +383,8 @@ namespace Enemies
                 2f * GetTurnSpeed() * 2f * Mathf.PI * Time.fixedDeltaTime, GetTurnSpeed() * Time.fixedDeltaTime
             ).normalized;
 
-            // vector maths - compensate for rb's current velocity vs. heading
-            headingAdjusted = (heading * GetMoveSpeed() - (Vector3)GetCurrentVelocity()).normalized;
+            // vector maths - compensate for rb's current velocity vs. heading - AND factor in avoidance vector
+            headingAdjusted = (Vector3.Lerp(heading, avoidanceHeading, avoiding.value) * GetMoveSpeed() - (Vector3)GetCurrentVelocity()).normalized;
             rb.AddForce(headingAdjusted * GetAccel());
             if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && (rb.velocity.magnitude + wobbleDeltaV.magnitude) > GetMoveSpeed()) {
                 rb.velocity *= 1f - Time.fixedDeltaTime * 1.5f;
@@ -455,10 +476,10 @@ namespace Enemies
             switch (mode) {
                 case MovementMode.Kamikaze:
                 case MovementMode.AttackRun:
-                    return moveSpeed * atxMoveMod;
+                    return Mathf.Lerp(moveSpeed, moveSpeed * avoidSpeedMod, avoiding.value) * atxMoveMod;
                 case MovementMode.Default:
                 default:
-                    return moveSpeed;
+                    return Mathf.Lerp(moveSpeed, moveSpeed * avoidSpeedMod, avoiding.value);
             }
         }
 

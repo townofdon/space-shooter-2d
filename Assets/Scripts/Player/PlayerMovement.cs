@@ -64,10 +64,6 @@ namespace Player {
         // state - bounds
         Vector2 screenPosition;
 
-        void Awake() {
-            ULayer.Init();
-        }
-
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(boostWaves);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +34,7 @@ namespace UI
         Vector3 markerPosition;
         Vector3 markerPositionWorld;
         Coroutine removeFiringFlag;
+        Canvas canvas;
 
         public void SetTarget(Transform _target) {
             target = _target;
@@ -70,7 +70,6 @@ namespace UI
         public void FlagIncoming() {
             BeforeFlag();
             marker.color = dangerFlag;
-            if (flag == FlagType.Enemy) removeFiringFlag = StartCoroutine(IRemoveFiringFlag());
         }
         public void FlagInfo() {
             BeforeFlag();
@@ -94,6 +93,10 @@ namespace UI
             aspectRatio = Camera.main.aspect;
             markerPosition = marker.rectTransform.position;
             marker.enabled = false;
+            canvas = marker.GetComponentInParent<Canvas>();
+            canvas.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+            marker.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+            transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
             InitFlag();
         }
 
@@ -126,11 +129,6 @@ namespace UI
                     marker.color = enemyFlag;
                     break;
             }
-        }
-
-        IEnumerator IRemoveFiringFlag() {
-            yield return new WaitForSeconds(0.5f);
-            marker.color = enemyFlag;
         }
 
         bool IsTrackedOutsideScreen() {

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1973028877276741723}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Colliders
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3589013471018733456}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 778000260438537473}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8254740369906255893}
   - component: {fileID: 3137452152476335786}
   - component: {fileID: 2269274064966869287}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoxCollider (3)
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 8326449067017271038}
   - component: {fileID: 4367764860853941247}
   - component: {fileID: 861709775686829533}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wobbler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6658138554846303949}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 1581469008230335765}
   - component: {fileID: 1339525002560203003}
   - component: {fileID: 609365068488650877}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoxCollider (0)
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 6084145170272831688}
   - component: {fileID: 7394055112961748513}
   - component: {fileID: 338354378501998805}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoxCollider (2)
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797570748302554224}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Gun (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,8 @@ GameObject:
   - component: {fileID: 5131740026465409543}
   - component: {fileID: 8048362676422506553}
   - component: {fileID: 7222827882652699523}
-  m_Layer: 0
+  - component: {fileID: 7376796279444992735}
+  m_Layer: 10
   m_Name: Enemy 0
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
@@ -558,6 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
+  activeAtStart: 1
   targetMode: 1
   loopMode: 0
   waypointTriggerRadius: 0.25
@@ -627,6 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageableType: 1
   debug: 0
+  _invulnerable: 0
   _maxHealth: 50
   _hitRecoveryTime: 0
   _destroyOnDeath: 0
@@ -678,7 +681,20 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b8010007e5d50014c9388ab4369d2c33, type: 3}
     - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
     oneShot: 1
-  OnEnemyDeath: {fileID: 11400000, guid: 0726f531bd9bc8a4d89e7cc6d32b4d4f, type: 2}
+  pickups:
+    pickups:
+    - pickupPrefab: {fileID: 1934952187741605194, guid: 5ba46c8e72fcc7c4689dac85689111d4, type: 3}
+      numItemsToSpawn: 1
+      spawnLikelihood: 0.1
+    - pickupPrefab: {fileID: 7348726175182028151, guid: b638c9b2738a1c54499d272fd277b6f9, type: 3}
+      numItemsToSpawn: 2
+      spawnLikelihood: 0.2
+    - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
+      numItemsToSpawn: 5
+      spawnLikelihood: 0.5
+  pointsWhenKilledByPlayer: 50
+  pointsWhenWoundedByPlayer: 10
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &-989283550689626629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,17 +707,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e870b1e6f637c1d43bf3964a85f7f593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
+  debug: 1
   firingMode: 0
   aimMode: 0
   weapon: {fileID: 11400000, guid: 64bdf2d990497204a9af057bc5bad994, type: 2}
   guns:
   - {fileID: 797570748302554224}
-  aimSpeed: 2
+  aimSpeed: 1
   maxAimAngle: 30
   triggerHoldTime: 0.5
-  triggerReleaseTime: 1
-  triggerTimeVariance: 0.26
+  triggerReleaseTime: 1.5
+  triggerTimeVariance: 0.5
   targetableLayers:
     serializedVersion: 2
     m_Bits: 129
@@ -734,14 +750,14 @@ MonoBehaviour:
   jukeLayerAvoid:
     serializedVersion: 2
     m_Bits: 0
-  avoids: 0
-  avoidSpeed: 0
-  avoidCooldown: 0
+  avoids: 1
+  avoidSpeedMod: 5
+  avoidCooldown: 0.5
   atxTurnMod: 1
   atxMoveMod: 1
   atxAccelMod: 1
   wobbler: {fileID: 4367764860853941247}
-  wobbleForce: {x: 20, y: 0.1}
+  wobbleForce: {x: 1, y: 0.1}
   wobbleMaxSpeed: {x: 5, y: 0.5}
   wobbleMaxDistance: {x: 0.5, y: 0.5}
   engineSound:
@@ -801,6 +817,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markerPrefab: {fileID: 2563741419318062698, guid: 5366983609dc2c442808bdbf36c8fcd6, type: 3}
   flagType: 0
+--- !u!114 &7376796279444992735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387282363394425764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76145445ca6d4f47a2fe56ba83777c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 1
+  raycastInterval: 0.2
+  obstacleAvoidDist: 1.2
 --- !u!1 &6735357303193718686
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6271433924919441103}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MovePoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4248843928520973727}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunLocations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -877,7 +908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2965768817307441118}
   - component: {fileID: 8151703202600299794}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ship
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
@@ -962,7 +993,7 @@ GameObject:
   - component: {fileID: 5381882545165822082}
   - component: {fileID: 5722242803555927166}
   - component: {fileID: 4675390018172458653}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CircleCollider
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
@@ -1023,7 +1054,7 @@ GameObject:
   - component: {fileID: 4872848357435059686}
   - component: {fileID: 5512897332484946181}
   - component: {fileID: 6910058268148917375}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoxCollider (1)
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}

@@ -38,8 +38,8 @@ namespace NPCs
             TickHealth();
         }
 
-        public void OnHealthDamage(float amount, DamageType damageType) {}
-        public void OnDeath() {
+        public void OnHealthDamage(float amount, DamageType damageType, bool isDamageByPlayer) { }
+        public void OnDeath(bool isDamageByPlayer) {
             // stop dat spinning
             rb.angularVelocity = 0f;
             SpawnDebris();

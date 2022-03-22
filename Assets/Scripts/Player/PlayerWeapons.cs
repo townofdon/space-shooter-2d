@@ -1,8 +1,10 @@
 using UnityEngine;
+
 using Core;
 using Weapons;
 using Damage;
 using Audio;
+using Event;
 
 namespace Player
 {
@@ -32,8 +34,15 @@ namespace Player
         [Header("DisruptorRing")][Space]
         [SerializeField] GameObject disruptorRingEffect;
 
+        [Header("Events")]
+        [Space]
+        [SerializeField] EventChannelSO eventChannel;
+
         [Header("Audio")][Space]
         [SerializeField] Sound switchWeaponSound;
+        [SerializeField] Sound switchSecondaryWeaponSound;
+        [SerializeField] Sound outOfAmmoSound;
+        [SerializeField] Sound outOfAmmoGunClickSound;
 
         // components
         PlayerGeneral player;
@@ -53,9 +62,22 @@ namespace Player
         public string primaryWeaponReserveAmmo => GetAmmoString(primaryWeapon.reserveAmmo, primaryWeapon.ammoInClipDisplayed == int.MaxValue);
         public bool primaryWeaponReloading => primaryWeapon.reloading;
         public bool primaryWeaponDeploying => primaryWeapon.deploying;
+        public bool machineGunHasAmmo => machineGun.ammo > 0;
+        public bool nukeHasAmmo => nuke.ammo > 0;
+        public bool missileHasAmmo => missile.ammo > 0;
         public WeaponType secondaryWeaponType => secondaryWeapon.type;
         public string nukeAmmo => GetAmmoString(Mathf.Min(nuke.ammo, 99));
         public string missileAmmo => GetAmmoString(Mathf.Min(missile.ammo, 99));
+
+        void OnEnable() {
+            eventChannel.OnPlayerDeath.Subscribe(OnPlayerDeath);
+            eventChannel.OnTakeAmmo.Subscribe(OnTakeAmmo);
+        }
+
+        void OnDisable() {
+            eventChannel.OnPlayerDeath.Unsubscribe(OnPlayerDeath);
+            eventChannel.OnTakeAmmo.Unsubscribe(OnTakeAmmo);
+        }
 
         void Start()
         {
@@ -78,6 +100,9 @@ namespace Player
             secondaryWeapon = nuke;
             tertiaryWeapon = disruptorRing;
             switchWeaponSound.Init(this);
+            switchSecondaryWeaponSound.Init(this);
+            outOfAmmoSound.Init(this);
+            outOfAmmoGunClickSound.Init(this);
         }
 
         void InitWeapon(WeaponClass weapon) {
@@ -349,6 +374,8 @@ namespace Player
             if (!input.isSwitchWeapon2Pressed) { didSwitchSecondaryWeapon = false; return; }
             if (didSwitchSecondaryWeapon) return;
 
+            switchSecondaryWeaponSound.Play();
+
             secondaryWeapon.reloadSound.Stop();
             // TODO: PLAY DEPLOYMENT SOUND - UNIQ TO EACH WEAPON?
 
@@ -378,6 +405,29 @@ namespace Player
             primaryWeapon.Reload();
         }
 
+        void OnTakeAmmo(WeaponType weaponType, int ammo) {
+            switch (weaponType) {
+                case WeaponType.MachineGun:
+                    machineGun.PickupAmmo(ammo);
+                    break;
+                case WeaponType.Nuke:
+                    nuke.PickupAmmo(ammo);
+                    break;
+                case WeaponType.Missile:
+                    missile.PickupAmmo(ammo);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void OnPlayerDeath() {
+            primaryWeapon.reloadSound.Stop();
+            secondaryWeapon.reloadSound.Stop();
+            switchWeaponSound.Stop();
+            switchSecondaryWeaponSound.Stop();
+        }
+
         // NOTE - "OnReload" name clashed with PlayerInputHandler method
         void OnReloadWeapon(WeaponType weaponType) {
             if (weaponType == primaryWeapon.type) {
@@ -389,20 +439,16 @@ namespace Player
         }
 
         void OnOutOfAmmoAlarm(WeaponType weaponType) {
-            // TODO: PLAY SOUND
-            // outOfAmmoSound.Play();
-            Debug.Log(weaponType + " Out of ammo :(");
+            outOfAmmoSound.Play();
         }
 
         void OnOutOfAmmoGunClick(WeaponType weaponType) {
-            // TODO: PLAY SOUND
-            // outOfAmmoGunClickSound.Play();
-            Debug.Log(weaponType + " *cliccckkk");
+            outOfAmmoGunClickSound.Play();
         }
 
         string GetAmmoString(int ammoVal, bool hideIfInfinite = false) {
             if (ammoVal == int.MaxValue) return hideIfInfinite ? "" : "∞";
-            return ammoVal.ToString();
+            return (Mathf.Min(ammoVal, 999)).ToString();
         }
     }
 }

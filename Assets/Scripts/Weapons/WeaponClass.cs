@@ -256,7 +256,6 @@ namespace Weapons
             if (reloads && _reloading.active) return false;
             if (overheats && _cooldown.active) return false;
             if (burstMax > 0 && _burstCooldown.active) return false;
-            if (reloads && !HasAmmoLeftInClip()) return false;
             if (!HasAmmo()) {
                 _burstStep = 0;
                 if (!_didGunClickOutOfAmmo) {
@@ -265,6 +264,7 @@ namespace Weapons
                 }
                 return false;
             }
+            if (reloads && !HasAmmoLeftInClip()) return false;
             return true;
         }
 
@@ -305,6 +305,7 @@ namespace Weapons
         public void Reload() {
             if (!reloads) return;
             if (GetAmmoLeftInClip() >= magazineCapacity) return;
+            if (_ammo <= 0) return;
             if (_reloading.active) {
                 _backpackReloading = true;
                 return;

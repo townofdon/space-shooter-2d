@@ -43,6 +43,7 @@ namespace Damage
         Vector3 prevPosition;
 
         // state
+        bool isDamageByPlayer = false;
         System.Nullable<System.Guid> ignoreUUID;
         float circlecastRadius = 1f;
         bool passedSafeDistance = false;
@@ -52,6 +53,10 @@ namespace Damage
 
         // getters
         new public Collider2D collider => _collider;
+
+        public void SetIsDamageByPlayer(bool value) {
+            isDamageByPlayer = value;
+        }
 
         public void SetIgnoreUUID(System.Nullable<System.Guid> uuid) {
             ignoreUUID = uuid;

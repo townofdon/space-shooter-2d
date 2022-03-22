@@ -19,9 +19,9 @@ namespace Damage
             actor = GetComponentInParent<DamageableBehaviour>();
         }
 
-        public bool TakeDamage(float amount, DamageType damageType = DamageType.Default) {
+        public bool TakeDamage(float amount, DamageType damageType = DamageType.Default, bool isDamageByPlayer = false) {
             if (actor == null) return false;
-            return actor.TakeDamage(amount, damageType);
+            return actor.TakeDamage(amount, damageType, isDamageByPlayer);
         }
 
         public bool DrainShield(float amount) {
