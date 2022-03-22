@@ -84,9 +84,10 @@ namespace Physics {
                 hit = Physics2D.Linecast(_initialPosition + _origin, _initialPosition + _origin + _heading * 5f, selfLayerMask);
                 if (hit.collider != null && Utils.GetRootInstanceId(hit.collider.gameObject) == instanceId) {
                     _origin = _origin + hit.distance * _heading + _heading * 0.11f;
+                } else {
+                    _origin = _origin + _heading * 0.11f;
                 }
                 safeguard--;
-                if (safeguard == 0) Debug.LogWarning("INFINITE LOOP AVERTED");
             } while (hit.collider != null && _origin.magnitude < 5f && safeguard > 0);
 
             _didHit = false;

@@ -20,6 +20,7 @@ namespace UI
         [SerializeField] Color dangerFlag;
         [SerializeField] Color infoFlag;
         [SerializeField] Color friendlyFlag;
+        [SerializeField] float outOfRange = 20f;
         [SerializeField] bool debug = false;
 
         Vector2 minBounds;
@@ -33,55 +34,19 @@ namespace UI
         float padding = 15f;
         Vector3 markerPosition;
         Vector3 markerPositionWorld;
-        Coroutine removeFiringFlag;
         Canvas canvas;
 
         public void SetTarget(Transform _target) {
             target = _target;
         }
         public void SetFlagType(FlagType type) {
-            switch (type) {
-                case FlagType.Enemy:
-                    FlagEnemy();
-                    break;
-                case FlagType.Incoming:
-                    FlagIncoming();
-                    break;
-                case FlagType.Friendly:
-                    FlagFriendly();
-                    break;
-                case FlagType.Info:
-                    FlagInfo();
-                    break;
-                default:
-                    FlagEnemy();
-                    break;
-            }
+            flag = type;
+            InitFlag();
         }
         public void Disable() {
             gameObject.SetActive(false);
             marker.enabled = false;
             target = null;
-        }
-        public void FlagEnemy() {
-            BeforeFlag();
-            marker.color = enemyFlag;
-        }
-        public void FlagIncoming() {
-            BeforeFlag();
-            marker.color = dangerFlag;
-        }
-        public void FlagInfo() {
-            BeforeFlag();
-            marker.color = infoFlag;
-        }
-        public void FlagFriendly() {
-            BeforeFlag();
-            marker.color = friendlyFlag;
-        }
-
-        void BeforeFlag() {
-            if (removeFiringFlag != null) StopCoroutine(removeFiringFlag);
         }
 
         void Start() {
@@ -102,6 +67,10 @@ namespace UI
 
         void Update() {
             if (target == null || target.gameObject == null || !target.gameObject.activeSelf) {
+                marker.enabled = false;
+                return;
+            }
+            if (IsTrackedOutOfRange()) {
                 marker.enabled = false;
                 return;
             }
@@ -131,12 +100,16 @@ namespace UI
             }
         }
 
-        bool IsTrackedOutsideScreen() {
+        bool IsTrackedOutOfRange() {
+            return IsTrackedOutsideScreen(outOfRange);
+        }
+
+        bool IsTrackedOutsideScreen(float mod = 0f) {
             return
-                target.position.x < minBoundsWorld.x ||
-                target.position.y < minBoundsWorld.y ||
-                target.position.x > maxBoundsWorld.x ||
-                target.position.y > maxBoundsWorld.y;
+                target.position.x < minBoundsWorld.x - mod ||
+                target.position.y < minBoundsWorld.y - mod ||
+                target.position.x > maxBoundsWorld.x + mod ||
+                target.position.y > maxBoundsWorld.y + mod;
         }
 
         // so turns out you actually don't need the Pythagoran theorum for this, however the name is still cool and all so I'll keep it
@@ -175,16 +148,16 @@ namespace UI
         {
             if (!debug) return;
             if (GUILayout.Button("Flag Enemy")) {
-                FlagEnemy();
+                SetFlagType(FlagType.Enemy);
             }
             if (GUILayout.Button("Flag Incoming")) {
-                FlagIncoming();
+                SetFlagType(FlagType.Incoming);
             }
             if (GUILayout.Button("Flag Info")) {
-                FlagInfo();
+                SetFlagType(FlagType.Info);
             }
             if (GUILayout.Button("Flag Friendly")) {
-                FlagFriendly();
+                SetFlagType(FlagType.Friendly);
             }
         }
     }

@@ -305,6 +305,7 @@ namespace Player
             Collider2D collider = instance.GetComponent<Collider2D>();
             if (collider != null) player.IgnoreCollider(instance.GetComponent<Collider2D>());
             if (damager != null) {
+                damager.SetIsDamageByPlayer(true);
                 damager.SetIgnoreTag(UTag.Player);
                 damager.SetDamageMultiplier(weapon.damageMultiplier);
             }

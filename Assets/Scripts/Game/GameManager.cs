@@ -53,10 +53,12 @@ namespace Game {
 
         void OnEnable() {
             eventChannel.OnPlayerDeath.Subscribe(OnPlayerDeath);
+            eventChannel.OnEnemyDeath.Subscribe(OnEnemyDeath);
         }
 
         void OnDisable() {
             eventChannel.OnPlayerDeath.Unsubscribe(OnPlayerDeath);
+            eventChannel.OnEnemyDeath.Unsubscribe(OnEnemyDeath);
         }
 
         void Awake() {
@@ -98,7 +100,11 @@ namespace Game {
         }
 
         void OnPlayerDeath() {
-            Debug.Log("GAME MANAGER WAS NOTIFIED THAT THE PLAYER HAST DIED");
+            Debug.Log("TODO: RESPAWN PLAYER");
+        }
+
+        public void OnEnemyDeath(int instanceId, int points) {
+            // TODO: LOG SCORE DUE TO ENEMIES KILLED
         }
     }
 }

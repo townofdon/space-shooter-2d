@@ -145,7 +145,11 @@ namespace Damage
                     HandleJarringCollision(actor);
                     return;
                 }
-                if (actor.TakeDamage(damageClass.baseDamage * baseDamageMultiplier * upgradeDamageMultiplier * (makeFramerateIndependent ? Time.deltaTime : 1f), damageType)) {
+                if (actor.TakeDamage(
+                    damageClass.baseDamage * baseDamageMultiplier * upgradeDamageMultiplier * (makeFramerateIndependent ? Time.deltaTime : 1f),
+                    damageType,
+                    isDamageByPlayer
+                )) {
                     hitThisFrame = true;
                 }
                 if (rb != null) {
@@ -183,7 +187,7 @@ namespace Damage
             rb.AddForce(forceToSelf, ForceMode2D.Impulse);
             actor.rigidbody.AddForce(forceToActor * damageClass.throwbackForceMultiplier, ForceMode2D.Impulse);
             float damageToActor = collisionDamage * collisionMagnitude * Mathf.Max(1f, (rb.mass / actor.rigidbody.mass) * 0.05f);
-            actor.TakeDamage(damageToActor * baseDamageMultiplier, DamageType.Collision);
+            actor.TakeDamage(damageToActor * baseDamageMultiplier, DamageType.Collision, isDamageByPlayer);
         }
         void HandleJarringCollision(Collider2D other) {
             if (damageType != DamageType.Collision) return;

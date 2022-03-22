@@ -87,7 +87,6 @@ namespace Enemies
         Coroutine battle;
 
         public void OnEnemyDeath(int instanceId, int points) {
-            Debug.Log($"ENEMY WAS KILLED - {points} points");
             numEnemiesAlive = Mathf.Max(0, numEnemiesAlive - 1);
         }
 

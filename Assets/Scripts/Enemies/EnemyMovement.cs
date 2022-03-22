@@ -162,8 +162,6 @@ namespace Enemies
         }
 
         public void NotifySensorTriggered(Vector2 sensorDirection, ULayerType layerType) {
-            Debug.Log("SENSED: " + sensorDirection + " " + layerType);
-
             switch (layerType) {
                 case ULayerType.Enemies:
                     avoidanceHeading = -sensorDirection;
