@@ -60,6 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 75f5ec9714d2e8d46831301011a93cbb, type: 2}
   - {fileID: 11400000, guid: 19ddc4e0cad1fa54089eb6696c73b021, type: 2}
   - {fileID: 11400000, guid: 8b533002829a4c84699a5ab4d7dfab91, type: 2}
+  - {fileID: 11400000, guid: 7bc63524a666b054dae23e8f07f70cbc, type: 2}
   _weaponClasses:
   - {fileID: 11400000, guid: 1eed027b1f728ff4eaeb8b6a9b46da46, type: 2}
   - {fileID: 11400000, guid: 64bdf2d990497204a9af057bc5bad994, type: 2}

@@ -3309,7 +3309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &315460465
 Transform:
   m_ObjectHideFlags: 0
@@ -11520,8 +11520,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleSequences:
+  - {fileID: 11400000, guid: d2548fd5e495de34e9dc701c894b46ca, type: 2}
   - {fileID: 11400000, guid: 4f419a6dde1d242429167aa5b0557b24, type: 2}
-  - {fileID: 11400000, guid: 4d49a9ef0068b914583868ff6c682926, type: 2}
+  - {fileID: 11400000, guid: f2d2f4f7f23eb8440b4a4255a901eaa7, type: 2}
   loopIndefinitely: 0
   debug: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
@@ -11556,9 +11557,9 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1318690698}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Enemies.EnemySpawner, Assembly-CSharp
-        m_MethodName: OnEnemyDeath
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11567,7 +11568,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
 --- !u!1 &1348766266
 GameObject:
   m_ObjectHideFlags: 0

@@ -166,7 +166,7 @@ namespace Enemies
                 case ULayerType.Enemies:
                     avoidanceHeading = -sensorDirection;
                     avoiding.Start();
-                    if (rb != null) rb.AddForce(-sensorDirection * moveSpeed * 0.25f, ForceMode2D.Impulse);
+                    if (rb != null) rb.AddForce(-sensorDirection * rb.velocity.magnitude * 0.5f, ForceMode2D.Impulse);
                     break;
                 case ULayerType.Asteroids:
                 // determine if avoiding (if avoids > randomFloat)

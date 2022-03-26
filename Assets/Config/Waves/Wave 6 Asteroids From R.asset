@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
+  m_Name: Wave 6 Asteroids From R
+  m_EditorClassIdentifier: 
+  _enemies:
+  - _enemyPrefab: {fileID: 1023591117905801292, guid: 8c1657a500c8e3d42ba90f4268f032a2, type: 3}
+    _spawnLocation: E-2-3
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 3526694645234146253, guid: 183d0a4728a03384da921fca2976089c, type: 3}
+    _spawnLocation: E-7-3
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 4480459323800503186, guid: f489614132f985f42aaafa4f4f61e9aa, type: 3}
+    _spawnLocation: E-12-3
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 1023591117905801292, guid: 8c1657a500c8e3d42ba90f4268f032a2, type: 3}
+    _spawnLocation: E-17-3
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 3526694645234146253, guid: 183d0a4728a03384da921fca2976089c, type: 3}
+    _spawnLocation: E-22-3
+    _spawnOffset: {x: 0, y: 0}
+  _spawnInterval: 0.5
+  _spawnTimeVariance: 0
+  _minSpawnInterval: 0.25
+  _spawnLocation: 
+  _spawnOffset: {x: 0, y: 0}
+  launchHeading: {x: -1, y: 0}
+  headingVariance: 0
+  launchVelocity: 5
+  velocityVariance: 0
+  aimTowardsPlayer: 0.1
+  _path: {fileID: 0}
+  _pathfinderLoopMode: 3
+  _flipX: 0
+  _flipY: 0
+  _initialState: {fileID: 0}

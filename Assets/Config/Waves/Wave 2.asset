@@ -10,25 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
-  m_Name: Wave 3
+  m_Name: Wave 2
   m_EditorClassIdentifier: 
   _enemies:
   - _enemyPrefab: {fileID: 3481663802736239128, guid: 23ce3a528ee400f49b688edfeab043a0, type: 3}
-    _spawnOffset: {x: 0, y: 0, z: 0}
+    _spawnLocation: W-2-2
+    _spawnOffset: {x: 0, y: 0}
   - _enemyPrefab: {fileID: 3481663802736239128, guid: 23ce3a528ee400f49b688edfeab043a0, type: 3}
-    _spawnOffset: {x: 0.5, y: 0, z: 0}
+    _spawnLocation: W-2-2
+    _spawnOffset: {x: -0.5, y: 0}
   - _enemyPrefab: {fileID: 3481663802736239128, guid: 23ce3a528ee400f49b688edfeab043a0, type: 3}
-    _spawnOffset: {x: 1, y: 0, z: 0}
+    _spawnLocation: W-2-2
+    _spawnOffset: {x: -1, y: 0}
   - _enemyPrefab: {fileID: 3481663802736239128, guid: 23ce3a528ee400f49b688edfeab043a0, type: 3}
-    _spawnOffset: {x: 1.5, y: 0, z: 0}
+    _spawnLocation: W-2-2
+    _spawnOffset: {x: -1.5, y: 0}
   - _enemyPrefab: {fileID: 3481663802736239128, guid: 23ce3a528ee400f49b688edfeab043a0, type: 3}
-    _spawnOffset: {x: 2, y: 0, z: 0}
+    _spawnLocation: W-2-2
+    _spawnOffset: {x: -2, y: 0}
   _spawnInterval: 0.5
   _spawnTimeVariance: 0
   _minSpawnInterval: 0.25
-  _mode: 1
-  _spawnLocation: {fileID: 0}
-  _offset: {x: 0, y: 0, z: 0}
-  _path: {fileID: 4829922803226117694, guid: 3fa4ebecbc478024290db9e4a58f578f, type: 3}
+  _spawnLocation: 
+  _spawnOffset: {x: 0, y: 0}
+  _path: {fileID: 4829922803226117694, guid: 9f529b1b6e1511f4daf59f2004ed086d, type: 3}
   _pathfinderLoopMode: 3
   _initialState: {fileID: 11400000, guid: d3c2e7de5e3935d45a2c1c65ee68a49e, type: 2}

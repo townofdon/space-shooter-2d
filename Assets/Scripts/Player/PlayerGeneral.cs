@@ -230,7 +230,7 @@ namespace Player {
             }
         }
 
-        void OnDeath(bool isDamageByPlayer) {
+        void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             if (shakeGamepadCoroutine != null) StopCoroutine(shakeGamepadCoroutine);
             shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(1.2f, 1f, 1f));
             deathCoroutine = StartCoroutine(DeathAnimation());

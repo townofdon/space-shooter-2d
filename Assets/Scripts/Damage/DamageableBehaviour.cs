@@ -39,7 +39,7 @@ namespace Damage {
 
         [Header("Events / Callbacks")][Space]
         // Action callbacks can be set via the Editor OR via RegisterCallbacks()
-        [SerializeField] System.Action<bool> _onDeath;
+        [SerializeField] System.Action<DamageType, bool> _onDeath;
         [SerializeField] System.Action<float> _onHealthTaken;
         [SerializeField] System.Action<float, DamageType, bool> _onHealthDamage;
         [SerializeField] System.Action _onShieldDepleted;
@@ -107,7 +107,7 @@ namespace Damage {
         }
 
         protected void RegisterHealthCallbacks(
-            System.Action<bool> onDeath,
+            System.Action<DamageType, bool> onDeath,
             System.Action<float, DamageType, bool> onHealthDamage,
             System.Action<float> onHealthTaken
         ) {
@@ -178,7 +178,7 @@ namespace Damage {
             if (damageType == DamageType.Instakill) {
                 _health = Mathf.Min(0f, _health - amount);
                 _shield = 0f;
-                _Die(isDamageByPlayer);
+                _Die(damageType, isDamageByPlayer);
                 return true;
             }
 
@@ -226,7 +226,7 @@ namespace Damage {
             _prevShield = _shield;
 
             if (_health <= 0f) {
-                if (_isAlive) _Die(isDamageByPlayer);
+                if (_isAlive) _Die(damageType, isDamageByPlayer);
             }
 
             return true;
@@ -243,10 +243,10 @@ namespace Damage {
             damageSpriteTarget.material = defaultMaterial;
         }
 
-        private void _Die(bool isDamageByPlayer) {
+        private void _Die(DamageType damageType, bool isDamageByPlayer) {
             _isAlive = false;
             _DisableColliders();
-            InvokeCallback(_onDeath, isDamageByPlayer);
+            InvokeCallback(_onDeath, damageType, isDamageByPlayer);
             if (_destroyOnDeath) Destroy(gameObject);
             if (OnDeathEvent != null) OnDeathEvent();
         }
@@ -274,6 +274,11 @@ namespace Damage {
         private void InvokeCallback(System.Action<bool> action, bool boolValue) {
             if (action != null) {
                 action.Invoke(boolValue);
+            }
+        }
+        private void InvokeCallback(System.Action<DamageType, bool> action, DamageType damageType, bool boolValue) {
+            if (action != null) {
+                action.Invoke(damageType, boolValue);
             }
         }
         private void InvokeCallback(System.Action<float> action, float amount) {

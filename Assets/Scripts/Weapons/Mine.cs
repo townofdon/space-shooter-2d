@@ -138,8 +138,8 @@ namespace Weapons
             blastbackDirection = (transform.position - other.transform.position).normalized;
         }
 
-        void OnDeath(bool isDamageByPlayer) {
-            Explode();
+        void OnDeath(DamageType damageType, bool isDamageByPlayer) {
+            Explode(damageType == DamageType.InstakillQuiet);
         }
 
         void Activate() {
@@ -156,19 +156,19 @@ namespace Weapons
             StartCoroutine(ITripped());
         }
 
-        void Explode() {
+        void Explode(bool quiet = false) {
             if (isSploded) return;
             isSploded = true;
-            StartCoroutine(ISplode());
+            StartCoroutine(ISplode(quiet));
         }
 
-        IEnumerator ISplode() {
+        IEnumerator ISplode(bool quiet = false) {
             // wait a small amount of time to create cascade chain explosions
             yield return new WaitForSeconds(0.1f);
             if (sr != null) sr.enabled = false;
             if (anim != null) anim.speed = 0f;
             trippedSound.Stop();
-            if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
+            if (explosion != null && !quiet) Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject, 5f);
         }
 

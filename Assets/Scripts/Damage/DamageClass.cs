@@ -3,14 +3,15 @@ using UnityEngine;
 namespace Damage
 {
     public enum DamageType {
-      Default,
-      Collision,
-      Explosion,
-      Laser,
-      Bullet,
-      Nuke,
-      Disruptor,
-      Instakill,
+        Default,
+        Collision,
+        Explosion,
+        Laser,
+        Bullet,
+        Nuke,
+        Disruptor,
+        Instakill,
+        InstakillQuiet,
     }
 
     [CreateAssetMenu(fileName = "DamageClass", menuName = "ScriptableObjects/DamageClass", order = 0)]

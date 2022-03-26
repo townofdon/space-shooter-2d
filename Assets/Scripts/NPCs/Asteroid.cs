@@ -39,11 +39,13 @@ namespace NPCs
         }
 
         public void OnHealthDamage(float amount, DamageType damageType, bool isDamageByPlayer) { }
-        public void OnDeath(bool isDamageByPlayer) {
+        public void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             // stop dat spinning
             rb.angularVelocity = 0f;
-            SpawnDebris();
-            rockExplodeSound.Play();
+            if (damageType != DamageType.InstakillQuiet) {
+                SpawnDebris();
+                rockExplodeSound.Play();
+            }
             StartCoroutine(IDeathFX());
         }
 
@@ -55,7 +57,7 @@ namespace NPCs
         void SpawnLilGuy(GameObject smallRock) {
             GameObject instance = Instantiate(smallRock, transform.position, Quaternion.identity);
             Rigidbody2D rbInstance = instance.GetComponent<Rigidbody2D>();
-            rbInstance.velocity = rb.velocity + UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(0.5f, 5f);
+            if (rbInstance != null) rbInstance.velocity = rb.velocity + UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(0.5f, 5f);
         }
 
         IEnumerator IDeathFX() {

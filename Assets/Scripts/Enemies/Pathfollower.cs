@@ -47,6 +47,9 @@ namespace Enemies {
         bool hasCrossedHeadingY = false;
         bool isOffscreen = false;
 
+        bool flipX = false;
+        bool flipY = false;
+
         // FSM STATE
         bool _isPathComplete = false;
         bool _isStarted = false;
@@ -65,7 +68,9 @@ namespace Enemies {
             loopMode = mode;
         }
 
-        public void SetWaypoints(List<Transform> waypoints) {
+        public void SetWaypoints(List<Transform> waypoints, bool shouldFlipX, bool shouldFlipY) {
+            flipX = shouldFlipX;
+            flipY = shouldFlipY;
             this.waypoints = new List<Transform>();
             foreach (Transform waypoint in waypoints) this.waypoints.Add(waypoint);
         }
@@ -286,8 +291,16 @@ namespace Enemies {
             {
                 if (i == waypointIndex) Gizmos.color = Color.green;
                 else Gizmos.color = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, 0.5f);
-                Gizmos.DrawSphere(waypoints[i].position, .2f);
+                Gizmos.DrawSphere(GetWaypointPosition(waypoints[i].position), .2f);
             }
+        }
+
+        Vector3 GetWaypointPosition(Vector3 position) {
+            // note - this only works because it's 2D
+            if (flipX && flipY) return -position;
+            if (flipX) return Vector2.Reflect(position, Vector2.up);
+            if (flipY) return Vector2.Reflect(position, Vector2.right);
+            return position;
         }
 
         

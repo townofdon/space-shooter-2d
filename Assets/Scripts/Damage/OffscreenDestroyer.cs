@@ -38,7 +38,7 @@ namespace Damage
                 timeOutsideBounds = 0f;
             }
             if (timeOutsideBounds >= offscreenLifetime && actor != null) {
-                actor.TakeDamage(1000f, DamageType.Instakill);
+                actor.TakeDamage(1000f, DamageType.InstakillQuiet);
             }
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Event;
 using Battle;
+using Player;
 
 namespace Enemies
 {
@@ -15,8 +16,14 @@ namespace Enemies
         [SerializeField] bool debug = false;
         [SerializeField] EventChannelSO eventChannel;
 
+        // cached
+        PlayerGeneral player;
+
+        // state
         int numEnemiesAlive = 0;
+        int battleSequenceIndex = 0;
         int battleEventIndex = 0;
+        WaveConfigSO currentWave;
         Coroutine currentWaveSpawn;
         Coroutine battle;
 
@@ -48,10 +55,12 @@ namespace Enemies
             do
             {
                 foreach (var battleSequence in battleSequences) {
+                    battleEventIndex = 0;
                     foreach (var battleEvent in battleSequence.battleEvents) {
                         if (battleEvent.Skip) { battleEventIndex++; continue; }
                         yield return OnBattleEvent(battleEvent);
                     }
+                    battleSequenceIndex++;
                 }
             } while (loopIndefinitely);
             BattleFinished();
@@ -64,6 +73,7 @@ namespace Enemies
                     break;
                 case BattleEventType.Wave:
                     if (battleEvent.Wave != null) {
+                        currentWave = battleEvent.Wave;
                         currentWaveSpawn = StartCoroutine(SpawnEnemies(battleEvent.Wave));
                         numEnemiesAlive += battleEvent.Wave.enemyCount;
                     }
@@ -100,18 +110,15 @@ namespace Enemies
             battleEventIndex++;
         }
 
-
         IEnumerator SpawnEnemies(WaveConfigSO wave) {
             if (wave != null) {
-                for (int i = 0; i < wave.enemyCount; i++) {
-                    // spawn enemy
-                    GameObject enemy = Instantiate(wave.GetEnemy(i).prefab,
-                        wave.GetSpawnPosition() + wave.GetEnemy(i).spawnOffset,
-                        Quaternion.identity,
-                        transform);
-                    if (wave.mode == WaveConfigSO.Mode.FollowPath) {
-                        SetEnemyPathfollow(enemy, wave.GetWaypoints(), wave.pathfinderLoopMode);
+                for (int i = 0; i < wave.spawnCount; i++) {
+                    player = PlayerUtils.FindPlayer();
+                    GameObject enemy = SpawnObject(wave.GetEnemy(i), wave);
+                    if (wave.HasPath()) {
+                        SetEnemyPathfollow(enemy, wave.GetWaypoints(), wave.pathfinderLoopMode, wave.flipX, wave.flipY);
                     }
+                    LaunchEnemy(enemy, wave);
                     // TODO: REPLACE WITH B-TREE
                     SetEnemyFSM(enemy, wave.initialState);
                     yield return new WaitForSeconds(wave.spawnInterval);
@@ -119,10 +126,22 @@ namespace Enemies
             }
         }
 
-        void SetEnemyPathfollow(GameObject enemy, List<Transform> waypoints, PathfinderLoopMode loopMode) {
+        GameObject SpawnObject(WaveEnemy enemy, WaveConfigSO wave) {
+            return Instantiate(
+                enemy.prefab,
+                (enemy.hasSpawnLocation
+                    ? wave.ParseSpawnLocation(enemy.spawnLocation) + (Vector2)enemy.spawnOffset
+                    : wave.GetSpawnPosition()
+                ),
+                Quaternion.identity,
+                transform
+            );
+        }
+
+        void SetEnemyPathfollow(GameObject enemy, List<Transform> waypoints, PathfinderLoopMode loopMode, bool flipX, bool flipY) {
             var pathFollower = enemy.GetComponent<Pathfollower>();
             if (pathFollower == null) return;
-            pathFollower.SetWaypoints(waypoints);
+            pathFollower.SetWaypoints(waypoints, flipX, flipY);
             pathFollower.SetLoopMode(loopMode);
             pathFollower.Begin();
             var enemyMovement = enemy.GetComponent<EnemyMovement>();
@@ -134,6 +153,12 @@ namespace Enemies
             var machine = enemy.GetComponent<FSM.FiniteStateMachine>();
             if (machine == null) return;
             machine.SetState(initialState);
+        }
+
+        void LaunchEnemy(GameObject enemy, WaveConfigSO wave) {
+            var rb = enemy.GetComponent<Rigidbody2D>();
+            if (rb == null) return;
+            rb.velocity = wave.GetLaunchVelocity(enemy.transform.position, player != null ? player.transform.position : Vector2.zero);
         }
 
         IEnumerator DestroyAllEnemiesPresent() {
@@ -148,8 +173,73 @@ namespace Enemies
 
         void OnGUI() {
             if (!debug) return;
+            GUILayout.TextField("Seq " + battleSequenceIndex);
             GUILayout.TextField("Event " + battleEventIndex);
             GUILayout.TextField(numEnemiesAlive.ToString());
+        }
+
+        void OnDrawGizmos() {
+            if (!debug) return;
+            if (currentWave != null) {
+                float radius = 0.4f;
+
+                string[] cardinals = new string[] {
+                    "N",
+                    "S",
+                    "E",
+                    "W",
+                };
+                string[] indices = new string[] {
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "19",
+                    "20",
+                    "21",
+                    "22",
+                    "23",
+                    "24",
+                };
+                string[] offsets = new string[] {
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                };
+
+                foreach (var cardinal in cardinals) {
+                    Gizmos.color = Color.magenta;
+                    if (cardinal == "N") Gizmos.color = Color.cyan;
+                    if (cardinal == "W") Gizmos.color = Color.yellow;
+                    if (cardinal == "E") Gizmos.color = Color.red;
+                    if (cardinal == "S") Gizmos.color = Color.blue;
+                    foreach (var index in indices) {
+                        foreach (var offset in offsets) {
+                            Gizmos.DrawSphere(currentWave.ParseSpawnLocation(
+                                $"{cardinal}-{index}-{offset}"
+                            ), radius);
+                        }
+                    }
+                }
+            }
         }
 
         // handy enumerator code below

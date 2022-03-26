@@ -74,13 +74,15 @@ namespace Enemies {
             damageSound.Play();
         }
 
-        void OnDeath(bool isDamageByPlayer) {
+        void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             RemoveMarker();
             // OnEnemyDeath.Raise(); // old event
             eventChannel.OnEnemyDeath.Invoke(Utils.GetRootInstanceId(gameObject), GetDeathPoints(isDamageByPlayer));
             rb.drag = originalDrag; // to make it seem like it was there all along
-            deathSound.Play();
-            pickups.Spawn(transform.position, rb);
+            if (damageType != DamageType.InstakillQuiet) {
+                deathSound.Play();
+                pickups.Spawn(transform.position, rb);
+            }
             StartCoroutine(DeathAnimation());
         }
 

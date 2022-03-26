@@ -153,14 +153,21 @@ namespace Core {
 
         // cached state
         static bool hasInitializedBounds = false;
+        static Camera cachedCamera;
         static Vector2 minScreenBoundsWorld;
         static Vector2 maxScreenBoundsWorld;
 
+        public static Camera GetCamera(Camera camera = null) {
+            if (camera != null) return camera;
+            if (cachedCamera == null) cachedCamera = Camera.main;
+            return cachedCamera;
+        }
+
         public static (Vector2, Vector2) GetScreenBounds(Camera camera = null, float offscreenPadding = 1f, bool forceCalc = false) {
-            if (camera == null) camera = Camera.main;
             if (hasInitializedBounds && !forceCalc) return (
                 minScreenBoundsWorld - Vector2.one * offscreenPadding,
                 maxScreenBoundsWorld + Vector2.one * offscreenPadding);
+            camera = GetCamera(camera);
             minScreenBoundsWorld = camera.ViewportToWorldPoint(Vector2.zero);
             maxScreenBoundsWorld = camera.ViewportToWorldPoint(Vector2.one);
             hasInitializedBounds = true;
@@ -170,7 +177,7 @@ namespace Core {
         }
 
         public static bool IsObjectOnScreen(GameObject obj, Camera camera = null, float offscreenPadding = 1f) {
-            if (camera == null) camera = Camera.main;
+            camera = GetCamera(camera);
             (Vector2 _minBoundsWorld, Vector2 _maxBoundsWorld) = Utils.GetScreenBounds(camera, offscreenPadding);
             return
                 obj.transform.position.x > _minBoundsWorld.x &&
@@ -180,7 +187,7 @@ namespace Core {
         }
 
         public static bool IsObjectHeadingAwayFromCenterScreen(GameObject obj, Rigidbody2D rb, Camera camera = null) {
-            if (camera == null) camera = Camera.main;
+            camera = GetCamera(camera);
             if (obj.transform.position.x > camera.transform.position.x && rb.velocity.x > 0) return true;
             if (obj.transform.position.x < camera.transform.position.x && rb.velocity.x < 0) return true;
             if (obj.transform.position.y > camera.transform.position.y && rb.velocity.y > 0) return true;
