@@ -1,17 +1,17 @@
-// using BadCupcake.Cyclic.Item;
-// using BadCupcake.Cyclic.Utility;
-using System;
-using UnityEditor;
+
 using UnityEngine;
- 
-namespace Enemies {
+using UnityEditor;
+
+using Game;
+
+namespace Battle {
 
     [CustomPropertyDrawer(typeof(BattleEvent))]
-    public class EnemySpawnerPropertyDrawer : PropertyDrawer {
+    public class BattleSequencePropertyDrawer : PropertyDrawer {
         private float rowHeight = 20;
         private float padding = 4;
         private bool isStriped = false;
-    
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             EditorGUI.BeginProperty(position, label, property);
             SerializedProperty eventLabel = property.FindPropertyRelative("eventLabel");
@@ -24,13 +24,23 @@ namespace Enemies {
             SerializedProperty arbitraryEvent = property.FindPropertyRelative("arbitraryEvent");
             SerializedProperty skip = property.FindPropertyRelative("skip");
 
+            // SerializedProperty coloursProp = property.FindPropertyRelative("colours");
+            // BattleEventColoursSO colours = (BattleEventColoursSO)coloursProp.objectReferenceValue;
+
+            // if (colours == null) {
+            //     Rect colorsLabelRect = new Rect(position.xMin + padding, position.yMin + rowHeight * 0 + padding, position.width - padding * 2, rowHeight);
+            //     EditorGUI.PropertyField(colorsLabelRect, coloursProp, new GUIContent("Colours (required)"));
+            //     return;
+            // }
+
+
             // COLOURS
-            SerializedProperty fieldColorWave = property.FindPropertyRelative("fieldColorWave");
-            SerializedProperty fieldColorBoss = property.FindPropertyRelative("fieldColorBoss");
-            SerializedProperty fieldColorFormation = property.FindPropertyRelative("fieldColorFormation");
-            SerializedProperty fieldColorWait = property.FindPropertyRelative("fieldColorWait");
-            SerializedProperty fieldColorEvent = property.FindPropertyRelative("fieldColorEvent");
-            SerializedProperty fieldColorLabel = property.FindPropertyRelative("fieldColorLabel");
+            // SerializedProperty fieldColorWave = property.FindPropertyRelative("fieldColorWave");
+            // SerializedProperty fieldColorBoss = property.FindPropertyRelative("fieldColorBoss");
+            // SerializedProperty fieldColorFormation = property.FindPropertyRelative("fieldColorFormation");
+            // SerializedProperty fieldColorWait = property.FindPropertyRelative("fieldColorWait");
+            // SerializedProperty fieldColorEvent = property.FindPropertyRelative("fieldColorEvent");
+            // SerializedProperty fieldColorLabel = property.FindPropertyRelative("fieldColorLabel");
 
             // BACKGROUND
             isStriped = !isStriped;
@@ -39,31 +49,30 @@ namespace Enemies {
             } else {
                 EditorGUI.DrawRect(position, new Color(0.1f, 0.1f, 0.1f, 1f));
             }
-            switch ((BattleEventType)type.enumValueIndex)
-            {
+            switch ((BattleEventType)type.enumValueIndex) {
                 case BattleEventType.Wave:
-                    EditorGUI.DrawRect(position, EnemySpawner.fieldColorWave);
+                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventWave);
                     break;
                 case BattleEventType.Boss:
-                    EditorGUI.DrawRect(position, EnemySpawner.fieldColorBoss);
+                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventBoss);
                     break;
                 case BattleEventType.Formation:
-                    EditorGUI.DrawRect(position, EnemySpawner.fieldColorFormation);
+                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventFormation);
                     break;
                 case BattleEventType.WaitForArbitraryTime:
-                    EditorGUI.DrawRect(position, EnemySpawner.fieldColorWait);
+                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventWait);
                     break;
                 case BattleEventType.WaitUntilEnemiesDestroyed:
-                    // EditorGUI.DrawRect(position, EnemySpawner.fieldColorWait);
+                    // EditorGUI.DrawRect(position, GameColours.inspectorBattleEventWait);
                     break;
                 case BattleEventType.WaitUntilWaveSpawnFinished:
-                    EditorGUI.DrawRect(position, EnemySpawner.fieldColorWait);
+                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventWait);
                     break;
                 case BattleEventType.ArbitraryEvent:
-                    EditorGUI.DrawRect(position, EnemySpawner.fieldColorEvent);
+                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventEvent);
                     break;
                 case BattleEventType.EventLabel:
-                    EditorGUI.DrawRect(position, EnemySpawner.fieldColorLabel);
+                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventLabel);
                     break;
                 default:
                     break;
@@ -71,12 +80,12 @@ namespace Enemies {
 
             float xMin = position.xMin;
             float yMin = position.yMin;
-            Rect labelPosition = new Rect(xMin + padding, yMin + rowHeight*0 + padding, position.width - padding * 2, rowHeight);
-            Rect titlePosition = new Rect(xMin + padding, yMin + rowHeight*1 + padding, position.width - padding * 2, rowHeight);
+            Rect labelPosition = new Rect(xMin + padding, yMin + rowHeight * 0 + padding, position.width - padding * 2, rowHeight);
+            Rect titlePosition = new Rect(xMin + padding, yMin + rowHeight * 1 + padding, position.width - padding * 2, rowHeight);
             float col = position.width / 12f;
-            Rect c0 = new Rect(xMin + col*0 + padding, yMin + rowHeight*2 + padding, col*2 - padding * 2, rowHeight);
-            Rect c1 = new Rect(xMin + col*2 + padding, yMin + rowHeight*2 + padding, col*2 - padding * 2, rowHeight);
-            Rect c2 = new Rect(xMin + col*4 + padding, yMin + rowHeight*2 + padding, col*8 - padding * 2, rowHeight);
+            Rect c0 = new Rect(xMin + col * 0 + padding, yMin + rowHeight * 2 + padding, col * 2 - padding * 2, rowHeight);
+            Rect c1 = new Rect(xMin + col * 2 + padding, yMin + rowHeight * 2 + padding, col * 2 - padding * 2, rowHeight);
+            Rect c2 = new Rect(xMin + col * 4 + padding, yMin + rowHeight * 2 + padding, col * 8 - padding * 2, rowHeight);
             // Rect c3 = new Rect(); // more cols if you need 'em
             // Rect c4 = new Rect();
             // Rect c5 = new Rect();
@@ -95,8 +104,7 @@ namespace Enemies {
                 EditorGUI.PropertyField(c1, skip, GUIContent.none);
             }
 
-            switch ((BattleEventType)type.enumValueIndex)
-            {
+            switch ((BattleEventType)type.enumValueIndex) {
                 case BattleEventType.Wave:
                     EditorGUI.PropertyField(c2, wave, GUIContent.none);
                     break;
@@ -124,11 +132,10 @@ namespace Enemies {
             // EditorGUI.DrawRect(new Rect(position.xMin, position.yMax - rowPadBottom, position.width, 1f), Color.gray);
             EditorGUI.EndProperty();
         }
-    
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             SerializedProperty type = property.FindPropertyRelative("type");
-            switch ((BattleEventType)type.enumValueIndex)
-            {
+            switch ((BattleEventType)type.enumValueIndex) {
                 case BattleEventType.ArbitraryEvent:
                     return (rowHeight + padding * 2) * 7;
                 case BattleEventType.EventLabel:

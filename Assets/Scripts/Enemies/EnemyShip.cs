@@ -74,7 +74,7 @@ namespace Enemies {
             damageSound.Play();
         }
 
-        public void OnDeath(bool isDamageByPlayer) {
+        void OnDeath(bool isDamageByPlayer) {
             RemoveMarker();
             // OnEnemyDeath.Raise(); // old event
             eventChannel.OnEnemyDeath.Invoke(Utils.GetRootInstanceId(gameObject), GetDeathPoints(isDamageByPlayer));
@@ -82,7 +82,10 @@ namespace Enemies {
             deathSound.Play();
             pickups.Spawn(transform.position, rb);
             StartCoroutine(DeathAnimation());
+        }
 
+        public void OnDeathByGuardians() {
+            TakeDamage(1000f, DamageType.Instakill, false);
         }
 
         int GetDeathPoints(bool isDamageByPlayer) {

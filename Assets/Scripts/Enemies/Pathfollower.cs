@@ -1,6 +1,8 @@
 using System.Collections.Generic;
-using Core;
 using UnityEngine;
+
+using Core;
+using Event;
 
 namespace Enemies {
 
@@ -24,6 +26,8 @@ namespace Enemies {
         [SerializeField] PathfinderLoopMode loopMode;
         [SerializeField] float waypointTriggerRadius = 0.25f;
         [SerializeField] Transform path;
+
+        VoidEventHandler OnPathComplete = new VoidEventHandler();
 
         // components
         EnemyShip enemy;
@@ -216,6 +220,7 @@ namespace Enemies {
 
         void OnPathEnd() {
             waypointIndex = 0;
+            OnPathComplete.Invoke();
             switch (loopMode)
             {
                 case PathfinderLoopMode.HaltAtEnd:
@@ -223,7 +228,7 @@ namespace Enemies {
                     Halt();
                     break;
                 case PathfinderLoopMode.Destroy:
-                    enemy.OnDeath(false);
+                    enemy.TakeDamage(1000f, Damage.DamageType.Instakill, false);
                     break;
                 case PathfinderLoopMode.Circular:
                     UpdateTarget();

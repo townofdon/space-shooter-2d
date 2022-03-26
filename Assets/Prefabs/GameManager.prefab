@@ -34,6 +34,7 @@ Transform:
   - {fileID: 1427305367275719997}
   - {fileID: 7835632799870548345}
   - {fileID: 5676628042550478045}
+  - {fileID: 6113766315020295640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -110,6 +111,56 @@ MonoBehaviour:
   starfieldWarp: {fileID: 8265752215700292112}
   starfieldWarpSpeed: 100
   starfieldWarpAccel: 100
+--- !u!1 &4880911372342419123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6113766315020295640}
+  - component: {fileID: 3901650744334064351}
+  m_Layer: 0
+  m_Name: GameColours
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6113766315020295640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880911372342419123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3488655753409945414}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3901650744334064351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880911372342419123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d310118b8bf5b144a5a86e482297aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inspectorBattleEventWave: {r: 0.42271298, g: 0.14117646, b: 0.77254903, a: 1}
+  _inspectorBattleEventFormation: {r: 0, g: 0, b: 0, a: 1}
+  _inspectorBattleEventBoss: {r: 1, g: 0.15733539, b: 0.054901958, a: 1}
+  _inspectorBattleEventWait: {r: 0.040628344, g: 0.59967095, b: 0.7830189, a: 1}
+  _inspectorBattleEventEvent: {r: 0.990566, g: 0.5898069, b: 0.014017418, a: 1}
+  _inspectorBattleEventLabel: {r: 0.65599096, g: 0.631675, b: 0.8018868, a: 1}
 --- !u!1001 &3226595600951443142
 PrefabInstance:
   m_ObjectHideFlags: 0

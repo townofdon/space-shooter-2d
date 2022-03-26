@@ -1,85 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-using Game;
 using Event;
+using Battle;
 
 namespace Enemies
 {
-    enum BattleEventType {
-        Wave,
-        Formation,
-        Boss,
-        WaitForArbitraryTime,
-        WaitUntilEnemiesDestroyed,
-        WaitUntilWaveSpawnFinished,
-        ArbitraryEvent,
-        EventLabel,
-        // ChangeMusic,
-    }
 
-    [System.Serializable]
-    class BattleEvent {
-        [SerializeField] bool skip;
-        [SerializeField] BattleEventType type;
-        [SerializeField] string eventLabel;
-        // could be a wave, a formation, a boss, incoming asteroids etc.
-        [SerializeField] WaveConfigSO wave;
-        [SerializeField] GameObject formation;
-        [SerializeField] GameObject boss;
-        [SerializeField] float arbitraryTime = 0f;
-        [SerializeField] int allowableEnemiesLeft = 0;
-        [SerializeField] UnityEvent arbitraryEvent;
+    public class EnemySpawner : MonoBehaviour {
+        [SerializeField] List<BattleSequence> battleSequences;
 
-        // inspector colors
-        [SerializeField] Color fieldColorWave;
-        [SerializeField] Color fieldColorFormation;
-        [SerializeField] Color fieldColorBoss;
-        [SerializeField] Color fieldColorWait;
-        [SerializeField] Color fieldColorEvent;
-        [SerializeField] Color fieldColorLabel;
-
-        public bool Skip => skip;
-        public BattleEventType Type => type;
-        public WaveConfigSO Wave => wave;
-        public float ArbitraryTime => arbitraryTime;
-        public int AllowableEnemiesLeft => allowableEnemiesLeft;
-        public UnityEvent ArbitraryEvent => arbitraryEvent;
-    }
-
-    public class EnemySpawner : MonoBehaviour, ISerializationCallbackReceiver
-    {
-        [SerializeField] List<BattleEvent> battleEvents;
         [SerializeField] bool loopIndefinitely = false;
         [SerializeField] bool debug = false;
-        // [SerializeField] GameEvent OnBattleFinished; // old event
         [SerializeField] EventChannelSO eventChannel;
-
-        // all this nonsense just to get colours to show like I want them...
-        [Header("Battle Event Colours")][Space]
-        [SerializeField] Color _fieldColorWave;
-        [SerializeField] Color _fieldColorFormation;
-        [SerializeField] Color _fieldColorBoss;
-        [SerializeField] Color _fieldColorWait;
-        [SerializeField] Color _fieldColorEvent;
-        [SerializeField] Color _fieldColorLabel;
-        public static Color fieldColorWave;
-        public static Color fieldColorFormation;
-        public static Color fieldColorBoss;
-        public static Color fieldColorWait;
-        public static Color fieldColorEvent;
-        public static Color fieldColorLabel;
-        public void OnBeforeSerialize() {}
-        public void OnAfterDeserialize() {
-            fieldColorWave = _fieldColorWave;
-            fieldColorFormation = _fieldColorFormation;
-            fieldColorBoss = _fieldColorBoss;
-            fieldColorWait = _fieldColorWait;
-            fieldColorEvent = _fieldColorEvent;
-            fieldColorLabel = _fieldColorLabel;
-        }
 
         int numEnemiesAlive = 0;
         int battleEventIndex = 0;
@@ -91,7 +25,6 @@ namespace Enemies
         }
 
         public void BattleFinished() {
-            // if (OnBattleFinished != null) OnBattleFinished.Raise();
             eventChannel.OnWinLevel.Invoke();
         }
 
@@ -114,51 +47,59 @@ namespace Enemies
         IEnumerator PlayBattle() {
             do
             {
-                yield return null;
-                foreach (var battleEvent in battleEvents)
-                {
-                    if (battleEvent.Skip) { battleEventIndex++; continue; }
-                    switch (battleEvent.Type) {
-                        case BattleEventType.EventLabel:
-                            // inspector only
-                            break;
-                        case BattleEventType.Wave:
-                            if (battleEvent.Wave != null) {
-                                currentWaveSpawn = StartCoroutine(SpawnEnemies(battleEvent.Wave));
-                                numEnemiesAlive += battleEvent.Wave.enemyCount;
-                            }
-                            break;
-                        case BattleEventType.Boss:
-                            // TODO: SPAWN BOSS
-                            break;
-                        case BattleEventType.Formation:
-                            // TODO: SPAWN FORMATION
-                            break;
-                        case BattleEventType.WaitForArbitraryTime:
-                            yield return new WaitForSeconds(battleEvent.ArbitraryTime);
-                            break;
-                        case BattleEventType.WaitUntilEnemiesDestroyed:
-                            while (numEnemiesAlive > battleEvent.AllowableEnemiesLeft) yield return null;
-                            break;
-                        case BattleEventType.WaitUntilWaveSpawnFinished:
-                            if (currentWaveSpawn != null) yield return currentWaveSpawn;
-                            break;
-                        case BattleEventType.ArbitraryEvent:
-                            if (battleEvent.ArbitraryEvent != null) {
-                                battleEvent.ArbitraryEvent.Invoke();
-                            }
-                            break;
-                        // case BattleEventType.ChangeMusic:
-                        //     break;
-                        default:
-                            Debug.LogError("Unsupported BattleEventType: " + battleEvent.Type);
-                            break;
+                foreach (var battleSequence in battleSequences) {
+                    foreach (var battleEvent in battleSequence.battleEvents) {
+                        if (battleEvent.Skip) { battleEventIndex++; continue; }
+                        yield return OnBattleEvent(battleEvent);
                     }
-                    battleEventIndex++;
                 }
             } while (loopIndefinitely);
             BattleFinished();
         }
+
+        IEnumerator OnBattleEvent(BattleEvent battleEvent) {
+            switch (battleEvent.Type) {
+                case BattleEventType.EventLabel:
+                    // inspector only
+                    break;
+                case BattleEventType.Wave:
+                    if (battleEvent.Wave != null) {
+                        currentWaveSpawn = StartCoroutine(SpawnEnemies(battleEvent.Wave));
+                        numEnemiesAlive += battleEvent.Wave.enemyCount;
+                    }
+                    break;
+                case BattleEventType.Boss:
+                    // TODO: SPAWN BOSS
+                    break;
+                case BattleEventType.Formation:
+                    // TODO: SPAWN FORMATION
+                    break;
+                case BattleEventType.WaitForArbitraryTime:
+                    yield return new WaitForSeconds(battleEvent.ArbitraryTime);
+                    break;
+                case BattleEventType.WaitUntilEnemiesDestroyed:
+                    while (numEnemiesAlive > battleEvent.AllowableEnemiesLeft) yield return null;
+                    break;
+                case BattleEventType.WaitUntilWaveSpawnFinished:
+                    if (currentWaveSpawn != null) yield return currentWaveSpawn;
+                    break;
+                case BattleEventType.ArbitraryEvent:
+                    if (battleEvent.ArbitraryEvent != null) {
+                        battleEvent.ArbitraryEvent.Invoke();
+                    }
+                    break;
+                case BattleEventType.DestroyAllEnemiesPresent:
+                    yield return DestroyAllEnemiesPresent();
+                    break;
+                // case BattleEventType.ChangeMusic:
+                //     break;
+                default:
+                    Debug.LogError("Unsupported BattleEventType: " + battleEvent.Type);
+                    break;
+            }
+            battleEventIndex++;
+        }
+
 
         IEnumerator SpawnEnemies(WaveConfigSO wave) {
             if (wave != null) {
@@ -171,32 +112,12 @@ namespace Enemies
                     if (wave.mode == WaveConfigSO.Mode.FollowPath) {
                         SetEnemyPathfollow(enemy, wave.GetWaypoints(), wave.pathfinderLoopMode);
                     }
+                    // TODO: REPLACE WITH B-TREE
                     SetEnemyFSM(enemy, wave.initialState);
-
-                    // TODO: REMOVE
-                    // switch (wave.mode)
-                    // {
-                    //     case WaveConfigSO.Mode.FollowPath:
-                    //         OnEnemyPathFollow(wave.GetEnemy(i), wave.GetSpawnPosition(), wave.GetWaypoints());
-                    //         break;
-                    //     case WaveConfigSO.Mode.Spawn:
-                    //         OnEnemySpawn(wave.GetEnemy(i), wave.GetSpawnPosition());
-                    //         break;
-                    //     default:
-                    //         break;
-                    // }
                     yield return new WaitForSeconds(wave.spawnInterval);
                 }
             }
         }
-
-        // GameObject OnEnemySpawn(WaveEnemy waveEnemy, Vector3 spawnPosition) {
-        //     GameObject enemy = Instantiate(waveEnemy.enemyPrefab,
-        //         spawnPosition + waveEnemy.spawnOffset,
-        //         Quaternion.identity,
-        //         transform);
-        //     return enemy;
-        // }
 
         void SetEnemyPathfollow(GameObject enemy, List<Transform> waypoints, PathfinderLoopMode loopMode) {
             var pathFollower = enemy.GetComponent<Pathfollower>();
@@ -213,6 +134,16 @@ namespace Enemies
             var machine = enemy.GetComponent<FSM.FiniteStateMachine>();
             if (machine == null) return;
             machine.SetState(initialState);
+        }
+
+        IEnumerator DestroyAllEnemiesPresent() {
+            EnemyShip[] enemies = FindObjectsOfType<EnemyShip>();
+            foreach (var enemy in enemies) {
+                if (enemy == null || !enemy.isAlive) continue;
+                yield return new WaitForSecondsRealtime(0.04f);
+                enemy.OnDeathByGuardians();
+            }
+            numEnemiesAlive = 0;
         }
 
         void OnGUI() {

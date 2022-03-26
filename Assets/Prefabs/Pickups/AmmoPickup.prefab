@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7348726174353450009}
   - component: {fileID: 7348726174353450008}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: things_gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7348726175182028155}
   - component: {fileID: 7348726175182028148}
   - component: {fileID: 7348726175182028149}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AmmoPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7348726175182028151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.45, y: 7.21, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

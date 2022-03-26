@@ -54,11 +54,13 @@ namespace Game {
         void OnEnable() {
             eventChannel.OnPlayerDeath.Subscribe(OnPlayerDeath);
             eventChannel.OnEnemyDeath.Subscribe(OnEnemyDeath);
+            eventChannel.OnWinLevel.Subscribe(OnWinLevel);
         }
 
         void OnDisable() {
             eventChannel.OnPlayerDeath.Unsubscribe(OnPlayerDeath);
             eventChannel.OnEnemyDeath.Unsubscribe(OnEnemyDeath);
+            eventChannel.OnWinLevel.Unsubscribe(OnWinLevel);
         }
 
         void Awake() {
@@ -103,8 +105,12 @@ namespace Game {
             Debug.Log("TODO: RESPAWN PLAYER");
         }
 
-        public void OnEnemyDeath(int instanceId, int points) {
+        void OnEnemyDeath(int instanceId, int points) {
             // TODO: LOG SCORE DUE TO ENEMIES KILLED
+        }
+
+        void OnWinLevel() {
+            Debug.Log("VICTORY!!");
         }
     }
 }
