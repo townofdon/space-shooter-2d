@@ -6,8 +6,7 @@ using Event;
 using Battle;
 using Player;
 
-namespace Enemies
-{
+namespace Enemies {
 
     public class EnemySpawner : MonoBehaviour {
         [SerializeField] List<BattleSequence> battleSequences;
@@ -27,8 +26,22 @@ namespace Enemies
         Coroutine currentWaveSpawn;
         Coroutine battle;
 
+        // state - boss
+        List<int> bossesAlive = new List<int>();
+        List<int> bossesAliveTemp = new List<int>();
+
         public void OnEnemyDeath(int instanceId, int points) {
             numEnemiesAlive = Mathf.Max(0, numEnemiesAlive - 1);
+            bossesAliveTemp.Clear();
+            foreach (var bossId in bossesAlive) {
+                if (bossId != instanceId) bossesAliveTemp.Add(bossId);
+            }
+            bossesAlive = bossesAliveTemp;
+        }
+
+        public void OnBossSpawn(int instanceId) {
+            bossesAlive.Add(instanceId);
+            numEnemiesAlive++;
         }
 
         public void BattleFinished() {
@@ -41,10 +54,12 @@ namespace Enemies
 
         void OnEnable() {
             eventChannel.OnEnemyDeath.Subscribe(OnEnemyDeath);
+            eventChannel.OnBossSpawn.Subscribe(OnBossSpawn);
         }
 
         void OnDisable() {
             eventChannel.OnEnemyDeath.Unsubscribe(OnEnemyDeath);
+            eventChannel.OnBossSpawn.Unsubscribe(OnBossSpawn);
         }
 
         void Start() {
@@ -52,8 +67,7 @@ namespace Enemies
         }
 
         IEnumerator PlayBattle() {
-            do
-            {
+            do {
                 foreach (var battleSequence in battleSequences) {
                     battleEventIndex = 0;
                     foreach (var battleEvent in battleSequence.battleEvents) {
@@ -81,9 +95,6 @@ namespace Enemies
                 case BattleEventType.Boss:
                     // TODO: SPAWN BOSS
                     break;
-                case BattleEventType.Formation:
-                    // TODO: SPAWN FORMATION
-                    break;
                 case BattleEventType.WaitForArbitraryTime:
                     yield return new WaitForSeconds(battleEvent.ArbitraryTime);
                     break;
@@ -93,6 +104,9 @@ namespace Enemies
                 case BattleEventType.WaitUntilWaveSpawnFinished:
                     if (currentWaveSpawn != null) yield return currentWaveSpawn;
                     break;
+                case BattleEventType.WaitUntilBossDestroyed:
+                    if (bossesAlive.Count > 0) yield return null;
+                    break;
                 case BattleEventType.ArbitraryEvent:
                     if (battleEvent.ArbitraryEvent != null) {
                         battleEvent.ArbitraryEvent.Invoke();
@@ -101,8 +115,15 @@ namespace Enemies
                 case BattleEventType.DestroyAllEnemiesPresent:
                     yield return DestroyAllEnemiesPresent();
                     break;
-                // case BattleEventType.ChangeMusic:
-                //     break;
+                case BattleEventType.PlayMusic:
+                    // TODO: PLAY MUSIC
+                    break;
+                case BattleEventType.StopMusic:
+                    // TODO: STOP MUSIC
+                    break;
+                case BattleEventType.ShowDialogue:
+                    // TODO: SHOW DIALOGUE
+                    break;
                 default:
                     Debug.LogError("Unsupported BattleEventType: " + battleEvent.Type);
                     break;

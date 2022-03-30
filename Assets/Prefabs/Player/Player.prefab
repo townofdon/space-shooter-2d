@@ -24756,7 +24756,7 @@ GameObject:
   - component: {fileID: 1440120796447821290}
   m_Layer: 7
   m_Name: ShieldRecharge
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29608,7 +29608,7 @@ GameObject:
   - component: {fileID: 6302041473631903954}
   m_Layer: 7
   m_Name: ShieldLost
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34504,7 +34504,7 @@ GameObject:
   - component: {fileID: 4883680674908443311}
   m_Layer: 7
   m_Name: WingR
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34898,7 +34898,7 @@ GameObject:
   - component: {fileID: 2363828978451154750}
   m_Layer: 7
   m_Name: BeamL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35002,7 +35002,7 @@ GameObject:
   - component: {fileID: 5316389521314479214}
   m_Layer: 7
   m_Name: Scratches
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35122,7 +35122,7 @@ GameObject:
   - component: {fileID: 4895612855257811383}
   m_Layer: 7
   m_Name: L
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35375,7 +35375,7 @@ GameObject:
   - component: {fileID: 6436365057156684379}
   m_Layer: 7
   m_Name: R
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35438,7 +35438,7 @@ GameObject:
   - component: {fileID: 6071589307695167622}
   m_Layer: 7
   m_Name: BeamR
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35542,7 +35542,7 @@ GameObject:
   - component: {fileID: 5316389521787693539}
   m_Layer: 7
   m_Name: AngleGuns
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35659,7 +35659,7 @@ GameObject:
   - component: {fileID: 5316389521841358786}
   m_Layer: 7
   m_Name: Guns
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35730,7 +35730,7 @@ GameObject:
   - component: {fileID: 5316389521971274009}
   m_Layer: 7
   m_Name: RearGuns
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35959,6 +35959,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 59e876a918970904f8f2576933a82bcb, type: 3}
     clipTail: {fileID: 0}
@@ -35990,6 +35991,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 385be5042d7e73749ad8852f0345012e, type: 3}
     clipTail: {fileID: 0}
@@ -36063,6 +36065,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    pitchVariance: 0
     clipHead: {fileID: 8300000, guid: 5e1a127f36bbc2147a05b1360e574ffe, type: 3}
     clipLoop: {fileID: 8300000, guid: 17ec2e7a8aad1f04cb8ba95d34ddb6cf, type: 3}
     clipTail: {fileID: 8300000, guid: dec33a6bcb68d0b40ae63f40da5d87bf, type: 3}
@@ -36266,7 +36269,7 @@ GameObject:
   - component: {fileID: 5316389522153779637}
   m_Layer: 7
   m_Name: MainGuns
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36299,7 +36302,7 @@ GameObject:
   - component: {fileID: 5316389522184798503}
   m_Layer: 7
   m_Name: Ship
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36506,7 +36509,7 @@ GameObject:
   - component: {fileID: 5643776550650706115}
   m_Layer: 7
   m_Name: Engine
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36611,7 +36614,7 @@ GameObject:
   - component: {fileID: 5316389522230486307}
   m_Layer: 7
   m_Name: RailGun
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36665,7 +36668,7 @@ GameObject:
   - component: {fileID: 5316389522262259973}
   m_Layer: 7
   m_Name: Cockpit
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37193,7 +37196,7 @@ GameObject:
   - component: {fileID: 8551335378418928994}
   m_Layer: 7
   m_Name: WingL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37699,7 +37702,7 @@ GameObject:
   - component: {fileID: 2564386746714250004}
   m_Layer: 7
   m_Name: Shield
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42628,7 +42631,7 @@ GameObject:
   - component: {fileID: 1867671198146079528}
   m_Layer: 7
   m_Name: SpawnPoints
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

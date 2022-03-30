@@ -65,11 +65,12 @@ namespace Weapons
         }
 
         void OnHit(Collider2D hit) {
-            Projectile projectile = hit.GetComponent<Projectile>();
+            // Projectile projectile = hit.GetComponent<Projectile>();
             // if (projectile != null) {
             //     projectile.OnDeath();
             //     return;
             // }
+
             Rocket rocket = hit.GetComponent<Rocket>();
             if (rocket != null) {
                 hitDist = hit.transform.position - transform.position;
@@ -77,6 +78,7 @@ namespace Weapons
                 StartCoroutine(BlowUpRocket(rocket));
                 return;
             }
+
             DamageReceiver actor = hit.GetComponent<DamageReceiver>();
             if (actor != null) {
                 // push the actor away from the center of the blast

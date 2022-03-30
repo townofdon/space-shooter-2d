@@ -68,6 +68,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 629baa710498d6f438cdb57bc748cf4f, type: 2}
   - {fileID: 11400000, guid: 2cce19c6bf4b83941a51bdb1687a3252, type: 2}
   - {fileID: 11400000, guid: 942ee69a4aae60441a760fcfad5519fc, type: 2}
+  - {fileID: 11400000, guid: 97f37ab9fe5d09c4797e093657e34422, type: 2}
+  - {fileID: 11400000, guid: f78c0e63fbd2c97409f395a44445c79d, type: 2}
 --- !u!114 &5392818402585228071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +171,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3488655753409945414}
     m_Modifications:
+    - target: {fileID: 7061719783394385040, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1179
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061719783394385047, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+      propertyPath: m_Size.x
+      value: 35.019474
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061719783394385047, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+      propertyPath: m_Color.a
+      value: 0.74509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061719783394385047, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+      propertyPath: m_DrawMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061719783394385047, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 26e031926eee9cc40a32ab9bd3070c0e, type: 2}
     - target: {fileID: 7061719783430060564, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
       propertyPath: m_Name
       value: Background
@@ -219,6 +241,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+--- !u!1 &5676628042514850391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7061719783394385041, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+  m_PrefabInstance: {fileID: 3226595600951443142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &497786458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676628042514850391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93218b858850d24ca964fc232c3e193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: {x: 0, y: 0.02}
 --- !u!4 &5676628042550478045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7061719783430060571, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
@@ -279,6 +319,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Starfield
       objectReference: {fileID: 0}
+    - target: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 6.283185
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: InitialModule.startRotation.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.a
+      value: 0.827451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7902197850839237192, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7902197850839237192, guid: c563594545caecc488361ac67fcabf51, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c563594545caecc488361ac67fcabf51, type: 3}
 --- !u!4 &1427305367275719997 stripped
@@ -298,6 +378,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3488655753409945414}
     m_Modifications:
+    - target: {fileID: 4282575996372903412, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818825437834719470, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 4818825437834719470, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
       value: 0.038047332
@@ -313,6 +401,10 @@ PrefabInstance:
     - target: {fileID: 6537545293228043461, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
       propertyPath: m_Name
       value: StarfieldWarp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537545293228043461, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6690083402845588359, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
       propertyPath: m_RootOrder

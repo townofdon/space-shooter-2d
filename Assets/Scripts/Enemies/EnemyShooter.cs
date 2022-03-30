@@ -28,12 +28,14 @@ namespace Enemies
         [SerializeField] EnemyFiringMode firingMode;
         [SerializeField] EnemyAimMode aimMode;
         [SerializeField] WeaponClass weapon;
+        [SerializeField] int numUpgrades;
         [SerializeField] List<Transform> guns = new List<Transform>();
         [SerializeField][Range(0f, 3f)] float aimSpeed = 2f;
         [SerializeField][Range(0f, 180f)] float maxAimAngle = 30f;
         [SerializeField][Range(0f, 10f)] float triggerHoldTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerReleaseTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerTimeVariance = 0f;
+        [SerializeField] Transform rotateTarget;
         [SerializeField] LayerMask targetableLayers;
 
         // Components
@@ -50,6 +52,7 @@ namespace Enemies
         Vector2 aimVector = Vector2.down;
         float aimAngle = 0f;
         Quaternion aim = Quaternion.identity;
+        Quaternion rot = Quaternion.identity;
         float shipRadius = 1f;
 
         // state - OnlyFireWhenPlayerInLineOfSight
@@ -60,13 +63,20 @@ namespace Enemies
         System.Nullable<RaycastHit2D> lineOfSightHit = null;
         RaycastHit2D[] lineOfSightHits = new RaycastHit2D[2];
 
+        public void UpgradeWeapon() {
+            weapon.Upgrade();
+        }
+
+        void OnEnable() {
+            StartCoroutine(PressAndReleaseTrigger());
+        }
+
         void Start() {
             rb = GetComponent<Rigidbody2D>();
             circle = GetComponentInChildren<CircleCollider2D>();
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
             player = FindObjectOfType<PlayerGeneral>();
             InitWeapon();
-            StartCoroutine(PressAndReleaseTrigger());
             // init
             if (circle != null) shipRadius = circle.radius + 1f;
         }
@@ -77,6 +87,8 @@ namespace Enemies
             weapon.Init();
             weapon.shotSound.Init(this);
             weapon.effectSound.Init(this);
+            weapon.SetInfiniteAmmo(true);
+            for (int i = 0; i < numUpgrades; i++) weapon.Upgrade();
         }
 
         void Update() {
@@ -86,6 +98,8 @@ namespace Enemies
                 AfterNoFire();
             }
             weapon.TickTimers();
+            triggerHeld.Tick();
+            triggerReleased.Tick();
             HandleFiringBehaviour();
             HandleAimBehaviour();
         }
@@ -107,21 +121,21 @@ namespace Enemies
         bool CheckPlayerWithinScopes() {
             if (player == null) return false;
             // if player is close to ship & within maxAngle
-            if (vectorToPlayer.magnitude < shipRadius && Vector2.Angle(transform.rotation * aim * -transform.up, vectorToPlayer) <= maxAimAngle) return true;
+            if (vectorToPlayer.magnitude < shipRadius && Vector2.Angle(transform.rotation * rot * aim * -transform.up, vectorToPlayer) <= maxAimAngle) return true;
             // if player is outside of ship's range
             if (vectorToPlayer.magnitude > weapon.effectiveRange) return false;
             isAnotherEnemyInTheWay = false;
-            if (CheckRaycastHit(transform.position + aim * Vector2.down * shipRadius)) return true;
-            if (CheckRaycastHit(transform.position + transform.right * 0.5f + aim * Vector2.down * shipRadius)) return true;
-            if (CheckRaycastHit(transform.position + transform.right + aim * Vector2.down * shipRadius)) return true;
-            if (CheckRaycastHit(transform.position - transform.right * 0.5f + aim * Vector2.down * shipRadius)) return true;
-            if (CheckRaycastHit(transform.position - transform.right + aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position + rot * aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position + transform.right * 0.5f + rot * aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position + transform.right + rot * aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position - transform.right * 0.5f + rot * aim * Vector2.down * shipRadius)) return true;
+            if (CheckRaycastHit(transform.position - transform.right + rot * aim * Vector2.down * shipRadius)) return true;
             return false;
         }
 
         bool CheckRaycastHit(Vector3 origin) {
             if (isAnotherEnemyInTheWay) return false;
-            int hits = Physics2D.RaycastNonAlloc(origin, aim * Vector2.down, lineOfSightHits, vectorToPlayer.magnitude * 1.5f, targetableLayers);
+            int hits = Physics2D.RaycastNonAlloc(origin, rot * aim * Vector2.down, lineOfSightHits, vectorToPlayer.magnitude * 1.5f, targetableLayers);
             for (int i = 0; i < hits; i++)
             {
                 if (lineOfSightHits[i].transform.tag == UTag.EnemyShip) { isAnotherEnemyInTheWay = true; return false; }
@@ -137,19 +151,30 @@ namespace Enemies
             {
                 case EnemyAimMode.AimAtPlayer:
                     CalculateAim();
-                    transform.rotation = Quaternion.identity;
+                    rot = Quaternion.identity;
                     aim = Quaternion.AngleAxis(Mathf.Clamp(aimAngle, -maxAimAngle, maxAimAngle), Vector3.forward);
+                    HandleRotation();
                     break;
                 case EnemyAimMode.RotateTowardsPlayer:
                     CalculateAim();
-                    transform.rotation = Quaternion.AngleAxis(aimAngle, Vector3.forward);
+                    rot = Quaternion.AngleAxis(aimAngle, Vector3.forward);
                     aim = Quaternion.identity;
+                    HandleRotation();
                     break;
                 case EnemyAimMode.AlwaysAimDown:
                 default:
-                    transform.rotation = Quaternion.identity;
+                    rot = Quaternion.identity;
                     aim = Quaternion.identity;
+                    HandleRotation();
                     break;
+            }
+        }
+
+        void HandleRotation() {
+            if (rotateTarget != null) {
+                rotateTarget.rotation = rot;
+            } else {
+                transform.rotation = rot;
             }
         }
 
@@ -184,23 +209,29 @@ namespace Enemies
 
         void FireProjectile(GameObject prefab, Vector3 position, Quaternion rotation) {
             GameObject instance = Object.Instantiate(prefab, position, rotation * aim);
-            DamageDealer damager = instance.GetComponent<DamageDealer>();
-            Collider2D collider = instance.GetComponent<Collider2D>();
-            if (collider != null) enemy.IgnoreCollider(instance.GetComponent<Collider2D>());
-            if (damager != null) damager.SetIgnoreUUID(enemy.uuid);
-            if (rb != null) {
-                Rigidbody2D rbInstance = instance.GetComponent<Rigidbody2D>();
-                rbInstance.velocity += rb.velocity;
+            Projectile[] projectiles = instance.GetComponentsInChildren<Projectile>();
+            foreach (var projectile in projectiles) {
+                DamageDealer damager = projectile.GetComponent<DamageDealer>();
+                Collider2D collider = projectile.GetComponent<Collider2D>();
+                if (collider != null) enemy.IgnoreCollider(projectile.GetComponent<Collider2D>());
+                if (damager != null) damager.SetIgnoreUUID(enemy.uuid);
+                if (rb != null) {
+                    Rigidbody2D rbInstance = projectile.GetComponent<Rigidbody2D>();
+                    rbInstance.velocity += rb.velocity;
+                }
             }
         }
 
         IEnumerator PressAndReleaseTrigger() {
+            // simulate human-like response time
+            yield return new WaitForSecondsRealtime(UnityEngine.Random.Range(0.2f, 0.6f));
             while (true) {
+                while (!isPlayerInScopes) yield return null;
                 triggerHeld.SetDuration(Mathf.Max(triggerHoldTime + UnityEngine.Random.Range(-triggerTimeVariance / 2f, triggerTimeVariance / 2f), 0.1f));
                 triggerReleased.SetDuration(Mathf.Max(triggerReleaseTime + UnityEngine.Random.Range(-triggerTimeVariance / 2f, triggerTimeVariance / 2f), 0.1f));
+                // NOTE!!! - if weapon burst is set, the weapon will keep firing for full burst even after the trigger is released
                 yield return triggerHeld.StartAndWaitUntilFinished(true);
                 yield return triggerReleased.StartAndWaitUntilFinished(true);
-                while (!isPlayerInScopes) yield return null;
             }
         }
 

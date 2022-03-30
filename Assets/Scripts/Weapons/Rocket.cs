@@ -10,6 +10,7 @@ namespace Weapons
     public class Rocket : MonoBehaviour
     {
         [Header("General Settings")][Space]
+        [SerializeField] bool debug;
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float accel = 5f;
         [SerializeField] float turnSpeed = 1f;
@@ -52,8 +53,22 @@ namespace Weapons
         float height = 0.5f;
         Vector2 launchForce;
 
+        // state - aim
+        Quaternion startingRotation = Quaternion.identity;
+        // Vector2 aimVector = Vector2.down;
+        // float aimAngle = 0f;
+        // Quaternion aim = Quaternion.identity;
+
         public void SetTarget(Transform _target) {
             target = _target;
+        }
+
+        public void SetIgnoreUUID(System.Guid? uuid) {
+            damageDealer.SetIgnoreUUID(uuid);
+        }
+
+        public void SetIgnoreLayers(LayerMask layerMask) {
+            damageDealer.SetIgnoreLayers(layerMask);
         }
 
         public void Launch(Vector2 force) {
@@ -68,6 +83,7 @@ namespace Weapons
             velocity = heading * moveSpeed;
             target = null;
             startingPosition = transform.position;
+            startingRotation = transform.rotation;
 
             impulseSound.Init(this);
             thrustSound.Init(this);
@@ -77,7 +93,7 @@ namespace Weapons
             damageDealer.RegisterCallbacks(OnHit, OnDeath);
         }
 
-        void Start() {
+        void Awake() {
             rb = GetComponent<Rigidbody2D>();
             sr = GetComponentInChildren<SpriteRenderer>();
             tr = GetComponentInChildren<TrailRenderer>();
@@ -86,10 +102,14 @@ namespace Weapons
             capsule = GetComponent<CapsuleCollider2D>();
             damageDealer = GetComponent<DamageDealer>();
             Init();
+        }
+
+        void Start() {
             OnLaunch();
         }
 
         void Update() {
+            RotateTowardsTarget();
             UpdateHeading();
             t += Time.deltaTime;
             if (rb == null) MoveViaTransform();
@@ -116,21 +136,32 @@ namespace Weapons
           if (rb != null) rb.drag = 0f;
         }
 
+        void RotateTowardsTarget() {
+            if (target == null) return;
+            if (!isAlive) return;
+            if (!isThrusting) return;
+
+            heading = Vector3.RotateTowards(
+                heading,
+                (target.position - transform.position).normalized,
+                turnSpeed * Mathf.PI * Time.fixedDeltaTime,
+                1f
+            ).normalized;
+            transform.rotation = startingRotation * Quaternion.Euler(0f, 0f, Vector2.SignedAngle(startingRotation * initialHeading, heading));
+
+            // rotation doesn't actually affect flight path; it's just for show (since we're setting velocity manually)
+            // aimVector = Vector2.MoveTowards(aimVector, heading, turnSpeed * Time.deltaTime);
+            // aimAngle = Vector2.SignedAngle(startingRotation * initialHeading, aimVector);
+            // transform.rotation = startingRotation * Quaternion.AngleAxis(aimAngle, Vector3.forward);
+        }
+
         void UpdateHeading() {
             if (!isAlive) {
                 velocity *= 0.05f;
                 return;
             }
             if (!isThrusting) return;
-            if (target != null) {
-                heading = Vector3.RotateTowards(
-                    heading,
-                    (target.position - transform.position).normalized,
-                    turnSpeed * 2f * Mathf.PI * Time.fixedDeltaTime,
-                    1f
-                ).normalized;
-            }
-            velocity = Vector3.MoveTowards(velocity, heading * moveSpeed, 2f * moveSpeed * Time.fixedDeltaTime);
+            // velocity = Vector3.MoveTowards(velocity, transform.rotation * initialHeading * moveSpeed, 2f * moveSpeed * Time.fixedDeltaTime);
         }
 
         void MoveViaTransform() {
@@ -153,7 +184,7 @@ namespace Weapons
             if (proximityDetonation <= 0f) return;
             proximityOtherCollider = Physics2D.OverlapCircle(transform.position, proximityDetonation);
             if (proximityOtherCollider == null) return;
-            if (proximityOtherCollider.tag != UTag.EnemyShip) return;
+            if (proximityOtherCollider.tag != UTag.EnemyShip && proximityOtherCollider.tag != UTag.EnemyTurret) return;
             // at this point we done tripped the thing
             OnDeath();
         }
@@ -176,6 +207,12 @@ namespace Weapons
                 Destroy(Instantiate(explosion, transform.position, Quaternion.identity), explosionLifetime);
             }
             Destroy(gameObject);
+        }
+
+
+        private void OnDrawGizmos() {
+            if (!debug) return;
+            Gizmos.DrawLine(transform.position, heading * moveSpeed);
         }
     }
 }

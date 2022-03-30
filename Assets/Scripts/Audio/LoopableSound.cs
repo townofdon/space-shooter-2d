@@ -16,6 +16,8 @@ namespace Audio
     [System.Serializable]
     public class LoopableSound : BaseSound
     {
+        [SerializeField][Range(0f, 0.2f)] protected float pitchVariance = 0f;
+
         [SerializeField] AudioClip clipHead;
         [SerializeField] AudioClip clipLoop;
         [SerializeField] AudioClip clipTail;
@@ -42,7 +44,10 @@ namespace Audio
         double nextStartTime = 0.0;
         bool playButtonPressed = false;
 
-        public override bool isPlaying => playButtonPressed;
+        public override bool isPlaying => playButtonPressed
+            || (cursor != PlayCursor.Stopped)
+            || (sourceLoop != null && sourceLoop.isPlaying)
+            || (sourceTail != null && sourceTail.isPlaying);
         public override bool hasClip => clipLoop != null;
         public override bool hasSource => sourceLoop != null;
         public PlayCursor Cursor => cursor;
@@ -96,6 +101,7 @@ namespace Audio
             if (sourceTail != null && sourceTail.isPlaying) sourceTail.Stop();
 
             if (playCoroutine != null) _script.StopCoroutine(playCoroutine);
+            if (sourceLoop != null) sourceLoop.pitch = Utils.RandomVariance(pitch, pitchVariance, 0f, 1f);
             playCoroutine = _script.StartCoroutine(IPlay());
         }
 
@@ -121,8 +127,8 @@ namespace Audio
             while (playButtonPressed) yield return null;
 
             if (cursor == PlayCursor.Loop && playLoopToEnd) {
-                int numFullCycles = GetNumFullLoopCycles();
-                timeLoopEndScheduled = timeLoopStartScheduled + clipLoopDuration * numFullCycles;
+                int numFullCycles = GetNumFullLoopCycles(sourceLoop.pitch);
+                timeLoopEndScheduled = timeLoopStartScheduled + clipLoopDuration * numFullCycles * (double)sourceLoop.pitch;
             } else {
                 // do not wait until loop end; start playing tail immediately
                 timeLoopEndScheduled = AudioSettings.dspTime + dspStartDelay;
@@ -178,8 +184,8 @@ namespace Audio
 
         // calculate timeLoopEnd based on amount of time has elapsed since timeLoopStart, vs. per the clipLoopDuration
         // e.g. what the number of cycles would be if the loop had finished
-        int GetNumFullLoopCycles() {
-            return Mathf.Min(1, Mathf.CeilToInt((float)((AudioSettings.dspTime - timeLoopStartScheduled) / clipLoopDuration)));
+        int GetNumFullLoopCycles(double currentPitch = 1.0) {
+            return Mathf.Min(1, Mathf.CeilToInt((float)((AudioSettings.dspTime - timeLoopStartScheduled) / (clipLoopDuration * currentPitch))));
         }
     }
 }

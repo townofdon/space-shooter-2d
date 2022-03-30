@@ -1,4 +1,4 @@
-using System.Collections;
+
 using UnityEngine;
 using Core;
 using Audio;
@@ -52,7 +52,7 @@ namespace Weapons
             sr.color = lifetimeColor.Evaluate(EasedTime());
 
             if (currentTime >= fuseTime) {
-                if (!sploded) StartCoroutine(Splode());
+                Explode();
             } else {
                 currentTime = Mathf.Clamp(currentTime + Time.deltaTime, 0f, fuseTime);
             }
@@ -62,10 +62,10 @@ namespace Weapons
             return Mathf.Clamp(Easing.easeInExpo(currentTime / fuseTime), 0f, 1f);
         }
 
-        IEnumerator Splode() {
-            if (sploded) yield return null;
+        public void Explode() {
+            if (sploded) return;
             sploded = true;
-            sr.enabled = false;
+            if (sr != null) sr.enabled = false;
             explosionSound.Play();
             splosion = Object.Instantiate(nukeExplosion, transform.position, new Quaternion(0f,0f,0f,0f));
             // TODO: USE OBJECT POOLING SYSTEM

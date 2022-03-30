@@ -20,6 +20,6 @@ MonoBehaviour:
   _unshieldedHealthEffectiveness: 1
   _playerEffectiveness: 1
   _enemyEffectiveness: 1
-  _environmentEffectiveness: 0.025
+  _environmentEffectiveness: 0.25
   _npcEffectiveness: 1
-  _throwbackForceMultiplier: 0
+  _throwbackForceMultiplier: 0.01

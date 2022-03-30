@@ -56,9 +56,6 @@ namespace Battle {
                 case BattleEventType.Boss:
                     EditorGUI.DrawRect(position, GameColours.inspectorBattleEventBoss);
                     break;
-                case BattleEventType.Formation:
-                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventFormation);
-                    break;
                 case BattleEventType.WaitForArbitraryTime:
                     EditorGUI.DrawRect(position, GameColours.inspectorBattleEventWait);
                     break;
@@ -111,9 +108,6 @@ namespace Battle {
                 case BattleEventType.Boss:
                     EditorGUI.PropertyField(c2, boss, GUIContent.none);
                     break;
-                case BattleEventType.Formation:
-                    EditorGUI.PropertyField(c2, formation, GUIContent.none);
-                    break;
                 case BattleEventType.WaitForArbitraryTime:
                     EditorGUI.PropertyField(c2, arbitraryTime, new GUIContent("Seconds"));
                     break;
@@ -142,7 +136,6 @@ namespace Battle {
                     return (rowHeight + padding * 2) * 2;
                 case BattleEventType.Wave:
                 case BattleEventType.Boss:
-                case BattleEventType.Formation:
                 case BattleEventType.WaitForArbitraryTime:
                 case BattleEventType.WaitUntilEnemiesDestroyed:
                 case BattleEventType.WaitUntilWaveSpawnFinished:

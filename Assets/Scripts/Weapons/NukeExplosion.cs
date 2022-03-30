@@ -87,7 +87,7 @@ namespace Weapons
                     return;
                 }
                 DamageReceiver actor = hit.GetComponent<DamageReceiver>();
-                if (actor != null) {
+                if (actor != null && actor.isAlive) {
                     hitDist = hit.transform.position - transform.position;
                     if (hitDist.magnitude > nukeCoreRadius) return;
 
@@ -100,8 +100,9 @@ namespace Weapons
                     );
 
                     // push the actor away from the center of the blast
-                    if (actor.rigidbody) {
+                    if (actor.rigidbody != null) {
                         blastDirection = (actor.rigidbody.transform.position - transform.position);
+                        if (blastDirection == Vector3.zero) blastDirection = Vector3.down * 0.1f;
                         actor.rigidbody.AddForce(blastDirection.normalized * (1f / blastDirection.magnitude) * blastForce);
                     }
                 }

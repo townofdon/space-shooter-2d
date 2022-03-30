@@ -7,7 +7,7 @@ namespace Pickups {
     [System.Serializable]
     public class PickupSpawnConfig {
         [SerializeField] GameObject pickupPrefab;
-        [SerializeField][Range(1, 20)] int numItemsToSpawn = 1;
+        [SerializeField][Range(1, 100)] int numItemsToSpawn = 1;
         [SerializeField][Range(0f, 1f)] float spawnLikelihood;
 
         // cache

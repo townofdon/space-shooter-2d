@@ -10,6 +10,7 @@ namespace Damage
         Rigidbody2D rb;
 
         public new Rigidbody2D rigidbody => rb;
+        public bool isAlive => actor != null && actor.isAlive;
         public bool canCollide => actor != null ? actor.timeHit <= 0f : false;
         public DamageableType damageableType => actor != null ? actor.damageableType : DamageableType.Default;
         public System.Nullable<System.Guid> uuid => actor != null ? actor.uuid : null;

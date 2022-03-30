@@ -16,10 +16,10 @@ namespace Core
 
     public class Timer
     {
-        public Timer(TimerDirection direction = TimerDirection.Decrement, TimerStep step = TimerStep.DeltaTime) {
+        public Timer(TimerDirection direction = TimerDirection.Decrement, TimerStep step = TimerStep.DeltaTime, float duration = 1f) {
             _direction = direction;
             _step = step;
-            _duration = 1f;
+            _duration = duration;
             _value = 0f;
             End(); // set timer value to end cursor
         }
@@ -32,6 +32,7 @@ namespace Core
         bool _turnedOn = true; // treat a timer with a duration of zero as turned off
 
         public float value => _value;
+        public float duration => _duration;
         public float timeLeft => active ? GetTimeLeft() : 0f;
         public bool active => _turnedOn && !GetIsAtEnd();
         public bool tZero => GetIsAtStart();
@@ -41,14 +42,13 @@ namespace Core
             set{ _continuous = value; }
         }
 
-        public void SetDuration(float duration, float value = 0f) {
+        public void SetDuration(float duration) {
             if (duration <= 0f) {
                 _turnedOn = false;
                 End();
             }
             _turnedOn = true;
             _duration = duration;
-            _value = Mathf.Clamp01(value);
         }
 
         public void SetValue(float value) {
@@ -98,7 +98,7 @@ namespace Core
         }
 
         public IEnumerator StartAndWaitUntilFinished(bool tickInsideCoroutine = false) {
-            if (!active) Start();
+            Start();
             yield return WaitUntilFinished(tickInsideCoroutine);
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using Core;
 using Player;
 using Audio;
+using Damage;
 
 namespace Enemies
 {
@@ -86,6 +87,11 @@ namespace Enemies
         [SerializeField] Vector2 wobbleMaxSpeed;
         [SerializeField] Vector2 wobbleMaxDistance;
 
+        [SerializeField] Transform wobble;
+        [SerializeField] Vector2 wobbleMag;
+        [SerializeField] Vector2 wobbleFreq = Vector2.one;
+        [SerializeField] Vector2 wobbleOffset;
+
         [Header("Audio")]
         [Space]
         [SerializeField] LoopableSound engineSound;
@@ -93,7 +99,7 @@ namespace Enemies
 
         // components
         PlayerGeneral player;
-        EnemyShip enemy;
+        DamageableBehaviour self;
         Rigidbody2D rb;
         Rigidbody2D rbWobble;
 
@@ -104,11 +110,15 @@ namespace Enemies
         Vector3 targetHeading;
         Vector3 targetPosition;
         Vector3 targetPositionPrev;
+        Vector3 minBounds;
+        Vector3 maxBounds;
 
         // state - wobble
         Vector2 wobbleDir = Vector2.one;
         Vector2 wobbleDeltaP = Vector2.zero; // diff in position
         Vector2 wobbleDeltaV = Vector2.zero; // diff in velocity
+        Vector2 wobblePosition;
+        float wobbleTime;
 
         // state - juke
         bool isJuking = false;
@@ -164,9 +174,10 @@ namespace Enemies
         public void NotifySensorTriggered(Vector2 sensorDirection, ULayerType layerType) {
             switch (layerType) {
                 case ULayerType.Enemies:
+                    if (avoiding.active) break;
                     avoidanceHeading = -sensorDirection;
                     avoiding.Start();
-                    if (rb != null) rb.AddForce(-sensorDirection * rb.velocity.magnitude * 0.5f, ForceMode2D.Impulse);
+                    if (rb != null) rb.AddForce(-sensorDirection * rb.velocity.magnitude * 0.5f * avoids, ForceMode2D.Impulse);
                     break;
                 case ULayerType.Asteroids:
                 // determine if avoiding (if avoids > randomFloat)
@@ -192,7 +203,7 @@ namespace Enemies
         }
 
         void Start() {
-            enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
+            self = Utils.GetRequiredComponent<DamageableBehaviour>(gameObject);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
             player = FindObjectOfType<PlayerGeneral>();
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
@@ -213,6 +224,7 @@ namespace Enemies
 
             movePoints.Clear();
             foreach (Transform location in movePointLocations) movePoints.Add(location.position);
+            (minBounds, maxBounds) = Utils.GetScreenBounds(Camera.main, 2f);
         }
 
         void Update() {
@@ -274,13 +286,15 @@ namespace Enemies
 
         void ModeKamikaze() {
             if (player == null || !player.isAlive) {
-                SetMode(MovementMode.Default);
+                targetPosition = Vector2.down;
                 return;
             }
             targetMode = TargetMode.Position;
             targetPosition = player.transform.position;
+            targetPosition.y = Mathf.Min(transform.position.y - 2f, player.transform.position.y);
             agroSound.Play();
             engineSound.Stop();
+            if (transform.position.y < minBounds.y) self.TakeDamage(1000f, DamageType.InstakillQuiet, false);
         }
 
         #region MoveBetweenPoints
@@ -327,7 +341,6 @@ namespace Enemies
                 newTarget = movePoints[UnityEngine.Random.Range(0, movePoints.Count)];
                 i++; // infinite loops are scary
             } while (moveTarget == newTarget && i < 100);
-            Debug.Log(newTarget);
             return newTarget;
         }
         #endregion MoveBetweenPoints
@@ -372,7 +385,7 @@ namespace Enemies
         }
 
         void MoveTowardsHeading() {
-            if (!enemy.isAlive) return;
+            if (!self.isAlive) return;
             if (targetMode == TargetMode.Null) return;
             // rotate the enemy so that it turns smoothly
             heading = Vector3.RotateTowards(
@@ -382,7 +395,7 @@ namespace Enemies
             ).normalized;
 
             // vector maths - compensate for rb's current velocity vs. heading - AND factor in avoidance vector
-            headingAdjusted = (Vector3.Lerp(heading, avoidanceHeading, avoiding.value) * GetMoveSpeed() - (Vector3)GetCurrentVelocity()).normalized;
+            headingAdjusted = (Vector3.Lerp(heading, avoidanceHeading, avoiding.value * avoids) * GetMoveSpeed() - (Vector3)GetCurrentVelocity()).normalized;
             rb.AddForce(headingAdjusted * GetAccel());
             if (Vector2.Angle(heading, rb.velocity.normalized) < 30f && (rb.velocity.magnitude + wobbleDeltaV.magnitude) > GetMoveSpeed()) {
                 rb.velocity *= 1f - Time.fixedDeltaTime * 1.5f;
@@ -407,13 +420,20 @@ namespace Enemies
         // We then determine when to flip the wobble direction based on distance traversed
         // Force is only applied if below the arbitrarily-set wobbleMaxSpeed
         void Wobble() {
+            // if (wobble == null) return;
+            // if (wobbleMag.x > 0f && wobbleFreq.x > 0f) wobblePosition.x = Mathf.Sin(wobbleTime / wobbleFreq.x + wobbleOffset.x * Mathf.PI) * wobbleMag.x;
+            // if (wobbleMag.y > 0f && wobbleFreq.y > 0f) wobblePosition.y = Mathf.Sin(wobbleTime / wobbleFreq.y + wobbleOffset.y * Mathf.PI) * wobbleMag.y;
+            // wobbleTime += Time.fixedDeltaTime;
+            // wobbleTime = wobbleTime % 2f;
+            // wobble.position = wobblePosition;
+
             if (wobbler == null) return;
             if (!Utils.IsObjectOnScreen(gameObject, Camera.main, -1f)) {
                 wobbler.transform.position = Vector3.zero;
                 wobbler.velocity = Vector3.zero;
                 return;
             }
-            if (!enemy.isAlive) {
+            if (!self.isAlive) {
                 Destroy(wobbler.gameObject);
                 return;
             }

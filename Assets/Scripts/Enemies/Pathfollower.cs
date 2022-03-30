@@ -3,6 +3,7 @@ using UnityEngine;
 
 using Core;
 using Event;
+using Damage;
 
 namespace Enemies {
 
@@ -26,11 +27,13 @@ namespace Enemies {
         [SerializeField] PathfinderLoopMode loopMode;
         [SerializeField] float waypointTriggerRadius = 0.25f;
         [SerializeField] Transform path;
+        [SerializeField] bool flipX = false;
+        [SerializeField] bool flipY = false;
 
         VoidEventHandler OnPathComplete = new VoidEventHandler();
 
         // components
-        EnemyShip enemy;
+        DamageableBehaviour self;
         EnemyMovement movement;
 
         // cached
@@ -46,9 +49,6 @@ namespace Enemies {
         bool hasCrossedHeadingX = false;
         bool hasCrossedHeadingY = false;
         bool isOffscreen = false;
-
-        bool flipX = false;
-        bool flipY = false;
 
         // FSM STATE
         bool _isPathComplete = false;
@@ -83,19 +83,21 @@ namespace Enemies {
         }
 
         public void Resume() {
-            if (waypoints.Count > 0 && enemy != null) {
+            if (waypoints.Count > 0 && self != null) {
                 Init(GetClosestWaypointIndex(), false);
             }
         }
 
         public void Halt() {
-            movement.SetHeading(Vector3.zero);
-            movement.SetTarget(transform.position);
+            if (movement != null) {
+                movement.SetHeading(Vector3.zero);
+                movement.SetTarget(transform.position);
+            }
             _isRunning = false;
         }
 
         void Start() {
-            enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
+            self = Utils.GetRequiredComponent<DamageableBehaviour>(gameObject);
             movement = Utils.GetRequiredComponent<EnemyMovement>(gameObject);
             (minBounds, maxBounds) = Utils.GetScreenBounds(Camera.main, -1f);
             if (path != null && activeAtStart) {
@@ -112,7 +114,7 @@ namespace Enemies {
 
         void Init(int initialWaypointIndex = 1, bool shouldSetImmediateVelocity = true) {
             if (waypoints.Count <= 0) return;
-            if (enemy == null) return;
+            if (self == null) return;
             if (movement == null) return;
             // the first waypoint is the spawn point, so thus the first target should be the second waypoint
             waypointIndex = initialWaypointIndex;
@@ -139,7 +141,7 @@ namespace Enemies {
 
         void UpdateTarget() {
             if (waypointIndex >= waypoints.Count) return;
-            target = waypoints[waypointIndex].position;
+            target = GetWaypointPosition(waypoints[waypointIndex].position);
             lastOrigin = transform.position;
             switch(targetMode) {
                 case PathfinderTargetMode.Heading:
@@ -167,10 +169,10 @@ namespace Enemies {
         void FollowPath() {
             if (!_isRunning) return;
             if (_isPathComplete) return;
-            if (enemy == null) return;
+            if (self == null) return;
             if (movement == null) return;
-            if (!enemy.isAlive) return;
-            if (enemy.timeHit > 0) return;
+            if (!self.isAlive) return;
+            if (self.timeHit > 0) return;
             if (waypoints.Count == 0) return;
             if (waypointIndex >= waypoints.Count) return;
 
@@ -196,10 +198,10 @@ namespace Enemies {
             if (targetMode != PathfinderTargetMode.Heading) return;
             if (!_isRunning) return;
             if (_isPathComplete) return;
-            if (enemy == null) return;
+            if (self == null) return;
             if (movement == null) return;
-            if (!enemy.isAlive) return;
-            if (enemy.timeHit > 0) return;
+            if (!self.isAlive) return;
+            if (self.timeHit > 0) return;
             if (waypoints.Count == 0) return;
             if (waypointIndex >= waypoints.Count) return;
             if (isOffscreen) {
@@ -233,14 +235,14 @@ namespace Enemies {
                     Halt();
                     break;
                 case PathfinderLoopMode.Destroy:
-                    enemy.TakeDamage(1000f, Damage.DamageType.Instakill, false);
+                    self.TakeDamage(1000f, Damage.DamageType.InstakillQuiet, false);
                     break;
                 case PathfinderLoopMode.Circular:
                     UpdateTarget();
                     break;
                 case PathfinderLoopMode.Teleport:
                 default:
-                    if (waypoints.Count > 0) transform.position = waypoints[0].position;
+                    if (waypoints.Count > 0) transform.position = GetWaypointPosition(waypoints[0].position);
                     Init();
                     break;
             }
@@ -269,13 +271,13 @@ namespace Enemies {
 
         Vector2 GetCurrentWaypointVector() {
             return (
-                waypoints[waypointIndex].position -
-                waypoints[GetPrevWaypointIndex()].position
+                GetWaypointPosition(waypoints[waypointIndex].position) -
+                GetWaypointPosition(waypoints[GetPrevWaypointIndex()].position)
             );
         }
 
         Vector2 GetCurrentWaypointPosition() {
-            return waypoints[waypointIndex].position;
+            return GetWaypointPosition(waypoints[waypointIndex].position);
         }
 
         bool IsLastWaypoint() {
@@ -298,13 +300,10 @@ namespace Enemies {
         Vector3 GetWaypointPosition(Vector3 position) {
             // note - this only works because it's 2D
             if (flipX && flipY) return -position;
-            if (flipX) return Vector2.Reflect(position, Vector2.up);
-            if (flipY) return Vector2.Reflect(position, Vector2.right);
+            if (flipX) return Vector2.Reflect(position, Vector2.left);
+            if (flipY) return Vector2.Reflect(position, Vector2.up);
             return position;
         }
-
-        
-
 
         // PHYSICS STUFF
         // 

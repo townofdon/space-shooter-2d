@@ -10,6 +10,7 @@ namespace Event {
     public delegate void FloatEvent(float value);
     // enemy-specific
     public delegate void EnemyDeathEvent(int instanceId, int points);
+    public delegate void BossSpawnEvent(int instanceId);
     // weapon-specific
     public delegate void WeaponAmmoEvent(WeaponType weaponType, int value);
     public delegate void WeaponUpgradeEvent(WeaponType weaponType);
@@ -42,6 +43,13 @@ namespace Event {
         public void Invoke(int instanceId, int points) { if (ev != null) ev.Invoke(instanceId, points); }
     }
 
+    public class BossSpawnEventHandler {
+        event BossSpawnEvent ev;
+        public void Subscribe(BossSpawnEvent action) { ev += action; }
+        public void Unsubscribe(BossSpawnEvent action) { ev -= action; }
+        public void Invoke(int instanceId) { if (ev != null) ev.Invoke(instanceId); }
+    }
+
     public class WeaponAmmoEventHandler {
         event WeaponAmmoEvent ev;
         public void Subscribe(WeaponAmmoEvent action) { ev += action; }
@@ -70,6 +78,7 @@ namespace Event {
         public WeaponUpgradeEventHandler OnUpgradeWeapon = new WeaponUpgradeEventHandler();
 
         public EnemyDeathEventHandler OnEnemyDeath = new EnemyDeathEventHandler();
+        public BossSpawnEventHandler OnBossSpawn = new BossSpawnEventHandler();
     }
 }
 

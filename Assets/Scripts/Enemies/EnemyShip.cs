@@ -13,6 +13,10 @@ namespace Enemies {
 
     public class EnemyShip : DamageableBehaviour
     {
+        [Header("Enemy Type")]
+        [Space]
+        [SerializeField] bool isBoss = false;
+
         [Header("Components")][Space]
         [SerializeField] GameObject ship;
         [SerializeField] GameObject explosion;
@@ -41,12 +45,25 @@ namespace Enemies {
         // cached
         float originalDrag;
 
+        // props
+        int instanceId;
+
         // state
         bool everDamagedByPlayer = false;
+
+        void OnEnable() {
+            if (isBoss) eventChannel.OnBossSpawn.Invoke(instanceId);
+        }
+
+        void Awake() {
+            instanceId = Utils.GetRootInstanceId(gameObject);
+            SetColliders();
+        }
 
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(ship);
             AppIntegrity.AssertPresent<GameObject>(explosion);
+            AppIntegrity.AssertPresent<EventChannelSO>(eventChannel);
 
             rb = GetComponent<Rigidbody2D>();
             if (rb != null) {
@@ -55,11 +72,12 @@ namespace Enemies {
             }
 
             ResetHealth();
-            SetColliders();
             RegisterHealthCallbacks(OnDeath, OnHealthDamaged, Utils.__NOOP__);
             ship.SetActive(true);
             damageSound.Init(this);
             deathSound.Init(this);
+
+            if (tag == UTag.Boss) eventChannel.OnBossSpawn.Invoke(instanceId);
         }
 
         void Update() {
@@ -76,9 +94,8 @@ namespace Enemies {
 
         void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             RemoveMarker();
-            // OnEnemyDeath.Raise(); // old event
-            eventChannel.OnEnemyDeath.Invoke(Utils.GetRootInstanceId(gameObject), GetDeathPoints(isDamageByPlayer));
-            rb.drag = originalDrag; // to make it seem like it was there all along
+            eventChannel.OnEnemyDeath.Invoke(instanceId, GetDeathPoints(isDamageByPlayer));
+            if (rb != null) rb.drag = originalDrag; // to make it seem like it was there all along
             if (damageType != DamageType.InstakillQuiet) {
                 deathSound.Play();
                 pickups.Spawn(transform.position, rb);
@@ -103,8 +120,9 @@ namespace Enemies {
 
         IEnumerator DeathAnimation() {
             Instantiate(explosion, transform);
-            ship.SetActive(false);
+            if (ship != null) ship.SetActive(false);
             yield return new WaitForSeconds(3f);
+            while (deathSound.isPlaying) yield return null;
             Destroy(gameObject);
 
             yield return null;

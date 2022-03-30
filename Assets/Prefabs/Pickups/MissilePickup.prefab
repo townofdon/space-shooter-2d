@@ -264,7 +264,7 @@ MonoBehaviour:
   lifetime: 0
   nearRemoveTime: 4
   blinkRate: 0.3
-  scrollDownScreen: 0
+  scrollDownScreen: 1
   scrollSpeed: 2
   scrollAccel: 5
   disperseAtStart: 1

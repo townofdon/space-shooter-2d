@@ -12,6 +12,7 @@ namespace Damage {
         Shield,
         Station,
         Rock,
+        ExplodeOnCollision,
     }
 
     public class DamageableBehaviour : MonoBehaviour
@@ -24,6 +25,7 @@ namespace Damage {
         [Header("Health Settings")][Space]
         [SerializeField] float _maxHealth = 50f;
         [SerializeField] float _hitRecoveryTime = 0.2f;
+        [SerializeField] float _nukeRecoveryTime = 0.4f;
         [SerializeField] bool _destroyOnDeath = false;
 
         [Header("Shield Settings")][Space]
@@ -36,6 +38,11 @@ namespace Damage {
         [SerializeField] Material damageFlashMaterial;
         [SerializeField] float damageFlashDuration = 0.1f;
         [SerializeField] SpriteRenderer damageSpriteTarget;
+        [SerializeField] SpriteRenderer[] secondaryDamageSpriteTargets;
+
+        [Header("Cleanup on Aisle 5")]
+        [Space]
+        [SerializeField] GameObject[] perishableObjects;
 
         [Header("Events / Callbacks")][Space]
         // Action callbacks can be set via the Editor OR via RegisterCallbacks()
@@ -63,6 +70,7 @@ namespace Damage {
         float _health = 50f;
         float _shield = 0f;
         float _timeHit = 0f;
+        Timer _nukeHit = new Timer(TimerDirection.Decrement, TimerStep.DeltaTime, 0.4f);
         float _healthDamageThisFrame = 0f;
         float _shieldDamageThisFrame = 0f;
 
@@ -87,6 +95,12 @@ namespace Damage {
             _invulnerable = value;
         }
 
+        void OnDestroy() {
+            foreach (var perishable in perishableObjects) {
+                GameObject.Destroy(perishable);
+            }
+        }
+
         protected void TickHealth() {
             if (!_isAlive) return;
             _timeHit = Mathf.Clamp(_timeHit - Time.deltaTime, 0f, _hitRecoveryTime);
@@ -104,6 +118,8 @@ namespace Damage {
                 if (_isRechargingShield && _shield == _maxShield) InvokeCallback(_onShieldRechargeComplete);
                 _isRechargingShield = false;
             }
+
+            _nukeHit.Tick();
         }
 
         protected void RegisterHealthCallbacks(
@@ -182,6 +198,19 @@ namespace Damage {
                 return true;
             }
 
+            if (_damageableType == DamageableType.ExplodeOnCollision && damageType == DamageType.Collision) {
+                _health = Mathf.Min(0f, _health - amount);
+                _shield = 0f;
+                _Die(damageType, isDamageByPlayer);
+                return true;
+            }
+
+            if (damageType == DamageType.Nuke) {
+                if (_nukeHit.active) return false;
+                _nukeHit.SetDuration(_nukeRecoveryTime);
+                _nukeHit.Start();
+            }
+
             damageClass = GameManager.current.GetDamageClass(damageType);
 
             // determine damage for health, shield
@@ -233,14 +262,16 @@ namespace Damage {
         }
 
         private void DamageFlash() {
-            if (damageFlashDuration <= 0 || defaultMaterial == null || damageFlashMaterial == null || damageSpriteTarget == null) return;
+            if (damageFlashDuration <= 0 || defaultMaterial == null || damageFlashMaterial == null || (damageSpriteTarget == null && secondaryDamageSpriteTargets.Length == 0)) return;
             StartCoroutine(IDamageFlash());
         }
 
         private IEnumerator IDamageFlash() {
-            damageSpriteTarget.material = damageFlashMaterial;
+            if (damageSpriteTarget != null) damageSpriteTarget.material = damageFlashMaterial;
+            foreach (var sprite in secondaryDamageSpriteTargets) sprite.material = damageFlashMaterial;
             yield return new WaitForSeconds(damageFlashDuration);
-            damageSpriteTarget.material = defaultMaterial;
+            if (damageSpriteTarget != null) damageSpriteTarget.material = defaultMaterial;
+            foreach (var sprite in secondaryDamageSpriteTargets) sprite.material = defaultMaterial;
         }
 
         private void _Die(DamageType damageType, bool isDamageByPlayer) {

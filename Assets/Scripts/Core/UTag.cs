@@ -16,5 +16,10 @@ namespace Core
         public const string Explosion = "Explosion";
         public const string Asteroid = "Asteroid";
         public const string Mine = "Mine";
+        public const string EnemyTurret = "EnemyTurret";
+        public const string Missile = "Missile";
+        public const string Nuke = "Nuke";
+        public const string Boss = "Boss";
+        public const string BeamLaser = "BeamLaser";
     }
 }

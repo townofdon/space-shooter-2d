@@ -8,7 +8,7 @@ namespace Player {
 
         static GameObject cachedPlayerGO;
         static PlayerGeneral cachedPlayerGeneral;
-        static Timer cacheBustInterval = new Timer();
+        static Timer cacheBustInterval = new Timer(TimerDirection.Decrement, TimerStep.DeltaTime, 0.2f);
 
         public static PlayerGeneral FindPlayer() {
             if (cachedPlayerGeneral != null && cachedPlayerGeneral.isAlive && cachedPlayerGeneral.isActiveAndEnabled && cachedPlayerGeneral.gameObject.activeSelf) {
@@ -21,7 +21,7 @@ namespace Player {
             cacheBustInterval.Start();
             cachedPlayerGO = GameObject.FindGameObjectWithTag(UTag.Player);
             if (cachedPlayerGO == null) return null;
-            cachedPlayerGeneral = cachedPlayerGO.GetComponent<PlayerGeneral>();
+            cachedPlayerGeneral = cachedPlayerGO.GetComponentInParent<PlayerGeneral>();
             return cachedPlayerGeneral;
         }
     }

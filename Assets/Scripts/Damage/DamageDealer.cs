@@ -62,6 +62,10 @@ namespace Damage
             ignoreUUID = uuid;
         }
 
+        public void SetIgnoreLayers(LayerMask layerMask) {
+            ignoreLayers = layerMask;
+        }
+
         public void SetIgnoreTag(string tag) {
             ignoreTag = tag;
         }
@@ -136,6 +140,11 @@ namespace Damage
                 HandleHitOtherProjectile(other);
                 return;
             }
+            if (other.tag == UTag.Missile || other.tag == UTag.Nuke) {
+                HandleHitOtherOrdnance(other);
+                return;
+            }
+
             DamageReceiver actor = other.GetComponent<DamageReceiver>();
             if (actor == null) {
                 // InvokeCallback(onHit, DamageableType.Default);
@@ -145,7 +154,7 @@ namespace Damage
                     HandleJarringCollision(actor);
                     return;
                 }
-                if (actor.TakeDamage(
+                if (actor != null && actor.TakeDamage(
                     damageClass.baseDamage * baseDamageMultiplier * upgradeDamageMultiplier * (makeFramerateIndependent ? Time.deltaTime : 1f),
                     damageType,
                     isDamageByPlayer
@@ -161,16 +170,31 @@ namespace Damage
 
         void HandleHitOtherProjectile(Collider2D other) {
             if (this.tag == UTag.DisruptorRing || this.damageType == DamageType.Disruptor) {
-                if (parentActor != null) {
-                    parentActor.DrainShield(
-                        GameManager.current.GetWeaponClass(Weapons.WeaponType.DisruptorRing).shieldDrain * 0.25f
-                    );
-                }
+                DrainSelfShields();
                 Projectile projectile = other.GetComponent<Projectile>();
                 if (projectile != null) projectile.OnDeath();
             }
             if (this.tag == UTag.Explosion || this.damageType == DamageType.Explosion) {
                 InvokeCallback(onDeath);
+            }
+        }
+
+        void HandleHitOtherOrdnance(Collider2D other) {
+            if (this.tag == UTag.DisruptorRing || this.damageType == DamageType.Disruptor) {
+                // do not apply to the player
+                if (parentActor != null && parentActor.tag == UTag.Player) return;
+
+                DrainSelfShields();
+
+                if (other.tag == UTag.Nuke) {
+                    Nuke nuke = other.GetComponent<Nuke>();
+                    if (nuke != null) nuke.Explode();
+                }
+
+                if (other.tag == UTag.Missile) {
+                    Rocket missile = other.GetComponent<Rocket>();
+                    if (missile != null) missile.OnDeath();
+                }
             }
         }
 
@@ -189,10 +213,19 @@ namespace Damage
             float damageToActor = collisionDamage * collisionMagnitude * Mathf.Max(1f, (rb.mass / actor.rigidbody.mass) * 0.05f);
             actor.TakeDamage(damageToActor * baseDamageMultiplier, DamageType.Collision, isDamageByPlayer);
         }
+
         void HandleJarringCollision(Collider2D other) {
             if (damageType != DamageType.Collision) return;
             DamageReceiver actor = other.gameObject.GetComponent<DamageReceiver>();
             HandleJarringCollision(actor);
+        }
+
+        void DrainSelfShields() {
+            if (parentActor != null) {
+                parentActor.DrainShield(
+                    GameManager.current.GetWeaponClass(Weapons.WeaponType.DisruptorRing).shieldDrain * 0.25f
+                );
+            }
         }
 
         void IgnoreColliders() {

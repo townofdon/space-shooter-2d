@@ -42,6 +42,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: c9129cd6c299bd84a82d7edc08b61198, type: 3}
     clipTail: {fileID: 0}
@@ -65,7 +66,7 @@ MonoBehaviour:
   baseSettings:
     _assetClass: Raptor I
     _damageMultiplier: 1
-    _startingAmmo: 50
+    _startingAmmo: 200
     _infiniteAmmo: 0
     _reloads: 1
     _reloadTime: 1.5
@@ -100,8 +101,8 @@ MonoBehaviour:
   upgrades:
   - _assetClass: Raptor II
     _damageMultiplier: 1.1
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _startingAmmo: 400
+    _infiniteAmmo: 0
     _reloads: 1
     _reloadTime: 1.4
     _magazineCapacity: 60
@@ -133,9 +134,9 @@ MonoBehaviour:
       clips: []
       oneShot: 0
   - _assetClass: Raptor III
-    _damageMultiplier: 1.4
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _damageMultiplier: 1.25
+    _startingAmmo: 500
+    _infiniteAmmo: 0
     _reloads: 1
     _reloadTime: 1
     _magazineCapacity: 70
@@ -168,9 +169,9 @@ MonoBehaviour:
       - {fileID: 8300000, guid: de4d9eb04fdabc444ac35ede33c4fd01, type: 3}
       oneShot: 0
   - _assetClass: Hydra IV
-    _damageMultiplier: 1.6
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _damageMultiplier: 1.5
+    _startingAmmo: 600
+    _infiniteAmmo: 0
     _reloads: 1
     _reloadTime: 1
     _magazineCapacity: 80
@@ -204,8 +205,8 @@ MonoBehaviour:
       oneShot: 0
   - _assetClass: Hydra V
     _damageMultiplier: 3
-    _startingAmmo: 100
-    _infiniteAmmo: 1
+    _startingAmmo: 800
+    _infiniteAmmo: 0
     _reloads: 1
     _reloadTime: 0.5
     _magazineCapacity: 100

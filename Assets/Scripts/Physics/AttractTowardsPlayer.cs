@@ -27,16 +27,16 @@ namespace Physics {
             rb = GetComponent<Rigidbody2D>();
             initialDrag = rb.drag;
             player = GameObject.FindGameObjectWithTag(UTag.Player);
-            if (player != null) playerGeneral = player.GetComponent<PlayerGeneral>();
-            findPlayerInterval.SetDuration(0.5f);
+            if (player != null) playerGeneral = player.GetComponentInParent<PlayerGeneral>();
+            findPlayerInterval.SetDuration(0.1f);
         }
 
         void FixedUpdate() {
-            if (player == null) {
+            if (player == null || playerGeneral == null) {
                 if (findPlayerInterval.active) return;
                 findPlayerInterval.Start();
                 player = GameObject.FindGameObjectWithTag(UTag.Player);
-                if (player != null) playerGeneral = player.GetComponent<PlayerGeneral>();
+                if (player != null) playerGeneral = player.GetComponentInParent<PlayerGeneral>();
             }
             Attract();
             findPlayerInterval.Tick();

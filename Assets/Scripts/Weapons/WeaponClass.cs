@@ -14,6 +14,8 @@ namespace Weapons
         DisruptorRing,
         Nuke,
         Missile,
+        MachineGunEnemy,
+        Fireball,
     }
 
     [System.Serializable]
@@ -72,6 +74,10 @@ namespace Weapons
         
         [Header("Override Audio")][Space]
         [SerializeField] Sound _reloadSound;
+
+        public void SetInfiniteAmmo(bool value) {
+            _infiniteAmmo = value;
+        }
 
         public string assetClass => _assetClass;
         public float damageMultiplier => _damageMultiplier;
@@ -192,7 +198,7 @@ namespace Weapons
                 PopulateUpgradeSounds();
             }
             _equipped = equipped;
-            _ammo = startingAmmo;
+            _ammo = Mathf.Max(_ammo, startingAmmo);
             _burstStep = 0;
             _firingCycle = 0;
             _ammoInClipDisplayed = GetAmmoLeftInClip();
@@ -215,6 +221,10 @@ namespace Weapons
             _onReload = OnReload;
             _onOutOfAmmo = OnOutOfAmmo;
             _onOutOfAmmoGunClick = OnOutOfAmmoGunClick;
+        }
+
+        public void SetInfiniteAmmo(bool value) {
+            current.SetInfiniteAmmo(value);
         }
 
         public void Upgrade() {
@@ -305,6 +315,7 @@ namespace Weapons
         public void Reload() {
             if (!reloads) return;
             if (GetAmmoLeftInClip() >= magazineCapacity) return;
+            if (GetReserveAmmo() <= 0) return;
             if (_ammo <= 0) return;
             if (_reloading.active) {
                 _backpackReloading = true;
