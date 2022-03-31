@@ -79,6 +79,10 @@ namespace Event {
 
         public EnemyDeathEventHandler OnEnemyDeath = new EnemyDeathEventHandler();
         public BossSpawnEventHandler OnBossSpawn = new BossSpawnEventHandler();
+
+        public VoidEventHandler OnGotoMainMenu = new VoidEventHandler();
+        public VoidEventHandler OnPause = new VoidEventHandler();
+        public VoidEventHandler OnUnpause = new VoidEventHandler();
     }
 }
 

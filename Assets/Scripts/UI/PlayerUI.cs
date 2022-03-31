@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 
 using Player;
+using Game;
 
 namespace UI {
 
@@ -129,6 +130,7 @@ namespace UI {
         }
 
         void DrawWeaponsUI() {
+            if (GameManager.isPaused) return;
             if (weapons == null) return;
             if (weapons.primaryWeaponType == Weapons.WeaponType.Laser) {
                 SetWeaponAsActive(laserBG, laserIcon, laserText);
@@ -144,6 +146,7 @@ namespace UI {
                 SetWeaponAsActive(missileBG, missileIcon, missileText, weapons.missileHasAmmo);
                 SetWeaponAsInactive(nukeBG, nukeIcon, nukeText, weapons.nukeHasAmmo);
             }
+
             if (weapons.primaryWeaponReloading) {
                 reloading.SetActive(true);
             } else {

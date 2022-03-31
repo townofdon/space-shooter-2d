@@ -12,15 +12,17 @@ namespace Core
     public enum TimerStep {
         DeltaTime,
         FixedDeltaTime,
+        UnscaledDeltaTime,
+        UnscaledFixedDeltaTime,
     }
 
     public class Timer
     {
-        public Timer(TimerDirection direction = TimerDirection.Decrement, TimerStep step = TimerStep.DeltaTime, float duration = 1f) {
+        public Timer(TimerDirection direction = TimerDirection.Decrement, TimerStep step = TimerStep.DeltaTime, float initialDuration = 1f) {
             _direction = direction;
             _step = step;
-            _duration = duration;
             _value = 0f;
+            SetDuration(initialDuration);
             End(); // set timer value to end cursor
         }
 
@@ -39,16 +41,18 @@ namespace Core
         public bool tEnd => GetIsAtEnd();
         public bool continuous {
             get { return _continuous; }
-            set{ _continuous = value; }
+            set { _continuous = value; }
         }
 
-        public void SetDuration(float duration) {
-            if (duration <= 0f) {
+        public void SetDuration(float value) {
+            _duration = value;
+            if (value <= 0f) {
                 _turnedOn = false;
                 End();
+            } else {
+                _turnedOn = true;
             }
-            _turnedOn = true;
-            _duration = duration;
+            if (_duration <= 0f) _duration = 1f;
         }
 
         public void SetValue(float value) {
@@ -77,6 +81,7 @@ namespace Core
             _value = _direction == TimerDirection.Increment
                 ? Mathf.Clamp(_value + GetStepValue(), 0f, 1f)
                 : Mathf.Clamp(_value - GetStepValue(), 0f, 1f);
+            if (float.IsNaN(_value)) End();
         }
 
         public void TickReversed() {
@@ -88,26 +93,44 @@ namespace Core
             _value = _direction == TimerDirection.Increment
                 ? Mathf.Clamp(_value - GetStepValue(), 0f, 1f)
                 : Mathf.Clamp(_value + GetStepValue(), 0f, 1f);
+            if (float.IsNaN(_value)) Start();
         }
 
         public IEnumerator WaitUntilFinished(bool tickInsideCoroutine = false) {
-            while(active) {
-                if (tickInsideCoroutine) Tick();
-                yield return null;
+            if (_turnedOn) {
+                while (active) {
+                    if (tickInsideCoroutine) Tick();
+                    yield return null;
+                }
             }
         }
 
         public IEnumerator StartAndWaitUntilFinished(bool tickInsideCoroutine = false) {
-            Start();
-            yield return WaitUntilFinished(tickInsideCoroutine);
+            if (_turnedOn) {
+                Start();
+                yield return WaitUntilFinished(tickInsideCoroutine);
+            }
         }
 
         // PRIVATE
 
         float GetStepValue() {
-            return _step == TimerStep.DeltaTime
-                ? Time.deltaTime / _duration
-                : Time.fixedDeltaTime / _duration;
+            if (_duration <= 0f) return 0f;
+            if (Time.timeScale <= 0f && (_step == TimerStep.DeltaTime || _step == TimerStep.FixedDeltaTime)) return 0f;
+            if (_step == TimerStep.DeltaTime && float.IsNaN(Time.deltaTime)) return 0f;
+            if (_step == TimerStep.FixedDeltaTime && float.IsNaN(Time.fixedDeltaTime)) return 0f;
+            switch (_step) {
+                case TimerStep.DeltaTime:
+                    return Time.deltaTime / _duration;
+                case TimerStep.FixedDeltaTime:
+                    return Time.fixedDeltaTime / _duration;
+                case TimerStep.UnscaledDeltaTime:
+                    return Time.unscaledDeltaTime / _duration;
+                case TimerStep.UnscaledFixedDeltaTime:
+                    return Time.fixedUnscaledDeltaTime / _duration;
+                default:
+                    return 0f;
+            }
         }
 
         bool GetIsAtStart() {
@@ -130,7 +153,7 @@ namespace Core
 
         public override string ToString()
         {
-            return "t=" + _value + " active=" + active;
+            return "t=" + _value + " dur=" + _duration + " on=" + _turnedOn + " active=" + active;
         }
     }
 }

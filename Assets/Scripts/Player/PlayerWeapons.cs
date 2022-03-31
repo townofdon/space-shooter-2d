@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using Core;
+using Game;
 using Weapons;
 using Damage;
 using Audio;
@@ -117,6 +118,7 @@ namespace Player
 
         void Update()
         {
+            if (GameManager.isPaused) return;
             if (FirePrimary()) {
                 AfterPrimaryFire();
             } else {
@@ -341,6 +343,7 @@ namespace Player
         }
 
         void HandleSwitchPrimaryWeapon() {
+            if (GameManager.isPaused) return;
             if (!player.isAlive) return;
             if (!input.isSwitchWeaponPressed) { didSwitchPrimaryWeapon = false; return; }
             if (didSwitchPrimaryWeapon) return;
@@ -371,6 +374,7 @@ namespace Player
         }
 
         void HandleSwitchSecondaryWeapon() {
+            if (GameManager.isPaused) return;
             if (!player.isAlive) return;
             if (!input.isSwitchWeapon2Pressed) { didSwitchSecondaryWeapon = false; return; }
             if (didSwitchSecondaryWeapon) return;
@@ -400,6 +404,7 @@ namespace Player
         }
 
         void HandleReloadPrimary() {
+            if (GameManager.isPaused) return;
             if (!player.isAlive) return;
             if (!input.isReloadPressed) { didReloadPrimary = false; return; }
             didReloadPrimary = true;

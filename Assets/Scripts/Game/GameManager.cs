@@ -1,11 +1,13 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using Core;
 using Damage;
 using Weapons;
 using Event;
+using System.Collections;
 
 namespace Game {
 
@@ -26,23 +28,29 @@ namespace Game {
     }
 
     public class GameManager : MonoBehaviour
+
     {
+        [Header("General")]
+        [Space]
+        [SerializeField] float pauseSlowdownDuration = 0.4f;
+        [SerializeField] float respawnWaitTime = 0.4f;
         [SerializeField] EventChannelSO eventChannel;
 
+        [Header("Global Classes")]
+        [Space]
         [SerializeField] List<DamageClass> _damageClasses = new List<DamageClass>();
         Dictionary<DamageType, DamageClass> _damageClassLookup = new Dictionary<DamageType, DamageClass>();
-
         [SerializeField] List<WeaponClass> _weaponClasses = new List<WeaponClass>();
         Dictionary<WeaponType, WeaponClass> _weaponClassLookup = new Dictionary<WeaponType, WeaponClass>();
 
+        // state
         GameState state = new GameState();
+        public static bool isPaused = false;
 
         public GameMode gameMode => state.mode;
-
         public DamageClass GetDamageClass(DamageType damageType) {
             return _damageClassLookup[damageType];
         }
-
         public WeaponClass GetWeaponClass(WeaponType weaponType) {
             return _weaponClassLookup[weaponType];
         }
@@ -55,12 +63,16 @@ namespace Game {
             eventChannel.OnPlayerDeath.Subscribe(OnPlayerDeath);
             eventChannel.OnEnemyDeath.Subscribe(OnEnemyDeath);
             eventChannel.OnWinLevel.Subscribe(OnWinLevel);
+            eventChannel.OnPause.Subscribe(OnPause);
+            eventChannel.OnUnpause.Subscribe(OnUnpause);
         }
 
         void OnDisable() {
             eventChannel.OnPlayerDeath.Unsubscribe(OnPlayerDeath);
             eventChannel.OnEnemyDeath.Unsubscribe(OnEnemyDeath);
             eventChannel.OnWinLevel.Unsubscribe(OnWinLevel);
+            eventChannel.OnPause.Unsubscribe(OnPause);
+            eventChannel.OnUnpause.Unsubscribe(OnUnpause);
         }
 
         void Awake() {
@@ -102,7 +114,7 @@ namespace Game {
         }
 
         void OnPlayerDeath() {
-            Debug.Log("TODO: RESPAWN PLAYER");
+            StartCoroutine(IRespawn());
         }
 
         void OnEnemyDeath(int instanceId, int points) {
@@ -111,6 +123,23 @@ namespace Game {
 
         void OnWinLevel() {
             Debug.Log("VICTORY!!");
+        }
+
+        void OnPause() {
+            Time.timeScale = 0f;
+            AudioListener.pause = true; // see: https://gamedevbeginner.com/10-unity-audio-tips-that-you-wont-find-in-the-tutorials/#audiolistener_pause
+            GameManager.isPaused = true;
+        }
+
+        void OnUnpause() {
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+            GameManager.isPaused = false;
+        }
+
+        IEnumerator IRespawn() {
+            yield return new WaitForSeconds(respawnWaitTime);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

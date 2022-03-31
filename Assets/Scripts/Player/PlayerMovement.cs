@@ -1,7 +1,9 @@
 using UnityEngine;
+
 using Core;
 using Audio;
 using Game;
+using Event;
 
 namespace Player {
 
@@ -99,6 +101,7 @@ namespace Player {
         }
 
         void HandleMove() {
+            if (GameManager.isPaused) return;
             if (!player.isAlive || !canMove) return;
             currentThrust.x = GetThrustComponent(input.move.x, rb.velocity.x);
             currentThrust.y = GetThrustComponent(input.move.y, rb.velocity.y);
@@ -106,6 +109,7 @@ namespace Player {
         }
 
         void HandleRotate() {
+            if (GameManager.isPaused) return;
             if (currentAngle < input.look.x * aimMaxAngle) currentAngle = Mathf.Round(Mathf.Clamp(currentAngle + aimSpeed * Time.deltaTime, -aimMaxAngle, aimMaxAngle));
             if (currentAngle > input.look.x * aimMaxAngle) currentAngle = Mathf.Round(Mathf.Clamp(currentAngle - aimSpeed * Time.deltaTime, -aimMaxAngle, aimMaxAngle));
             aim = Quaternion.AngleAxis(-currentAngle, Vector3.forward);
@@ -122,6 +126,7 @@ namespace Player {
         }
 
         void HandleBoost() {
+            if (GameManager.isPaused) return;
             if (player.isAlive && input.isBoostPressed && input.move.magnitude > 0.1f && canBoost) {
                 currentBoost = (Vector2.up * 0.01f + input.move).normalized * boostThrust * boostAvailable;
                 rb.AddForce(currentBoost, ForceMode2D.Impulse);
