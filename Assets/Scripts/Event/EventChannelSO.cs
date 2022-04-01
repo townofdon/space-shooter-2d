@@ -17,6 +17,7 @@ namespace Event {
     public delegate void WeaponUpgradeEvent(WeaponType weaponType);
     // dialogue-specific
     public delegate void DialogueEvent(DialogueItemSO dialogueItem);
+    public delegate void HintEvent(HintSO hint, string currentControlScheme);
 
     public class VoidEventHandler {
         event VoidEvent ev;
@@ -74,6 +75,13 @@ namespace Event {
         public void Invoke(DialogueItemSO dialogueItem) { if (ev != null) ev.Invoke(dialogueItem); }
     }
 
+    public class HintEventHandler {
+        event HintEvent ev;
+        public void Subscribe(HintEvent action) { ev += action; }
+        public void Unsubscribe(HintEvent action) { ev -= action; }
+        public void Invoke(HintSO hint, string currentControlScheme = "Keyboard&Mouse") { if (ev != null) ev.Invoke(hint, currentControlScheme); }
+    }
+
     [CreateAssetMenu(fileName = "EventChannel", menuName = "ScriptableObjects/EventChannel")]
     public class EventChannelSO : ScriptableObject {
 
@@ -98,8 +106,9 @@ namespace Event {
 
         public DialogueEventHandler OnShowDialogue = new DialogueEventHandler();
         public VoidEventHandler OnDismissDialogue = new VoidEventHandler();
-        public VoidEventHandler OnAnyKeyPress = new VoidEventHandler() { };
+        public VoidEventHandler OnAnyKeyPress = new VoidEventHandler();
 
+        public HintEventHandler OnShowHint = new HintEventHandler();
     }
 }
 

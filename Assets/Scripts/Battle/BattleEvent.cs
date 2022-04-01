@@ -20,6 +20,7 @@ namespace Battle {
         PlayMusic,
         StopMusic,
         ShowDialogue,
+        ShowHint,
     }
 
     [System.Serializable]
@@ -35,6 +36,7 @@ namespace Battle {
         [SerializeField] int allowableEnemiesLeft = 0;
         [SerializeField] UnityEvent arbitraryEvent;
         [SerializeField] DialogueItemSO _dialogueItem;
+        [SerializeField] HintSO _hint;
 
         public bool Skip => skip;
         public BattleEventType Type => type;
@@ -43,5 +45,6 @@ namespace Battle {
         public int AllowableEnemiesLeft => allowableEnemiesLeft;
         public UnityEvent ArbitraryEvent => arbitraryEvent;
         public DialogueItemSO dialogueItem => _dialogueItem;
+        public HintSO hint => _hint;
     }
 }

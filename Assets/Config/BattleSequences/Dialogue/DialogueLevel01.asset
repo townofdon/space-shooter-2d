@@ -25,4 +25,31 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+  - skip: 0
+    type: 12
+    eventLabel: 
+    wave: {fileID: 0}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 11400000, guid: f611c4756c5feff49a53e05d0d8216ad, type: 2}
+  - skip: 0
+    type: 12
+    eventLabel: 
+    wave: {fileID: 0}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 11400000, guid: b91f7409d2197ca48987b423f17e56c4, type: 2}
   notes: 

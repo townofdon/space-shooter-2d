@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 using Event;
 using Battle;
@@ -17,6 +18,7 @@ namespace Enemies {
 
         // cached
         PlayerGeneral player;
+        PlayerInput playerInput;
 
         // state
         int numEnemiesAlive = 0;
@@ -129,11 +131,22 @@ namespace Enemies {
                     waitingForDialogue = true;
                     while (waitingForDialogue) yield return null;
                     break;
+                case BattleEventType.ShowHint:
+                    playerInput = GetPlayerInput();
+                    eventChannel.OnShowHint.Invoke(battleEvent.hint, playerInput != null ? playerInput.currentControlScheme : "Keyboard&Mouse");
+                    break;
                 default:
                     Debug.LogError("Unsupported BattleEventType: " + battleEvent.Type);
                     break;
             }
             battleEventIndex++;
+        }
+
+        PlayerInput GetPlayerInput() {
+            if (playerInput != null) return playerInput;
+            player = PlayerUtils.FindPlayer();
+            if (player == null) return null;
+            return player.GetComponent<PlayerInput>();
         }
 
         IEnumerator SpawnEnemies(WaveConfigSO wave) {
