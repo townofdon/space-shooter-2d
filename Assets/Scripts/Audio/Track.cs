@@ -9,6 +9,7 @@ namespace Audio {
     public class Track : BaseSound {
         [SerializeField][Range(10f, 300f)] float bpm = 150f;
         [SerializeField][Range(1, 8)] int beatsPerBar = 16;
+        [SerializeField] bool loops = true;
 
         [SerializeField] AudioClip clipIntro;
         [SerializeField] AudioClip clipLoop;
@@ -65,7 +66,7 @@ namespace Audio {
             }
             if (clipLoop != null) {
                 sourceLoop = script.gameObject.AddComponent<AudioSource>();
-                SetSource(clipLoop, sourceLoop, true);
+                SetSource(clipLoop, sourceLoop, loops);
                 clipLoopDuration = GetClipDuration(clipLoop);
             }
             if (clipOutro != null) {

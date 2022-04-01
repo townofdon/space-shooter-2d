@@ -44,10 +44,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3465598a4399b4418407da40fcc5a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugSounds: 0
+  debugTracks: 1
   musicMix: {fileID: 0}
   soundFXMix: {fileID: 0}
-  sounds: []
-  tracks: []
+  sounds:
+  - soundName: MenuFocus
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    volumeVariance: 0.05
+    pitchVariance: 0.1
+    clips:
+    - {fileID: 8300000, guid: d6129ba5a431bc546a1437f49d93d1fd, type: 3}
+    oneShot: 1
+  tracks:
+  - soundName: starlord-main-theme
+    volume: 1
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    bpm: 120
+    beatsPerBar: 4
+    loops: 1
+    clipIntro: {fileID: 8300000, guid: d1ef0207d5b0cb841b3aac7e787da88a, type: 3}
+    clipLoop: {fileID: 8300000, guid: fe624ab2a63886c42a2538f17490262f, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
+  - soundName: starlord-transition
+    volume: 0.8
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    bpm: 120
+    beatsPerBar: 4
+    loops: 0
+    clipIntro: {fileID: 0}
+    clipLoop: {fileID: 8300000, guid: 15b3f488d0c01014d923d03415de53dd, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
   nullSound:
     soundName: 
     volume: 0.7
@@ -61,7 +114,8 @@ MonoBehaviour:
     maxFalloffDistance: 40
     volumeVariance: 0.1
     pitchVariance: 0.1
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 74742596661baf742a8c7d254db08635, type: 3}
     oneShot: 1
 --- !u!1 &3488655753409945412
 GameObject:
@@ -114,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d18826ddb31cb0499228171c9a2a205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseSlowdownDuration: 0.5
   respawnWaitTime: 0.4
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   _damageClasses:
