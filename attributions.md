@@ -14,3 +14,5 @@
 
 
 - https://opengameart.org/content/explosions-0
+- https://opengameart.org/content/assorted-32x32-creatures
+- https://opengameart.org/content/minimare-rework
