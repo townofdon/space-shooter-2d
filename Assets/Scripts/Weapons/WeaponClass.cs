@@ -116,9 +116,9 @@ namespace Weapons
         [SerializeField] List<WeaponSettings> upgrades = new List<WeaponSettings>();
 
         WeaponSettings current => (_upgradeLevel > -1 && _upgradeLevel < upgrades.Count) ? upgrades[_upgradeLevel] : baseSettings;
-        bool CanUpgrade => _upgradeLevel < upgrades.Count - 1;
-        int CurrentUpgradeLevel => _upgradeLevel + 1;
-        int MaxUpgradeLevel => upgrades.Count;
+        public bool CanUpgrade => _upgradeLevel < upgrades.Count - 1;
+        public int CurrentUpgradeLevel => _upgradeLevel + 1;
+        public int MaxUpgradeLevel => upgrades.Count;
         List<Sound> _upgradeSounds = new List<Sound>();
         
         // PUBLIC SETTINGS
@@ -215,6 +215,11 @@ namespace Weapons
             _cooldown.End();
             _burstCooldown.End();
             if (overheats) _overheated.Start(); // overheated gets ticked manually
+        }
+
+        public void Reset() {
+            _upgradeLevel = -1;
+            Init();
         }
 
         public void RegisterCallbacks(System.Action<WeaponType> OnReload, System.Action<WeaponType> OnOutOfAmmo, System.Action<WeaponType> OnOutOfAmmoGunClick) {

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 
 using Event;
 using Core;
+using Audio;
 
 namespace UI {
 
@@ -15,9 +15,9 @@ namespace UI {
         [SerializeField] Image backgroundImage;
         [SerializeField] GameObject canvas;
         [SerializeField] GameObject content;
-        [SerializeField] UnityEngine.EventSystems.EventSystem eventSystem;
 
         bool isShowing;
+        bool everFocused;
         Coroutine ieShow;
         Coroutine ieHide;
 
@@ -28,6 +28,11 @@ namespace UI {
         public void GotoMainMenu() {
             StopAllCoroutines();
             StartCoroutine(IGotoMainMenu());
+        }
+
+        public void OnButtonFocusSound() {
+            if (everFocused) AudioManager.current.PlaySound("MenuFocus");
+            everFocused = true;
         }
 
         void OnEnable() {
@@ -44,28 +49,10 @@ namespace UI {
             AppIntegrity.AssertPresent(backgroundImage);
             AppIntegrity.AssertPresent(canvas);
             AppIntegrity.AssertPresent(content);
-            AppIntegrity.AssertPresent(eventSystem);
 
             backgroundImage.enabled = false;
-            eventSystem.enabled = false;
             canvas.SetActive(false);
             content.SetActive(false);
-        }
-
-        void Update() {
-
-        }
-
-        void OnNavigate(InputValue value) {
-            Debug.Log("Navigate >> " + value.Get<Vector2>());
-        }
-
-        void OnSubmit(InputValue value) {
-            if (value.isPressed) Debug.Log("Submit >> " + value);
-        }
-
-        void OnCancel(InputValue value) {
-            if (value.isPressed) Debug.Log("Cancel >> " + value);
         }
 
         void OnShowPauseMenu() {
@@ -83,7 +70,6 @@ namespace UI {
 
             isShowing = true;
             canvas.SetActive(true);
-            eventSystem.enabled = true;
             backgroundImage.enabled = true;
 
             // TODO: animate in menu
@@ -96,7 +82,6 @@ namespace UI {
         }
 
         IEnumerator IHidePauseMenu() {
-            eventSystem.enabled = false;
             content.SetActive(false);
 
             // TODO: animate in menu (use WaitForSecondsRealTime)

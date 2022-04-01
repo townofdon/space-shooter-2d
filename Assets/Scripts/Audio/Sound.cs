@@ -19,7 +19,6 @@ namespace Audio
         AudioSource source;
 
         // getters
-        public string name => soundName;
         public AudioClip Clip => clips[currentClipIndex];
         public override bool isPlaying => source != null && source.isPlaying;
         public override bool hasClip => clips.Length > 0;

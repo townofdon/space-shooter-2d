@@ -32,7 +32,6 @@ namespace Game {
     {
         [Header("General")]
         [Space]
-        [SerializeField] float pauseSlowdownDuration = 0.4f;
         [SerializeField] float respawnWaitTime = 0.4f;
         [SerializeField] EventChannelSO eventChannel;
 
@@ -65,6 +64,8 @@ namespace Game {
             eventChannel.OnWinLevel.Subscribe(OnWinLevel);
             eventChannel.OnPause.Subscribe(OnPause);
             eventChannel.OnUnpause.Subscribe(OnUnpause);
+            eventChannel.OnShowDebug.Subscribe(OnShowDebug);
+            eventChannel.OnHideDebug.Subscribe(OnHideDebug);
         }
 
         void OnDisable() {
@@ -73,6 +74,8 @@ namespace Game {
             eventChannel.OnWinLevel.Unsubscribe(OnWinLevel);
             eventChannel.OnPause.Unsubscribe(OnPause);
             eventChannel.OnUnpause.Unsubscribe(OnUnpause);
+            eventChannel.OnShowDebug.Unsubscribe(OnShowDebug);
+            eventChannel.OnHideDebug.Unsubscribe(OnHideDebug);
         }
 
         void Awake() {
@@ -135,6 +138,14 @@ namespace Game {
             Time.timeScale = 1f;
             AudioListener.pause = false;
             GameManager.isPaused = false;
+        }
+
+        void OnShowDebug() {
+            OnPause();
+        }
+
+        void OnHideDebug() {
+            OnUnpause();
         }
 
         IEnumerator IRespawn() {

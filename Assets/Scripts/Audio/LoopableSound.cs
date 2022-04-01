@@ -40,8 +40,6 @@ namespace Audio
 
         // state
         PlayCursor cursor = PlayCursor.Head;
-        double timePlaying = 0.0;
-        double nextStartTime = 0.0;
         bool playButtonPressed = false;
 
         public override bool isPlaying => playButtonPressed

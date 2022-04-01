@@ -21,6 +21,7 @@ namespace Audio
         [SerializeField][Range(5f, 100f)] protected float maxFalloffDistance = 40f;
 
         // getters
+        public string name => soundName;
         public abstract bool hasClip { get; }
         public abstract bool hasSource { get; }
         public abstract bool isPlaying { get; }

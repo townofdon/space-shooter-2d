@@ -83,6 +83,8 @@ namespace Event {
         public VoidEventHandler OnGotoMainMenu = new VoidEventHandler();
         public VoidEventHandler OnPause = new VoidEventHandler();
         public VoidEventHandler OnUnpause = new VoidEventHandler();
+        public VoidEventHandler OnShowDebug = new VoidEventHandler();
+        public VoidEventHandler OnHideDebug = new VoidEventHandler();
     }
 }
 
