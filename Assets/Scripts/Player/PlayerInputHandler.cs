@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 using Core;
 using Event;
+using Dialogue;
 
 namespace Player {
 
@@ -42,11 +43,25 @@ namespace Player {
         void OnEnable() {
             eventChannel.OnPause.Subscribe(OnPause);
             eventChannel.OnUnpause.Subscribe(OnUnpause);
+            eventChannel.OnShowDialogue.Subscribe(OnDisableInput);
+            eventChannel.OnDismissDialogue.Subscribe(OnEnableInput);
         }
 
         void OnDisable() {
             eventChannel.OnPause.Unsubscribe(OnPause);
             eventChannel.OnUnpause.Unsubscribe(OnUnpause);
+            eventChannel.OnShowDialogue.Unsubscribe(OnDisableInput);
+            eventChannel.OnDismissDialogue.Unsubscribe(OnEnableInput);
+        }
+
+        void OnEnableInput() {
+            _isDisabled = false;
+        }
+        void OnDisableInput() {
+            _isDisabled = true;
+        }
+        void OnDisableInput(DialogueItemSO item) {
+            OnDisableInput();
         }
 
         void Start() {
@@ -122,6 +137,7 @@ namespace Player {
         }
 
         void OnUIStart(InputValue value) {
+            if (!value.isPressed) return;
             OnStart(value);
         }
 
@@ -130,6 +146,17 @@ namespace Player {
                 HideDebug();
             }
         }
+
+        void OnAnyKey(InputValue value) {
+            if (!value.isPressed) return;
+            eventChannel.OnAnyKeyPress.Invoke();
+        }
+
+        void OnUIAnyKey(InputValue value) {
+            OnAnyKey(value);
+        }
+
+        // event callbacks
 
         void ShowDebug() {
             eventChannel.OnShowDebug.Invoke();

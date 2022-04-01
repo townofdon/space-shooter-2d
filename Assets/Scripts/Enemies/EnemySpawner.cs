@@ -9,7 +9,7 @@ using Player;
 namespace Enemies {
 
     public class EnemySpawner : MonoBehaviour {
-        [SerializeField] List<BattleSequence> battleSequences;
+        [SerializeField] List<BattleSequenceSO> battleSequences;
 
         [SerializeField] bool loopIndefinitely = false;
         [SerializeField] bool debug = false;
@@ -22,6 +22,7 @@ namespace Enemies {
         int numEnemiesAlive = 0;
         int battleSequenceIndex = 0;
         int battleEventIndex = 0;
+        bool waitingForDialogue = false;
         WaveConfigSO currentWave;
         Coroutine currentWaveSpawn;
         Coroutine battle;
@@ -55,11 +56,13 @@ namespace Enemies {
         void OnEnable() {
             eventChannel.OnEnemyDeath.Subscribe(OnEnemyDeath);
             eventChannel.OnBossSpawn.Subscribe(OnBossSpawn);
+            eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
         }
 
         void OnDisable() {
             eventChannel.OnEnemyDeath.Unsubscribe(OnEnemyDeath);
             eventChannel.OnBossSpawn.Unsubscribe(OnBossSpawn);
+            eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
         }
 
         void Start() {
@@ -122,7 +125,9 @@ namespace Enemies {
                     // TODO: STOP MUSIC
                     break;
                 case BattleEventType.ShowDialogue:
-                    // TODO: SHOW DIALOGUE
+                    eventChannel.OnShowDialogue.Invoke(battleEvent.dialogueItem);
+                    waitingForDialogue = true;
+                    while (waitingForDialogue) yield return null;
                     break;
                 default:
                     Debug.LogError("Unsupported BattleEventType: " + battleEvent.Type);
@@ -190,6 +195,10 @@ namespace Enemies {
                 enemy.OnDeathByGuardians();
             }
             numEnemiesAlive = 0;
+        }
+
+        void OnDismissDialogue() {
+            waitingForDialogue = false;
         }
 
         void OnGUI() {

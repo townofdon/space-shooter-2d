@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+
 using Weapons;
+using Dialogue;
 
 namespace Event {
     // delegate types
@@ -14,6 +15,8 @@ namespace Event {
     // weapon-specific
     public delegate void WeaponAmmoEvent(WeaponType weaponType, int value);
     public delegate void WeaponUpgradeEvent(WeaponType weaponType);
+    // dialogue-specific
+    public delegate void DialogueEvent(DialogueItemSO dialogueItem);
 
     public class VoidEventHandler {
         event VoidEvent ev;
@@ -64,6 +67,13 @@ namespace Event {
         public void Invoke(WeaponType weaponType) { if (ev != null) ev.Invoke(weaponType); }
     }
 
+    public class DialogueEventHandler {
+        event DialogueEvent ev;
+        public void Subscribe(DialogueEvent action) { ev += action; }
+        public void Unsubscribe(DialogueEvent action) { ev -= action; }
+        public void Invoke(DialogueItemSO dialogueItem) { if (ev != null) ev.Invoke(dialogueItem); }
+    }
+
     [CreateAssetMenu(fileName = "EventChannel", menuName = "ScriptableObjects/EventChannel")]
     public class EventChannelSO : ScriptableObject {
 
@@ -85,6 +95,11 @@ namespace Event {
         public VoidEventHandler OnUnpause = new VoidEventHandler();
         public VoidEventHandler OnShowDebug = new VoidEventHandler();
         public VoidEventHandler OnHideDebug = new VoidEventHandler();
+
+        public DialogueEventHandler OnShowDialogue = new DialogueEventHandler();
+        public VoidEventHandler OnDismissDialogue = new VoidEventHandler();
+        public VoidEventHandler OnAnyKeyPress = new VoidEventHandler() { };
+
     }
 }
 

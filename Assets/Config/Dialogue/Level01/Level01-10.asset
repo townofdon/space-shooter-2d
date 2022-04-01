@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa76725453cd3a64fb790457859c7f25, type: 3}
+  m_Name: Level01-10
+  m_EditorClassIdentifier: 
+  _dialogueEntity: {fileID: 11400000, guid: 59b4178810c647d45b124daf52d8c93f, type: 2}
+  _statements:
+  - Lord Hyperion, our forces are overrun by the Xyclon armada!
+  - We lack the firepower necessary to repel their attack. Now they're targeting
+    civilian bases. Those alien slimeballs...
+  - Do what you do best. We're all counting on you.

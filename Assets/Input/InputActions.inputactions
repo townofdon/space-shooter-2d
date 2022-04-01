@@ -112,6 +112,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AnyKey",
+                    "type": "Button",
+                    "id": "d53244c9-bc20-4ba5-8043-36e7bfeb7c0a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -466,6 +475,83 @@
                     "action": "Debug",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1770ca4a-7202-40b3-b926-3c3896dc54f3",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f34437de-a0cf-48bf-ab1c-56f720899f25",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c854362-7191-49d9-9608-a94549fa9283",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14ba2ed4-335f-4f7f-8cb0-e67151870663",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f276c5a1-b2a6-429f-b5f1-729c1fa43f60",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5051ade-72fc-4841-b451-713b3609a581",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "301251e6-d993-4b99-8cb4-cb52803be4a5",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -582,7 +668,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AnyKey",
+                    "name": "UIAnyKey",
                     "type": "Button",
                     "id": "8bf02f1a-fd13-4563-9c89-c07241c0e59d",
                     "expectedControlType": "Button",
@@ -1050,7 +1136,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "AnyKey",
+                    "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1061,7 +1147,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "AnyKey",
+                    "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1072,7 +1158,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AnyKey",
+                    "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1083,7 +1169,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AnyKey",
+                    "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1094,7 +1180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AnyKey",
+                    "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1105,7 +1191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AnyKey",
+                    "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1116,7 +1202,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AnyKey",
+                    "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 using Enemies;
+using Dialogue;
 
 namespace Battle {
 
@@ -33,6 +34,7 @@ namespace Battle {
         [SerializeField] float arbitraryTime = 0f;
         [SerializeField] int allowableEnemiesLeft = 0;
         [SerializeField] UnityEvent arbitraryEvent;
+        [SerializeField] DialogueItemSO _dialogueItem;
 
         public bool Skip => skip;
         public BattleEventType Type => type;
@@ -40,5 +42,6 @@ namespace Battle {
         public float ArbitraryTime => arbitraryTime;
         public int AllowableEnemiesLeft => allowableEnemiesLeft;
         public UnityEvent ArbitraryEvent => arbitraryEvent;
+        public DialogueItemSO dialogueItem => _dialogueItem;
     }
 }

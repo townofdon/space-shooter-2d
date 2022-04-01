@@ -22,6 +22,7 @@ namespace Battle {
             SerializedProperty arbitraryTime = property.FindPropertyRelative("arbitraryTime");
             SerializedProperty allowableEnemiesLeft = property.FindPropertyRelative("allowableEnemiesLeft");
             SerializedProperty arbitraryEvent = property.FindPropertyRelative("arbitraryEvent");
+            SerializedProperty _dialogueItem = property.FindPropertyRelative("_dialogueItem");
             SerializedProperty skip = property.FindPropertyRelative("skip");
 
             // SerializedProperty coloursProp = property.FindPropertyRelative("colours");
@@ -118,6 +119,9 @@ namespace Battle {
                     break;
                 case BattleEventType.ArbitraryEvent:
                     EditorGUI.PropertyField(c2, arbitraryEvent, GUIContent.none);
+                    break;
+                case BattleEventType.ShowDialogue:
+                    EditorGUI.PropertyField(c2, _dialogueItem, GUIContent.none);
                     break;
                 default:
                     break;
