@@ -88,7 +88,7 @@ namespace Enemies
             rb = GetComponent<Rigidbody2D>();
             circle = GetComponentInChildren<CircleCollider2D>();
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
-            player = FindObjectOfType<PlayerGeneral>();
+            player = PlayerUtils.FindPlayer();
             InitWeapon();
             // init
             if (circle != null) shipRadius = circle.radius + 1f;
@@ -105,6 +105,7 @@ namespace Enemies
         }
 
         void Update() {
+            if (player == null || !player.isAlive) player = PlayerUtils.FindPlayer();
             if (Fire()) {
                 AfterFire();
             } else {
@@ -132,7 +133,7 @@ namespace Enemies
         }
 
         bool CheckPlayerWithinScopes() {
-            if (player == null) return false;
+            if (player == null || !player.isAlive) return false;
             // if player is close to ship & within maxAngle
             if (vectorToPlayer.magnitude < shipRadius && Vector2.Angle(transform.rotation * rot * aim * -transform.up, vectorToPlayer) <= maxAimAngle) return true;
             // if player is outside of ship's range
@@ -158,7 +159,7 @@ namespace Enemies
         }
 
         void HandleAimBehaviour() {
-            if (player == null) return;
+            if (player == null || !player.isAlive) return;
             vectorToPlayer = player.transform.position - transform.position;
             switch (aimMode)
             {

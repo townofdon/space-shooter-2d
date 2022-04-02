@@ -45,7 +45,7 @@ namespace Enemies {
         }
 
         void OnDeath() {
-            if (deployAnimator != null) {
+            if (deployAnimator != null && animateDeploy) {
                 deployAnimator.SetTrigger("Retract");
                 StartCoroutine(IRetract());
             }
@@ -58,7 +58,7 @@ namespace Enemies {
 
         IEnumerator IDeploy() {
             yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.5f));
-            if (deployAnimator != null && deployAnimator.enabled) {
+            if (deployAnimator != null && deployAnimator.enabled && animateDeploy) {
                 deploySound.Play();
                 deployAnimator.speed = 1f;
             }

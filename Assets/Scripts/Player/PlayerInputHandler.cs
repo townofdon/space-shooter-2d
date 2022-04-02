@@ -92,6 +92,7 @@ namespace Player {
             AppIntegrity.AssertPresent(eventChannel);
             input = GetComponent<PlayerInput>();
             input.SwitchCurrentActionMap("Player");
+            input.enabled = true;
         }
 
         void Update() {
