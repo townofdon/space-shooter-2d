@@ -7,6 +7,7 @@ using Player;
 using Core;
 using Weapons;
 using Audio;
+using Game;
 
 namespace Enemies {
 
@@ -81,20 +82,31 @@ namespace Enemies {
             if (!self.isAlive) return;
             if (launchCooldown.active) return;
 
-            launchCooldown.Start();
-            launchSound.Play();
+            if (GameManager.current.difficulty == GameDifficulty.Hard) {
 
-            LaunchMissile(missileLaunchL.position, Vector2.left, launchForce);
-            LaunchMissile(missileLaunchR.position, Vector2.right, launchForce);
+                launchCooldown.Start();
+                launchSound.Play();
 
-            if (self.healthPct < secondaryMissileThreshold) {
-                LaunchMissile(missileLaunchL.position, Vector2.left, launchForceSecondary);
-                LaunchMissile(missileLaunchR.position, Vector2.right, launchForceSecondary);
-            }
+                LaunchMissile(missileLaunchL.position, Vector2.left, launchForce);
+                LaunchMissile(missileLaunchR.position, Vector2.right, launchForce);
 
-            if (self.healthPct < tertiaryMissileThreshold) {
-                LaunchMissile(missileLaunchL.position, Vector2.left, launchForceTertiary);
-                LaunchMissile(missileLaunchR.position, Vector2.right, launchForceTertiary);
+                if (self.healthPct < secondaryMissileThreshold) {
+                    LaunchMissile(missileLaunchL.position, Vector2.left, launchForceSecondary);
+                    LaunchMissile(missileLaunchR.position, Vector2.right, launchForceSecondary);
+                }
+
+                if (self.healthPct < tertiaryMissileThreshold) {
+                    LaunchMissile(missileLaunchL.position, Vector2.left, launchForceTertiary);
+                    LaunchMissile(missileLaunchR.position, Vector2.right, launchForceTertiary);
+                }
+            } else if (GameManager.current.difficulty == GameDifficulty.Medium) {
+
+                if (self.healthPct < secondaryMissileThreshold) {
+                    launchCooldown.Start();
+                    launchSound.Play();
+                    LaunchMissile(missileLaunchL.position, Vector2.left, launchForceSecondary);
+                    LaunchMissile(missileLaunchR.position, Vector2.right, launchForceSecondary);
+                }
             }
         }
 

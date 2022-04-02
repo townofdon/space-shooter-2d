@@ -47,12 +47,14 @@ namespace Enemies {
             numEnemiesAlive++;
         }
 
-        public void BattleFinished() {
-            eventChannel.OnWinLevel.Invoke();
-        }
+        public void BattleFinished() { }
 
         public void StopBattle() {
             if (battle != null) StopCoroutine(battle);
+        }
+
+        public void DestroyAllEnemies(bool isQuiet = false) {
+            DestroyAllEnemiesPresent(isQuiet);
         }
 
         void OnEnable() {
@@ -118,7 +120,7 @@ namespace Enemies {
                     }
                     break;
                 case BattleEventType.DestroyAllEnemiesPresent:
-                    yield return DestroyAllEnemiesPresent();
+                    DestroyAllEnemiesPresent();
                     break;
                 case BattleEventType.PlayMusic:
                     // TODO: PLAY MUSIC
@@ -134,6 +136,9 @@ namespace Enemies {
                 case BattleEventType.ShowHint:
                     playerInput = GetPlayerInput();
                     eventChannel.OnShowHint.Invoke(battleEvent.hint, playerInput != null ? playerInput.currentControlScheme : "Keyboard&Mouse");
+                    break;
+                case BattleEventType.WinLevel:
+                    eventChannel.OnWinLevel.Invoke();
                     break;
                 default:
                     Debug.LogError("Unsupported BattleEventType: " + battleEvent.Type);
@@ -200,12 +205,11 @@ namespace Enemies {
             rb.velocity = wave.GetLaunchVelocity(enemy.transform.position, player != null ? player.transform.position : Vector2.zero);
         }
 
-        IEnumerator DestroyAllEnemiesPresent() {
+        void DestroyAllEnemiesPresent(bool isQuiet = false) {
             EnemyShip[] enemies = FindObjectsOfType<EnemyShip>();
             foreach (var enemy in enemies) {
                 if (enemy == null || !enemy.isAlive) continue;
-                yield return new WaitForSecondsRealtime(0.04f);
-                enemy.OnDeathByGuardians();
+                enemy.OnDeathByGuardians(isQuiet);
             }
             numEnemiesAlive = 0;
         }

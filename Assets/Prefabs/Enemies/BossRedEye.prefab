@@ -126,6 +126,7 @@ MonoBehaviour:
   _damageableType: 1
   debug: 0
   _invulnerable: 0
+  _timeInvincibleAfterSpawn: 0
   _maxHealth: 1000
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -133,11 +134,20 @@ MonoBehaviour:
   _maxShield: 0
   _shieldWaitTime: 3
   _shieldRechargeTime: 1
+  healthModEasy: 0.5
+  healthModMedium: 1
+  healthModHard: 1.2
+  healthModInsane: 3
+  shieldModEasy: 0.5
+  shieldModMedium: 1
+  shieldModHard: 1.2
+  shieldModInsane: 3
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   damageFlashMaterial: {fileID: 2100000, guid: 0ae09c084eeb8aa45b520fcf9e353eba, type: 2}
   damageFlashDuration: 0.1
   damageSpriteTarget: {fileID: 3306651752485391463}
   secondaryDamageSpriteTargets: []
+  perishableObjects: []
   isBoss: 1
   ship: {fileID: 3306651752637380792}
   explosion: {fileID: 5345083779386589570, guid: 6f0bd7f793570f2488b51bcbc9eda4cb, type: 3}

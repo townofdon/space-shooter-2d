@@ -21,6 +21,7 @@ namespace Damage {
         [SerializeField] DamageableType _damageableType = DamageableType.Default;
         [SerializeField] bool debug = false;
         [SerializeField] bool _invulnerable = false;
+        [SerializeField] float _timeInvincibleAfterSpawn = 0f;
 
         [Header("Health Settings")][Space]
         [SerializeField] float _maxHealth = 50f;
@@ -32,7 +33,19 @@ namespace Damage {
         [SerializeField] float _maxShield = 0f;
         [SerializeField] float _shieldWaitTime = 3f;
         [SerializeField] float _shieldRechargeTime = 1f;
-        
+
+        [Header("Difficulty Settings")]
+        [Space]
+        [SerializeField][Range(0f, 5f)] float healthModEasy = 1f;
+        [SerializeField][Range(0f, 5f)] float healthModMedium = 1f;
+        [SerializeField][Range(0f, 5f)] float healthModHard = 1f;
+        [SerializeField][Range(0f, 5f)] float healthModInsane = 1f;
+        [Space]
+        [SerializeField][Range(0f, 5f)] float shieldModEasy = 1f;
+        [SerializeField][Range(0f, 5f)] float shieldModMedium = 1f;
+        [SerializeField][Range(0f, 5f)] float shieldModHard = 1f;
+        [SerializeField][Range(0f, 5f)] float shieldModInsane = 1f;
+
         [Header("Damage FX")][Space]
         [SerializeField] Material defaultMaterial;
         [SerializeField] Material damageFlashMaterial;
@@ -73,6 +86,7 @@ namespace Damage {
         Timer _nukeHit = new Timer(TimerDirection.Decrement, TimerStep.DeltaTime, 0.4f);
         float _healthDamageThisFrame = 0f;
         float _shieldDamageThisFrame = 0f;
+        Timer _tempInvulnerable = new Timer();
 
         float _prevShield = 0f;
         float _timeShieldHit = 0f;
@@ -82,9 +96,9 @@ namespace Damage {
         public System.Guid uuid => _uuid;
         public bool isAlive => _isAlive;
         public float health => _health;
-        public float healthPct => _health / _maxHealth;
+        public float healthPct => _health / (_maxHealth * GetHealthMod());
         public float shield => _shield;
-        public float shieldPct => _shield / _maxShield;
+        public float shieldPct => _shield / (_maxShield * GetShieldMod());
         public float timeHit => _timeHit;
         public bool isRechargingShield => _isRechargingShield;
         public float hitRecoveryTime => _hitRecoveryTime;
@@ -120,6 +134,7 @@ namespace Damage {
             }
 
             _nukeHit.Tick();
+            _tempInvulnerable.Tick();
         }
 
         protected void RegisterHealthCallbacks(
@@ -147,9 +162,11 @@ namespace Damage {
 
         protected void ResetHealth() {
             _isAlive = true;
-            _health = _maxHealth;
-            _shield = _maxShield;
+            _health = _maxHealth * GetHealthMod();
+            _shield = _maxShield * GetShieldMod();
             _timeHit = 0f;
+            _tempInvulnerable.SetDuration(_timeInvincibleAfterSpawn);
+            _tempInvulnerable.Start();
         }
 
         protected void SetColliders() {
@@ -190,6 +207,7 @@ namespace Damage {
         public bool TakeDamage(float amount, DamageType damageType = DamageType.Default, bool isDamageByPlayer = false) {
             if (!_isAlive || _timeHit > 0f) return false;
             if (_invulnerable) return false;
+            if (_tempInvulnerable.active) return false;
 
             if (damageType == DamageType.Instakill) {
                 _health = Mathf.Min(0f, _health - amount);
@@ -292,6 +310,36 @@ namespace Damage {
             if (colliders == null) return;
             foreach (var collider in colliders) {
                 if (collider != null) collider.enabled = false;
+            }
+        }
+
+        private float GetHealthMod() {
+            switch (GameManager.current.difficulty) {
+                case (GameDifficulty.Easy):
+                    return healthModEasy;
+                case (GameDifficulty.Medium):
+                    return healthModMedium;
+                case (GameDifficulty.Hard):
+                    return healthModHard;
+                case (GameDifficulty.Insane):
+                    return healthModInsane;
+                default:
+                    return healthModMedium;
+            }
+        }
+
+        private float GetShieldMod() {
+            switch (GameManager.current.difficulty) {
+                case (GameDifficulty.Easy):
+                    return shieldModEasy;
+                case (GameDifficulty.Medium):
+                    return shieldModMedium;
+                case (GameDifficulty.Hard):
+                    return shieldModHard;
+                case (GameDifficulty.Insane):
+                    return shieldModInsane;
+                default:
+                    return shieldModMedium;
             }
         }
 

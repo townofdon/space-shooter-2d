@@ -6,6 +6,7 @@ using Core;
 using Weapons;
 using Damage;
 using Player;
+using Game;
 
 namespace Enemies
 {
@@ -37,6 +38,18 @@ namespace Enemies
         [SerializeField][Range(0f, 10f)] float triggerTimeVariance = 0f;
         [SerializeField] Transform rotateTarget;
         [SerializeField] LayerMask targetableLayers;
+
+        [Header("Difficulty Settings")]
+        [Space]
+        [SerializeField][Range(0f, 5f)] float triggerHoldEasyMod = 1f;
+        [SerializeField][Range(0f, 5f)] float triggerHoldMediumMod = 1f;
+        [SerializeField][Range(0f, 5f)] float triggerHoldHardMod = 1f;
+        [SerializeField][Range(0f, 5f)] float triggerHoldInsaneMod = 1f;
+        [Space]
+        [SerializeField][Range(0f, 5f)] float triggerReleaseEasyMod = 1f;
+        [SerializeField][Range(0f, 5f)] float triggerReleaseMediumMod = 1f;
+        [SerializeField][Range(0f, 5f)] float triggerReleaseHardMod = 1f;
+        [SerializeField][Range(0f, 5f)] float triggerReleaseInsaneMod = 1f;
 
         // Components
         Rigidbody2D rb;
@@ -227,11 +240,45 @@ namespace Enemies
             yield return new WaitForSecondsRealtime(UnityEngine.Random.Range(0.2f, 0.6f));
             while (true) {
                 while (!isPlayerInScopes) yield return null;
-                triggerHeld.SetDuration(Mathf.Max(triggerHoldTime + UnityEngine.Random.Range(-triggerTimeVariance / 2f, triggerTimeVariance / 2f), 0.1f));
-                triggerReleased.SetDuration(Mathf.Max(triggerReleaseTime + UnityEngine.Random.Range(-triggerTimeVariance / 2f, triggerTimeVariance / 2f), 0.1f));
+                triggerHeld.SetDuration(Mathf.Max(triggerHoldTime * GetTriggerHoldMod() + GetTriggerVariance(), 0.1f));
+                triggerReleased.SetDuration(Mathf.Max(triggerReleaseTime * GetTriggerReleaseMod() + GetTriggerVariance(), triggerReleaseTime / 2f));
                 // NOTE!!! - if weapon burst is set, the weapon will keep firing for full burst even after the trigger is released
                 yield return triggerHeld.StartAndWaitUntilFinished(true);
                 yield return triggerReleased.StartAndWaitUntilFinished(true);
+            }
+        }
+
+        float GetTriggerVariance() {
+            return UnityEngine.Random.Range(-triggerTimeVariance / 2f, triggerTimeVariance / 2f);
+        }
+
+        float GetTriggerHoldMod() {
+            switch (GameManager.current.difficulty) {
+                case GameDifficulty.Easy:
+                    return triggerHoldInsaneMod;
+                case GameDifficulty.Medium:
+                    return triggerHoldMediumMod;
+                case GameDifficulty.Hard:
+                    return triggerHoldHardMod;
+                case GameDifficulty.Insane:
+                    return triggerHoldInsaneMod;
+                default:
+                    return 1f;
+            }
+        }
+
+        float GetTriggerReleaseMod() {
+            switch (GameManager.current.difficulty) {
+                case GameDifficulty.Easy:
+                    return triggerReleaseInsaneMod;
+                case GameDifficulty.Medium:
+                    return triggerReleaseMediumMod;
+                case GameDifficulty.Hard:
+                    return triggerReleaseHardMod;
+                case GameDifficulty.Insane:
+                    return triggerReleaseInsaneMod;
+                default:
+                    return 1f;
             }
         }
 

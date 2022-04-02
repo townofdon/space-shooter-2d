@@ -202,6 +202,10 @@ namespace Enemies
             }
         }
 
+        void OnDestroy() {
+            if (wobbler != null) Destroy(wobbler.gameObject);
+        }
+
         void Start() {
             self = Utils.GetRequiredComponent<DamageableBehaviour>(gameObject);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
@@ -308,10 +312,6 @@ namespace Enemies
         HasCrossed hasCrossed = new HasCrossed();
 
         void ModeMoveBetweenPoints() {
-            if (player == null || !player.isAlive || movePoints.Count == 0) {
-                SetMode(MovementMode.Default);
-                return;
-            }
             if (moveTarget != null) {
                 targetMode = TargetMode.Position;
                 targetPosition = moveTarget;

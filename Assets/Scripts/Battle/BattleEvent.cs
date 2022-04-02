@@ -21,6 +21,7 @@ namespace Battle {
         StopMusic,
         ShowDialogue,
         ShowHint,
+        WinLevel,
     }
 
     [System.Serializable]

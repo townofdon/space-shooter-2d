@@ -9,6 +9,11 @@ using Game;
 namespace UI {
 
     public class PlayerUI : MonoBehaviour {
+
+        [Header("General Settings")]
+        [Space]
+        [SerializeField] GameObject canvas;
+
         [Header("Health UI")]
         [Space]
         [SerializeField] Slider shieldSlider;
@@ -23,7 +28,7 @@ namespace UI {
         [SerializeField] Image healthBarFill;
         [SerializeField] Gradient healthGradient;
 
-        [Header("Health UI")]
+        [Header("Weapon UI")]
         [Space]
         [SerializeField] Color activeBGColor;
         [SerializeField] Color activeFGColor;
@@ -65,19 +70,23 @@ namespace UI {
         float lastShield = 0f;
 
         void Start() {
-            player = FindObjectOfType<PlayerGeneral>();
-            if (player != null) weapons = player.GetComponent<PlayerWeapons>();
+            FindPlayer();
         }
-
 
         void Update() {
             if (player == null || !player.isAlive) {
-                gameObject.SetActive(false);
+                FindPlayer();
+                canvas.SetActive(false);
             } else {
-                gameObject.SetActive(true);
+                canvas.SetActive(true);
                 DrawHealthUI();
                 DrawWeaponsUI();
             }
+        }
+
+        void FindPlayer() {
+            player = PlayerUtils.FindPlayer();
+            if (player != null) weapons = player.GetComponent<PlayerWeapons>();
         }
 
         void DrawHealthUI() {

@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,33 +8,31 @@ using Core;
 using Damage;
 using Weapons;
 using Event;
-using System.Collections;
+using Player;
+using Audio;
 
 namespace Game {
-
-    public enum GameMode {
-        Battle,
-        FreeRoam,
-        Docked,
-    }
-
-    struct GameState {
-        GameMode _mode;
-
-        public GameState(GameMode mode = GameMode.Battle) : this() {
-            _mode = mode;
-        }
-
-        public GameMode mode { get; set; }
-    }
 
     public class GameManager : MonoBehaviour
 
     {
         [Header("General")]
         [Space]
-        [SerializeField] float respawnWaitTime = 0.4f;
+        [SerializeField] float respawnWaitTime = 2f;
+        [SerializeField] float winLevelWaitTime = 5f;
         [SerializeField] EventChannelSO eventChannel;
+        [SerializeField] GameStateSO gameState;
+
+        [Header("Player")]
+        [Space]
+        [SerializeField] PlayerStateSO playerState;
+        [SerializeField] GameObject redShipPrefab;
+        [SerializeField] GameObject yellowShipPrefab;
+        [SerializeField] GameObject blueShipPrefab;
+        [SerializeField] GameObject greenShipPrefab;
+        [SerializeField] Transform playerRespawnPoint;
+        [SerializeField] Transform playerRespawnTarget;
+        [SerializeField] Transform playerExitTarget;
 
         [Header("Global Classes")]
         [Space]
@@ -42,11 +41,21 @@ namespace Game {
         [SerializeField] List<WeaponClass> _weaponClasses = new List<WeaponClass>();
         Dictionary<WeaponType, WeaponClass> _weaponClassLookup = new Dictionary<WeaponType, WeaponClass>();
 
+        // cached
+        PlayerGeneral player;
+        Coroutine ieRespawn;
+        Coroutine ieWin;
+
         // state
-        GameState state = new GameState();
         public static bool isPaused = false;
 
-        public GameMode gameMode => state.mode;
+        // singleton
+        static GameManager _current;
+        public static GameManager current => _current;
+
+        // public
+        public GameMode gameMode => gameState.mode;
+        public GameDifficulty difficulty => gameState.difficulty;
         public DamageClass GetDamageClass(DamageType damageType) {
             return _damageClassLookup[damageType];
         }
@@ -54,9 +63,30 @@ namespace Game {
             return _weaponClassLookup[weaponType];
         }
 
-        // singleton
-        static GameManager _current;
-        public static GameManager current => _current;
+        public static void Cleanup() {
+            Utils.CleanupSingleton<GameManager>(_current);
+        }
+
+        public void SetDifficulty(GameDifficulty difficulty) {
+            Debug.Log("Setting difficulty to: " + difficulty);
+            gameState.SetDifficulty(difficulty);
+        }
+
+        public void SetPlayerShipColor(PlayerShipColor value) {
+            playerState.SetShipColor(value);
+        }
+
+        public void RespawnPlayerShip(Transform respawnTarget) {
+            HandleRespawnPlayerShip(respawnTarget);
+        }
+
+        public void RespawnPlayerShip() {
+            HandleRespawnPlayerShip(playerRespawnTarget);
+        }
+
+        public void GotoNextLevel() {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
         void OnEnable() {
             eventChannel.OnPlayerDeath.Subscribe(OnPlayerDeath);
@@ -83,6 +113,11 @@ namespace Game {
             SetupDamageClasses();
             SetupWeaponClasses();
             ULayer.Init();
+        }
+
+        void Start() {
+            playerState.Init();
+            gameState.Init();
         }
 
         void SetupDamageClasses() {
@@ -112,20 +147,24 @@ namespace Game {
             }
         }
 
-        public static void Cleanup() {
-            Utils.CleanupSingleton<GameManager>(_current);
-        }
-
         void OnPlayerDeath() {
-            StartCoroutine(IRespawn());
+            playerState.IncrementDeaths();
+            AudioManager.current.PlaySound("ship-death");
+            if (ieRespawn != null) StopCoroutine(ieRespawn);
+            if (ieWin != null) StopCoroutine(ieWin);
+            ieRespawn = StartCoroutine(IRespawn());
         }
 
         void OnEnemyDeath(int instanceId, int points) {
-            // TODO: LOG SCORE DUE TO ENEMIES KILLED
+            gameState.GainPoints(points);
         }
 
         void OnWinLevel() {
+            // TODO: SHOW VICTORY UI
             Debug.Log("VICTORY!!");
+            gameState.StorePoints();
+            if (ieWin != null) StopCoroutine(ieWin);
+            ieWin = StartCoroutine(IWinLevel());
         }
 
         void OnPause() {
@@ -148,9 +187,46 @@ namespace Game {
             OnUnpause();
         }
 
+        void HandleRespawnPlayerShip(Transform respawnTarget) {
+            GameObject playerShip = Instantiate(GetPlayerShipPrefab(), playerRespawnPoint.position, Quaternion.identity);
+            PlayerInputHandler input = playerShip.GetComponent<PlayerInputHandler>();
+            input.SetMode(PlayerControlMode.ByGame);
+            input.SetAutoMoveTarget(respawnTarget);
+        }
+
         IEnumerator IRespawn() {
             yield return new WaitForSeconds(respawnWaitTime);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            AudioManager.current.PlaySound("ship-respawn");
+            HandleRespawnPlayerShip(playerRespawnTarget);
+        }
+
+        IEnumerator IWinLevel() {
+            yield return new WaitForSeconds(winLevelWaitTime);
+            while (player == null) {
+                player = PlayerUtils.FindPlayer();
+                yield return null;
+            }
+            AudioManager.current.PlaySound("ship-whoosh");
+            PlayerInputHandler input = player.GetComponent<PlayerInputHandler>();
+            input.SetMode(PlayerControlMode.ByGame);
+            input.SetAutoMoveTarget(playerExitTarget);
+            while (Utils.IsObjectOnScreen(player.gameObject)) yield return null;
+            GotoNextLevel();
+        }
+
+        GameObject GetPlayerShipPrefab() {
+            switch (playerState.shipColor) {
+                case PlayerShipColor.Red:
+                    return redShipPrefab;
+                case PlayerShipColor.Yellow:
+                    return yellowShipPrefab;
+                case PlayerShipColor.Blue:
+                    return blueShipPrefab;
+                case PlayerShipColor.Green:
+                    return greenShipPrefab;
+                default:
+                    return redShipPrefab;
+            }
         }
     }
 }

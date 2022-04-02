@@ -7,39 +7,56 @@ using TMPro;
 namespace UI {
 
     public class UIButton {
-        Image image;
-        TextMeshProUGUI text;
-        Button button;
-        Color initialButtonColor;
-        Color initialTextColor;
+        Image _backgroundImage;
+        Image _image;
+        TextMeshProUGUI _text;
+        Button _button;
+        Color _initialButtonColor;
+        Color _initialTextColor;
+        Color _initialImageColor;
+
+        public Button button => _button;
+        public TextMeshProUGUI text => _text;
 
         // state
         bool disabled; // note - this only controls the APPEARANCE of being disabled; button is still interactable
 
         public UIButton(Button initialButton) {
-            button = initialButton;
-            image = button.GetComponent<Image>();
-            text = button.GetComponentInChildren<TextMeshProUGUI>();
-            initialButtonColor = image.color;
-            initialTextColor = text.color;
+            _button = initialButton;
+            _backgroundImage = _button.GetComponent<Image>();
+            _text = _button.GetComponentInChildren<TextMeshProUGUI>();
+            _image = GetInnerImage();
+            _initialButtonColor = _backgroundImage.color;
+            if (_text != null) _initialTextColor = _text.color;
+            if (_image != null) _initialImageColor = _image.color;
         }
 
         public void SetTextColorInherit() {
-            text.color = image.color;
+            if (_text == null) return;
+            _text.color = _backgroundImage.color;
         }
 
         public void SetTextColorInitial() {
-            text.color = initialTextColor;
+            if (_text == null) return;
+            _text.color = _initialTextColor;
         }
 
         public void Enable() {
-            image.color = initialButtonColor;
-            text.color = initialTextColor;
+            _backgroundImage.color = _initialButtonColor;
+            if (_text != null) _text.color = _initialTextColor;
+            if (_image != null) _image.color = _initialImageColor;
         }
 
         public void Disable() {
-            image.color = button.colors.disabledColor;
-            text.color = button.colors.disabledColor;
+            _backgroundImage.color = _button.colors.disabledColor;
+            if (_text != null) _text.color = _button.colors.disabledColor;
+            if (_image != null) _image.color = _button.colors.disabledColor;
+        }
+
+        Image GetInnerImage() {
+            if (_button.transform.childCount == 0) return null;
+            Transform child = _button.transform.GetChild(0);
+            return child.GetComponent<Image>();
         }
     }
 }

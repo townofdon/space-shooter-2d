@@ -169,7 +169,7 @@ namespace Weapons
             if (damageDealer != null) {
                 // once ricochet happens, let own bullets damage parentActor
                 damageDealer.SetIgnoreUUID(null);
-                damageDealer.SetIgnoreTag(UTag.Null);
+                damageDealer.SetIgnoreTag("");
             }
         }
 

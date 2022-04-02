@@ -139,19 +139,6 @@ namespace Player
             HandleSwitchPrimaryWeapon();
             HandleSwitchSecondaryWeapon();
             HandleReloadPrimary();
-
-            // TODO: REMOVE
-            HandleTempUpgrade();
-        }
-
-        // TODO: REMOVE
-        bool didUpgrade = false;
-        void HandleTempUpgrade() {
-            if (!input.isUpgradePressed) { didUpgrade = false; return; }
-            if (didUpgrade) return;
-            didUpgrade = true;
-            primaryWeapon.Upgrade();
-            secondaryWeapon.Upgrade();
         }
 
         void InitSound(WeaponClass weapon) {

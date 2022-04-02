@@ -1216,16 +1216,29 @@ MonoBehaviour:
   _damageableType: 3
   debug: 0
   _invulnerable: 0
+  _timeInvincibleAfterSpawn: 0
   _maxHealth: 50
   _hitRecoveryTime: 0
+  _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
   _maxShield: 0
   _shieldWaitTime: 3
   _shieldRechargeTime: 1
+  healthModEasy: 0.5
+  healthModMedium: 1
+  healthModHard: 1.2
+  healthModInsane: 1.5
+  shieldModEasy: 0.5
+  shieldModMedium: 1
+  shieldModHard: 1.2
+  shieldModInsane: 1.5
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   damageFlashMaterial: {fileID: 2100000, guid: 0ae09c084eeb8aa45b520fcf9e353eba, type: 2}
   damageFlashDuration: 0.1
   damageSpriteTarget: {fileID: 3691588788372855393}
+  secondaryDamageSpriteTargets: []
+  perishableObjects: []
+  isBoss: 0
   ship: {fileID: 3691588787849085019}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
   damageSound:
@@ -1297,6 +1310,7 @@ MonoBehaviour:
   firingMode: 0
   aimMode: 2
   weapon: {fileID: 11400000, guid: 97f37ab9fe5d09c4797e093657e34422, type: 2}
+  numUpgrades: 0
   guns:
   - {fileID: 3691588789139359782}
   aimSpeed: 0.5
@@ -1308,6 +1322,14 @@ MonoBehaviour:
   targetableLayers:
     serializedVersion: 2
     m_Bits: 0
+  triggerHoldEasyMod: 0.5
+  triggerHoldMediumMod: 1
+  triggerHoldHardMod: 1.2
+  triggerHoldInsaneMod: 1.5
+  triggerReleaseEasyMod: 2.5
+  triggerReleaseMediumMod: 1.5
+  triggerReleaseHardMod: 1
+  triggerReleaseInsaneMod: 0.75
 --- !u!114 &718122837
 MonoBehaviour:
   m_ObjectHideFlags: 0

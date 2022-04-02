@@ -103,8 +103,8 @@ namespace Enemies {
             StartCoroutine(DeathAnimation());
         }
 
-        public void OnDeathByGuardians() {
-            TakeDamage(1000f, DamageType.Instakill, false);
+        public void OnDeathByGuardians(bool isQuiet = false) {
+            StartCoroutine(IDeathByGuardians());
         }
 
         int GetDeathPoints(bool isDamageByPlayer) {
@@ -116,6 +116,11 @@ namespace Enemies {
         void RemoveMarker() {
             OffscreenMarker marker = GetComponentInChildren<OffscreenMarker>();
             if (marker != null) marker.Disable();
+        }
+
+        IEnumerator IDeathByGuardians(bool isQuiet = false) {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.2f));
+            TakeDamage(1000f, isQuiet ? DamageType.InstakillQuiet : DamageType.Instakill, false);
         }
 
         IEnumerator DeathAnimation() {

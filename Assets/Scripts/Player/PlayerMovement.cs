@@ -79,6 +79,7 @@ namespace Player {
 
         void Update() {
             SetThrottle();
+            HandleMoveByGame();
         }
 
         void FixedUpdate() {
@@ -100,7 +101,15 @@ namespace Player {
             throttle = Mathf.Clamp(throttle, 0f, 1f);
         }
 
+        void HandleMoveByGame() {
+            if (input.controlMode == PlayerControlMode.ByPlayer) return;
+            if (GameManager.isPaused) return;
+            if (!player.isAlive || !canMove) return;
+            transform.position += (Vector3)input.move * throttle * maxSpeed * Time.deltaTime;
+        }
+
         void HandleMove() {
+            if (input.controlMode == PlayerControlMode.ByGame) return;
             if (GameManager.isPaused) return;
             if (!player.isAlive || !canMove) return;
             currentThrust.x = GetThrustComponent(input.move.x, rb.velocity.x);
@@ -117,6 +126,7 @@ namespace Player {
         }
 
         void HandleBounds() {
+            if (input.controlMode == PlayerControlMode.ByGame) return;
             if (GameManager.current.gameMode == GameMode.Battle) {
                 transform.position = new Vector2(
                     Mathf.Clamp(transform.position.x, minBounds.x + screenPadLeft, maxBounds.x - screenPadRight),

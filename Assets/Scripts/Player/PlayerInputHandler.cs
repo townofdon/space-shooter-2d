@@ -7,6 +7,11 @@ using Dialogue;
 
 namespace Player {
 
+    public enum PlayerControlMode {
+        ByPlayer,
+        ByGame,
+    }
+
     public class PlayerInputHandler : MonoBehaviour
     {
         [SerializeField] EventChannelSO eventChannel;
@@ -25,6 +30,7 @@ namespace Player {
         bool _isSwitchWeaponPressed = false;
         bool _isSwitchWeapon2Pressed = false;
 
+        public PlayerControlMode controlMode => _controlMode;
         public Vector2 move => _move;
         public Vector2 look => _look;
         public bool isFirePressed => _isFirePressed;
@@ -35,10 +41,32 @@ namespace Player {
         public bool isSwitchWeaponPressed => _isSwitchWeaponPressed;
         public bool isSwitchWeapon2Pressed => _isSwitchWeapon2Pressed;
 
+        // cached
+        Rigidbody2D rb;
+
         // state
+        PlayerControlMode _controlMode;
         bool _isPaused = false;
         bool _isDebug = false;
         bool _isDisabled = false;
+        Transform _autoMoveTarget;
+
+
+        public void SetMode(PlayerControlMode value) {
+            if (_controlMode == PlayerControlMode.ByGame && value == PlayerControlMode.ByPlayer) {
+                rb.velocity = Vector2.zero;
+            }
+            _controlMode = value;
+        }
+
+        public void SetAutoMoveTarget(Transform value) {
+            _autoMoveTarget = value;
+        }
+
+        Vector2 GetMoveTarget() {
+            if (_autoMoveTarget == null) return Vector2.zero;
+            return _autoMoveTarget.position;
+        }
 
         void OnEnable() {
             eventChannel.OnPause.Subscribe(OnPause);
@@ -67,49 +95,66 @@ namespace Player {
         void Start() {
             AppIntegrity.AssertPresent(eventChannel);
             input = GetComponent<PlayerInput>();
+            rb = GetComponent<Rigidbody2D>();
+            input.SwitchCurrentActionMap("Player");
+        }
+
+        void Update() {
+            if (_controlMode == PlayerControlMode.ByPlayer) return;
+            _move = (GetMoveTarget() - (Vector2)transform.position).normalized;
+            if (Vector2.Distance(GetMoveTarget(), transform.position) < 0.1f) SetMode(PlayerControlMode.ByPlayer);
         }
 
         void OnMove(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _move = value.Get<Vector2>();
         }
 
         void OnLook(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _look = value.Get<Vector2>();
         }
 
         void OnFire(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _isFirePressed = value.isPressed;
         }
 
         void OnFireSecondary(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _isFire2Pressed = value.isPressed;
         }
 
         void OnMelee(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _isMeleePressed = value.isPressed;
         }
 
         void OnReload(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _isReloadPressed = value.isPressed;
         }
 
         void OnBoost(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _isBoostPressed = value.isPressed;
         }
 
         void OnSwitchWeapon(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _isSwitchWeaponPressed = value.isPressed;
         }
 
         void OnSwitchSecondary(InputValue value) {
+            if (_controlMode == PlayerControlMode.ByGame) return;
             if (_isPaused || _isDisabled) return;
             _isSwitchWeapon2Pressed = value.isPressed;
         }
@@ -173,12 +218,6 @@ namespace Player {
         void OnUnpause() {
             input.SwitchCurrentActionMap("Player");
             _isPaused = false;
-        }
-
-        // TODO: REMOVE
-        public bool isUpgradePressed = false;
-        void OnTempUpgrade(InputValue value) {
-            // isUpgradePressed = value.isPressed;
         }
     }
 }

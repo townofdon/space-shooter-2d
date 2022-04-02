@@ -35770,7 +35770,7 @@ GameObject:
   - component: {fileID: 5316389521978419115}
   - component: {fileID: 1689767547919250669}
   m_Layer: 7
-  m_Name: Player
+  m_Name: PlayerShipRed
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35812,7 +35812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: c04d20722f3b1c0499d9f64341cce08c, type: 3}
   m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 3231548756238966217, guid: b9c0a061d34389f429aab27226582ee1, type: 3}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -35824,7 +35824,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -35880,16 +35880,28 @@ MonoBehaviour:
   _damageableType: 1
   debug: 0
   _invulnerable: 0
+  _timeInvincibleAfterSpawn: 2
   _maxHealth: 50
   _hitRecoveryTime: 0.05
+  _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
   _maxShield: 100
   _shieldWaitTime: 3
   _shieldRechargeTime: 2.5
+  healthModEasy: 2
+  healthModMedium: 1
+  healthModHard: 1
+  healthModInsane: 0.5
+  shieldModEasy: 2
+  shieldModMedium: 1
+  shieldModHard: 1
+  shieldModInsane: 0.25
   defaultMaterial: {fileID: 0}
   damageFlashMaterial: {fileID: 0}
   damageFlashDuration: 0
   damageSpriteTarget: {fileID: 0}
+  secondaryDamageSpriteTargets: []
+  perishableObjects: []
   blastThrowback: 6
   collideThrowback: 4
   collideThrowbackFromVelocity: 0.3
@@ -36026,7 +36038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede1a5f8579b3014080755d4a133a861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUpgradePressed: 0
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &5316389521978419114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36099,18 +36111,18 @@ MonoBehaviour:
   disruptorRingEffect: {fileID: 415421435}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   switchWeaponSound:
-    soundName: SwitchWeapon
-    volume: 0.25
+    soundName: Deployment
+    volume: 0.516
     pitch: 1
     ignoreListenerPause: 0
-    realtimeEditorInspect: 1
+    realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 0
     spread: 0
     minFalloffDistance: 20
     maxFalloffDistance: 40
-    volumeVariance: 0.1
-    pitchVariance: 0.17
+    volumeVariance: 0.113
+    pitchVariance: 0.214
     clips:
     - {fileID: 8300000, guid: 75bd53d41261cc34f8bca164fb522b72, type: 3}
     oneShot: 0

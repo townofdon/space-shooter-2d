@@ -4,26 +4,43 @@ using UnityEngine;
 
 namespace Player {
 
+    public enum PlayerShipColor {
+        Red,
+        Yellow,
+        Blue,
+        Green,
+    }
+
     [CreateAssetMenu(fileName = "PlayerState", menuName = "ScriptableObjects/PlayerState", order = 0)]
     public class PlayerStateSO : ScriptableObject {
         [SerializeField] float _initialHealth = 50f;
         [SerializeField] float _initialShield = 100f;
         [SerializeField] int _initialMoney = 500;
 
+        PlayerShipColor _shipColor;
         float _maxHealth;
         float _maxShield;
         int _moneyInBank;
         int _moneyGained; // money accumulated since round start - when player dies the number goes to zero
+        int _numDeaths;
 
+        public PlayerShipColor shipColor => _shipColor;
         public float maxHealth => _maxHealth;
         public float maxShield => _maxShield;
         public int totalMoney => _moneyInBank + _moneyGained;
+        public int numDeaths => _numDeaths;
 
         public void Init() {
+            Debug.Log("INIT PLAYER STATE");
             _maxHealth = _initialHealth;
             _maxShield = _initialShield;
             _moneyInBank = _initialMoney;
             _moneyGained = 0;
+            _numDeaths = 0;
+        }
+
+        public void SetShipColor(PlayerShipColor value) {
+            _shipColor = value;
         }
 
         public void UpgradeHealth(float value) {
@@ -45,6 +62,10 @@ namespace Player {
 
         public void LoseMoney() {
             _moneyGained = 0;
+        }
+
+        public void IncrementDeaths() {
+            _numDeaths++;
         }
     }
 }

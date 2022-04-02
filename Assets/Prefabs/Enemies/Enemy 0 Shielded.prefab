@@ -55,13 +55,37 @@ PrefabInstance:
       propertyPath: _maxShield
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModEasy
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModHard
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: shieldModEasy
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: shieldModHard
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModInsane
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: shieldModInsane
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5276796515409683919, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e427c9165a211cf478e5b33bffb716c1, type: 3}
     - target: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Name
-      value: Enemy 0
+      value: Enemy 0 Shielded
       objectReference: {fileID: 0}
     - target: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_IsActive

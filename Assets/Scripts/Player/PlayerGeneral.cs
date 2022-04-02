@@ -240,6 +240,16 @@ namespace Player {
             shieldSound.Stop();
             shieldAlarmSound.Stop();
             shieldRechargeSound.Stop();
+
+            // set tag to non-player so that PlayerUtils.FindPlayer can find the player once it respawns
+            foreach (var obj in GameObject.FindGameObjectsWithTag(UTag.Player)) { obj.tag = UTag.Untagged; }
+
+            // Destroy the input handler so that the newly-spawned item will gain control (hopefully)
+            Destroy(GetComponent<PlayerMovement>());
+            PlayerInputHandler input = GetComponent<PlayerInputHandler>();
+            input.enabled = false;
+            Destroy(input);
+
             eventChannel.OnPlayerDeath.Invoke();
         }
 
@@ -256,12 +266,9 @@ namespace Player {
         IEnumerator DeathAnimation() {
             if (damageCoroutine != null) StopCoroutine(damageCoroutine);
             StartCoroutine(GameFeel.ShakeScreen(Camera.main, 0.3f, 0.2f));
-            // TODO: PLAY PRELIMINARY DEATH SOUND
             ship.SetActive(false);
             yield return HullDamageAnimation();
             BreakShipApart();
-            // TODO: PLAY DEATH SOUND
-            // TODO: INSTANTIATE PARTICLE EFFECT
             splosion = Object.Instantiate(playerExplosion, transform.position, new Quaternion(0f,0f,0f,0f));
             splosion.GetComponent<Rigidbody2D>().velocity = rb.velocity * 0.25f;
             yield return new WaitForSeconds(6f);

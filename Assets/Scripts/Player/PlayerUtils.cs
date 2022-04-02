@@ -24,5 +24,9 @@ namespace Player {
             cachedPlayerGeneral = cachedPlayerGO.GetComponentInParent<PlayerGeneral>();
             return cachedPlayerGeneral;
         }
+
+        public static void InvalidateCache() {
+            cacheBustInterval.End();
+        }
     }
 }
