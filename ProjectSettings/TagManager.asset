@@ -21,6 +21,7 @@ TagManager:
   - Boss
   - BeamLaser
   - Planetoid
+  - LevelTransitionUI
   layers:
   - Default
   - TransparentFX

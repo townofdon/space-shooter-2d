@@ -105,6 +105,7 @@ namespace Player {
             if (input.controlMode == PlayerControlMode.ByPlayer) return;
             if (GameManager.isPaused) return;
             if (!player.isAlive || !canMove) return;
+            rb.isKinematic = true;
             transform.position += (Vector3)input.move * throttle * maxSpeed * Time.deltaTime;
         }
 
@@ -112,6 +113,7 @@ namespace Player {
             if (input.controlMode == PlayerControlMode.ByGame) return;
             if (GameManager.isPaused) return;
             if (!player.isAlive || !canMove) return;
+            rb.isKinematic = false;
             currentThrust.x = GetThrustComponent(input.move.x, rb.velocity.x);
             currentThrust.y = GetThrustComponent(input.move.y, rb.velocity.y);
             rb.AddForce(currentThrust);

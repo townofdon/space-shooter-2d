@@ -41,9 +41,6 @@ namespace Player {
         public bool isSwitchWeaponPressed => _isSwitchWeaponPressed;
         public bool isSwitchWeapon2Pressed => _isSwitchWeapon2Pressed;
 
-        // cached
-        Rigidbody2D rb;
-
         // state
         PlayerControlMode _controlMode;
         bool _isPaused = false;
@@ -51,10 +48,9 @@ namespace Player {
         bool _isDisabled = false;
         Transform _autoMoveTarget;
 
-
         public void SetMode(PlayerControlMode value) {
             if (_controlMode == PlayerControlMode.ByGame && value == PlayerControlMode.ByPlayer) {
-                rb.velocity = Vector2.zero;
+                _move = Vector2.zero;
             }
             _controlMode = value;
         }
@@ -95,7 +91,6 @@ namespace Player {
         void Start() {
             AppIntegrity.AssertPresent(eventChannel);
             input = GetComponent<PlayerInput>();
-            rb = GetComponent<Rigidbody2D>();
             input.SwitchCurrentActionMap("Player");
         }
 
