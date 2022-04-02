@@ -152,10 +152,6 @@ namespace Player {
             eventChannel.OnAnyKeyPress.Invoke();
         }
 
-        void OnUIAnyKey(InputValue value) {
-            OnAnyKey(value);
-        }
-
         // event callbacks
 
         void ShowDebug() {

@@ -21,5 +21,6 @@ namespace Core
         public const string Nuke = "Nuke";
         public const string Boss = "Boss";
         public const string BeamLaser = "BeamLaser";
+        public const string Planetoid = "Planetoid";
     }
 }

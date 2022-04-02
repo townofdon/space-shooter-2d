@@ -20,6 +20,7 @@ TagManager:
   - Nuke
   - Boss
   - BeamLaser
+  - Planetoid
   layers:
   - Default
   - TransparentFX

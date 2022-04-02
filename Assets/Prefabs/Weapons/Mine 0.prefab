@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 6445558338947623653}
   - component: {fileID: -2522919158053661408}
   - component: {fileID: 4642657472974251940}
+  - component: {fileID: 2649445964044771836}
   m_Layer: 9
   m_Name: Mine 0
   m_TagString: Mine
@@ -266,8 +267,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageableType: 0
   debug: 0
+  _invulnerable: 0
   _maxHealth: 1
   _hitRecoveryTime: 0.01
+  _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
   _maxShield: 0
   _shieldWaitTime: 3
@@ -276,6 +279,8 @@ MonoBehaviour:
   damageFlashMaterial: {fileID: 0}
   damageFlashDuration: 0.1
   damageSpriteTarget: {fileID: 0}
+  secondaryDamageSpriteTargets: []
+  perishableObjects: []
   activeAtStart: 1
   activationDelay: 0.5
   tripTime: 0.02
@@ -316,46 +321,65 @@ MonoBehaviour:
   shockwaveDuration: 1
   deploySound:
     soundName: 
-    volume: 0.7
+    volume: 0.2
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 1
     spread: 180
-    minFalloffDistance: 20
+    minFalloffDistance: 5
     maxFalloffDistance: 40
     volumeVariance: 0.1
     pitchVariance: 0.1
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 6bfbff222fd7a994ea5a202a55f4463a, type: 3}
     oneShot: 1
   beepingSound:
     soundName: 
-    volume: 0.7
+    volume: 0.2
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 1
     spread: 180
-    minFalloffDistance: 20
+    minFalloffDistance: 5
     maxFalloffDistance: 40
+    pitchVariance: 0.2
     clipHead: {fileID: 0}
-    clipLoop: {fileID: 0}
+    clipLoop: {fileID: 8300000, guid: ac976aff765e8fd40b9212736f45d4fd, type: 3}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
   trippedSound:
     soundName: 
-    volume: 0.7
+    volume: 0.4
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 1
     spread: 180
-    minFalloffDistance: 20
+    minFalloffDistance: 5
     maxFalloffDistance: 40
+    pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
+--- !u!114 &2649445964044771836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4642657472974251929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 2
+  speedVariance: 0.5
+  accel: 10

@@ -61,11 +61,16 @@ namespace Weapons
             ResetHealth();
             SetColliders();
             RegisterHealthCallbacks(OnDeath, Utils.__NOOP__, Utils.__NOOP__);
-            // init
-            deploySound.Play();
+
+            deploySound.Init(this);
+            beepingSound.Init(this);
+            trippedSound.Init(this);
+
             shockwavePositionTimer.SetDuration(shockwaveDuration);
             if (activeAtStart) StartCoroutine(IActivate());
             if (rb != null) initialVelocity = rb.velocity;
+
+            StartCoroutine(IPlayDeploySound());
         }
 
         // Update is called once per frame
@@ -89,6 +94,8 @@ namespace Weapons
         // TODO: CONSIDER CHANGING TO A CIRCLECAST
         void OnTriggerEnter2D(Collider2D other) {
             if (!isActive || isTripped || isSploded) return;
+
+            if (other.tag == UTag.Mine) return;
 
             if ((
                 other.tag == UTag.Bullet ||
@@ -145,7 +152,7 @@ namespace Weapons
         void Activate() {
             if (!isAlive || isTripped || isSploded) return;
             isActive = true;
-            beepingSound.Play();
+            StartCoroutine(IPlayActivateSound());
         }
 
         void Trip() {
@@ -160,6 +167,16 @@ namespace Weapons
             if (isSploded) return;
             isSploded = true;
             StartCoroutine(ISplode(quiet));
+        }
+
+        IEnumerator IPlayDeploySound() {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.2f));
+            deploySound.Play();
+        }
+
+        IEnumerator IPlayActivateSound() {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.2f));
+            beepingSound.Play();
         }
 
         IEnumerator ISplode(bool quiet = false) {
