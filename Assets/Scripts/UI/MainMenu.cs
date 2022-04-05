@@ -8,10 +8,16 @@ using Audio;
 using Core;
 using Game;
 using Enemies;
+using Player;
 
 namespace UI {
 
     public class MainMenu : MonoBehaviour {
+
+        [Header("State")]
+        [Space]
+        [SerializeField] GameStateSO gameState;
+        [SerializeField] PlayerStateSO playerState;
 
         [Header("Menus")]
         [Space]
@@ -40,7 +46,7 @@ namespace UI {
         [SerializeField] Button blueShipButton;
         [SerializeField] Button greenShipButton;
         [SerializeField] Transform playerExitTarget;
-        [SerializeField] float timeDelayFirstLevel = 2f;
+        [SerializeField] float timeDelayFirstLevel = 3f;
 
         [Header("Timing")]
         [Space]
@@ -76,6 +82,8 @@ namespace UI {
         UIButton uiButtonGreenShip;
 
         bool everFocused = false;
+
+        Coroutine ieStart;
 
         public void OnSelectLevelStart(BaseEventData eventData) {
             OnFocusSound();
@@ -141,9 +149,7 @@ namespace UI {
             GotoFirstLevel();
         }
 
-        void Start() {
-            AudioManager.current.PlayTrack("starlord-main-theme");
-
+        void Awake() {
             initialTitleColor = title.color;
             initialSubtitleColor = subTitle.color;
 
@@ -160,6 +166,12 @@ namespace UI {
             uiButtonBlueShip = new UIButton(blueShipButton);
             uiButtonYellowShip = new UIButton(yellowShipButton);
             uiButtonGreenShip = new UIButton(greenShipButton);
+        }
+
+        void Start() {
+            AudioManager.current.PlayTrack("starlord-main-theme");
+            playerState.Init();
+            gameState.Init();
 
             startButton.SetActive(false);
             quitButton.SetActive(false);
@@ -168,7 +180,8 @@ namespace UI {
             canvasChooseDifficultyMenu.SetActive(false);
             canvasChooseShipMenu.SetActive(false);
 
-            StartCoroutine(IStart());
+            if (ieStart != null) StopCoroutine(ieStart);
+            ieStart = StartCoroutine(IStart());
         }
 
         void GotoChooseDifficultyMenu() {
@@ -189,9 +202,10 @@ namespace UI {
             canvasChooseShipMenu.SetActive(false);
             EnemySpawner spawner = FindObjectOfType<EnemySpawner>();
             spawner.StopBattle();
-            spawner.DestroyAllEnemies(true);
+            spawner.DestroyAllEnemiesPresent(true);
             AudioManager.current.CueTrack("starlord-transition");
             GameManager.current.RespawnPlayerShip(playerExitTarget);
+            AudioManager.current.PlaySound("ship-whoosh");
             StartCoroutine(IGotoFirstLevel());
         }
 

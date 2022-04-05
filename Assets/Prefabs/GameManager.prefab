@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugSounds: 0
-  debugTracks: 1
+  debugTracks: 0
   musicMix: {fileID: 0}
   soundFXMix: {fileID: 0}
   sounds:
@@ -321,6 +321,51 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 7b15c4d77618cc94baa850f5ef3e0bf1, type: 3}
     oneShot: 0
+  - soundName: show-hint
+    volume: 0.5
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    volumeVariance: 0.05
+    pitchVariance: 0.05
+    clips:
+    - {fileID: 8300000, guid: 467ac5290c8b7ee4687d9c140bd6f140, type: 3}
+    oneShot: 0
+  - soundName: upgrade-weapon
+    volume: 0.3
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    volumeVariance: 0.05
+    pitchVariance: 0.05
+    clips:
+    - {fileID: 8300000, guid: 54503a8411277d34d9938feee1694bb9, type: 3}
+    oneShot: 0
+  - soundName: upgrade-error
+    volume: 0.3
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    volumeVariance: 0.05
+    pitchVariance: 0.05
+    clips:
+    - {fileID: 8300000, guid: 74742596661baf742a8c7d254db08635, type: 3}
+    oneShot: 0
   tracks:
   - soundName: starlord-main-theme
     volume: 1
@@ -358,6 +403,96 @@ MonoBehaviour:
     clipOutro: {fileID: 0}
     fadeInTime: 0
     fadeOutTime: 0
+  - soundName: battle-theme
+    volume: 0.6
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    bpm: 120
+    beatsPerBar: 4
+    loops: 1
+    clipIntro: {fileID: 8300000, guid: 97b3936efe04d2340a6b93b51f63b5f3, type: 3}
+    clipLoop: {fileID: 8300000, guid: fa61ceb985aa357498a9e35d6c617469, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
+  - soundName: fast-theme
+    volume: 0.5
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    bpm: 150
+    beatsPerBar: 4
+    loops: 1
+    clipIntro: {fileID: 0}
+    clipLoop: {fileID: 8300000, guid: 9f5e738cd304dc048b4756ce619ded83, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
+  - soundName: pleasant-theme
+    volume: 0.5
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    bpm: 150
+    beatsPerBar: 4
+    loops: 1
+    clipIntro: {fileID: 8300000, guid: 656baad2745114144a0736284931b90c, type: 3}
+    clipLoop: {fileID: 8300000, guid: fbbff7a59eabf0b46b5e507dcc9d3619, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
+  - soundName: business-theme
+    volume: 0.5
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    bpm: 150
+    beatsPerBar: 4
+    loops: 1
+    clipIntro: {fileID: 8300000, guid: be443fa219e447c4c9953675b149bfe8, type: 3}
+    clipLoop: {fileID: 8300000, guid: 345212e20f8ceed4d846c10aeacc0c3c, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
+  - soundName: win-theme
+    volume: 0.5
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    bpm: 160
+    beatsPerBar: 4
+    loops: 0
+    clipIntro: {fileID: 0}
+    clipLoop: {fileID: 8300000, guid: ce292e76da79e4e4fb01c957c495bc07, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
   nullSound:
     soundName: 
     volume: 0.7
@@ -374,6 +509,104 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 74742596661baf742a8c7d254db08635, type: 3}
     oneShot: 1
+--- !u!1 &1673764705415480822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6957067479259790573}
+  - component: {fileID: 7461518842748900648}
+  - component: {fileID: 5305697854370298139}
+  m_Layer: 0
+  m_Name: starfield (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6957067479259790573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673764705415480822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1179, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5676628042550478045}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &7461518842748900648
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673764705415480822}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 26e031926eee9cc40a32ab9bd3070c0e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 578443963
+  m_SortingLayer: -1
+  m_SortingOrder: -100
+  m_Sprite: {fileID: 21300000, guid: 39d67f656384d904cbf8ecc6c019f47d, type: 3}
+  m_Color: {r: 0.745283, g: 0.71106267, b: 0.17928976, a: 0.74509805}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 2
+  m_Size: {x: 35.019474, y: 20.48}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &5305697854370298139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673764705415480822}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93218b858850d24ca964fc232c3e193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: {x: 0, y: 0.005}
 --- !u!1 &3488655753409945412
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnWaitTime: 2
-  winLevelWaitTime: 5
+  winLevelWaitTime: 3.5
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   gameState: {fileID: 11400000, guid: 6a03aadd81bb63f4c9f0b480d72a1b9f, type: 2}
   playerState: {fileID: 11400000, guid: fa472ff00b3833642af6ce2e7f0e81da, type: 2}
@@ -456,6 +689,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 942ee69a4aae60441a760fcfad5519fc, type: 2}
   - {fileID: 11400000, guid: 97f37ab9fe5d09c4797e093657e34422, type: 2}
   - {fileID: 11400000, guid: f78c0e63fbd2c97409f395a44445c79d, type: 2}
+  timeElapsed: 0
 --- !u!114 &5392818402585228071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +784,104 @@ MonoBehaviour:
   _inspectorBattleEventWait: {r: 0.040628344, g: 0.59967095, b: 0.7830189, a: 1}
   _inspectorBattleEventEvent: {r: 0.990566, g: 0.5898069, b: 0.014017418, a: 1}
   _inspectorBattleEventLabel: {r: 0.65599096, g: 0.631675, b: 0.8018868, a: 1}
+--- !u!1 &8492617212075592221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1101097669573116269}
+  - component: {fileID: 732083451951522815}
+  - component: {fileID: 7198836784471696146}
+  m_Layer: 0
+  m_Name: starfield (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1101097669573116269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492617212075592221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1179, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5676628042550478045}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &732083451951522815
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492617212075592221}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 26e031926eee9cc40a32ab9bd3070c0e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 578443963
+  m_SortingLayer: -1
+  m_SortingOrder: -99
+  m_Sprite: {fileID: 21300000, guid: 6a680917978abdb42b4c3fc58aade7d4, type: 3}
+  m_Color: {r: 0.745283, g: 0.71106267, b: 0.17928976, a: 0.74509805}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 2
+  m_Size: {x: 35.019474, y: 20.48}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &7198836784471696146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492617212075592221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93218b858850d24ca964fc232c3e193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: {x: 0, y: 0.02}
 --- !u!1001 &3226595600951443142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -587,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7061719783430060564, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7061719783430060571, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
       propertyPath: m_RootOrder

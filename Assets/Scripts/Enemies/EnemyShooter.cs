@@ -256,7 +256,7 @@ namespace Enemies
         float GetTriggerHoldMod() {
             switch (GameManager.current.difficulty) {
                 case GameDifficulty.Easy:
-                    return triggerHoldInsaneMod;
+                    return triggerHoldEasyMod;
                 case GameDifficulty.Medium:
                     return triggerHoldMediumMod;
                 case GameDifficulty.Hard:
@@ -271,7 +271,7 @@ namespace Enemies
         float GetTriggerReleaseMod() {
             switch (GameManager.current.difficulty) {
                 case GameDifficulty.Easy:
-                    return triggerReleaseInsaneMod;
+                    return triggerReleaseEasyMod;
                 case GameDifficulty.Medium:
                     return triggerReleaseMediumMod;
                 case GameDifficulty.Hard:

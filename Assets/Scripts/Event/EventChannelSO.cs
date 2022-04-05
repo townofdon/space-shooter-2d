@@ -9,6 +9,7 @@ namespace Event {
     public delegate void VoidEvent();
     public delegate void IntEvent(int value);
     public delegate void FloatEvent(float value);
+    public delegate void BoolEvent(bool value);
     // enemy-specific
     public delegate void EnemyDeathEvent(int instanceId, int points);
     public delegate void BossSpawnEvent(int instanceId);
@@ -38,6 +39,13 @@ namespace Event {
         public void Subscribe(FloatEvent action) { ev += action; }
         public void Unsubscribe(FloatEvent action) { ev -= action; }
         public void Invoke(float value) { if (ev != null) ev.Invoke(value); }
+    }
+
+    public class BoolEventHandler {
+        event BoolEvent ev;
+        public void Subscribe(BoolEvent action) { ev += action; }
+        public void Unsubscribe(BoolEvent action) { ev -= action; }
+        public void Invoke(bool value) { if (ev != null) ev.Invoke(value); }
     }
 
     public class EnemyDeathEventHandler {
@@ -85,7 +93,7 @@ namespace Event {
     [CreateAssetMenu(fileName = "EventChannel", menuName = "ScriptableObjects/EventChannel")]
     public class EventChannelSO : ScriptableObject {
 
-        public VoidEventHandler OnWinLevel = new VoidEventHandler();
+        public BoolEventHandler OnWinLevel = new BoolEventHandler();
         public VoidEventHandler OnPlayerDeath = new VoidEventHandler();
 
         public FloatEventHandler OnPlayerTakeHealth = new FloatEventHandler();
@@ -103,6 +111,9 @@ namespace Event {
         public VoidEventHandler OnUnpause = new VoidEventHandler();
         public VoidEventHandler OnShowDebug = new VoidEventHandler();
         public VoidEventHandler OnHideDebug = new VoidEventHandler();
+        public VoidEventHandler OnShowVictory = new VoidEventHandler();
+        public VoidEventHandler OnHideVictory = new VoidEventHandler();
+        public VoidEventHandler OnShowUpgradePanel = new VoidEventHandler();
 
         public DialogueEventHandler OnShowDialogue = new DialogueEventHandler();
         public VoidEventHandler OnDismissDialogue = new VoidEventHandler();

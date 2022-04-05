@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Core;
+using Game;
 using UnityEngine;
 
 namespace Enemies
@@ -11,10 +12,12 @@ namespace Enemies
         [SerializeField] GameObject _enemyPrefab;
         [SerializeField] string _spawnLocation;
         [SerializeField] Vector2 _spawnOffset = Vector3.zero;
+        [SerializeField][Tooltip("Spawn at or above selected difficulty")] GameDifficulty _spawnDifficulty = GameDifficulty.Easy;
 
         public GameObject prefab => _enemyPrefab;
         public string spawnLocation => _spawnLocation;
         public Vector3 spawnOffset => _spawnOffset;
+        public GameDifficulty spawnDifficulty => _spawnDifficulty;
 
         public bool hasSpawnLocation => _spawnLocation != null && _spawnLocation != "";
     }
@@ -39,6 +42,7 @@ namespace Enemies
         [Space]
         [SerializeField] string _spawnLocation;
         [SerializeField] Vector2 _spawnOffset = Vector3.zero;
+        [SerializeField][Tooltip("Spawn at or above selected difficulty")] GameDifficulty _spawnDifficulty = GameDifficulty.Easy;
 
         [Header("Launch")]
         [Space]
@@ -60,7 +64,7 @@ namespace Enemies
         [SerializeField] FSM.BaseState _initialState;
 
         // getters
-        public int spawnCount => _enemies.Count;
+        public int spawnCount => GetSpawnCount();
         public int enemyCount => GetEnemyCount();
         public float spawnInterval => GetSpawnInterval();
         public Transform path => _path;
@@ -74,6 +78,7 @@ namespace Enemies
         Vector2 minBounds;
         Vector2 maxBounds;
         Vector2 tempSpawnLocation;
+        int numEnemies = 0;
 
         // constants
         const float SPAWN_GRID_SIZE = 2f;
@@ -86,12 +91,23 @@ namespace Enemies
             );
         }
 
+        int GetSpawnCount() {
+            if (GameManager.current.difficulty < _spawnDifficulty) return 0;
+            return _enemies.Count;
+        }
+
         int GetEnemyCount() {
-            int count = 0;
+            if (GameManager.current.difficulty < _spawnDifficulty) return 0;
+            if (numEnemies > 0) return numEnemies;
+            numEnemies = 0;
             foreach (var enemy in _enemies) {
-                if (enemy.prefab.tag == UTag.EnemyShip) count++;
+                if (GameManager.current.difficulty < enemy.spawnDifficulty) continue;
+                // evaluating the tag here worked in most cases, but not for enemy groups like turrets or boss stations
+                // if (enemy.prefab.tag == UTag.EnemyShip || enemy.prefab.tag == UTag.EnemyTurret || enemy.prefab.tag == UTag.Boss) numEnemies++;
+                int count = enemy.prefab.GetComponentsInChildren<EnemyShip>().Length;
+                numEnemies += count;
             }
-            return count;
+            return numEnemies;
         }
 
         public WaveEnemy GetEnemy(int index)

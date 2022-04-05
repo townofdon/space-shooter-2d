@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7531810961699429522}
   m_Layer: 0
   m_Name: Satellite
-  m_TagString: Untagged
+  m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,13 +78,22 @@ MonoBehaviour:
   _damageableType: 3
   debug: 0
   _invulnerable: 0
+  _timeInvincibleAfterSpawn: 0
   _maxHealth: 25
-  _hitRecoveryTime: 0.2
+  _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
-  _maxShield: 100
+  _maxShield: 75
   _shieldWaitTime: 3
   _shieldRechargeTime: 1
+  healthModEasy: 0.25
+  healthModMedium: 0.5
+  healthModHard: 1
+  healthModInsane: 2
+  shieldModEasy: 1
+  shieldModMedium: 1
+  shieldModHard: 1
+  shieldModInsane: 3
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   damageFlashMaterial: {fileID: 2100000, guid: b7880cc0511879b44beb7d60a1f37f63, type: 2}
   damageFlashDuration: 0.1
@@ -132,7 +141,7 @@ MonoBehaviour:
   pickups:
     pickups:
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
-      numItemsToSpawn: 25
+      numItemsToSpawn: 5
       spawnLikelihood: 0.797
   pointsWhenKilledByPlayer: 25
   pointsWhenWoundedByPlayer: 5

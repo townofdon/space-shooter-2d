@@ -1,5 +1,7 @@
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
+
+#if (UNITY_EDITOR)
 
 [CustomEditor(typeof(Audio.Sound))]
 public class SoundDrawer : Editor {
@@ -95,3 +97,5 @@ public class SoundDrawer : Editor {
 //         EditorGUI.EndProperty();
 //     }
 // }
+
+#endif

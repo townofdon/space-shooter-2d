@@ -3,18 +3,13 @@ using UnityEngine.InputSystem;
 
 using Core;
 using Event;
-using Dialogue;
 
 namespace Player {
-
-    public enum PlayerControlMode {
-        ByPlayer,
-        ByGame,
-    }
 
     public class PlayerInputHandler : MonoBehaviour
     {
         [SerializeField] EventChannelSO eventChannel;
+        [SerializeField] PlayerStateSO playerState;
 
         // components
         PlayerInput input;
@@ -30,7 +25,6 @@ namespace Player {
         bool _isSwitchWeaponPressed = false;
         bool _isSwitchWeapon2Pressed = false;
 
-        public PlayerControlMode controlMode => _controlMode;
         public Vector2 move => _move;
         public Vector2 look => _look;
         public bool isFirePressed => _isFirePressed;
@@ -42,17 +36,15 @@ namespace Player {
         public bool isSwitchWeapon2Pressed => _isSwitchWeapon2Pressed;
 
         // state
-        PlayerControlMode _controlMode;
         bool _isPaused = false;
         bool _isDebug = false;
-        bool _isDisabled = false;
         Transform _autoMoveTarget;
 
-        public void SetMode(PlayerControlMode value) {
-            if (_controlMode == PlayerControlMode.ByGame && value == PlayerControlMode.ByPlayer) {
+        public void SetMode(PlayerInputControlMode incoming) {
+            if (playerState.controlMode != PlayerInputControlMode.Player && incoming == PlayerInputControlMode.Player) {
                 _move = Vector2.zero;
             }
-            _controlMode = value;
+            playerState.SetInputControlMode(incoming);
         }
 
         public void SetAutoMoveTarget(Transform value) {
@@ -67,25 +59,12 @@ namespace Player {
         void OnEnable() {
             eventChannel.OnPause.Subscribe(OnPause);
             eventChannel.OnUnpause.Subscribe(OnUnpause);
-            eventChannel.OnShowDialogue.Subscribe(OnDisableInput);
-            eventChannel.OnDismissDialogue.Subscribe(OnEnableInput);
+
         }
 
         void OnDisable() {
             eventChannel.OnPause.Unsubscribe(OnPause);
             eventChannel.OnUnpause.Unsubscribe(OnUnpause);
-            eventChannel.OnShowDialogue.Unsubscribe(OnDisableInput);
-            eventChannel.OnDismissDialogue.Unsubscribe(OnEnableInput);
-        }
-
-        void OnEnableInput() {
-            _isDisabled = false;
-        }
-        void OnDisableInput() {
-            _isDisabled = true;
-        }
-        void OnDisableInput(DialogueItemSO item) {
-            OnDisableInput();
         }
 
         void Start() {
@@ -96,62 +75,63 @@ namespace Player {
         }
 
         void Update() {
-            if (_controlMode == PlayerControlMode.ByPlayer) return;
+            if (playerState.controlMode != PlayerInputControlMode.GameBrain) return;
             _move = (GetMoveTarget() - (Vector2)transform.position).normalized;
-            if (Vector2.Distance(GetMoveTarget(), transform.position) < 0.1f) SetMode(PlayerControlMode.ByPlayer);
+            if (Vector2.Distance(GetMoveTarget(), transform.position) < 0.1f) SetMode(PlayerInputControlMode.Player);
         }
 
         void OnMove(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode == PlayerInputControlMode.GameBrain) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _move = Vector2.zero; return; }
+            if (_isPaused) return;
             _move = value.Get<Vector2>();
         }
 
         void OnLook(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _look = Vector2.zero; return; }
+            if (_isPaused) return;
             _look = value.Get<Vector2>();
         }
 
         void OnFire(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _isFirePressed = false; return; }
+            if (_isPaused) return;
             _isFirePressed = value.isPressed;
         }
 
         void OnFireSecondary(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _isFire2Pressed = false; return; }
+            if (_isPaused) return;
             _isFire2Pressed = value.isPressed;
         }
 
         void OnMelee(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _isMeleePressed = false; return; }
+            if (_isPaused) return;
             _isMeleePressed = value.isPressed;
         }
 
         void OnReload(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _isReloadPressed = false; return; }
+            if (_isPaused) return;
             _isReloadPressed = value.isPressed;
         }
 
         void OnBoost(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _isBoostPressed = false; return; }
+            if (_isPaused) return;
             _isBoostPressed = value.isPressed;
         }
 
         void OnSwitchWeapon(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _isSwitchWeaponPressed = false; return; }
+            if (_isPaused) return;
             _isSwitchWeaponPressed = value.isPressed;
         }
 
         void OnSwitchSecondary(InputValue value) {
-            if (_controlMode == PlayerControlMode.ByGame) return;
-            if (_isPaused || _isDisabled) return;
+            if (playerState.controlMode != PlayerInputControlMode.Player) { _isSwitchWeapon2Pressed = false; return; }
+            if (_isPaused) return;
             _isSwitchWeapon2Pressed = value.isPressed;
         }
 

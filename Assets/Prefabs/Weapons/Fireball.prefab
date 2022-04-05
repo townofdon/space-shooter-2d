@@ -86,6 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168224b7bf0a97247898722e8c1045c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  removalMode: 1
   moveSpeed: 6
   turnSpeed: 1
   lifetime: 20

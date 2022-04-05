@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponType: 3
   _weaponName: Disruptor Field
+  _effectiveRange: 10
   _shotSound:
     soundName: 
     volume: 0.7
@@ -40,10 +41,26 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 10
     maxFalloffDistance: 50
+    pitchVariance: 0
     clipHead: {fileID: 8300000, guid: a8b93234090105549be38672bacb0c40, type: 3}
     clipLoop: {fileID: 8300000, guid: 3b6726c9178fbfa42abb3067aa29160d, type: 3}
     clipTail: {fileID: 8300000, guid: fdfc55d4d99ad534b9dd6a8ec46aaeba, type: 3}
     playLoopToEnd: 0
+  _reloadSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips: []
+    oneShot: 1
   baseSettings:
     _assetClass: Prototype
     _damageMultiplier: 1
@@ -64,6 +81,21 @@ MonoBehaviour:
     _prefab: {fileID: 0}
     _shieldDrain: 30
     _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   upgrades:
   - _assetClass: Mark I
     _damageMultiplier: 1.1
@@ -83,7 +115,22 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 0}
     _shieldDrain: 20
-    _cost: 0
+    _cost: 100
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   - _assetClass: Mark II
     _damageMultiplier: 1.2
     _startingAmmo: 0
@@ -102,7 +149,22 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 0}
     _shieldDrain: 17
-    _cost: 0
+    _cost: 300
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   - _assetClass: Mark III
     _damageMultiplier: 1.4
     _startingAmmo: 0
@@ -121,7 +183,22 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 0}
     _shieldDrain: 15
-    _cost: 0
+    _cost: 500
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   - _assetClass: Mark IV
     _damageMultiplier: 1.5
     _startingAmmo: 0
@@ -140,7 +217,22 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 0}
     _shieldDrain: 10
-    _cost: 0
+    _cost: 1000
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
   - _assetClass: Mark V
     _damageMultiplier: 3
     _startingAmmo: 0
@@ -159,4 +251,19 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 0}
     _shieldDrain: 5
-    _cost: 0
+    _cost: 1500
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1

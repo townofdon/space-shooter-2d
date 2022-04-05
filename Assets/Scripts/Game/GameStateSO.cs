@@ -22,12 +22,15 @@ namespace Game {
         [SerializeField] int _initialPoints = 50;
 
         GameMode _mode;
-        GameDifficulty _difficulty;
+        [SerializeField] GameDifficulty _difficulty;
+
         int _pointsInBank;
         int _pointsGained; // points accumulated since round start - when player dies the number goes to zero
+        int _numEnemiesKilled = 0;
 
         public int totalPoints => _pointsInBank + _pointsGained;
         public int pointsGained => _pointsGained;
+        public int numEnemiesKilled => _numEnemiesKilled;
         public GameMode mode => _mode;
         public GameDifficulty difficulty => _difficulty;
 
@@ -35,6 +38,7 @@ namespace Game {
             Debug.Log("GAME STATE INIT");
             _pointsInBank = _initialPoints;
             _pointsGained = 0;
+            _numEnemiesKilled = 0;
             _mode = GameMode.Battle;
             _difficulty = GameDifficulty.Medium;
         }
@@ -58,6 +62,10 @@ namespace Game {
 
         public void LosePoints() {
             _pointsGained = 0;
+        }
+
+        public void IncrementEnemiesKilled() {
+            _numEnemiesKilled++;
         }
     }
 }

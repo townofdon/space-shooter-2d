@@ -36039,6 +36039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+  playerState: {fileID: 11400000, guid: fa472ff00b3833642af6ce2e7f0e81da, type: 2}
 --- !u!114 &5316389521978419114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36051,6 +36052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b863022d3cbcd6e478e052c64807183e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerState: {fileID: 11400000, guid: fa472ff00b3833642af6ce2e7f0e81da, type: 2}
   maxSpeed: 10
   thrust: 100
   decelMultiplier: 2
@@ -36082,6 +36084,22 @@ MonoBehaviour:
     clipLoop: {fileID: 8300000, guid: 17ec2e7a8aad1f04cb8ba95d34ddb6cf, type: 3}
     clipTail: {fileID: 8300000, guid: dec33a6bcb68d0b40ae63f40da5d87bf, type: 3}
     playLoopToEnd: 0
+  boostSound:
+    soundName: Boost
+    volume: 0.3
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 70
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.07
+    pitchVariance: 0.1
+    clips:
+    - {fileID: 8300000, guid: c60a864f7c9ba2247ba3c002f4d1fb70, type: 3}
+    oneShot: 0
 --- !u!114 &5316389521978419115
 MonoBehaviour:
   m_ObjectHideFlags: 0

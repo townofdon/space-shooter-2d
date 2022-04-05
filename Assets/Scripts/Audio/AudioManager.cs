@@ -58,6 +58,13 @@ namespace Audio
             currentTrack = track;
         }
 
+        public void StopTrack() {
+            if (currentTrack == null) return;
+            if (!currentTrack.isPlaying) return;
+            currentTrack.Stop();
+            currentTrack = null;
+        }
+
         void Awake()
         {
             _current = Utils.ManageSingleton(_current, this);

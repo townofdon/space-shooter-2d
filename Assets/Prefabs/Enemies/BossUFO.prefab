@@ -1148,20 +1148,20 @@ MonoBehaviour:
   aimSpeed: 2
   maxAimAngle: 30
   triggerHoldTime: 0.1
-  triggerReleaseTime: 2
-  triggerTimeVariance: 0
+  triggerReleaseTime: 1
+  triggerTimeVariance: 0.05
   rotateTarget: {fileID: 0}
   targetableLayers:
     serializedVersion: 2
     m_Bits: 0
-  triggerHoldEasyMod: 1
-  triggerHoldMediumMod: 1
-  triggerHoldHardMod: 1
-  triggerHoldInsaneMod: 1
-  triggerReleaseEasyMod: 2
-  triggerReleaseMediumMod: 1
-  triggerReleaseHardMod: 0.85
-  triggerReleaseInsaneMod: 0.5
+  triggerHoldEasyMod: 0.39
+  triggerHoldMediumMod: 0.61
+  triggerHoldHardMod: 0.7
+  triggerHoldInsaneMod: 1.26
+  triggerReleaseEasyMod: 4.09
+  triggerReleaseMediumMod: 3.26
+  triggerReleaseHardMod: 2.02
+  triggerReleaseInsaneMod: 1
 --- !u!114 &7867457986422667110
 MonoBehaviour:
   m_ObjectHideFlags: 0

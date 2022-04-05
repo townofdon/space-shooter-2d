@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
+  m_Name: OrdnanceNukeRTL
+  m_EditorClassIdentifier: 
+  _enemies:
+  - _enemyPrefab: {fileID: 7424278838868182110, guid: 512faea623695d540bc5871998c22ae5, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  _spawnInterval: 1
+  _spawnTimeVariance: 0
+  _minSpawnInterval: 0
+  _spawnLocation: E-6-5
+  _spawnOffset: {x: 0, y: 0}
+  launchHeading: {x: -1, y: 0}
+  headingVariance: 0
+  launchVelocity: 0
+  velocityVariance: 0
+  aimTowardsPlayer: 0
+  _path: {fileID: 8622307038240250050, guid: 69b745a7e1067da479cbc9cedb17e748, type: 3}
+  _pathfinderLoopMode: 0
+  _flipX: 1
+  _flipY: 0
+  _initialState: {fileID: 0}

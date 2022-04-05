@@ -42,8 +42,10 @@ namespace NPCs
         public void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             // stop dat spinning
             rb.angularVelocity = 0f;
-            if (damageType != DamageType.InstakillQuiet) {
+            if (damageType != DamageType.Instakill && damageType != DamageType.InstakillQuiet) {
                 SpawnDebris();
+            }
+            if (damageType != DamageType.InstakillQuiet) {
                 rockExplodeSound.Play();
             }
             StartCoroutine(IDeathFX());
@@ -64,10 +66,10 @@ namespace NPCs
             if (sr != null) sr.enabled = false;
             if (explodeFX != null) {
                 explodeFX.Play();
-                while (explodeFX.isPlaying) yield return null;
+                while (explodeFX != null && explodeFX.isPlaying) yield return null;
             }
             while (rockExplodeSound.isPlaying) yield return null;
-            Destroy(gameObject);
+            Destroy(gameObject, 2f);
         }
     }
 }

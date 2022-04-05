@@ -46,11 +46,6 @@ namespace Pickups {
         [Space]
         [SerializeField] EventChannelSO eventChannel;
 
-
-        // TODO: REMOVE
-        // // TODO: MAKE A SEPARATE EVENT FOR OnItemPickup IN ORDER TO PASS IN (itemType {ItemType}, value {float})
-        // [SerializeField] PickupItemEvent onItemPickup;
-
         // components
         SpriteRenderer sr;
         TrailRenderer tr;

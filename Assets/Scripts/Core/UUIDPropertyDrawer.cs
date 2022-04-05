@@ -3,7 +3,9 @@
 using System;
 using UnityEditor;
 using UnityEngine;
- 
+
+#if (UNITY_EDITOR)
+
 /// <summary>
 /// Property drawer for UUID
 ///
@@ -52,3 +54,5 @@ public class UUIDPropertyDrawer : PropertyDrawer {
         return ySep * 2;
     }
 }
+
+#endif

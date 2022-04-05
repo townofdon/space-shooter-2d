@@ -84,7 +84,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: _maxHealth
-      value: 120
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModEasy
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: pickups.pickups.Array.data[1].numItemsToSpawn
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: pickups.pickups.Array.data[1].spawnLikelihood
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3678265484273532077, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_LocalPosition.x
@@ -112,12 +124,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: triggerHoldTime
-      value: 3.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: guns.Array.data[1]
       value: 
       objectReference: {fileID: 122974770}
+    - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: triggerHoldEasyMod
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: triggerHoldHardMod
+      value: 1.56
+      objectReference: {fileID: 0}
     - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: triggerReleaseTime
       value: 1
@@ -140,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164195204246999770, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: mode
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9164195204246999770, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: accel

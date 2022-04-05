@@ -6,6 +6,7 @@ using TMPro;
 using Event;
 using Core;
 using Dialogue;
+using Audio;
 
 public class HintUI : MonoBehaviour {
     [SerializeField] EventChannelSO eventChannel;
@@ -83,6 +84,7 @@ public class HintUI : MonoBehaviour {
                     }
                     yield return null;
                 } while (currentPanelIndex < 0);
+                AudioManager.current.PlaySound("show-hint");
                 yield return IHidePanel(currentPanelIndex);
 
                 // note - I couldn't figure out how to show two panels at the same time. This may acktchually be a feature, not a bug ;)

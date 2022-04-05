@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 490975964535693413, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: m_Name
-      value: Enemy 3
+      value: Enemy 3 Shielded
       objectReference: {fileID: 0}
     - target: {fileID: 490975964535693413, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: m_IsActive
@@ -26,6 +26,14 @@ PrefabInstance:
     - target: {fileID: 5718039084960973126, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: _maxShield
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718039084960973126, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: healthModInsane
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718039084960973126, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: shieldModInsane
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8425783821170144702, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: m_RootOrder

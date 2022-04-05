@@ -1322,13 +1322,13 @@ MonoBehaviour:
   targetableLayers:
     serializedVersion: 2
     m_Bits: 0
-  triggerHoldEasyMod: 0.5
-  triggerHoldMediumMod: 1
+  triggerHoldEasyMod: 0.34
+  triggerHoldMediumMod: 0.8
   triggerHoldHardMod: 1.2
   triggerHoldInsaneMod: 1.5
-  triggerReleaseEasyMod: 2.5
-  triggerReleaseMediumMod: 1.5
-  triggerReleaseHardMod: 1
+  triggerReleaseEasyMod: 3.87
+  triggerReleaseMediumMod: 2.85
+  triggerReleaseHardMod: 1.66
   triggerReleaseInsaneMod: 0.75
 --- !u!114 &718122837
 MonoBehaviour:

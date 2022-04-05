@@ -7,10 +7,21 @@ using Core;
 
 namespace Weapons
 {
-    
+
+    public enum ProjectileDeathReason {
+        Collision,
+        Guardians,
+    }
+
+    public enum ProjectileRemovalMode {
+        OutWithABang,
+        Quiet,
+    }
+
     public class Projectile : MonoBehaviour
     {
         [Header("General Settings")][Space]
+        [SerializeField] ProjectileRemovalMode removalMode;
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float turnSpeed = 1f;
         [SerializeField] float lifetime = 10f;
@@ -59,6 +70,7 @@ namespace Weapons
         float t = 0;
         float height = 0.5f;
         int numCollisions = 0;
+        ProjectileDeathReason deathReason;
 
         public void SetTarget(Transform _target) {
             target = _target;
@@ -103,9 +115,9 @@ namespace Weapons
             UpdateHeading();
             if (rb == null) MoveViaTransform();
             t += Time.deltaTime;
-            if (t > lifetime) OnDeath();
-            if (!Utils.IsObjectOnScreen(gameObject)) OnDeath();
-            if ((transform.position - startingPosition).magnitude > outOfRange) OnDeath();
+            if (t > lifetime) OnDeathByGuardians();
+            if (!Utils.IsObjectOnScreen(gameObject)) OnDeathByGuardians();
+            if ((transform.position - startingPosition).magnitude > outOfRange) OnDeathByGuardians();
         }
 
         void FixedUpdate() {
@@ -173,6 +185,11 @@ namespace Weapons
             }
         }
 
+        void OnDeathByGuardians() {
+            deathReason = ProjectileDeathReason.Guardians;
+            OnDeath();
+        }
+
         public void OnDeath() {
             if (!isAlive) return;
             isAlive = false;
@@ -186,10 +203,13 @@ namespace Weapons
             if (sr != null) sr.enabled = false;
             if (tr != null) tr.enabled = false;
 
-            destroyedSound.Play();
-            if (explosionFX != null) {
-                Destroy(Instantiate(explosionFX, transform.position, Quaternion.identity), explosionLifetime);
+            if (removalMode != ProjectileRemovalMode.Quiet || deathReason != ProjectileDeathReason.Guardians) {
+                destroyedSound.Play();
+                if (explosionFX != null) {
+                    Destroy(Instantiate(explosionFX, transform.position, Quaternion.identity), explosionLifetime);
+                }
             }
+
             while (impactSound.isPlaying) yield return null;
             while (destroyedSound.isPlaying) yield return null;
             Destroy(gameObject);

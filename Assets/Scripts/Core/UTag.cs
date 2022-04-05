@@ -23,5 +23,6 @@ namespace Core
         public const string BeamLaser = "BeamLaser";
         public const string Planetoid = "Planetoid";
         public const string LevelTransitionUI = "LevelTransitionUI";
+        public const string Ordnance = "Ordnance";
     }
 }

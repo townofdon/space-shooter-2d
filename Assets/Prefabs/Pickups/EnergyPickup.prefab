@@ -259,7 +259,7 @@ MonoBehaviour:
   debug: 0
   pickupType: 1
   weaponType: 0
-  value: 10
+  value: 25
   startRotation: 250
   lifetime: 0
   nearRemoveTime: 3

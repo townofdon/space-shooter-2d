@@ -26,8 +26,9 @@ namespace UI {
         }
 
         public void GotoMainMenu() {
-            StopAllCoroutines();
-            StartCoroutine(IGotoMainMenu());
+            if (ieShow != null) StopCoroutine(ieShow);
+            if (ieHide != null) StopCoroutine(ieHide);
+            eventChannel.OnGotoMainMenu.Invoke();
         }
 
         public void OnButtonFocusSound() {
@@ -56,12 +57,14 @@ namespace UI {
         }
 
         void OnShowPauseMenu() {
-            StopAllCoroutines();
+            if (ieShow != null) StopCoroutine(ieShow);
+            if (ieHide != null) StopCoroutine(ieHide);
             if (ieShow == null) ieShow = StartCoroutine(IShowPauseMenu());
         }
 
         void OnHidePauseMenu() {
-            StopAllCoroutines();
+            if (ieShow != null) StopCoroutine(ieShow);
+            if (ieHide != null) StopCoroutine(ieHide);
             if (ieHide == null) ieHide = StartCoroutine(IHidePauseMenu());
         }
 
@@ -91,11 +94,6 @@ namespace UI {
             canvas.SetActive(false);
             isShowing = false;
             ieHide = null;
-        }
-
-        IEnumerator IGotoMainMenu() {
-            yield return IHidePauseMenu();
-            eventChannel.OnGotoMainMenu.Invoke();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 using Core;
 using Damage;
@@ -10,6 +11,7 @@ using Weapons;
 using Event;
 using Player;
 using Audio;
+using Dialogue;
 
 namespace Game {
 
@@ -48,6 +50,8 @@ namespace Game {
 
         // state
         public static bool isPaused = false;
+        public float timeElapsed = 0f;
+        bool timerActive = false;
 
         // singleton
         static GameManager _current;
@@ -84,8 +88,36 @@ namespace Game {
             HandleRespawnPlayerShip(playerRespawnTarget);
         }
 
+        public void ShowUpgradePanel() {
+            eventChannel.OnShowUpgradePanel.Invoke();
+        }
+
         public void GotoNextLevel() {
+            GameManager.isPaused = false;
+            Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        public void GotoMainMenu() {
+            GameManager.isPaused = false;
+            Time.timeScale = 1f;
+            AudioManager.current.StopTrack();
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        public void StartGameTimer() {
+            timerActive = true;
+        }
+        public void StopGameTimer() {
+            timerActive = false;
+        }
+
+        public void DestroyAllEnemies(bool isQuiet = false) {
+            ImperativelyDestroyAllEnemies(isQuiet);
+        }
+
+        public void OnFocusSound() {
+            AudioManager.current.PlaySound("MenuFocus");
         }
 
         void OnEnable() {
@@ -96,6 +128,11 @@ namespace Game {
             eventChannel.OnUnpause.Subscribe(OnUnpause);
             eventChannel.OnShowDebug.Subscribe(OnShowDebug);
             eventChannel.OnHideDebug.Subscribe(OnHideDebug);
+            eventChannel.OnShowDialogue.Subscribe(OnShowDialogue);
+            eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
+            eventChannel.OnPlayerTakeMoney.Subscribe(OnPlayerTakeMoney);
+            eventChannel.OnGotoMainMenu.Subscribe(OnGotoMainMenu);
+
         }
 
         void OnDisable() {
@@ -106,6 +143,10 @@ namespace Game {
             eventChannel.OnUnpause.Unsubscribe(OnUnpause);
             eventChannel.OnShowDebug.Unsubscribe(OnShowDebug);
             eventChannel.OnHideDebug.Unsubscribe(OnHideDebug);
+            eventChannel.OnShowDialogue.Unsubscribe(OnShowDialogue);
+            eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
+            eventChannel.OnPlayerTakeMoney.Unsubscribe(OnPlayerTakeMoney);
+            eventChannel.OnGotoMainMenu.Unsubscribe(OnGotoMainMenu);
         }
 
         void Awake() {
@@ -118,6 +159,12 @@ namespace Game {
         void Start() {
             playerState.Init();
             gameState.Init();
+        }
+
+        void Update() {
+            if (timerActive) {
+                timeElapsed += Time.deltaTime;
+            }
         }
 
         void SetupDamageClasses() {
@@ -147,6 +194,25 @@ namespace Game {
             }
         }
 
+        void ImperativelyDestroyAllEnemies(bool isQuiet = false) {
+            Enemies.EnemyShip[] enemies = FindObjectsOfType<Enemies.EnemyShip>();
+            foreach (var enemy in enemies) {
+                if (enemy == null || !enemy.isAlive) continue;
+                enemy.OnDeathByGuardians(isQuiet);
+            }
+            GameObject[] asteroids = GameObject.FindGameObjectsWithTag(UTag.Asteroid);
+            foreach (var asteroid in asteroids) {
+                DamageableBehaviour actor = asteroid.GetComponent<DamageableBehaviour>();
+                if (actor != null) actor.OnDeathByGuardians(isQuiet);
+                else Destroy(asteroid);
+            }
+            foreach (var mine in GameObject.FindGameObjectsWithTag(UTag.Mine)) {
+                DamageableBehaviour actor = mine.GetComponent<DamageableBehaviour>();
+                if (actor != null) actor.OnDeathByGuardians(isQuiet);
+                else Destroy(mine);
+            }
+        }
+
         void OnPlayerDeath() {
             playerState.IncrementDeaths();
             AudioManager.current.PlaySound("ship-death");
@@ -155,16 +221,26 @@ namespace Game {
             ieRespawn = StartCoroutine(IRespawn());
         }
 
+        void OnPlayerTakeMoney(float value) {
+            playerState.GainMoney((int)value);
+        }
+
         void OnEnemyDeath(int instanceId, int points) {
+            gameState.IncrementEnemiesKilled();
             gameState.GainPoints(points);
         }
 
-        void OnWinLevel() {
-            // TODO: SHOW VICTORY UI
-            Debug.Log("VICTORY!!");
+        void OnWinLevel(bool showUpgradePanel = true) {
+            AudioManager.current.StopTrack();
+            AudioManager.current.CueTrack("win-theme");
+            StopGameTimer();
             gameState.StorePoints();
             if (ieWin != null) StopCoroutine(ieWin);
-            ieWin = StartCoroutine(IWinLevel());
+            ieWin = StartCoroutine(IWinLevel(showUpgradePanel));
+        }
+
+        void OnGotoMainMenu() {
+            GotoMainMenu();
         }
 
         void OnPause() {
@@ -187,10 +263,18 @@ namespace Game {
             OnUnpause();
         }
 
+        void OnShowDialogue(DialogueItemSO item) {
+            // playerState.SetInputControlMode(PlayerInputControlMode.Disabled);
+        }
+
+        void OnDismissDialogue() {
+            // playerState.SetInputControlMode(PlayerInputControlMode.Player);
+        }
+
         void HandleRespawnPlayerShip(Transform respawnTarget) {
             GameObject playerShip = Instantiate(GetPlayerShipPrefab(), playerRespawnPoint.position, Quaternion.identity);
             PlayerInputHandler input = playerShip.GetComponent<PlayerInputHandler>();
-            input.SetMode(PlayerControlMode.ByGame);
+            input.SetMode(PlayerInputControlMode.GameBrain);
             input.SetAutoMoveTarget(respawnTarget);
         }
 
@@ -200,18 +284,39 @@ namespace Game {
             HandleRespawnPlayerShip(playerRespawnTarget);
         }
 
-        IEnumerator IWinLevel() {
+        IEnumerator IWinLevel(bool showUpgradePanel = true) {
+            eventChannel.OnShowVictory.Invoke();
+            ImperativelyDestroyAllEnemies();
             yield return new WaitForSeconds(winLevelWaitTime);
             while (player == null) {
                 player = PlayerUtils.FindPlayer();
                 yield return null;
             }
+            player.SetInvulnerable(true);
+            eventChannel.OnHideVictory.Invoke();
             AudioManager.current.PlaySound("ship-whoosh");
-            PlayerInputHandler input = player.GetComponent<PlayerInputHandler>();
-            input.SetMode(PlayerControlMode.ByGame);
-            input.SetAutoMoveTarget(playerExitTarget);
-            while (Utils.IsObjectOnScreen(player.gameObject)) yield return null;
-            GotoNextLevel();
+            PlayerInputHandler inputHandler = player.GetComponent<PlayerInputHandler>();
+            while (Utils.IsObjectOnScreen(player.gameObject)) {
+                inputHandler.SetMode(PlayerInputControlMode.GameBrain);
+                inputHandler.SetAutoMoveTarget(playerExitTarget);
+                yield return null;
+            }
+
+            PlayerMovement movement = player.GetComponent<PlayerMovement>();
+            PlayerInput input = player.GetComponent<PlayerInput>();
+            // input.SwitchCurrentActionMap("UI");
+            // Destroy the input handler so that the newly-spawned item will gain control (hopefully)
+            if (movement != null) { movement.enabled = false; }
+            if (input != null) { input.enabled = false; }
+            if (inputHandler != null) { inputHandler.enabled = false; }
+
+            player.gameObject.SetActive(false);
+
+            if (showUpgradePanel) {
+                ShowUpgradePanel();
+            } else {
+                GotoNextLevel();
+            }
         }
 
         GameObject GetPlayerShipPrefab() {

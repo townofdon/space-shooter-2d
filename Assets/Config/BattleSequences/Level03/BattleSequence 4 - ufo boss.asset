@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fba42dbb5f93146b81c33b70407bfc, type: 3}
+  m_Name: BattleSequence 4 - ufo boss
+  m_EditorClassIdentifier: 
+  battleEvents:
+  - skip: 0
+    type: 0
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 947b490d1f8673644a43d2fd8a3d9c38, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 0}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 6
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 947b490d1f8673644a43d2fd8a3d9c38, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 0}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 4
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 947b490d1f8673644a43d2fd8a3d9c38, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 0}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 15
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 947b490d1f8673644a43d2fd8a3d9c38, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 0}
+    _hint: {fileID: 0}
+    _track: 
+  notes: 

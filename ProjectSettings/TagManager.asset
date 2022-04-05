@@ -22,6 +22,7 @@ TagManager:
   - BeamLaser
   - Planetoid
   - LevelTransitionUI
+  - Ordnance
   layers:
   - Default
   - TransparentFX

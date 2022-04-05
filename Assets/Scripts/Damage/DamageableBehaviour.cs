@@ -109,6 +109,10 @@ namespace Damage {
             _invulnerable = value;
         }
 
+        public void OnDeathByGuardians(bool isQuiet = false) {
+            StartCoroutine(IDeathByGuardians());
+        }
+
         void OnDestroy() {
             foreach (var perishable in perishableObjects) {
                 GameObject.Destroy(perishable);
@@ -119,6 +123,8 @@ namespace Damage {
             if (!_isAlive) return;
             _timeHit = Mathf.Clamp(_timeHit - Time.deltaTime, 0f, _hitRecoveryTime);
             _timeShieldHit = Mathf.Clamp(_timeShieldHit - Time.deltaTime / _shieldWaitTime, 0f, _shieldWaitTime);
+            _nukeHit.Tick();
+            _tempInvulnerable.Tick();
 
             if (!hasShieldCapability) return;
 
@@ -132,9 +138,6 @@ namespace Damage {
                 if (_isRechargingShield && _shield == _maxShield) InvokeCallback(_onShieldRechargeComplete);
                 _isRechargingShield = false;
             }
-
-            _nukeHit.Tick();
-            _tempInvulnerable.Tick();
         }
 
         protected void RegisterHealthCallbacks(
@@ -223,7 +226,7 @@ namespace Damage {
                 return true;
             }
 
-            if (damageType == DamageType.Nuke) {
+            if (damageType == DamageType.Nuke || damageType == DamageType.Explosion) {
                 if (_nukeHit.active) return false;
                 _nukeHit.SetDuration(_nukeRecoveryTime);
                 _nukeHit.Start();
@@ -341,6 +344,11 @@ namespace Damage {
                 default:
                     return shieldModMedium;
             }
+        }
+
+        private IEnumerator IDeathByGuardians(bool isQuiet = false) {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.2f));
+            TakeDamage(1000f, isQuiet ? DamageType.InstakillQuiet : DamageType.Instakill, false);
         }
 
         // CALLBACK STUFF

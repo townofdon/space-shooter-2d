@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 783937458869655134}
   m_Layer: 0
   m_Name: OrdnanceRTL
-  m_TagString: Untagged
+  m_TagString: Ordnance
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,16 +74,28 @@ MonoBehaviour:
   _damageableType: 0
   debug: 0
   _invulnerable: 0
+  _timeInvincibleAfterSpawn: 0
   _maxHealth: 1
   _hitRecoveryTime: 0.2
+  _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
   _maxShield: 0
   _shieldWaitTime: 3
   _shieldRechargeTime: 1
+  healthModEasy: 1
+  healthModMedium: 1
+  healthModHard: 1
+  healthModInsane: 1
+  shieldModEasy: 1
+  shieldModMedium: 1
+  shieldModHard: 1
+  shieldModInsane: 1
   defaultMaterial: {fileID: 0}
   damageFlashMaterial: {fileID: 0}
   damageFlashDuration: 0.1
   damageSpriteTarget: {fileID: 0}
+  secondaryDamageSpriteTargets: []
+  perishableObjects: []
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
   spriteContainer: {fileID: 783937458923777813}
   engineSound:
@@ -159,6 +171,10 @@ MonoBehaviour:
   wobbleForce: {x: 0, y: 0}
   wobbleMaxSpeed: {x: 0, y: 0}
   wobbleMaxDistance: {x: 0, y: 0}
+  wobble: {fileID: 0}
+  wobbleMag: {x: 0, y: 0}
+  wobbleFreq: {x: 1, y: 1}
+  wobbleOffset: {x: 0, y: 0}
   engineSound:
     soundName: 
     volume: 0.7

@@ -6,11 +6,16 @@ using UnityEngine.InputSystem;
 using Event;
 using Battle;
 using Player;
+using NPCs;
+using Game;
+using Audio;
 
 namespace Enemies {
 
     public class EnemySpawner : MonoBehaviour {
         [SerializeField] List<BattleSequenceSO> battleSequences;
+        [SerializeField] float timeStartDelay = 3f;
+        [SerializeField][Tooltip("show upgrade panel at end of level")] bool showUpgradePanel = true;
 
         [SerializeField] bool loopIndefinitely = false;
         [SerializeField] bool debug = false;
@@ -19,11 +24,13 @@ namespace Enemies {
         // cached
         PlayerGeneral player;
         PlayerInput playerInput;
+        AsteroidLauncher asteroidLauncher;
 
         // state
         int numEnemiesAlive = 0;
         int battleSequenceIndex = 0;
         int battleEventIndex = 0;
+        BattleEvent currentBattleEvent;
         bool waitingForDialogue = false;
         WaveConfigSO currentWave;
         Coroutine currentWaveSpawn;
@@ -44,7 +51,6 @@ namespace Enemies {
 
         public void OnBossSpawn(int instanceId) {
             bossesAlive.Add(instanceId);
-            numEnemiesAlive++;
         }
 
         public void BattleFinished() { }
@@ -53,8 +59,9 @@ namespace Enemies {
             if (battle != null) StopCoroutine(battle);
         }
 
-        public void DestroyAllEnemies(bool isQuiet = false) {
-            DestroyAllEnemiesPresent(isQuiet);
+        public void DestroyAllEnemiesPresent(bool isQuiet = false) {
+            GameManager.current.DestroyAllEnemies(isQuiet);
+            numEnemiesAlive = 0;
         }
 
         void OnEnable() {
@@ -70,10 +77,12 @@ namespace Enemies {
         }
 
         void Start() {
+            asteroidLauncher = FindObjectOfType<AsteroidLauncher>();
             battle = StartCoroutine(PlayBattle());
         }
 
         IEnumerator PlayBattle() {
+            yield return new WaitForSeconds(timeStartDelay);
             do {
                 foreach (var battleSequence in battleSequences) {
                     battleEventIndex = 0;
@@ -88,6 +97,7 @@ namespace Enemies {
         }
 
         IEnumerator OnBattleEvent(BattleEvent battleEvent) {
+            currentBattleEvent = battleEvent;
             switch (battleEvent.Type) {
                 case BattleEventType.EventLabel:
                     // inspector only
@@ -123,10 +133,10 @@ namespace Enemies {
                     DestroyAllEnemiesPresent();
                     break;
                 case BattleEventType.PlayMusic:
-                    // TODO: PLAY MUSIC
+                    AudioManager.current.CueTrack(battleEvent.track);
                     break;
                 case BattleEventType.StopMusic:
-                    // TODO: STOP MUSIC
+                    AudioManager.current.StopTrack();
                     break;
                 case BattleEventType.ShowDialogue:
                     eventChannel.OnShowDialogue.Invoke(battleEvent.dialogueItem);
@@ -137,8 +147,20 @@ namespace Enemies {
                     playerInput = GetPlayerInput();
                     eventChannel.OnShowHint.Invoke(battleEvent.hint, playerInput != null ? playerInput.currentControlScheme : "Keyboard&Mouse");
                     break;
+                case BattleEventType.ActivateAsteroidLauncher:
+                    if (asteroidLauncher != null) {
+                        asteroidLauncher.gameObject.SetActive(true);
+                        asteroidLauncher.enabled = true;
+                    }
+                    break;
+                case BattleEventType.DeactivateAsteroidLauncher:
+                    if (asteroidLauncher != null) {
+                        asteroidLauncher.enabled = false;
+                        asteroidLauncher.gameObject.SetActive(false);
+                    }
+                    break;
                 case BattleEventType.WinLevel:
-                    eventChannel.OnWinLevel.Invoke();
+                    eventChannel.OnWinLevel.Invoke(showUpgradePanel);
                     break;
                 default:
                     Debug.LogError("Unsupported BattleEventType: " + battleEvent.Type);
@@ -205,15 +227,6 @@ namespace Enemies {
             rb.velocity = wave.GetLaunchVelocity(enemy.transform.position, player != null ? player.transform.position : Vector2.zero);
         }
 
-        void DestroyAllEnemiesPresent(bool isQuiet = false) {
-            EnemyShip[] enemies = FindObjectsOfType<EnemyShip>();
-            foreach (var enemy in enemies) {
-                if (enemy == null || !enemy.isAlive) continue;
-                enemy.OnDeathByGuardians(isQuiet);
-            }
-            numEnemiesAlive = 0;
-        }
-
         void OnDismissDialogue() {
             waitingForDialogue = false;
         }
@@ -222,7 +235,9 @@ namespace Enemies {
             if (!debug) return;
             GUILayout.TextField("Seq " + battleSequenceIndex);
             GUILayout.TextField("Event " + battleEventIndex);
-            GUILayout.TextField(numEnemiesAlive.ToString());
+            GUILayout.TextField((currentBattleEvent != null) ? System.Enum.GetName(typeof(BattleEventType), currentBattleEvent.Type) : "null");
+            GUILayout.TextField("#e=" + numEnemiesAlive.ToString());
+            GUILayout.TextField("#b=" + bossesAlive.Count.ToString());
         }
 
         void OnDrawGizmos() {

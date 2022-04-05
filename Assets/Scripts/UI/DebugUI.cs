@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 using Event;
 using Core;
@@ -62,6 +63,10 @@ namespace UI {
 
         public void UpgradeDisruptor() { disruptor.Upgrade(); }
         public void ResetDisruptor() { disruptor.Reset(); }
+
+        public void WarpToLevel(int level) {
+            SceneManager.LoadScene(level);
+        }
 
         void OnEnable() {
             eventChannel.OnShowDebug.Subscribe(OnShowDebugMenu);

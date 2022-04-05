@@ -3,7 +3,17 @@ guid: 9d18826ddb31cb0499228171c9a2a205
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+  - gameState: {fileID: 11400000, guid: 6a03aadd81bb63f4c9f0b480d72a1b9f, type: 2}
+  - playerState: {fileID: 11400000, guid: fa472ff00b3833642af6ce2e7f0e81da, type: 2}
+  - redShipPrefab: {instanceID: 0}
+  - yellowShipPrefab: {instanceID: 0}
+  - blueShipPrefab: {instanceID: 0}
+  - greenShipPrefab: {instanceID: 0}
+  - playerRespawnPoint: {instanceID: 0}
+  - playerRespawnTarget: {instanceID: 0}
+  - playerExitTarget: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

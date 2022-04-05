@@ -1,3 +1,4 @@
+using Enemies;
 using UnityEngine;
 
 namespace UI {
@@ -10,6 +11,8 @@ namespace UI {
         GameObject instance;
         OffscreenMarker marker;
 
+        EnemyShip enemy;
+
         void Start() {
             if (markerPrefab == null) return;
             instance = Instantiate(markerPrefab, Vector3.zero, Quaternion.identity);
@@ -17,6 +20,15 @@ namespace UI {
             if (marker == null) return;
             marker.SetTarget(transform);
             marker.SetFlagType(flagType);
+            enemy = GetComponent<EnemyShip>();
+        }
+
+        void Update() {
+            if (enemy == null || !enemy.isAlive) Deactivate();
+        }
+
+        void Deactivate() {
+            if (marker != null) marker.Disable();
         }
 
         void OnDestroy() {

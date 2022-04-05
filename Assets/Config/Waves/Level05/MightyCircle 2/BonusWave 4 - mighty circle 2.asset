@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
+  m_Name: BonusWave 4 - mighty circle 2
+  m_EditorClassIdentifier: 
+  _enemies:
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7911815944131692052, guid: 3814c385c58a1b94baeeb94ca1972a42, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+  _spawnInterval: 0.5
+  _spawnTimeVariance: 0
+  _minSpawnInterval: 0.5
+  _spawnLocation: N-20-1
+  _spawnOffset: {x: 0, y: 0}
+  launchHeading: {x: 0, y: -1}
+  headingVariance: 0
+  launchVelocity: 0
+  velocityVariance: 0
+  aimTowardsPlayer: 0
+  _path: {fileID: 6479781549283213967, guid: e681327878c9e5b4db0875a4eafe96d3, type: 3}
+  _pathfinderLoopMode: 2
+  _flipX: 0
+  _flipY: 0
+  _initialState: {fileID: 0}

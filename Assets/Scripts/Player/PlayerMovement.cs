@@ -11,6 +11,10 @@ namespace Player {
 
     public class PlayerMovement : MonoBehaviour
     {
+        [Header("General")]
+        [Space]
+        [SerializeField] PlayerStateSO playerState;
+
         [Header("Main Movement Control")][Space]
         [SerializeField] float maxSpeed = 10f;
         [SerializeField] float thrust = 100f;
@@ -36,6 +40,7 @@ namespace Player {
 
         [Header("Audio")][Space]
         [SerializeField] LoopableSound thrustSound;
+        [SerializeField] Sound boostSound;
 
         // components
         Rigidbody2D rb;
@@ -75,6 +80,7 @@ namespace Player {
             minBounds = Camera.main.ViewportToWorldPoint(new Vector2(0f, 0f));
             maxBounds = Camera.main.ViewportToWorldPoint(new Vector2(1f, 1f));
             thrustSound.Init(this);
+            boostSound.Init(this);
         }
 
         void Update() {
@@ -102,17 +108,20 @@ namespace Player {
         }
 
         void HandleMoveByGame() {
-            if (input.controlMode == PlayerControlMode.ByPlayer) return;
+            if (playerState.controlMode == PlayerInputControlMode.Player) return;
             if (GameManager.isPaused) return;
             if (!player.isAlive || !canMove) return;
+            rb.simulated = false;
             rb.isKinematic = true;
+            rb.velocity = Vector2.zero;
             transform.position += (Vector3)input.move * throttle * maxSpeed * Time.deltaTime;
         }
 
         void HandleMove() {
-            if (input.controlMode == PlayerControlMode.ByGame) return;
+            if (playerState.controlMode == PlayerInputControlMode.GameBrain) return;
             if (GameManager.isPaused) return;
             if (!player.isAlive || !canMove) return;
+            rb.simulated = true;
             rb.isKinematic = false;
             currentThrust.x = GetThrustComponent(input.move.x, rb.velocity.x);
             currentThrust.y = GetThrustComponent(input.move.y, rb.velocity.y);
@@ -128,7 +137,7 @@ namespace Player {
         }
 
         void HandleBounds() {
-            if (input.controlMode == PlayerControlMode.ByGame) return;
+            if (playerState.controlMode == PlayerInputControlMode.GameBrain) return;
             if (GameManager.current.gameMode == GameMode.Battle) {
                 transform.position = new Vector2(
                     Mathf.Clamp(transform.position.x, minBounds.x + screenPadLeft, maxBounds.x - screenPadRight),
@@ -142,7 +151,10 @@ namespace Player {
             if (player.isAlive && input.isBoostPressed && input.move.magnitude > 0.1f && canBoost) {
                 currentBoost = (Vector2.up * 0.01f + input.move).normalized * boostThrust * boostAvailable;
                 rb.AddForce(currentBoost, ForceMode2D.Impulse);
-                if (rb.velocity.magnitude > maxSpeed && boostAvailable >= 0.7f) CreateBoostWaves();
+                if (rb.velocity.magnitude > maxSpeed && boostAvailable >= 0.7f) {
+                    boostSound.Play();
+                    CreateBoostWaves();
+                }
                 boostAvailable = 0f;
             } else {
                 boostAvailable += Time.deltaTime / boostCooldownTime;

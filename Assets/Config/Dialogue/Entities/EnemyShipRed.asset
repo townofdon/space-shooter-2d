@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueType: 1
   _entityImage: {fileID: 21300000, guid: 212e8973053bd084097a263c4f2f1235, type: 3}
-  _entityName: Xyclon Squadron Leader
+  _entityName: Xyclon Juggernaut

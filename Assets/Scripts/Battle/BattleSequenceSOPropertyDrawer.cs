@@ -4,6 +4,8 @@ using UnityEditor;
 
 using Game;
 
+#if (UNITY_EDITOR)
+
 namespace Battle {
 
     [CustomPropertyDrawer(typeof(BattleEvent))]
@@ -24,6 +26,7 @@ namespace Battle {
             SerializedProperty arbitraryEvent = property.FindPropertyRelative("arbitraryEvent");
             SerializedProperty _dialogueItem = property.FindPropertyRelative("_dialogueItem");
             SerializedProperty _hint = property.FindPropertyRelative("_hint");
+            SerializedProperty _track = property.FindPropertyRelative("_track");
             SerializedProperty skip = property.FindPropertyRelative("skip");
 
             // SerializedProperty coloursProp = property.FindPropertyRelative("colours");
@@ -127,6 +130,9 @@ namespace Battle {
                 case BattleEventType.ShowHint:
                     EditorGUI.PropertyField(c2, _hint, GUIContent.none);
                     break;
+                case BattleEventType.PlayMusic:
+                    EditorGUI.PropertyField(c2, _track, GUIContent.none);
+                    break;
                 default:
                     break;
             }
@@ -153,3 +159,5 @@ namespace Battle {
         }
     }
 }
+
+#endif

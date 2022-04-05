@@ -17,6 +17,8 @@ namespace Battle {
         WaitUntilBossDestroyed,
         ArbitraryEvent,
         EventLabel,
+        ActivateAsteroidLauncher,
+        DeactivateAsteroidLauncher,
         PlayMusic,
         StopMusic,
         ShowDialogue,
@@ -38,6 +40,7 @@ namespace Battle {
         [SerializeField] UnityEvent arbitraryEvent;
         [SerializeField] DialogueItemSO _dialogueItem;
         [SerializeField] HintSO _hint;
+        [SerializeField] string _track;
 
         public bool Skip => skip;
         public BattleEventType Type => type;
@@ -47,5 +50,6 @@ namespace Battle {
         public UnityEvent ArbitraryEvent => arbitraryEvent;
         public DialogueItemSO dialogueItem => _dialogueItem;
         public HintSO hint => _hint;
+        public string track => _track;
     }
 }

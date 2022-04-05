@@ -5,8 +5,8 @@ using Damage;
 using Game;
 using Audio;
 using UI;
-using Pickups;
 using Event;
+using UnityEngine.InputSystem;
 
 namespace Player {
 
@@ -50,6 +50,9 @@ namespace Player {
         CircleCollider2D col;
         Rigidbody2D rb;
         Animator shipFlashEffect;
+        PlayerInputHandler inputHandler;
+        PlayerMovement movement;
+        PlayerInput input;
 
         // cached
         GameObject splosion;
@@ -73,6 +76,11 @@ namespace Player {
             col = Utils.GetRequiredComponent<CircleCollider2D>(gameObject);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
             shipFlashEffect = Utils.GetRequiredComponent<Animator>(shipFlash);
+
+            inputHandler = GetComponent<PlayerInputHandler>();
+            movement = GetComponent<PlayerMovement>();
+            input = GetComponent<PlayerInput>();
+
             // init
             ResetHealth();
             SetColliders();
@@ -241,14 +249,13 @@ namespace Player {
             shieldAlarmSound.Stop();
             shieldRechargeSound.Stop();
 
+            // Destroy the input handler so that the newly-spawned item will gain control (hopefully)
+            if (movement != null) { movement.enabled = false; Destroy(movement); }
+            if (input != null) { input.enabled = false; Destroy(input); }
+            if (inputHandler != null) { inputHandler.enabled = false; Destroy(inputHandler); }
+
             // set tag to non-player so that PlayerUtils.FindPlayer can find the player once it respawns
             foreach (var obj in GameObject.FindGameObjectsWithTag(UTag.Player)) { obj.tag = UTag.Untagged; }
-
-            // Destroy the input handler so that the newly-spawned item will gain control (hopefully)
-            Destroy(GetComponent<PlayerMovement>());
-            PlayerInputHandler input = GetComponent<PlayerInputHandler>();
-            input.enabled = false;
-            Destroy(input);
 
             eventChannel.OnPlayerDeath.Invoke();
         }

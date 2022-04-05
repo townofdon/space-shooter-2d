@@ -32,8 +32,8 @@ namespace NPCs {
         [SerializeField][Range(0, 255)] List<int> seeds = new List<int>();
 
         // cached
-        GameObject player;
-        PlayerGeneral playerGeneral;
+        PlayerGeneral player;
+        Coroutine ieSpawn;
 
         // state
         int currentSeedIndex = 0;
@@ -47,25 +47,22 @@ namespace NPCs {
 
         public bool isFinishedSpawning => false;
 
+        void OnEnable() {
+            if (ieSpawn != null) {
+                StopCoroutine(ieSpawn);
+            }
+            ieSpawn = StartCoroutine(ISpawn());
+        }
+
         void Start() {
-            FindPlayer();
+            player = PlayerUtils.FindPlayer();
         }
 
         void FixedUpdate() {
-            FindPlayer();
+            player = PlayerUtils.FindPlayer();
         }
 
         void FindPlayer() {
-            if (player != null) return;
-            if (findPlayerInterval.active) return;
-            Debug.Log("searching for player...");
-            findPlayerInterval.Start();
-            player = GameObject.FindGameObjectWithTag(UTag.Player);
-            findPlayerInterval.Tick();
-            if (player != null) {
-                playerGeneral = player.GetComponent<PlayerGeneral>();
-                StartCoroutine(ISpawn());
-            }
         }
 
         void IncrementSeed() {
@@ -79,7 +76,7 @@ namespace NPCs {
         }
 
         Vector3 GetHeading(Vector3 origin) {
-            if (player == null || !playerGeneral.isAlive) return GetHeadingVariance() * mainHeading;
+            if (player == null || !player.isAlive) return GetHeadingVariance() * mainHeading;
             headingTowardsPlayer = (player.transform.position - origin).normalized;
             return GetHeadingVariance() * Vector3.Lerp(mainHeading, headingTowardsPlayer, aimTowardsPlayer);
         }

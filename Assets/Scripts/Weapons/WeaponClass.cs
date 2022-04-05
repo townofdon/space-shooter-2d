@@ -98,6 +98,7 @@ namespace Weapons
         public GameObject prefab => _prefab;
         public float shieldDrain => _shieldDrain;
         public Sound reloadSound => _reloadSound;
+        public int cost => _cost;
     }
 
     [CreateAssetMenu(fileName = "WeaponClass", menuName = "ScriptableObjects/WeaponClass", order = 0)]
@@ -117,10 +118,11 @@ namespace Weapons
 
         WeaponSettings current => (_upgradeLevel > -1 && _upgradeLevel < upgrades.Count) ? upgrades[_upgradeLevel] : baseSettings;
         public bool CanUpgrade => _upgradeLevel < upgrades.Count - 1;
+        public int CostNextUpgrade => upgrades[Mathf.Min(_upgradeLevel + 1, upgrades.Count - 1)].cost;
         public int CurrentUpgradeLevel => _upgradeLevel + 1;
         public int MaxUpgradeLevel => upgrades.Count;
         List<Sound> _upgradeSounds = new List<Sound>();
-        
+
         // PUBLIC SETTINGS
         public WeaponType type => _weaponType;
         public string weaponName => _weaponName;

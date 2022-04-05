@@ -116,7 +116,7 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 7740262aaef2bb04387b291288442365, type: 3}
     _shieldDrain: 0
-    _cost: 0
+    _cost: 200
     _reloadSound:
       soundName: 
       volume: 0.7
@@ -150,7 +150,7 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 78e35a5914ef53542b6ace38cb363ebc, type: 3}
     _shieldDrain: 0
-    _cost: 0
+    _cost: 1000
     _reloadSound:
       soundName: 
       volume: 0.7
@@ -184,7 +184,7 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 78e35a5914ef53542b6ace38cb363ebc, type: 3}
     _shieldDrain: 0
-    _cost: 0
+    _cost: 2000
     _reloadSound:
       soundName: 
       volume: 0.7
@@ -201,7 +201,7 @@ MonoBehaviour:
       clips: []
       oneShot: 1
   - _assetClass: HYPERION V
-    _damageMultiplier: 5
+    _damageMultiplier: 6
     _startingAmmo: 0
     _infiniteAmmo: 1
     _reloads: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: be67dfab09195ad46a0ed4752d0e6e13, type: 3}
     _shieldDrain: 0
-    _cost: 0
+    _cost: 8000
     _reloadSound:
       soundName: 
       volume: 0.7

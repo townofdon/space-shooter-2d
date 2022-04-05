@@ -11,12 +11,19 @@ namespace Player {
         Green,
     }
 
+    public enum PlayerInputControlMode {
+        Player,
+        GameBrain,
+        Disabled,
+    }
+
     [CreateAssetMenu(fileName = "PlayerState", menuName = "ScriptableObjects/PlayerState", order = 0)]
     public class PlayerStateSO : ScriptableObject {
         [SerializeField] float _initialHealth = 50f;
         [SerializeField] float _initialShield = 100f;
         [SerializeField] int _initialMoney = 500;
 
+        PlayerInputControlMode _controlMode;
         PlayerShipColor _shipColor;
         float _maxHealth;
         float _maxShield;
@@ -25,6 +32,7 @@ namespace Player {
         int _numDeaths;
 
         public PlayerShipColor shipColor => _shipColor;
+        public PlayerInputControlMode controlMode => _controlMode;
         public float maxHealth => _maxHealth;
         public float maxShield => _maxShield;
         public int totalMoney => _moneyInBank + _moneyGained;
@@ -37,6 +45,15 @@ namespace Player {
             _moneyInBank = _initialMoney;
             _moneyGained = 0;
             _numDeaths = 0;
+            _controlMode = PlayerInputControlMode.Player;
+        }
+
+        public void ResetAfterDeath() {
+            LoseMoney();
+        }
+
+        public void SetInputControlMode(PlayerInputControlMode value) {
+            _controlMode = value;
         }
 
         public void SetShipColor(PlayerShipColor value) {
@@ -58,6 +75,11 @@ namespace Player {
 
         public void GainMoney(int value) {
             _moneyGained += value;
+        }
+
+        public void SpendMoney(int value) {
+            _moneyGained -= value;
+            _moneyGained = Mathf.Max(_moneyGained, 0);
         }
 
         public void LoseMoney() {

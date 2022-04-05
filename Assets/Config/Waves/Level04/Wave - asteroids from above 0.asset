@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
+  m_Name: Wave - asteroids from above 0
+  m_EditorClassIdentifier: 
+  _enemies:
+  - _enemyPrefab: {fileID: 1023591117905801292, guid: 8c1657a500c8e3d42ba90f4268f032a2, type: 3}
+    _spawnLocation: N-4-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 8184613412094788, guid: 7f21ac43ba0309842bcafcaf8e5599c3, type: 3}
+    _spawnLocation: N-14-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 5346947312078079096, guid: 4d0ef2b5e6e48bd499ca5dc4776b9fa0, type: 3}
+    _spawnLocation: N-7-5
+    _spawnOffset: {x: 0, y: 0}
+  _spawnInterval: 0.1
+  _spawnTimeVariance: 0.45
+  _minSpawnInterval: 0
+  _spawnLocation: 
+  _spawnOffset: {x: 0, y: 0}
+  launchHeading: {x: 0, y: -1}
+  headingVariance: 3
+  launchVelocity: 6.8
+  velocityVariance: 5.6
+  aimTowardsPlayer: 1
+  _path: {fileID: 3160559291137630212, guid: ab36157b281d05345b550962cf682f22, type: 3}
+  _pathfinderLoopMode: 0
+  _flipX: 1
+  _flipY: 0
+  _initialState: {fileID: 0}

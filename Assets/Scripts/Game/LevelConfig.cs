@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
 
 using Audio;
-using Core;
 using Player;
 
 namespace Game {
@@ -16,8 +14,10 @@ namespace Game {
         [SerializeField] GameObject transitionCanvas;
         [SerializeField] TextMeshProUGUI levelTitle;
 
+        Coroutine ieLevelStart;
 
         void Start() {
+            if (ieLevelStart != null) StopCoroutine(ieLevelStart);
             StartCoroutine(ILevelStart());
         }
 
@@ -27,8 +27,10 @@ namespace Game {
             transitionCanvas.SetActive(true);
             yield return new WaitForSeconds(2f);
             transitionCanvas.SetActive(false);
+            GameManager.current.StartGameTimer();
             GameManager.current.RespawnPlayerShip();
             PlayerUtils.InvalidateCache();
+            AudioManager.current.PlaySound("ship-whoosh");
         }
     }
 }

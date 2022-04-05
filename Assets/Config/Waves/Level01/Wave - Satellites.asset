@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
+  m_Name: Wave - Satellites
+  m_EditorClassIdentifier: 
+  _enemies:
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-4-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-20-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-4-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-20-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-6-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-14-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-8-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-16-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-16-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-14-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-12-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-10-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-8-5
+    _spawnOffset: {x: 0, y: 0}
+  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+    _spawnLocation: N-4-5
+    _spawnOffset: {x: 0, y: 0}
+  _spawnInterval: 1.5
+  _spawnTimeVariance: 0.97
+  _minSpawnInterval: 1
+  _spawnLocation: 
+  _spawnOffset: {x: 0, y: 0}
+  launchHeading: {x: 0, y: 0}
+  headingVariance: 0
+  launchVelocity: 0
+  velocityVariance: 0
+  aimTowardsPlayer: 0
+  _path: {fileID: 0}
+  _pathfinderLoopMode: 0
+  _flipX: 0
+  _flipY: 0
+  _initialState: {fileID: 0}
