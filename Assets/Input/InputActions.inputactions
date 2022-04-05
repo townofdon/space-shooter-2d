@@ -25,12 +25,12 @@
                 },
                 {
                     "name": "Fire",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "52efb9bc-99f6-4491-9142-4c8225bd70d7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "FireSecondary",
@@ -43,21 +43,21 @@
                 },
                 {
                     "name": "Boost",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "62ffdd18-3780-46f3-b7e7-862137c725b8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "SwitchWeapon",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "dbbc45f1-feff-44b5-a003-4089afde9995",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "SwitchSecondary",
@@ -78,15 +78,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TempUpgrade",
-                    "type": "Value",
-                    "id": "4a05f292-d9c2-441e-8c1d-00861975cc70",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Melee",
                     "type": "Value",
                     "id": "3117a64c-3251-4949-8199-bc5ca2d4c103",
@@ -97,12 +88,12 @@
                 },
                 {
                     "name": "Start",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "38081404-ebcd-49b9-a364-ffe52a001fee",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Debug",
@@ -324,6 +315,17 @@
                 },
                 {
                     "name": "",
+                    "id": "44b23c11-0812-42d1-8fca-c25cba11726a",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e75af7fb-7b22-4594-ad27-fb8224ea50bc",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "Press(behavior=2)",
@@ -358,7 +360,7 @@
                 {
                     "name": "",
                     "id": "ab4c6a0c-8204-45c4-85b2-81476f73db9f",
-                    "path": "<Mouse>/middleButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -380,7 +382,7 @@
                 {
                     "name": "",
                     "id": "087b0944-0c29-4c28-998e-1a5a927e8aa7",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -407,17 +409,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "af217056-e928-495b-b994-72078460c8f1",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TempUpgrade",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
