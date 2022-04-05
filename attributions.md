@@ -17,4 +17,4 @@
 - https://opengameart.org/content/assorted-32x32-creatures
 - https://opengameart.org/content/minimare-rework
 - https://opengameart.org/content/cugzilia-ii-prototype-squid
-
+- https://opengameart.org/content/512-sound-effects-8-bit-style
