@@ -2,7 +2,14 @@
 
 This docker setup runs a unity webgl build locally.
 
-## Getting started
+## Testing Locally
+
+First, create a Unity build - make sure that it's placed in `/Build`
+
+Next, just run `./test.sh`. This will copy the contents of `/Build` and run
+docker-compose.
+
+## Testing Locally - manual process
 
 First, run:
 
