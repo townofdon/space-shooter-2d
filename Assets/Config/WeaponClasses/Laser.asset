@@ -116,7 +116,7 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 7740262aaef2bb04387b291288442365, type: 3}
     _shieldDrain: 0
-    _cost: 200
+    _cost: 400
     _reloadSound:
       soundName: 
       volume: 0.7
@@ -133,40 +133,6 @@ MonoBehaviour:
       clips: []
       oneShot: 1
   - _assetClass: VYPER III
-    _damageMultiplier: 1.4
-    _startingAmmo: 0
-    _infiniteAmmo: 1
-    _reloads: 0
-    _reloadTime: 0
-    _magazineCapacity: 0
-    _firingRate: 0.18
-    _burstMax: 0
-    _burstInterval: 0.15
-    _overheats: 0
-    _overheatTime: 0
-    _cooldownTime: 0
-    _deploymentTime: 0.5
-    _launchForce: 0
-    _recoil: 0
-    _prefab: {fileID: 1916144924080233305, guid: 78e35a5914ef53542b6ace38cb363ebc, type: 3}
-    _shieldDrain: 0
-    _cost: 1000
-    _reloadSound:
-      soundName: 
-      volume: 0.7
-      pitch: 1
-      ignoreListenerPause: 0
-      realtimeEditorInspect: 0
-      mixerGroup: {fileID: 0}
-      spatialBlend: 1
-      spread: 180
-      minFalloffDistance: 20
-      maxFalloffDistance: 40
-      volumeVariance: 0.1
-      pitchVariance: 0.1
-      clips: []
-      oneShot: 1
-  - _assetClass: VYPER IV
     _damageMultiplier: 2
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -184,7 +150,41 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: 78e35a5914ef53542b6ace38cb363ebc, type: 3}
     _shieldDrain: 0
-    _cost: 2000
+    _cost: 850
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      clips: []
+      oneShot: 1
+  - _assetClass: VYPER IV
+    _damageMultiplier: 4
+    _startingAmmo: 0
+    _infiniteAmmo: 1
+    _reloads: 0
+    _reloadTime: 0
+    _magazineCapacity: 0
+    _firingRate: 0.18
+    _burstMax: 0
+    _burstInterval: 0.15
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
+    _prefab: {fileID: 1916144924080233305, guid: 78e35a5914ef53542b6ace38cb363ebc, type: 3}
+    _shieldDrain: 0
+    _cost: 2500
     _reloadSound:
       soundName: 
       volume: 0.7
@@ -201,13 +201,13 @@ MonoBehaviour:
       clips: []
       oneShot: 1
   - _assetClass: HYPERION V
-    _damageMultiplier: 6
+    _damageMultiplier: 8
     _startingAmmo: 0
     _infiniteAmmo: 1
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
-    _firingRate: 0.15
+    _firingRate: 0.13
     _burstMax: 0
     _burstInterval: 0
     _overheats: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
     _recoil: 0
     _prefab: {fileID: 1916144924080233305, guid: be67dfab09195ad46a0ed4752d0e6e13, type: 3}
     _shieldDrain: 0
-    _cost: 8000
+    _cost: 8250
     _reloadSound:
       soundName: 
       volume: 0.7

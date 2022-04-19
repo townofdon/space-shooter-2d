@@ -102,7 +102,7 @@ namespace Damage {
         public float timeHit => _timeHit;
         public bool isRechargingShield => _isRechargingShield;
         public float hitRecoveryTime => _hitRecoveryTime;
-        public bool hasShieldCapability => _maxShield > 0f;
+        public bool hasShieldCapability => _maxShield * GetShieldMod() > 0f;
         public DamageableType damageableType => (hasShieldCapability && _shield > 0f) ? DamageableType.Shield : _damageableType;
 
         public void SetInvulnerable(bool value) {
@@ -129,13 +129,13 @@ namespace Damage {
             if (!hasShieldCapability) return;
 
             // recharge shield
-            if (_timeShieldHit <= 0f && _shield < _maxShield) {
+            if (_timeShieldHit <= 0f && _shield < _maxShield * GetShieldMod()) {
                 // NOTE - may also find it useful to add an `_onShieldRechargeStep` callback method at some point if needed for UI updates, etc.
                 if (!_isRechargingShield) InvokeCallback(_onShieldRechargeStart);
                 _isRechargingShield = true;
-                _shield = Mathf.Min(_shield + _maxShield * (Time.deltaTime / _shieldRechargeTime), _maxShield);
+                _shield = Mathf.Min(_shield + _maxShield * GetShieldMod() * (Time.deltaTime / _shieldRechargeTime), _maxShield * GetShieldMod());
             } else {
-                if (_isRechargingShield && _shield == _maxShield) InvokeCallback(_onShieldRechargeComplete);
+                if (_isRechargingShield && _shield == _maxShield * GetShieldMod()) InvokeCallback(_onShieldRechargeComplete);
                 _isRechargingShield = false;
             }
         }
@@ -201,7 +201,7 @@ namespace Damage {
         public bool TakeHealth(float amount) {
             if (!_isAlive) return false;
 
-            _health = Mathf.Min(_health + amount, _maxHealth);
+            _health = Mathf.Min(_health + amount, _maxHealth * GetHealthMod());
             InvokeCallback(_onHealthTaken, amount);
 
             return true;

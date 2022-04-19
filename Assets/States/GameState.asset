@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3929393ea856c442b81dd810c1d538e, type: 3}
   m_Name: GameState
   m_EditorClassIdentifier: 
-  _initialPoints: 50
+  _initialPoints: 0
   _difficulty: 3

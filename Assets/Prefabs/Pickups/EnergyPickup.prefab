@@ -228,7 +228,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shockwaveDuration: 2
+  shockwaveDuration: 1
+  shockwaveMagnitude: 0.5
 --- !u!114 &5322709981639709621
 MonoBehaviour:
   m_ObjectHideFlags: 0

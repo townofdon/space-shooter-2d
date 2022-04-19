@@ -349,6 +349,7 @@ MonoBehaviour:
   battleSequences:
   - {fileID: 11400000, guid: ff3ffa281ddad374ba400feec126f7b1, type: 2}
   - {fileID: 11400000, guid: abfb14081039e704d846327d3cf53473, type: 2}
+  - {fileID: 11400000, guid: ad354af7050fc5948afa9115846c5702, type: 2}
   - {fileID: 11400000, guid: 5fe51554b26177d45b886279336811ff, type: 2}
   timeStartDelay: 3
   showUpgradePanel: 1

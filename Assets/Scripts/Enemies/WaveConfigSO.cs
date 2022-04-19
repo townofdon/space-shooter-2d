@@ -63,7 +63,11 @@ namespace Enemies
         [Space]
         [SerializeField] FSM.BaseState _initialState;
 
+        [TextArea(minLines: 3, maxLines: 10)]
+        public string notes;
+
         // getters
+        public GameDifficulty spawnDifficulty => _spawnDifficulty;
         public int spawnCount => GetSpawnCount();
         public int enemyCount => GetEnemyCount();
         public float spawnInterval => GetSpawnInterval();

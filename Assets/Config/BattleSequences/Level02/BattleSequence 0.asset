@@ -26,6 +26,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 0
     eventLabel: 
@@ -39,6 +40,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 4
     eventLabel: 
@@ -52,6 +54,21 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 14
+    eventLabel: 
+    wave: {fileID: 11400000, guid: bfde94ac5a8b16643ba7633bace8ebd2, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 11400000, guid: b97208056b15b1348978414fac468426, type: 2}
+    _track: 
   - skip: 0
     type: 0
     eventLabel: 
@@ -65,6 +82,21 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 0
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 3c5cd7e620af88c4cb7c07cd5397e399, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 4
     eventLabel: 
@@ -78,6 +110,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 0
     eventLabel: 
@@ -91,6 +124,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 3
     eventLabel: 
@@ -104,6 +138,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 0
     eventLabel: 
@@ -117,6 +152,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 4
     eventLabel: 
@@ -130,6 +166,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 0
     eventLabel: 
@@ -143,6 +180,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 0
     eventLabel: 
@@ -156,6 +194,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 5
     eventLabel: 
@@ -169,6 +208,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 0
     eventLabel: 
@@ -182,6 +222,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   - skip: 0
     type: 3
     eventLabel: 
@@ -195,4 +236,5 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
+    _track: 
   notes: 

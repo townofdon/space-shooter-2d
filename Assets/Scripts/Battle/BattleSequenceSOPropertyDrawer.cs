@@ -88,6 +88,7 @@ namespace Battle {
             Rect c0 = new Rect(xMin + col * 0 + padding, yMin + rowHeight * 2 + padding, col * 2 - padding * 2, rowHeight);
             Rect c1 = new Rect(xMin + col * 2 + padding, yMin + rowHeight * 2 + padding, col * 2 - padding * 2, rowHeight);
             Rect c2 = new Rect(xMin + col * 4 + padding, yMin + rowHeight * 2 + padding, col * 8 - padding * 2, rowHeight);
+            Rect posDif = new Rect(xMin + col * 4 + padding, yMin + rowHeight * 3 + padding, col * 8 - padding * 2, rowHeight);
             // Rect c3 = new Rect(); // more cols if you need 'em
             // Rect c4 = new Rect();
             // Rect c5 = new Rect();
@@ -109,6 +110,8 @@ namespace Battle {
             switch ((BattleEventType)type.enumValueIndex) {
                 case BattleEventType.Wave:
                     EditorGUI.PropertyField(c2, wave, GUIContent.none);
+                    GameDifficulty difficulty = ((Enemies.WaveConfigSO)wave.objectReferenceValue).spawnDifficulty;
+                    EditorGUI.LabelField(posDif, System.Enum.GetName(typeof(GameDifficulty), difficulty));
                     break;
                 case BattleEventType.Boss:
                     EditorGUI.PropertyField(c2, boss, GUIContent.none);

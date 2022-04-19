@@ -16,7 +16,7 @@ namespace Physics {
         void Start() {
             moveSpeed = Utils.RandomVariance(moveSpeed, speedVariance, moveSpeed / 2f);
             rb = GetComponent<Rigidbody2D>();
-            if (rb != null) rb.velocity = Vector2.down * moveSpeed;
+            if (rb != null) rb.velocity = rb.velocity + Vector2.down * moveSpeed;
         }
 
         void Update() {

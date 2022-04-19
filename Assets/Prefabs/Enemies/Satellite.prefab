@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   moveSpeed: 2
-  speedVariance: 1
+  speedVariance: 0.5
   accel: 15
 --- !u!114 &7531810961699429525
 MonoBehaviour:

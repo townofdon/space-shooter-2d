@@ -35,7 +35,6 @@ namespace Game {
         public GameDifficulty difficulty => _difficulty;
 
         public void Init() {
-            Debug.Log("GAME STATE INIT");
             _pointsInBank = _initialPoints;
             _pointsGained = 0;
             _numEnemiesKilled = 0;

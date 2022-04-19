@@ -39,7 +39,6 @@ namespace Player {
         public int numDeaths => _numDeaths;
 
         public void Init() {
-            Debug.Log("INIT PLAYER STATE");
             _maxHealth = _initialHealth;
             _maxShield = _initialShield;
             _moneyInBank = _initialMoney;

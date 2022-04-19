@@ -117,7 +117,7 @@ MonoBehaviour:
     _recoil: 1.1
     _prefab: {fileID: 1916144924080233305, guid: 1e301ad3856b6d04b862fb6e17525025, type: 3}
     _shieldDrain: 0
-    _cost: 200
+    _cost: 600
     _reloadSound:
       soundName: 
       volume: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
     _recoil: 1.3
     _prefab: {fileID: 1916144924080233305, guid: 81ffb9d40e395ea4c914fce747b2b72e, type: 3}
     _shieldDrain: 0
-    _cost: 2000
+    _cost: 3500
     _reloadSound:
       soundName: MacineReload1000
       volume: 0.2
@@ -206,7 +206,7 @@ MonoBehaviour:
   - _assetClass: Hydra V
     _damageMultiplier: 3
     _startingAmmo: 1000
-    _infiniteAmmo: 0
+    _infiniteAmmo: 1
     _reloads: 1
     _reloadTime: 0.5
     _magazineCapacity: 100

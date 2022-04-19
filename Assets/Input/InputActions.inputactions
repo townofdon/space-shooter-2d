@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "873d11e4-dd25-4fc9-9a50-dea67c48f483",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -88,12 +88,12 @@
                 },
                 {
                     "name": "Start",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "38081404-ebcd-49b9-a364-ffe52a001fee",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Debug",
