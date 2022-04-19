@@ -141,8 +141,8 @@ MonoBehaviour:
   pickups:
     pickups:
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
-      numItemsToSpawn: 5
-      spawnLikelihood: 0.797
+      numItemsToSpawn: 3
+      spawnLikelihood: 0.499
   pointsWhenKilledByPlayer: 25
   pointsWhenWoundedByPlayer: 5
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}

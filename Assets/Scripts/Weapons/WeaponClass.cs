@@ -200,7 +200,7 @@ namespace Weapons
                 PopulateUpgradeSounds();
             }
             _equipped = equipped;
-            _ammo = Mathf.Max(_ammo, startingAmmo);
+            _ammo = startingAmmo;
             _burstStep = 0;
             _firingCycle = 0;
             _ammoInClipDisplayed = GetAmmoLeftInClip();
@@ -255,6 +255,10 @@ namespace Weapons
             } else {
                 _deploying.Start();
             }
+        }
+
+        public void SetToStartingAmmo() {
+            _ammo = startingAmmo;
         }
 
         public void PickupAmmo(int amount) {

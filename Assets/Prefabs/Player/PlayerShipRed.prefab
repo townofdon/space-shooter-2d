@@ -35902,7 +35902,7 @@ MonoBehaviour:
   damageSpriteTarget: {fileID: 0}
   secondaryDamageSpriteTargets: []
   perishableObjects: []
-  blastThrowback: 6
+  blastThrowback: 70
   collideThrowback: 4
   collideThrowbackFromVelocity: 0.3
   deathExplosiveForce: 3
@@ -36058,7 +36058,7 @@ MonoBehaviour:
   decelMultiplier: 2
   throttleUpTime: 0.3
   throttleDownTime: 2
-  aimMaxAngle: 30
+  aimMaxAngle: 45
   aimSpeed: 270
   boostThrust: 50
   boostCooldownTime: 0.5

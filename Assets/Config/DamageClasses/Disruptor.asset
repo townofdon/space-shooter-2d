@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Disruptor
   m_EditorClassIdentifier: 
   _damageType: 6
-  _baseDamage: 500
+  _baseDamage: 700
   _damageVariance: 0
   _shieldEffectiveness: 1
   _shieldedHealthEffectiveness: 0.75

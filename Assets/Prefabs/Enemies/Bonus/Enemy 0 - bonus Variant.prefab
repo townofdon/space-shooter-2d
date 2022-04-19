@@ -55,6 +55,18 @@ PrefabInstance:
       propertyPath: _maxHealth
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModHard
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModInsane
+      value: 1.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModMedium
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Enabled
       value: 0

@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SatelliteYellow
       objectReference: {fileID: 0}
+    - target: {fileID: 7531810961699429516, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+      propertyPath: _maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531810961699429516, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+      propertyPath: _maxShield
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7531810961699429517, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
       propertyPath: m_RootOrder
       value: 0

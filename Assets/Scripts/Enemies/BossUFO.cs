@@ -82,7 +82,7 @@ namespace Enemies {
             if (!self.isAlive) return;
             if (launchCooldown.active) return;
 
-            if (GameManager.current.difficulty == GameDifficulty.Hard) {
+            if (GameManager.current.difficulty >= GameDifficulty.Hard) {
 
                 launchCooldown.Start();
                 launchSound.Play();

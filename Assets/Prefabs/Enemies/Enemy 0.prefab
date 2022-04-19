@@ -650,6 +650,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 1
+  shockwaveMagnitude: 1.5
 --- !u!114 &5436292977086282879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,17 +681,17 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
-  _maxHealth: 50
+  _maxHealth: 40
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
   _maxShield: 0
   _shieldWaitTime: 5
   _shieldRechargeTime: 10
-  healthModEasy: 0.5
-  healthModMedium: 1
-  healthModHard: 1.25
-  healthModInsane: 2.5
+  healthModEasy: 0.25
+  healthModMedium: 0.6
+  healthModHard: 1.03
+  healthModInsane: 1.53
   shieldModEasy: 0.75
   shieldModMedium: 1
   shieldModHard: 1.2
@@ -750,7 +751,7 @@ MonoBehaviour:
       spawnLikelihood: 0.07
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
       numItemsToSpawn: 5
-      spawnLikelihood: 0.61
+      spawnLikelihood: 0.503
   pointsWhenKilledByPlayer: 50
   pointsWhenWoundedByPlayer: 10
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
@@ -782,14 +783,14 @@ MonoBehaviour:
   targetableLayers:
     serializedVersion: 2
     m_Bits: 129
-  triggerHoldEasyMod: 0.81
-  triggerHoldMediumMod: 1
+  triggerHoldEasyMod: 0.5
+  triggerHoldMediumMod: 0.75
   triggerHoldHardMod: 1.3
   triggerHoldInsaneMod: 3
   triggerReleaseEasyMod: 1.87
   triggerReleaseMediumMod: 1.41
   triggerReleaseHardMod: 1
-  triggerReleaseInsaneMod: 0.5
+  triggerReleaseInsaneMod: 0.37
 --- !u!114 &9164195204246999770
 MonoBehaviour:
   m_ObjectHideFlags: 0

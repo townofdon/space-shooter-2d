@@ -59,6 +59,7 @@ namespace Player {
         Coroutine shakeGamepadCoroutine;
         Coroutine damageCoroutine;
         Coroutine deathCoroutine;
+        Timer nukeShockwaveTimer = new Timer(TimerDirection.Decrement, TimerStep.DeltaTime, 1f);
 
         void OnEnable() {
             eventChannel.OnPlayerTakeHealth.Subscribe(HandleHealthPickup);
@@ -103,6 +104,7 @@ namespace Player {
         void Update() {
             HandleShields();
             TickHealth();
+            nukeShockwaveTimer.Tick();
 
             // move the splosion along the same trajectory as the player's previous heading
             if (splosion != null) splosion.GetComponent<Rigidbody2D>().velocity = rb.velocity * 0.25f;
@@ -175,6 +177,8 @@ namespace Player {
         // }
 
         void TriggerShockwaveBlast(Vector3 shockwaveOrigin) {
+            if (nukeShockwaveTimer.active) return;
+            nukeShockwaveTimer.Start();
             Vector3 dir = transform.position - shockwaveOrigin;
             float force = blastThrowback * (4f / (dir.magnitude + 4f));
             rb.AddForce(dir.normalized * force, ForceMode2D.Impulse);

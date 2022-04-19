@@ -10,6 +10,7 @@ namespace Physics
         [Space]
         [SerializeField] AnimationCurve shockwaveVelocity = AnimationCurve.EaseInOut(0f, 0.75f, 1f, -0.75f);
         [SerializeField] float shockwaveDuration = 1f;
+        [SerializeField] float shockwaveMagnitude = 1.5f;
 
         // components
         Rigidbody2D rb;
@@ -33,7 +34,7 @@ namespace Physics
             if (rb == null) return;
             rb.velocity = shockwavePositionTimer.active
                 ? Vector2.Lerp(
-                    rb.velocity + blastbackDirection * shockwaveVelocity.Evaluate(shockwavePositionTimer.value),
+                    rb.velocity + blastbackDirection * shockwaveVelocity.Evaluate(shockwavePositionTimer.value) * shockwaveMagnitude,
                     initialVelocity,
                     shockwavePositionTimer.value)
                 : rb.velocity;

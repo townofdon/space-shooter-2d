@@ -1157,11 +1157,11 @@ MonoBehaviour:
   triggerHoldEasyMod: 0.39
   triggerHoldMediumMod: 0.61
   triggerHoldHardMod: 0.7
-  triggerHoldInsaneMod: 1.26
+  triggerHoldInsaneMod: 1
   triggerReleaseEasyMod: 4.09
   triggerReleaseMediumMod: 3.26
-  triggerReleaseHardMod: 2.02
-  triggerReleaseInsaneMod: 1
+  triggerReleaseHardMod: 2.44
+  triggerReleaseInsaneMod: 1.67
 --- !u!114 &7867457986422667110
 MonoBehaviour:
   m_ObjectHideFlags: 0

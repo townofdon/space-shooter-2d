@@ -53,7 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: _maxHealth
-      value: 100
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModHard
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: healthModInsane
+      value: 1.41
       objectReference: {fileID: 0}
     - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: pickups.pickups.Array.data[1].numItemsToSpawn
@@ -61,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: pickups.pickups.Array.data[1].spawnLikelihood
-      value: 0.729
+      value: 0.603
       objectReference: {fileID: 0}
     - target: {fileID: 3066012647267639334, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Size.x
@@ -105,11 +113,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: triggerHoldTime
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: triggerHoldEasyMod
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: triggerReleaseTime
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: triggerHoldInsaneMod
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: triggerHoldMediumMod
+      value: 0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: triggerReleaseHardMod
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: triggerReleaseMediumMod
+      value: 1.51
       objectReference: {fileID: 0}
     - target: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Name

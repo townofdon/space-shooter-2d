@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Explosion
   m_EditorClassIdentifier: 
   _damageType: 2
-  _baseDamage: 50
+  _baseDamage: 75
   _damageVariance: 10.3
   _shieldEffectiveness: 0.7
-  _shieldedHealthEffectiveness: 0.094
+  _shieldedHealthEffectiveness: 0.062
   _unshieldedHealthEffectiveness: 1
   _playerEffectiveness: 1
   _enemyEffectiveness: 1

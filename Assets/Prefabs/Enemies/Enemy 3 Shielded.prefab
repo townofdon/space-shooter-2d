@@ -19,13 +19,45 @@ PrefabInstance:
       propertyPath: mode
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: triggerHoldEasyMod
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: triggerHoldHardMod
+      value: 1.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: triggerHoldInsaneMod
+      value: 3.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: triggerHoldMediumMod
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: triggerReleaseEasyMod
+      value: 1.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: triggerReleaseHardMod
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: triggerReleaseInsaneMod
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: triggerReleaseMediumMod
+      value: 1.46
+      objectReference: {fileID: 0}
     - target: {fileID: 3410572513304776403, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: aa0504bd2899ade43884cd99cb18898e, type: 3}
     - target: {fileID: 5718039084960973126, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: _maxShield
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5718039084960973126, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: healthModInsane
@@ -33,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5718039084960973126, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: shieldModInsane
-      value: 3
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 8425783821170144702, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: m_RootOrder

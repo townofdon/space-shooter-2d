@@ -95,6 +95,8 @@ namespace Game {
         public void GotoNextLevel() {
             GameManager.isPaused = false;
             Time.timeScale = 1f;
+            AudioManager.current.StopTrack();
+            foreach (var weapon in _weaponClasses) weapon.SetToStartingAmmo();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
@@ -159,6 +161,7 @@ namespace Game {
         void Start() {
             playerState.Init();
             gameState.Init();
+            foreach (var weapon in _weaponClasses) weapon.Reset();
         }
 
         void Update() {

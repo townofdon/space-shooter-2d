@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,8 @@ using Event;
 using Core;
 using Player;
 using Weapons;
+using Game;
+using Audio;
 
 namespace UI {
 
@@ -65,6 +66,9 @@ namespace UI {
         public void ResetDisruptor() { disruptor.Reset(); }
 
         public void WarpToLevel(int level) {
+            GameManager.isPaused = false;
+            Time.timeScale = 1f;
+            AudioManager.current.StopTrack();
             SceneManager.LoadScene(level);
         }
 

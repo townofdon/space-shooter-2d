@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: _damageableType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: pickups.pickups.Array.data[1].numItemsToSpawn
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3066012647267639334, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Size.x
       value: 0.65
@@ -131,6 +135,10 @@ PrefabInstance:
       propertyPath: triggerReleaseTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5359005915781872934, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: triggerReleaseInsaneMod
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 6317388715572867300, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -149,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Name
-      value: Enemy 1 Variant
+      value: Enemy 1
       objectReference: {fileID: 0}
     - target: {fileID: 8402562747196404184, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Size.x

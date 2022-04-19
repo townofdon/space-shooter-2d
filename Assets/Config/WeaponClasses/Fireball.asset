@@ -99,7 +99,7 @@ MonoBehaviour:
       oneShot: 1
   upgrades:
   - _assetClass: Fireball Spread 3
-    _damageMultiplier: 0
+    _damageMultiplier: 1
     _startingAmmo: 0
     _infiniteAmmo: 1
     _reloads: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
       clips: []
       oneShot: 0
   - _assetClass: Fireball Spread 5
-    _damageMultiplier: 0
+    _damageMultiplier: 1
     _startingAmmo: 0
     _infiniteAmmo: 1
     _reloads: 0

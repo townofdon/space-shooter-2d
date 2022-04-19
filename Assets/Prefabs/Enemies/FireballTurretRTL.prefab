@@ -104,7 +104,7 @@ MonoBehaviour:
   healthModEasy: 0.5
   healthModMedium: 1
   healthModHard: 1.74
-  healthModInsane: 3
+  healthModInsane: 5
   shieldModEasy: 1
   shieldModMedium: 1
   shieldModHard: 1
@@ -155,7 +155,7 @@ MonoBehaviour:
     pickups:
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
       numItemsToSpawn: 50
-      spawnLikelihood: 0.9
+      spawnLikelihood: 0.789
   pointsWhenKilledByPlayer: 100
   pointsWhenWoundedByPlayer: 20
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}

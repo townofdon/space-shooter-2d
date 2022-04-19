@@ -19,7 +19,7 @@ namespace Game {
 
     [CreateAssetMenu(fileName = "GameState", menuName = "ScriptableObjects/GameState", order = 0)]
     public class GameStateSO : ScriptableObject {
-        [SerializeField] int _initialPoints = 50;
+        [SerializeField] int _initialPoints = 0;
 
         GameMode _mode;
         [SerializeField] GameDifficulty _difficulty;
