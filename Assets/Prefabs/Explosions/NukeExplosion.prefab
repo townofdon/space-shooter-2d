@@ -14897,8 +14897,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderMultiple: 0.5
   timeCausingDamage: 1.5
-  damageBegin: 200
-  damageEnd: 10
+  damageBegin: 250
+  damageEnd: 50
   damageAtEdge: 0.75
   blastForce: 20
   nukeShockwave: {fileID: 7041673841703532676}

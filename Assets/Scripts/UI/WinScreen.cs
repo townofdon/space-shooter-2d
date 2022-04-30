@@ -103,7 +103,7 @@ namespace UI {
             dismiss = false;
             while (!dismiss) yield return null;
 
-            GameManager.current.GotoMainMenu();
+            GameManager.current.GotoLevelOne();
         }
 
         IEnumerator IShowStat(TextMeshProUGUI field, int value, int acc = 1) {

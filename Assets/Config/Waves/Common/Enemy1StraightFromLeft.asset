@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
-  m_Name: Wave 3 - straight from right
+  m_Name: Enemy1StraightFromLeft
   m_EditorClassIdentifier: 
   _enemies:
-  - _enemyPrefab: {fileID: 490975964535693413, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
-    _spawnLocation: E-0-5
+  - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+    _spawnLocation: W-1-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 5448723158378592738, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
-    _spawnLocation: E-18-5
+  - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+    _spawnLocation: W-19-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 490975964535693413, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
-    _spawnLocation: E-9-5
+  - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+    _spawnLocation: W-10-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 5448723158378592738, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
-    _spawnLocation: E-5-5
+  - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+    _spawnLocation: W-6-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 490975964535693413, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
-    _spawnLocation: E-15-5
+  - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+    _spawnLocation: W-16-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
   _spawnInterval: 0.2
@@ -38,15 +38,15 @@ MonoBehaviour:
   _minSpawnInterval: 0
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
-  _spawnDifficulty: 0
-  launchHeading: {x: -1, y: 0}
+  _spawnDifficulty: 2
+  launchHeading: {x: 1, y: 0}
   headingVariance: 3
   launchVelocity: 5.2
   velocityVariance: 0
   aimTowardsPlayer: 0
   _path: {fileID: 3160559291137630212, guid: ab36157b281d05345b550962cf682f22, type: 3}
   _pathfinderLoopMode: 0
-  _flipX: 1
+  _flipX: 0
   _flipY: 0
   _initialState: {fileID: 0}
   notes: 

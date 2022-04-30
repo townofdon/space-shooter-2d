@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using Core;
+
 namespace Damage
 {
 
@@ -22,8 +24,8 @@ namespace Damage
             actor = GetComponentInParent<DamageableBehaviour>();
             // init
             timeOutsideBounds = 0f;
-            minBounds = Camera.main.ViewportToWorldPoint(new Vector2(0f, 0f)) - (Vector3)Vector2.one * outsideBoundsPadding;
-            maxBounds = Camera.main.ViewportToWorldPoint(new Vector2(1f, 1f)) + (Vector3)Vector2.one * outsideBoundsPadding;
+            minBounds = Utils.GetCamera().ViewportToWorldPoint(new Vector2(0f, 0f)) - (Vector3)Vector2.one * outsideBoundsPadding;
+            maxBounds = Utils.GetCamera().ViewportToWorldPoint(new Vector2(1f, 1f)) + (Vector3)Vector2.one * outsideBoundsPadding;
         }
 
         void Update() {

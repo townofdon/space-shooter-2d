@@ -219,7 +219,7 @@ namespace Damage {
                 return true;
             }
 
-            if (!Utils.IsObjectOnScreen(gameObject, Camera.main, 1f)) return false;
+            if (!Utils.IsObjectOnScreen(gameObject, Utils.GetCamera(), 1f)) return false;
 
             if (_damageableType == DamageableType.ExplodeOnCollision && damageType == DamageType.Collision) {
                 _health = Mathf.Min(0f, _health - amount);

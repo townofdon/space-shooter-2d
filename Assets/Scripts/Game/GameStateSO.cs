@@ -35,11 +35,15 @@ namespace Game {
         public GameDifficulty difficulty => _difficulty;
 
         public void Init() {
+            ResetScores();
+            _mode = GameMode.Battle;
+            _difficulty = GameDifficulty.Medium;
+        }
+
+        public void ResetScores() {
             _pointsInBank = _initialPoints;
             _pointsGained = 0;
             _numEnemiesKilled = 0;
-            _mode = GameMode.Battle;
-            _difficulty = GameDifficulty.Medium;
         }
 
         public void SetMode(GameMode value) {
@@ -60,7 +64,7 @@ namespace Game {
         }
 
         public void LosePoints() {
-            _pointsGained = 0;
+            _pointsGained = (int)(_pointsGained * 0.5f);
         }
 
         public void IncrementEnemiesKilled() {

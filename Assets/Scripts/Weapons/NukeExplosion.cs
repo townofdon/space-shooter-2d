@@ -111,7 +111,7 @@ namespace Weapons
 
         IEnumerator NukeFX() {
             yield return GameFeel.PauseTime(0.15f, 0.1f);
-            yield return GameFeel.ShakeScreen(Camera.main);
+            yield return GameFeel.ShakeScreen(Utils.GetCamera());
         }
     }
 }

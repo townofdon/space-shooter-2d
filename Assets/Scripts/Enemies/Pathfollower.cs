@@ -99,7 +99,7 @@ namespace Enemies {
         void Start() {
             self = Utils.GetRequiredComponent<DamageableBehaviour>(gameObject);
             movement = Utils.GetRequiredComponent<EnemyMovement>(gameObject);
-            (minBounds, maxBounds) = Utils.GetScreenBounds(Camera.main, -1f);
+            (minBounds, maxBounds) = Utils.GetScreenBounds(Utils.GetCamera(), -1f);
             if (path != null && activeAtStart) {
                 SetWaypointsFromPath();
                 Begin();

@@ -181,7 +181,7 @@ namespace Weapons
 
         IEnumerator ISplode(bool quiet = false) {
             // wait a small amount of time to create cascade chain explosions
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             if (sr != null) sr.enabled = false;
             if (anim != null) anim.speed = 0f;
             trippedSound.Stop();

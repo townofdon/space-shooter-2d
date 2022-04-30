@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 using Audio;
@@ -19,6 +20,7 @@ namespace Weapons
         [SerializeField] float lifetime = 10f;
         [SerializeField] Vector3 initialHeading = Vector3.up;
         [SerializeField] float proximityDetonation = 0.5f;
+        [SerializeField] float proximityDelay = 0.15f;
         [SerializeField] float outOfRange = 20f;
 
         [Header("Effects")][Space]
@@ -186,7 +188,7 @@ namespace Weapons
             if (proximityOtherCollider == null) return;
             if (proximityOtherCollider.tag != UTag.EnemyShip && proximityOtherCollider.tag != UTag.EnemyTurret) return;
             // at this point we done tripped the thing
-            OnDeath();
+            StartCoroutine(IOnDeath(proximityDelay));
         }
 
         void OnHit(DamageableType damageableType) {
@@ -209,6 +211,10 @@ namespace Weapons
             Destroy(gameObject);
         }
 
+        IEnumerator IOnDeath(float delay) {
+            yield return new WaitForSeconds(delay);
+            OnDeath();
+        }
 
         private void OnDrawGizmos() {
             if (!debug) return;

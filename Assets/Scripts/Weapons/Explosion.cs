@@ -49,7 +49,7 @@ namespace Weapons
             splosion.Init(this);
             splosion.Play();
             StartCoroutine(GameFeel.ShakeGamepad(0.25f, 0.25f, 0.25f));
-            StartCoroutine(GameFeel.ShakeScreen(Camera.main, 0.1f, 0.1f));
+            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.1f, 0.1f));
             Destroy(gameObject, lifetime);
         }
 
@@ -103,7 +103,7 @@ namespace Weapons
 
         IEnumerator BlowUpRocket(Rocket rocket) {
             // wait a small amount of time in order to create the illusion of chain-reaction explosions
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             rocket.OnDeath();
         }
     }

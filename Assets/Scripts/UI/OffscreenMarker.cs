@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+using Core;
+
 namespace UI
 {
 
@@ -50,12 +52,12 @@ namespace UI
         }
 
         void Start() {
-            minBounds = Camera.main.ViewportToScreenPoint(new Vector2(0f, 0f)) + Vector3.one * padding;
-            maxBounds = Camera.main.ViewportToScreenPoint(new Vector2(1f, 1f)) - Vector3.one * padding;
-            minBoundsWorld = Camera.main.ViewportToWorldPoint(new Vector2(0f, 0f)) - (Vector3)Vector2.one * offscreenDistanceBeforeShowingMarker;
-            maxBoundsWorld = Camera.main.ViewportToWorldPoint(new Vector2(1f, 1f)) + (Vector3)Vector2.one * offscreenDistanceBeforeShowingMarker;
-            screenSize = Camera.main.ViewportToWorldPoint(new Vector2(1f, 1f)) - Camera.main.ScreenToWorldPoint(Vector3.one * padding);
-            aspectRatio = Camera.main.aspect;
+            minBounds = Utils.GetCamera().ViewportToScreenPoint(new Vector2(0f, 0f)) + Vector3.one * padding;
+            maxBounds = Utils.GetCamera().ViewportToScreenPoint(new Vector2(1f, 1f)) - Vector3.one * padding;
+            minBoundsWorld = Utils.GetCamera().ViewportToWorldPoint(new Vector2(0f, 0f)) - (Vector3)Vector2.one * offscreenDistanceBeforeShowingMarker;
+            maxBoundsWorld = Utils.GetCamera().ViewportToWorldPoint(new Vector2(1f, 1f)) + (Vector3)Vector2.one * offscreenDistanceBeforeShowingMarker;
+            screenSize = Utils.GetCamera().ViewportToWorldPoint(new Vector2(1f, 1f)) - Utils.GetCamera().ScreenToWorldPoint(Vector3.one * padding);
+            aspectRatio = Utils.GetCamera().aspect;
             markerPosition = marker.rectTransform.position;
             marker.enabled = false;
             canvas = marker.GetComponentInParent<Canvas>();
@@ -135,7 +137,7 @@ namespace UI
                 float b = (a * target.position.x) / target.position.y;
                 markerPositionWorld = new Vector2(b, a);
             }
-            markerPosition = Camera.main.WorldToScreenPoint(markerPositionWorld);
+            markerPosition = Utils.GetCamera().WorldToScreenPoint(markerPositionWorld);
             marker.rectTransform.position = markerPosition;
             marker.rectTransform.rotation = GetMarkerRotation();
         }

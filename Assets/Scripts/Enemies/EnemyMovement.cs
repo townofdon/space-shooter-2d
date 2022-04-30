@@ -228,7 +228,7 @@ namespace Enemies
 
             movePoints.Clear();
             foreach (Transform location in movePointLocations) movePoints.Add(location.position);
-            (minBounds, maxBounds) = Utils.GetScreenBounds(Camera.main, 2f);
+            (minBounds, maxBounds) = Utils.GetScreenBounds(Utils.GetCamera(), 2f);
         }
 
         void Update() {
@@ -429,7 +429,7 @@ namespace Enemies
             // wobble.position = wobblePosition;
 
             if (wobbler == null) return;
-            if (!Utils.IsObjectOnScreen(gameObject, Camera.main, -1f)) {
+            if (!Utils.IsObjectOnScreen(gameObject, Utils.GetCamera(), -1f)) {
                 wobbler.transform.position = Vector3.zero;
                 wobbler.velocity = Vector3.zero;
                 return;
@@ -463,7 +463,7 @@ namespace Enemies
         }
 
         void AddWobbleForce(Vector2 value, ForceMode2D mode = ForceMode2D.Force) {
-            (Vector2 min, Vector2 max) = Utils.GetScreenBounds(Camera.main, -3f);
+            (Vector2 min, Vector2 max) = Utils.GetScreenBounds(Utils.GetCamera(), -3f);
             if (rb != null) rb.AddForce(value, mode);
             if (wobbler != null) wobbler.AddForce(-value, mode);
         }

@@ -292,7 +292,7 @@ MonoBehaviour:
   secondaryDamageSpriteTargets: []
   perishableObjects: []
   activeAtStart: 1
-  activationDelay: 1
+  activationDelay: 1.5
   tripTime: 0.02
   explosion: {fileID: 547358973900262000, guid: 1191d5bf8165270409cce2311db38d77, type: 3}
   shockwaveVelocity:

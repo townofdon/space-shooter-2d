@@ -148,7 +148,6 @@ namespace Core {
                     Object.Destroy(item.gameObject);
                 }
             }
-
         }
 
         // cached state

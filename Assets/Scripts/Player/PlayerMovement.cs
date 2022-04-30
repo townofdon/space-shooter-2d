@@ -77,8 +77,8 @@ namespace Player {
             input = Utils.GetRequiredComponent<PlayerInputHandler>(gameObject);
             player = Utils.GetRequiredComponent<PlayerGeneral>(gameObject);
             initialDrag = rb.drag;
-            minBounds = Camera.main.ViewportToWorldPoint(new Vector2(0f, 0f));
-            maxBounds = Camera.main.ViewportToWorldPoint(new Vector2(1f, 1f));
+            minBounds = Utils.GetCamera().ViewportToWorldPoint(new Vector2(0f, 0f));
+            maxBounds = Utils.GetCamera().ViewportToWorldPoint(new Vector2(1f, 1f));
             thrustSound.Init(this);
             boostSound.Init(this);
         }

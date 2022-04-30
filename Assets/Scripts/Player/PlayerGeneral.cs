@@ -266,7 +266,7 @@ namespace Player {
 
         IEnumerator HullDamageAnimation() {
             if (damageCoroutine != null) StopCoroutine(damageCoroutine);
-            StartCoroutine(GameFeel.ShakeScreen(Camera.main, 0.15f, 0.05f));
+            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.15f, 0.05f));
             shipFlash.SetActive(true);
             yield return new WaitForSeconds(hitRecoveryTime);
             shipFlash.SetActive(false);
@@ -276,7 +276,7 @@ namespace Player {
 
         IEnumerator DeathAnimation() {
             if (damageCoroutine != null) StopCoroutine(damageCoroutine);
-            StartCoroutine(GameFeel.ShakeScreen(Camera.main, 0.3f, 0.2f));
+            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.3f, 0.2f));
             ship.SetActive(false);
             yield return HullDamageAnimation();
             BreakShipApart();

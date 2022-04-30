@@ -74,11 +74,10 @@ namespace Game {
         public void NewGame() {
             timeElapsed = 0f;
             playerState.Init();
-            gameState.Init();
+            gameState.ResetScores();
         }
 
         public void SetDifficulty(GameDifficulty difficulty) {
-            Debug.Log("Setting difficulty to: " + difficulty);
             gameState.SetDifficulty(difficulty);
         }
 
@@ -107,8 +106,21 @@ namespace Game {
 
         public void GotoMainMenu() {
             OnUnpause();
+            NewGame();
+            ResetWeaponUpgrades();
             AudioManager.current.StopTrack();
             SceneManager.LoadScene("MainMenu");
+        }
+
+        public void GotoLevelOne() {
+            OnUnpause();
+            NewGame();
+            AudioManager.current.StopTrack();
+            if (difficulty == GameDifficulty.Insane) {
+                SceneManager.LoadScene("Level02");
+            } else {
+                SceneManager.LoadScene("Level01");
+            }
         }
 
         public void StartGameTimer() {
@@ -138,7 +150,6 @@ namespace Game {
             eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
             eventChannel.OnPlayerTakeMoney.Subscribe(OnPlayerTakeMoney);
             eventChannel.OnGotoMainMenu.Subscribe(OnGotoMainMenu);
-
         }
 
         void OnDisable() {
@@ -166,8 +177,7 @@ namespace Game {
             timeElapsed = 0f;
             playerState.Init();
             gameState.Init();
-            playerState.ResetGunsUpgrade();
-            foreach (var weapon in _weaponClasses) weapon.Reset();
+            ResetWeaponUpgrades();
         }
 
         void Update() {
@@ -203,6 +213,11 @@ namespace Game {
             }
         }
 
+        void ResetWeaponUpgrades() {
+            playerState.ResetGunsUpgrade();
+            foreach (var weapon in _weaponClasses) weapon.Reset();
+        }
+
         void ImperativelyDestroyAllEnemies(bool isQuiet = false) {
             Enemies.EnemyShip[] enemies = FindObjectsOfType<Enemies.EnemyShip>();
             foreach (var enemy in enemies) {
@@ -224,6 +239,7 @@ namespace Game {
 
         void OnPlayerDeath() {
             playerState.IncrementDeaths();
+            gameState.LosePoints();
             AudioManager.current.PlaySound("ship-death");
             if (ieRespawn != null) StopCoroutine(ieRespawn);
             if (ieWin != null) StopCoroutine(ieWin);
