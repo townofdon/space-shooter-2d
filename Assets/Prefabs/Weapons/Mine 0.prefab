@@ -239,6 +239,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 1
+  shockwaveMagnitude: 1
 --- !u!114 &-2522919158053661408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +269,7 @@ MonoBehaviour:
   _damageableType: 0
   debug: 0
   _invulnerable: 0
+  _timeInvincibleAfterSpawn: 0
   _maxHealth: 1
   _hitRecoveryTime: 0.01
   _nukeRecoveryTime: 0.4
@@ -275,6 +277,14 @@ MonoBehaviour:
   _maxShield: 0
   _shieldWaitTime: 3
   _shieldRechargeTime: 1
+  healthModEasy: 1
+  healthModMedium: 1
+  healthModHard: 1
+  healthModInsane: 1
+  shieldModEasy: 1
+  shieldModMedium: 1
+  shieldModHard: 1
+  shieldModInsane: 1
   defaultMaterial: {fileID: 0}
   damageFlashMaterial: {fileID: 0}
   damageFlashDuration: 0.1
@@ -282,7 +292,7 @@ MonoBehaviour:
   secondaryDamageSpriteTargets: []
   perishableObjects: []
   activeAtStart: 1
-  activationDelay: 0.5
+  activationDelay: 1
   tripTime: 0.02
   explosion: {fileID: 547358973900262000, guid: 1191d5bf8165270409cce2311db38d77, type: 3}
   shockwaveVelocity:

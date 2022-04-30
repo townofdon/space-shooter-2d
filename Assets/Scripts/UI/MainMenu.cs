@@ -129,23 +129,23 @@ namespace UI {
         }
 
         public void OnChooseRedShip() {
-            GameManager.current.SetPlayerShipColor(Player.PlayerShipColor.Red);
+            GameManager.current.SetPlayerShipColor(PlayerShipColor.Red);
             GotoFirstLevel();
         }
 
         public void OnChooseYellowShip() {
-            GameManager.current.SetPlayerShipColor(Player.PlayerShipColor.Yellow);
+            GameManager.current.SetPlayerShipColor(PlayerShipColor.Yellow);
             GotoFirstLevel();
 
         }
 
         public void OnChooseBlueShip() {
-            GameManager.current.SetPlayerShipColor(Player.PlayerShipColor.Blue);
+            GameManager.current.SetPlayerShipColor(PlayerShipColor.Blue);
             GotoFirstLevel();
         }
 
         public void OnChooseGreenShip() {
-            GameManager.current.SetPlayerShipColor(Player.PlayerShipColor.Green);
+            GameManager.current.SetPlayerShipColor(PlayerShipColor.Green);
             GotoFirstLevel();
         }
 
@@ -170,8 +170,7 @@ namespace UI {
 
         void Start() {
             AudioManager.current.PlayTrack("starlord-main-theme");
-            playerState.Init();
-            gameState.Init();
+            GameManager.current.NewGame();
 
             startButton.SetActive(false);
             quitButton.SetActive(false);
@@ -179,6 +178,7 @@ namespace UI {
             canvasLevelStart.SetActive(true);
             canvasChooseDifficultyMenu.SetActive(false);
             canvasChooseShipMenu.SetActive(false);
+
 
             if (ieStart != null) StopCoroutine(ieStart);
             ieStart = StartCoroutine(IStart());
@@ -317,7 +317,7 @@ namespace UI {
 
         IEnumerator IGotoFirstLevel() {
             yield return new WaitForSeconds(timeDelayFirstLevel);
-            GameManager.current.GotoNextLevel();
+            GameManager.current.GotoNextLevel(GameManager.current.difficulty == GameDifficulty.Insane ? 1 : 0);
         }
     }
 }

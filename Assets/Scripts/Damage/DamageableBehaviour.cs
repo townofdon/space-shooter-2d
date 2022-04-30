@@ -212,12 +212,14 @@ namespace Damage {
             if (_invulnerable) return false;
             if (_tempInvulnerable.active) return false;
 
-            if (damageType == DamageType.Instakill) {
+            if (damageType == DamageType.Instakill || damageType == DamageType.InstakillQuiet) {
                 _health = Mathf.Min(0f, _health - amount);
                 _shield = 0f;
                 _Die(damageType, isDamageByPlayer);
                 return true;
             }
+
+            if (!Utils.IsObjectOnScreen(gameObject, Camera.main, 1f)) return false;
 
             if (_damageableType == DamageableType.ExplodeOnCollision && damageType == DamageType.Collision) {
                 _health = Mathf.Min(0f, _health - amount);

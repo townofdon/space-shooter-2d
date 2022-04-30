@@ -15,36 +15,46 @@ MonoBehaviour:
   _enemies:
   - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
     _spawnLocation: 
-    _spawnOffset: {x: 8, y: 0}
-  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
-    _spawnLocation: 
-    _spawnOffset: {x: -5, y: 0}
-  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
-    _spawnLocation: 
-    _spawnOffset: {x: 5, y: 0}
-  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
-    _spawnLocation: 
-    _spawnOffset: {x: -2, y: 0}
-  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
-    _spawnLocation: 
-    _spawnOffset: {x: -1, y: 0}
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
     _spawnLocation: 
-    _spawnOffset: {x: 6, y: 0}
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: -2, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 3, y: 0}
+    _spawnDifficulty: 0
   _spawnInterval: 0.2
   _spawnTimeVariance: 0
   _minSpawnInterval: 0.1
-  _spawnLocation: N-0-5
+  _spawnLocation: N-2-5
   _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 2
   launchHeading: {x: 0, y: -1}
   headingVariance: 0
   launchVelocity: 10
@@ -55,3 +65,4 @@ MonoBehaviour:
   _flipX: 0
   _flipY: 0
   _initialState: {fileID: 0}
+  notes: 

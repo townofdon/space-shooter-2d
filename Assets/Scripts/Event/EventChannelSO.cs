@@ -104,6 +104,7 @@ namespace Event {
         public WeaponUpgradeEventHandler OnUpgradeWeapon = new WeaponUpgradeEventHandler();
 
         public EnemyDeathEventHandler OnEnemyDeath = new EnemyDeathEventHandler();
+        public VoidEventHandler OnEnemySpawn = new VoidEventHandler();
         public BossSpawnEventHandler OnBossSpawn = new BossSpawnEventHandler();
 
         public VoidEventHandler OnGotoMainMenu = new VoidEventHandler();
@@ -120,6 +121,8 @@ namespace Event {
         public VoidEventHandler OnAnyKeyPress = new VoidEventHandler();
 
         public HintEventHandler OnShowHint = new HintEventHandler();
+
+        public VoidEventHandler OnDisableAllSpawners = new VoidEventHandler();
     }
 }
 

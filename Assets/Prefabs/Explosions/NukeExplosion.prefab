@@ -14899,7 +14899,7 @@ MonoBehaviour:
   timeCausingDamage: 1.5
   damageBegin: 200
   damageEnd: 10
-  damageAtEdge: 0.25
+  damageAtEdge: 0.75
   blastForce: 20
   nukeShockwave: {fileID: 7041673841703532676}
   nukeShockwave2: {fileID: 2103412361578673311}

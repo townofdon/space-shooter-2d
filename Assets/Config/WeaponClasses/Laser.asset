@@ -17,7 +17,7 @@ MonoBehaviour:
   _effectiveRange: 10
   _shotSound:
     soundName: LazerShot
-    volume: 0.553
+    volume: 0.44
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     pitchVariance: 0.183
     clips:
     - {fileID: 8300000, guid: 3e81efa7a91939342b3f5fc7ae29fc77, type: 3}
-    oneShot: 1
+    oneShot: 0
   _effectSound:
     soundName: 
     volume: 0.7
@@ -67,6 +67,7 @@ MonoBehaviour:
     _damageMultiplier: 1
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -102,6 +103,7 @@ MonoBehaviour:
     _damageMultiplier: 1.2
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -136,6 +138,7 @@ MonoBehaviour:
     _damageMultiplier: 2
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -170,10 +173,11 @@ MonoBehaviour:
     _damageMultiplier: 4
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 1
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
-    _firingRate: 0.18
+    _firingRate: 0.1
     _burstMax: 0
     _burstInterval: 0.15
     _overheats: 0
@@ -204,10 +208,11 @@ MonoBehaviour:
     _damageMultiplier: 8
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 1
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
-    _firingRate: 0.13
+    _firingRate: 0.075
     _burstMax: 0
     _burstInterval: 0
     _overheats: 0

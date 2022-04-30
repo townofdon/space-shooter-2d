@@ -12,39 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fba42dbb5f93146b81c33b70407bfc, type: 3}
   m_Name: BattleSequence 1
   m_EditorClassIdentifier: 
+  _spawnDifficulty: 2
   battleEvents:
   - skip: 0
-    type: 11
-    eventLabel: 
-    wave: {fileID: 11400000, guid: 95c3554466fafea4789068239a6178ab, type: 2}
-    formation: {fileID: 0}
-    boss: {fileID: 0}
-    arbitraryTime: 4
-    allowableEnemiesLeft: 0
-    arbitraryEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
-    _hint: {fileID: 0}
-    _track: battle-theme
-  - skip: 0
-    type: 13
-    eventLabel: 
-    wave: {fileID: 0}
-    formation: {fileID: 0}
-    boss: {fileID: 0}
-    arbitraryTime: 0
-    allowableEnemiesLeft: 0
-    arbitraryEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
-    _hint: {fileID: 0}
-    _track: 
-  - skip: 0
     type: 0
     eventLabel: 
-    wave: {fileID: 11400000, guid: fa37470d2b6f4d740ab12565202a02bc, type: 2}
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
     arbitraryTime: 0
@@ -52,41 +25,13 @@ MonoBehaviour:
     arbitraryEvent:
       m_PersistentCalls:
         m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
-    _hint: {fileID: 0}
-    _track: 
-  - skip: 0
-    type: 4
-    eventLabel: 
-    wave: {fileID: 11400000, guid: fa37470d2b6f4d740ab12565202a02bc, type: 2}
-    formation: {fileID: 0}
-    boss: {fileID: 0}
-    arbitraryTime: 0
-    allowableEnemiesLeft: 0
-    arbitraryEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
-    _hint: {fileID: 0}
-    _track: 
-  - skip: 0
-    type: 0
-    eventLabel: 
-    wave: {fileID: 11400000, guid: eb1cc47f3eee9bf48a652ab56865967b, type: 2}
-    formation: {fileID: 0}
-    boss: {fileID: 0}
-    arbitraryTime: 0
-    allowableEnemiesLeft: 0
-    arbitraryEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
     _track: 
   - skip: 0
     type: 5
     eventLabel: 
-    wave: {fileID: 11400000, guid: eb1cc47f3eee9bf48a652ab56865967b, type: 2}
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
     arbitraryTime: 0
@@ -94,77 +39,189 @@ MonoBehaviour:
     arbitraryEvent:
       m_PersistentCalls:
         m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
     _track: 
   - skip: 0
     type: 3
     eventLabel: 
-    wave: {fileID: 11400000, guid: eb1cc47f3eee9bf48a652ab56865967b, type: 2}
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
-    arbitraryTime: 4
+    arbitraryTime: 1
     allowableEnemiesLeft: 0
     arbitraryEvent:
       m_PersistentCalls:
         m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
     _track: 
   - skip: 0
     type: 0
     eventLabel: 
-    wave: {fileID: 11400000, guid: 95c3554466fafea4789068239a6178ab, type: 2}
+    wave: {fileID: 11400000, guid: 4ce5ae0a73b34ae4e8b2a3fb42e7bb85, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
-    arbitraryTime: 4
+    arbitraryTime: 0
     allowableEnemiesLeft: 0
     arbitraryEvent:
       m_PersistentCalls:
         m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
     _track: 
   - skip: 0
-    type: 4
+    type: 5
     eventLabel: 
-    wave: {fileID: 11400000, guid: 95c3554466fafea4789068239a6178ab, type: 2}
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
-    arbitraryTime: 4
+    arbitraryTime: 0
     allowableEnemiesLeft: 0
     arbitraryEvent:
       m_PersistentCalls:
         m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
     _track: 
   - skip: 0
-    type: 2
+    type: 3
     eventLabel: 
-    wave: {fileID: 11400000, guid: 95c3554466fafea4789068239a6178ab, type: 2}
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
-    arbitraryTime: 4
+    arbitraryTime: 1
     allowableEnemiesLeft: 0
     arbitraryEvent:
       m_PersistentCalls:
         m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
     _track: 
   - skip: 0
-    type: 15
+    type: 0
     eventLabel: 
-    wave: {fileID: 11400000, guid: 95c3554466fafea4789068239a6178ab, type: 2}
+    wave: {fileID: 11400000, guid: 777be219360180545acc861b9e3b0dbe, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
-    arbitraryTime: 4
+    arbitraryTime: 0
     allowableEnemiesLeft: 0
     arbitraryEvent:
       m_PersistentCalls:
         m_Calls: []
-    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 5
+    eventLabel: 
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 3
+    eventLabel: 
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 1
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 0
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 60977e53a606b7f4dadea55eb7052da1, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 5
+    eventLabel: 
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 3
+    eventLabel: 
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 1
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 0
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 9e62811cffb886d4b93e244a73a1b15a, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 5
+    eventLabel: 
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 0
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 3
+    eventLabel: 
+    wave: {fileID: 11400000, guid: b60de3f4de4e6b5498c10e84d1631571, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 3
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
     _hint: {fileID: 0}
     _track: 
   notes: 

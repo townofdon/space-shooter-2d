@@ -35889,13 +35889,13 @@ MonoBehaviour:
   _shieldWaitTime: 3
   _shieldRechargeTime: 2.5
   healthModEasy: 2
-  healthModMedium: 1
+  healthModMedium: 1.25
   healthModHard: 1
-  healthModInsane: 0.5
+  healthModInsane: 0.75
   shieldModEasy: 2
-  shieldModMedium: 1
+  shieldModMedium: 1.25
   shieldModHard: 1
-  shieldModInsane: 0.25
+  shieldModInsane: 0.8
   defaultMaterial: {fileID: 0}
   damageFlashMaterial: {fileID: 0}
   damageFlashDuration: 0
@@ -36112,6 +36112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabddd98da22e77478c249ebc12e8538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerState: {fileID: 11400000, guid: fa472ff00b3833642af6ce2e7f0e81da, type: 2}
   laser: {fileID: 11400000, guid: 1eed027b1f728ff4eaeb8b6a9b46da46, type: 2}
   machineGun: {fileID: 11400000, guid: 152165e57ca196e46a78a1de221f4ebb, type: 2}
   disruptorRing: {fileID: 11400000, guid: 629baa710498d6f438cdb57bc748cf4f, type: 2}

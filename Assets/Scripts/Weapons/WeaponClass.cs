@@ -46,6 +46,7 @@ namespace Weapons
         [Header("Ammo / Firing")][Space]
         [SerializeField] int _startingAmmo = 0;
         [SerializeField] bool _infiniteAmmo = true;
+        [SerializeField] bool _cycles = false;
         [SerializeField] bool _reloads = false;
         [SerializeField][Range(0f, 10f)] float _reloadTime = 0f;
         [SerializeField] int _magazineCapacity = 0;
@@ -90,6 +91,7 @@ namespace Weapons
         public int burstMax => _burstMax;
         public float burstInterval => _burstInterval;
         public float deploymentTime => _deploymentTime;
+        public bool cycles => _cycles;
         public bool reloads => _reloads;
         public int magazineCapacity => _magazineCapacity;
         public float reloadTime => _reloadTime;
@@ -162,6 +164,7 @@ namespace Weapons
         public int reserveAmmo => GetReserveAmmo();
         public bool hasAmmo => infiniteAmmo || (HasAmmo() && HasAmmoLeftInClip());
         public int firingCycle => _firingCycle;
+        public bool IsCycle(int cycle) { return !current.cycles || _firingCycle % 2 == cycle; }
         public bool deploying => _deploying.active;
         public bool firing => _firing.active;
         public bool reloading => _reloading.active;

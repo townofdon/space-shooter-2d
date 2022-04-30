@@ -35,10 +35,15 @@ namespace Enemies {
         WaveConfigSO currentWave;
         Coroutine currentWaveSpawn;
         Coroutine battle;
+        Coroutine refreshEnemyCount;
 
         // state - boss
         List<int> bossesAlive = new List<int>();
         List<int> bossesAliveTemp = new List<int>();
+
+        public void OnEnemySpawn() {
+            numEnemiesAlive++;
+        }
 
         public void OnEnemyDeath(int instanceId, int points) {
             numEnemiesAlive = Mathf.Max(0, numEnemiesAlive - 1);
@@ -53,10 +58,13 @@ namespace Enemies {
             bossesAlive.Add(instanceId);
         }
 
-        public void BattleFinished() { }
+        public void BattleFinished() {
+            if (refreshEnemyCount != null) StopCoroutine(refreshEnemyCount);
+        }
 
         public void StopBattle() {
             if (battle != null) StopCoroutine(battle);
+            if (refreshEnemyCount != null) StopCoroutine(refreshEnemyCount);
         }
 
         public void DestroyAllEnemiesPresent(bool isQuiet = false) {
@@ -64,14 +72,20 @@ namespace Enemies {
             numEnemiesAlive = 0;
         }
 
+        public void DisableAllSpawners() {
+            eventChannel.OnDisableAllSpawners.Invoke();
+        }
+
         void OnEnable() {
             eventChannel.OnEnemyDeath.Subscribe(OnEnemyDeath);
+            eventChannel.OnEnemySpawn.Subscribe(OnEnemySpawn);
             eventChannel.OnBossSpawn.Subscribe(OnBossSpawn);
             eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
         }
 
         void OnDisable() {
             eventChannel.OnEnemyDeath.Unsubscribe(OnEnemyDeath);
+            eventChannel.OnEnemySpawn.Unsubscribe(OnEnemySpawn);
             eventChannel.OnBossSpawn.Unsubscribe(OnBossSpawn);
             eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
         }
@@ -79,12 +93,14 @@ namespace Enemies {
         void Start() {
             asteroidLauncher = FindObjectOfType<AsteroidLauncher>();
             battle = StartCoroutine(PlayBattle());
+            refreshEnemyCount = StartCoroutine(IRefreshEnemyCount());
         }
 
         IEnumerator PlayBattle() {
             yield return new WaitForSeconds(timeStartDelay);
             do {
                 foreach (var battleSequence in battleSequences) {
+                    if (GameManager.current.difficulty < battleSequence.spawnDifficulty) { battleSequenceIndex++; continue; }
                     battleEventIndex = 0;
                     foreach (var battleEvent in battleSequence.battleEvents) {
                         if (battleEvent.Skip) { battleEventIndex++; continue; }
@@ -106,7 +122,7 @@ namespace Enemies {
                     if (battleEvent.Wave != null) {
                         currentWave = battleEvent.Wave;
                         currentWaveSpawn = StartCoroutine(SpawnEnemies(battleEvent.Wave));
-                        numEnemiesAlive += battleEvent.Wave.enemyCount;
+                        // numEnemiesAlive += battleEvent.Wave.enemyCount;
                     }
                     break;
                 case BattleEventType.Boss:
@@ -130,6 +146,7 @@ namespace Enemies {
                     }
                     break;
                 case BattleEventType.DestroyAllEnemiesPresent:
+                    DisableAllSpawners();
                     DestroyAllEnemiesPresent();
                     break;
                 case BattleEventType.PlayMusic:
@@ -139,6 +156,7 @@ namespace Enemies {
                     AudioManager.current.StopTrack();
                     break;
                 case BattleEventType.ShowDialogue:
+                    DisableAllSpawners();
                     eventChannel.OnShowDialogue.Invoke(battleEvent.dialogueItem);
                     waitingForDialogue = true;
                     while (waitingForDialogue) yield return null;
@@ -160,6 +178,7 @@ namespace Enemies {
                     }
                     break;
                 case BattleEventType.WinLevel:
+                    DisableAllSpawners();
                     eventChannel.OnWinLevel.Invoke(showUpgradePanel);
                     break;
                 default:
@@ -197,7 +216,7 @@ namespace Enemies {
                 enemy.prefab,
                 (enemy.hasSpawnLocation
                     ? wave.ParseSpawnLocation(enemy.spawnLocation) + (Vector2)enemy.spawnOffset
-                    : wave.GetSpawnPosition()
+                    : wave.GetSpawnPosition() + enemy.spawnOffset
                 ),
                 Quaternion.identity,
                 transform
@@ -229,6 +248,23 @@ namespace Enemies {
 
         void OnDismissDialogue() {
             waitingForDialogue = false;
+        }
+
+        IEnumerator IRefreshEnemyCount() {
+            while (true) {
+                yield return new WaitForSeconds(5f);
+                RefreshEnemyCount();
+            }
+        }
+
+        int refreshCount;
+        void RefreshEnemyCount() {
+            if (battle == null) return;
+            refreshCount = 0;
+            foreach (EnemyShip enemy in FindObjectsOfType<EnemyShip>()) {
+                if (enemy.isAlive && enemy.isActiveAndEnabled) refreshCount++;
+            }
+            numEnemiesAlive = refreshCount;
         }
 
         void OnGUI() {

@@ -23,6 +23,9 @@ namespace UI {
         [SerializeField] EventSystem eventSystem;
 
         [Space]
+        [SerializeField] int gunsUpgradeCost = 20000;
+
+        [Space]
         [SerializeField] WeaponClass machineGun;
         [SerializeField] WeaponClass laser;
         [SerializeField] WeaponClass missiles;
@@ -37,24 +40,28 @@ namespace UI {
         [SerializeField] TextMeshProUGUI textNameLaser;
         [SerializeField] TextMeshProUGUI textNameMissiles;
         [SerializeField] TextMeshProUGUI textNameDisruptor;
+        [SerializeField] TextMeshProUGUI textNameGuns;
 
         [Space]
         [SerializeField] TextMeshProUGUI textClassPDC;
         [SerializeField] TextMeshProUGUI textClassLaser;
         [SerializeField] TextMeshProUGUI textClassMissiles;
         [SerializeField] TextMeshProUGUI textClassDisruptor;
+        [SerializeField] TextMeshProUGUI textClassGuns;
 
         [Space]
         [SerializeField] TextMeshProUGUI textCostPDC;
         [SerializeField] TextMeshProUGUI textCostLaser;
         [SerializeField] TextMeshProUGUI textCostMissiles;
         [SerializeField] TextMeshProUGUI textCostDisruptor;
+        [SerializeField] TextMeshProUGUI textCostGuns;
 
         [Space]
         [SerializeField] Button buttonUpgradePDC;
         [SerializeField] Button buttonUpgradeLaser;
         [SerializeField] Button buttonUpgradeMissiles;
         [SerializeField] Button buttonUpgradeDisruptor;
+        [SerializeField] Button buttonUpgradeGuns;
 
         [Space]
         [SerializeField] Color maxxedColor;
@@ -63,6 +70,7 @@ namespace UI {
         UIButton uiButtonUpgradeLaser;
         UIButton uiButtonUpgradeMissiles;
         UIButton uiButtonUpgradeDisruptor;
+        UIButton uiButtonUpgradeGuns;
 
         InputSystemUIInputModule uiModule;
 
@@ -114,6 +122,16 @@ namespace UI {
             }
         }
 
+        public void UpgradeGuns() {
+            if (gunsUpgradeCost <= playerState.totalMoney) {
+                playerState.SpendMoney(gunsUpgradeCost);
+                playerState.UpgradeGuns();
+                AudioManager.current.PlaySound("upgrade-gun-slots");
+            } else {
+                AudioManager.current.PlaySound("upgrade-error");
+            }
+        }
+
         void OnEnable() {
             eventChannel.OnShowUpgradePanel.Subscribe(OnShowUpgradePanel);
         }
@@ -137,21 +155,25 @@ namespace UI {
             AppIntegrity.AssertPresent(textCostLaser);
             AppIntegrity.AssertPresent(textCostMissiles);
             AppIntegrity.AssertPresent(textCostDisruptor);
+            AppIntegrity.AssertPresent(textCostGuns);
 
             AppIntegrity.AssertPresent(textClassPDC);
             AppIntegrity.AssertPresent(textClassLaser);
             AppIntegrity.AssertPresent(textClassMissiles);
             AppIntegrity.AssertPresent(textClassDisruptor);
+            AppIntegrity.AssertPresent(textClassGuns);
 
             AppIntegrity.AssertPresent(buttonUpgradePDC);
             AppIntegrity.AssertPresent(buttonUpgradeLaser);
             AppIntegrity.AssertPresent(buttonUpgradeMissiles);
             AppIntegrity.AssertPresent(buttonUpgradeDisruptor);
+            AppIntegrity.AssertPresent(buttonUpgradeGuns);
 
             uiButtonUpgradePDC = new UIButton(buttonUpgradePDC);
             uiButtonUpgradeLaser = new UIButton(buttonUpgradeLaser);
             uiButtonUpgradeMissiles = new UIButton(buttonUpgradeMissiles);
             uiButtonUpgradeDisruptor = new UIButton(buttonUpgradeDisruptor);
+            uiButtonUpgradeGuns = new UIButton(buttonUpgradeGuns);
         }
 
         void Update() {
@@ -167,16 +189,19 @@ namespace UI {
             textClassLaser.text = laser.assetClass;
             textClassMissiles.text = missiles.assetClass;
             textClassDisruptor.text = disruptor.assetClass;
+            textClassGuns.text = playerState.hasGunsUpgrade ? "Destructoid" : "Stock";
 
             textCostPDC.text = machineGun.CanUpgrade ? machineGun.CostNextUpgrade.ToString() + " CR" : "-";
             textCostLaser.text = laser.CanUpgrade ? laser.CostNextUpgrade.ToString() + " CR" : "-";
             textCostMissiles.text = missiles.CanUpgrade ? missiles.CostNextUpgrade.ToString() + " CR" : "-";
             textCostDisruptor.text = disruptor.CanUpgrade ? disruptor.CostNextUpgrade.ToString() + " CR" : "-";
+            textCostGuns.text = !playerState.hasGunsUpgrade ? gunsUpgradeCost.ToString() + " CR" : "-";
 
             EnablifyWeaponButton(machineGun, uiButtonUpgradePDC);
             EnablifyWeaponButton(laser, uiButtonUpgradeLaser);
             EnablifyWeaponButton(missiles, uiButtonUpgradeMissiles);
             EnablifyWeaponButton(disruptor, uiButtonUpgradeDisruptor);
+            EnablifyUpgradeGunsButton(uiButtonUpgradeGuns);
 
             anyMaxxedOut = !machineGun.CanUpgrade || !laser.CanUpgrade || !missiles.CanUpgrade || !disruptor.CanUpgrade;
 
@@ -186,10 +211,11 @@ namespace UI {
                 textMaxxedOut.enabled = false;
             }
 
-            MaxxifyText(machineGun, textNamePDC, textClassPDC);
-            MaxxifyText(laser, textNameLaser, textClassLaser);
-            MaxxifyText(missiles, textNameMissiles, textClassMissiles);
-            MaxxifyText(disruptor, textNameDisruptor, textClassDisruptor);
+            MaxxifyText(machineGun.CanUpgrade, textNamePDC, textClassPDC);
+            MaxxifyText(laser.CanUpgrade, textNameLaser, textClassLaser);
+            MaxxifyText(missiles.CanUpgrade, textNameMissiles, textClassMissiles);
+            MaxxifyText(disruptor.CanUpgrade, textNameDisruptor, textClassDisruptor);
+            MaxxifyText(!playerState.hasGunsUpgrade, textNameGuns, textClassGuns);
         }
 
         // yeah, the refactor is here waiting for ya
@@ -205,8 +231,16 @@ namespace UI {
             }
         }
 
-        void MaxxifyText(WeaponClass weapon, TextMeshProUGUI elem1, TextMeshProUGUI elem2) {
-            if (!weapon.CanUpgrade) {
+        void EnablifyUpgradeGunsButton(UIButton button) {
+            if (!playerState.hasGunsUpgrade && gunsUpgradeCost <= playerState.totalMoney) {
+                button.Enable();
+            } else {
+                button.Disable();
+            }
+        }
+
+        void MaxxifyText(bool canUpgrade, TextMeshProUGUI elem1, TextMeshProUGUI elem2) {
+            if (!canUpgrade) {
                 elem1.color = maxxedColor;
                 elem2.color = maxxedColor;
             }

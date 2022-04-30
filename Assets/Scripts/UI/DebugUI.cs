@@ -14,6 +14,7 @@ using Audio;
 namespace UI {
 
     public class DebugUI : MonoBehaviour {
+        [SerializeField] PlayerStateSO playerState;
         [SerializeField] EventChannelSO eventChannel;
         [SerializeField] List<Button> buttons;
         [SerializeField] GameObject canvas;
@@ -31,6 +32,7 @@ namespace UI {
         [SerializeField] TextMeshProUGUI textLevelLaser;
         [SerializeField] TextMeshProUGUI textLevelMissiles;
         [SerializeField] TextMeshProUGUI textLevelDisruptor;
+        [SerializeField] TextMeshProUGUI textLevelGuns;
 
         [SerializeField] TextMeshProUGUI textClassPDC;
         [SerializeField] TextMeshProUGUI textClassLaser;
@@ -64,6 +66,9 @@ namespace UI {
 
         public void UpgradeDisruptor() { disruptor.Upgrade(); }
         public void ResetDisruptor() { disruptor.Reset(); }
+
+        public void UpgradeGuns() { playerState.UpgradeGuns(); }
+        public void ResetGuns() { playerState.ResetGunsUpgrade(); }
 
         public void WarpToLevel(int level) {
             GameManager.isPaused = false;
@@ -135,6 +140,7 @@ namespace UI {
             textLevelLaser.text = laser.upgradeLevel.ToString();
             textLevelMissiles.text = missiles.upgradeLevel.ToString();
             textLevelDisruptor.text = disruptor.upgradeLevel.ToString();
+            textLevelGuns.text = playerState.hasGunsUpgrade ? "TRUE" : "FALSE";
 
             textClassPDC.text = machineGun.assetClass;
             textClassLaser.text = laser.assetClass;

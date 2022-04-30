@@ -56,13 +56,24 @@ namespace Enemies {
             if (ieShootAtPlayer != null) ieShootAtPlayer = StartCoroutine(IShootAtPlayer());
         }
 
+        void OnEnable() {
+            enemy.OnDeathEvent += OnDeath;
+        }
+
+        void OnDisable() {
+            enemy.OnDeathEvent -= OnDeath;
+        }
+
+        void Awake() {
+            enemy = GetComponent<EnemyShip>();
+        }
+
         void Start() {
             if (disruptorRing != null) {
                 disruptorRingCollider = disruptorRing.GetComponent<CircleCollider2D>();
                 if (disruptorRingCollider != null) disruptorRingRadius = disruptorRingCollider.radius;
             }
             player = PlayerUtils.FindPlayer();
-            enemy = GetComponent<EnemyShip>();
             disruptorSound.Init(this);
             if (attackOnStart) ieShootAtPlayer = StartCoroutine(IShootAtPlayer());
         }
@@ -73,11 +84,20 @@ namespace Enemies {
             disruptorHold.Tick();
         }
 
+        void OnDeath() {
+            EntitySpawner[] spawners = transform.parent.GetComponentsInChildren<EntitySpawner>();
+            foreach (var spawner in spawners) {
+                spawner.KillCurrent();
+                spawner.Disable();
+            }
+        }
+
         void FixedUpdate() {
             HandleCirclecast();
         }
 
         void HandleCirclecast() {
+            if (enemy == null || !enemy.isAlive) return;
             Collider2D[] otherColliders = Physics2D.OverlapCircleAll(transform.position, disruptorRingRadius);
             foreach (var other in otherColliders) {
                 if (other.tag != UTag.Mine && other.tag != UTag.Missile && other.tag != UTag.Nuke && other.tag != UTag.Asteroid) return;

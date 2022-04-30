@@ -15,3 +15,4 @@ MonoBehaviour:
   _initialHealth: 50
   _initialShield: 100
   _initialMoney: 0
+  _hasGunsUpgrade: 1

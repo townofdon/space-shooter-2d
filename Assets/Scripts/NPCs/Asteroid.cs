@@ -5,6 +5,7 @@ using UnityEngine;
 using Core;
 using Damage;
 using Audio;
+using Pickups;
 
 namespace NPCs
 {
@@ -18,6 +19,10 @@ namespace NPCs
         [SerializeField] List<GameObject> pieces = new List<GameObject>();
         [SerializeField] ParticleSystem explodeFX;
         [SerializeField] Sound rockExplodeSound;
+
+        [Header("Pickups")]
+        [Space]
+        [SerializeField] PickupsSpawnConfig pickups;
 
         // cached
         SpriteRenderer sr;
@@ -44,6 +49,7 @@ namespace NPCs
             rb.angularVelocity = 0f;
             if (damageType != DamageType.Instakill && damageType != DamageType.InstakillQuiet) {
                 SpawnDebris();
+                pickups.Spawn(transform.position, rb);
             }
             if (damageType != DamageType.InstakillQuiet) {
                 rockExplodeSound.Play();

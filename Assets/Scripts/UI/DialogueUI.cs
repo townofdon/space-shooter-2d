@@ -18,6 +18,7 @@ namespace UI {
         [SerializeField] TextMeshProUGUI textAnnouncer;
         [SerializeField] TextMeshProUGUI textStatement;
         [SerializeField] TextMeshProUGUI textPressAnyKey;
+        [SerializeField] float inputDelay = 0.25f;
 
         // state
         bool isShowing = false;
@@ -27,6 +28,7 @@ namespace UI {
         DialogueItemSO currentItem;
         Coroutine ieShowing;
         Coroutine ieHiding;
+        Timer justAppeared = new Timer();
 
         private void OnEnable() {
             eventChannel.OnShowDialogue.Subscribe(OnShowDialogue);
@@ -47,19 +49,21 @@ namespace UI {
             AppIntegrity.AssertPresent(textPressAnyKey);
 
             canvas.SetActive(false);
+            justAppeared.SetDuration(inputDelay);
         }
 
-
         void Update() {
-
+            justAppeared.Tick();
         }
 
         void OnShowDialogue(DialogueItemSO dialogueItem) {
+            justAppeared.Start();
             currentItem = dialogueItem;
             ieShowing = StartCoroutine(IShowDialogue());
         }
 
         void OnAnyKeyPress() {
+            if (justAppeared.active) return;
             dismiss = true;
         }
 

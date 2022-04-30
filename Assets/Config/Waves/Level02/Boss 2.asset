@@ -16,11 +16,13 @@ MonoBehaviour:
   - _enemyPrefab: {fileID: 5448723158378592738, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
-  _spawnInterval: 5
+    _spawnDifficulty: 0
+  _spawnInterval: 2
   _spawnTimeVariance: 0.23
   _minSpawnInterval: 0.5
   _spawnLocation: N-12-5
   _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 0
   launchHeading: {x: 0, y: -1}
   headingVariance: 0
   launchVelocity: 12
@@ -31,3 +33,4 @@ MonoBehaviour:
   _flipX: 0
   _flipY: 0
   _initialState: {fileID: 0}
+  notes: 

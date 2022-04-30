@@ -810,8 +810,8 @@ MonoBehaviour:
   - {fileID: 4502822571183817723, guid: b76260f37ffc4834daf1e153b8794375, type: 3}
   debug: 0
   turnSpeed: 8
-  moveSpeed: 5
-  accel: 10
+  moveSpeed: 6
+  accel: 11
   jukes: 0
   jukeTargetedTime: 0
   jukeTargetedVariance: 0

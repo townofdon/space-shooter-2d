@@ -51,11 +51,16 @@ namespace Enemies {
         // state
         bool everDamagedByPlayer = false;
         bool didNotifyBossSpawn = false;
+        bool didNotifyEnemySpawn = false;
 
         void OnEnable() {
-            if ((isBoss || tag == UTag.Boss) && !didNotifyBossSpawn) {
+            if (isAlive && (isBoss || tag == UTag.Boss) && !didNotifyBossSpawn) {
                 didNotifyBossSpawn = true;
                 eventChannel.OnBossSpawn.Invoke(instanceId);
+            }
+            if (isAlive && !didNotifyEnemySpawn) {
+                didNotifyEnemySpawn = true;
+                eventChannel.OnEnemySpawn.Invoke();
             }
         }
 

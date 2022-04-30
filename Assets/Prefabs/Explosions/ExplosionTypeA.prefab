@@ -9803,7 +9803,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.5
 --- !u!198 &547358973900262005
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14663,10 +14663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa6032e1e5d19c4b9624e6e38787f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeCausingDamage: 0.5
-  damageBegin: 100
-  damageEnd: 10
-  damageAtEdge: 0.75
+  timeCausingDamage: 0.2
+  damageBegin: 130
+  damageEnd: 20
+  damageAtEdge: 0.9
   blastForce: 5
   lifetime: 10
   splosion:

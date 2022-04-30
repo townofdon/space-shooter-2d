@@ -25,7 +25,7 @@ MonoBehaviour:
     _spawnLocation: N-8-3
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  _spawnInterval: 0
+  _spawnInterval: 0.1
   _spawnTimeVariance: 0
   _minSpawnInterval: 0
   _spawnLocation: 

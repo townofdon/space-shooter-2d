@@ -172,6 +172,7 @@ namespace Player {
             GameObject obj = Object.Instantiate(boostWaves, transform.position, rotation);
             obj.transform.position += (Vector3)rb.velocity.normalized * 0.5f;
             obj.GetComponent<Rigidbody2D>().velocity = -rb.velocity * 0.01f;
+            Destroy(obj, 5f);
         }
 
         float GetThrustComponent(float value, float componentVelocity) {

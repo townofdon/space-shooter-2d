@@ -130,7 +130,6 @@ namespace Weapons {
             for (int i = 0; i < numResults; i++) {
                 if (IsIgnoredCollider(raycastHits[i].collider)) continue;
                 if (raycastHits[i].collider.tag == UTag.Bullet || raycastHits[i].collider.tag == UTag.Laser) continue;
-                Debug.Log(raycastHits[i].collider.tag);
                 return Vector2.Distance(raycastHits[i].collider.transform.position, transform.position);
             }
             return 40f;

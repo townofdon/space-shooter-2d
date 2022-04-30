@@ -110,8 +110,10 @@ namespace Battle {
             switch ((BattleEventType)type.enumValueIndex) {
                 case BattleEventType.Wave:
                     EditorGUI.PropertyField(c2, wave, GUIContent.none);
-                    GameDifficulty difficulty = ((Enemies.WaveConfigSO)wave.objectReferenceValue).spawnDifficulty;
-                    EditorGUI.LabelField(posDif, System.Enum.GetName(typeof(GameDifficulty), difficulty));
+                    if (wave != null && wave.objectReferenceValue != null) {
+                        GameDifficulty difficulty = ((Enemies.WaveConfigSO)wave.objectReferenceValue).spawnDifficulty;
+                        EditorGUI.LabelField(posDif, System.Enum.GetName(typeof(GameDifficulty), difficulty));
+                    }
                     break;
                 case BattleEventType.Boss:
                     EditorGUI.PropertyField(c2, boss, GUIContent.none);

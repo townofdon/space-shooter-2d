@@ -71,6 +71,12 @@ namespace Game {
             Utils.CleanupSingleton<GameManager>(_current);
         }
 
+        public void NewGame() {
+            timeElapsed = 0f;
+            playerState.Init();
+            gameState.Init();
+        }
+
         public void SetDifficulty(GameDifficulty difficulty) {
             Debug.Log("Setting difficulty to: " + difficulty);
             gameState.SetDifficulty(difficulty);
@@ -92,17 +98,15 @@ namespace Game {
             eventChannel.OnShowUpgradePanel.Invoke();
         }
 
-        public void GotoNextLevel() {
-            GameManager.isPaused = false;
-            Time.timeScale = 1f;
+        public void GotoNextLevel(int skip = 0) {
+            OnUnpause();
             AudioManager.current.StopTrack();
             foreach (var weapon in _weaponClasses) weapon.SetToStartingAmmo();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + skip);
         }
 
         public void GotoMainMenu() {
-            GameManager.isPaused = false;
-            Time.timeScale = 1f;
+            OnUnpause();
             AudioManager.current.StopTrack();
             SceneManager.LoadScene("MainMenu");
         }
@@ -159,8 +163,10 @@ namespace Game {
         }
 
         void Start() {
+            timeElapsed = 0f;
             playerState.Init();
             gameState.Init();
+            playerState.ResetGunsUpgrade();
             foreach (var weapon in _weaponClasses) weapon.Reset();
         }
 
@@ -298,11 +304,20 @@ namespace Game {
             player.SetInvulnerable(true);
             eventChannel.OnHideVictory.Invoke();
             AudioManager.current.PlaySound("ship-whoosh");
+
+            // This could DEFINITELY be refactored... basically this covers the edge case where the player dies during the win level event.
+            // We need this coroutine to continually search for the player in this case.
             PlayerInputHandler inputHandler = player.GetComponent<PlayerInputHandler>();
-            while (Utils.IsObjectOnScreen(player.gameObject)) {
-                inputHandler.SetMode(PlayerInputControlMode.GameBrain);
-                inputHandler.SetAutoMoveTarget(playerExitTarget);
-                yield return null;
+            while (player == null || !player.isAlive || Utils.IsObjectOnScreen(player.gameObject)) {
+                if (player != null && player.isAlive) {
+                    inputHandler.SetMode(PlayerInputControlMode.GameBrain);
+                    inputHandler.SetAutoMoveTarget(playerExitTarget);
+                    yield return null;
+                } else {
+                    player = PlayerUtils.FindPlayer();
+                    if (player != null) inputHandler = player.GetComponent<PlayerInputHandler>();
+                    yield return null;
+                }
             }
 
             PlayerMovement movement = player.GetComponent<PlayerMovement>();

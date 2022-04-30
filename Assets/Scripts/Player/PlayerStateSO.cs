@@ -22,6 +22,7 @@ namespace Player {
         [SerializeField] float _initialHealth = 50f;
         [SerializeField] float _initialShield = 100f;
         [SerializeField] int _initialMoney = 500;
+        [SerializeField] bool _hasGunsUpgrade = false;
 
         PlayerInputControlMode _controlMode;
         PlayerShipColor _shipColor;
@@ -37,6 +38,7 @@ namespace Player {
         public float maxShield => _maxShield;
         public int totalMoney => _moneyInBank + _moneyGained;
         public int numDeaths => _numDeaths;
+        public bool hasGunsUpgrade => _hasGunsUpgrade;
 
         public void Init() {
             _maxHealth = _initialHealth;
@@ -59,6 +61,14 @@ namespace Player {
             _shipColor = value;
         }
 
+        public void ResetGunsUpgrade() {
+            _hasGunsUpgrade = false;
+        }
+
+        public void UpgradeGuns() {
+            _hasGunsUpgrade = true;
+        }
+
         public void UpgradeHealth(float value) {
             _maxHealth = Mathf.Max(_maxHealth, value);
         }
@@ -78,7 +88,9 @@ namespace Player {
 
         public void SpendMoney(int value) {
             _moneyGained -= value;
+            if (_moneyGained < 0) _moneyInBank += _moneyGained;
             _moneyGained = Mathf.Max(_moneyGained, 0);
+            _moneyInBank = Mathf.Max(_moneyInBank, 0);
         }
 
         public void LoseMoney() {

@@ -20,7 +20,6 @@ namespace Physics {
         float distanceToPlayer = 100f;
 
         // state
-        Timer findPlayerInterval = new Timer(TimerDirection.Decrement, TimerStep.FixedDeltaTime);
         Vector2 attraction;
 
         void Start() {
@@ -28,18 +27,14 @@ namespace Physics {
             initialDrag = rb.drag;
             player = GameObject.FindGameObjectWithTag(UTag.Player);
             if (player != null) playerGeneral = player.GetComponentInParent<PlayerGeneral>();
-            findPlayerInterval.SetDuration(0.1f);
         }
 
         void FixedUpdate() {
-            if (player == null || playerGeneral == null) {
-                if (findPlayerInterval.active) return;
-                findPlayerInterval.Start();
-                player = GameObject.FindGameObjectWithTag(UTag.Player);
-                if (player != null) playerGeneral = player.GetComponentInParent<PlayerGeneral>();
+            if (player == null || playerGeneral == null || !playerGeneral.isAlive) {
+                playerGeneral = PlayerUtils.FindPlayer();
+                if (playerGeneral != null) player = playerGeneral.gameObject;
             }
             Attract();
-            findPlayerInterval.Tick();
         }
 
         void Attract() {
@@ -61,7 +56,7 @@ namespace Physics {
         }
 
         Vector2 getAttractionVector() {
-            if (player == null) return Vector2.zero;
+            if (player == null || playerGeneral == null || !playerGeneral.isAlive) return Vector2.zero;
             if (distanceToPlayer > attractRadius) return Vector2.zero;
             float force = (9.81f * accelMod) / Mathf.Pow(distanceToPlayer, 2f);
             return (player.transform.position - transform.position).normalized * force;

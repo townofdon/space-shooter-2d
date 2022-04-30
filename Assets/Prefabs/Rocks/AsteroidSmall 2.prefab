@@ -134,16 +134,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageableType: 4
   debug: 0
+  _invulnerable: 0
+  _timeInvincibleAfterSpawn: 0
   _maxHealth: 20
   _hitRecoveryTime: 0.02
+  _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
   _maxShield: 0
   _shieldWaitTime: 3
   _shieldRechargeTime: 1
+  healthModEasy: 1
+  healthModMedium: 1
+  healthModHard: 1
+  healthModInsane: 1
+  shieldModEasy: 1
+  shieldModMedium: 1
+  shieldModHard: 1
+  shieldModInsane: 1
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   damageFlashMaterial: {fileID: 2100000, guid: b7880cc0511879b44beb7d60a1f37f63, type: 2}
   damageFlashDuration: 0.1
   damageSpriteTarget: {fileID: 3779440292081912993}
+  secondaryDamageSpriteTargets: []
+  perishableObjects: []
   startRotation: 360
   pieces: []
   explodeFX: {fileID: 4591862536936171469}
@@ -164,6 +177,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4352aefd54665c440abb0747071e8b02, type: 3}
     - {fileID: 8300000, guid: 93bd3ee9788e0f946bc52d9616bd2f4f, type: 3}
     oneShot: 1
+  pickups:
+    pickups:
+    - pickupPrefab: {fileID: 7348726175182028151, guid: b638c9b2738a1c54499d272fd277b6f9, type: 3}
+      numItemsToSpawn: 1
+      spawnLikelihood: 0.015
+    - pickupPrefab: {fileID: 1934952187741605194, guid: 5ba46c8e72fcc7c4689dac85689111d4, type: 3}
+      numItemsToSpawn: 1
+      spawnLikelihood: 0.111
 --- !u!114 &-5229191268552919587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +222,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 1
+  shockwaveMagnitude: 1.5
 --- !u!114 &-310290028536169065
 MonoBehaviour:
   m_ObjectHideFlags: 0

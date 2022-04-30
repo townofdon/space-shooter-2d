@@ -13,6 +13,7 @@ namespace Game {
         [SerializeField] string levelName;
         [SerializeField] GameObject transitionCanvas;
         [SerializeField] TextMeshProUGUI levelTitle;
+        [SerializeField] bool ShowTitleScreen = true;
 
         Coroutine ieLevelStart;
 
@@ -22,11 +23,13 @@ namespace Game {
         }
 
         IEnumerator ILevelStart() {
-            AudioManager.current.PlayTrack(musicTrack);
-            levelTitle.text = levelName;
-            transitionCanvas.SetActive(true);
-            yield return new WaitForSeconds(2f);
-            transitionCanvas.SetActive(false);
+            if (musicTrack != "") AudioManager.current.PlayTrack(musicTrack);
+            if (ShowTitleScreen) {
+                levelTitle.text = levelName;
+                transitionCanvas.SetActive(true);
+                yield return new WaitForSeconds(2f);
+                transitionCanvas.SetActive(false);
+            }
             GameManager.current.StartGameTimer();
             GameManager.current.RespawnPlayerShip();
             PlayerUtils.InvalidateCache();

@@ -366,6 +366,21 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 74742596661baf742a8c7d254db08635, type: 3}
     oneShot: 0
+  - soundName: upgrade-gun-slots
+    volume: 0.3
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    volumeVariance: 0.05
+    pitchVariance: 0.05
+    clips:
+    - {fileID: 8300000, guid: 716ddc1a95d33ae41b17b49121f15f69, type: 3}
+    oneShot: 0
   tracks:
   - soundName: starlord-main-theme
     volume: 1

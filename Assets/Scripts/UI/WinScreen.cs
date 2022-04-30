@@ -17,6 +17,7 @@ namespace UI {
         [SerializeField] PlayerStateSO playerState;
         [SerializeField] GameObject canvas;
         [SerializeField] GameObject textPressAnyKey;
+        [SerializeField] Dialogue.HintSO upgradeHint;
 
         [Space]
 
@@ -45,7 +46,7 @@ namespace UI {
         int totalPoints => debug ? 123456 : gameState.totalPoints;
         int numEnemiesKilled => debug ? 123 : gameState.numEnemiesKilled;
         int numPlayerDeaths => debug ? 42 : playerState.numDeaths;
-        float timeElapsed => debug ? 300 : GameManager.current.timeElapsed;
+        float timeElapsed => debug ? 333 : GameManager.current.timeElapsed;
 
         private void OnEnable() {
             eventChannel.OnAnyKeyPress.Subscribe(OnAnyKeyPress);
@@ -95,6 +96,8 @@ namespace UI {
 
             yield return new WaitForSeconds(timeDelayPressAnyKey);
 
+            eventChannel.OnShowHint.Invoke(upgradeHint, "Keyboard&Mouse");
+
             AudioManager.current.PlaySound("DialogueChip");
             textPressAnyKey.SetActive(true);
             dismiss = false;
@@ -108,9 +111,9 @@ namespace UI {
             num = 0;
             AudioManager.current.PlaySound("DialogueChip");
             while (!dismiss && num < value) {
-                field.text = num.ToString();
                 AudioManager.current.PlaySound("DialogueChip");
                 num = Mathf.Min(num + acc, value);
+                field.text = num.ToString();
                 yield return new WaitForSeconds(0.02f);
             }
             dismiss = false;
@@ -121,9 +124,9 @@ namespace UI {
             fNum = 0;
             AudioManager.current.PlaySound("DialogueChip");
             while (!dismiss && fNum < value) {
-                field.text = Utils.ToTimeString(fNum);
                 AudioManager.current.PlaySound("DialogueChip");
                 fNum = Mathf.Min(fNum + 10f, value);
+                field.text = Utils.ToTimeString(fNum);
                 yield return new WaitForSeconds(0.02f);
             }
             dismiss = false;

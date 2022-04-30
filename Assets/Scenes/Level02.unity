@@ -828,6 +828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleSequences:
   - {fileID: 11400000, guid: 6ac7a5ecd8e4ac649a7c62b0090aa2f3, type: 2}
+  - {fileID: 11400000, guid: e3d60541283e70b429ee3932c63d44b0, type: 2}
   - {fileID: 11400000, guid: bb3469b1d3761c045ab6545aa6cae912, type: 2}
   timeStartDelay: 3
   showUpgradePanel: 1

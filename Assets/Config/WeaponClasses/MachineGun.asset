@@ -68,6 +68,7 @@ MonoBehaviour:
     _damageMultiplier: 1
     _startingAmmo: 400
     _infiniteAmmo: 0
+    _cycles: 1
     _reloads: 1
     _reloadTime: 1.5
     _magazineCapacity: 50
@@ -103,6 +104,7 @@ MonoBehaviour:
     _damageMultiplier: 1.1
     _startingAmmo: 500
     _infiniteAmmo: 0
+    _cycles: 1
     _reloads: 1
     _reloadTime: 1.4
     _magazineCapacity: 60
@@ -137,6 +139,7 @@ MonoBehaviour:
     _damageMultiplier: 1.25
     _startingAmmo: 600
     _infiniteAmmo: 0
+    _cycles: 1
     _reloads: 1
     _reloadTime: 1
     _magazineCapacity: 70
@@ -172,6 +175,7 @@ MonoBehaviour:
     _damageMultiplier: 1.5
     _startingAmmo: 800
     _infiniteAmmo: 0
+    _cycles: 1
     _reloads: 1
     _reloadTime: 1
     _magazineCapacity: 80
@@ -207,6 +211,7 @@ MonoBehaviour:
     _damageMultiplier: 3
     _startingAmmo: 1000
     _infiniteAmmo: 1
+    _cycles: 1
     _reloads: 1
     _reloadTime: 0.5
     _magazineCapacity: 100

@@ -12,6 +12,10 @@ namespace Player
 
     public class PlayerWeapons : MonoBehaviour
     {
+        [SerializeField] PlayerStateSO playerState;
+
+        [Space]
+
         [Header("Weapon Classes")][Space]
         [SerializeField] WeaponClass laser;
         [SerializeField] WeaponClass machineGun;
@@ -104,6 +108,7 @@ namespace Player
             switchSecondaryWeaponSound.Init(this);
             outOfAmmoSound.Init(this);
             outOfAmmoGunClickSound.Init(this);
+            if (playerState.hasGunsUpgrade) sideGuns.SetActive(true);
         }
 
         void InitWeapon(WeaponClass weapon) {
@@ -153,30 +158,30 @@ namespace Player
 
             if (primaryWeapon.type == WeaponType.Laser) {
                 laser.shotSound.Play();
-                FireProjectile(laser, mainGunL.position, mainGunL.rotation);
-                FireProjectile(laser, mainGunR.position, mainGunR.rotation);
+                if (primaryWeapon.IsCycle(0)) FireProjectile(laser, mainGunL.position, mainGunL.rotation);
+                if (primaryWeapon.IsCycle(1)) FireProjectile(laser, mainGunR.position, mainGunR.rotation);
                 if (sideGuns.activeSelf) {
-                    FireProjectile(laser, sideGunL.position, sideGunL.rotation, false);
-                    FireProjectile(laser, sideGunR.position, sideGunR.rotation, false);
+                    if (primaryWeapon.IsCycle(0)) FireProjectile(laser, sideGunL.position, sideGunL.rotation, false);
+                    if (primaryWeapon.IsCycle(1)) FireProjectile(laser, sideGunR.position, sideGunR.rotation, false);
                 }
                 if (rearGuns.activeSelf) {
-                    FireProjectile(laser, rearGunL.position, rearGunL.rotation, false);
-                    FireProjectile(laser, rearGunR.position, rearGunR.rotation, false);
+                    if (primaryWeapon.IsCycle(0)) FireProjectile(laser, rearGunL.position, rearGunL.rotation, false);
+                    if (primaryWeapon.IsCycle(1)) FireProjectile(laser, rearGunR.position, rearGunR.rotation, false);
                 }
                 return true;
             }
-            
+
             if (primaryWeapon.type == WeaponType.MachineGun) {
                 machineGun.effectSound.Play();
-                if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, mainGunL.position, mainGunL.rotation);
-                if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, mainGunR.position, mainGunR.rotation);
+                if (primaryWeapon.IsCycle(0)) FireProjectile(machineGun, mainGunL.position, mainGunL.rotation);
+                if (primaryWeapon.IsCycle(1)) FireProjectile(machineGun, mainGunR.position, mainGunR.rotation);
                 if (sideGuns.activeSelf) {
-                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, sideGunL.position, sideGunL.rotation, false);
-                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, sideGunR.position, sideGunR.rotation, false);
+                    if (primaryWeapon.IsCycle(1)) FireProjectile(machineGun, sideGunL.position, sideGunL.rotation, false);
+                    if (primaryWeapon.IsCycle(0)) FireProjectile(machineGun, sideGunR.position, sideGunR.rotation, false);
                 }
                 if (rearGuns.activeSelf) {
-                    if (primaryWeapon.firingCycle % 2 == 1) FireProjectile(machineGun, rearGunL.position, rearGunL.rotation, false);
-                    if (primaryWeapon.firingCycle % 2 == 0) FireProjectile(machineGun, rearGunR.position, rearGunR.rotation, false);
+                    if (primaryWeapon.IsCycle(1)) FireProjectile(machineGun, rearGunL.position, rearGunL.rotation, false);
+                    if (primaryWeapon.IsCycle(0)) FireProjectile(machineGun, rearGunR.position, rearGunR.rotation, false);
                 }
                 return true;
             }
@@ -322,6 +327,7 @@ namespace Player
         }
 
         void TickTimers() {
+            if (!player.isAlive) return;
             laser.TickTimers();
             machineGun.TickTimers();
             disruptorRing.TickTimers();

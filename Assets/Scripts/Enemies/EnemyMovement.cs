@@ -209,7 +209,7 @@ namespace Enemies
         void Start() {
             self = Utils.GetRequiredComponent<DamageableBehaviour>(gameObject);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
-            player = FindObjectOfType<PlayerGeneral>();
+            player = PlayerUtils.FindPlayer();
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
             engineSound.Init(this);
             agroSound.Init(this);
@@ -290,7 +290,8 @@ namespace Enemies
 
         void ModeKamikaze() {
             if (player == null || !player.isAlive) {
-                targetPosition = Vector2.down;
+                player = PlayerUtils.FindPlayer();
+                targetPosition = Vector2.down * 20f;
                 return;
             }
             targetMode = TargetMode.Position;
