@@ -14,34 +14,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemies:
   - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
-    _spawnLocation: N-0-3
+    _spawnLocation: N-0-5
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
     _spawnLocation: N-2-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
-    _spawnLocation: N-4-3
+    _spawnLocation: N-4-5
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
     _spawnLocation: N-6-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
-    _spawnLocation: N-8-3
+    _spawnLocation: N-8-5
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
     _spawnLocation: N-10-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
-    _spawnLocation: N-12-3
+    _spawnLocation: N-12-5
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 2
   - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
     _spawnLocation: N-14-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 2
+  - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
+    _spawnLocation: N-16-5
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
+  - _enemyPrefab: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
+    _spawnLocation: N-18-3
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
   _spawnInterval: 0
   _spawnTimeVariance: 0
   _minSpawnInterval: 0
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 0
   launchHeading: {x: 0, y: -1}
   headingVariance: 0
   launchVelocity: 1
@@ -52,3 +69,4 @@ MonoBehaviour:
   _flipX: 1
   _flipY: 0
   _initialState: {fileID: 0}
+  notes: 

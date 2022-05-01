@@ -856,6 +856,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 278a3c633efa6d24dbf9dc4588d8fb3b, type: 2}
   - {fileID: 11400000, guid: 3a1d489a8d1b1504b807052fdfd0eee2, type: 2}
   - {fileID: 11400000, guid: 64000173e82bdf34bbceb700c490b349, type: 2}
+  - {fileID: 11400000, guid: a6e24b26c06e9f04caca6b5bc8a54e92, type: 2}
   - {fileID: 11400000, guid: 16c37aa3b1b858a43a3fdb0c62e2a016, type: 2}
   timeStartDelay: 3
   showUpgradePanel: 1

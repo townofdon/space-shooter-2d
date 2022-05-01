@@ -16,23 +16,29 @@ MonoBehaviour:
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
     _spawnLocation: E-18-0
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 2
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
     _spawnLocation: E-14-0
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
     _spawnLocation: E-10-0
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
     _spawnLocation: E-6-0
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
     _spawnLocation: E-2-0
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   _spawnInterval: 0.5
   _spawnTimeVariance: 0.18
   _minSpawnInterval: 0.2
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 0
   launchHeading: {x: -1, y: 0}
   headingVariance: 0
   launchVelocity: 3
@@ -43,3 +49,4 @@ MonoBehaviour:
   _flipX: 1
   _flipY: 0
   _initialState: {fileID: 0}
+  notes: 

@@ -152,7 +152,7 @@ namespace Player
         }
 
         bool FirePrimary() {
-            if (!player.isAlive) return false;
+            if (player == null || !player.isAlive) return false;
             if (disruptorRingEffect.activeSelf) return false;
             if (!primaryWeapon.ShouldFire(input.isFirePressed)) return false;
 
@@ -215,7 +215,7 @@ namespace Player
         }
 
         bool FireSecondary() {
-            if (!player.isAlive) return false;
+            if (player == null || !player.isAlive) return false;
             if (disruptorRingEffect.activeSelf) return false;
             if (!secondaryWeapon.ShouldFire(input.isFire2Pressed)) return false;
 
@@ -421,10 +421,15 @@ namespace Player
         }
 
         void OnPlayerDeath() {
+            primaryWeapon.shotSound.Stop();
+            primaryWeapon.effectSound.Stop();
             primaryWeapon.reloadSound.Stop();
+            secondaryWeapon.shotSound.Stop();
+            secondaryWeapon.reloadSound.Stop();
             secondaryWeapon.reloadSound.Stop();
             switchWeaponSound.Stop();
             switchSecondaryWeaponSound.Stop();
+            disruptorRing.effectSound.Stop();
         }
 
         // NOTE - "OnReload" name clashed with PlayerInputHandler method

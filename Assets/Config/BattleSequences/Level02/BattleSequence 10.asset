@@ -15,6 +15,20 @@ MonoBehaviour:
   _spawnDifficulty: 0
   battleEvents:
   - skip: 0
+    type: 12
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 95c3554466fafea4789068239a6178ab, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 4
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 63be2c09fc2ddc04f9c83b7a56f0dc53, type: 2}
+    _hint: {fileID: 0}
+    _track: battle-theme
+  - skip: 0
     type: 11
     eventLabel: 
     wave: {fileID: 11400000, guid: 95c3554466fafea4789068239a6178ab, type: 2}

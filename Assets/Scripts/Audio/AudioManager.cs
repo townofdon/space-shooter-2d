@@ -27,6 +27,8 @@ namespace Audio
         static AudioManager _current;
         public static AudioManager current => _current;
 
+        public bool isCurrentTrackPlaying => currentTrack != null && currentTrack.isPlaying;
+
         public static void Cleanup() {
             Utils.CleanupSingleton<AudioManager>(_current);
         }

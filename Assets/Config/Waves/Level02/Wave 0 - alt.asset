@@ -45,7 +45,7 @@ MonoBehaviour:
   velocityVariance: 0.5
   aimTowardsPlayer: 0
   _path: {fileID: 8622307038240250050, guid: 69b745a7e1067da479cbc9cedb17e748, type: 3}
-  _pathfinderLoopMode: 0
+  _pathfinderLoopMode: 2
   _flipX: 0
   _flipY: 1
   _initialState: {fileID: 0}

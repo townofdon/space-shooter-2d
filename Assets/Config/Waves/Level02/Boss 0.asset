@@ -21,6 +21,14 @@ MonoBehaviour:
     _spawnLocation: N-10-4
     _spawnOffset: {x: 7, y: 0}
     _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 490975964535693413, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+    _spawnLocation: N-6-4
+    _spawnOffset: {x: 7, y: 0}
+    _spawnDifficulty: 2
+  - _enemyPrefab: {fileID: 490975964535693413, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+    _spawnLocation: N-18-4
+    _spawnOffset: {x: 7, y: 0}
+    _spawnDifficulty: 3
   _spawnInterval: 2
   _spawnTimeVariance: 0.23
   _minSpawnInterval: 0.5
