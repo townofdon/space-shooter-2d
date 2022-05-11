@@ -35888,11 +35888,11 @@ MonoBehaviour:
   _maxShield: 100
   _shieldWaitTime: 3
   _shieldRechargeTime: 2.5
-  healthModEasy: 2
-  healthModMedium: 1.25
+  healthModEasy: 3
+  healthModMedium: 1.5
   healthModHard: 1
   healthModInsane: 0.75
-  shieldModEasy: 2
+  shieldModEasy: 3
   shieldModMedium: 1.25
   shieldModHard: 1
   shieldModInsane: 0.8

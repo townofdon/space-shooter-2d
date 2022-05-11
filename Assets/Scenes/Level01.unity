@@ -309,8 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleSequences:
-  - {fileID: 11400000, guid: ad354af7050fc5948afa9115846c5702, type: 2}
-  - {fileID: 11400000, guid: 5fe51554b26177d45b886279336811ff, type: 2}
+  - {fileID: 11400000, guid: 396cce5b6c7537549903f22cce643fb4, type: 2}
   timeStartDelay: 3
   showUpgradePanel: 1
   loopIndefinitely: 0

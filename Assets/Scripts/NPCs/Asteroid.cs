@@ -19,6 +19,7 @@ namespace NPCs
         [SerializeField] List<GameObject> pieces = new List<GameObject>();
         [SerializeField] ParticleSystem explodeFX;
         [SerializeField] Sound rockExplodeSound;
+        [SerializeField] Sound rockHitRockSound;
 
         [Header("Pickups")]
         [Space]
@@ -36,11 +37,24 @@ namespace NPCs
             ResetHealth();
             SetColliders();
             RegisterHealthCallbacks(OnDeath, OnHealthDamage, Utils.__NOOP__);
+            InitRoidCollisionCallback();
             rockExplodeSound.Init(this);
+            rockHitRockSound.Init(this);
         }
 
         void Update() {
             TickHealth();
+        }
+
+        void InitRoidCollisionCallback() {
+            DamageDealer dd = GetComponentInChildren<DamageDealer>();
+            if (dd == null) return;
+            if (dd.type != DamageType.Collision) return;
+            dd.RegisterRoidHitRoidCallback(OnRoidHitRoid);
+        }
+
+        void OnRoidHitRoid() {
+            rockHitRockSound.Play();
         }
 
         public void OnHealthDamage(float amount, DamageType damageType, bool isDamageByPlayer) { }

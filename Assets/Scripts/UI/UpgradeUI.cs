@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -64,7 +63,19 @@ namespace UI {
         [SerializeField] Button buttonUpgradeGuns;
 
         [Space]
+        [SerializeField] GameObject upgradeSlotsPDC;
+        [SerializeField] GameObject upgradeSlotsLaser;
+        [SerializeField] GameObject upgradeSlotsMissiles;
+        [SerializeField] GameObject upgradeSlotsDisruptor;
+        [SerializeField] GameObject upgradeSlotsGuns;
+
+        [Space]
         [SerializeField] Color maxxedColor;
+        [SerializeField] Color slotActiveColorBG;
+        [SerializeField] Color slotActiveColor;
+        [SerializeField] Color slotInactiveColorBG;
+        [SerializeField] Color slotInactiveColor;
+        [SerializeField] Color slotHiddenColor;
 
         UIButton uiButtonUpgradePDC;
         UIButton uiButtonUpgradeLaser;
@@ -72,10 +83,16 @@ namespace UI {
         UIButton uiButtonUpgradeDisruptor;
         UIButton uiButtonUpgradeGuns;
 
+        UpgradeSlot upgradeSlotPDC;
+        UpgradeSlot upgradeSlotLaser;
+        UpgradeSlot upgradeSlotMissiles;
+        UpgradeSlot upgradeSlotDisruptor;
+        UpgradeSlot upgradeSlotGuns;
+
         InputSystemUIInputModule uiModule;
 
         bool isShowing;
-        bool anyMaxxedOut;
+        // bool anyMaxxedOut;
 
         public void OnDone() {
             OnHideUpgradePanel();
@@ -86,6 +103,7 @@ namespace UI {
             if (machineGun.CanUpgrade && machineGun.CostNextUpgrade <= playerState.totalMoney) {
                 playerState.SpendMoney(machineGun.CostNextUpgrade);
                 machineGun.Upgrade();
+                upgradeSlotPDC.SetUpgradeLevel(machineGun.CurrentUpgradeLevel);
                 AudioManager.current.PlaySound("upgrade-weapon");
             } else {
                 AudioManager.current.PlaySound("upgrade-error");
@@ -96,6 +114,7 @@ namespace UI {
             if (laser.CanUpgrade && laser.CostNextUpgrade <= playerState.totalMoney) {
                 playerState.SpendMoney(laser.CostNextUpgrade);
                 laser.Upgrade();
+                upgradeSlotLaser.SetUpgradeLevel(laser.CurrentUpgradeLevel);
                 AudioManager.current.PlaySound("upgrade-weapon");
             } else {
                 AudioManager.current.PlaySound("upgrade-error");
@@ -106,6 +125,7 @@ namespace UI {
             if (missiles.CanUpgrade && missiles.CostNextUpgrade <= playerState.totalMoney) {
                 playerState.SpendMoney(missiles.CostNextUpgrade);
                 missiles.Upgrade();
+                upgradeSlotMissiles.SetUpgradeLevel(missiles.CurrentUpgradeLevel);
                 AudioManager.current.PlaySound("upgrade-weapon");
             } else {
                 AudioManager.current.PlaySound("upgrade-error");
@@ -116,6 +136,7 @@ namespace UI {
             if (disruptor.CanUpgrade && disruptor.CostNextUpgrade <= playerState.totalMoney) {
                 playerState.SpendMoney(disruptor.CostNextUpgrade);
                 disruptor.Upgrade();
+                upgradeSlotDisruptor.SetUpgradeLevel(disruptor.CurrentUpgradeLevel);
                 AudioManager.current.PlaySound("upgrade-weapon");
             } else {
                 AudioManager.current.PlaySound("upgrade-error");
@@ -126,6 +147,7 @@ namespace UI {
             if (gunsUpgradeCost <= playerState.totalMoney) {
                 playerState.SpendMoney(gunsUpgradeCost);
                 playerState.UpgradeGuns();
+                upgradeSlotGuns.SetUpgradeLevel(1);
                 AudioManager.current.PlaySound("upgrade-gun-slots");
             } else {
                 AudioManager.current.PlaySound("upgrade-error");
@@ -149,7 +171,7 @@ namespace UI {
             AppIntegrity.AssertPresent(disruptor);
 
             AppIntegrity.AssertPresent(textNumCredits);
-            AppIntegrity.AssertPresent(textMaxxedOut);
+            // AppIntegrity.AssertPresent(textMaxxedOut);
 
             AppIntegrity.AssertPresent(textCostPDC);
             AppIntegrity.AssertPresent(textCostLaser);
@@ -174,10 +196,26 @@ namespace UI {
             uiButtonUpgradeMissiles = new UIButton(buttonUpgradeMissiles);
             uiButtonUpgradeDisruptor = new UIButton(buttonUpgradeDisruptor);
             uiButtonUpgradeGuns = new UIButton(buttonUpgradeGuns);
+
+            upgradeSlotPDC = InitUpgradeSlot(upgradeSlotsPDC, 0, machineGun.MaxUpgradeLevel);
+            upgradeSlotLaser = InitUpgradeSlot(upgradeSlotsLaser, 0, laser.MaxUpgradeLevel);
+            upgradeSlotMissiles = InitUpgradeSlot(upgradeSlotsMissiles, 0, missiles.MaxUpgradeLevel);
+            upgradeSlotDisruptor = InitUpgradeSlot(upgradeSlotsDisruptor, 0, disruptor.MaxUpgradeLevel);
+            upgradeSlotGuns = InitUpgradeSlot(upgradeSlotsGuns, 0, 1);
         }
 
         void Update() {
             UpdateGUI();
+        }
+
+        UpgradeSlot InitUpgradeSlot(GameObject upgradeSlotsGO, int initialUpgradeLevel, int maxUpgradeLevel) {
+            UpgradeSlot slot = new UpgradeSlot(upgradeSlotsGO, initialUpgradeLevel, maxUpgradeLevel);
+            slot.SetActiveColor(slotActiveColor);
+            slot.SetActiveColorBG(slotActiveColorBG);
+            slot.SetInactiveColor(slotInactiveColor);
+            slot.SetInactiveColorBG(slotInactiveColorBG);
+            slot.SetHiddenColor(slotHiddenColor);
+            return slot;
         }
 
         void UpdateGUI() {
@@ -203,13 +241,12 @@ namespace UI {
             EnablifyWeaponButton(disruptor, uiButtonUpgradeDisruptor);
             EnablifyUpgradeGunsButton(uiButtonUpgradeGuns);
 
-            anyMaxxedOut = !machineGun.CanUpgrade || !laser.CanUpgrade || !missiles.CanUpgrade || !disruptor.CanUpgrade;
-
-            if (anyMaxxedOut) {
-                textMaxxedOut.enabled = true;
-            } else {
-                textMaxxedOut.enabled = false;
-            }
+            // anyMaxxedOut = !machineGun.CanUpgrade || !laser.CanUpgrade || !missiles.CanUpgrade || !disruptor.CanUpgrade;
+            // if (anyMaxxedOut) {
+            //     textMaxxedOut.enabled = true;
+            // } else {
+            //     textMaxxedOut.enabled = false;
+            // }
 
             MaxxifyText(machineGun.CanUpgrade, textNamePDC, textClassPDC);
             MaxxifyText(laser.CanUpgrade, textNameLaser, textClassLaser);
@@ -246,11 +283,20 @@ namespace UI {
             }
         }
 
+        void RefreshUpgrade(UpgradeSlot slot, int currentLevel) {
+            slot.SetUpgradeLevel(currentLevel);
+        }
+
         void OnShowUpgradePanel() {
             isShowing = true;
             canvas.SetActive(true);
             StartCoroutine(IHackUiModule());
             buttonUpgradePDC.Select();
+            RefreshUpgrade(upgradeSlotPDC, machineGun.CurrentUpgradeLevel);
+            RefreshUpgrade(upgradeSlotLaser, laser.CurrentUpgradeLevel);
+            RefreshUpgrade(upgradeSlotMissiles, missiles.CurrentUpgradeLevel);
+            RefreshUpgrade(upgradeSlotDisruptor, disruptor.CurrentUpgradeLevel);
+            RefreshUpgrade(upgradeSlotGuns, playerState.hasGunsUpgrade ? 1 : 0);
         }
 
         void OnHideUpgradePanel() {

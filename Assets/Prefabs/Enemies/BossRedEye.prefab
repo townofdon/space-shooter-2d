@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackOnStart: 1
+  invulnerableAtStart: 1
   delayAtStart: 0.5
   agroThreshold: 0.4
   agroFireSpeedUp: 2

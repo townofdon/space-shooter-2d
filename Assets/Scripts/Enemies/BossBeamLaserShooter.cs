@@ -12,6 +12,7 @@ namespace Enemies {
         [Header("Behaviour")]
         [Space]
         [SerializeField] bool attackOnStart;
+        [SerializeField] bool invulnerableAtStart;
         [SerializeField][Range(0f, 10f)] float delayAtStart = 0.5f;
         [SerializeField][Range(0f, 1f)] float agroThreshold = 0.3f;
         [SerializeField][Range(1f, 5f)] float agroFireSpeedUp = 2f;
@@ -53,7 +54,7 @@ namespace Enemies {
         }
 
         public void StartAttacking() {
-            if (ieShootAtPlayer != null) ieShootAtPlayer = StartCoroutine(IShootAtPlayer());
+            if (ieShootAtPlayer == null) ieShootAtPlayer = StartCoroutine(IShootAtPlayer());
         }
 
         void OnEnable() {
@@ -75,7 +76,8 @@ namespace Enemies {
             }
             player = PlayerUtils.FindPlayer();
             disruptorSound.Init(this);
-            if (attackOnStart) ieShootAtPlayer = StartCoroutine(IShootAtPlayer());
+            if (invulnerableAtStart && enemy != null) enemy.SetInvulnerable(true);
+            if (attackOnStart && ieShootAtPlayer == null) ieShootAtPlayer = StartCoroutine(IShootAtPlayer());
         }
 
         void Update() {
@@ -149,6 +151,7 @@ namespace Enemies {
             while (true) {
                 didFire = false;
                 yield return new WaitForSeconds(isAgro() ? fireIntervalAgro : fireInterval);
+                enemy.SetInvulnerable(false);
                 if (anim != null) {
                     anim.SetTrigger("ChargeUp");
                     anim.SetFloat("TimeMultiplier", isAgro() ? agroFireSpeedUp : 1f);

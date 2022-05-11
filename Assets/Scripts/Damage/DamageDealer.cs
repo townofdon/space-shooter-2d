@@ -32,6 +32,7 @@ namespace Damage
 
         // callbacks
         System.Action<DamageableType> onHit;
+        System.Action onRoidHitRoid;
         System.Action onDeath;
 
         // cached
@@ -53,6 +54,7 @@ namespace Damage
 
         // getters
         new public Collider2D collider => _collider;
+        public DamageType type => damageType;
 
         public void SetIsDamageByPlayer(bool value) {
             isDamageByPlayer = value;
@@ -77,6 +79,10 @@ namespace Damage
         public void RegisterCallbacks(System.Action<DamageableType> OnHit, System.Action OnDeath) {
             onHit = OnHit;
             onDeath = OnDeath;
+        }
+
+        public void RegisterRoidHitRoidCallback(System.Action OnRoidHitRoid) {
+            onRoidHitRoid = OnRoidHitRoid;
         }
 
         void Start() {
@@ -212,6 +218,7 @@ namespace Damage
             actor.rigidbody.AddForce(forceToActor * damageClass.throwbackForceMultiplier, ForceMode2D.Impulse);
             float damageToActor = collisionDamage * collisionMagnitude * Mathf.Max(1f, (rb.mass / actor.rigidbody.mass) * 0.05f);
             actor.TakeDamage(damageToActor * baseDamageMultiplier, DamageType.Collision, isDamageByPlayer);
+            if (actor.tag == UTag.Asteroid) InvokeCallback(onRoidHitRoid);
         }
 
         void HandleJarringCollision(Collider2D other) {

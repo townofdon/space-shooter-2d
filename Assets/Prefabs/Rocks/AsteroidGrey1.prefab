@@ -132,6 +132,24 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0c68e7618f293ea47a59e1174a5f9805, type: 3}
     - {fileID: 8300000, guid: 1722cb2d0843fce4199e46413cd60b60, type: 3}
     oneShot: 0
+  rockHitRockSound:
+    soundName: 
+    volume: 0.283
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    clips:
+    - {fileID: 8300000, guid: 9d2b06d8049add8478ec94a23ddf5134, type: 3}
+    - {fileID: 8300000, guid: 09653370cfcb98040a4d0484d1f758f0, type: 3}
+    - {fileID: 8300000, guid: fe1232f10ca67be45a5600cb12e0fb5f, type: 3}
+    oneShot: 0
   pickups:
     pickups:
     - pickupPrefab: {fileID: 7348726175182028151, guid: b638c9b2738a1c54499d272fd277b6f9, type: 3}
