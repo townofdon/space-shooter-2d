@@ -31,6 +31,14 @@ PrefabInstance:
       propertyPath: _maxShield
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+      propertyPath: pointsWhenKilledByPlayer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+      propertyPath: pointsWhenWoundedByPlayer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7218930177387286965, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
       propertyPath: m_RootOrder
       value: 0

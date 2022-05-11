@@ -43,7 +43,7 @@ namespace UI {
         int num = 0;
         float fNum = 0;
 
-        int totalPoints => debug ? 123456 : gameState.totalPoints;
+        int totalPoints => debug ? 123456 : GetFinalScore();
         int numEnemiesKilled => debug ? 123 : gameState.numEnemiesKilled;
         int numPlayerDeaths => debug ? 42 : playerState.numDeaths;
         float timeElapsed => debug ? 333 : GameManager.current.timeElapsed;
@@ -77,7 +77,7 @@ namespace UI {
 
             rowPoints.SetActive(true);
 
-            yield return IShowStat(fieldPoints, totalPoints, 1000);
+            yield return IShowStat(fieldPoints, totalPoints, 1000, $"(X{(int)GetPointsModifier()})");
             yield return new WaitForSeconds(timeBetweenStats);
 
             rowEnemies.SetActive(true);
@@ -103,17 +103,17 @@ namespace UI {
             dismiss = false;
             while (!dismiss) yield return null;
 
-            GameManager.current.GotoLevelOne();
+            GameManager.current.GotoLevelOne(true);
         }
 
-        IEnumerator IShowStat(TextMeshProUGUI field, int value, int acc = 1) {
+        IEnumerator IShowStat(TextMeshProUGUI field, int value, int acc = 1, string append = "") {
             dismiss = false;
             num = 0;
             AudioManager.current.PlaySound("DialogueChip");
             while (!dismiss && num < value) {
                 AudioManager.current.PlaySound("DialogueChip");
                 num = Mathf.Min(num + acc, value);
-                field.text = num.ToString();
+                field.text = num.ToString() + (append == "" ? "" : " ") + append;
                 yield return new WaitForSeconds(0.02f);
             }
             dismiss = false;
@@ -130,6 +130,24 @@ namespace UI {
                 yield return new WaitForSeconds(0.02f);
             }
             dismiss = false;
+        }
+
+        int GetFinalScore() {
+            return (int)(gameState.totalPoints * GetPointsModifier());
+        }
+
+        float GetPointsModifier() {
+            switch (gameState.difficulty) {
+                case GameDifficulty.Insane:
+                    return 10.0f;
+                case GameDifficulty.Hard:
+                    return 4.0f;
+                case GameDifficulty.Medium:
+                    return 2.0f;
+                case GameDifficulty.Easy:
+                default:
+                    return 1.0f;
+            }
         }
     }
 }

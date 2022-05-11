@@ -1186,7 +1186,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   spawnFX: {fileID: 8063068017844242433}
-  spawnSprite: {fileID: 3691588788372855393}
+  spawnSprites: []
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   spawnMaterial: {fileID: 2100000, guid: b7880cc0511879b44beb7d60a1f37f63, type: 2}
   deathFadeOutSprites:
@@ -1349,6 +1349,7 @@ MonoBehaviour:
       spawnLikelihood: 0.8
   pointsWhenKilledByPlayer: 20
   pointsWhenWoundedByPlayer: 10
+  pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &3691588788118134409
 MonoBehaviour:

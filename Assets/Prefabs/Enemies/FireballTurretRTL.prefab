@@ -94,7 +94,7 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
-  _maxHealth: 500
+  _maxHealth: 800
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
@@ -158,6 +158,7 @@ MonoBehaviour:
       spawnLikelihood: 0.789
   pointsWhenKilledByPlayer: 100
   pointsWhenWoundedByPlayer: 20
+  pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &6500453103026850518
 MonoBehaviour:
@@ -225,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   baseDamageMultiplier: 10
+  isDamageByPlayer: 0
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2

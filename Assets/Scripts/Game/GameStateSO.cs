@@ -64,11 +64,15 @@ namespace Game {
         }
 
         public void LosePoints() {
-            _pointsGained = (int)(_pointsGained * 0.5f);
+            _pointsGained = GetPointsToLose();
         }
 
         public void IncrementEnemiesKilled() {
             _numEnemiesKilled++;
+        }
+
+        public int GetPointsToLose() {
+            return (int)(_pointsGained * 0.5f);
         }
     }
 }

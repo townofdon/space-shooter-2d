@@ -5027,6 +5027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 6
   baseDamageMultiplier: 1
+  isDamageByPlayer: 1
   preferCirclecast: 1
   raycast: 0
   minSafeDistance: 10
@@ -36025,7 +36026,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c7887879df4ee1647b0616c157e63c14, type: 3}
     oneShot: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+  gameState: {fileID: 11400000, guid: 6a03aadd81bb63f4c9f0b480d72a1b9f, type: 2}
   playerUI: {fileID: 0}
+  pointsLostPrefab: {fileID: 8416309717947886794, guid: 6ed326618bac5814abb43fa72b604d88, type: 3}
 --- !u!114 &5316389521978419112
 MonoBehaviour:
   m_ObjectHideFlags: 0

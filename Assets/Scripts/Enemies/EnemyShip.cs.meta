@@ -3,7 +3,14 @@ guid: 300e0f69b5f078a4eac7c5976bb91400
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - defaultMaterial: {instanceID: 0}
+  - damageFlashMaterial: {instanceID: 0}
+  - damageSpriteTarget: {instanceID: 0}
+  - ship: {instanceID: 0}
+  - explosion: {instanceID: 0}
+  - pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
+  - eventChannel: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

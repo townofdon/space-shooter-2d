@@ -40,6 +40,14 @@ PrefabInstance:
       value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 5209504494967835017, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
+      propertyPath: pointsWhenKilledByPlayer
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209504494967835017, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
+      propertyPath: pointsWhenWoundedByPlayer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209504494967835017, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
       propertyPath: pickups.pickups.Array.data[1].numItemsToSpawn
       value: 5
       objectReference: {fileID: 0}

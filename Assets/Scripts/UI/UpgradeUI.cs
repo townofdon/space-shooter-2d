@@ -17,12 +17,14 @@ namespace UI {
     public class UpgradeUI : MonoBehaviour {
 
         [SerializeField] EventChannelSO eventChannel;
+        [SerializeField] GameStateSO gameState;
         [SerializeField] PlayerStateSO playerState;
         [SerializeField] GameObject canvas;
         [SerializeField] EventSystem eventSystem;
 
         [Space]
         [SerializeField] int gunsUpgradeCost = 20000;
+        [SerializeField] int upgradePointBonus = 10000;
 
         [Space]
         [SerializeField] WeaponClass machineGun;
@@ -101,6 +103,7 @@ namespace UI {
 
         public void UpgradePDC() {
             if (machineGun.CanUpgrade && machineGun.CostNextUpgrade <= playerState.totalMoney) {
+                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(machineGun.CostNextUpgrade);
                 machineGun.Upgrade();
                 upgradeSlotPDC.SetUpgradeLevel(machineGun.CurrentUpgradeLevel);
@@ -112,6 +115,7 @@ namespace UI {
 
         public void UpgradeLZR() {
             if (laser.CanUpgrade && laser.CostNextUpgrade <= playerState.totalMoney) {
+                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(laser.CostNextUpgrade);
                 laser.Upgrade();
                 upgradeSlotLaser.SetUpgradeLevel(laser.CurrentUpgradeLevel);
@@ -123,6 +127,7 @@ namespace UI {
 
         public void UpgradeMissiles() {
             if (missiles.CanUpgrade && missiles.CostNextUpgrade <= playerState.totalMoney) {
+                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(missiles.CostNextUpgrade);
                 missiles.Upgrade();
                 upgradeSlotMissiles.SetUpgradeLevel(missiles.CurrentUpgradeLevel);
@@ -134,6 +139,7 @@ namespace UI {
 
         public void UpgradeDisruptor() {
             if (disruptor.CanUpgrade && disruptor.CostNextUpgrade <= playerState.totalMoney) {
+                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(disruptor.CostNextUpgrade);
                 disruptor.Upgrade();
                 upgradeSlotDisruptor.SetUpgradeLevel(disruptor.CurrentUpgradeLevel);
@@ -145,6 +151,7 @@ namespace UI {
 
         public void UpgradeGuns() {
             if (gunsUpgradeCost <= playerState.totalMoney) {
+                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(gunsUpgradeCost);
                 playerState.UpgradeGuns();
                 upgradeSlotGuns.SetUpgradeLevel(1);

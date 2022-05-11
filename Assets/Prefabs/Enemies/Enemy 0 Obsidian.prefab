@@ -91,5 +91,13 @@ PrefabInstance:
       propertyPath: _maxShield
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8279548539955522849, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+      propertyPath: pointsWhenKilledByPlayer
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279548539955522849, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+      propertyPath: pointsWhenWoundedByPlayer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}

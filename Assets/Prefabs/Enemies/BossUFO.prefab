@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   baseDamageMultiplier: 2
+  isDamageByPlayer: 0
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -1044,6 +1045,7 @@ MonoBehaviour:
       spawnLikelihood: 0.8
   pointsWhenKilledByPlayer: 500
   pointsWhenWoundedByPlayer: 100
+  pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &7867457986422667112
 MonoBehaviour:
@@ -1248,6 +1250,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 1
+  shockwaveMagnitude: 1.5
 --- !u!1 &7867457986615339765
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,6 +68,10 @@ PrefabInstance:
       value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: pointsWhenKilledByPlayer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969197718982584922, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: pickups.pickups.Array.data[1].spawnLikelihood
       value: 0.616
       objectReference: {fileID: 0}

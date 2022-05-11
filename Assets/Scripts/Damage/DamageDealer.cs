@@ -15,6 +15,7 @@ namespace Damage
         [Header("Damage Settings")][Space]
         [SerializeField] DamageType damageType = DamageType.Default;
         [SerializeField][Range(0f, 10f)] float baseDamageMultiplier = 1f;
+        [SerializeField] bool isDamageByPlayer = false;
 
         [Header("Circlecast Settings")][Space]
         [SerializeField] bool preferCirclecast = false;
@@ -44,7 +45,6 @@ namespace Damage
         Vector3 prevPosition;
 
         // state
-        bool isDamageByPlayer = false;
         System.Nullable<System.Guid> ignoreUUID;
         float circlecastRadius = 1f;
         bool passedSafeDistance = false;

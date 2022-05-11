@@ -41,10 +41,12 @@ namespace Player {
         [Header("Events")]
         [Space]
         [SerializeField] EventChannelSO eventChannel;
+        [SerializeField] GameStateSO gameState;
 
         [Header("UI")]
         [Space]
         [SerializeField] PlayerUI playerUI;
+        [SerializeField] GameObject pointsLostPrefab;
 
         // components
         CircleCollider2D col;
@@ -152,7 +154,7 @@ namespace Player {
             if (!actor.canCollide) return;
             float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
             float collisionMagnitude = (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
-            actor.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision);
+            actor.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision, true);
             this.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision);
             float selfMagnitude = rb.velocity.magnitude;
             float otherMagnitude = actor.rigidbody.velocity.magnitude;
@@ -261,7 +263,15 @@ namespace Player {
             // set tag to non-player so that PlayerUtils.FindPlayer can find the player once it respawns
             foreach (var obj in GameObject.FindGameObjectsWithTag(UTag.Player)) { obj.tag = UTag.Untagged; }
 
+            SpawnPointsToast();
             eventChannel.OnPlayerDeath.Invoke();
+        }
+
+        void SpawnPointsToast() {
+            if (pointsLostPrefab == null) return;
+            GameObject instance = Instantiate(pointsLostPrefab, transform.position, Quaternion.identity);
+            PointsToast toast = instance.GetComponent<PointsToast>();
+            toast.SetPoints(gameState.GetPointsToLose());
         }
 
         IEnumerator HullDamageAnimation() {

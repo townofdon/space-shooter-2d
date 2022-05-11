@@ -112,11 +112,11 @@ namespace Game {
             SceneManager.LoadScene("MainMenu");
         }
 
-        public void GotoLevelOne() {
+        public void GotoLevelOne(bool skipToLevel2 = false) {
             OnUnpause();
             NewGame();
             AudioManager.current.StopTrack();
-            if (difficulty == GameDifficulty.Insane) {
+            if (difficulty == GameDifficulty.Insane || skipToLevel2) {
                 SceneManager.LoadScene("Level02");
             } else {
                 SceneManager.LoadScene("Level01");

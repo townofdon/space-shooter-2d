@@ -754,6 +754,7 @@ MonoBehaviour:
       spawnLikelihood: 0.503
   pointsWhenKilledByPlayer: 50
   pointsWhenWoundedByPlayer: 10
+  pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &5359005915781872934
 MonoBehaviour:

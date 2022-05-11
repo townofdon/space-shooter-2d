@@ -34,6 +34,7 @@ namespace Enemies {
         [Space]
         [SerializeField] int pointsWhenKilledByPlayer = 50;
         [SerializeField] int pointsWhenWoundedByPlayer = 10;
+        [SerializeField] GameObject pointsToastPrefab;
 
         [Header("Events")][Space]
         // [SerializeField] GameEvent OnEnemyDeath;
@@ -101,13 +102,23 @@ namespace Enemies {
 
         void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             RemoveMarker();
-            eventChannel.OnEnemyDeath.Invoke(instanceId, GetDeathPoints(isDamageByPlayer));
+            int points = GetDeathPoints(isDamageByPlayer);
+            eventChannel.OnEnemyDeath.Invoke(instanceId, points);
             if (rb != null) rb.drag = originalDrag; // to make it seem like it was there all along
             if (damageType != DamageType.InstakillQuiet) {
                 deathSound.Play();
                 pickups.Spawn(transform.position, rb);
+                SpawnPointsToast(points);
             }
             StartCoroutine(DeathAnimation());
+        }
+
+        void SpawnPointsToast(int points = 0) {
+            if (pointsToastPrefab == null) return;
+            if (points <= 0) return;
+            GameObject instance = Instantiate(pointsToastPrefab, transform.position, Quaternion.identity);
+            PointsToast pointsToast = instance.GetComponent<PointsToast>();
+            pointsToast.SetPoints(points);
         }
 
         int GetDeathPoints(bool isDamageByPlayer) {

@@ -5,6 +5,7 @@ using TMPro;
 
 using Player;
 using Game;
+using Audio;
 
 namespace UI {
 
@@ -13,6 +14,8 @@ namespace UI {
         [Header("General Settings")]
         [Space]
         [SerializeField] GameObject canvas;
+        [SerializeField] GameStateSO gameState;
+        [SerializeField] PlayerStateSO playerState;
 
         [Header("Health UI")]
         [Space]
@@ -54,6 +57,12 @@ namespace UI {
         [SerializeField] TextMeshProUGUI clipAmmoText;
         [SerializeField] TextMeshProUGUI reserveAmmoText;
 
+        [Header("Points UI")]
+        [Space]
+        [SerializeField] TextMeshProUGUI scoreText;
+        [SerializeField] TextMeshProUGUI moneyText;
+        [SerializeField] Sound scoreSound;
+
         // state
         enum ShieldState {
             nominal,
@@ -68,9 +77,15 @@ namespace UI {
 
         float lastHealth = 0f;
         float lastShield = 0f;
+        int tempPoints = 0;
+        int tempMoney = 0;
+        int tempStep = 1;
 
         void Start() {
             FindPlayer();
+            scoreSound.Init(this);
+            tempPoints = gameState.totalPoints;
+            tempMoney = playerState.totalMoney;
         }
 
         void Update() {
@@ -81,6 +96,7 @@ namespace UI {
                 canvas.SetActive(true);
                 DrawHealthUI();
                 DrawWeaponsUI();
+                DrawPointsUI();
             }
         }
 
@@ -190,6 +206,37 @@ namespace UI {
                 if (icon != null) icon.color = warningInactiveFGColor;
                 if (text != null) text.color = warningInactiveFGColor;
             }
+        }
+
+        void DrawPointsUI() {
+            if (tempPoints < gameState.totalPoints || tempMoney < playerState.totalMoney) {
+                scoreSound.Play();
+            }
+            if (tempPoints < gameState.totalPoints) {
+                tempStep = getStep(gameState.totalPoints - tempPoints);
+                tempPoints = Mathf.Min(tempPoints + tempStep, gameState.totalPoints);
+            }
+            if (tempMoney < playerState.totalMoney) {
+                tempStep = getStep(playerState.totalMoney - tempMoney);
+                tempMoney = Mathf.Min(tempMoney + tempStep, playerState.totalMoney);
+            }
+            if (tempPoints > gameState.totalPoints) {
+                tempStep = getStep(tempPoints - gameState.totalPoints);
+                tempPoints = Mathf.Max(tempPoints - tempStep, gameState.totalPoints);
+            }
+            if (tempMoney > playerState.totalMoney) {
+                tempStep = getStep(tempMoney - playerState.totalMoney);
+                tempMoney = Mathf.Max(tempMoney - tempStep, playerState.totalMoney);
+            }
+            scoreText.text = tempPoints.ToString("00000000");
+            moneyText.text = tempMoney.ToString("0000000") + " CR";
+        }
+
+        int getStep(int diff) {
+            if (diff >= 100000) return 5000;
+            if (diff >= 10000) return 500;
+            if (diff >= 1000) return 50;
+            return 1;
         }
     }
 }

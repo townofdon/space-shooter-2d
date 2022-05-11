@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 4
   baseDamageMultiplier: 1
+  isDamageByPlayer: 1
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -203,6 +204,7 @@ MonoBehaviour:
   lifetime: 10
   initialHeading: {x: 0, y: 1, z: 0}
   proximityDetonation: 1.2
+  proximityDelay: 0.15
   outOfRange: 14
   thrustFX: {fileID: 1329884247295841544}
   explosion: {fileID: 547358973900262000, guid: 1191d5bf8165270409cce2311db38d77, type: 3}
