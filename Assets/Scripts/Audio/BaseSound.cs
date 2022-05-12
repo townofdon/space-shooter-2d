@@ -19,6 +19,7 @@ namespace Audio
         [SerializeField][Range(0f, 360f)] protected float spread = 180f;
         [SerializeField][Range(1f, 20f)] protected float minFalloffDistance = 20f;
         [SerializeField][Range(5f, 100f)] protected float maxFalloffDistance = 40f;
+        [SerializeField][Range(0f, 5f)] protected float dopplerLevel = 1f;
 
         // getters
         public string name => soundName;

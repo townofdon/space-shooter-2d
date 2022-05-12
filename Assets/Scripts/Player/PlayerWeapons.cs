@@ -35,6 +35,16 @@ namespace Player
         [SerializeField] Transform sideGunR;
         [SerializeField] Transform rearGunL;
         [SerializeField] Transform rearGunR;
+        [Space]
+        [SerializeField] Animator muzzleFlashPDCLeft;
+        [SerializeField] Animator muzzleFlashPDCRight;
+        [SerializeField] Animator muzzleFlashPDCSideLeft;
+        [SerializeField] Animator muzzleFlashPDCSideRight;
+        [Space]
+        [SerializeField] Animator muzzleFlashLZRLeft;
+        [SerializeField] Animator muzzleFlashLZRRight;
+        [SerializeField] Animator muzzleFlashLZRSideLeft;
+        [SerializeField] Animator muzzleFlashLZRSideRight;
 
         [Header("DisruptorRing")][Space]
         [SerializeField] GameObject disruptorRingEffect;
@@ -48,6 +58,9 @@ namespace Player
         [SerializeField] Sound switchSecondaryWeaponSound;
         [SerializeField] Sound outOfAmmoSound;
         [SerializeField] Sound outOfAmmoGunClickSound;
+
+        // cached
+        Coroutine shakeGamepadCoroutine;
 
         // components
         PlayerGeneral player;
@@ -158,9 +171,13 @@ namespace Player
 
             if (primaryWeapon.type == WeaponType.Laser) {
                 laser.shotSound.Play();
+                if (primaryWeapon.IsCycle(0)) muzzleFlashLZRLeft.SetTrigger("Fire");
+                if (primaryWeapon.IsCycle(1)) muzzleFlashLZRRight.SetTrigger("Fire");
                 if (primaryWeapon.IsCycle(0)) FireProjectile(laser, mainGunL.position, mainGunL.rotation);
                 if (primaryWeapon.IsCycle(1)) FireProjectile(laser, mainGunR.position, mainGunR.rotation);
                 if (sideGuns.activeSelf) {
+                    if (primaryWeapon.IsCycle(0)) muzzleFlashLZRSideLeft.SetTrigger("Fire");
+                    if (primaryWeapon.IsCycle(1)) muzzleFlashLZRSideRight.SetTrigger("Fire");
                     if (primaryWeapon.IsCycle(0)) FireProjectile(laser, sideGunL.position, sideGunL.rotation, false);
                     if (primaryWeapon.IsCycle(1)) FireProjectile(laser, sideGunR.position, sideGunR.rotation, false);
                 }
@@ -173,9 +190,13 @@ namespace Player
 
             if (primaryWeapon.type == WeaponType.MachineGun) {
                 machineGun.effectSound.Play();
+                if (primaryWeapon.IsCycle(0)) muzzleFlashPDCLeft.SetTrigger("Fire");
+                if (primaryWeapon.IsCycle(1)) muzzleFlashPDCRight.SetTrigger("Fire");
                 if (primaryWeapon.IsCycle(0)) FireProjectile(machineGun, mainGunL.position, mainGunL.rotation);
                 if (primaryWeapon.IsCycle(1)) FireProjectile(machineGun, mainGunR.position, mainGunR.rotation);
                 if (sideGuns.activeSelf) {
+                    if (primaryWeapon.IsCycle(0)) muzzleFlashPDCSideLeft.SetTrigger("Fire");
+                    if (primaryWeapon.IsCycle(1)) muzzleFlashPDCSideRight.SetTrigger("Fire");
                     if (primaryWeapon.IsCycle(1)) FireProjectile(machineGun, sideGunL.position, sideGunL.rotation, false);
                     if (primaryWeapon.IsCycle(0)) FireProjectile(machineGun, sideGunR.position, sideGunR.rotation, false);
                 }
@@ -186,24 +207,25 @@ namespace Player
                 return true;
             }
 
-            if (primaryWeapon.type == WeaponType.DisruptorRing) {
-                if (player.shield > 0f) {
-                    disruptorRing.effectSound.Play();
-                    disruptorRingEffect.SetActive(true);
-                    player.DrainShield(disruptorRing.shieldDrain * Time.deltaTime);
-                    return true;
-                } else {
-                    disruptorRingEffect.SetActive(false);
-                    disruptorRing.effectSound.Stop();
-                    return false;
-                }
-            }
+            // if (primaryWeapon.type == WeaponType.DisruptorRing) {
+            //     if (player.shield > 0f) {
+            //         disruptorRing.effectSound.Play();
+            //         disruptorRingEffect.SetActive(true);
+            //         player.DrainShield(disruptorRing.shieldDrain * Time.deltaTime);
+            //         return true;
+            //     } else {
+            //         disruptorRingEffect.SetActive(false);
+            //         disruptorRing.effectSound.Stop();
+            //         return false;
+            //     }
+            // }
 
             return false;
         }
 
         void AfterPrimaryFire() {
             primaryWeapon.AfterFire();
+            shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(0.1f, 0.02f, 0.02f));
         }
         void AfterPrimaryNoFire() {
             primaryWeapon.AfterNoFire();
@@ -247,6 +269,7 @@ namespace Player
 
         void AfterSecondaryFire() {
             secondaryWeapon.AfterFire();
+            shakeGamepadCoroutine = StartCoroutine(GameFeel.ShakeGamepad(0.2f, 0.2f, 0.2f));
         }
         void AfterSecondaryNoFire() {
             secondaryWeapon.AfterNoFire();

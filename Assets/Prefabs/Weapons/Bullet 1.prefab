@@ -139,7 +139,7 @@ TrailRenderer:
       serializedVersion: 2
       key0: {r: 0.9433962, g: 0.021457126, b: 0.013349922, a: 0.7254902}
       key1: {r: 0.76862746, g: 0.13071024, b: 0.09411765, a: 0.70980394}
-      key2: {r: 0.031372536, g: 0.15674458, b: 0.59607846, a: 0.16470589}
+      key2: {r: 0.031372536, g: 0.15674458, b: 0.59607846, a: 0.42352942}
       key3: {r: 0, g: 0, b: 0, a: 0.02745098}
       key4: {r: 0, g: 0, b: 0, a: 0.002811417}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -155,7 +155,7 @@ TrailRenderer:
       ctime7: 0
       atime0: 0
       atime1: 10987
-      atime2: 13107
+      atime2: 16769
       atime3: 62837
       atime4: 65535
       atime5: 0
@@ -187,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 4
   baseDamageMultiplier: 1
+  isDamageByPlayer: 0
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168224b7bf0a97247898722e8c1045c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  removalMode: 0
   moveSpeed: 60
   turnSpeed: 0
   lifetime: 10
@@ -234,6 +236,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.288
     pitchVariance: 0.055
     clips: []
@@ -249,6 +252,8 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
+    pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
     clipTail: {fileID: 0}
@@ -264,6 +269,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.167
     pitchVariance: 0.336
     clips:
@@ -281,6 +287,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.164
     pitchVariance: 0.5
     clips:
@@ -297,6 +304,7 @@ MonoBehaviour:
     spread: 360
     minFalloffDistance: 20
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.122
     pitchVariance: 0.425
     clips:
@@ -320,6 +328,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []

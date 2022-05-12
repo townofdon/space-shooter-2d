@@ -55,7 +55,7 @@ namespace Weapons
         CircleCollider2D circle;
         CapsuleCollider2D capsule;
         SpriteRenderer sr;
-        TrailRenderer tr;
+        TrailRenderer[] trails;
         Rigidbody2D rb;
 
         // cached
@@ -102,7 +102,7 @@ namespace Weapons
         void Start() {
             rb = GetComponent<Rigidbody2D>();
             sr = GetComponentInChildren<SpriteRenderer>();
-            tr = GetComponentInChildren<TrailRenderer>();
+            trails = GetComponentsInChildren<TrailRenderer>();
             box = GetComponent<BoxCollider2D>();
             circle = GetComponent<CircleCollider2D>();
             capsule = GetComponent<CapsuleCollider2D>();
@@ -201,18 +201,18 @@ namespace Weapons
 
         IEnumerator IDeath() {
             if (sr != null) sr.enabled = false;
-            if (tr != null) tr.enabled = false;
 
             if (removalMode != ProjectileRemovalMode.Quiet || deathReason != ProjectileDeathReason.Guardians) {
                 destroyedSound.Play();
                 if (explosionFX != null) {
                     Destroy(Instantiate(explosionFX, transform.position, Quaternion.identity), explosionLifetime);
                 }
+                foreach (var tr in trails) if (tr != null) tr.enabled = false;
             }
 
             while (impactSound.isPlaying) yield return null;
             while (destroyedSound.isPlaying) yield return null;
-            Destroy(gameObject);
+            Destroy(gameObject, 1f);
         }
 
         float CalcHeight() {

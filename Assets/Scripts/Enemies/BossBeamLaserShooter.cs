@@ -46,6 +46,7 @@ namespace Enemies {
             disruptorHold.Start();
             ActivateDisruptorRing();
             if (beamLaser != null) beamLaser.Fire();
+            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.5f, 0.2f));
         }
 
         public void LockTarget() {

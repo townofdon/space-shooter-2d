@@ -43,6 +43,7 @@ namespace Audio
             source.ignoreListenerPause = ignoreListenerPause;
 
             // 3d settings
+            source.dopplerLevel = dopplerLevel;
             source.spread = spread;
             source.spatialBlend = spatialBlend;
             source.minDistance = minFalloffDistance;
