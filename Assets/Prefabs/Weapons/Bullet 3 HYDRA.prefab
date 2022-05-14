@@ -225,7 +225,7 @@ MonoBehaviour:
   explosionLifetime: 5
   impactLifetime: 1
   explosionFX: {fileID: 0}
-  impactFX: {fileID: 0}
+  impactFX: {fileID: 3293150142525677553, guid: fc7d090a2d664644ebf3b87188e8e1bc, type: 3}
   impulseSound:
     soundName: 
     volume: 0

@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -765428885
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 01652b8fd45c1e44e8fa00c9bacffc84, type: 3}
   m_Color: {r: 0.8301887, g: 0.7828088, b: 0.763617, a: 1}
@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3691588788447605000, guid: 7d0cf52870c44f642a1d6ca18a66365e, type: 3}
       propertyPath: m_Name
-      value: TurretOnAWireLZR Variant
+      value: TurretOnAWireLZR
       objectReference: {fileID: 0}
     - target: {fileID: 3691588788447605001, guid: 7d0cf52870c44f642a1d6ca18a66365e, type: 3}
       propertyPath: m_RootOrder

@@ -58,6 +58,7 @@ namespace Enemies
         [SerializeField] PathfinderLoopMode _pathfinderLoopMode;
         [SerializeField] bool _flipX;
         [SerializeField] bool _flipY;
+        [SerializeField] int _maxPathLoops = 99;
 
         [Header("FSM")]
         [Space]
@@ -76,6 +77,7 @@ namespace Enemies
         public PathfinderLoopMode pathfinderLoopMode => _pathfinderLoopMode;
         public bool flipX => _flipX;
         public bool flipY => _flipY;
+        public int maxPathLoops => _maxPathLoops;
 
         // cached
         string[] locationParts = new string[3];

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fba42dbb5f93146b81c33b70407bfc, type: 3}
   m_Name: BattleSequence 1
   m_EditorClassIdentifier: 
+  _spawnDifficulty: 0
   battleEvents:
   - skip: 0
     type: 0
@@ -185,6 +186,76 @@ MonoBehaviour:
     type: 0
     eventLabel: 
     wave: {fileID: 11400000, guid: d8ff3601211616243888b263f6b702d9, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 2
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 19ef144ffed9e784c87f0c81f6360743, type: 2}
+    _hint: {fileID: 0}
+    _track: battle-theme
+  - skip: 0
+    type: 3
+    eventLabel: 
+    wave: {fileID: 11400000, guid: d8ff3601211616243888b263f6b702d9, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 5
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 19ef144ffed9e784c87f0c81f6360743, type: 2}
+    _hint: {fileID: 0}
+    _track: battle-theme
+  - skip: 0
+    type: 0
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 7ca4bcc62d4f66a439877d9228e66a5f, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 2
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 19ef144ffed9e784c87f0c81f6360743, type: 2}
+    _hint: {fileID: 0}
+    _track: battle-theme
+  - skip: 0
+    type: 0
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 71f54e6f31ab22a48aea813794355bbc, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 2
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 19ef144ffed9e784c87f0c81f6360743, type: 2}
+    _hint: {fileID: 0}
+    _track: battle-theme
+  - skip: 0
+    type: 3
+    eventLabel: 
+    wave: {fileID: 11400000, guid: d8ff3601211616243888b263f6b702d9, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 4
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 19ef144ffed9e784c87f0c81f6360743, type: 2}
+    _hint: {fileID: 0}
+    _track: battle-theme
+  - skip: 0
+    type: 0
+    eventLabel: 
+    wave: {fileID: 11400000, guid: d9df11005a560bf44aef528b5d5874a1, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
     arbitraryTime: 2

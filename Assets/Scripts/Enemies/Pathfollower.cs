@@ -29,6 +29,7 @@ namespace Enemies {
         [SerializeField] Transform path;
         [SerializeField] bool flipX = false;
         [SerializeField] bool flipY = false;
+        [SerializeField] int maxPathLoops = 99;
 
         VoidEventHandler OnPathComplete = new VoidEventHandler();
 
@@ -44,6 +45,7 @@ namespace Enemies {
  
         // state
         int waypointIndex = 0;
+        int numPathLoops = 0;
         Vector3 lastOrigin;
         Vector3 target;
         bool hasCrossedHeadingX = false;
@@ -73,6 +75,10 @@ namespace Enemies {
             flipY = shouldFlipY;
             this.waypoints = new List<Transform>();
             foreach (Transform waypoint in waypoints) this.waypoints.Add(waypoint);
+        }
+
+        public void SetMaxLoops(int value) {
+            maxPathLoops = value;
         }
 
         public void Begin() {
@@ -242,10 +248,19 @@ namespace Enemies {
                     break;
                 case PathfinderLoopMode.Teleport:
                 default:
-                    if (waypoints.Count > 0) transform.position = GetWaypointPosition(waypoints[0].position);
-                    Init();
+                    TeleportBackToStart();
                     break;
             }
+        }
+
+        void TeleportBackToStart() {
+            numPathLoops++;
+            if (numPathLoops >= maxPathLoops) {
+                self.TakeDamage(1000f, Damage.DamageType.InstakillQuiet, false);
+                return;
+            }
+            if (waypoints.Count > 0) transform.position = GetWaypointPosition(waypoints[0].position);
+            Init();
         }
 
         int GetPrevWaypointIndex() {

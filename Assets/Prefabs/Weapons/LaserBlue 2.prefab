@@ -242,7 +242,7 @@ MonoBehaviour:
   explosionLifetime: 5
   impactLifetime: 1
   explosionFX: {fileID: 0}
-  impactFX: {fileID: 0}
+  impactFX: {fileID: 6889943620554294198, guid: f74aabdcc4ca6bc47b579848ef1ee5dd, type: 3}
   impulseSound:
     soundName: 
     volume: 0.7
@@ -470,7 +470,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 4
+  m_Time: 2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

@@ -48,5 +48,6 @@ MonoBehaviour:
   _pathfinderLoopMode: 0
   _flipX: 1
   _flipY: 0
+  _maxPathLoops: 2
   _initialState: {fileID: 0}
   notes: 

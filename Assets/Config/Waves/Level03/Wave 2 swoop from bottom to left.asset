@@ -16,17 +16,21 @@ MonoBehaviour:
   - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
     _spawnLocation: S-10-5
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
     _spawnLocation: S-9-5
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
     _spawnLocation: S-8-5
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   _spawnInterval: 0
   _spawnTimeVariance: 0
   _minSpawnInterval: 1
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 0
   launchHeading: {x: 0, y: -1}
   headingVariance: 0
   launchVelocity: 0
@@ -36,4 +40,6 @@ MonoBehaviour:
   _pathfinderLoopMode: 0
   _flipX: 1
   _flipY: 1
+  _maxPathLoops: 2
   _initialState: {fileID: 0}
+  notes: 

@@ -22,7 +22,10 @@ namespace Game {
         [SerializeField] int _initialPoints = 0;
 
         GameMode _mode;
-        [SerializeField] GameDifficulty _difficulty;
+        [SerializeField] GameDifficulty _initialDifficulty = GameDifficulty.Medium;
+
+        [Space]
+        [SerializeField] GameDifficulty _difficulty = GameDifficulty.Medium;
 
         int _pointsInBank;
         int _pointsGained; // points accumulated since round start - when player dies the number goes to zero
@@ -37,7 +40,7 @@ namespace Game {
         public void Init() {
             ResetScores();
             _mode = GameMode.Battle;
-            _difficulty = GameDifficulty.Medium;
+            _difficulty = _initialDifficulty;
         }
 
         public void ResetScores() {

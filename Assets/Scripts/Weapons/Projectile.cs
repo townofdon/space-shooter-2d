@@ -158,11 +158,11 @@ namespace Weapons
             } else {
                 impactSound.Play();
             }
-            if (impactFX != null) {
-                Destroy(Instantiate(impactFX, transform.position, Quaternion.identity), impactLifetime);
-            }
             bool ShouldRichochet = damageableType == DamageableType.Shield || UnityEngine.Random.Range(0f, 1f) <= ricochetProbability;
             if (explosive || numCollisions >= numCollisionsMax || !ShouldRichochet) {
+                if (damageableType != DamageableType.Shield && impactFX != null) {
+                    Destroy(Instantiate(impactFX, transform.position, transform.rotation * Quaternion.Euler(0, 0, 180f)), impactLifetime);
+                }
                 OnDeath();
             } else {
                 Ricochet();
@@ -207,6 +207,9 @@ namespace Weapons
                 if (explosionFX != null) {
                     Destroy(Instantiate(explosionFX, transform.position, Quaternion.identity), explosionLifetime);
                 }
+            }
+
+            if (deathReason == ProjectileDeathReason.Collision) {
                 foreach (var tr in trails) if (tr != null) tr.enabled = false;
             }
 

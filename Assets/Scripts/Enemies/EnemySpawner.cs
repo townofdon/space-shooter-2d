@@ -201,7 +201,7 @@ namespace Enemies {
                     player = PlayerUtils.FindPlayer();
                     GameObject enemy = SpawnObject(wave.GetEnemy(i), wave);
                     if (wave.HasPath()) {
-                        SetEnemyPathfollow(enemy, wave.GetWaypoints(), wave.pathfinderLoopMode, wave.flipX, wave.flipY);
+                        SetEnemyPathfollow(enemy, wave.GetWaypoints(), wave.pathfinderLoopMode, wave.flipX, wave.flipY, wave.maxPathLoops);
                     }
                     LaunchEnemy(enemy, wave);
                     // TODO: REPLACE WITH B-TREE
@@ -223,11 +223,12 @@ namespace Enemies {
             );
         }
 
-        void SetEnemyPathfollow(GameObject enemy, List<Transform> waypoints, PathfinderLoopMode loopMode, bool flipX, bool flipY) {
+        void SetEnemyPathfollow(GameObject enemy, List<Transform> waypoints, PathfinderLoopMode loopMode, bool flipX, bool flipY, int maxPathLoops) {
             var pathFollower = enemy.GetComponent<Pathfollower>();
             if (pathFollower == null) return;
             pathFollower.SetWaypoints(waypoints, flipX, flipY);
             pathFollower.SetLoopMode(loopMode);
+            pathFollower.SetMaxLoops(maxPathLoops);
             pathFollower.Begin();
             var enemyMovement = enemy.GetComponent<EnemyMovement>();
             if (enemyMovement == null) return;

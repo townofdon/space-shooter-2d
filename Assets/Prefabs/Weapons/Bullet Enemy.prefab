@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 4
   baseDamageMultiplier: 1
+  isDamageByPlayer: 0
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -209,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168224b7bf0a97247898722e8c1045c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  removalMode: 0
   moveSpeed: 15
   turnSpeed: 0
   lifetime: 20
@@ -223,7 +225,7 @@ MonoBehaviour:
   explosionLifetime: 5
   impactLifetime: 1
   explosionFX: {fileID: 0}
-  impactFX: {fileID: 0}
+  impactFX: {fileID: 3293150142525677553, guid: fc7d090a2d664644ebf3b87188e8e1bc, type: 3}
   impulseSound:
     soundName: 
     volume: 0
@@ -235,6 +237,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.288
     pitchVariance: 0.055
     clips: []
@@ -250,6 +253,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
@@ -266,6 +270,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.167
     pitchVariance: 0.336
     clips:
@@ -283,6 +288,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.164
     pitchVariance: 0.5
     clips:
@@ -299,6 +305,7 @@ MonoBehaviour:
     spread: 360
     minFalloffDistance: 20
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.122
     pitchVariance: 0.425
     clips:
@@ -322,6 +329,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
