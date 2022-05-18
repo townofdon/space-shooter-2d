@@ -35028,6 +35028,7 @@ GameObject:
   - component: {fileID: 5316389520736407414}
   - component: {fileID: 5316389520736407415}
   - component: {fileID: 4883680674908443311}
+  - component: {fileID: 4662179756716972741}
   m_Layer: 7
   m_Name: WingR
   m_TagString: Untagged
@@ -35123,6 +35124,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4662179756716972741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389520736407413}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 1
+  speedVariance: 0.2
+  accel: 5
 --- !u!1 &5316389520798936039
 GameObject:
   m_ObjectHideFlags: 0
@@ -35422,6 +35439,7 @@ GameObject:
   - component: {fileID: 5316389521223937191}
   - component: {fileID: 5316389521223937184}
   - component: {fileID: 2363828978451154750}
+  - component: {fileID: 1986500710467508579}
   m_Layer: 7
   m_Name: BeamL
   m_TagString: Untagged
@@ -35517,6 +35535,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1986500710467508579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389521223937190}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 1
+  speedVariance: 0.2
+  accel: 5
 --- !u!1 &5316389521314479213
 GameObject:
   m_ObjectHideFlags: 0
@@ -35793,6 +35827,7 @@ GameObject:
   - component: {fileID: 5316389521695733011}
   - component: {fileID: 5316389521695733020}
   - component: {fileID: 5965875637972207999}
+  - component: {fileID: 6547152780630721533}
   m_Layer: 7
   m_Name: GunL
   m_TagString: Untagged
@@ -35888,6 +35923,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6547152780630721533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389521695733010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 1
+  speedVariance: 0.2
+  accel: 5
 --- !u!1 &5316389521768776256
 GameObject:
   m_ObjectHideFlags: 0
@@ -35962,6 +36013,7 @@ GameObject:
   - component: {fileID: 5316389521773242220}
   - component: {fileID: 5316389521773242221}
   - component: {fileID: 6071589307695167622}
+  - component: {fileID: 8516133571027223642}
   m_Layer: 7
   m_Name: BeamR
   m_TagString: Untagged
@@ -36057,6 +36109,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &8516133571027223642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389521773242211}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 1
+  speedVariance: 0.2
+  accel: 5
 --- !u!1 &5316389521787693538
 GameObject:
   m_ObjectHideFlags: 0
@@ -37094,6 +37162,7 @@ GameObject:
   - component: {fileID: 5316389522214553762}
   - component: {fileID: 5316389522214553763}
   - component: {fileID: 5643776550650706115}
+  - component: {fileID: 4136226291850492414}
   m_Layer: 7
   m_Name: Engine
   m_TagString: Untagged
@@ -37189,6 +37258,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4136226291850492414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389522214553761}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 1
+  speedVariance: 0.2
+  accel: 5
 --- !u!1 &5316389522230486305
 GameObject:
   m_ObjectHideFlags: 0
@@ -37507,6 +37592,7 @@ GameObject:
   - component: {fileID: 5316389522306815038}
   - component: {fileID: 5316389522306815039}
   - component: {fileID: 5794692790455388946}
+  - component: {fileID: 3889866306584882925}
   m_Layer: 7
   m_Name: GunR
   m_TagString: Untagged
@@ -37602,6 +37688,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3889866306584882925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389522306815037}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 1
+  speedVariance: 0.2
+  accel: 5
 --- !u!1 &5316389522326147461
 GameObject:
   m_ObjectHideFlags: 0
@@ -37781,6 +37883,7 @@ GameObject:
   - component: {fileID: 5316389522427673564}
   - component: {fileID: 5316389522427673565}
   - component: {fileID: 8551335378418928994}
+  - component: {fileID: 5912274882240152024}
   m_Layer: 7
   m_Name: WingL
   m_TagString: Untagged
@@ -37876,6 +37979,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5912274882240152024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316389522427673555}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 1
+  speedVariance: 0.2
+  accel: 5
 --- !u!1 &5316389522484429941
 GameObject:
   m_ObjectHideFlags: 0

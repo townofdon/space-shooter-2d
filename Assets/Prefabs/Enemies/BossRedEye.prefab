@@ -96,7 +96,7 @@ MonoBehaviour:
   fireIntervalAgro: 1
   flingForce: 5
   disruptorHoldTime: 0.6
-  disruptorHoldTimeAgro: 0.8
+  disruptorHoldTimeAgro: 1
   fireIntervalEasyMod: 1
   fireIntervalMediumMod: 1
   fireIntervalHardMod: 0.9

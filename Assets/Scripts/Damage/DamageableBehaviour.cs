@@ -208,9 +208,7 @@ namespace Damage {
         }
 
         public bool TakeDamage(float amount, DamageType damageType = DamageType.Default, bool isDamageByPlayer = false) {
-            if (!_isAlive || _timeHit > 0f) return false;
-            if (_invulnerable) return false;
-            if (_tempInvulnerable.active) return false;
+            if (!_isAlive) return false;
 
             if (damageType == DamageType.Instakill || damageType == DamageType.InstakillQuiet) {
                 _health = Mathf.Min(0f, _health - amount);
@@ -218,6 +216,10 @@ namespace Damage {
                 _Die(damageType, isDamageByPlayer);
                 return true;
             }
+
+            if (_timeHit > 0f) return false;
+            if (_invulnerable) return false;
+            if (_tempInvulnerable.active) return false;
 
             if (!Utils.IsObjectOnScreen(gameObject, Utils.GetCamera(), 1f)) return false;
 

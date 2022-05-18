@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea0dec8cb9882c409ac4a676adf7360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   activeAtStart: 1
   targetMode: 1
   loopMode: 0
@@ -666,6 +666,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offscreenLifetime: 10
   outsideBoundsPadding: 1
+  killNorth: 1
+  killSouth: 1
+  killEast: 1
+  killWest: 1
 --- !u!114 &2969197718982584922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,6 +820,7 @@ MonoBehaviour:
   turnSpeed: 8
   moveSpeed: 6
   accel: 11
+  initMoveBetweenPoints: 0
   jukes: 0
   jukeTargetedTime: 0
   jukeTargetedVariance: 0

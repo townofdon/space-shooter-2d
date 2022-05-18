@@ -7,6 +7,7 @@ using Audio;
 using UI;
 using Event;
 using UnityEngine.InputSystem;
+using Physics;
 
 namespace Player {
 
@@ -241,6 +242,7 @@ namespace Player {
                 rbPart.velocity = rb.velocity;
                 rbPart.AddForce(direction * deathExplosiveForce + Utils.RandomVector2() * 0.5f, ForceMode2D.Impulse);
                 rbPart.AddTorque(UnityEngine.Random.Range(-deathPartTorque, deathPartTorque));
+                part.GetComponent<ScrollDownScreen>().enabled = true;
             }
         }
 
