@@ -67,8 +67,10 @@ namespace UI {
         enum ShieldState {
             nominal,
             alarm,
+            disruptorActive,
         }
         ShieldState shieldState;
+        ShieldState lastShieldState;
         Coroutine shieldAlarm;
 
         // cached
@@ -89,12 +91,13 @@ namespace UI {
         }
 
         void Update() {
-            if (player == null || !player.isAlive) {
+            if (player == null || !player.isAlive || !player.isActiveAndEnabled) {
                 FindPlayer();
                 canvas.SetActive(false);
             } else {
                 canvas.SetActive(true);
                 DrawHealthUI();
+                DrawShieldUI();
                 DrawWeaponsUI();
                 DrawPointsUI();
             }
@@ -111,17 +114,31 @@ namespace UI {
                 healthSlider.value = player.healthPct;
                 SetHealthColor(player.healthPct);
             }
+        }
 
+        void DrawShieldUI() {
             if (player.shield != lastShield) {
                 lastShield = player.shield;
                 shieldSlider.value = player.shieldPct;
-                SetShieldState(player.shieldPct);
-                if (shieldState == ShieldState.alarm) {
-                    if (shieldAlarm == null) shieldAlarm = StartCoroutine(IShieldAlarm());
-                } else {
-                    SetShieldColor(shieldColor);
+            }
+
+            SetShieldState(player.shieldPct, weapons != null && weapons.isDisruptorActive);
+
+            if (lastShieldState != shieldState) {
+                switch (shieldState) {
+                    case ShieldState.alarm:
+                        if (shieldAlarm == null) shieldAlarm = StartCoroutine(IShieldAlarm());
+                        break;
+                    case ShieldState.disruptorActive:
+                        SetShieldColor(shieldAlarmGradient.Evaluate(1f));
+                        break;
+                    case ShieldState.nominal:
+                        SetShieldColor(shieldColor);
+                        break;
                 }
             }
+
+            lastShieldState = shieldState;
         }
 
         void SetHealthColor(float value) {
@@ -136,11 +153,13 @@ namespace UI {
             shieldBarFill.color = color;
         }
 
-        void SetShieldState(float value) {
-            if (value > 0) {
-                shieldState = ShieldState.nominal;
-            } else {
+        void SetShieldState(float value, bool isDisruptorActive) {
+            if (value <= 0) {
                 shieldState = ShieldState.alarm;
+            } else if (isDisruptorActive) {
+                shieldState = ShieldState.disruptorActive;
+            } else {
+                shieldState = ShieldState.nominal;
             }
         }
 
@@ -177,6 +196,7 @@ namespace UI {
             } else {
                 reloading.SetActive(false);
             }
+
             // ammo
             clipAmmoText.text = weapons.primaryWeaponClipAmmo;
             reserveAmmoText.text = weapons.primaryWeaponReserveAmmo;
@@ -233,9 +253,10 @@ namespace UI {
         }
 
         int getStep(int diff) {
-            if (diff >= 100000) return 5000;
-            if (diff >= 10000) return 500;
-            if (diff >= 1000) return 50;
+            if (diff >= 100000) return 10000;
+            if (diff >= 10000) return 1000;
+            if (diff >= 1000) return 100;
+            if (diff >= 100) return 10;
             return 1;
         }
     }

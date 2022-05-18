@@ -66,18 +66,21 @@ namespace Weapons
         DamageDealer damageDealer;
 
         // state
-        bool isAlive = true;
+        bool _isAlive = true;
         float t = 0;
         float height = 0.5f;
         int numCollisions = 0;
         ProjectileDeathReason deathReason;
+
+        // public
+        public bool isAlive => _isAlive;
 
         public void SetTarget(Transform _target) {
             target = _target;
         }
 
         void Init() {
-            isAlive = true;
+            _isAlive = true;
             height = CalcHeight();
             heading = initialHeading;
             // point heading in direction of rotation
@@ -111,7 +114,7 @@ namespace Weapons
         }
 
         void Update() {
-            if (!isAlive) return;
+            if (!_isAlive) return;
             UpdateHeading();
             if (rb == null) MoveViaTransform();
             t += Time.deltaTime;
@@ -125,7 +128,7 @@ namespace Weapons
         }
 
         void UpdateHeading() {
-            if (!isAlive) {
+            if (!_isAlive) {
                 velocity *= 0.05f;
                 return;
             }
@@ -141,17 +144,17 @@ namespace Weapons
         }
 
         void MoveViaTransform() {
-            if (!isAlive) return;
+            if (!_isAlive) return;
             transform.position += velocity * Time.deltaTime;
         }
 
         void MoveViaRigidbody() {
-            if (!isAlive) return;
+            if (!_isAlive) return;
             rb.velocity = velocity;
         }
 
         void OnHit(DamageableType damageableType) {
-            if (!isAlive) return;
+            if (!_isAlive) return;
             numCollisions++;
             if (damageableType == DamageableType.Shield) {
                 impactShieldSound.Play();
@@ -170,7 +173,7 @@ namespace Weapons
         }
 
         void Ricochet() {
-            if (!isAlive) return;
+            if (!_isAlive) return;
             ricochetSound.Play();
             heading = -heading;
             Quaternion ricochet = GetRicochet();
@@ -191,8 +194,8 @@ namespace Weapons
         }
 
         public void OnDeath() {
-            if (!isAlive) return;
-            isAlive = false;
+            if (!_isAlive) return;
+            _isAlive = false;
             if (damageDealer != null) damageDealer.enabled = false;
             destroyedSound.Play();
             thrustSound.Stop();
@@ -209,8 +212,10 @@ namespace Weapons
                 }
             }
 
-            if (deathReason == ProjectileDeathReason.Collision) {
-                foreach (var tr in trails) if (tr != null) tr.enabled = false;
+            if (deathReason == ProjectileDeathReason.Collision && trails != null) {
+                foreach (var tr in trails) {
+                    if (tr != null) tr.enabled = false;
+                }
             }
 
             while (impactSound.isPlaying) yield return null;

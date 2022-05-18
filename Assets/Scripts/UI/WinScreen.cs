@@ -7,6 +7,7 @@ using Game;
 using Player;
 using Event;
 using Core;
+using Dialogue;
 
 namespace UI {
 
@@ -17,6 +18,7 @@ namespace UI {
         [SerializeField] PlayerStateSO playerState;
         [SerializeField] GameObject canvas;
         [SerializeField] GameObject textPressAnyKey;
+        [SerializeField] DialogueItemSO dialogueItem;
         [SerializeField] Dialogue.HintSO upgradeHint;
 
         [Space]
@@ -40,6 +42,7 @@ namespace UI {
         [SerializeField] float timeDelayPressAnyKey = 0.7f;
 
         bool dismiss = false;
+        bool waitingForDialogue = false;
         int num = 0;
         float fNum = 0;
 
@@ -50,14 +53,16 @@ namespace UI {
 
         private void OnEnable() {
             eventChannel.OnAnyKeyPress.Subscribe(OnAnyKeyPress);
+            eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
         }
 
         private void OnDisable() {
             eventChannel.OnAnyKeyPress.Unsubscribe(OnAnyKeyPress);
+            eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
         }
 
         void Start() {
-            canvas.SetActive(true);
+            canvas.SetActive(false);
             rowPoints.SetActive(false);
             rowEnemies.SetActive(false);
             rowDeaths.SetActive(false);
@@ -65,14 +70,26 @@ namespace UI {
             textPressAnyKey.SetActive(false);
             AudioManager.current.CueTrack("starlord-main-theme");
 
-            StartCoroutine(IStats());
+            StartCoroutine(IDialogue());
         }
 
         void OnAnyKeyPress() {
             dismiss = true;
         }
 
+        void OnDismissDialogue() {
+            waitingForDialogue = false;
+        }
+
+        IEnumerator IDialogue() {
+            eventChannel.OnShowDialogue.Invoke(dialogueItem);
+            waitingForDialogue = true;
+            while (waitingForDialogue) yield return null;
+            yield return IStats();
+        }
+
         IEnumerator IStats() {
+            canvas.SetActive(true);
             yield return new WaitForSeconds(timeDelayStats);
 
             rowPoints.SetActive(true);

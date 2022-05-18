@@ -613,6 +613,7 @@ MonoBehaviour:
   path: {fileID: 0}
   flipX: 0
   flipY: 0
+  maxPathLoops: 99
 --- !u!114 &5542606424295928501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,6 +717,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.221
     pitchVariance: 0.389
     clips:
@@ -735,6 +737,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.073
     pitchVariance: 0.3
     clips:
@@ -748,7 +751,7 @@ MonoBehaviour:
     pickups:
     - pickupPrefab: {fileID: 7348726175182028151, guid: b638c9b2738a1c54499d272fd277b6f9, type: 3}
       numItemsToSpawn: 2
-      spawnLikelihood: 0.07
+      spawnLikelihood: 0.04
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
       numItemsToSpawn: 5
       spawnLikelihood: 0.503
@@ -846,6 +849,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
@@ -862,6 +866,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
@@ -935,6 +940,7 @@ MonoBehaviour:
     spread: 293
     minFalloffDistance: 15
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 59e876a918970904f8f2576933a82bcb, type: 3}
@@ -951,6 +957,7 @@ MonoBehaviour:
     spread: 286
     minFalloffDistance: 15
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:

@@ -20,15 +20,21 @@ namespace Physics {
         }
 
         void Update() {
-            if (rb != null) return;
+            if (isUsingRigidBodyPhysics()) return;
             transform.position = transform.position + (Vector3)Vector2.down * moveSpeed * Time.deltaTime;
         }
 
         void FixedUpdate() {
-            if (rb == null) return;
+            if (!isUsingRigidBodyPhysics()) return;
             if (debug) Debug.Log(rb.velocity.y);
-
             if (rb.velocity.y > -moveSpeed) rb.AddForce(Vector2.down * accel);
+        }
+
+        bool isUsingRigidBodyPhysics() {
+            if (rb == null) return false;
+            if (rb.isKinematic) return false;
+            if (!rb.simulated) return false;
+            return true;
         }
     }
 }

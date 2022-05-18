@@ -1090,6 +1090,7 @@ GameObject:
   - component: {fileID: 3691588788118134409}
   - component: {fileID: 718122837}
   - component: {fileID: 1493440362998903205}
+  - component: {fileID: 3005587173296999683}
   m_Layer: 10
   m_Name: Turret
   m_TagString: EnemyTurret
@@ -1205,6 +1206,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -1221,6 +1223,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -1237,6 +1240,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -1252,6 +1256,7 @@ MonoBehaviour:
     spread: 247
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.129
     clips:
@@ -1308,6 +1313,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.221
     pitchVariance: 0.389
     clips:
@@ -1327,6 +1333,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.073
     pitchVariance: 0.3
     clips:
@@ -1413,6 +1420,7 @@ MonoBehaviour:
     spread: 293
     minFalloffDistance: 15
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 59e876a918970904f8f2576933a82bcb, type: 3}
@@ -1429,6 +1437,7 @@ MonoBehaviour:
     spread: 286
     minFalloffDistance: 15
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -1446,6 +1455,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3005587173296999683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691588788118134410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenLifetime: 10
+  outsideBoundsPadding: 1
+  killNorth: 0
+  killSouth: 1
+  killEast: 1
+  killWest: 1
 --- !u!1 &3691588788243879605
 GameObject:
   m_ObjectHideFlags: 0

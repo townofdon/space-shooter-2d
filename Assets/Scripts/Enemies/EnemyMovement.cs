@@ -57,6 +57,7 @@ namespace Enemies
         [SerializeField] float turnSpeed = 4f;
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float accel = 10f;
+        [SerializeField] bool initMoveBetweenPoints = false;
 
         [Header("Behaviour")]
         [Space]
@@ -228,6 +229,7 @@ namespace Enemies
 
             movePoints.Clear();
             foreach (Transform location in movePointLocations) movePoints.Add(location.position);
+            if (initMoveBetweenPoints && movePoints.Count > 0 && mode == MovementMode.MoveBetweenPoints) moveTarget = movePoints[0];
             (minBounds, maxBounds) = Utils.GetScreenBounds(Utils.GetCamera(), 2f);
         }
 

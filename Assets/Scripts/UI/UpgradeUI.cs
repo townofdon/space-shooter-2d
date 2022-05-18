@@ -31,6 +31,7 @@ namespace UI {
         [SerializeField] WeaponClass laser;
         [SerializeField] WeaponClass missiles;
         [SerializeField] WeaponClass disruptor;
+        [SerializeField] WeaponClass nuke;
 
         [Space]
         [SerializeField] TextMeshProUGUI textNumCredits;
@@ -41,6 +42,7 @@ namespace UI {
         [SerializeField] TextMeshProUGUI textNameLaser;
         [SerializeField] TextMeshProUGUI textNameMissiles;
         [SerializeField] TextMeshProUGUI textNameDisruptor;
+        [SerializeField] TextMeshProUGUI textNameNuke;
         [SerializeField] TextMeshProUGUI textNameGuns;
 
         [Space]
@@ -48,6 +50,7 @@ namespace UI {
         [SerializeField] TextMeshProUGUI textClassLaser;
         [SerializeField] TextMeshProUGUI textClassMissiles;
         [SerializeField] TextMeshProUGUI textClassDisruptor;
+        [SerializeField] TextMeshProUGUI textClassNuke;
         [SerializeField] TextMeshProUGUI textClassGuns;
 
         [Space]
@@ -55,6 +58,7 @@ namespace UI {
         [SerializeField] TextMeshProUGUI textCostLaser;
         [SerializeField] TextMeshProUGUI textCostMissiles;
         [SerializeField] TextMeshProUGUI textCostDisruptor;
+        [SerializeField] TextMeshProUGUI textCostNuke;
         [SerializeField] TextMeshProUGUI textCostGuns;
 
         [Space]
@@ -62,6 +66,7 @@ namespace UI {
         [SerializeField] Button buttonUpgradeLaser;
         [SerializeField] Button buttonUpgradeMissiles;
         [SerializeField] Button buttonUpgradeDisruptor;
+        [SerializeField] Button buttonUpgradeNuke;
         [SerializeField] Button buttonUpgradeGuns;
 
         [Space]
@@ -69,6 +74,7 @@ namespace UI {
         [SerializeField] GameObject upgradeSlotsLaser;
         [SerializeField] GameObject upgradeSlotsMissiles;
         [SerializeField] GameObject upgradeSlotsDisruptor;
+        [SerializeField] GameObject upgradeSlotsNuke;
         [SerializeField] GameObject upgradeSlotsGuns;
 
         [Space]
@@ -83,12 +89,14 @@ namespace UI {
         UIButton uiButtonUpgradeLaser;
         UIButton uiButtonUpgradeMissiles;
         UIButton uiButtonUpgradeDisruptor;
+        UIButton uiButtonUpgradeNuke;
         UIButton uiButtonUpgradeGuns;
 
         UpgradeSlot upgradeSlotPDC;
         UpgradeSlot upgradeSlotLaser;
         UpgradeSlot upgradeSlotMissiles;
         UpgradeSlot upgradeSlotDisruptor;
+        UpgradeSlot upgradeSlotNuke;
         UpgradeSlot upgradeSlotGuns;
 
         InputSystemUIInputModule uiModule;
@@ -103,7 +111,6 @@ namespace UI {
 
         public void UpgradePDC() {
             if (machineGun.CanUpgrade && machineGun.CostNextUpgrade <= playerState.totalMoney) {
-                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(machineGun.CostNextUpgrade);
                 machineGun.Upgrade();
                 upgradeSlotPDC.SetUpgradeLevel(machineGun.CurrentUpgradeLevel);
@@ -115,7 +122,6 @@ namespace UI {
 
         public void UpgradeLZR() {
             if (laser.CanUpgrade && laser.CostNextUpgrade <= playerState.totalMoney) {
-                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(laser.CostNextUpgrade);
                 laser.Upgrade();
                 upgradeSlotLaser.SetUpgradeLevel(laser.CurrentUpgradeLevel);
@@ -127,7 +133,6 @@ namespace UI {
 
         public void UpgradeMissiles() {
             if (missiles.CanUpgrade && missiles.CostNextUpgrade <= playerState.totalMoney) {
-                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(missiles.CostNextUpgrade);
                 missiles.Upgrade();
                 upgradeSlotMissiles.SetUpgradeLevel(missiles.CurrentUpgradeLevel);
@@ -139,7 +144,6 @@ namespace UI {
 
         public void UpgradeDisruptor() {
             if (disruptor.CanUpgrade && disruptor.CostNextUpgrade <= playerState.totalMoney) {
-                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(disruptor.CostNextUpgrade);
                 disruptor.Upgrade();
                 upgradeSlotDisruptor.SetUpgradeLevel(disruptor.CurrentUpgradeLevel);
@@ -149,9 +153,19 @@ namespace UI {
             }
         }
 
+        public void UpgradeNuke() {
+            if (nuke.CanUpgrade && nuke.CostNextUpgrade <= playerState.totalMoney) {
+                playerState.SpendMoney(nuke.CostNextUpgrade);
+                nuke.Upgrade();
+                upgradeSlotNuke.SetUpgradeLevel(nuke.CurrentUpgradeLevel);
+                AudioManager.current.PlaySound("upgrade-weapon");
+            } else {
+                AudioManager.current.PlaySound("upgrade-error");
+            }
+        }
+
         public void UpgradeGuns() {
             if (gunsUpgradeCost <= playerState.totalMoney) {
-                gameState.GainPoints(upgradePointBonus);
                 playerState.SpendMoney(gunsUpgradeCost);
                 playerState.UpgradeGuns();
                 upgradeSlotGuns.SetUpgradeLevel(1);
@@ -175,6 +189,7 @@ namespace UI {
             AppIntegrity.AssertPresent(machineGun);
             AppIntegrity.AssertPresent(laser);
             AppIntegrity.AssertPresent(missiles);
+            AppIntegrity.AssertPresent(nuke);
             AppIntegrity.AssertPresent(disruptor);
 
             AppIntegrity.AssertPresent(textNumCredits);
@@ -184,30 +199,35 @@ namespace UI {
             AppIntegrity.AssertPresent(textCostLaser);
             AppIntegrity.AssertPresent(textCostMissiles);
             AppIntegrity.AssertPresent(textCostDisruptor);
+            AppIntegrity.AssertPresent(textCostNuke);
             AppIntegrity.AssertPresent(textCostGuns);
 
             AppIntegrity.AssertPresent(textClassPDC);
             AppIntegrity.AssertPresent(textClassLaser);
             AppIntegrity.AssertPresent(textClassMissiles);
             AppIntegrity.AssertPresent(textClassDisruptor);
+            AppIntegrity.AssertPresent(textClassNuke);
             AppIntegrity.AssertPresent(textClassGuns);
 
             AppIntegrity.AssertPresent(buttonUpgradePDC);
             AppIntegrity.AssertPresent(buttonUpgradeLaser);
             AppIntegrity.AssertPresent(buttonUpgradeMissiles);
             AppIntegrity.AssertPresent(buttonUpgradeDisruptor);
+            AppIntegrity.AssertPresent(buttonUpgradeNuke);
             AppIntegrity.AssertPresent(buttonUpgradeGuns);
 
             uiButtonUpgradePDC = new UIButton(buttonUpgradePDC);
             uiButtonUpgradeLaser = new UIButton(buttonUpgradeLaser);
             uiButtonUpgradeMissiles = new UIButton(buttonUpgradeMissiles);
             uiButtonUpgradeDisruptor = new UIButton(buttonUpgradeDisruptor);
+            uiButtonUpgradeNuke = new UIButton(buttonUpgradeNuke);
             uiButtonUpgradeGuns = new UIButton(buttonUpgradeGuns);
 
             upgradeSlotPDC = InitUpgradeSlot(upgradeSlotsPDC, 0, machineGun.MaxUpgradeLevel);
             upgradeSlotLaser = InitUpgradeSlot(upgradeSlotsLaser, 0, laser.MaxUpgradeLevel);
             upgradeSlotMissiles = InitUpgradeSlot(upgradeSlotsMissiles, 0, missiles.MaxUpgradeLevel);
             upgradeSlotDisruptor = InitUpgradeSlot(upgradeSlotsDisruptor, 0, disruptor.MaxUpgradeLevel);
+            upgradeSlotNuke = InitUpgradeSlot(upgradeSlotsNuke, 0, nuke.MaxUpgradeLevel);
             upgradeSlotGuns = InitUpgradeSlot(upgradeSlotsGuns, 0, 1);
         }
 
@@ -234,18 +254,21 @@ namespace UI {
             textClassLaser.text = laser.assetClass;
             textClassMissiles.text = missiles.assetClass;
             textClassDisruptor.text = disruptor.assetClass;
+            textClassNuke.text = nuke.assetClass;
             textClassGuns.text = playerState.hasGunsUpgrade ? "Destructoid" : "Stock";
 
             textCostPDC.text = machineGun.CanUpgrade ? machineGun.CostNextUpgrade.ToString() + " CR" : "-";
             textCostLaser.text = laser.CanUpgrade ? laser.CostNextUpgrade.ToString() + " CR" : "-";
             textCostMissiles.text = missiles.CanUpgrade ? missiles.CostNextUpgrade.ToString() + " CR" : "-";
             textCostDisruptor.text = disruptor.CanUpgrade ? disruptor.CostNextUpgrade.ToString() + " CR" : "-";
+            textCostNuke.text = nuke.CanUpgrade ? nuke.CostNextUpgrade.ToString() + " CR" : "-";
             textCostGuns.text = !playerState.hasGunsUpgrade ? gunsUpgradeCost.ToString() + " CR" : "-";
 
             EnablifyWeaponButton(machineGun, uiButtonUpgradePDC);
             EnablifyWeaponButton(laser, uiButtonUpgradeLaser);
             EnablifyWeaponButton(missiles, uiButtonUpgradeMissiles);
             EnablifyWeaponButton(disruptor, uiButtonUpgradeDisruptor);
+            EnablifyWeaponButton(nuke, uiButtonUpgradeNuke);
             EnablifyUpgradeGunsButton(uiButtonUpgradeGuns);
 
             // anyMaxxedOut = !machineGun.CanUpgrade || !laser.CanUpgrade || !missiles.CanUpgrade || !disruptor.CanUpgrade;
@@ -259,6 +282,7 @@ namespace UI {
             MaxxifyText(laser.CanUpgrade, textNameLaser, textClassLaser);
             MaxxifyText(missiles.CanUpgrade, textNameMissiles, textClassMissiles);
             MaxxifyText(disruptor.CanUpgrade, textNameDisruptor, textClassDisruptor);
+            MaxxifyText(nuke.CanUpgrade, textNameNuke, textClassNuke);
             MaxxifyText(!playerState.hasGunsUpgrade, textNameGuns, textClassGuns);
         }
 
@@ -303,6 +327,7 @@ namespace UI {
             RefreshUpgrade(upgradeSlotLaser, laser.CurrentUpgradeLevel);
             RefreshUpgrade(upgradeSlotMissiles, missiles.CurrentUpgradeLevel);
             RefreshUpgrade(upgradeSlotDisruptor, disruptor.CurrentUpgradeLevel);
+            RefreshUpgrade(upgradeSlotNuke, nuke.CurrentUpgradeLevel);
             RefreshUpgrade(upgradeSlotGuns, playerState.hasGunsUpgrade ? 1 : 0);
         }
 

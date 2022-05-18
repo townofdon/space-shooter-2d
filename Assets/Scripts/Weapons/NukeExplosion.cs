@@ -33,11 +33,13 @@ namespace Weapons
         float lifetime = 1f;
         float nukeCoreRadius = 1f;
         Vector3 scale;
+        Collider2D[] colliders;
 
         // state
         Vector3 hitDist;
         Vector3 blastDirection;
         float t = 0f;
+        bool didDisableColliders = false;
 
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(nukeShockwave);
@@ -54,6 +56,7 @@ namespace Weapons
             nukeCoreRadius = nukeCore.radius;
             nukeCore.enabled = false;
             t = 0f;
+            colliders = GetComponentsInChildren<Collider2D>();
 
             StartCoroutine(GameFeel.ShakeGamepad(0.75f, 1f, 1f));
             StartCoroutine(NukeFX());
@@ -70,7 +73,14 @@ namespace Weapons
             nukeShockwave2.transform.localScale = scale;
             t += Time.deltaTime;
 
-            if (t < timeCausingDamage) BlastRadius();
+            if (t < timeCausingDamage) {
+                BlastRadius();
+            } else if (colliders != null && !didDisableColliders) {
+                foreach (Collider2D col in colliders) {
+                    col.enabled = false;
+                }
+                didDisableColliders = true;
+            }
         }
 
         void BlastRadius() {

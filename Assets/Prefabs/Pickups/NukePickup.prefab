@@ -229,6 +229,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 2
+  shockwaveMagnitude: 1.5
 --- !u!114 &8348319779286762644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +282,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.341
     pitchVariance: 0.031
     clips:

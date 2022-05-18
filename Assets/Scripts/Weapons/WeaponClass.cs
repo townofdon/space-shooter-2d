@@ -64,6 +64,14 @@ namespace Weapons
         [SerializeField] float _launchForce = 0f;
         [SerializeField] float _recoil = 0f;
 
+        [Header("Accuracy")]
+        [Space]
+        [SerializeField] bool _hasPerfectAccuracy = true;
+        [SerializeField] float _accuracyAngle = 0f;
+        [SerializeField]
+        [Tooltip("make sure start / end values are -1, 1 respectively")]
+        AnimationCurve _accuracyCurve = AnimationCurve.Linear(0f, -1f, 1f, 1f);
+
         [Header("Prefab Settings")][Space]
         [SerializeField] GameObject _prefab;
 
@@ -97,6 +105,9 @@ namespace Weapons
         public float reloadTime => _reloadTime;
         public float recoil => _recoil;
         public float launchForce => _launchForce;
+        public bool hasPerfectAccuracy => _hasPerfectAccuracy;
+        public float accuracyAngle => _accuracyAngle;
+        public AnimationCurve accuracyCurve => _accuracyCurve;
         public GameObject prefab => _prefab;
         public float shieldDrain => _shieldDrain;
         public Sound reloadSound => _reloadSound;
@@ -406,6 +417,15 @@ namespace Weapons
                     _upgradeSounds.Add(upgrade.reloadSound);
                 }
             }
+        }
+
+        //
+        // ACCURACY
+        //
+
+        public float GetAccuracyAngle(float t = 0f) {
+            if (current.hasPerfectAccuracy) return 0f;
+            return current.accuracyAngle * current.accuracyCurve.Evaluate(t);
         }
     }
 }

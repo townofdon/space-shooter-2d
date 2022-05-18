@@ -1562,7 +1562,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 65f310315cf39d04d8d9d1575ca6cd93, type: 2}
   - {fileID: 11400000, guid: 45d71d32693b83d4f9011984d508b9e6, type: 2}
   timeStartDelay: 3
-  showUpgradePanel: 0
+  showUpgradePanel: 1
   loopIndefinitely: 0
   debug: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}

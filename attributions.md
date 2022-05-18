@@ -18,3 +18,5 @@
 - https://opengameart.org/content/minimare-rework
 - https://opengameart.org/content/cugzilia-ii-prototype-squid
 - https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- https://freesound.org/people/primeval_polypod/sounds/156508/

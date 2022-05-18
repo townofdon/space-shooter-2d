@@ -255,10 +255,27 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.1
     clips:
     - {fileID: 8300000, guid: d6129ba5a431bc546a1437f49d93d1fd, type: 3}
+    oneShot: 1
+  - soundName: MenuSelect
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    dopplerLevel: 1
+    volumeVariance: 0.05
+    pitchVariance: 0.1
+    clips:
+    - {fileID: 8300000, guid: 055a5ee0ca59f2c4f9bbe8ba438bb790, type: 3}
     oneShot: 1
   - soundName: DialogueChip
     volume: 0.4
@@ -270,6 +287,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.05
     clips:
@@ -285,6 +303,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.05
     clips:
@@ -301,6 +320,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.05
     clips:
@@ -316,6 +336,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.05
     clips:
@@ -331,6 +352,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.05
     clips:
@@ -346,6 +368,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.05
     clips:
@@ -361,6 +384,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.05
     clips:
@@ -376,6 +400,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     volumeVariance: 0.05
     pitchVariance: 0.05
     clips:
@@ -392,6 +417,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     bpm: 120
     beatsPerBar: 4
     loops: 1
@@ -410,6 +436,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     bpm: 120
     beatsPerBar: 4
     loops: 0
@@ -419,7 +446,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: battle-theme
-    volume: 0.6
+    volume: 0.8
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -428,6 +455,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     bpm: 120
     beatsPerBar: 4
     loops: 1
@@ -437,7 +465,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: fast-theme
-    volume: 0.5
+    volume: 0.6
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -446,6 +474,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     bpm: 150
     beatsPerBar: 4
     loops: 1
@@ -455,7 +484,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: pleasant-theme
-    volume: 0.5
+    volume: 0.6
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -464,6 +493,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     bpm: 150
     beatsPerBar: 4
     loops: 1
@@ -473,6 +503,25 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: business-theme
+    volume: 0.9
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    dopplerLevel: 1
+    bpm: 150
+    beatsPerBar: 4
+    loops: 1
+    clipIntro: {fileID: 8300000, guid: be443fa219e447c4c9953675b149bfe8, type: 3}
+    clipLoop: {fileID: 8300000, guid: 345212e20f8ceed4d846c10aeacc0c3c, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
+  - soundName: danger-theme
     volume: 0.5
     pitch: 1
     ignoreListenerPause: 0
@@ -482,11 +531,12 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
-    bpm: 150
+    dopplerLevel: 1
+    bpm: 158
     beatsPerBar: 4
     loops: 1
-    clipIntro: {fileID: 8300000, guid: be443fa219e447c4c9953675b149bfe8, type: 3}
-    clipLoop: {fileID: 8300000, guid: 345212e20f8ceed4d846c10aeacc0c3c, type: 3}
+    clipIntro: {fileID: 8300000, guid: bc0612378b64b1846a798b7f1b437830, type: 3}
+    clipLoop: {fileID: 8300000, guid: 7547953edc1649f459b88d9f690fd13b, type: 3}
     clipOutro: {fileID: 0}
     fadeInTime: 0
     fadeOutTime: 0
@@ -500,6 +550,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 0
     maxFalloffDistance: 0
+    dopplerLevel: 1
     bpm: 160
     beatsPerBar: 4
     loops: 0
@@ -519,6 +570,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -912,6 +964,10 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 35.019474
       objectReference: {fileID: 0}
+    - target: {fileID: 7061719783394385047, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 043fcc697e6309d42b1a037570c6b70b, type: 3}
     - target: {fileID: 7061719783394385047, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
       propertyPath: m_Color.a
       value: 0.74509805

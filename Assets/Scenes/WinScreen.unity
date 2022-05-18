@@ -2310,6 +2310,7 @@ MonoBehaviour:
   playerState: {fileID: 11400000, guid: fa472ff00b3833642af6ce2e7f0e81da, type: 2}
   canvas: {fileID: 927384325}
   textPressAnyKey: {fileID: 213235212}
+  dialogueItem: {fileID: 11400000, guid: 8e292d1cf500fe347bac7619df7f1518, type: 2}
   upgradeHint: {fileID: 11400000, guid: d1c495a372b7007428d85a0b49da8853, type: 2}
   rowPoints: {fileID: 500151003}
   rowEnemies: {fileID: 1712940997}
@@ -3000,9 +3001,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2828281069327750389, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: debug
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2828281069327756043, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2828281069696956102, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
       propertyPath: m_AnchorMax.y

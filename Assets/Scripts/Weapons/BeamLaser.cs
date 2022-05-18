@@ -6,6 +6,7 @@ using Audio;
 using Core;
 using Player;
 using Damage;
+using Game;
 
 namespace Weapons {
 
@@ -31,6 +32,13 @@ namespace Weapons {
         [SerializeField][Range(0.01f, 1f)] float damageStartThreshold = 0.8f;
         [SerializeField][Range(0f, 1000f)] float damageAmount = 100f;
         [SerializeField][Range(0f, 1000f)] float damageVariance = 20f;
+
+        [Header("Difficulty Settings")]
+        [Space]
+        [SerializeField][Range(0f, 5f)] float aimSpeedEasyMod = 1f;
+        [SerializeField][Range(0f, 5f)] float aimSpeedMediumMod = 1f;
+        [SerializeField][Range(0f, 5f)] float aimSpeedHardMod = 1f;
+        [SerializeField][Range(0f, 5f)] float aimSpeedInsaneMod = 1f;
 
         [Header("Audio")]
         [Space]
@@ -62,7 +70,7 @@ namespace Weapons {
         float aimAngle = 0f;
         Quaternion aim = Quaternion.identity;
         RaycastHit2D[] raycastHits = new RaycastHit2D[10];
-        Vector2 aimEndpoint = new Vector2(0, -40f);
+        Vector2 aimEndpoint = new Vector2(0, -100f);
 
         public void SetLocked(bool value) {
             isLocked = value;
@@ -94,6 +102,7 @@ namespace Weapons {
             AppIntegrity.AssertPresent(parentActor);
 
             laserLine.widthMultiplier = 0f;
+            laserLine.enabled = true;
             box.enabled = false;
             aimVector = -transform.up;
             if (chargeFX != null) {
@@ -117,22 +126,22 @@ namespace Weapons {
             if (isLocked) return;
             if (player == null || !player.isAlive) return;
             vectorToPlayer = player.transform.position - transform.position;
-            aimVector = Vector2.MoveTowards(aimVector, vectorToPlayer.normalized, aimSpeed * Time.deltaTime);
+            aimVector = Vector2.MoveTowards(aimVector, vectorToPlayer.normalized, aimSpeed * GetAimSpeedMod() * Time.deltaTime);
             aimAngle = Vector2.SignedAngle(Vector2.down, aimVector);
             transform.rotation = Quaternion.AngleAxis(aimAngle, Vector3.forward);
         }
 
         float GetAimIntersectDistance() {
-            if (firing.active) return 40f;
-            if (closing.active) return 40f;
-            if (player == null || !player.isAlive) return 40f;
-            int numResults = Physics2D.RaycastNonAlloc(transform.position, aimVector.normalized, raycastHits, 40f);
+            if (firing.active) return 100f;
+            if (closing.active) return 100f;
+            if (player == null || !player.isAlive) return 100f;
+            int numResults = Physics2D.RaycastNonAlloc(transform.position, aimVector.normalized, raycastHits, 100f);
             for (int i = 0; i < numResults; i++) {
                 if (IsIgnoredCollider(raycastHits[i].collider)) continue;
                 if (raycastHits[i].collider.tag == UTag.Bullet || raycastHits[i].collider.tag == UTag.Laser) continue;
                 return Vector2.Distance(raycastHits[i].collider.transform.position, transform.position);
             }
-            return 40f;
+            return 100f;
         }
 
         bool IsIgnoredCollider(Collider2D collider) {
@@ -206,6 +215,21 @@ namespace Weapons {
                 yield return null;
             }
             ieChargeUp = null;
+        }
+
+        float GetAimSpeedMod() {
+            switch (GameManager.current.difficulty) {
+                case GameDifficulty.Easy:
+                    return aimSpeedEasyMod;
+                case GameDifficulty.Medium:
+                    return aimSpeedMediumMod;
+                case GameDifficulty.Hard:
+                    return aimSpeedHardMod;
+                case GameDifficulty.Insane:
+                    return aimSpeedInsaneMod;
+                default:
+                    return 1f;
+            }
         }
 
         void OnGUI() {

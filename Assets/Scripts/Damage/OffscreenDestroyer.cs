@@ -10,6 +10,13 @@ namespace Damage
         [SerializeField] float offscreenLifetime = 10f;
         [SerializeField] float outsideBoundsPadding = 1f;
 
+        [Space]
+
+        [SerializeField] bool killNorth = true;
+        [SerializeField] bool killSouth = true;
+        [SerializeField] bool killEast = true;
+        [SerializeField] bool killWest = true;
+
         // components
         Rigidbody2D rb;
         DamageableBehaviour actor;
@@ -30,10 +37,10 @@ namespace Damage
 
         void Update() {
             if (
-                transform.position.x < minBounds.x ||
-                transform.position.x > maxBounds.x ||
-                transform.position.y > maxBounds.y ||
-                transform.position.y < minBounds.y
+                (killWest && transform.position.x < minBounds.x) ||
+                (killEast && transform.position.x > maxBounds.x) ||
+                (killNorth && transform.position.y > maxBounds.y) ||
+                (killSouth && transform.position.y < minBounds.y)
             ) {
                 timeOutsideBounds += Time.deltaTime;
             } else {

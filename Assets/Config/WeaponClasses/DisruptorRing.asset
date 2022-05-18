@@ -26,6 +26,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 10
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -41,6 +42,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 10
     maxFalloffDistance: 50
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 8300000, guid: a8b93234090105549be38672bacb0c40, type: 3}
     clipLoop: {fileID: 8300000, guid: 3b6726c9178fbfa42abb3067aa29160d, type: 3}
@@ -57,6 +59,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -66,6 +69,7 @@ MonoBehaviour:
     _damageMultiplier: 1
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -78,6 +82,32 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 0
     _recoil: 0
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 0}
     _shieldDrain: 30
     _cost: 0
@@ -92,6 +122,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []
@@ -101,6 +132,7 @@ MonoBehaviour:
     _damageMultiplier: 1.1
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -113,6 +145,32 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 0
     _recoil: 0
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 0}
     _shieldDrain: 20
     _cost: 100
@@ -127,6 +185,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []
@@ -135,6 +194,7 @@ MonoBehaviour:
     _damageMultiplier: 1.2
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -147,6 +207,32 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 0
     _recoil: 0
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 0}
     _shieldDrain: 17
     _cost: 300
@@ -161,6 +247,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []
@@ -169,6 +256,7 @@ MonoBehaviour:
     _damageMultiplier: 1.4
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -181,6 +269,32 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 0
     _recoil: 0
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 0}
     _shieldDrain: 15
     _cost: 500
@@ -195,14 +309,16 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []
       oneShot: 1
   - _assetClass: Mark IV
-    _damageMultiplier: 1.5
+    _damageMultiplier: 3
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -215,6 +331,32 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 0
     _recoil: 0
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 0}
     _shieldDrain: 10
     _cost: 1000
@@ -229,6 +371,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []
@@ -237,6 +380,7 @@ MonoBehaviour:
     _damageMultiplier: 5
     _startingAmmo: 0
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 0
     _reloadTime: 0
     _magazineCapacity: 0
@@ -249,6 +393,32 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 0
     _recoil: 0
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 0}
     _shieldDrain: 5
     _cost: 1500
@@ -263,6 +433,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []

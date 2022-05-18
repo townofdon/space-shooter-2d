@@ -176,9 +176,10 @@ namespace Damage
 
         void HandleHitOtherProjectile(Collider2D other) {
             if (this.tag == UTag.DisruptorRing || this.damageType == DamageType.Disruptor) {
-                DrainSelfShields();
                 Projectile projectile = other.GetComponent<Projectile>();
-                if (projectile != null) projectile.OnDeath();
+                if (projectile == null || !projectile.isAlive) return;
+                projectile.OnDeath();
+                DrainSelfShields();
             }
             if (this.tag == UTag.Explosion || this.damageType == DamageType.Explosion) {
                 InvokeCallback(onDeath);
@@ -230,7 +231,7 @@ namespace Damage
         void DrainSelfShields() {
             if (parentActor != null) {
                 parentActor.DrainShield(
-                    GameManager.current.GetWeaponClass(Weapons.WeaponType.DisruptorRing).shieldDrain * 0.25f
+                    GameManager.current.GetWeaponClass(Weapons.WeaponType.DisruptorRing).shieldDrain * Time.deltaTime * 15f
                 );
             }
         }

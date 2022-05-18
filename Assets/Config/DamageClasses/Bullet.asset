@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   _damageType: 4
-  _baseDamage: 10
-  _damageVariance: 2.1
-  _shieldEffectiveness: 0.25
+  _baseDamage: 13
+  _damageVariance: 4.5
+  _shieldEffectiveness: 0.2
   _shieldedHealthEffectiveness: 0
   _unshieldedHealthEffectiveness: 1
-  _playerEffectiveness: 1
+  _playerEffectiveness: 0.9
   _enemyEffectiveness: 1
   _environmentEffectiveness: 0.8
   _npcEffectiveness: 1

@@ -71,8 +71,6 @@ namespace Enemies {
         }
 
         void Start() {
-            AppIntegrity.AssertPresent<GameObject>(ship);
-            AppIntegrity.AssertPresent<GameObject>(explosion);
             AppIntegrity.AssertPresent<EventChannelSO>(eventChannel);
 
             rb = GetComponent<Rigidbody2D>();
@@ -83,7 +81,7 @@ namespace Enemies {
 
             ResetHealth();
             RegisterHealthCallbacks(OnDeath, OnHealthDamaged, Utils.__NOOP__);
-            ship.SetActive(true);
+            if (ship != null) ship.SetActive(true);
             damageSound.Init(this);
             deathSound.Init(this);
         }
@@ -133,7 +131,7 @@ namespace Enemies {
         }
 
         IEnumerator DeathAnimation() {
-            Instantiate(explosion, transform);
+            if (explosion != null) Instantiate(explosion, transform);
             if (ship != null) ship.SetActive(false);
             yield return new WaitForSeconds(3f);
             while (deathSound.isPlaying) yield return null;

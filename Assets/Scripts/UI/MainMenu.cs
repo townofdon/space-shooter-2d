@@ -185,6 +185,7 @@ namespace UI {
         }
 
         void GotoChooseDifficultyMenu() {
+            AudioManager.current.PlaySound("MenuSelect");
             everFocused = false;
             canvasLevelStart.SetActive(false);
             canvasChooseDifficultyMenu.SetActive(true);
@@ -192,6 +193,7 @@ namespace UI {
         }
 
         void GotoChooseShipMenu() {
+            AudioManager.current.PlaySound("MenuSelect");
             everFocused = false;
             canvasChooseShipMenu.SetActive(true);
             canvasChooseDifficultyMenu.SetActive(false);

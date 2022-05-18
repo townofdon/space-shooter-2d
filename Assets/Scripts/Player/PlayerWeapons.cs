@@ -74,6 +74,7 @@ namespace Player
         bool didSwitchPrimaryWeapon;
         bool didSwitchSecondaryWeapon;
         bool didReloadPrimary;
+        bool _isDisruptorActive;
 
         public WeaponType primaryWeaponType => primaryWeapon.type;
         public string primaryWeaponClipAmmo => GetAmmoString(primaryWeapon.ammoInClipDisplayed);
@@ -86,6 +87,7 @@ namespace Player
         public WeaponType secondaryWeaponType => secondaryWeapon.type;
         public string nukeAmmo => GetAmmoString(Mathf.Min(nuke.ammo, 99));
         public string missileAmmo => GetAmmoString(Mathf.Min(missile.ammo, 99));
+        public bool isDisruptorActive => _isDisruptorActive;
 
         void OnEnable() {
             eventChannel.OnPlayerDeath.Subscribe(OnPlayerDeath);
@@ -303,9 +305,11 @@ namespace Player
 
         void AfterTertiaryFire() {
             tertiaryWeapon.AfterFire();
+            _isDisruptorActive = tertiaryWeapon == disruptorRing ? true : false;
         }
         void AfterTertiaryNoFire() {
             tertiaryWeapon.AfterNoFire();
+            _isDisruptorActive = false;
             StopTertiaryFX();
         }
 
@@ -317,7 +321,7 @@ namespace Player
         void FireProjectile(WeaponClass weapon, Vector3 position, Quaternion rotation, bool shouldRecoil = true) {
             // Quaternion aim = Quaternion.AngleAxis(-input.look.x * aimMaxAngle, Vector3.forward);
             // GameObject instance = Object.Instantiate(prefab, position, aim * rotation);
-            GameObject instance = Object.Instantiate(weapon.prefab, position, rotation);
+            GameObject instance = Object.Instantiate(weapon.prefab, position, rotation * GetAccuracyMod(weapon));
             DamageDealer damager = instance.GetComponent<DamageDealer>();
             Collider2D collider = instance.GetComponent<Collider2D>();
             if (collider != null) player.IgnoreCollider(instance.GetComponent<Collider2D>());
@@ -337,6 +341,10 @@ namespace Player
                     rocket.Launch(GetRocketLaunchVector(weapon) * GetRocketLaunchForce(weapon));
                 }
             }
+        }
+
+        Quaternion GetAccuracyMod(WeaponClass weapon) {
+            return Quaternion.AngleAxis(weapon.GetAccuracyAngle(UnityEngine.Random.Range(-1f, 1f)), Vector3.forward);
         }
 
         Vector3 GetRocketLaunchVector(WeaponClass weapon) {

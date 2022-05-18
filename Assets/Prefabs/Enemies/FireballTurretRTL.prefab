@@ -132,6 +132,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -147,6 +148,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -262,6 +264,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offscreenLifetime: 10
   outsideBoundsPadding: 1
+  killNorth: 1
+  killSouth: 1
+  killEast: 1
+  killWest: 1
 --- !u!1 &6500453103116257047
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,8 +338,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -765428885
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 18ef52bf92bc71d47bed0d6854940721, type: 3}
   m_Color: {r: 0.7830189, g: 0.7570458, b: 0.7202296, a: 1}
@@ -447,8 +453,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -765428885
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4324d91e965b64d4d9757c700cd5b110, type: 3}
   m_Color: {r: 0.28996083, g: 0.32716045, b: 0.33962262, a: 1}
@@ -566,8 +572,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -765428885
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 18ef52bf92bc71d47bed0d6854940721, type: 3}
   m_Color: {r: 0.7830189, g: 0.7570458, b: 0.7202296, a: 1}
@@ -650,8 +656,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -765428885
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 18ef52bf92bc71d47bed0d6854940721, type: 3}
   m_Color: {r: 0.7830189, g: 0.7570458, b: 0.7202296, a: 1}

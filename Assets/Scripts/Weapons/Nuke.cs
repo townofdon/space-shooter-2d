@@ -22,6 +22,7 @@ namespace Weapons
         // cached
         Rigidbody2D rb;
         SpriteRenderer sr;
+        SpriteRenderer[] renderers;
         Animator anim;
 
         // state
@@ -35,6 +36,7 @@ namespace Weapons
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);
             sr = Utils.GetRequiredComponent<SpriteRenderer>(gameObject);
             anim = Utils.GetRequiredComponent<Animator>(gameObject);
+            renderers = GetComponentsInChildren<SpriteRenderer>();
             // init
             currentTime = 0f;
             sr.enabled = true;
@@ -66,6 +68,7 @@ namespace Weapons
             if (sploded) return;
             sploded = true;
             if (sr != null) sr.enabled = false;
+            if (renderers != null) foreach (SpriteRenderer renderer in renderers) renderer.enabled = false;
             explosionSound.Play();
             splosion = Object.Instantiate(nukeExplosion, transform.position, new Quaternion(0f,0f,0f,0f));
             // TODO: USE OBJECT POOLING SYSTEM

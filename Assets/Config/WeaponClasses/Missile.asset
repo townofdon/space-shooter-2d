@@ -26,6 +26,7 @@ MonoBehaviour:
     spread: 0
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.151
     pitchVariance: 0.262
     clips:
@@ -42,6 +43,7 @@ MonoBehaviour:
     spread: 271
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
@@ -58,6 +60,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -67,6 +70,7 @@ MonoBehaviour:
     _damageMultiplier: 1
     _startingAmmo: 20
     _infiniteAmmo: 0
+    _cycles: 0
     _reloads: 1
     _reloadTime: 0
     _magazineCapacity: 2
@@ -79,6 +83,32 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 50
     _recoil: 3
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
     _shieldDrain: 0
     _cost: 0
@@ -93,6 +123,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []
@@ -102,6 +133,7 @@ MonoBehaviour:
     _damageMultiplier: 1.1
     _startingAmmo: 40
     _infiniteAmmo: 0
+    _cycles: 0
     _reloads: 1
     _reloadTime: 0
     _magazineCapacity: 2
@@ -114,9 +146,35 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 50
     _recoil: 2
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
     _shieldDrain: 0
-    _cost: 150
+    _cost: 250
     _reloadSound:
       soundName: 
       volume: 0.7
@@ -128,6 +186,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []
@@ -136,6 +195,7 @@ MonoBehaviour:
     _damageMultiplier: 1.1
     _startingAmmo: 60
     _infiniteAmmo: 0
+    _cycles: 0
     _reloads: 1
     _reloadTime: 0
     _magazineCapacity: 2
@@ -148,9 +208,35 @@ MonoBehaviour:
     _deploymentTime: 0.5
     _launchForce: 50
     _recoil: 2
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
     _shieldDrain: 0
-    _cost: 500
+    _cost: 800
     _reloadSound:
       soundName: 
       volume: 0.7
@@ -162,6 +248,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []
@@ -170,6 +257,7 @@ MonoBehaviour:
     _damageMultiplier: 2
     _startingAmmo: 100
     _infiniteAmmo: 1
+    _cycles: 0
     _reloads: 1
     _reloadTime: 0
     _magazineCapacity: 2
@@ -182,9 +270,35 @@ MonoBehaviour:
     _deploymentTime: 0.2
     _launchForce: 40
     _recoil: 3
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
     _shieldDrain: 0
-    _cost: 2200
+    _cost: 4200
     _reloadSound:
       soundName: 
       volume: 0.7
@@ -196,6 +310,7 @@ MonoBehaviour:
       spread: 180
       minFalloffDistance: 20
       maxFalloffDistance: 40
+      dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
       clips: []

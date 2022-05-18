@@ -12,6 +12,7 @@ using Audio;
 namespace UI {
 
     public class DialogueUI : MonoBehaviour {
+        [SerializeField] bool debug;
         [SerializeField] EventChannelSO eventChannel;
         [SerializeField] GameObject canvas;
         [SerializeField] Image avatarImage;
@@ -111,6 +112,12 @@ namespace UI {
             canvas.SetActive(false);
             yield return null;
             eventChannel.OnDismissDialogue.Invoke();
+        }
+
+        private void OnGUI() {
+            if (!debug) return;
+            GUILayout.TextField(currentStatement);
+            GUILayout.TextField(isShowing ? "showing" : "hidden");
         }
     }
 }
