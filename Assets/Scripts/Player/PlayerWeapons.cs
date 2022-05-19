@@ -48,6 +48,7 @@ namespace Player
 
         [Header("DisruptorRing")][Space]
         [SerializeField] GameObject disruptorRingEffect;
+        [SerializeField] DamageDealer disruptorDamageDealer;
 
         [Header("Events")]
         [Space]
@@ -123,6 +124,7 @@ namespace Player
             switchSecondaryWeaponSound.Init(this);
             outOfAmmoSound.Init(this);
             outOfAmmoGunClickSound.Init(this);
+            disruptorDamageDealer.SetDamageMultiplier(disruptorRing.damageMultiplier);
             if (playerState.hasGunsUpgrade) sideGuns.SetActive(true);
         }
 

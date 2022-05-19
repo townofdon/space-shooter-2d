@@ -34,9 +34,11 @@ namespace Enemies
         [Header("General Settings")]
         [Space]
         [SerializeField] List<WaveEnemy> _enemies;
-        [SerializeField] float _spawnInterval = 1f;
-        [SerializeField] [Range(0f, 2f)] float _spawnTimeVariance = 0f;
-        [SerializeField] float _minSpawnInterval = 1f;
+        [SerializeField][Range(0f, 10f)] float _spawnInterval = 1f;
+        [SerializeField][Range(0f, 2f)] float _spawnTimeVariance = 0f;
+        [SerializeField][Range(0f, 10f)] float _minSpawnInterval = 1f;
+        [SerializeField][Range(1, 10)] int _numLoops = 1;
+        [SerializeField][Range(0f, 20f)] float _loopInterval = 0f;
 
         [Header("Spawning")]
         [Space]
@@ -72,6 +74,8 @@ namespace Enemies
         public int spawnCount => GetSpawnCount();
         public int enemyCount => GetEnemyCount();
         public float spawnInterval => GetSpawnInterval();
+        public int numLoops => GetLoopCount();
+        public float loopInterval => _loopInterval;
         public Transform path => _path;
         public FSM.BaseState initialState => _initialState;
         public PathfinderLoopMode pathfinderLoopMode => _pathfinderLoopMode;
@@ -114,6 +118,11 @@ namespace Enemies
                 numEnemies += count;
             }
             return numEnemies;
+        }
+
+        int GetLoopCount() {
+            if (GameManager.current.difficulty < _spawnDifficulty) return 0;
+            return Mathf.Max(_numLoops, 1);
         }
 
         public WaveEnemy GetEnemy(int index)

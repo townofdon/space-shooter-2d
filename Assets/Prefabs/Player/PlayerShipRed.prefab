@@ -36744,6 +36744,7 @@ MonoBehaviour:
   muzzleFlashLZRSideLeft: {fileID: 6288516049204033260}
   muzzleFlashLZRSideRight: {fileID: 8147814422078195142}
   disruptorRingEffect: {fileID: 415421435}
+  disruptorDamageDealer: {fileID: 2553109525966398664}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   switchWeaponSound:
     soundName: Deployment

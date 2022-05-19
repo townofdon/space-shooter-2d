@@ -17,13 +17,19 @@ namespace Damage
         [SerializeField][Range(0f, 10f)] float baseDamageMultiplier = 1f;
         [SerializeField] bool isDamageByPlayer = false;
 
+        [Space]
+
         [Header("Circlecast Settings")][Space]
         [SerializeField] bool preferCirclecast = false;
+
+        [Space]
 
         [Header("Raycast Settings")][Space]
         [SerializeField] bool raycast = false;
         [SerializeField][Tooltip("Minimum distance the projectile must travel before ignore settings are turned off and it can start raycasting")]
         float minSafeDistance = 2f;
+
+        [Space]
 
         [Header("Ignore Settings")][Space]
         [SerializeField] bool ignoreParentUUID = true;

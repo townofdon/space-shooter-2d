@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 7348726175182028155}
   - component: {fileID: 7348726175182028148}
   - component: {fileID: 7348726175182028149}
+  - component: {fileID: -8280308180682311959}
   m_Layer: 13
   m_Name: AmmoPickup
   m_TagString: Untagged
@@ -313,6 +314,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 2
+  shockwaveMagnitude: 1.5
 --- !u!114 &7348726175182028148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,9 +367,28 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.341
     pitchVariance: 0.031
     clips:
     - {fileID: 8300000, guid: 9d933d4c696fd4841a923f97d3fadc8b, type: 3}
     oneShot: 1
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+--- !u!114 &-8280308180682311959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7348726175182028151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenLifetime: 5
+  outsideBoundsPadding: 5
+  killNorth: 0
+  killSouth: 1
+  killEast: 1
+  killWest: 1

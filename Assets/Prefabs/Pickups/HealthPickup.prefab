@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 1934952187741605198}
   - component: {fileID: 1934952187741605197}
   - component: {fileID: 1934952187741605196}
+  - component: {fileID: -1605377199510479926}
   m_Layer: 0
   m_Name: HealthPickup
   m_TagString: Untagged
@@ -334,6 +335,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 2
+  shockwaveMagnitude: 1.5
 --- !u!114 &1934952187741605197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,9 +388,28 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.341
     pitchVariance: 0.031
     clips:
     - {fileID: 8300000, guid: ad473b0044e3a6d48bf82c019b443213, type: 3}
     oneShot: 1
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+--- !u!114 &-1605377199510479926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934952187741605194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenLifetime: 5
+  outsideBoundsPadding: 5
+  killNorth: 0
+  killSouth: 1
+  killEast: 1
+  killWest: 1

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fba42dbb5f93146b81c33b70407bfc, type: 3}
-  m_Name: BattleSequence 0
+  m_Name: BGBattleSequence 0
   m_EditorClassIdentifier: 
   _spawnDifficulty: 0
   battleEvents:
@@ -28,7 +28,7 @@ MonoBehaviour:
     _dialogueItem: {fileID: 0}
     _hint: {fileID: 0}
     _track: 
-  - skip: 0
+  - skip: 1
     type: 3
     eventLabel: 
     wave: {fileID: 11400000, guid: d841f7fbf52095b4b825e54f301a4900, type: 2}
@@ -42,7 +42,7 @@ MonoBehaviour:
     _dialogueItem: {fileID: 0}
     _hint: {fileID: 0}
     _track: 
-  - skip: 0
+  - skip: 1
     type: 0
     eventLabel: 
     wave: {fileID: 11400000, guid: d841f7fbf52095b4b825e54f301a4900, type: 2}
@@ -56,7 +56,7 @@ MonoBehaviour:
     _dialogueItem: {fileID: 0}
     _hint: {fileID: 0}
     _track: 
-  - skip: 0
+  - skip: 1
     type: 3
     eventLabel: 
     wave: {fileID: 11400000, guid: d841f7fbf52095b4b825e54f301a4900, type: 2}
@@ -70,7 +70,7 @@ MonoBehaviour:
     _dialogueItem: {fileID: 0}
     _hint: {fileID: 0}
     _track: 
-  - skip: 0
+  - skip: 1
     type: 0
     eventLabel: 
     wave: {fileID: 11400000, guid: d841f7fbf52095b4b825e54f301a4900, type: 2}

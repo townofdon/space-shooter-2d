@@ -15,6 +15,10 @@ namespace Battle {
 
         [TextArea(minLines: 3, maxLines: 10)]
         public string notes;
+
+        public void AddBattleEvent(BattleEvent battleEvent) {
+            battleEvents.Add(battleEvent);
+        }
     }
 }
 

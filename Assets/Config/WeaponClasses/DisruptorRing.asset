@@ -377,7 +377,7 @@ MonoBehaviour:
       clips: []
       oneShot: 1
   - _assetClass: Mark V
-    _damageMultiplier: 5
+    _damageMultiplier: 10
     _startingAmmo: 0
     _infiniteAmmo: 1
     _cycles: 0

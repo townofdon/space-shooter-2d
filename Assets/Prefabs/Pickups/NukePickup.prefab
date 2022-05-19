@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8348319779286762645}
   - component: {fileID: 8348319779286762644}
   - component: {fileID: 8348319779286762643}
+  - component: {fileID: -3128683496687013354}
   m_Layer: 13
   m_Name: NukePickup
   m_TagString: Untagged
@@ -289,6 +290,24 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 6f7f4f86dd45cab4aa13102778992c09, type: 3}
     oneShot: 1
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+--- !u!114 &-3128683496687013354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348319779286762641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenLifetime: 5
+  outsideBoundsPadding: 5
+  killNorth: 0
+  killSouth: 1
+  killEast: 1
+  killWest: 1
 --- !u!1 &8348319780436977361
 GameObject:
   m_ObjectHideFlags: 0

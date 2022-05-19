@@ -171,12 +171,13 @@ namespace Enemies {
 
         void HandleCirclecast() {
             if (enemy == null || !enemy.isAlive) return;
+            if (!disruptorRing.activeInHierarchy) return;
             Collider2D[] otherColliders = Physics2D.OverlapCircleAll(transform.position, disruptorRingRadius);
             foreach (var other in otherColliders) {
                 if (other.tag != UTag.Mine && other.tag != UTag.Missile && other.tag != UTag.Nuke && other.tag != UTag.Asteroid) return;
                 rbOther = other.GetComponent<Rigidbody2D>();
                 if (rbOther != null) {
-                    rbOther.AddForce((transform.position - other.transform.position) * flingForce, ForceMode2D.Impulse);
+                    rbOther.AddForce((other.transform.position - transform.position) * flingForce, ForceMode2D.Impulse);
                 }
                 disruptorHold.SetDuration(IsAgro() ? disruptorHoldTimeAgro : disruptorHoldTime);
                 disruptorHold.Start();

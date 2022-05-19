@@ -51,5 +51,10 @@ namespace Battle {
         public DialogueItemSO dialogueItem => _dialogueItem;
         public HintSO hint => _hint;
         public string track => _track;
+
+        public void SetWave(WaveConfigSO value) {
+            type = BattleEventType.Wave;
+            wave = value;
+        }
     }
 }

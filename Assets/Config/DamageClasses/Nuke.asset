@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nuke
   m_EditorClassIdentifier: 
   _damageType: 5
-  _baseDamage: 300
+  _baseDamage: 1000
   _damageVariance: 4.7
   _shieldEffectiveness: 1
   _shieldedHealthEffectiveness: 1

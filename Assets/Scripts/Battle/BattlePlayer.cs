@@ -16,9 +16,14 @@ namespace Battle {
         [SerializeField] List<BattleSequenceSO> battleSequences;
         [SerializeField] float timeStartDelay = 3f;
         [SerializeField][Tooltip("show upgrade panel at end of level")] bool showUpgradePanel = true;
+        [SerializeField] float enemyCountRefreshRate = 5f;
+
+        [Space]
 
         [SerializeField] bool loopIndefinitely = false;
         [SerializeField] bool debug = false;
+
+        [Space]
         [SerializeField] EventChannelSO eventChannel;
 
         // cached
@@ -92,11 +97,15 @@ namespace Battle {
 
         protected void Init() {
             asteroidLauncher = FindObjectOfType<AsteroidLauncher>();
-            refreshEnemyCount = StartCoroutine(IRefreshEnemyCount());
         }
 
         protected void StartBattle() {
+            refreshEnemyCount = StartCoroutine(IRefreshEnemyCount());
             battle = StartCoroutine(PlayBattle());
+        }
+
+        protected void AddBattleSequence(BattleSequenceSO sequence) {
+            battleSequences.Add(sequence);
         }
 
         IEnumerator PlayBattle() {
@@ -113,6 +122,7 @@ namespace Battle {
                 }
             } while (loopIndefinitely);
             BattleFinished();
+            battle = null;
         }
 
         IEnumerator OnBattleEvent(BattleEvent battleEvent) {
@@ -200,16 +210,19 @@ namespace Battle {
 
         IEnumerator SpawnEnemies(WaveConfigSO wave) {
             if (wave != null) {
-                for (int i = 0; i < wave.spawnCount; i++) {
-                    player = PlayerUtils.FindPlayer();
-                    GameObject enemy = SpawnObject(wave.GetEnemy(i), wave);
-                    if (wave.HasPath()) {
-                        SetEnemyPathfollow(enemy, wave.GetWaypoints(), wave.pathfinderLoopMode, wave.flipX, wave.flipY, wave.maxPathLoops);
+                for (int i = 0; i < wave.numLoops; i++) {
+                    for (int j = 0; j < wave.spawnCount; j++) {
+                        player = PlayerUtils.FindPlayer();
+                        GameObject enemy = SpawnObject(wave.GetEnemy(j), wave);
+                        if (wave.HasPath()) {
+                            SetEnemyPathfollow(enemy, wave.GetWaypoints(), wave.pathfinderLoopMode, wave.flipX, wave.flipY, wave.maxPathLoops);
+                        }
+                        LaunchEnemy(enemy, wave);
+                        // TODO: REPLACE WITH B-TREE
+                        SetEnemyFSM(enemy, wave.initialState);
+                        yield return new WaitForSeconds(wave.spawnInterval);
                     }
-                    LaunchEnemy(enemy, wave);
-                    // TODO: REPLACE WITH B-TREE
-                    SetEnemyFSM(enemy, wave.initialState);
-                    yield return new WaitForSeconds(wave.spawnInterval);
+                    if (i < wave.numLoops - 1) yield return new WaitForSeconds(wave.loopInterval);
                 }
             }
         }
@@ -255,7 +268,7 @@ namespace Battle {
 
         IEnumerator IRefreshEnemyCount() {
             while (true) {
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(enemyCountRefreshRate);
                 RefreshEnemyCount();
             }
         }

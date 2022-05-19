@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5737812109323730875}
   - component: {fileID: 5737812109323730874}
   - component: {fileID: 5737812109323730873}
+  - component: {fileID: 3471252270484774716}
   m_Layer: 13
   m_Name: MissilePickup
   m_TagString: Untagged
@@ -229,6 +230,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shockwaveDuration: 2
+  shockwaveMagnitude: 1.5
 --- !u!114 &5737812109323730874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,12 +283,31 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.341
     pitchVariance: 0.031
     clips:
     - {fileID: 8300000, guid: 54dc3bdfe93665f468a36164a5754055, type: 3}
     oneShot: 1
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+--- !u!114 &3471252270484774716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737812109323730879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenLifetime: 5
+  outsideBoundsPadding: 5
+  killNorth: 0
+  killSouth: 1
+  killEast: 1
+  killWest: 1
 --- !u!1 &5737812110091084559
 GameObject:
   m_ObjectHideFlags: 0

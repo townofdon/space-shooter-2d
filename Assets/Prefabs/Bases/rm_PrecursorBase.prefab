@@ -2084,7 +2084,7 @@ GameObject:
   - component: {fileID: 6250715558358725930}
   - component: {fileID: 6250715558358725941}
   m_Layer: 0
-  m_Name: PrecursorBase
+  m_Name: rm_PrecursorBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

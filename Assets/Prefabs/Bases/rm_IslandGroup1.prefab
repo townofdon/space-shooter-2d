@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 736204066175077657}
   m_Layer: 0
-  m_Name: IslandGroup1
+  m_Name: rm_IslandGroup1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
