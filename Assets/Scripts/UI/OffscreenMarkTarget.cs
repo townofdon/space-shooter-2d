@@ -1,5 +1,6 @@
-using Enemies;
 using UnityEngine;
+
+using Damage;
 
 namespace UI {
 
@@ -11,7 +12,7 @@ namespace UI {
         GameObject instance;
         OffscreenMarker marker;
 
-        EnemyShip enemy;
+        DamageableBehaviour actor;
 
         void Start() {
             if (markerPrefab == null) return;
@@ -20,11 +21,11 @@ namespace UI {
             if (marker == null) return;
             marker.SetTarget(transform);
             marker.SetFlagType(flagType);
-            enemy = GetComponent<EnemyShip>();
+            actor = GetComponent<DamageableBehaviour>();
         }
 
         void Update() {
-            if (enemy == null || !enemy.isAlive) Deactivate();
+            if (actor == null || !actor.isAlive) Deactivate();
         }
 
         void Deactivate() {

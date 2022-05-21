@@ -37,7 +37,7 @@ namespace Enemies
         [SerializeField][Range(0f, 10f)] float _spawnInterval = 1f;
         [SerializeField][Range(0f, 2f)] float _spawnTimeVariance = 0f;
         [SerializeField][Range(0f, 10f)] float _minSpawnInterval = 1f;
-        [SerializeField][Range(1, 10)] int _numLoops = 1;
+        [SerializeField][Range(1, 20)] int _numLoops = 1;
         [SerializeField][Range(0f, 20f)] float _loopInterval = 0f;
 
         [Header("Spawning")]
@@ -200,7 +200,7 @@ namespace Enemies
         }
 
         public Vector3 GetLaunchVelocity(Vector3 origin, Vector3 playerPosition) {
-            return GetLaunchHeading(origin, playerPosition) * Utils.RandomVariance(launchVelocity, velocityVariance, launchVelocity / 2f);
+            return GetLaunchHeading(origin, playerPosition) * Utils.RandomVariance2(launchVelocity, velocityVariance, launchVelocity / 2f);
         }
 
         Vector3 GetLaunchHeading(Vector3 origin, Vector3 playerPosition) {
@@ -209,7 +209,7 @@ namespace Enemies
         }
 
         Quaternion GetLaunchHeadingVariance() {
-            return Quaternion.AngleAxis(Utils.RandomVariance(0f, headingVariance), Vector3.forward);
+            return Quaternion.AngleAxis(UnityEngine.Random.Range(-headingVariance / 2f, headingVariance / 2f), Vector3.forward);
         }
 
         int ToInt(string val) {

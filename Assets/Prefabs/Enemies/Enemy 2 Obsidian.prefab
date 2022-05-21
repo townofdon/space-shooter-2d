@@ -69,23 +69,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: aimSpeed
-      value: 3
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: triggerHoldTime
-      value: 1.4
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
+      propertyPath: triggerHoldHardMod
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: triggerReleaseTime
-      value: 0.9
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
+      propertyPath: triggerTimeVariance
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: triggerHoldInsaneMod
-      value: 1.98
+      value: 1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
+      propertyPath: triggerReleaseHardMod
+      value: 1.23
       objectReference: {fileID: 0}
     - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: triggerReleaseInsaneMod
-      value: 0.64
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
+      propertyPath: triggerReleaseMediumMod
+      value: 1.57
       objectReference: {fileID: 0}
     - target: {fileID: 5168055301130596605, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: m_Sprite

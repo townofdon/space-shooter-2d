@@ -15,10 +15,20 @@ namespace Weapons
         [SerializeField] float activationDelay = 0.5f;
         [SerializeField] float tripTime = 0.05f;
         [SerializeField] GameObject explosion;
+        [SerializeField] Animator animBlink;
+        [SerializeField] Animator animPulse;
 
         [Header("Physics")][Space]
         [SerializeField] AnimationCurve shockwaveVelocity;
         [SerializeField] float shockwaveDuration;
+
+        [Header("Trip Target Behaviour")]
+        [Space]
+        [SerializeField][Range(0f, 20f)] float attractRadius = 1f;
+        [SerializeField][Range(0f, 20f)] float attractMin = .25f;
+        [SerializeField][Range(0.1f, 50f)] float accelMod = 1f;
+        [SerializeField][Range(1f, 100f)] float topSpeed = 20f;
+        [SerializeField][Range(1f, 100f)] float targetDrag = 2f;
 
         [Header("Audio")][Space]
         [SerializeField] Sound deploySound;
@@ -27,8 +37,8 @@ namespace Weapons
 
         // components
         Rigidbody2D rb;
-        Animator anim;
         SpriteRenderer sr;
+        Collider2D col;
 
         // state
         bool isActive = false;
@@ -46,18 +56,17 @@ namespace Weapons
         Vector2 initialVelocity;
         Vector2 blastbackDirection;
 
-        public void SetVelocity(Vector2 value) {
-            if (rb == null) return;
-            initialVelocity = value;
-            rb.velocity = value;
-        }
+        // state - target
+        Transform target;
+        float distanceToTarget;
+        Vector2 attraction;
 
         // Start is called before the first frame update
         void Start()
         {
             rb = GetComponentInChildren<Rigidbody2D>();
-            anim = GetComponentInChildren<Animator>();
             sr = GetComponentInChildren<SpriteRenderer>();
+            col = GetComponent<Collider2D>();
             ResetHealth();
             SetColliders();
             RegisterHealthCallbacks(OnDeath, Utils.__NOOP__, Utils.__NOOP__);
@@ -69,6 +78,7 @@ namespace Weapons
             shockwavePositionTimer.SetDuration(shockwaveDuration);
             if (activeAtStart) StartCoroutine(IActivate());
             if (rb != null) initialVelocity = rb.velocity;
+            if (animPulse != null) animPulse.enabled = false;
 
             StartCoroutine(IPlayDeploySound());
         }
@@ -78,6 +88,10 @@ namespace Weapons
         {
             Animate();
             TickHealth();
+        }
+
+        void FixedUpdate() {
+            LatchToTarget();
         }
 
         // void FixedUpdate() {
@@ -120,20 +134,33 @@ namespace Weapons
                 return;
             }
 
+            target = other.transform;
+
             Trip();
         }
 
-        void Animate() {
-            if (anim == null) return;
-            if (!isAlive) {
-                anim.speed = 0f;
+        void LatchToTarget() {
+            if (!isTripped || target == null) return;
+            attraction = GetAttractionVector();
+            if (attraction == Vector2.zero) {
+                rb.drag = targetDrag;
                 return;
             }
-            anim.speed = isTripped ? 0.25f : 1f;
+            rb.drag = 0f;
+            rb.AddForce(GetAttractionVector());
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, topSpeed);
+            // aim directly at the player
+            rb.velocity = Vector2.ClampMagnitude((target.position - transform.position).normalized * topSpeed, rb.velocity.magnitude);
+        }
+
+        void Animate() {
+            if (animBlink == null) return;
+            if (!isAlive) return;
+            animBlink.speed = isTripped ? 2f : 1f;
             nextAnimState = isActive ? ANIM_MINE_ON : ANIM_MINE_OFF;
             if (currentAnimState == nextAnimState) return;
             currentAnimState = nextAnimState;
-            anim.Play(currentAnimState);
+            animBlink.Play(currentAnimState);
         }
 
         void HandleShockwaveHit(Collider2D other) {
@@ -152,6 +179,9 @@ namespace Weapons
         void Activate() {
             if (!isAlive || isTripped || isSploded) return;
             isActive = true;
+            col.enabled = true;
+            if (animBlink != null) animBlink.enabled = true;
+            if (animPulse != null) animPulse.enabled = true;
             StartCoroutine(IPlayActivateSound());
         }
 
@@ -160,6 +190,8 @@ namespace Weapons
             isTripped = true;
             trippedSound.Play();
             beepingSound.Stop();
+            if (animPulse != null) animPulse.gameObject.SetActive(false);
+            SetInvulnerable(true);
             StartCoroutine(ITripped());
         }
 
@@ -181,9 +213,12 @@ namespace Weapons
 
         IEnumerator ISplode(bool quiet = false) {
             // wait a small amount of time to create cascade chain explosions
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.2f));
             if (sr != null) sr.enabled = false;
-            if (anim != null) anim.speed = 0f;
+            if (animBlink != null) animBlink.enabled = false;
+            if (animBlink != null) animBlink.speed = 0f;
+            if (animPulse != null) animPulse.enabled = false;
+            if (animPulse != null) animPulse.gameObject.SetActive(false);
             trippedSound.Stop();
             if (explosion != null && !quiet) Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject, 5f);
@@ -197,6 +232,16 @@ namespace Weapons
         IEnumerator ITripped() {
             yield return new WaitForSeconds(tripTime);
             TakeDamage(100f, DamageType.Instakill);
+        }
+
+        // yes this could def be generalized
+        Vector2 GetAttractionVector() {
+            if (target == null) return Vector2.zero;
+            distanceToTarget = Vector2.Distance(transform.position, target.position);
+            if (distanceToTarget > attractRadius) return Vector2.zero;
+            if (distanceToTarget < attractMin) return Vector2.zero;
+            float force = (9.81f * accelMod) / Mathf.Pow(distanceToTarget, 2f);
+            return (target.position - transform.position).normalized * Mathf.Min(force, topSpeed * 2);
         }
     }
 }

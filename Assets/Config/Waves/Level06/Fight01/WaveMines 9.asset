@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
+  m_Name: WaveMines 9
+  m_EditorClassIdentifier: 
+  _enemies:
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 2
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 2
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 2
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
+  - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
+  _spawnInterval: 0.1
+  _spawnTimeVariance: 0
+  _minSpawnInterval: 0
+  _numLoops: 1
+  _loopInterval: 0
+  _spawnLocation: N-24-5
+  _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 2
+  launchHeading: {x: 0, y: -1}
+  headingVariance: 15
+  launchVelocity: 13
+  velocityVariance: 3
+  aimTowardsPlayer: 0.9
+  _path: {fileID: 0}
+  _pathfinderLoopMode: 2
+  _flipX: 0
+  _flipY: 0
+  _maxPathLoops: 99
+  _initialState: {fileID: 0}
+  notes: 

@@ -408,7 +408,7 @@ MonoBehaviour:
     oneShot: 0
   tracks:
   - soundName: starlord-main-theme
-    volume: 1
+    volume: 0.9
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -427,7 +427,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: starlord-transition
-    volume: 0.8
+    volume: 0.9
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -446,7 +446,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: battle-theme
-    volume: 0.8
+    volume: 0.9
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -465,7 +465,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: fast-theme
-    volume: 0.6
+    volume: 0.9
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -484,7 +484,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: pleasant-theme
-    volume: 0.6
+    volume: 0.9
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: danger-theme
-    volume: 0.5
+    volume: 0.9
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -541,7 +541,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: win-theme
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0

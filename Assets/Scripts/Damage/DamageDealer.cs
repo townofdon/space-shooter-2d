@@ -214,7 +214,7 @@ namespace Damage
         void HandleJarringCollision(DamageReceiver actor) {
             if (damageType != DamageType.Collision) return;
             if (actor == null) return;
-            if (actor.rigidbody == null) return;
+            if (actor.rigidbody == null || !actor.rigidbody.simulated) return;
             if (rb == null) return;
             float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
             float collisionMagnitude = (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
@@ -222,7 +222,7 @@ namespace Damage
             Vector3 forceToSelf = (actor.rigidbody.velocity - rb.velocity);
             Vector3 forceToActor = (rb.velocity - actor.rigidbody.velocity);
             rb.AddForce(forceToSelf, ForceMode2D.Impulse);
-            actor.rigidbody.AddForce(forceToActor * damageClass.throwbackForceMultiplier, ForceMode2D.Impulse);
+            if (!actor.rigidbody.isKinematic) actor.rigidbody.AddForce(forceToActor * damageClass.throwbackForceMultiplier, ForceMode2D.Impulse);
             float damageToActor = collisionDamage * collisionMagnitude * Mathf.Max(1f, (rb.mass / actor.rigidbody.mass) * 0.05f);
             actor.TakeDamage(damageToActor * baseDamageMultiplier, DamageType.Collision, isDamageByPlayer);
             if (actor.tag == UTag.Asteroid) InvokeCallback(onRoidHitRoid);

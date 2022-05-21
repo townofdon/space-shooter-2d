@@ -97,10 +97,14 @@ namespace Core {
             return new Vector2(UnityEngine.Random.Range(0f, magnitude), UnityEngine.Random.Range(0f, magnitude)).normalized;
         }
 
-        public static float RandomVariance(float initialValue, float variance = 0f, float min = float.MinValue, float max = float.MaxValue)
-        {
+        public static float RandomVariance(float initialValue, float variance = 0f, float min = float.MinValue, float max = float.MaxValue) {
             if (variance <= 0) return initialValue;
             return Mathf.Clamp(initialValue * (1 + UnityEngine.Random.Range(-variance / 2f, variance / 2f)), min, max);
+        }
+
+        public static float RandomVariance2(float initialValue, float variance = 0f, float min = float.MinValue, float max = float.MaxValue) {
+            if (variance <= 0) return initialValue;
+            return Mathf.Clamp(initialValue + UnityEngine.Random.Range(-variance / 2f, variance / 2f), min, max);
         }
 
         public static bool RandomBool(float threshold = 0.5f) {

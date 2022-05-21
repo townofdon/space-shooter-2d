@@ -278,8 +278,12 @@ PrefabInstance:
       value: MineShielded 0
       objectReference: {fileID: 0}
     - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+      propertyPath: tripTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: _maxShield
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: shieldEffect
@@ -287,15 +291,19 @@ PrefabInstance:
       objectReference: {fileID: 5909513716411347501}
     - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: _shieldWaitTime
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+      propertyPath: activationDelay
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: _hitRecoveryTime
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: _shieldRechargeTime
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4642657472974251941, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: m_Mass
@@ -334,6 +342,8 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 15
     maxFalloffDistance: 40
+    dopplerLevel: 1
+    pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 59e876a918970904f8f2576933a82bcb, type: 3}
     clipTail: {fileID: 0}
@@ -349,6 +359,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 15
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:

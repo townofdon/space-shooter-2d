@@ -125,6 +125,11 @@ namespace Weapons {
         void HandleLookAtPlayer() {
             if (isLocked) return;
             if (player == null || !player.isAlive) return;
+            if (Vector2.Distance(transform.position, player.transform.position) > 50f) {
+                aimLine.enabled = false;
+                return;
+            }
+            aimLine.enabled = true;
             vectorToPlayer = player.transform.position - transform.position;
             aimVector = Vector2.MoveTowards(aimVector, vectorToPlayer.normalized, aimSpeed * GetAimSpeedMod() * Time.deltaTime);
             aimAngle = Vector2.SignedAngle(Vector2.down, aimVector);
