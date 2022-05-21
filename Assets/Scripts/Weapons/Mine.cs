@@ -110,6 +110,7 @@ namespace Weapons
             if (!isActive || isTripped || isSploded) return;
 
             if (other.tag == UTag.Mine) return;
+            if (other.tag == UTag.Ordnance) return;
 
             if ((
                 other.tag == UTag.Bullet ||

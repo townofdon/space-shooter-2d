@@ -8,6 +8,13 @@ namespace UI {
         [SerializeField] GameObject markerPrefab;
         [SerializeField] FlagType flagType;
 
+        [Space]
+
+        [SerializeField] bool showNorth = true;
+        [SerializeField] bool showSouth = true;
+        [SerializeField] bool showEast = true;
+        [SerializeField] bool showWest = true;
+
         // cached
         GameObject instance;
         OffscreenMarker marker;
@@ -21,6 +28,7 @@ namespace UI {
             if (marker == null) return;
             marker.SetTarget(transform);
             marker.SetFlagType(flagType);
+            marker.SetOrdinals(showNorth, showEast, showSouth, showWest);
             actor = GetComponent<DamageableBehaviour>();
         }
 

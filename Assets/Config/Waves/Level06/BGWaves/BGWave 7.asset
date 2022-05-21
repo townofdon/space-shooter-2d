@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemies:
   - _enemyPrefab: {fileID: 8152363124352207934, guid: bdf007d993f25a646876b3864df6475f, type: 3}
+    _spawnLocation: S-6-5
+    _spawnOffset: {x: 0, y: 1}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 8152363124352207934, guid: bdf007d993f25a646876b3864df6475f, type: 3}
     _spawnLocation: S-5-5
     _spawnOffset: {x: 0, y: 1}
     _spawnDifficulty: 0
@@ -31,10 +35,6 @@ MonoBehaviour:
     _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 8152363124352207934, guid: bdf007d993f25a646876b3864df6475f, type: 3}
     _spawnLocation: S-1-5
-    _spawnOffset: {x: 0, y: 1}
-    _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 8152363124352207934, guid: bdf007d993f25a646876b3864df6475f, type: 3}
-    _spawnLocation: S-0-5
     _spawnOffset: {x: 0, y: 1}
     _spawnDifficulty: 0
   _spawnInterval: 0

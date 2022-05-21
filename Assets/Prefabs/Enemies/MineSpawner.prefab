@@ -483,9 +483,133 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialDelay: 3
-  spawnInterval: 2.75
-  spawnVariance: 0.4
+  spawnInterval: 2
+  spawnVariance: 0.3
   minePrefab: {fileID: 6976033613844432529, guid: 505e7ec1c2ffa614aad7b0ea522ccee1, type: 3}
+  delayBetweenSpawns: 0.15
+  agroNumSpawnsEasy:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0000004796311
+      value: 2.308319
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.009549489
+      outSlope: -0.009549489
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21844544
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  agroNumSpawnsMedium:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.00470654
+      value: 3.2610798
+      inSlope: -0.008284622
+      outSlope: -0.008284622
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.21175185
+    - serializedVersion: 3
+      time: 0.11954866
+      value: 3.2589352
+      inSlope: 0.014246261
+      outSlope: 0.014246261
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.18782274
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.0149764875
+      outSlope: -0.0149764875
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2666894
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  agroNumSpawnsHard:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 4.504619
+      inSlope: 0.019643357
+      outSlope: 0.019643357
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.28448638
+    - serializedVersion: 3
+      time: 0.13835338
+      value: 4.50034
+      inSlope: -0.0021517652
+      outSlope: -0.0021517652
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.32971147
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.035244796
+      outSlope: -0.035244796
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26635614
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  agroNumSpawnsInsane:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5.4983215
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.099820614
+      value: 5.5020814
+      inSlope: -0.050538708
+      outSlope: -0.050538708
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.27255583
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.03445684
+      outSlope: -0.03445684
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21515685
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   launchHeading: {x: 0, y: -1}
   headingVariance: 5
   launchVelocity: 22

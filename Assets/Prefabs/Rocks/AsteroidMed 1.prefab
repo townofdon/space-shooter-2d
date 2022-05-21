@@ -382,6 +382,7 @@ MonoBehaviour:
     spread: 360
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.235
     pitchVariance: 0.258
     clips:
@@ -399,6 +400,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -466,6 +468,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markerPrefab: {fileID: 2563741419318062698, guid: 5366983609dc2c442808bdbf36c8fcd6, type: 3}
   flagType: 1
+  showNorth: 1
+  showSouth: 0
+  showEast: 1
+  showWest: 1
 --- !u!114 &-4583589472260488921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +486,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offscreenLifetime: 10
   outsideBoundsPadding: 1
+  killNorth: 1
+  killSouth: 1
+  killEast: 1
+  killWest: 1
 --- !u!1001 &8169396135458978942
 PrefabInstance:
   m_ObjectHideFlags: 0

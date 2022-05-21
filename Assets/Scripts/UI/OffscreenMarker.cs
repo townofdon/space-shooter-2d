@@ -25,6 +25,13 @@ namespace UI
         [SerializeField] float outOfRange = 20f;
         [SerializeField] bool debug = false;
 
+        [Space]
+
+        [SerializeField] bool showNorth = true;
+        [SerializeField] bool showSouth = true;
+        [SerializeField] bool showEast = true;
+        [SerializeField] bool showWest = true;
+
         Vector2 minBounds;
         Vector2 maxBounds;
         Vector2 minBoundsWorld;
@@ -38,6 +45,12 @@ namespace UI
         Vector3 markerPositionWorld;
         Canvas canvas;
 
+        public void SetOrdinals(bool north, bool east, bool south, bool west) {
+            showNorth = north;
+            showEast = east;
+            showSouth = south;
+            showWest = west;
+        }
         public void SetTarget(Transform _target) {
             target = _target;
         }
@@ -108,10 +121,10 @@ namespace UI
 
         bool IsTrackedOutsideScreen(float mod = 0f) {
             return
-                target.position.x < minBoundsWorld.x - mod ||
-                target.position.y < minBoundsWorld.y - mod ||
-                target.position.x > maxBoundsWorld.x + mod ||
-                target.position.y > maxBoundsWorld.y + mod;
+                (showWest && target.position.x < minBoundsWorld.x - mod) ||
+                (showSouth && target.position.y < minBoundsWorld.y - mod) ||
+                (showEast && target.position.x > maxBoundsWorld.x + mod) ||
+                (showNorth && target.position.y > maxBoundsWorld.y + mod);
         }
 
         // so turns out you actually don't need the Pythagoran theorum for this, however the name is still cool and all so I'll keep it

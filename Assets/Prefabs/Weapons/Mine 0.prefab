@@ -423,6 +423,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markerPrefab: {fileID: 2563741419318062698, guid: 5366983609dc2c442808bdbf36c8fcd6, type: 3}
   flagType: 1
+  showNorth: 1
+  showSouth: 0
+  showEast: 1
+  showWest: 1
 --- !u!1 &7225357374370844391
 GameObject:
   m_ObjectHideFlags: 0
