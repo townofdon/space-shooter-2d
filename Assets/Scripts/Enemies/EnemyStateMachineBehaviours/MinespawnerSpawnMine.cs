@@ -2,15 +2,12 @@ using UnityEngine;
 
 namespace Enemies {
     public class MinespawnerSpawnMine : MinespawnerBaseStateMachineBehaviour {
-        [SerializeField] GameObject prefab;
-
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-            Instantiate(prefab, animator.transform.position, Quaternion.identity);
             animator.ResetTrigger("SpawnMine");
             FindAndSetMinespawnerComponent(animator);
             if (mineSpawner == null) return;
-            mineSpawner.PlaySpawnSound();
+            mineSpawner.SpawnMine();
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -37,8 +37,8 @@ namespace Weapons
 
         // components
         Rigidbody2D rb;
-        SpriteRenderer sr;
         Collider2D col;
+        SpriteRenderer[] sprites;
 
         // state
         bool isActive = false;
@@ -65,8 +65,8 @@ namespace Weapons
         void Start()
         {
             rb = GetComponentInChildren<Rigidbody2D>();
-            sr = GetComponentInChildren<SpriteRenderer>();
             col = GetComponent<Collider2D>();
+            sprites = GetComponentsInChildren<SpriteRenderer>();
             ResetHealth();
             SetColliders();
             RegisterHealthCallbacks(OnDeath, Utils.__NOOP__, Utils.__NOOP__);
@@ -214,7 +214,7 @@ namespace Weapons
         IEnumerator ISplode(bool quiet = false) {
             // wait a small amount of time to create cascade chain explosions
             yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.2f));
-            if (sr != null) sr.enabled = false;
+            if (sprites != null) foreach (SpriteRenderer sr in sprites) if (sr != null) sr.enabled = false;
             if (animBlink != null) animBlink.enabled = false;
             if (animBlink != null) animBlink.speed = 0f;
             if (animPulse != null) animPulse.enabled = false;

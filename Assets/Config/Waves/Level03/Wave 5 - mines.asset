@@ -16,45 +16,60 @@ MonoBehaviour:
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-0-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-7-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-18-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-17-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-5-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-11-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-15-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-22-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-3-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
     _spawnLocation: N-5-3
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   _spawnInterval: 1
   _spawnTimeVariance: 0
   _minSpawnInterval: 0
+  _numLoops: 1
+  _loopInterval: 0
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 0
   launchHeading: {x: 0, y: -1}
-  headingVariance: 0
-  launchVelocity: 1
-  velocityVariance: 1.7
-  aimTowardsPlayer: 0.102
+  headingVariance: 5
+  launchVelocity: 4
+  velocityVariance: 1
+  aimTowardsPlayer: 0.166
   _path: {fileID: 0}
   _pathfinderLoopMode: 0
   _flipX: 0
   _flipY: 0
+  _maxPathLoops: 99
   _initialState: {fileID: 0}
+  notes: 

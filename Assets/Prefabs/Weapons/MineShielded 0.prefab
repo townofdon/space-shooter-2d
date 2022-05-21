@@ -279,11 +279,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: tripTime
-      value: 0
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: _maxShield
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4642657472974251940, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: shieldEffect
@@ -308,6 +308,10 @@ PrefabInstance:
     - target: {fileID: 4642657472974251941, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
       propertyPath: m_Mass
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295165069518759100, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}

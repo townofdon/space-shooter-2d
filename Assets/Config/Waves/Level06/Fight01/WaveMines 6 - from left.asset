@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
-  m_Name: WaveMines 6
+  m_Name: WaveMines 6 - from left
   m_EditorClassIdentifier: 
   _enemies:
   - _enemyPrefab: {fileID: 4642657472974251929, guid: 3002c159feed3fc429e76b833ce0450f, type: 3}
