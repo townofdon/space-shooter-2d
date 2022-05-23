@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2861713255140605800, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: _maxShield
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2861713255140605800, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: pointsWhenKilledByPlayer

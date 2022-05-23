@@ -67,7 +67,7 @@ namespace Game {
         }
 
         public void LosePoints() {
-            _pointsGained = GetPointsToLose();
+            _pointsGained -= GetPointsToLose();
         }
 
         public void IncrementEnemiesKilled() {
@@ -75,7 +75,7 @@ namespace Game {
         }
 
         public int GetPointsToLose() {
-            return (int)(_pointsGained * 0.5f);
+            return (int)(Mathf.Min(_pointsGained * 0.5f, 1000f));
         }
     }
 }

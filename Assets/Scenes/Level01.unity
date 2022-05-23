@@ -219,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1399429297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 396cce5b6c7537549903f22cce643fb4, type: 2}
   timeStartDelay: 3
   showUpgradePanel: 1
+  enemyCountRefreshRate: 5
   loopIndefinitely: 0
   debug: 1
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
@@ -365,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1557695440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +386,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5fe51554b26177d45b886279336811ff, type: 2}
   timeStartDelay: 3
   showUpgradePanel: 1
+  enemyCountRefreshRate: 5
   loopIndefinitely: 0
   debug: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}

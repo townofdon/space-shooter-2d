@@ -60,6 +60,7 @@ namespace Weapons
 
             StartCoroutine(GameFeel.ShakeGamepad(0.75f, 1f, 1f));
             StartCoroutine(NukeFX());
+            Destroy(gameObject, lifetime + 5f);
         }
 
         void Update() {

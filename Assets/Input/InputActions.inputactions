@@ -304,6 +304,17 @@
                 },
                 {
                     "name": "",
+                    "id": "83aeea1d-a1e9-4c66-8ec5-0372df5535e1",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "44c7aad3-fb50-4455-a510-d2d96786114d",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "Press(behavior=2)",
@@ -319,7 +330,7 @@
                     "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -341,7 +352,7 @@
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -352,7 +363,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "FireSecondary",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -363,7 +374,18 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "FireSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "950b3cff-36f7-457c-a3e4-5f3defead3c6",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "FireSecondary",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -374,7 +396,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "SwitchSecondary",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -385,7 +407,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SwitchSecondary",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -396,7 +418,7 @@
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -407,7 +429,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -418,7 +440,7 @@
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Melee",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -429,7 +451,18 @@
                     "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
+                    "action": "Melee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c411be93-16b0-4a52-801d-4a714e3ba644",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Melee",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -440,7 +473,7 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -451,7 +484,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -480,6 +513,17 @@
                 },
                 {
                     "name": "",
+                    "id": "3c79bb29-67ac-41d7-ab50-5ddf64448bab",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f34437de-a0cf-48bf-ab1c-56f720899f25",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -495,7 +539,7 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "AnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -506,7 +550,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "AnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -517,7 +561,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "AnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -528,7 +572,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "AnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -540,6 +584,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74981af9-5d86-44ab-a39f-30586d2dd76a",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
                     "action": "AnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1122,8 +1177,30 @@
                 },
                 {
                     "name": "",
+                    "id": "11a60f52-fac2-4dce-b2cd-284c9f4f937a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "UIStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ee9eb37b-3397-488f-9c44-7650de9d657e",
                     "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "UIAnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8ffddb4-6100-41a9-849b-f69fe04ae4fb",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -1203,7 +1280,7 @@
                     "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "UISelect",
                     "isComposite": false,
                     "isPartOfComposite": false

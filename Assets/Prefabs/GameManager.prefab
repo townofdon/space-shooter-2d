@@ -541,7 +541,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: win-theme
-    volume: 0.8
+    volume: 0.7
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0

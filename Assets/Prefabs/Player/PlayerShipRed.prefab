@@ -36500,7 +36500,7 @@ MonoBehaviour:
   damageSpriteTarget: {fileID: 0}
   secondaryDamageSpriteTargets: []
   perishableObjects: []
-  blastThrowback: 70
+  blastThrowback: 50
   collideThrowback: 4
   collideThrowbackFromVelocity: 0.3
   deathExplosiveForce: 3

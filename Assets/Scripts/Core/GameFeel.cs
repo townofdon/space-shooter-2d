@@ -24,7 +24,10 @@ namespace Core
                 camera.transform.position = initialPosition + (Vector3)UnityEngine.Random.insideUnitCircle * magnitude;
                 yield return new WaitForEndOfFrame();
             }
-            camera.transform.position = initialPosition;
+            // TODO: in next game, def want to move this method inside of a monobehaviour so that IShakeScreen can be cancelled
+            // Another solution would be figuring out a way to modify the camera offset, not the position itself
+            // camera.transform.position = initialPosition;
+            camera.transform.position = new Vector3(0f, 0f, camera.transform.position.z);
         }
 
         public static IEnumerator PauseTime(float duration = 0.1f, float timeScale = 0f) {

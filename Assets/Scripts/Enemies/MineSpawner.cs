@@ -135,7 +135,7 @@ namespace Enemies {
         IEnumerator ISpawnMines() {
             numItemsToSpawn = GetNumItemsToSpawn();
             for (int i = 0; i < numItemsToSpawn; i++) {
-                if (!debug) HandleSpawnMine();
+                HandleSpawnMine();
                 if (i < numItemsToSpawn - 1) yield return new WaitForSeconds(delayBetweenSpawns);
             }
             anim.SetTrigger("CloseDoors");

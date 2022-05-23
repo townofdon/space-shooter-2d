@@ -226,6 +226,7 @@ MonoBehaviour:
   isBoss: 1
   ship: {fileID: 3306651752637380792}
   explosion: {fileID: 5345083779386589570, guid: 6f0bd7f793570f2488b51bcbc9eda4cb, type: 3}
+  otherDeathFX: {fileID: 0}
   damageSound:
     soundName: 
     volume: 0.7
@@ -470,7 +471,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -765428885
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: b9e3eccb67b6e5848bfeb6120ca24f36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

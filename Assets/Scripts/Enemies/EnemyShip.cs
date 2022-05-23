@@ -20,6 +20,7 @@ namespace Enemies {
         [Header("Components")][Space]
         [SerializeField] GameObject ship;
         [SerializeField] GameObject explosion;
+        [SerializeField] GameObject otherDeathFX;
 
         [Header("Movement")][Space]
         [Header("Audio")][Space]
@@ -132,6 +133,7 @@ namespace Enemies {
 
         IEnumerator DeathAnimation() {
             if (explosion != null) Instantiate(explosion, transform);
+            if (otherDeathFX != null) otherDeathFX.SetActive(true);
             if (ship != null) ship.SetActive(false);
             yield return new WaitForSeconds(3f);
             while (deathSound.isPlaying) yield return null;

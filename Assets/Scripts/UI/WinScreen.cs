@@ -94,7 +94,7 @@ namespace UI {
 
             rowPoints.SetActive(true);
 
-            yield return IShowStat(fieldPoints, totalPoints, 1000, $"(X{(int)GetPointsModifier()})");
+            yield return IShowStat(fieldPoints, totalPoints, 1000);
             yield return new WaitForSeconds(timeBetweenStats);
 
             rowEnemies.SetActive(true);
@@ -156,11 +156,11 @@ namespace UI {
         float GetPointsModifier() {
             switch (gameState.difficulty) {
                 case GameDifficulty.Insane:
-                    return 10.0f;
-                case GameDifficulty.Hard:
                     return 4.0f;
+                case GameDifficulty.Hard:
+                    return 1.5f;
                 case GameDifficulty.Medium:
-                    return 2.0f;
+                    return 1.2f;
                 case GameDifficulty.Easy:
                 default:
                     return 1.0f;

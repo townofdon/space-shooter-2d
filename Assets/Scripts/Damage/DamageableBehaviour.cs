@@ -110,7 +110,7 @@ namespace Damage {
         }
 
         public void OnDeathByGuardians(bool isQuiet = false) {
-            StartCoroutine(IDeathByGuardians());
+            StartCoroutine(IDeathByGuardians(isQuiet));
         }
 
         void OnDestroy() {

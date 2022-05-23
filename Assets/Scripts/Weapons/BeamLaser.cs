@@ -125,7 +125,7 @@ namespace Weapons {
         void HandleLookAtPlayer() {
             if (isLocked) return;
             if (player == null || !player.isAlive) return;
-            if (Vector2.Distance(transform.position, player.transform.position) > 50f) {
+            if (Vector2.Distance(transform.position, player.transform.position) > 50f || !Utils.IsObjectOnScreen(gameObject)) {
                 aimLine.enabled = false;
                 return;
             }
@@ -175,7 +175,6 @@ namespace Weapons {
         IEnumerator IFire() {
             isLocked = true;
             box.enabled = false;
-            if (chargeFX != null) chargeFX.Stop();
             chargeUpSound.Stop();
             fireSound.Stop();
             fireSound.Play();
@@ -202,6 +201,7 @@ namespace Weapons {
                 yield return null;
             }
 
+            if (chargeFX != null) chargeFX.Stop();
             laserLine.widthMultiplier = 0f;
             box.enabled = false;
             fireSound.Stop();

@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 1696105624144994210}
   - component: {fileID: 1696105624144994211}
   - component: {fileID: 1696105624144994212}
+  - component: {fileID: 574425164465803797}
   m_Layer: 0
   m_Name: DestructibleBase
   m_TagString: Untagged
@@ -213,6 +214,7 @@ MonoBehaviour:
   isBoss: 0
   ship: {fileID: 1696105623651568362}
   explosion: {fileID: 1093051661043625850, guid: 31955458818a7c6468dc1b10087cfec5, type: 3}
+  otherDeathFX: {fileID: 0}
   damageSound:
     soundName: EnemyDamage
     volume: 0
@@ -270,6 +272,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &574425164465803797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696105624144994214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offscreenLifetime: 10
+  outsideBoundsPadding: 5
+  killNorth: 0
+  killSouth: 1
+  killEast: 0
+  killWest: 0
 --- !u!1 &1696105624373644150
 GameObject:
   m_ObjectHideFlags: 0

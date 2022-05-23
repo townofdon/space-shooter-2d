@@ -46,8 +46,12 @@ namespace Damage
             } else {
                 timeOutsideBounds = 0f;
             }
-            if (timeOutsideBounds >= offscreenLifetime && actor != null) {
-                actor.TakeDamage(1000f, DamageType.InstakillQuiet);
+            if (timeOutsideBounds >= offscreenLifetime) {
+                if (actor != null) {
+                    actor.TakeDamage(10000f, DamageType.InstakillQuiet);
+                } else {
+                    Destroy(gameObject);
+                }
             }
         }
     }

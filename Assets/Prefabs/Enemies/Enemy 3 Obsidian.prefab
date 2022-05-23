@@ -9,11 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 150591935660693697, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
       propertyPath: _maxHealth
-      value: 300
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 150591935660693697, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
       propertyPath: _maxShield
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 150591935660693697, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
       propertyPath: pointsWhenKilledByPlayer

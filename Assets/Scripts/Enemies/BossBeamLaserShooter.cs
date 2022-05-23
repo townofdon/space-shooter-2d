@@ -46,6 +46,7 @@ namespace Enemies {
         [SerializeField] bool moveOnAgro;
         [SerializeField] GameObject agroSplosion;
         [SerializeField] List<Transform> agroSplosionLocations = new List<Transform>();
+        [SerializeField] List<GameObject> agroHideItems = new List<GameObject>();
         [SerializeField] float agroDelay = 1f;
         [SerializeField] Sound agroSound;
 
@@ -60,6 +61,12 @@ namespace Enemies {
         [SerializeField] float screenPadBottom = 4f;
         [SerializeField] float screenPadLeft = 2f;
         [SerializeField] float screenPadRight = 2f;
+
+        [Header("Death")]
+        [Space]
+        [SerializeField] bool destroyAllEnemies = false;
+        [SerializeField] GameObject hideOnDeath;
+        [SerializeField] GameObject showOnDeath;
 
         [Header("Components")]
         [Space]
@@ -156,6 +163,9 @@ namespace Enemies {
                     spawner.Disable();
                 }
             }
+            if (hideOnDeath != null) hideOnDeath.SetActive(false);
+            if (showOnDeath != null) showOnDeath.SetActive(true);
+            if (destroyAllEnemies) GameManager.current.DestroyAllEnemies();
         }
 
         void FixedUpdate() {
@@ -277,6 +287,9 @@ namespace Enemies {
             isAgroStarting = false;
             foreach (Transform location in agroSplosionLocations) {
                 Instantiate(agroSplosion, location.position, Quaternion.identity);
+            }
+            foreach (GameObject item in agroHideItems) {
+                item.SetActive(false);
             }
             while (IsAlive()) {
                 throttleUp.SetDuration(throttleUpTime);
