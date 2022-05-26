@@ -158,9 +158,9 @@ namespace UI {
                 case GameDifficulty.Insane:
                     return 4.0f;
                 case GameDifficulty.Hard:
-                    return 1.5f;
+                    return 2f;
                 case GameDifficulty.Medium:
-                    return 1.2f;
+                    return 1.25f;
                 case GameDifficulty.Easy:
                 default:
                     return 1.0f;

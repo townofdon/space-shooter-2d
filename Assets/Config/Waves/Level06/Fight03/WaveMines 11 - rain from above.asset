@@ -52,7 +52,7 @@ MonoBehaviour:
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
     _spawnLocation: N-20-5
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 2
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
     _spawnLocation: N-22-5
     _spawnOffset: {x: 0, y: 0}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DisruptorHint
   m_EditorClassIdentifier: 
   _showButton: 1
-  _keyboardButton: M Mouse
+  _keyboardButton: V
   _gamepadButton: R Stick
   _hintText: USE DISRUPTOR

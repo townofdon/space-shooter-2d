@@ -281,6 +281,34 @@ MonoBehaviour:
     _hint: {fileID: 0}
     _track: 
   - skip: 0
+    type: 5
+    eventLabel: 
+    wave: {fileID: 11400000, guid: f79e91c069a5afd4e9d26d88dc3e217a, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 6
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
+    type: 0
+    eventLabel: 
+    wave: {fileID: 11400000, guid: c793b493dc5acb64a84ec3ea8fe5183e, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 10
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 11400000, guid: 2b415e8691dbea14f82afceaea1cc0e7, type: 2}
+    _hint: {fileID: 0}
+    _track: 
+  - skip: 0
     type: 4
     eventLabel: 
     wave: {fileID: 11400000, guid: 969d50785709f3b48aeaedfbe043560e, type: 2}

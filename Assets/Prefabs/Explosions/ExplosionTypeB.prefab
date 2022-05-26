@@ -4847,7 +4847,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 244279707
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 90
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -9726,8 +9726,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 244279707
-  m_SortingLayer: 2
-  m_SortingOrder: 100
+  m_SortingLayer: 3
+  m_SortingOrder: 110
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -14613,6 +14613,8 @@ MonoBehaviour:
   damageAtEdge: 0.2
   blastForce: 2
   lifetime: 10
+  shakeScreenMagnitude: 0.05
+  shakeScreenDuration: 2
   splosion:
     soundName: 
     volume: 0.7
@@ -14624,6 +14626,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:

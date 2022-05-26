@@ -12,7 +12,8 @@ namespace Weapons
 
     public class Explosion : MonoBehaviour
     {
-        [Header("Splosion Settings")][Space]
+        [Header("Splosion Settings")]
+        [Space]
         [SerializeField] float timeCausingDamage = 1.5f;
         [SerializeField] float damageBegin = 200f;
         [SerializeField] float damageEnd = 10f;
@@ -20,7 +21,13 @@ namespace Weapons
         [SerializeField] float blastForce = 5f;
         [SerializeField] float lifetime = 10f;
 
-        [Header("Audio")][Space]
+        [Header("Gamefeel")]
+        [Space]
+        [SerializeField] float shakeScreenMagnitude = 0.1f;
+        [SerializeField] float shakeScreenDuration = 0.1f;
+
+        [Header("Audio")]
+        [Space]
         [SerializeField] Sound splosion;
 
 
@@ -49,7 +56,7 @@ namespace Weapons
             splosion.Init(this);
             splosion.Play();
             StartCoroutine(GameFeel.ShakeGamepad(0.25f, 0.25f, 0.25f));
-            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.1f, 0.1f));
+            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), shakeScreenDuration, shakeScreenMagnitude));
             Destroy(gameObject, lifetime);
         }
 

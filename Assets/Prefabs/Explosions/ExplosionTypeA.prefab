@@ -4838,7 +4838,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 244279707
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 80
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -9717,7 +9717,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 244279707
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 100
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -14664,11 +14664,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeCausingDamage: 0.1
-  damageBegin: 130
+  damageBegin: 180
   damageEnd: 50
   damageAtEdge: 0.9
   blastForce: 6
   lifetime: 10
+  shakeScreenMagnitude: 0.15
+  shakeScreenDuration: 0.1
   splosion:
     soundName: Splode
     volume: 0.764
@@ -14680,6 +14682,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -19524,7 +19527,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 244279707
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 90
   m_RenderMode: 0
   m_MeshDistribution: 0

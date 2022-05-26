@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7531810961699429523}
   - component: {fileID: 7531810961699429525}
   - component: {fileID: 7531810961699429522}
+  - component: {fileID: 6265358664012059138}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: EnemyShip
@@ -79,6 +80,7 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
+  savingThrow: 0
   _maxHealth: 25
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -103,6 +105,7 @@ MonoBehaviour:
   isBoss: 0
   ship: {fileID: 7531810961871352895}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
+  otherDeathFX: {fileID: 0}
   damageSound:
     soundName: 
     volume: 0.7
@@ -114,6 +117,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips: []
@@ -129,6 +133,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.073
     pitchVariance: 0.3
     clips:
@@ -139,12 +144,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
     oneShot: 1
   pickups:
-    pickups:
-    - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
-      numItemsToSpawn: 3
-      spawnLikelihood: 0.499
-  pointsWhenKilledByPlayer: 25
-  pointsWhenWoundedByPlayer: 5
+    pickups: []
+  pointsWhenKilledByPlayer: 0
+  pointsWhenWoundedByPlayer: 0
+  pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &7531810961699429519
 MonoBehaviour:
@@ -172,6 +175,7 @@ MonoBehaviour:
     spread: 293
     minFalloffDistance: 15
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 59e876a918970904f8f2576933a82bcb, type: 3}
@@ -188,6 +192,7 @@ MonoBehaviour:
     spread: 286
     minFalloffDistance: 15
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
     clips:
@@ -234,8 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  moveSpeed: 2
-  speedVariance: 0.5
+  moveSpeed: 1.5
+  speedVariance: 0.2
   accel: 15
 --- !u!114 &7531810961699429525
 MonoBehaviour:
@@ -249,8 +254,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offscreenLifetime: 10
+  offscreenLifetime: 2
   outsideBoundsPadding: 1
+  killNorth: 0
+  killSouth: 1
+  killEast: 1
+  killWest: 1
 --- !u!114 &7531810961699429522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +274,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markerPrefab: {fileID: 2563741419318062698, guid: 5366983609dc2c442808bdbf36c8fcd6, type: 3}
   flagType: 3
+  showNorth: 1
+  showSouth: 1
+  showEast: 1
+  showWest: 1
+--- !u!114 &6265358664012059138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531810961699429514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9012be0a3df9f43b215bfc9cedca4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRotation: 5
+  startTranslate: 0
 --- !u!1 &7531810961716835077
 GameObject:
   m_ObjectHideFlags: 0

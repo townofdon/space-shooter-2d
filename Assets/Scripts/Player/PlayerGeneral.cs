@@ -22,6 +22,13 @@ namespace Player {
         [SerializeField] float hitPauseDuration = 0.1f;
         [SerializeField] float hitPauseTimescale = 0.3f;
 
+        [Header("Gamefeel")]
+        [Space]
+        [SerializeField] float damageShakeScreenDuration = 0.15f;
+        [SerializeField] float damageShakeScreenMagnitude = 0.15f;
+        [SerializeField] float deathShakeScreenDuration = 0.3f;
+        [SerializeField] float deathShakeScreenMagnitude = 0.3f;
+
         [Header("Components")][Space]
         [SerializeField] ParticleSystem shieldEffect;
         [SerializeField] ParticleSystem shieldLostEffect;
@@ -278,7 +285,7 @@ namespace Player {
 
         IEnumerator HullDamageAnimation() {
             if (damageCoroutine != null) StopCoroutine(damageCoroutine);
-            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.15f, 0.05f));
+            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), damageShakeScreenDuration, damageShakeScreenMagnitude));
             shipFlash.SetActive(true);
             yield return new WaitForSeconds(hitRecoveryTime);
             shipFlash.SetActive(false);
@@ -288,7 +295,7 @@ namespace Player {
 
         IEnumerator DeathAnimation() {
             if (damageCoroutine != null) StopCoroutine(damageCoroutine);
-            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.3f, 0.2f));
+            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), deathShakeScreenDuration, deathShakeScreenMagnitude));
             ship.SetActive(false);
             yield return HullDamageAnimation();
             BreakShipApart();

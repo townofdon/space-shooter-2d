@@ -17,7 +17,7 @@ namespace Core
 
         public static IEnumerator ShakeScreen(Camera camera, float duration = 0.3f, float magnitude = 0.5f) {
             // set initial position
-            Vector3 initialPosition = camera.transform.position;
+            Vector3 initialPosition = new Vector3(0f, 0f, -10f);
             float t = 0f;
             while (t < duration) {
                 t += Time.deltaTime;
@@ -27,7 +27,9 @@ namespace Core
             // TODO: in next game, def want to move this method inside of a monobehaviour so that IShakeScreen can be cancelled
             // Another solution would be figuring out a way to modify the camera offset, not the position itself
             // camera.transform.position = initialPosition;
-            camera.transform.position = new Vector3(0f, 0f, camera.transform.position.z);
+            // Yes, this is hard-coded for now and this works perfectly for THIS GAME. Future games esp. with moving camera would need
+            // a different implementation.
+            camera.transform.position = new Vector3(0f, 0f, -10f);
         }
 
         public static IEnumerator PauseTime(float duration = 0.1f, float timeScale = 0f) {

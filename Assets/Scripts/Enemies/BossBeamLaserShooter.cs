@@ -65,6 +65,7 @@ namespace Enemies {
         [Header("Death")]
         [Space]
         [SerializeField] bool destroyAllEnemies = false;
+        [SerializeField] bool disableAllSpawners = true;
         [SerializeField] GameObject hideOnDeath;
         [SerializeField] GameObject showOnDeath;
 
@@ -156,7 +157,7 @@ namespace Enemies {
         }
 
         void OnDeath() {
-            if (transform.parent != null) {
+            if (disableAllSpawners && transform.parent != null) {
                 EntitySpawner[] spawners = transform.parent.GetComponentsInChildren<EntitySpawner>();
                 foreach (var spawner in spawners) {
                     spawner.KillCurrent();

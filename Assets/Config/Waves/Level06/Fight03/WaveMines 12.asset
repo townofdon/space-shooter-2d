@@ -28,7 +28,7 @@ MonoBehaviour:
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
     _spawnLocation: W-8-5
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 2
+    _spawnDifficulty: 3
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
     _spawnLocation: W-10-5
     _spawnOffset: {x: 0, y: 0}
@@ -36,7 +36,7 @@ MonoBehaviour:
   _spawnInterval: 0
   _spawnTimeVariance: 0.1
   _minSpawnInterval: 0
-  _numLoops: 4
+  _numLoops: 3
   _loopInterval: 0.8
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}

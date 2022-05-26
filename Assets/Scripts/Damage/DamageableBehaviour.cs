@@ -23,6 +23,10 @@ namespace Damage {
         [SerializeField] bool _invulnerable = false;
         [SerializeField] float _timeInvincibleAfterSpawn = 0f;
 
+        [Space]
+        [Tooltip("Probability that actor cheats death")]
+        [SerializeField][Range(0f, 1f)] float savingThrow = 0f;
+
         [Header("Health Settings")][Space]
         [SerializeField] float _maxHealth = 50f;
         [SerializeField] float _hitRecoveryTime = 0.2f;
@@ -220,7 +224,6 @@ namespace Damage {
             if (_timeHit > 0f) return false;
             if (_invulnerable) return false;
             if (_tempInvulnerable.active) return false;
-
             if (!Utils.IsObjectOnScreen(gameObject, Utils.GetCamera(), 1f)) return false;
 
             if (_damageableType == DamageableType.ExplodeOnCollision && damageType == DamageType.Collision) {
@@ -280,6 +283,11 @@ namespace Damage {
             _prevShield = _shield;
 
             if (_health <= 0f) {
+                if (savingThrow > 0f && UnityEngine.Random.Range(0f, 1f) <= savingThrow) {
+                    _health = _maxHealth * 0.05f;
+                    return true;
+                }
+
                 if (_isAlive) _Die(damageType, isDamageByPlayer);
             }
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FireWeaponsHint
   m_EditorClassIdentifier: 
   _showButton: 1
-  _keyboardButton: L Mouse
+  _keyboardButton: Spacebar
   _gamepadButton: RT
-  _hintText: FIRE PRIMARY WEAPON
+  _hintText: FIRE GUNS

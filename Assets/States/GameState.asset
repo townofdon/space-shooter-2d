@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameState
   m_EditorClassIdentifier: 
   _initialPoints: 0
-  _initialDifficulty: 3
+  _initialDifficulty: 1
   _difficulty: 3

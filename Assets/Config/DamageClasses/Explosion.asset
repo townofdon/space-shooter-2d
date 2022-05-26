@@ -18,7 +18,7 @@ MonoBehaviour:
   _shieldEffectiveness: 0.7
   _shieldedHealthEffectiveness: 0.062
   _unshieldedHealthEffectiveness: 1
-  _playerEffectiveness: 1
+  _playerEffectiveness: 0.8
   _enemyEffectiveness: 1
   _environmentEffectiveness: 1
   _npcEffectiveness: 1

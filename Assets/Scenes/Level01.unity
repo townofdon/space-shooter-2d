@@ -381,11 +381,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleSequences:
   - {fileID: 11400000, guid: ff3ffa281ddad374ba400feec126f7b1, type: 2}
+  - {fileID: 11400000, guid: ee3c8954a34530a4dbc8e0e6ed193b4d, type: 2}
   - {fileID: 11400000, guid: abfb14081039e704d846327d3cf53473, type: 2}
   - {fileID: 11400000, guid: ad354af7050fc5948afa9115846c5702, type: 2}
+  - {fileID: 11400000, guid: 1ca2e9d7780b88a4bacd33c0785cc55d, type: 2}
   - {fileID: 11400000, guid: 5fe51554b26177d45b886279336811ff, type: 2}
   timeStartDelay: 3
-  showUpgradePanel: 1
+  showUpgradePanel: 0
   enemyCountRefreshRate: 5
   loopIndefinitely: 0
   debug: 0

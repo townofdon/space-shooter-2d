@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: _maxShield
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 1157459284806702471, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
+      propertyPath: activationDelay
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
       propertyPath: m_Name
       value: MineShieldedProjectile

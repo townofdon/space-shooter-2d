@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0fdb61bda10be74dbc9a8fe9564ed78, type: 3}
-  m_Name: FireSecondaryHint
+  m_Name: ResupplyIncoming
   m_EditorClassIdentifier: 
-  _showButton: 1
-  _keyboardButton: B
-  _gamepadButton: LT
-  _hintText: FIRE INCENDIARY
+  _showButton: 0
+  _keyboardButton: 
+  _gamepadButton: 
+  _hintText: RESUPPLY INCOMING

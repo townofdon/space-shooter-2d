@@ -15,4 +15,4 @@ MonoBehaviour:
   _showButton: 1
   _keyboardButton: TAB
   _gamepadButton: Y
-  _hintText: SWITCH WEAPONS
+  _hintText: SWITCH GUNS

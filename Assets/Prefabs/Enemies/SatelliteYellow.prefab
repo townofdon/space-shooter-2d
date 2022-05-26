@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7531810961699429516, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
       propertyPath: _maxHealth
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7531810961699429516, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
       propertyPath: _maxShield
@@ -62,6 +62,10 @@ PrefabInstance:
     - target: {fileID: 7531810961699429517, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531810961699429523, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
+      propertyPath: moveSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7531810961871352833, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
       propertyPath: m_Sprite

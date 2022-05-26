@@ -112,6 +112,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LookLeft",
+                    "type": "Value",
+                    "id": "f834424d-f21a-48b3-9236-b169157e3922",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LookRight",
+                    "type": "Value",
+                    "id": "4b9084db-d878-4c6e-89cd-e1726059ef0c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LookTouchscreen",
+                    "type": "Value",
+                    "id": "e8a0d382-c58f-4a30-b2e1-78ecb843f6d5",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -227,22 +254,22 @@
                 },
                 {
                     "name": "",
-                    "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
-                    "path": "<Mouse>/delta",
+                    "id": "3e5f5442-8668-4b27-a940-df99bad7e831",
+                    "path": "<Joystick>/{Hatswitch}",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
+                    "groups": "Joystick",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "3e5f5442-8668-4b27-a940-df99bad7e831",
-                    "path": "<Joystick>/{Hatswitch}",
+                    "id": "c216aa4a-7fa5-4659-bb8b-f831db19eb11",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
+                    "groups": "Keyboard&Mouse",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -459,7 +486,7 @@
                 {
                     "name": "",
                     "id": "c411be93-16b0-4a52-801d-4a714e3ba644",
-                    "path": "<Keyboard>/n",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -596,6 +623,39 @@
                     "processors": "",
                     "groups": "Touch",
                     "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4202b6d-0ae2-49bd-b2f6-03e3655ae453",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "LookRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "113f4eb5-c7a4-400c-9ab5-f43a9b30f89a",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "LookLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51fd66c7-c049-432e-976b-9da8794ee912",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "LookTouchscreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

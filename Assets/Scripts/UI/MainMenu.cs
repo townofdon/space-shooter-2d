@@ -201,6 +201,7 @@ namespace UI {
         }
 
         void GotoFirstLevel() {
+            AudioManager.current.PlaySound("MenuSelect");
             canvasChooseShipMenu.SetActive(false);
             EnemySpawner spawner = FindObjectOfType<EnemySpawner>();
             spawner.StopBattle();

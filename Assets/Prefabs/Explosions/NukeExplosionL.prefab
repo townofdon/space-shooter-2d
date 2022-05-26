@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441939292386623249, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}
       propertyPath: m_Name
-      value: NukeExplosion
+      value: NukeExplosionL
       objectReference: {fileID: 0}
     - target: {fileID: 5441939292386623249, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}
       propertyPath: m_IsActive
@@ -102,6 +102,18 @@ PrefabInstance:
     - target: {fileID: 5441939293623937580, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978668443108018080, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}
+      propertyPath: damageBegin
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978668443108018080, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}
+      propertyPath: shakeScreenDuration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978668443108018080, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}
+      propertyPath: shakeScreenMagnitude
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}

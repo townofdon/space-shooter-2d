@@ -1989,6 +1989,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e7672c360813e1a4284873be92133c95, type: 2}
   timeStartDelay: 3
   showUpgradePanel: 1
+  enemyCountRefreshRate: 5
   loopIndefinitely: 1
   debug: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}

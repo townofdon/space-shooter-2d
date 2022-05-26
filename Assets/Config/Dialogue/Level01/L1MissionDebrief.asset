@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueEntity: {fileID: 11400000, guid: 59b4178810c647d45b124daf52d8c93f, type: 2}
   _statements:
-  - Thanks for clearing up that mess! I knew we could count on you.
-  - Satellites and asteroids don't shoot back though... reports are coming in for
-    an imminent invasion...
+  - Great work, looks like you're getting the hang of your ship's new weapon systems.
+  - Satellites and asteroids don't shoot back though...
   - You're probably itching to blast some aliens, aren't you... you may get your
     wish soon enough!

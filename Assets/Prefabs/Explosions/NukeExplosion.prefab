@@ -14897,7 +14897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderMultiple: 0.5
   timeCausingDamage: 1.5
-  damageBegin: 600
+  damageBegin: 750
   damageEnd: 75
   damageAtEdge: 0.75
   blastForce: 20

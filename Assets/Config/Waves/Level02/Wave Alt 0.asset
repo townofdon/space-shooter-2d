@@ -40,6 +40,8 @@ MonoBehaviour:
   _spawnInterval: 0.3
   _spawnTimeVariance: 0.03
   _minSpawnInterval: 0.1
+  _numLoops: 1
+  _loopInterval: 2
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
   _spawnDifficulty: 3
@@ -48,9 +50,9 @@ MonoBehaviour:
   launchVelocity: 4
   velocityVariance: 0.6
   aimTowardsPlayer: 0.12
-  _path: {fileID: 6053553464058246422, guid: 3f4ae7d7c18d73b4fa2f115323f45ad9, type: 3}
+  _path: {fileID: 1827874083109662934, guid: 025ccde33f5602e4f97a674661668a1b, type: 3}
   _pathfinderLoopMode: 2
-  _flipX: 0
+  _flipX: 1
   _flipY: 0
   _maxPathLoops: 99
   _initialState: {fileID: 0}

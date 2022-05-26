@@ -17,6 +17,11 @@ namespace Weapons
         [SerializeField] float damageAtEdge = 0.25f;
         [SerializeField] float blastForce = 5f;
 
+        [Header("Gamefeel")]
+        [Space]
+        [SerializeField] float shakeScreenMagnitude = 0.8f;
+        [SerializeField] float shakeScreenDuration = 0.3f;
+
         [Header("Components")][Space]
         [SerializeField] GameObject nukeShockwave;
         [SerializeField] GameObject nukeShockwave2;
@@ -122,7 +127,7 @@ namespace Weapons
 
         IEnumerator NukeFX() {
             yield return GameFeel.PauseTime(0.15f, 0.1f);
-            yield return GameFeel.ShakeScreen(Utils.GetCamera());
+            yield return GameFeel.ShakeScreen(Utils.GetCamera(), shakeScreenDuration, shakeScreenMagnitude);
         }
     }
 }

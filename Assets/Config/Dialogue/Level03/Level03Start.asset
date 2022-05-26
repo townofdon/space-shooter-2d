@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueEntity: {fileID: 11400000, guid: 59b4178810c647d45b124daf52d8c93f, type: 2}
   _statements:
-  - You're starting to get close to the Xyclon system... I don't need to tell you
-    to watch your back...
+  - You're starting to get close to the Xyclon capital system... I don't need to
+    tell you to watch your back...
   - The goodwill of all Nobles go with you. Good hunting.

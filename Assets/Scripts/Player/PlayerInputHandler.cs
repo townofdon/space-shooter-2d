@@ -17,6 +17,7 @@ namespace Player {
         // cached
         Vector2 _move;
         Vector2 _look;
+        Vector2 _touchPoint;
         bool _isFirePressed = false;
         bool _isFire2Pressed = false;
         bool _isMeleePressed = false;
@@ -91,6 +92,30 @@ namespace Player {
             if (playerState.controlMode != PlayerInputControlMode.Player) { _look = Vector2.zero; return; }
             if (_isPaused) return;
             _look = value.Get<Vector2>();
+        }
+
+        void OnLookLeft(InputValue value) {
+            if (playerState.controlMode != PlayerInputControlMode.Player) { return; }
+            if (_isPaused) return;
+            if (!value.isPressed) { _look = Vector2.zero; return; }
+            _look = new Vector2(-1f, _look.y).normalized;
+        }
+
+        void OnLookRight(InputValue value) {
+            if (playerState.controlMode != PlayerInputControlMode.Player) { return; }
+            if (_isPaused) return;
+            if (!value.isPressed) { _look = Vector2.zero; return; }
+            _look = new Vector2(1f, _look.y).normalized;
+        }
+
+        void OnLookTouchscreen(InputValue value) {
+            if (playerState.controlMode != PlayerInputControlMode.Player) { return; }
+            if (_isPaused) return;
+            if (!value.isPressed) {
+                return;
+            }
+            _touchPoint = value.Get<Vector2>();
+            _look = _move = (_touchPoint - (Vector2)transform.position).normalized;
         }
 
         void OnFire(InputValue value) {

@@ -26,10 +26,6 @@ MonoBehaviour:
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
-    _spawnLocation: N-20-3
-    _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
     _spawnLocation: N-6-3
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
@@ -38,19 +34,7 @@ MonoBehaviour:
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
-    _spawnLocation: N-8-3
-    _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
     _spawnLocation: N-16-3
-    _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
-    _spawnLocation: N-16-3
-    _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
-    _spawnLocation: N-14-3
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 7531810961699429514, guid: 6557f56a0aa6931429fad8fe387a0d0b, type: 3}
@@ -71,7 +55,9 @@ MonoBehaviour:
     _spawnDifficulty: 0
   _spawnInterval: 1.5
   _spawnTimeVariance: 0.97
-  _minSpawnInterval: 1
+  _minSpawnInterval: 0.82
+  _numLoops: 1
+  _loopInterval: 0
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
   _spawnDifficulty: 0
@@ -84,5 +70,6 @@ MonoBehaviour:
   _pathfinderLoopMode: 0
   _flipX: 0
   _flipY: 0
+  _maxPathLoops: 99
   _initialState: {fileID: 0}
   notes: Blue satellites
