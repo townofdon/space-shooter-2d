@@ -370,9 +370,10 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.341
     pitchVariance: 0.031
+    delayVariance: 0.03
     clips:
     - {fileID: 8300000, guid: 9d933d4c696fd4841a923f97d3fadc8b, type: 3}
-    oneShot: 1
+    oneShot: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &-8280308180682311959
 MonoBehaviour:

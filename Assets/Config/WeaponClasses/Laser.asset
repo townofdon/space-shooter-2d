@@ -17,12 +17,12 @@ MonoBehaviour:
   _effectiveRange: 10
   _shotSound:
     soundName: LazerShot
-    volume: 0.44
+    volume: 0.4
     pitch: 1
     ignoreListenerPause: 0
-    realtimeEditorInspect: 0
+    realtimeEditorInspect: 1
     mixerGroup: {fileID: 0}
-    spatialBlend: 0
+    spatialBlend: 0.1
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50

@@ -16,10 +16,12 @@ namespace Enemies {
         [Header("Enemy Type")]
         [Space]
         [SerializeField] bool isBoss = false;
+        [SerializeField] bool isCountableEnemy = true;
 
         [Header("Components")][Space]
         [SerializeField] GameObject ship;
         [SerializeField] GameObject explosion;
+        [SerializeField] GameObject explosion2;
         [SerializeField] GameObject otherDeathFX;
 
         [Header("Movement")][Space]
@@ -60,7 +62,7 @@ namespace Enemies {
                 didNotifyBossSpawn = true;
                 eventChannel.OnBossSpawn.Invoke(instanceId);
             }
-            if (isAlive && !didNotifyEnemySpawn) {
+            if (isAlive && isCountableEnemy && !didNotifyEnemySpawn) {
                 didNotifyEnemySpawn = true;
                 eventChannel.OnEnemySpawn.Invoke();
             }
@@ -133,6 +135,7 @@ namespace Enemies {
 
         IEnumerator DeathAnimation() {
             if (explosion != null) Instantiate(explosion, transform);
+            if (explosion2 != null) Instantiate(explosion2, transform);
             if (otherDeathFX != null) otherDeathFX.SetActive(true);
             if (ship != null) ship.SetActive(false);
             yield return new WaitForSeconds(3f);

@@ -257,6 +257,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.215
+    delayVariance: 0
     clips: []
     oneShot: 1
   thrustSound:
@@ -290,6 +291,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.5
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 47ae2feb7773a79439a59d44fa1f86c8, type: 3}
     - {fileID: 8300000, guid: 5e0706d2652922b4c9829e4ac9c80ad2, type: 3}
@@ -308,6 +310,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.135
     pitchVariance: 0.5
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: c8a4790b735f26b43b8ae8bfc10365cd, type: 3}
     oneShot: 1
@@ -325,6 +328,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   destroyedSound:
@@ -341,6 +345,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
 --- !u!1 &1916144925046824998

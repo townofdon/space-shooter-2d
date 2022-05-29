@@ -111,6 +111,7 @@ namespace Weapons
 
             if (other.tag == UTag.Mine) return;
             if (other.tag == UTag.Ordnance) return;
+            if (!Utils.IsObjectOnScreen(gameObject, Utils.GetCamera(), 0f)) return;
 
             if ((
                 other.tag == UTag.Bullet ||

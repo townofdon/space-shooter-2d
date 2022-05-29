@@ -171,12 +171,12 @@ namespace Audio {
                 sourceLoop.PlayScheduled(timeLoopStartScheduled);
             }
 
-            while (playButtonPressed) yield return null;
+            while (playButtonPressed && sourceLoop.isPlaying) yield return null;
 
             int numFullCycles = GetNumFullLoopCycles();
             timeLoopEndScheduled = timeLoopStartScheduled + clipLoopDuration * numFullCycles;
 
-            sourceLoop.SetScheduledEndTime(timeLoopEndScheduled);
+            if (sourceLoop.isPlaying) sourceLoop.SetScheduledEndTime(timeLoopEndScheduled);
             if (sourceOutro != null && sourceOutro.enabled) sourceOutro.PlayScheduled(timeLoopEndScheduled);
 
             while (sourceLoop.isPlaying) yield return null;
@@ -186,6 +186,7 @@ namespace Audio {
             while (sourceOutro != null && sourceOutro.isPlaying) yield return null;
 
             cursor = PlayCursor.Stopped;
+            playButtonPressed = false;
             playCoroutine = null;
         }
 

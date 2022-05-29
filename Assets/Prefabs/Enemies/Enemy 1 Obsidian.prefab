@@ -25,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 5a708fa62406beb48a66b6ec6d567e47, type: 3}
     - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
       propertyPath: _maxHealth
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
       propertyPath: _maxShield
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
       propertyPath: pointsWhenKilledByPlayer

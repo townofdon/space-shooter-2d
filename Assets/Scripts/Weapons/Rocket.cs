@@ -15,6 +15,7 @@ namespace Weapons
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float accel = 5f;
         [SerializeField] float turnSpeed = 1f;
+        [SerializeField] float turnSpeedPreLaunch = 3f;
         [SerializeField] float startDelay = 0.25f;
         [SerializeField] float launchDrag = 1f;
         [SerializeField] float lifetime = 10f;
@@ -22,6 +23,7 @@ namespace Weapons
         [SerializeField] float proximityDetonation = 0.5f;
         [SerializeField] float proximityDelay = 0.15f;
         [SerializeField] float outOfRange = 20f;
+        [SerializeField] float cascadeExplodeDelay = 0.4f;
 
         [Header("Effects")][Space]
         [SerializeField] ParticleSystem thrustFX;
@@ -75,6 +77,11 @@ namespace Weapons
 
         public void Launch(Vector2 force) {
             launchForce = force;
+        }
+
+        public void Explode(DamageType damageType) {
+            if (damageType == DamageType.Explosion && t < cascadeExplodeDelay) return;
+            OnDeath();
         }
 
         void Init() {
@@ -141,15 +148,15 @@ namespace Weapons
         void RotateTowardsTarget() {
             if (target == null) return;
             if (!isAlive) return;
-            if (!isThrusting) return;
 
             heading = Vector3.RotateTowards(
                 heading,
                 (target.position - transform.position).normalized,
-                turnSpeed * Mathf.PI * Time.fixedDeltaTime,
+                (isThrusting ? turnSpeed : turnSpeedPreLaunch) * Mathf.PI * Time.fixedDeltaTime,
                 1f
             ).normalized;
-            transform.rotation = startingRotation * Quaternion.Euler(0f, 0f, Vector2.SignedAngle(startingRotation * initialHeading, heading));
+            rb.rotation = Vector2.SignedAngle(startingRotation * initialHeading, -heading);
+            // transform.rotation = startingRotation * Quaternion.Euler(0f, 0f, Vector2.SignedAngle(startingRotation * initialHeading, heading));
 
             // rotation doesn't actually affect flight path; it's just for show (since we're setting velocity manually)
             // aimVector = Vector2.MoveTowards(aimVector, heading, turnSpeed * Time.deltaTime);
@@ -196,7 +203,7 @@ namespace Weapons
             OnDeath();
         }
 
-        public void OnDeath() {
+        void OnDeath() {
             if (!isAlive) return;
 
             isAlive = false;
@@ -206,7 +213,10 @@ namespace Weapons
             if (thrustSound != null) thrustSound.Stop();
 
             if (explosion != null) {
-                Destroy(Instantiate(explosion, transform.position, Quaternion.identity), explosionLifetime);
+                GameObject instance = Instantiate(explosion, transform.position, Quaternion.identity);
+                Explosion splosion = instance.GetComponent<Explosion>();
+                if (splosion != null) splosion.SetIsDamageByPlayer(damageDealer.GetIsDamageByPlayer());
+                Destroy(instance, explosionLifetime);
             }
             Destroy(gameObject);
         }

@@ -272,12 +272,14 @@ namespace Game {
             Time.timeScale = 0f;
             AudioListener.pause = true; // see: https://gamedevbeginner.com/10-unity-audio-tips-that-you-wont-find-in-the-tutorials/#audiolistener_pause
             GameManager.isPaused = true;
+            StopGameTimer();
         }
 
         void OnUnpause() {
             Time.timeScale = 1f;
             AudioListener.pause = false;
             GameManager.isPaused = false;
+            StartGameTimer();
         }
 
         void OnShowDebug() {
@@ -312,12 +314,12 @@ namespace Game {
         IEnumerator IWinLevel(bool showUpgradePanel = true) {
             eventChannel.OnShowVictory.Invoke();
             ImperativelyDestroyAllEnemies();
-            yield return new WaitForSeconds(winLevelWaitTime);
             while (player == null) {
                 player = PlayerUtils.FindPlayer();
                 yield return null;
             }
             player.SetInvulnerable(true);
+            yield return new WaitForSeconds(winLevelWaitTime);
             eventChannel.OnHideVictory.Invoke();
             AudioManager.current.PlaySound("ship-whoosh");
 

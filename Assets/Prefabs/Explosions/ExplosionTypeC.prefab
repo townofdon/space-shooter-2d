@@ -14663,9 +14663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa6032e1e5d19c4b9624e6e38787f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeCausingDamage: 0.1
+  hasSingleFrameDamage: 1
+  timeCausingDamage: 0.05
   damageBegin: 75
-  damageEnd: 5
+  damageEnd: 65
   damageAtEdge: 1
   blastForce: 2
   lifetime: 3
@@ -14685,6 +14686,7 @@ MonoBehaviour:
     dopplerLevel: 0.11
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0.0183
     clips:
     - {fileID: 8300000, guid: c77d065e8a880a548b3f15d9a43f32e5, type: 3}
     - {fileID: 8300000, guid: 15c64c1b1f298d74caa2e49d05d35498, type: 3}

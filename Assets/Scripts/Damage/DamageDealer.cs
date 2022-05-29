@@ -12,26 +12,36 @@ namespace Damage
 
     public class DamageDealer : MonoBehaviour
     {
-        [Header("Damage Settings")][Space]
+        [Header("Damage Settings")]
+        [Space]
         [SerializeField] DamageType damageType = DamageType.Default;
         [SerializeField][Range(0f, 10f)] float baseDamageMultiplier = 1f;
         [SerializeField] bool isDamageByPlayer = false;
 
         [Space]
 
-        [Header("Circlecast Settings")][Space]
+        [Header("Collision")]
+        [Space]
+        [SerializeField][Range(0f, 2f)] float collisionForceMod = 1f;
+
+        [Space]
+
+        [Header("Circlecast Settings")]
+        [Space]
         [SerializeField] bool preferCirclecast = false;
 
         [Space]
 
-        [Header("Raycast Settings")][Space]
+        [Header("Raycast Settings")]
+        [Space]
         [SerializeField] bool raycast = false;
         [SerializeField][Tooltip("Minimum distance the projectile must travel before ignore settings are turned off and it can start raycasting")]
         float minSafeDistance = 2f;
 
         [Space]
 
-        [Header("Ignore Settings")][Space]
+        [Header("Ignore Settings")]
+        [Space]
         [SerializeField] bool ignoreParentUUID = true;
         [SerializeField] LayerMask ignoreLayers;
         [SerializeField] string ignoreTag;
@@ -64,6 +74,10 @@ namespace Damage
 
         public void SetIsDamageByPlayer(bool value) {
             isDamageByPlayer = value;
+        }
+
+        public bool GetIsDamageByPlayer() {
+            return isDamageByPlayer;
         }
 
         public void SetIgnoreUUID(System.Nullable<System.Guid> uuid) {
@@ -206,7 +220,7 @@ namespace Damage
 
                 if (other.tag == UTag.Missile) {
                     Rocket missile = other.GetComponent<Rocket>();
-                    if (missile != null) missile.OnDeath();
+                    if (missile != null) missile.Explode(damageType);
                 }
             }
         }
@@ -218,12 +232,19 @@ namespace Damage
             if (rb == null) return;
             float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
             float collisionMagnitude = (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
+            float canCollideMod = actor.canCollide ? 1f : 0.1f;
+            float mSelf = Mathf.Min(0.8f, rb.mass);
+            float mOther = Mathf.Min(0.8f, actor.rigidbody.mass);
             // a very inelastic collision
-            Vector3 forceToSelf = (actor.rigidbody.velocity - rb.velocity);
-            Vector3 forceToActor = (rb.velocity - actor.rigidbody.velocity);
+            Vector3 forceToSelf = (actor.rigidbody.velocity * mOther - Vector2.ClampMagnitude(rb.velocity, 3f) * mSelf) * collisionForceMod * canCollideMod;
+            Vector3 forceToActor = (rb.velocity * mSelf - Vector2.ClampMagnitude(actor.rigidbody.velocity, 3f) * mOther) * collisionForceMod * canCollideMod;
             rb.AddForce(forceToSelf, ForceMode2D.Impulse);
             if (!actor.rigidbody.isKinematic) actor.rigidbody.AddForce(forceToActor * damageClass.throwbackForceMultiplier, ForceMode2D.Impulse);
-            float damageToActor = collisionDamage * collisionMagnitude * Mathf.Max(1f, (rb.mass / actor.rigidbody.mass) * 0.05f);
+            float damageToActor = collisionDamage * collisionMagnitude * Mathf.Clamp((rb.mass / actor.rigidbody.mass) * 0.05f, 1f, 10f);
+            if (collisionMagnitude < 2f) damageToActor = Mathf.Max(30f, damageToActor);
+            if (collisionMagnitude < 1.5f) damageToActor = Mathf.Max(10f, damageToActor);
+            if (collisionMagnitude < 1f) damageToActor = Mathf.Max(4f, damageToActor);
+            if (collisionMagnitude < 0.5f) damageToActor = Mathf.Max(1f, damageToActor);
             actor.TakeDamage(damageToActor * baseDamageMultiplier, DamageType.Collision, isDamageByPlayer);
             if (actor.tag == UTag.Asteroid) InvokeCallback(onRoidHitRoid);
         }

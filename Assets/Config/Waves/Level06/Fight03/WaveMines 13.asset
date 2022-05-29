@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemies:
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-    _spawnLocation: E-10-5
+    _spawnLocation: E-1-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 2
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-    _spawnLocation: E-12-5
+    _spawnLocation: E-2-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 2
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-    _spawnLocation: E-14-5
+    _spawnLocation: E-3-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 3
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-    _spawnLocation: E-16-5
+    _spawnLocation: E-2-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 3
   - _enemyPrefab: {fileID: 1157459284806702522, guid: 7406a6d822fa3d441bdc7b3f214d90a2, type: 3}
-    _spawnLocation: E-18-5
+    _spawnLocation: E-1-5
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 3
   _spawnInterval: 0

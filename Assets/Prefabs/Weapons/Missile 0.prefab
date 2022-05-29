@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1514200712958095845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.6700001, y: 2.2772725, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1916144924080233307}
@@ -136,7 +136,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.16963053, y: 0.7467263}
+  m_Size: {x: 0.23886734, y: 1.1302813}
   m_Direction: 0
 --- !u!50 &8661837291738327277
 Rigidbody2D:
@@ -220,22 +220,25 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 5
     maxFalloffDistance: 50
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   thrustSound:
     soundName: RocketThrust
-    volume: 0.711
+    volume: 0.4
     pitch: 0.56
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 1
-    spread: 180
+    spread: 276
     minFalloffDistance: 15
     maxFalloffDistance: 50
-    pitchVariance: 0
+    dopplerLevel: 1
+    pitchVariance: 0.0393
     clipHead: {fileID: 8300000, guid: 7e96b3811454ad84ab51b770e750b347, type: 3}
     clipLoop: {fileID: 8300000, guid: 65e95a605d8078d4ba5bf2c2201ae7e8, type: 3}
     clipTail: {fileID: 8300000, guid: 7e0f6c17fd52fa94e9ff5d80719af7d6, type: 3}
@@ -266,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 4847337570574955363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.6700001, y: 2.2772725, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1916144924080233307}

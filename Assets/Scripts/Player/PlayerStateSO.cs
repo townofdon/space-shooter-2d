@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+using Weapons;
 
 namespace Player {
 
@@ -24,6 +24,8 @@ namespace Player {
         [SerializeField] int _initialMoney = 500;
         [SerializeField] bool _hasGunsUpgrade = false;
 
+        WeaponClass _primaryWeapon;
+        WeaponClass _secondaryWeapon;
         PlayerInputControlMode _controlMode;
         PlayerShipColor _shipColor;
         float _maxHealth;
@@ -32,8 +34,10 @@ namespace Player {
         int _moneyGained; // money accumulated since round start - when player dies the number goes to zero
         int _numDeaths;
 
-        public PlayerShipColor shipColor => _shipColor;
+        public WeaponClass primaryWeapon => _primaryWeapon;
+        public WeaponClass secondaryWeapon => _secondaryWeapon;
         public PlayerInputControlMode controlMode => _controlMode;
+        public PlayerShipColor shipColor => _shipColor;
         public float maxHealth => _maxHealth;
         public float maxShield => _maxShield;
         public int totalMoney => _moneyInBank + _moneyGained;
@@ -41,6 +45,8 @@ namespace Player {
         public bool hasGunsUpgrade => _hasGunsUpgrade;
 
         public void Init() {
+            _primaryWeapon = null;
+            _secondaryWeapon = null;
             _maxHealth = _initialHealth;
             _maxShield = _initialShield;
             _moneyInBank = _initialMoney;
@@ -59,6 +65,14 @@ namespace Player {
 
         public void SetShipColor(PlayerShipColor value) {
             _shipColor = value;
+        }
+
+        public void SetPrimaryWeapon(WeaponClass weapon) {
+            _primaryWeapon = weapon;
+        }
+
+        public void SetSecondaryWeapon(WeaponClass weapon) {
+            _secondaryWeapon = weapon;
         }
 
         public void ResetGunsUpgrade() {

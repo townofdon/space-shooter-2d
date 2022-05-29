@@ -320,6 +320,7 @@ namespace UI {
 
         IEnumerator IGotoFirstLevel() {
             yield return new WaitForSeconds(timeDelayFirstLevel);
+            while (AudioManager.current.isCurrentTrackPlaying) yield return null;
             GameManager.current.GotoNextLevel(GameManager.current.difficulty == GameDifficulty.Insane ? 1 : 0);
         }
     }

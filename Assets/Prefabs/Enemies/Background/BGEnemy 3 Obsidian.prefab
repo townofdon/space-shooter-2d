@@ -20,6 +20,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 150591935660693697, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
+      propertyPath: isCountableEnemy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 150591935660693697, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
       propertyPath: deathSound.volume
       value: 0
       objectReference: {fileID: 0}

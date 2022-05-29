@@ -41,10 +41,15 @@ namespace Weapons
         Collider2D[] colliders;
 
         // state
+        bool isDamageByPlayer;
         Vector3 hitDist;
         Vector3 blastDirection;
         float t = 0f;
         bool didDisableColliders = false;
+
+        public void SetIsDamageByPlayer(bool value) {
+            isDamageByPlayer = value;
+        }
 
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(nukeShockwave);
@@ -77,7 +82,6 @@ namespace Weapons
             scale.x = size;
             scale.y = size;
             nukeShockwave2.transform.localScale = scale;
-            t += Time.deltaTime;
 
             if (t < timeCausingDamage) {
                 BlastRadius();
@@ -87,40 +91,47 @@ namespace Weapons
                 }
                 didDisableColliders = true;
             }
+
+            t += Time.deltaTime;
         }
 
         void BlastRadius() {
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, nukeCoreRadius);
             foreach (var hit in hits) {
-                Projectile projectile = hit.GetComponent<Projectile>();
-                if (projectile != null) {
-                    projectile.OnDeath();
-                    return;
-                }
-                Rocket rocket = hit.GetComponent<Rocket>();
-                if (rocket != null) {
-                    rocket.OnDeath();
-                    return;
-                }
-                DamageReceiver actor = hit.GetComponent<DamageReceiver>();
-                if (actor != null && actor.isAlive) {
-                    hitDist = hit.transform.position - transform.position;
-                    if (hitDist.magnitude > nukeCoreRadius) return;
+                OnHit(hit);
+            }
+        }
 
-                    actor.TakeDamage(
-                        // damage amount per time
-                        Mathf.Lerp(damageBegin, damageEnd, t / timeCausingDamage) *
-                        // account for distance from nuke core center
-                        Mathf.Lerp(1f, damageAtEdge, hitDist.magnitude / nukeCoreRadius),
-                        DamageType.Nuke
-                    );
+        void OnHit(Collider2D hit) {
+            Projectile projectile = hit.GetComponent<Projectile>();
+            if (projectile != null) {
+                projectile.OnDeath();
+                return;
+            }
+            Rocket rocket = hit.GetComponent<Rocket>();
+            if (rocket != null) {
+                rocket.Explode(DamageType.Nuke);
+                return;
+            }
+            DamageReceiver actor = hit.GetComponent<DamageReceiver>();
+            if (actor != null && actor.isAlive) {
+                hitDist = hit.transform.position - transform.position;
+                if (hitDist.magnitude > nukeCoreRadius) return;
 
-                    // push the actor away from the center of the blast
-                    if (actor.rigidbody != null) {
-                        blastDirection = (actor.rigidbody.transform.position - transform.position);
-                        if (blastDirection == Vector3.zero) blastDirection = Vector3.down * 0.1f;
-                        actor.rigidbody.AddForce(blastDirection.normalized * (1f / blastDirection.magnitude) * blastForce);
-                    }
+                actor.TakeDamage(
+                    // damage amount per time
+                    Mathf.Lerp(damageBegin, damageEnd, t / timeCausingDamage) *
+                    // account for distance from nuke core center
+                    Mathf.Lerp(1f, damageAtEdge, hitDist.magnitude / nukeCoreRadius),
+                    DamageType.Nuke,
+                    isDamageByPlayer
+                );
+
+                // push the actor away from the center of the blast
+                if (actor.rigidbody != null) {
+                    blastDirection = (actor.rigidbody.transform.position - transform.position);
+                    if (blastDirection == Vector3.zero) blastDirection = Vector3.down * 0.1f;
+                    actor.rigidbody.AddForce(blastDirection.normalized * (1f / blastDirection.magnitude) * blastForce);
                 }
             }
         }

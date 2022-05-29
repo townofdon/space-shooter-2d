@@ -29,6 +29,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   _effectSound:
@@ -62,6 +63,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   baseSettings:
@@ -125,10 +127,11 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
       clips: []
       oneShot: 1
   upgrades:
-  - _assetClass: ANTIMATTER WARHEAD
+  - _assetClass: Antimatter Charge
     _damageMultiplier: 1
     _startingAmmo: 5
     _infiniteAmmo: 0
@@ -173,6 +176,69 @@ MonoBehaviour:
       m_RotationOrder: 4
     _prefab: {fileID: 7388768028247383186, guid: 29bd1da63226c2848991fc23d220c157, type: 3}
     _shieldDrain: 0
+    _cost: 7500
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      dopplerLevel: 1
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      delayVariance: 0
+      clips: []
+      oneShot: 1
+  - _assetClass: Atomic Disruptor
+    _damageMultiplier: 1
+    _startingAmmo: 5
+    _infiniteAmmo: 0
+    _cycles: 0
+    _reloads: 1
+    _reloadTime: 2
+    _magazineCapacity: 1
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _prefab: {fileID: 6325608876787072612, guid: aced458c4054d2d46964be3cb708d349, type: 3}
+    _shieldDrain: 0
     _cost: 15000
     _reloadSound:
       soundName: 
@@ -188,5 +254,6 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
       clips: []
       oneShot: 1

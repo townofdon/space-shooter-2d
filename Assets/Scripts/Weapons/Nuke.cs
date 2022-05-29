@@ -8,6 +8,7 @@ namespace Weapons
 
     public class Nuke : MonoBehaviour
     {
+        [SerializeField] bool isDamageByPlayer = false;
         [SerializeField] float fuseTime = 3f;
         [SerializeField] float finalAnimSpeed = 10f;
         [SerializeField] float moveSpeed = 5f;
@@ -29,7 +30,6 @@ namespace Weapons
         Vector2 heading = Vector2.up;
         float currentTime = 0f;
         bool sploded = false;
-        GameObject splosion;
 
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(nukeExplosion);
@@ -70,9 +70,11 @@ namespace Weapons
             if (sr != null) sr.enabled = false;
             if (renderers != null) foreach (SpriteRenderer renderer in renderers) renderer.enabled = false;
             explosionSound.Play();
-            splosion = Object.Instantiate(nukeExplosion, transform.position, new Quaternion(0f,0f,0f,0f));
+            GameObject instance = Object.Instantiate(nukeExplosion, transform.position, Quaternion.identity);
+            NukeExplosion splosion = instance.GetComponent<NukeExplosion>();
+            if (splosion != null) splosion.SetIsDamageByPlayer(isDamageByPlayer);
             // TODO: USE OBJECT POOLING SYSTEM
-            Destroy(splosion, 7f);
+            Destroy(instance, 7f);
             Destroy(gameObject, 7f);
         }
 

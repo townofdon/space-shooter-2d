@@ -215,7 +215,8 @@ MonoBehaviour:
   debug: 0
   ignoredColliders:
   - {fileID: 1998003900697053705}
-  chargingLineWidth: 0.1
+  chargingLineWidth: 0.2
+  chargingLineVariance: 0.5
   chargeTime: 0.5
   fireTime: 0.2
   holdTime: 0.4
@@ -228,25 +229,8 @@ MonoBehaviour:
   aimSpeedInsaneMod: 1
   chargeUpSound:
     soundName: ChargeUp
-    volume: 0.7
-    pitch: 1
-    ignoreListenerPause: 0
-    realtimeEditorInspect: 0
-    mixerGroup: {fileID: 0}
-    spatialBlend: 1
-    spread: 180
-    minFalloffDistance: 20
-    maxFalloffDistance: 40
-    dopplerLevel: 1
-    volumeVariance: 0.1
-    pitchVariance: 0.1
-    clips:
-    - {fileID: 8300000, guid: 66045012dd0ab6b499545258cb856c23, type: 3}
-    oneShot: 0
-  fireSound:
-    soundName: FireBigAssLaser
     volume: 0.6
-    pitch: 0.8
+    pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
@@ -257,6 +241,25 @@ MonoBehaviour:
     dopplerLevel: 0
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0.03
+    clips:
+    - {fileID: 8300000, guid: 66045012dd0ab6b499545258cb856c23, type: 3}
+    oneShot: 0
+  fireSound:
+    soundName: FireBigAssLaser
+    volume: 0.5
+    pitch: 0.8
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 0
+    volumeVariance: 0.1
+    pitchVariance: 0.244
+    delayVariance: 0.03
     clips:
     - {fileID: 8300000, guid: eb4614ed5ffd9794d8faa2fb897d0846, type: 3}
     oneShot: 0

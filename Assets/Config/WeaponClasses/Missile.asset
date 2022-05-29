@@ -17,8 +17,8 @@ MonoBehaviour:
   _effectiveRange: 10
   _shotSound:
     soundName: 
-    volume: 0.33
-    pitch: 1
+    volume: 0.36
+    pitch: 0.9
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}

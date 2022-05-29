@@ -271,6 +271,7 @@ MonoBehaviour:
   damageType: 1
   baseDamageMultiplier: 1
   isDamageByPlayer: 0
+  collisionForceMod: 1.4
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -368,17 +369,18 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
+  savingThrow: 0
   _maxHealth: 150
-  _hitRecoveryTime: 0.02
+  _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
   _maxShield: 0
   _shieldWaitTime: 3
   _shieldRechargeTime: 1
-  healthModEasy: 1
+  healthModEasy: 0.75
   healthModMedium: 1
-  healthModHard: 1
-  healthModInsane: 1
+  healthModHard: 1.25
+  healthModInsane: 2
   shieldModEasy: 1
   shieldModMedium: 1
   shieldModHard: 1
@@ -389,6 +391,10 @@ MonoBehaviour:
   damageSpriteTarget: {fileID: 3526694644768065681}
   secondaryDamageSpriteTargets: []
   perishableObjects: []
+  startHeading: {x: 0, y: -1}
+  headingVariance: 0
+  startSpeed: 0
+  speedVariance: 0
   startRotation: 360
   pieces:
   - {fileID: 5346947312078079096, guid: 4d0ef2b5e6e48bd499ca5dc4776b9fa0, type: 3}
@@ -408,6 +414,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.167
     pitchVariance: 0.225
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 5b8e7481c4fd987479f74f152826e552, type: 3}
     - {fileID: 8300000, guid: 4cd0b25957bfb9d4fa715ba1a60c5f95, type: 3}
@@ -428,7 +435,8 @@ MonoBehaviour:
     maxFalloffDistance: 40
     dopplerLevel: 1
     volumeVariance: 0.1
-    pitchVariance: 0.1
+    pitchVariance: 0.138
+    delayVariance: 0.03
     clips:
     - {fileID: 8300000, guid: 9d2b06d8049add8478ec94a23ddf5134, type: 3}
     - {fileID: 8300000, guid: 09653370cfcb98040a4d0484d1f758f0, type: 3}

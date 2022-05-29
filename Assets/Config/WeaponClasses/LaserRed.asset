@@ -17,10 +17,10 @@ MonoBehaviour:
   _effectiveRange: 20
   _shotSound:
     soundName: LazerRed
-    volume: 0.565
+    volume: 0.35
     pitch: 0.6
     ignoreListenerPause: 0
-    realtimeEditorInspect: 1
+    realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 1
     spread: 290
@@ -78,9 +78,9 @@ MonoBehaviour:
     _firingRate: 0.1
     _burstMax: 0
     _burstInterval: 0.05
-    _overheats: 0
-    _overheatTime: 0
-    _cooldownTime: 0
+    _overheats: 1
+    _overheatTime: 0.4
+    _cooldownTime: 0.5
     _deploymentTime: 0.5
     _launchForce: 0
     _recoil: 0

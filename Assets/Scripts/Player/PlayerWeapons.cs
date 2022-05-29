@@ -117,8 +117,8 @@ namespace Player
             InitWeapon(disruptorRing);
             InitWeapon(missile);
             InitWeapon(nuke);
-            primaryWeapon = laser;
-            secondaryWeapon = nuke;
+            primaryWeapon = playerState.primaryWeapon != null ? playerState.primaryWeapon : laser;
+            secondaryWeapon = playerState.secondaryWeapon != null ? playerState.secondaryWeapon : nuke;
             tertiaryWeapon = disruptorRing;
             switchWeaponSound.Init(this);
             switchSecondaryWeaponSound.Init(this);
@@ -395,6 +395,7 @@ namespace Player
                     return;
             }
 
+            playerState.SetPrimaryWeapon(primaryWeapon);
             primaryWeapon.Deploy();
             StopPrimaryFX();
         }
@@ -421,10 +422,11 @@ namespace Player
                     secondaryWeapon = nuke;
                     break;
                 default:
-                    Debug.LogError("Unsupported secondary weapon type: " + primaryWeapon.type);
+                    Debug.LogError("Unsupported secondary weapon type: " + secondaryWeapon.type);
                     return;
             }
 
+            playerState.SetSecondaryWeapon(secondaryWeapon);
             secondaryWeapon.Deploy();
             StopSecondaryFX();
         }

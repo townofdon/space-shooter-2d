@@ -94,12 +94,12 @@ namespace UI {
 
             rowPoints.SetActive(true);
 
-            yield return IShowStat(fieldPoints, totalPoints, 1000);
+            yield return IShowStat(fieldPoints, totalPoints);
             yield return new WaitForSeconds(timeBetweenStats);
 
             rowEnemies.SetActive(true);
 
-            yield return IShowStat(fieldEnemies, numEnemiesKilled, 10);
+            yield return IShowStat(fieldEnemies, numEnemiesKilled);
             yield return new WaitForSeconds(timeBetweenStats);
 
             rowDeaths.SetActive(true);
@@ -123,16 +123,17 @@ namespace UI {
             GameManager.current.GotoLevelOne(true);
         }
 
-        IEnumerator IShowStat(TextMeshProUGUI field, int value, int acc = 1, string append = "") {
+        IEnumerator IShowStat(TextMeshProUGUI field, int value, string append = "") {
             dismiss = false;
             num = 0;
             AudioManager.current.PlaySound("DialogueChip");
             while (!dismiss && num < value) {
                 AudioManager.current.PlaySound("DialogueChip");
-                num = Mathf.Min(num + acc, value);
+                num = Mathf.Min(num + GetStep(value - num), value);
                 field.text = num.ToString() + (append == "" ? "" : " ") + append;
                 yield return new WaitForSeconds(0.02f);
             }
+            field.text = value.ToString() + (append == "" ? "" : " ") + append;
             dismiss = false;
         }
 
@@ -146,6 +147,7 @@ namespace UI {
                 field.text = Utils.ToTimeString(fNum);
                 yield return new WaitForSeconds(0.02f);
             }
+            field.text = Utils.ToTimeString(value);
             dismiss = false;
         }
 
@@ -156,15 +158,24 @@ namespace UI {
         float GetPointsModifier() {
             switch (gameState.difficulty) {
                 case GameDifficulty.Insane:
-                    return 4.0f;
+                    return 5.0f;
                 case GameDifficulty.Hard:
                     return 2f;
                 case GameDifficulty.Medium:
-                    return 1.25f;
+                    return 1.2f;
                 case GameDifficulty.Easy:
                 default:
                     return 1.0f;
             }
+        }
+
+        int GetStep(int diff) {
+            if (diff >= 50000) return 10000;
+            if (diff >= 5000) return 1000;
+            if (diff >= 500) return 100;
+            if (diff >= 50) return 10;
+            if (diff >= 10) return 5;
+            return 1;
         }
     }
 }

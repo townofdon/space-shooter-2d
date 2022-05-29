@@ -29,15 +29,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5209504494967835017, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
       propertyPath: _maxHealth
-      value: 80
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5209504494967835017, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
       propertyPath: _maxShield
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5209504494967835017, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
       propertyPath: healthModHard
       value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209504494967835017, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
+      propertyPath: _nukeRecoveryTime
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5209504494967835017, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
       propertyPath: pointsWhenKilledByPlayer

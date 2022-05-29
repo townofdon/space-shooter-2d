@@ -108,6 +108,7 @@ MonoBehaviour:
   moveOnAgro: 0
   agroSplosion: {fileID: 8618738012250842369, guid: 00c6a1d78ddfa7d4a87dcfb1c6d8d3ee, type: 3}
   agroSplosionLocations: []
+  agroHideItems: []
   agroDelay: 2.5
   agroSound:
     soundName: 
@@ -123,6 +124,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   moveAngle: 15
@@ -166,6 +168,10 @@ MonoBehaviour:
   screenPadBottom: 4
   screenPadLeft: 2
   screenPadRight: 2
+  destroyAllEnemies: 0
+  disableAllSpawners: 1
+  hideOnDeath: {fileID: 0}
+  showOnDeath: {fileID: 0}
   disruptorRing: {fileID: 4817823717859940317}
   beamLaser: {fileID: 3306651751174570915}
   anim: {fileID: 3306651752485391457}
@@ -202,6 +208,7 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
+  savingThrow: 0
   _maxHealth: 3000
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -224,6 +231,7 @@ MonoBehaviour:
   secondaryDamageSpriteTargets: []
   perishableObjects: []
   isBoss: 1
+  isCountableEnemy: 1
   ship: {fileID: 3306651752637380792}
   explosion: {fileID: 5345083779386589570, guid: 6f0bd7f793570f2488b51bcbc9eda4cb, type: 3}
   otherDeathFX: {fileID: 0}
@@ -241,6 +249,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   deathSound:
@@ -257,6 +266,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: e014521f70e1fee489c3dceeeeccf5b5, type: 3}
     oneShot: 1
@@ -637,6 +647,10 @@ PrefabInstance:
     - target: {fileID: 1998003900697053704, guid: 17353e26befe28042b321e9ac32fe21c, type: 3}
       propertyPath: aimSpeedInsaneMod
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998003900697053704, guid: 17353e26befe28042b321e9ac32fe21c, type: 3}
+      propertyPath: chargingLineVariance
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1998003900697053704, guid: 17353e26befe28042b321e9ac32fe21c, type: 3}
       propertyPath: ignoredColliders.Array.size

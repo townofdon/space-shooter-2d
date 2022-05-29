@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Weapons
     {
         [Header("Splosion Settings")]
         [Space]
+        [SerializeField] bool hasSingleFrameDamage = false;
         [SerializeField] float timeCausingDamage = 1.5f;
         [SerializeField] float damageBegin = 200f;
         [SerializeField] float damageEnd = 10f;
@@ -42,10 +44,18 @@ namespace Weapons
         float blastRadius = 1f;
         Vector3 scale;
 
+        // hit cache
+        Dictionary<System.Nullable<System.Guid>, bool> hitMap = new Dictionary<System.Nullable<System.Guid>, bool>(20);
+
         // state
+        bool isDamageByPlayer;
         Vector3 hitDist;
         Vector3 blastDirection;
         float t = 0f;
+
+        public void SetIsDamageByPlayer(bool value) {
+            isDamageByPlayer = value;
+        }
 
         void Start() {
             collider = GetComponent<CircleCollider2D>();
@@ -61,9 +71,8 @@ namespace Weapons
         }
 
         void Update() {
-            t += Time.deltaTime;
-
             if (t < timeCausingDamage) BlastRadius();
+            t += Time.deltaTime;
         }
 
         void BlastRadius() {
@@ -88,6 +97,9 @@ namespace Weapons
 
             DamageReceiver actor = hit.GetComponent<DamageReceiver>();
             if (actor != null) {
+                // if actor is already damaged by this splosion, ignore
+                if (hasSingleFrameDamage && actor.uuid != null && hitMap.ContainsKey(actor.uuid) && hitMap[actor.uuid]) return;
+
                 // push the actor away from the center of the blast
                 if (actor.rigidbody) {
                     blastDirection = (actor.rigidbody.transform.position - transform.position);
@@ -97,13 +109,14 @@ namespace Weapons
                 hitDist = hit.transform.position - transform.position;
                 if (hitDist.magnitude > blastRadius) return;
 
-                actor.TakeDamage(
+                if (actor.TakeDamage(
                     // damage amount per time
                     Mathf.Lerp(damageBegin, damageEnd, t / timeCausingDamage) *
                     // account for distance from explosion center
                     Mathf.Lerp(1f, damageAtEdge, hitDist.magnitude / blastRadius),
-                    DamageType.Explosion
-                );
+                    DamageType.Explosion,
+                    isDamageByPlayer
+                ) && hasSingleFrameDamage && actor.uuid != null) hitMap[actor.uuid] = true;
                 return;
             }
         }
@@ -111,7 +124,7 @@ namespace Weapons
         IEnumerator BlowUpRocket(Rocket rocket) {
             // wait a small amount of time in order to create the illusion of chain-reaction explosions
             yield return new WaitForSeconds(0.2f);
-            rocket.OnDeath();
+            rocket.Explode(DamageType.Explosion);
         }
     }
 }

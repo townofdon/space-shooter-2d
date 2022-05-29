@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: nukeExplosion
       value: 
       objectReference: {fileID: 1093051661043625850, guid: 31955458818a7c6468dc1b10087cfec5, type: 3}
+    - target: {fileID: 6265466151077065733, guid: c21db27f042e279499be883f02544470, type: 3}
+      propertyPath: isDamageByPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6411006964417785913, guid: c21db27f042e279499be883f02544470, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -65,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6411006964417785918, guid: c21db27f042e279499be883f02544470, type: 3}
       propertyPath: m_Name
-      value: Nuke
+      value: NukeL
       objectReference: {fileID: 0}
     - target: {fileID: 6411006964417785918, guid: c21db27f042e279499be883f02544470, type: 3}
       propertyPath: m_IsActive

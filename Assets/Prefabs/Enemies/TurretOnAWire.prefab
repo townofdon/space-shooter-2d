@@ -1209,6 +1209,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: dcff69efbe48d89408370c0f1c68a19f, type: 3}
     oneShot: 0
@@ -1226,6 +1227,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: dcff69efbe48d89408370c0f1c68a19f, type: 3}
     oneShot: 0
@@ -1243,6 +1245,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   retractSound:
@@ -1259,6 +1262,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.129
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 75f774a11111c1846862831a9ca94f7f, type: 3}
     oneShot: 1
@@ -1278,9 +1282,10 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
+  savingThrow: 0
   _maxHealth: 50
   _hitRecoveryTime: 0
-  _nukeRecoveryTime: 0.4
+  _nukeRecoveryTime: 0.1
   _destroyOnDeath: 0
   _maxShield: 50
   _shieldWaitTime: 3
@@ -1291,7 +1296,7 @@ MonoBehaviour:
   healthModInsane: 1.5
   shieldModEasy: 0
   shieldModMedium: 0
-  shieldModHard: 0
+  shieldModHard: 0.1
   shieldModInsane: 1
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   damageFlashMaterial: {fileID: 2100000, guid: 0ae09c084eeb8aa45b520fcf9e353eba, type: 2}
@@ -1300,8 +1305,10 @@ MonoBehaviour:
   secondaryDamageSpriteTargets: []
   perishableObjects: []
   isBoss: 0
+  isCountableEnemy: 1
   ship: {fileID: 3691588787849085019}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
+  otherDeathFX: {fileID: 0}
   damageSound:
     soundName: EnemyDamage
     volume: 0
@@ -1316,6 +1323,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.221
     pitchVariance: 0.389
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 9f9b58c4eaff5fa4a9eb5551104f5afb, type: 3}
     - {fileID: 8300000, guid: 79c1fb287e211164e9e9982a8ec6cb08, type: 3}
@@ -1336,6 +1344,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.073
     pitchVariance: 0.3
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
     - {fileID: 8300000, guid: 9110c62ef46cad44db77ae0b96721dbf, type: 3}
@@ -1440,6 +1449,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 67d51dc4185a91d44ad731dfb70308d8, type: 3}
     oneShot: 1

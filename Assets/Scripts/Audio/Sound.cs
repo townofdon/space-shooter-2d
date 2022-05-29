@@ -12,6 +12,7 @@ namespace Audio
     {
         [SerializeField][Range(0f, 0.5f)] protected float volumeVariance = 0.1f;
         [SerializeField][Range(0f, 0.5f)] protected float pitchVariance = 0.1f;
+        [SerializeField][Range(0f, 0.03f)] protected float delayVariance = 0f;
         [SerializeField] AudioClip[] clips;
         [SerializeField] bool oneShot = true;
 
@@ -62,7 +63,7 @@ namespace Audio
             } else {
                 UpdateVariance();
                 source.Stop();
-                source.Play();
+                source.PlayDelayed(UnityEngine.Random.Range(0f, delayVariance));
             }
         }
 

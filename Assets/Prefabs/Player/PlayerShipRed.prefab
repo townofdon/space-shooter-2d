@@ -36479,7 +36479,7 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 2
-  savingThrow: 0.4
+  savingThrow: 0.5
   _maxHealth: 50
   _hitRecoveryTime: 0.05
   _nukeRecoveryTime: 0.4
@@ -36508,6 +36508,10 @@ MonoBehaviour:
   deathPartTorque: 90
   hitPauseDuration: 0.1
   hitPauseTimescale: 0.3
+  damageShakeScreenDuration: 0.15
+  damageShakeScreenMagnitude: 0.15
+  deathShakeScreenDuration: 0.3
+  deathShakeScreenMagnitude: 0.3
   shieldEffect: {fileID: 5185491018674316405}
   shieldLostEffect: {fileID: 3368911211538164238}
   shieldRechargeEffect: {fileID: 2511720650173199793}
@@ -36536,6 +36540,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.229
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
     - {fileID: 8300000, guid: 9110c62ef46cad44db77ae0b96721dbf, type: 3}
@@ -36557,6 +36562,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 7506493630befce48b1ad9e57294c46a, type: 3}
     - {fileID: 8300000, guid: bf7c6c85221cb3441b871bd5170a0307, type: 3}
@@ -36592,6 +36598,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 67d51dc4185a91d44ad731dfb70308d8, type: 3}
     oneShot: 0
@@ -36626,6 +36633,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0
     pitchVariance: 0
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: c7887879df4ee1647b0616c157e63c14, type: 3}
     oneShot: 0
@@ -36706,6 +36714,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.07
     pitchVariance: 0.1
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: c60a864f7c9ba2247ba3c002f4d1fb70, type: 3}
     oneShot: 0
@@ -36761,6 +36770,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.113
     pitchVariance: 0.214
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 75bd53d41261cc34f8bca164fb522b72, type: 3}
     oneShot: 0
@@ -36778,6 +36788,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.022
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 30e32a0be02fd4541abaaf79fd097cac, type: 3}
     oneShot: 0
@@ -36795,6 +36806,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: e7d24c5074ff36149be35f614dd991aa, type: 3}
     oneShot: 1
@@ -36812,6 +36824,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.03
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 6c879a32c4ccd6449975eb9354e53a08, type: 3}
     oneShot: 0

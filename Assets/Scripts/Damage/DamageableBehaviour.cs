@@ -90,7 +90,7 @@ namespace Damage {
         Timer _nukeHit = new Timer(TimerDirection.Decrement, TimerStep.DeltaTime, 0.4f);
         float _healthDamageThisFrame = 0f;
         float _shieldDamageThisFrame = 0f;
-        Timer _tempInvulnerable = new Timer();
+        Timer _spawnInvulnerable = new Timer();
 
         float _prevShield = 0f;
         float _timeShieldHit = 0f;
@@ -128,7 +128,7 @@ namespace Damage {
             _timeHit = Mathf.Clamp(_timeHit - Time.deltaTime, 0f, _hitRecoveryTime);
             _timeShieldHit = Mathf.Clamp(_timeShieldHit - Time.deltaTime / _shieldWaitTime, 0f, _shieldWaitTime);
             _nukeHit.Tick();
-            _tempInvulnerable.Tick();
+            _spawnInvulnerable.Tick();
 
             if (!hasShieldCapability) return;
 
@@ -172,8 +172,8 @@ namespace Damage {
             _health = _maxHealth * GetHealthMod();
             _shield = _maxShield * GetShieldMod();
             _timeHit = 0f;
-            _tempInvulnerable.SetDuration(_timeInvincibleAfterSpawn);
-            _tempInvulnerable.Start();
+            _spawnInvulnerable.SetDuration(_timeInvincibleAfterSpawn);
+            _spawnInvulnerable.Start();
         }
 
         protected void SetColliders() {
@@ -221,9 +221,9 @@ namespace Damage {
                 return true;
             }
 
-            if (_timeHit > 0f) return false;
+            if (_timeHit > Mathf.Epsilon) return false;
             if (_invulnerable) return false;
-            if (_tempInvulnerable.active) return false;
+            if (_spawnInvulnerable.active) return false;
             if (!Utils.IsObjectOnScreen(gameObject, Utils.GetCamera(), 1f)) return false;
 
             if (_damageableType == DamageableType.ExplodeOnCollision && damageType == DamageType.Collision) {
@@ -233,7 +233,7 @@ namespace Damage {
                 return true;
             }
 
-            if (damageType == DamageType.Nuke || damageType == DamageType.Explosion) {
+            if (damageType == DamageType.Nuke && amount > Mathf.Epsilon) {
                 if (_nukeHit.active) return false;
                 _nukeHit.SetDuration(_nukeRecoveryTime);
                 _nukeHit.Start();
@@ -252,7 +252,7 @@ namespace Damage {
                 _healthDamageThisFrame *= damageClass.playerEffectiveness;
                 _shieldDamageThisFrame *= damageClass.playerEffectiveness;
             }
-            if (gameObject.tag == UTag.EnemyShip) {
+            if (gameObject.tag == UTag.EnemyShip || gameObject.tag == UTag.EnemyTurret) {
                 _healthDamageThisFrame *= damageClass.enemyEffectiveness;
                 _shieldDamageThisFrame *= damageClass.enemyEffectiveness;
             }
@@ -272,8 +272,10 @@ namespace Damage {
 
             _health -= _healthDamageThisFrame;
             _shield = Mathf.Max(_shield - _shieldDamageThisFrame, 0f);
-            _timeHit = _hitRecoveryTime;
-            _timeShieldHit = 1f;
+            if (amount > Mathf.Epsilon) {
+                _timeHit = _hitRecoveryTime;
+                _timeShieldHit = 1f;
+            }
 
             if (_shield == 0f && _prevShield > _shield && hasShieldCapability) {
                 InvokeCallback(_onShieldDepleted);
@@ -283,7 +285,13 @@ namespace Damage {
             _prevShield = _shield;
 
             if (_health <= 0f) {
-                if (savingThrow > 0f && UnityEngine.Random.Range(0f, 1f) <= savingThrow) {
+                if (savingThrow > Mathf.Epsilon && UnityEngine.Random.Range(0f, 1f) <= savingThrow) {
+                    _health = _maxHealth * 0.05f;
+                    return true;
+                }
+
+                // if about to die from collision - give one last save
+                if (savingThrow > Mathf.Epsilon && damageType == DamageType.Collision && UnityEngine.Random.Range(0f, 1f) <= savingThrow) {
                     _health = _maxHealth * 0.05f;
                     return true;
                 }

@@ -26,6 +26,7 @@ namespace Weapons {
         [Header("Damage")]
         [Space]
         [SerializeField][Range(0f, 1f)] float chargingLineWidth = 0.1f;
+        [SerializeField][Range(0f, 0.5f)] float chargingLineVariance = 0.1f;
         [SerializeField][Range(0.01f, 1f)] float chargeTime = 0.5f;
         [SerializeField][Range(0.01f, 1f)] float fireTime = 0.2f;
         [SerializeField][Range(0.01f, 1f)] float holdTime = 0.2f;
@@ -210,16 +211,21 @@ namespace Weapons {
         }
 
         IEnumerator IChargeUp() {
-            laserLine.widthMultiplier = chargingLineWidth;
+            laserLine.widthMultiplier = GetChargingLineWidth();
             if (chargeFX != null) chargeFX.Play();
             chargeUpSound.Play();
             charging.Start();
             while (charging.active) {
+                laserLine.widthMultiplier = GetChargingLineWidth();
                 if (chargeFX != null) chargeFXModule.simulationSpeed = Mathf.Lerp(0.5f, 2f, charging.value);
                 charging.Tick();
                 yield return null;
             }
             ieChargeUp = null;
+        }
+
+        float GetChargingLineWidth() {
+            return Utils.RandomVariance2(chargingLineWidth, chargingLineVariance, 0.08f, 0.5f);
         }
 
         float GetAimSpeedMod() {

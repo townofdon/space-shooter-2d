@@ -33,6 +33,7 @@ namespace Audio
         double clipHeadDuration = 0.0;
         double clipLoopDuration = 0.0;
         double clipTailDuration = 0.0;
+        double timeHeadStartScheduled = 0.0;
         double timeLoopStartScheduled = 0.0;
         double timeLoopEndScheduled = 0.0;
         MonoBehaviour _script;
@@ -44,6 +45,7 @@ namespace Audio
 
         public override bool isPlaying => playButtonPressed
             || (cursor != PlayCursor.Stopped)
+            || (sourceHead != null && sourceHead.isPlaying)
             || (sourceLoop != null && sourceLoop.isPlaying)
             || (sourceTail != null && sourceTail.isPlaying);
         public override bool hasClip => clipLoop != null;
@@ -107,10 +109,11 @@ namespace Audio
         IEnumerator IPlay() {
             playButtonPressed = true;
 
-            if (sourceHead != null && sourceHead.enabled) {
+            if (sourceHead != null && sourceHead.isActiveAndEnabled) {
                 cursor = PlayCursor.Head;
-                timeLoopStartScheduled = AudioSettings.dspTime + dspStartDelay + clipHeadDuration;
-                sourceHead.PlayScheduled(AudioSettings.dspTime + dspStartDelay);
+                timeHeadStartScheduled = AudioSettings.dspTime + dspStartDelay;
+                timeLoopStartScheduled = timeHeadStartScheduled + clipHeadDuration;
+                sourceHead.PlayScheduled(timeHeadStartScheduled);
                 sourceLoop.PlayScheduled(timeLoopStartScheduled);
 
                 while (playButtonPressed && sourceHead.isPlaying) yield return null;
@@ -123,7 +126,7 @@ namespace Audio
                 sourceLoop.PlayScheduled(timeLoopStartScheduled);
             }
 
-            while (playButtonPressed) yield return null;
+            while (playButtonPressed && sourceLoop.isPlaying) yield return null;
 
             if (cursor == PlayCursor.Loop && playLoopToEnd) {
                 int numFullCycles = GetNumFullLoopCycles(sourceLoop.pitch);
@@ -133,16 +136,17 @@ namespace Audio
                 timeLoopEndScheduled = AudioSettings.dspTime + dspStartDelay;
             }
 
-            sourceLoop.SetScheduledEndTime(timeLoopEndScheduled);
+            if (sourceLoop.isPlaying) sourceLoop.SetScheduledEndTime(timeLoopEndScheduled);
             if (sourceTail != null && sourceTail.enabled) sourceTail.PlayScheduled(timeLoopEndScheduled);
 
             while (sourceLoop.isPlaying) yield return null;
 
             cursor = PlayCursor.Tail;
-            
+
             while (sourceTail != null && sourceTail.isPlaying) yield return null;
 
             cursor = PlayCursor.Stopped;
+            playButtonPressed = false;
             playCoroutine = null;
         }
 

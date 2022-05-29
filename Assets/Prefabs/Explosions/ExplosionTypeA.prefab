@@ -14663,13 +14663,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa6032e1e5d19c4b9624e6e38787f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasSingleFrameDamage: 1
   timeCausingDamage: 0.1
   damageBegin: 180
-  damageEnd: 50
+  damageEnd: 150
   damageAtEdge: 0.9
   blastForce: 6
   lifetime: 10
-  shakeScreenMagnitude: 0.15
+  shakeScreenMagnitude: 0.175
   shakeScreenDuration: 0.1
   splosion:
     soundName: Splode
@@ -14685,10 +14686,11 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0.0241
     clips:
     - {fileID: 8300000, guid: 2b90036558cedf043966c9eae1113951, type: 3}
     - {fileID: 8300000, guid: 5c731abfb2a6ab14e80fbfc4c39b8a74, type: 3}
-    oneShot: 1
+    oneShot: 0
 --- !u!1 &547358974142009884
 GameObject:
   m_ObjectHideFlags: 0

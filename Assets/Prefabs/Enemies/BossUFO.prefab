@@ -938,6 +938,7 @@ Transform:
   m_Children:
   - {fileID: 7867457984961899812}
   - {fileID: 7867457985992020306}
+  - {fileID: 8664591674652644477}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -978,17 +979,18 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
-  _maxHealth: 500
-  _hitRecoveryTime: 0.2
-  _nukeRecoveryTime: 0.4
+  savingThrow: 0.5
+  _maxHealth: 1000
+  _hitRecoveryTime: 0
+  _nukeRecoveryTime: 1
   _destroyOnDeath: 0
-  _maxShield: 0
+  _maxShield: 25
   _shieldWaitTime: 3
-  _shieldRechargeTime: 1
+  _shieldRechargeTime: 10
   healthModEasy: 0.5
   healthModMedium: 1
-  healthModHard: 1.2
-  healthModInsane: 2
+  healthModHard: 1.63
+  healthModInsane: 3
   shieldModEasy: 0.5
   shieldModMedium: 1
   shieldModHard: 1.2
@@ -1006,8 +1008,10 @@ MonoBehaviour:
   - {fileID: 7867457985923360267}
   perishableObjects: []
   isBoss: 1
+  isCountableEnemy: 1
   ship: {fileID: 7867457984961899815}
   explosion: {fileID: 8618738012250842369, guid: 00c6a1d78ddfa7d4a87dcfb1c6d8d3ee, type: 3}
+  otherDeathFX: {fileID: 0}
   damageSound:
     soundName: 
     volume: 0.7
@@ -1019,8 +1023,10 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   deathSound:
@@ -1034,10 +1040,12 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0.0163
     clips: []
-    oneShot: 1
+    oneShot: 0
   pickups:
     pickups:
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
@@ -1073,6 +1081,7 @@ MonoBehaviour:
   turnSpeed: 4
   moveSpeed: 5
   accel: 500
+  initMoveBetweenPoints: 0
   jukes: 0
   jukeTargetedTime: 0
   jukeTargetedVariance: 0
@@ -1096,7 +1105,7 @@ MonoBehaviour:
   wobbleFreq: {x: 1, y: 1}
   wobbleOffset: {x: 0, y: 0}
   engineSound:
-    soundName: 
+    soundName: UFOEngines
     volume: 0.5
     pitch: 1
     ignoreListenerPause: 0
@@ -1106,25 +1115,27 @@ MonoBehaviour:
     spread: 295
     minFalloffDistance: 4
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 0eda377199eab914285e1d736d1b75bf, type: 3}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
   agroSound:
-    soundName: 
-    volume: 0.7
-    pitch: 1
+    soundName: UFOAgro
+    volume: 0.3
+    pitch: 0.5
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 1
     spread: 180
-    minFalloffDistance: 20
+    minFalloffDistance: 10
     maxFalloffDistance: 40
-    pitchVariance: 0
+    dopplerLevel: 0.1
+    pitchVariance: 0.2
     clipHead: {fileID: 0}
-    clipLoop: {fileID: 0}
+    clipLoop: {fileID: 8300000, guid: c59d4b7f8155d7a4786fb258617cdddb, type: 3}
     clipTail: {fileID: 0}
     playLoopToEnd: 0
 --- !u!114 &7867457986422667113
@@ -1163,7 +1174,7 @@ MonoBehaviour:
   triggerReleaseEasyMod: 4.09
   triggerReleaseMediumMod: 3.26
   triggerReleaseHardMod: 2.44
-  triggerReleaseInsaneMod: 1.67
+  triggerReleaseInsaneMod: 1.77
 --- !u!114 &7867457986422667110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,10 +1187,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44aa5ad4eab459a419753d81502c818a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agroThreshold: 0.2
-  secondaryMissileThreshold: 0.1
-  tertiaryMissileThreshold: 0.05
-  weaponUpgradeThreshold: 0.6
+  agroThreshold: 0.373
+  secondaryMissileThreshold: 0.273
+  tertiaryMissileThreshold: 0.2
+  weaponUpgradeThreshold: 0.5
   anim: {fileID: 7867457986615339763}
   missileLaunchL: {fileID: 7867457985954413619}
   missileLaunchR: {fileID: 7867457985469598671}
@@ -1187,11 +1198,11 @@ MonoBehaviour:
   launchForce: 7
   launchForceSecondary: 15
   launchForceTertiary: 22
-  launchInterval: 4
+  launchInterval: 3.5
   launchSound:
     soundName: RLaunch
     volume: 0.5
-    pitch: 1
+    pitch: 0.85
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
@@ -1199,8 +1210,10 @@ MonoBehaviour:
     spread: 314
     minFalloffDistance: 10
     maxFalloffDistance: 40
+    dopplerLevel: 0.35
     volumeVariance: 0.1
-    pitchVariance: 0.1
+    pitchVariance: 0.411
+    delayVariance: 0.0212
     clips:
     - {fileID: 8300000, guid: a9755c879a79d274588307db81e28e31, type: 3}
     oneShot: 1
@@ -1414,3 +1427,77 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
+--- !u!1001 &1174973875430559084
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7867457986422667117}
+    m_Modifications:
+    - target: {fileID: 7525665314092642454, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0644eb31edf460c4594e5514c324c57b, type: 3}
+    - target: {fileID: 7525665314782927119, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_Name
+      value: HealthBarSmall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.364
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665315907378808, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525665315907378808, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+--- !u!4 &8664591674652644477 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7525665314782927121, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
+  m_PrefabInstance: {fileID: 1174973875430559084}
+  m_PrefabAsset: {fileID: 0}

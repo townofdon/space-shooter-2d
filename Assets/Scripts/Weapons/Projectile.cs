@@ -208,7 +208,10 @@ namespace Weapons
             if (removalMode != ProjectileRemovalMode.Quiet || deathReason != ProjectileDeathReason.Guardians) {
                 destroyedSound.Play();
                 if (explosionFX != null) {
-                    Destroy(Instantiate(explosionFX, transform.position, Quaternion.identity), explosionLifetime);
+                    GameObject instance = Instantiate(explosionFX, transform.position, Quaternion.identity);
+                    Explosion splosion = instance.GetComponent<Explosion>();
+                    if (splosion != null) splosion.SetIsDamageByPlayer(damageDealer.GetIsDamageByPlayer());
+                    Destroy(instance, explosionLifetime);
                 }
             }
 

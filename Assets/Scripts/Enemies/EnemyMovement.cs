@@ -315,6 +315,11 @@ namespace Enemies
         HasCrossed hasCrossed = new HasCrossed();
 
         void ModeMoveBetweenPoints() {
+            if (!self.isAlive) {
+                engineSound.Stop();
+                agroSound.Stop();
+                return;
+            }
             if (moveTarget != null) {
                 targetMode = TargetMode.Position;
                 targetPosition = moveTarget;

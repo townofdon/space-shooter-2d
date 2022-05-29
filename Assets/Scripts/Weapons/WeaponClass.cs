@@ -354,8 +354,12 @@ namespace Weapons
         }
 
         public void AfterNoFire() {
-            if (overheats && !_firing.active && !_burstCooldown.active) {
-                _overheated.TickReversed();
+            if (overheats) {
+                if (_firing.active) {
+                    _overheated.Tick();
+                } else {
+                    _overheated.TickReversed();
+                }
             }
         }
 

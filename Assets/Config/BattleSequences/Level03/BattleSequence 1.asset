@@ -104,7 +104,7 @@ MonoBehaviour:
     wave: {fileID: 11400000, guid: ecc389df2adcbef46a6988488b97dcdd, type: 2}
     formation: {fileID: 0}
     boss: {fileID: 0}
-    arbitraryTime: 7
+    arbitraryTime: 5
     allowableEnemiesLeft: 0
     arbitraryEvent:
       m_PersistentCalls:

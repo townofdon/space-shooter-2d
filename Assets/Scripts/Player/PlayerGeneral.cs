@@ -160,18 +160,20 @@ namespace Player {
             if (actor == null) return;
             if (actor.rigidbody == null || !actor.rigidbody.simulated) return;
             if (!actor.canCollide) return;
+            float selfMagnitude = rb.velocity.magnitude;
+            float otherMagnitude = actor.rigidbody.isKinematic ? 1f : actor.rigidbody.velocity.magnitude;
             float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
-            float collisionMagnitude = (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
+            float collisionMagnitude = (otherMagnitude + rb.velocity.magnitude);
             actor.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision, true);
             this.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision);
-            float selfMagnitude = rb.velocity.magnitude;
-            float otherMagnitude = actor.rigidbody.velocity.magnitude;
-            // move the rigidbodies away from each other
-            this.rb.velocity         = (transform.position - actor.rigidbody.transform.position).normalized * collideThrowback;
-            if (!actor.rigidbody.isKinematic) actor.rigidbody.velocity = -rb.velocity;
-            // billiards effect - whatever object is moving faster transfers the velocity to the other rigidbody
-            this.rb.velocity         += rb.velocity.normalized * otherMagnitude * collideThrowbackFromVelocity;
-            if (!actor.rigidbody.isKinematic) actor.rigidbody.velocity += actor.rigidbody.velocity.normalized * selfMagnitude * collideThrowbackFromVelocity;
+            Vector2 forceToOther = this.rb.velocity * this.rb.mass;
+            Vector2 forceToSelf = actor.rigidbody.velocity * actor.rigidbody.mass;
+            // // move the rigidbodies away from each other
+            // this.rb.velocity         = (transform.position - actor.rigidbody.transform.position).normalized * collideThrowback;
+            // if (!actor.rigidbody.isKinematic) actor.rigidbody.velocity = -rb.velocity;
+            // // billiards effect - whatever object is moving faster transfers the velocity to the other rigidbody
+            // this.rb.velocity         += rb.velocity.normalized * (otherMagnitude * actor.rigidbody.mass) * collideThrowbackFromVelocity;
+            // if (!actor.rigidbody.isKinematic) actor.rigidbody.velocity += actor.rigidbody.velocity.normalized * selfMagnitude * collideThrowbackFromVelocity;
         }
 
         // void OnCollisionEnter2D(Collision2D other) {

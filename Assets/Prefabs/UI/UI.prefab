@@ -745,7 +745,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &1398775829
 MonoBehaviour:
@@ -2445,8 +2445,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -32.479645}
-  m_SizeDelta: {x: 120, y: 64.95929}
+  m_AnchoredPosition: {x: 80, y: -32.61017}
+  m_SizeDelta: {x: 120, y: 65.22034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7369532588177740107
 CanvasRenderer:
@@ -5478,7 +5478,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 535, y: 0}
-  m_SizeDelta: {x: 50, y: 64.95929}
+  m_SizeDelta: {x: 50, y: 65.22034}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5752624380789563975
 CanvasRenderer:
@@ -5808,7 +5808,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 475, y: 0}
-  m_SizeDelta: {x: 50, y: 64.95929}
+  m_SizeDelta: {x: 50, y: 65.22034}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4369176314993346173
 CanvasRenderer:
@@ -6211,7 +6211,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 295, y: 0}
-  m_SizeDelta: {x: 50, y: 64.95929}
+  m_SizeDelta: {x: 50, y: 65.22034}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3093751616798699501
 CanvasRenderer:
@@ -7356,7 +7356,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2828281068068336705}
         m_TargetAssemblyTypeName: UI.DebugUI, Assembly-CSharp
-        m_MethodName: ResetDisruptor
+        m_MethodName: ResetNuke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19844,8 +19844,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -242.47964}
-  m_SizeDelta: {x: 950, y: 234.95929}
+  m_AnchoredPosition: {x: 500, y: -242.61017}
+  m_SizeDelta: {x: 950, y: 235.22034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2828281069758340294
 MonoBehaviour:
@@ -20613,8 +20613,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -237.45929}
-  m_SizeDelta: {x: 1000, y: 474.91858}
+  m_AnchoredPosition: {x: 500, y: -237.72034}
+  m_SizeDelta: {x: 1000, y: 475.44067}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2828281069886204988
 MonoBehaviour:
@@ -22821,7 +22821,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 415, y: 0}
-  m_SizeDelta: {x: 50, y: 64.95929}
+  m_SizeDelta: {x: 50, y: 65.22034}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5801916471966381686
 CanvasRenderer:
@@ -25920,7 +25920,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 175, y: 0}
-  m_SizeDelta: {x: 50, y: 64.95929}
+  m_SizeDelta: {x: 50, y: 65.22034}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8439319652443206982
 CanvasRenderer:
@@ -29890,8 +29890,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -417.43893}
-  m_SizeDelta: {x: 580, y: 64.95929}
+  m_AnchoredPosition: {x: 500, y: -417.8305}
+  m_SizeDelta: {x: 580, y: 65.22034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3419805646737866527
 MonoBehaviour:
@@ -31269,7 +31269,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 355, y: 0}
-  m_SizeDelta: {x: 50, y: 64.95929}
+  m_SizeDelta: {x: 50, y: 65.22034}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8236960083128100477
 CanvasRenderer:
@@ -34102,7 +34102,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 235, y: 0}
-  m_SizeDelta: {x: 50, y: 64.95929}
+  m_SizeDelta: {x: 50, y: 65.22034}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1697838668445905119
 CanvasRenderer:
@@ -37878,6 +37878,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
 --- !u!1 &7202012897334987013

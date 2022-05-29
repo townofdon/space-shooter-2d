@@ -379,7 +379,7 @@ MonoBehaviour:
   disperseMax: 7
   pickupSound:
     soundName: powerup
-    volume: 0.7
+    volume: 0.4
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -391,9 +391,10 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.341
     pitchVariance: 0.031
+    delayVariance: 0.03
     clips:
     - {fileID: 8300000, guid: ad473b0044e3a6d48bf82c019b443213, type: 3}
-    oneShot: 1
+    oneShot: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &-1605377199510479926
 MonoBehaviour:

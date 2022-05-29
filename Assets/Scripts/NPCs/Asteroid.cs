@@ -15,6 +15,10 @@ namespace NPCs
     public class Asteroid : DamageableBehaviour
     {
         [Header("Asteroid")][Space]
+        [SerializeField] Vector2 startHeading = Vector2.down;
+        [SerializeField][Range(0f, 360)] float headingVariance = 0f;
+        [SerializeField][Range(0f, 20)] float startSpeed = 0f;
+        [SerializeField][Range(0f, 20)] float speedVariance = 0f;
         [SerializeField][Range(0f, 1080f)] float startRotation = 360f;
         [SerializeField] List<GameObject> pieces = new List<GameObject>();
         [SerializeField] ParticleSystem explodeFX;
@@ -33,6 +37,10 @@ namespace NPCs
             sr = GetComponentInChildren<SpriteRenderer>();
             rb = GetComponent<Rigidbody2D>();
             rb.angularVelocity = UnityEngine.Random.Range(-startRotation, startRotation);
+
+            if (rb.velocity == Vector2.zero) {
+                rb.velocity = GetHeadingVariance() * startHeading.normalized * Utils.RandomVariance2(startSpeed, speedVariance, startSpeed / 2f);
+            }
 
             ResetHealth();
             SetColliders();
@@ -90,6 +98,11 @@ namespace NPCs
             }
             while (rockExplodeSound.isPlaying) yield return null;
             Destroy(gameObject, 2f);
+        }
+
+        // copied from AsteroidLauncher
+        Quaternion GetHeadingVariance() {
+            return Quaternion.AngleAxis(Utils.RandomVariance(0f, headingVariance), Vector3.forward);
         }
     }
 }

@@ -233,26 +233,26 @@ namespace UI {
                 scoreSound.Play();
             }
             if (tempPoints < gameState.totalPoints) {
-                tempStep = getStep(gameState.totalPoints - tempPoints);
+                tempStep = GetStep(gameState.totalPoints - tempPoints);
                 tempPoints = Mathf.Min(tempPoints + tempStep, gameState.totalPoints);
             }
             if (tempMoney < playerState.totalMoney) {
-                tempStep = getStep(playerState.totalMoney - tempMoney);
+                tempStep = GetStep(playerState.totalMoney - tempMoney);
                 tempMoney = Mathf.Min(tempMoney + tempStep, playerState.totalMoney);
             }
             if (tempPoints > gameState.totalPoints) {
-                tempStep = getStep(tempPoints - gameState.totalPoints);
+                tempStep = GetStep(tempPoints - gameState.totalPoints);
                 tempPoints = Mathf.Max(tempPoints - tempStep, gameState.totalPoints);
             }
             if (tempMoney > playerState.totalMoney) {
-                tempStep = getStep(tempMoney - playerState.totalMoney);
+                tempStep = GetStep(tempMoney - playerState.totalMoney);
                 tempMoney = Mathf.Max(tempMoney - tempStep, playerState.totalMoney);
             }
             scoreText.text = tempPoints.ToString("00000000");
             moneyText.text = tempMoney.ToString("0000000") + " CR";
         }
 
-        int getStep(int diff) {
+        int GetStep(int diff) {
             if (diff >= 100000) return 10000;
             if (diff >= 10000) return 1000;
             if (diff >= 1000) return 100;

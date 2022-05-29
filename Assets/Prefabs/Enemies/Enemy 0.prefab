@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 3308132561376447944}
   - component: {fileID: 3066012647267639334}
   - component: {fileID: 3489936680094857376}
+  - component: {fileID: 8918867231681778533}
   m_Layer: 10
   m_Name: BoxCollider (0)
   m_TagString: EnemyShip
@@ -105,6 +106,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8918867231681778533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645265175987905220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  baseDamageMultiplier: 0.5
+  isDamageByPlayer: 0
+  collisionForceMod: 0.2
+  preferCirclecast: 0
+  raycast: 0
+  minSafeDistance: 2
+  ignoreParentUUID: 1
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ignoreTag: 
+  ignoreColliders: []
 --- !u!1 &2169552266129842559
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +282,7 @@ GameObject:
   - component: {fileID: 8900675707410572603}
   - component: {fileID: 8402562747196404184}
   - component: {fileID: 7493758628397100194}
+  - component: {fileID: 583180383850993988}
   m_Layer: 10
   m_Name: BoxCollider (1)
   m_TagString: EnemyShip
@@ -316,6 +343,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &583180383850993988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959571417947071574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  baseDamageMultiplier: 0.5
+  isDamageByPlayer: 0
+  collisionForceMod: 0.2
+  preferCirclecast: 0
+  raycast: 0
+  minSafeDistance: 2
+  ignoreParentUUID: 1
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ignoreTag: 
+  ignoreColliders: []
 --- !u!1 &5343755187509938051
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +379,7 @@ GameObject:
   - component: {fileID: 8262435225089286239}
   - component: {fileID: 8607264156029570211}
   - component: {fileID: 8716728992343219776}
+  - component: {fileID: 8756200705372480257}
   m_Layer: 10
   m_Name: CircleCollider
   m_TagString: EnemyShip
@@ -377,6 +430,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8756200705372480257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343755187509938051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  baseDamageMultiplier: 0.5
+  isDamageByPlayer: 0
+  collisionForceMod: 0.2
+  preferCirclecast: 0
+  raycast: 0
+  minSafeDistance: 2
+  ignoreParentUUID: 1
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ignoreTag: 
+  ignoreColliders: []
 --- !u!1 &5831929629639837094
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,9 +764,10 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
+  savingThrow: 0
   _maxHealth: 40
   _hitRecoveryTime: 0
-  _nukeRecoveryTime: 0.4
+  _nukeRecoveryTime: 0.2
   _destroyOnDeath: 0
   _maxShield: 0
   _shieldWaitTime: 5
@@ -708,8 +787,10 @@ MonoBehaviour:
   secondaryDamageSpriteTargets: []
   perishableObjects: []
   isBoss: 0
+  isCountableEnemy: 1
   ship: {fileID: 6315280202670403281}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
+  otherDeathFX: {fileID: 0}
   damageSound:
     soundName: EnemyDamage
     volume: 0
@@ -724,6 +805,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.221
     pitchVariance: 0.389
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 9f9b58c4eaff5fa4a9eb5551104f5afb, type: 3}
     - {fileID: 8300000, guid: 79c1fb287e211164e9e9982a8ec6cb08, type: 3}
@@ -744,13 +826,14 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.073
     pitchVariance: 0.3
+    delayVariance: 0.03
     clips:
     - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
     - {fileID: 8300000, guid: 9110c62ef46cad44db77ae0b96721dbf, type: 3}
     - {fileID: 8300000, guid: ddb4aa71b5f1b304cad599a3bee4ccdf, type: 3}
     - {fileID: 8300000, guid: b8010007e5d50014c9388ab4369d2c33, type: 3}
     - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
-    oneShot: 1
+    oneShot: 0
   pickups:
     pickups:
     - pickupPrefab: {fileID: 7348726175182028151, guid: b638c9b2738a1c54499d272fd277b6f9, type: 3}
@@ -830,7 +913,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   avoids: 1
-  avoidSpeedMod: 5
+  avoidSpeedMod: 4
   avoidCooldown: 0.5
   atxTurnMod: 1
   atxMoveMod: 1
@@ -904,6 +987,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markerPrefab: {fileID: 2563741419318062698, guid: 5366983609dc2c442808bdbf36c8fcd6, type: 3}
   flagType: 0
+  showNorth: 1
+  showSouth: 1
+  showEast: 1
+  showWest: 1
 --- !u!114 &6793114370509978114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +1052,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 67d51dc4185a91d44ad731dfb70308d8, type: 3}
     oneShot: 1

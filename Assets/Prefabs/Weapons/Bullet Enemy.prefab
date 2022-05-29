@@ -240,6 +240,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.288
     pitchVariance: 0.055
+    delayVariance: 0
     clips: []
     oneShot: 1
   thrustSound:
@@ -273,6 +274,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.167
     pitchVariance: 0.336
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: c7dc102d17e050b4696d09d35fa2cf3b, type: 3}
     - {fileID: 8300000, guid: c66d9363eb3afe640b2734340aeb973f, type: 3}
@@ -291,15 +293,16 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.164
     pitchVariance: 0.5
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 5e0706d2652922b4c9829e4ac9c80ad2, type: 3}
     oneShot: 1
   ricochetSound:
     soundName: Ricochet
-    volume: 0.516
+    volume: 0.5
     pitch: 1
     ignoreListenerPause: 0
-    realtimeEditorInspect: 1
+    realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 1
     spread: 360
@@ -308,6 +311,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.122
     pitchVariance: 0.425
+    delayVariance: 0.0233
     clips:
     - {fileID: 8300000, guid: f46d122e4b61ba344ad5fd5248018d86, type: 3}
     - {fileID: 8300000, guid: 1b2c1f6a139f49b41b68de88048dec86, type: 3}
@@ -332,6 +336,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
 --- !u!114 &-9176195106732576791
