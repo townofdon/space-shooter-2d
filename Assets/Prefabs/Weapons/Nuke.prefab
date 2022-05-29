@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffaa654ffaef6a4582f3ae68f53d78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDamageByPlayer: 1
+  isDamageByPlayer: 0
   fuseTime: 1.3
   finalAnimSpeed: 10
   moveSpeed: 3

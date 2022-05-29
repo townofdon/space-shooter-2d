@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b88cfe901e14b84b82d3af28e10b3b4, type: 3}
+  m_Name: NukeRed
+  m_EditorClassIdentifier: 
+  _weaponType: 8
+  _weaponName: NukeRed
+  _effectiveRange: 10
+  _shotSound:
+    soundName: NukeLaunch
+    volume: 0.5
+    pitch: 0.7
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 15
+    maxFalloffDistance: 40
+    dopplerLevel: 0.11
+    volumeVariance: 0.1
+    pitchVariance: 0.157
+    delayVariance: 0.03
+    clips:
+    - {fileID: 8300000, guid: 6bfbff222fd7a994ea5a202a55f4463a, type: 3}
+    oneShot: 1
+  _effectSound:
+    soundName: 
+    volume: 0.4
+    pitch: 1.4
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 196
+    minFalloffDistance: 15
+    maxFalloffDistance: 40
+    dopplerLevel: 0
+    pitchVariance: 0.1048
+    clipHead: {fileID: 0}
+    clipLoop: {fileID: 0}
+    clipTail: {fileID: 0}
+    playLoopToEnd: 0
+  _reloadSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    clips: []
+    oneShot: 1
+  baseSettings:
+    _assetClass: Xyclon Disruptor Charge
+    _damageMultiplier: 1
+    _startingAmmo: 5
+    _infiniteAmmo: 1
+    _cycles: 0
+    _reloads: 1
+    _reloadTime: 2
+    _magazineCapacity: 1
+    _firingRate: 0
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 0
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _prefab: {fileID: 7910575934420552213, guid: cbbbf3ca3eb40ab4b85cc0bc88965cbd, type: 3}
+    _shieldDrain: 0
+    _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      dopplerLevel: 1
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      delayVariance: 0
+      clips: []
+      oneShot: 1
+  upgrades: []

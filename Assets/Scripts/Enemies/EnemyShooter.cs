@@ -7,6 +7,7 @@ using Weapons;
 using Damage;
 using Player;
 using Game;
+using Audio;
 
 namespace Enemies
 {
@@ -29,6 +30,7 @@ namespace Enemies
         [SerializeField] EnemyFiringMode firingMode;
         [SerializeField] EnemyAimMode aimMode;
         [SerializeField] WeaponClass weapon;
+        [SerializeField] ParticleSystem muzzleFlashFX;
         [SerializeField] int numUpgrades;
         [SerializeField] List<Transform> guns = new List<Transform>();
         [SerializeField][Range(0f, 3f)] float aimSpeed = 2f;
@@ -38,6 +40,11 @@ namespace Enemies
         [SerializeField][Range(0f, 10f)] float triggerTimeVariance = 0f;
         [SerializeField] Transform rotateTarget;
         [SerializeField] LayerMask targetableLayers;
+
+        [Header("Firing Animation")]
+        [Space]
+        [SerializeField] bool useFireAnimation = false;
+        [SerializeField] Animator anim;
 
         [Header("Difficulty Settings")]
         [Space]
@@ -50,6 +57,9 @@ namespace Enemies
         [SerializeField][Range(0f, 5f)] float triggerReleaseMediumMod = 1f;
         [SerializeField][Range(0f, 5f)] float triggerReleaseHardMod = 1f;
         [SerializeField][Range(0f, 5f)] float triggerReleaseInsaneMod = 1f;
+
+        [Header("Audio")]
+        [SerializeField] Sound chargeUpSound;
 
         // Components
         Rigidbody2D rb;
@@ -80,6 +90,15 @@ namespace Enemies
             weapon.Upgrade();
         }
 
+        public void Fire() {
+            chargeUpSound.Stop();
+            ImperativelyFire();
+        }
+
+        public void ChargeUp() {
+            chargeUpSound.Play();
+        }
+
         void OnEnable() {
             StartCoroutine(PressAndReleaseTrigger());
         }
@@ -89,6 +108,7 @@ namespace Enemies
             circle = GetComponentInChildren<CircleCollider2D>();
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
             player = PlayerUtils.FindPlayer();
+            chargeUpSound.Init(this);
             InitWeapon();
             // init
             if (circle != null) shipRadius = circle.radius + 1f;
@@ -106,7 +126,7 @@ namespace Enemies
 
         void Update() {
             if (player == null || !player.isAlive) player = PlayerUtils.FindPlayer();
-            if (Fire()) {
+            if (DidFire()) {
                 AfterFire();
             } else {
                 AfterNoFire();
@@ -198,12 +218,22 @@ namespace Enemies
             aimAngle = Vector2.SignedAngle(Vector2.down, aimVector);
         }
 
-        bool Fire() {
+        bool DidFire() {
             if (!enemy.isAlive) return false;
             if (!Utils.IsObjectOnScreen(gameObject)) return false;
             if (!isPlayerInScopes) return false;
             if (!weapon.ShouldFire(triggerHeld.active)) return false;
+            if (useFireAnimation && anim != null) {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !anim.GetCurrentAnimatorStateInfo(0).IsTag("Idle")) return false;
+                anim.SetTrigger("Fire");
+                return true;
+            }
 
+            return ImperativelyFire();
+        }
+
+        bool ImperativelyFire() {
+            if (!enemy.isAlive) return false;
             foreach (var gun in guns) {    
                 FireProjectile(weapon.prefab, gun.position, gun.rotation);
                 weapon.shotSound.Play();
@@ -222,6 +252,7 @@ namespace Enemies
         }
 
         void FireProjectile(GameObject prefab, Vector3 position, Quaternion rotation) {
+            if (muzzleFlashFX != null) muzzleFlashFX.Play();
             GameObject instance = Object.Instantiate(prefab, position, rotation * aim);
             Projectile[] projectiles = instance.GetComponentsInChildren<Projectile>();
             foreach (var projectile in projectiles) {
@@ -233,6 +264,10 @@ namespace Enemies
                     Rigidbody2D rbInstance = projectile.GetComponent<Rigidbody2D>();
                     rbInstance.velocity += rb.velocity;
                 }
+            }
+            Nuke nuke = instance.GetComponent<Nuke>();
+            if (nuke != null && player != null && player.isAlive) {
+                nuke.SetMoveSpeed(Mathf.Clamp(Vector2.Distance(transform.position, player.transform.position) * 0.75f, 4f, 10f));
             }
         }
 

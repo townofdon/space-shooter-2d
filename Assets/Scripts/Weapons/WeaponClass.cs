@@ -16,6 +16,7 @@ namespace Weapons
         Missile,
         MachineGunEnemy,
         Fireball,
+        NukeEnemy,
     }
 
     [System.Serializable]

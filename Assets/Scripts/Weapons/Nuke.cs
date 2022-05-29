@@ -31,6 +31,14 @@ namespace Weapons
         float currentTime = 0f;
         bool sploded = false;
 
+        public void SetIsDamageByPlayer(bool value) {
+            isDamageByPlayer = value;
+        }
+
+        public void SetMoveSpeed(float value) {
+            moveSpeed = value;
+        }
+
         void Start() {
             AppIntegrity.AssertPresent<GameObject>(nukeExplosion);
             rb = Utils.GetRequiredComponent<Rigidbody2D>(gameObject);

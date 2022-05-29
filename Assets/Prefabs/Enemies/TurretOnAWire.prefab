@@ -1159,33 +1159,33 @@ MonoBehaviour:
   deployAnimator: {fileID: 3691588789487530699}
   spawnGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 1, g: 0.5615012, b: 0, a: 0}
+    key1: {r: 1, g: 0.5705291, b: 0.020588236, a: 0}
+    key2: {r: 1, g: 1, b: 1, a: 1}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
+    ctime1: 31226
+    ctime2: 65535
     ctime3: 0
     ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
+    atime0: 193
+    atime1: 31033
+    atime2: 65535
     atime3: 0
     atime4: 0
     atime5: 0
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 3
   spawnFX: {fileID: 8063068017844242433}
   spawnSprites: []
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
@@ -1308,10 +1308,11 @@ MonoBehaviour:
   isCountableEnemy: 1
   ship: {fileID: 3691588787849085019}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
+  explosion2: {fileID: 0}
   otherDeathFX: {fileID: 0}
   damageSound:
     soundName: EnemyDamage
-    volume: 0
+    volume: 0.02
     pitch: 0.92
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -1323,13 +1324,13 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.221
     pitchVariance: 0.389
-    delayVariance: 0
+    delayVariance: 0.03
     clips:
     - {fileID: 8300000, guid: 9f9b58c4eaff5fa4a9eb5551104f5afb, type: 3}
     - {fileID: 8300000, guid: 79c1fb287e211164e9e9982a8ec6cb08, type: 3}
     - {fileID: 8300000, guid: c7dc102d17e050b4696d09d35fa2cf3b, type: 3}
     - {fileID: 8300000, guid: c66d9363eb3afe640b2734340aeb973f, type: 3}
-    oneShot: 1
+    oneShot: 0
   deathSound:
     soundName: EnemyDeath
     volume: 0.801
@@ -1383,6 +1384,7 @@ MonoBehaviour:
   firingMode: 0
   aimMode: 2
   weapon: {fileID: 11400000, guid: 97f37ab9fe5d09c4797e093657e34422, type: 2}
+  muzzleFlashFX: {fileID: 0}
   numUpgrades: 0
   guns:
   - {fileID: 3691588789139359782}
@@ -1395,6 +1397,8 @@ MonoBehaviour:
   targetableLayers:
     serializedVersion: 2
     m_Bits: 0
+  useFireAnimation: 0
+  anim: {fileID: 0}
   triggerHoldEasyMod: 0.34
   triggerHoldMediumMod: 0.8
   triggerHoldHardMod: 1.2
@@ -1403,6 +1407,23 @@ MonoBehaviour:
   triggerReleaseMediumMod: 2.85
   triggerReleaseHardMod: 1.66
   triggerReleaseInsaneMod: 0.75
+  chargeUpSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    clips: []
+    oneShot: 1
 --- !u!114 &718122837
 MonoBehaviour:
   m_ObjectHideFlags: 0

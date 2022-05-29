@@ -94,17 +94,18 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
-  _maxHealth: 800
+  savingThrow: 0
+  _maxHealth: 2000
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
   _maxShield: 0
   _shieldWaitTime: 3
   _shieldRechargeTime: 1
-  healthModEasy: 0.5
-  healthModMedium: 1
-  healthModHard: 1.74
-  healthModInsane: 5
+  healthModEasy: 2
+  healthModMedium: 2
+  healthModHard: 2
+  healthModInsane: 2
   shieldModEasy: 1
   shieldModMedium: 1
   shieldModHard: 1
@@ -119,8 +120,11 @@ MonoBehaviour:
   - {fileID: 6500453103116257045}
   perishableObjects: []
   isBoss: 0
+  isCountableEnemy: 1
   ship: {fileID: 6500453104065247985}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
+  explosion2: {fileID: 0}
+  otherDeathFX: {fileID: 0}
   damageSound:
     soundName: 
     volume: 0.7
@@ -135,6 +139,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   deathSound:
@@ -151,6 +156,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
     clips: []
     oneShot: 1
   pickups:
@@ -178,6 +184,7 @@ MonoBehaviour:
   firingMode: 0
   aimMode: 0
   weapon: {fileID: 11400000, guid: f78c0e63fbd2c97409f395a44445c79d, type: 2}
+  muzzleFlashFX: {fileID: 0}
   numUpgrades: 1
   guns:
   - {fileID: 6500453103276142087}
@@ -190,6 +197,8 @@ MonoBehaviour:
   targetableLayers:
     serializedVersion: 2
     m_Bits: 0
+  useFireAnimation: 0
+  anim: {fileID: 0}
   triggerHoldEasyMod: 1
   triggerHoldMediumMod: 1
   triggerHoldHardMod: 1
@@ -198,6 +207,23 @@ MonoBehaviour:
   triggerReleaseMediumMod: 3.48
   triggerReleaseHardMod: 2.18
   triggerReleaseInsaneMod: 1.25
+  chargeUpSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    clips: []
+    oneShot: 1
 --- !u!58 &6500453103026850519
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -229,6 +255,7 @@ MonoBehaviour:
   damageType: 1
   baseDamageMultiplier: 10
   isDamageByPlayer: 0
+  collisionForceMod: 1
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2

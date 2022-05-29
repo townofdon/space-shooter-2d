@@ -339,9 +339,12 @@ namespace Player
             // launch rocket
             if (weapon.type == WeaponType.Missile) {
                 Rocket rocket = instance.GetComponent<Rocket>();
-                if (rocket != null) {
-                    rocket.Launch(GetRocketLaunchVector(weapon) * GetRocketLaunchForce(weapon));
-                }
+                if (rocket != null) rocket.Launch(GetRocketLaunchVector(weapon) * GetRocketLaunchForce(weapon));
+            }
+            // set nuke isDamageByPlayer
+            if (weapon.type == WeaponType.Nuke) {
+                Nuke nuke = instance.GetComponent<Nuke>();
+                if (nuke != null) nuke.SetIsDamageByPlayer(true);
             }
         }
 

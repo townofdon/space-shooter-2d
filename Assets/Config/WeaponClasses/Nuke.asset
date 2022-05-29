@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nuke
   m_EditorClassIdentifier: 
   _weaponType: 4
-  _weaponName: 
+  _weaponName: Nuke
   _effectiveRange: 10
   _shotSound:
     soundName: 

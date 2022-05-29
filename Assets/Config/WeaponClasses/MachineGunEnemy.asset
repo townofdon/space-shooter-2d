@@ -17,7 +17,7 @@ MonoBehaviour:
   _effectiveRange: 10
   _shotSound:
     soundName: MachineGunSingle
-    volume: 0.5
+    volume: 0.45
     pitch: 0.84
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -29,6 +29,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.053
     pitchVariance: 0.046
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: 6bfbff222fd7a994ea5a202a55f4463a, type: 3}
     oneShot: 1
@@ -63,6 +64,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0
     pitchVariance: 0
+    delayVariance: 0
     clips:
     - {fileID: 8300000, guid: c74509568c2031340ae3cb9fe11e5458, type: 3}
     oneShot: 0
@@ -136,6 +138,7 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0
       pitchVariance: 0
+      delayVariance: 0
       clips: []
       oneShot: 0
   upgrades: []
