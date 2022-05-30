@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 5322709981639709621}
   - component: {fileID: 5322709981639709622}
   - component: {fileID: 6807126693813540248}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: EnergyPickup
-  m_TagString: Ordnance
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -319,7 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5322709983393665120}
   - component: {fileID: 5322709983393665127}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: EnergyPellet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

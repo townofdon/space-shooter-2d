@@ -25,12 +25,18 @@ namespace Weapons
         [SerializeField] float outOfRange = 20f;
         [SerializeField] float cascadeExplodeDelay = 0.4f;
 
+        [Header("Targeting System")]
+        [Space]
+        [SerializeField] bool targetingEnabled;
+        [SerializeField] GameObject detector;
+
         [Header("Effects")][Space]
         [SerializeField] ParticleSystem thrustFX;
         [SerializeField] GameObject explosion;
         [SerializeField] float explosionLifetime = 5f;
 
         [Header("Audio")][Space]
+        [SerializeField] Sound lockSound;
         [SerializeField] Sound impulseSound;
         [SerializeField] LoopableSound thrustSound;
 
@@ -44,9 +50,11 @@ namespace Weapons
 
         // cached
         Vector3 startingPosition;
+        Vector3 targetHeading;
         Vector3 heading;
         Vector3 velocity;
         Transform target;
+        DamageableBehaviour targetActor;
         DamageDealer damageDealer;
         Collider2D proximityOtherCollider;
 
@@ -65,6 +73,8 @@ namespace Weapons
 
         public void SetTarget(Transform _target) {
             target = _target;
+            targetActor = target.GetComponent<DamageableBehaviour>();
+            if (targetingEnabled) lockSound.Play();
         }
 
         public void SetIgnoreUUID(System.Guid? uuid) {
@@ -94,6 +104,7 @@ namespace Weapons
             startingPosition = transform.position;
             startingRotation = transform.rotation;
 
+            lockSound.Init(this);
             impulseSound.Init(this);
             thrustSound.Init(this);
             impulseSound.Play();
@@ -115,11 +126,19 @@ namespace Weapons
 
         void Start() {
             OnLaunch();
+            if (targetingEnabled && detector != null) {
+                GameObject go = new GameObject("DetectorContainer");
+                detector.transform.SetParent(go.transform);
+                RocketTargetingSystem targeting = detector.GetComponent<RocketTargetingSystem>();
+                if (targeting != null) targeting.SetRocket(this);
+                detector.SetActive(true);
+            }
         }
 
         void Update() {
             RotateTowardsTarget();
             UpdateHeading();
+            HandleDetector();
             t += Time.deltaTime;
             if (rb == null) MoveViaTransform();
             if (t > startDelay) Activate();
@@ -130,6 +149,16 @@ namespace Weapons
         void FixedUpdate() {
             if (rb != null) MoveViaRigidbody();
             HandleProximityDetonation();
+        }
+
+        void HandleDetector() {
+            if (detector == null) return;
+            if (isAlive && targetingEnabled && detector.activeSelf) {
+                detector.transform.position = transform.position;
+                detector.transform.rotation = transform.rotation;
+            } else {
+                detector.SetActive(false);
+            }
         }
 
         void OnLaunch() {
@@ -146,22 +175,30 @@ namespace Weapons
         }
 
         void RotateTowardsTarget() {
-            if (target == null) return;
+            if (!HasTarget()) return;
             if (!isAlive) return;
 
+            targetHeading = (target.position - transform.position).normalized;
             heading = Vector3.RotateTowards(
                 heading,
-                (target.position - transform.position).normalized,
+                // adjusted heading - factors in rocket's own velocity
+                (targetHeading + (targetHeading * moveSpeed - GetCurrentVelocity())).normalized,
                 (isThrusting ? turnSpeed : turnSpeedPreLaunch) * Mathf.PI * Time.fixedDeltaTime,
                 1f
             ).normalized;
-            rb.rotation = Vector2.SignedAngle(startingRotation * initialHeading, -heading);
+            rb.rotation = Vector2.SignedAngle(initialHeading, heading);
+            // rb.rotation = Vector2.SignedAngle(startingRotation * initialHeading, -heading);
             // transform.rotation = startingRotation * Quaternion.Euler(0f, 0f, Vector2.SignedAngle(startingRotation * initialHeading, heading));
 
             // rotation doesn't actually affect flight path; it's just for show (since we're setting velocity manually)
             // aimVector = Vector2.MoveTowards(aimVector, heading, turnSpeed * Time.deltaTime);
             // aimAngle = Vector2.SignedAngle(startingRotation * initialHeading, aimVector);
             // transform.rotation = startingRotation * Quaternion.AngleAxis(aimAngle, Vector3.forward);
+        }
+
+        Vector3 GetCurrentVelocity() {
+            if (rb == null) return Vector3.zero;
+            return (Vector3)rb.velocity;
         }
 
         void UpdateHeading() {
@@ -219,6 +256,7 @@ namespace Weapons
                 Destroy(instance, explosionLifetime);
             }
             Destroy(gameObject);
+            if (detector != null) Destroy(detector);
         }
 
         IEnumerator IOnDeath(float delay) {
@@ -226,9 +264,20 @@ namespace Weapons
             OnDeath();
         }
 
+        bool HasTarget() {
+            if (target == null) return false;
+            if (targetActor != null && !targetActor.isAlive) return false;
+            return true;
+        }
+
         private void OnDrawGizmos() {
             if (!debug) return;
-            Gizmos.DrawLine(transform.position, heading * moveSpeed);
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, transform.position + heading * moveSpeed);
+            if (target != null) {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, target.position);
+            }
         }
     }
 }

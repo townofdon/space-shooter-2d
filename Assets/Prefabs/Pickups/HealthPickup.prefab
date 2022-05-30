@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1934952187321234566}
   - component: {fileID: 1934952187321234567}
   - component: {fileID: 1934952187321234616}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HealthPowerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,9 +121,9 @@ GameObject:
   - component: {fileID: 1934952187741605197}
   - component: {fileID: 1934952187741605196}
   - component: {fileID: -1605377199510479926}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HealthPickup
-  m_TagString: Ordnance
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

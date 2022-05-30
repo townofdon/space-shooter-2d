@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 7867457985064241827}
   m_Layer: 10
   m_Name: capsule
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,6 +194,7 @@ MonoBehaviour:
   damageType: 1
   baseDamageMultiplier: 2
   isDamageByPlayer: 0
+  collisionForceMod: 1
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -214,7 +215,7 @@ GameObject:
   - component: {fileID: 7867457985288966932}
   m_Layer: 10
   m_Name: colliders
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1011,6 +1012,7 @@ MonoBehaviour:
   isCountableEnemy: 1
   ship: {fileID: 7867457984961899815}
   explosion: {fileID: 8618738012250842369, guid: 00c6a1d78ddfa7d4a87dcfb1c6d8d3ee, type: 3}
+  explosion2: {fileID: 0}
   otherDeathFX: {fileID: 0}
   damageSound:
     soundName: 
@@ -1154,6 +1156,7 @@ MonoBehaviour:
   firingMode: 0
   aimMode: 0
   weapon: {fileID: 11400000, guid: f78c0e63fbd2c97409f395a44445c79d, type: 2}
+  muzzleFlashFX: {fileID: 0}
   numUpgrades: 0
   guns:
   - {fileID: 7867457986701016567}
@@ -1167,6 +1170,8 @@ MonoBehaviour:
   targetableLayers:
     serializedVersion: 2
     m_Bits: 0
+  useFireAnimation: 0
+  anim: {fileID: 0}
   triggerHoldEasyMod: 0.39
   triggerHoldMediumMod: 0.61
   triggerHoldHardMod: 0.7
@@ -1175,6 +1180,23 @@ MonoBehaviour:
   triggerReleaseMediumMod: 3.26
   triggerReleaseHardMod: 2.44
   triggerReleaseInsaneMod: 1.77
+  chargeUpSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    clips: []
+    oneShot: 1
 --- !u!114 &7867457986422667110
 MonoBehaviour:
   m_ObjectHideFlags: 0

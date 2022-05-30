@@ -123,7 +123,7 @@ namespace Weapons
 
         IEnumerator BlowUpRocket(Rocket rocket) {
             // wait a small amount of time in order to create the illusion of chain-reaction explosions
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.5f);
             rocket.Explode(DamageType.Explosion);
         }
     }

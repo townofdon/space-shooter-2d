@@ -24,5 +24,7 @@ namespace Core
         public const string Planetoid = "Planetoid";
         public const string LevelTransitionUI = "LevelTransitionUI";
         public const string Ordnance = "Ordnance";
+        public const string Pickup = "Pickup";
+        public const string Detector = "Detector";
     }
 }

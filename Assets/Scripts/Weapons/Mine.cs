@@ -110,14 +110,15 @@ namespace Weapons
             if (!isActive || isTripped || isSploded) return;
 
             if (other.tag == UTag.Mine) return;
-            if (other.tag == UTag.Ordnance) return;
+            if (other.tag == UTag.Pickup) return;
             if (!Utils.IsObjectOnScreen(gameObject, Utils.GetCamera(), 0f)) return;
 
             if ((
                 other.tag == UTag.Bullet ||
                 other.tag == UTag.DisruptorRing ||
                 other.tag == UTag.Explosion ||
-                other.tag == UTag.NukeCore
+                other.tag == UTag.NukeCore ||
+                other.tag == UTag.Detector
             )) {
                 if (shield <= 0f) {
                     // don't call Explode directly as DamageableBehaviour.Die() handles some stuff internally, like disabling colliders and such
