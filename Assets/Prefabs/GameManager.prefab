@@ -550,6 +550,25 @@ MonoBehaviour:
     clipOutro: {fileID: 0}
     fadeInTime: 0
     fadeOutTime: 0
+  - soundName: badass-boss-theme
+    volume: 0.9
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    dopplerLevel: 0
+    bpm: 150
+    beatsPerBar: 4
+    loops: 0
+    clipIntro: {fileID: 8300000, guid: 9cbeab204c965b24c8a992f64963b6ab, type: 3}
+    clipLoop: {fileID: 8300000, guid: 299d0fe83d8fe0543864c24a661b3d3d, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
   - soundName: win-theme
     volume: 0.7
     pitch: 1

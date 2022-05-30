@@ -13,6 +13,7 @@ namespace Audio
         [SerializeField][Range(0f, 0.5f)] protected float volumeVariance = 0.1f;
         [SerializeField][Range(0f, 0.5f)] protected float pitchVariance = 0.1f;
         [SerializeField][Range(0f, 0.03f)] protected float delayVariance = 0f;
+        [SerializeField][Range(0f, 5f)] protected float courseDelayVariance = 0f;
         [SerializeField] AudioClip[] clips;
         [SerializeField] bool oneShot = true;
 
@@ -30,15 +31,20 @@ namespace Audio
         Timer fadeTimer = new Timer();
         int currentClipIndex = 0;
 
-        public override void Init(MonoBehaviour script, AudioMixerGroup mix = null)
+        public override void Init(MonoBehaviour script, AudioMixerGroup mix = null, AudioSource existingSource = null)
         {
+            if (existingSource != null && existingSource.clip != null) {
+                clips = new AudioClip[1] { existingSource.clip };
+            }
             if (clips.Length == 0) return;
             // nullSound.SetSource(gameObject.AddComponent<AudioSource>(), soundFXMix);
-            source = script.gameObject.AddComponent<AudioSource>();
+            source = existingSource != null ? existingSource : script.gameObject.AddComponent<AudioSource>();
+            if (existingSource == null) {
+                source.clip = clips[0];
+                source.loop = false;
+            }
             source.volume = volume;
             source.pitch = pitch;
-            source.loop = false;
-            source.clip = clips[0];
             source.playOnAwake = false;
             source.outputAudioMixerGroup = mix;
             source.ignoreListenerPause = ignoreListenerPause;
@@ -49,9 +55,8 @@ namespace Audio
             source.spatialBlend = spatialBlend;
             source.minDistance = minFalloffDistance;
             source.maxDistance = maxFalloffDistance;
-            AppIntegrity.AssertPresent<AudioClip>(clips[0]);
 
-            script.StartCoroutine(RealtimeEditorInspection());
+            if (existingSource == null) script.StartCoroutine(RealtimeEditorInspection());
         }
 
         public override void Play()
@@ -63,7 +68,7 @@ namespace Audio
             } else {
                 UpdateVariance();
                 source.Stop();
-                source.PlayDelayed(UnityEngine.Random.Range(0f, delayVariance));
+                source.PlayDelayed(UnityEngine.Random.Range(0f, delayVariance + courseDelayVariance));
             }
         }
 

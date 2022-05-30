@@ -113,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6265466151077065733, guid: c21db27f042e279499be883f02544470, type: 3}
       propertyPath: explosionSound.volume
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6265466151077065733, guid: c21db27f042e279499be883f02544470, type: 3}
       propertyPath: explosionSound.delayVariance
@@ -186,6 +186,6 @@ PrefabInstance:
     - target: {fileID: 6411006964417785919, guid: c21db27f042e279499be883f02544470, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: cfcc7a8fb89fff047bc8e25c7c1fdf9e, type: 2}
+      objectReference: {fileID: 9100000, guid: 10ee957862e1f434698fdcf6c1ecaa71, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c21db27f042e279499be883f02544470, type: 3}

@@ -9,6 +9,7 @@ namespace Damage
         DamageableBehaviour actor;
         Rigidbody2D rb;
 
+        public DamageableBehaviour root => actor;
         public new Rigidbody2D rigidbody => rb;
         public bool isAlive => actor != null && actor.isAlive;
         public bool canCollide => actor != null ? actor.timeHit <= 0f : false;

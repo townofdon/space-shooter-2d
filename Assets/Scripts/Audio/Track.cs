@@ -55,7 +55,7 @@ namespace Audio {
         public override bool hasSource => sourceLoop != null;
         public PlayCursor Cursor => cursor;
 
-        public override void Init(MonoBehaviour script, AudioMixerGroup mix = null) {
+        public override void Init(MonoBehaviour script, AudioMixerGroup mix = null, AudioSource _source = null) {
             _script = script;
             if (mix != null) mixerGroup = mix;
 

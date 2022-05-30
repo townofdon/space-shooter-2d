@@ -26,5 +26,6 @@ namespace Core
         public const string Ordnance = "Ordnance";
         public const string Pickup = "Pickup";
         public const string Detector = "Detector";
+        public const string EnergyField = "EnergyField";
     }
 }

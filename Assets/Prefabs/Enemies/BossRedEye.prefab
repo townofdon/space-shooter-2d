@@ -176,7 +176,7 @@ MonoBehaviour:
   beamLaser: {fileID: 3306651751174570915}
   anim: {fileID: 3306651752485391457}
   disruptorSound:
-    soundName: 
+    soundName: QuiteDisruptive
     volume: 0.5
     pitch: 1
     ignoreListenerPause: 0
@@ -234,7 +234,10 @@ MonoBehaviour:
   isCountableEnemy: 1
   ship: {fileID: 3306651752637380792}
   explosion: {fileID: 5345083779386589570, guid: 6f0bd7f793570f2488b51bcbc9eda4cb, type: 3}
+  explosion2: {fileID: 0}
   otherDeathFX: {fileID: 0}
+  deathContainer: {fileID: 0}
+  destroyedShip: {fileID: 0}
   damageSound:
     soundName: 
     volume: 0.7

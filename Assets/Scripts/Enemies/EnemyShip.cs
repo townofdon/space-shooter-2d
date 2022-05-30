@@ -24,6 +24,11 @@ namespace Enemies {
         [SerializeField] GameObject explosion2;
         [SerializeField] GameObject otherDeathFX;
 
+        [Header("Deeeeeath!")]
+        [Space]
+        [SerializeField] GameObject deathContainer;
+        [SerializeField] GameObject destroyedShip;
+
         [Header("Movement")][Space]
         [Header("Audio")][Space]
         [SerializeField] Sound damageSound;
@@ -104,7 +109,7 @@ namespace Enemies {
         void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             RemoveMarker();
             int points = GetDeathPoints(isDamageByPlayer);
-            eventChannel.OnEnemyDeath.Invoke(instanceId, points);
+            if (isCountableEnemy) eventChannel.OnEnemyDeath.Invoke(instanceId, points);
             if (rb != null) rb.drag = originalDrag; // to make it seem like it was there all along
             if (damageType != DamageType.InstakillQuiet) {
                 deathSound.Play();
@@ -138,8 +143,14 @@ namespace Enemies {
             if (explosion2 != null) Instantiate(explosion2, transform);
             if (otherDeathFX != null) otherDeathFX.SetActive(true);
             if (ship != null) ship.SetActive(false);
+            if (destroyedShip != null) {
+                GameObject container = deathContainer != null ? deathContainer : new GameObject("DestroyedShip");
+                destroyedShip.transform.SetParent(container.transform);
+                destroyedShip.SetActive(true);
+            }
             yield return new WaitForSeconds(3f);
             while (deathSound.isPlaying) yield return null;
+
             Destroy(gameObject);
 
             yield return null;

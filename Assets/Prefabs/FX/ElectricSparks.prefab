@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2344551527574657809}
   - component: {fileID: 2344551527574657814}
   - component: {fileID: 8505937566545300272}
+  - component: {fileID: 4637844204053738440}
   m_Layer: 0
   m_Name: ElectricSparks
   m_TagString: Untagged
@@ -4826,7 +4827,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e8fea58603e4f384a8614ddd1fb72fbb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
@@ -4911,6 +4912,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4637844204053738440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344551527574657812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8efcc82bef4cc14db2df070a05ec951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnAwake: 1
+  source: {fileID: 8505937566545300272}
+  sound:
+    soundName: Sparks
+    volume: 0.3
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 5
+    maxFalloffDistance: 40
+    dopplerLevel: 0
+    volumeVariance: 0.1
+    pitchVariance: 0.171
+    delayVariance: 0.03
+    courseDelayVariance: 2.04
+    clips: []
+    oneShot: 0
 --- !u!1 &2344551527997773214
 GameObject:
   m_ObjectHideFlags: 0

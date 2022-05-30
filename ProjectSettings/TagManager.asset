@@ -25,6 +25,7 @@ TagManager:
   - Ordnance
   - Pickup
   - Detector
+  - EnergyField
   layers:
   - Default
   - TransparentFX

@@ -31,7 +31,7 @@ namespace Audio
 
         // public methods
 
-        public abstract void Init(MonoBehaviour script, AudioMixerGroup mix = null);
+        public abstract void Init(MonoBehaviour script, AudioMixerGroup mix = null, AudioSource _source = null);
 
         public abstract void Play();
 

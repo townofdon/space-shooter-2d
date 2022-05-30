@@ -46,6 +46,7 @@ namespace Damage
         [SerializeField] LayerMask ignoreLayers;
         [SerializeField] string ignoreTag;
         [SerializeField] List<Collider2D> ignoreColliders = new List<Collider2D>();
+        [SerializeField] bool ignoreProjectiles = false;
 
         // callbacks
         System.Action<DamageableType> onHit;
@@ -195,6 +196,7 @@ namespace Damage
         }
 
         void HandleHitOtherProjectile(Collider2D other) {
+            if (ignoreProjectiles) return;
             if (this.tag == UTag.DisruptorRing || this.damageType == DamageType.Disruptor) {
                 Projectile projectile = other.GetComponent<Projectile>();
                 if (projectile == null || !projectile.isAlive) return;

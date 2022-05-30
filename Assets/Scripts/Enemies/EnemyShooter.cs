@@ -35,6 +35,7 @@ namespace Enemies
         [SerializeField] List<Transform> guns = new List<Transform>();
         [SerializeField][Range(0f, 3f)] float aimSpeed = 2f;
         [SerializeField][Range(0f, 180f)] float maxAimAngle = 30f;
+        [SerializeField][Range(0f, 10f)] float delayStart = 0f;
         [SerializeField][Range(0f, 10f)] float triggerHoldTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerReleaseTime = 1f;
         [SerializeField][Range(0f, 10f)] float triggerTimeVariance = 0f;
@@ -274,6 +275,9 @@ namespace Enemies
         IEnumerator PressAndReleaseTrigger() {
             // simulate human-like response time
             yield return new WaitForSecondsRealtime(UnityEngine.Random.Range(0.2f, 0.6f));
+            if (delayStart > 0f) {
+                yield return new WaitForSeconds(Utils.RandomVariance2(delayStart, 1f, delayStart * 0.5f));
+            }
             while (true) {
                 while (!isPlayerInScopes) yield return null;
                 triggerHeld.SetDuration(Mathf.Max(triggerHoldTime * GetTriggerHoldMod() + GetTriggerVariance(), 0.1f));

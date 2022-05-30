@@ -87,6 +87,7 @@ MonoBehaviour:
     m_Bits: 0
   ignoreTag: 
   ignoreColliders: []
+  ignoreProjectiles: 0
 --- !u!1 &1638331097990065524
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +369,8 @@ MonoBehaviour:
   explosion: {fileID: 5441939292386623249, guid: 234389a0bc2cdd448bb4efa54a7d304a, type: 3}
   explosion2: {fileID: 0}
   otherDeathFX: {fileID: 0}
+  deathContainer: {fileID: 0}
+  destroyedShip: {fileID: 0}
   damageSound:
     soundName: EnemyDamage
     volume: 0.05
@@ -440,6 +443,7 @@ MonoBehaviour:
   - {fileID: 1638331099525916972}
   aimSpeed: 0.5
   maxAimAngle: 30
+  delayStart: 1.67
   triggerHoldTime: 0.5
   triggerReleaseTime: 4
   triggerTimeVariance: 0.3
@@ -459,18 +463,18 @@ MonoBehaviour:
   triggerReleaseInsaneMod: 0.75
   chargeUpSound:
     soundName: ChargeUp
-    volume: 0.25
+    volume: 0.2
     pitch: 1.45
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 1
     spread: 287
-    minFalloffDistance: 15.62
+    minFalloffDistance: 10
     maxFalloffDistance: 40
     dopplerLevel: 0
-    volumeVariance: 0.1
-    pitchVariance: 0.119
+    volumeVariance: 0.112
+    pitchVariance: 0.131
     delayVariance: 0.03
     clips:
     - {fileID: 8300000, guid: 66045012dd0ab6b499545258cb856c23, type: 3}
