@@ -109,22 +109,40 @@ namespace Weapons
                 hitDist = hit.transform.position - transform.position;
                 if (hitDist.magnitude > blastRadius) return;
 
-                if (actor.TakeDamage(
-                    // damage amount per time
-                    Mathf.Lerp(damageBegin, damageEnd, t / timeCausingDamage) *
-                    // account for distance from explosion center
-                    Mathf.Lerp(1f, damageAtEdge, hitDist.magnitude / blastRadius),
-                    DamageType.Explosion,
-                    isDamageByPlayer
-                ) && hasSingleFrameDamage && actor.uuid != null) hitMap[actor.uuid] = true;
-                return;
+                if (actor.tag == UTag.Mine) {
+                    // wait a small amount of time in order to create the illusion of chain-reaction explosions
+                    StartCoroutine(WaitFor(0.2f, () => DamageActor(actor, hitDist.magnitude)));
+                    return;
+                }
+
+                DamageActor(actor, hitDist.magnitude);
             }
         }
 
+        void DamageActor(DamageReceiver actor, float hitMag) {
+            if (
+                actor.TakeDamage(GetDamageAmount(hitMag), DamageType.Explosion, isDamageByPlayer)
+                && hasSingleFrameDamage && actor.uuid != null
+            ) {
+                hitMap[actor.uuid] = true;
+            }
+        }
+
+        float GetDamageAmount(float hitMag) {
+            return
+                Mathf.Lerp(damageBegin, damageEnd, t / timeCausingDamage) *
+                // account for distance from explosion center
+                Mathf.Lerp(1f, damageAtEdge, hitMag / blastRadius);
+        }
+
         IEnumerator BlowUpRocket(Rocket rocket) {
-            // wait a small amount of time in order to create the illusion of chain-reaction explosions
             yield return new WaitForSeconds(0.5f);
             rocket.Explode(DamageType.Explosion);
+        }
+
+        IEnumerator WaitFor(float waitTime, System.Action callback) {
+            yield return new WaitForSeconds(waitTime);
+            if (callback != null) callback();
         }
     }
 }

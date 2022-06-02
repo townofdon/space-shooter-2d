@@ -947,6 +947,9 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
+  savingThrow: 0
+  savingThrowUseTime: 2
+  savingThrowCooldownTime: 5
   _maxHealth: 300
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -974,9 +977,14 @@ MonoBehaviour:
   - {fileID: 3676972206631351771}
   perishableObjects: []
   isBoss: 0
+  isCountableEnemy: 1
   ship: {fileID: 3676972207723964803}
   explosion: {fileID: 8618738012250842369, guid: 00c6a1d78ddfa7d4a87dcfb1c6d8d3ee, type: 3}
+  explosion2: {fileID: 0}
   otherDeathFX: {fileID: 3934464960565712990}
+  deathContainer: {fileID: 0}
+  destroyedShip: {fileID: 0}
+  killOtherObjects: []
   damageSound:
     soundName: EnemyDamage
     volume: 0
@@ -991,6 +999,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.221
     pitchVariance: 0.389
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 9f9b58c4eaff5fa4a9eb5551104f5afb, type: 3}
     - {fileID: 8300000, guid: 79c1fb287e211164e9e9982a8ec6cb08, type: 3}
@@ -1011,6 +1021,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.11
     pitchVariance: 0.304
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: c2edad0108051194dbe5fd1a2f2f2ae5, type: 3}
     - {fileID: 8300000, guid: 120284d3d1223f946a8026e715162b5f, type: 3}
@@ -1018,7 +1030,7 @@ MonoBehaviour:
     oneShot: 1
   pickups:
     pickups: []
-  pointsWhenKilledByPlayer: 200
+  pointsWhenKilledByPlayer: 100
   pointsWhenWoundedByPlayer: 50
   pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}

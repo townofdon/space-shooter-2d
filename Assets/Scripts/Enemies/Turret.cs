@@ -5,6 +5,7 @@ using UnityEngine;
 using Audio;
 using Game;
 using Core;
+using Damage;
 
 namespace Enemies {
 
@@ -78,7 +79,7 @@ namespace Enemies {
             StartCoroutine(ISpawn());
         }
 
-        void OnDeath() {
+        void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             if (deployAnimator != null && animateDeploy) {
                 deployAnimator.SetTrigger("Retract");
                 StartCoroutine(IRetract());

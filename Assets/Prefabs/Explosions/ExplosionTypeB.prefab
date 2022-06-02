@@ -14607,6 +14607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa6032e1e5d19c4b9624e6e38787f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasSingleFrameDamage: 0
   timeCausingDamage: 2
   damageBegin: 30
   damageEnd: 30
@@ -14617,7 +14618,7 @@ MonoBehaviour:
   shakeScreenDuration: 2
   splosion:
     soundName: 
-    volume: 0.7
+    volume: 0.6
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -14628,8 +14629,9 @@ MonoBehaviour:
     maxFalloffDistance: 40
     dopplerLevel: 1
     volumeVariance: 0.1
-    pitchVariance: 0.163
-    delayVariance: 0.0105
+    pitchVariance: 0.173
+    delayVariance: 0.03
+    courseDelayVariance: 0.1
     clips:
     - {fileID: 8300000, guid: 4dbc7606b7d8a9f4586eff61f6a46089, type: 3}
     oneShot: 1

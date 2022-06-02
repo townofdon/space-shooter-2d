@@ -57,6 +57,7 @@ namespace Weapons
         DamageableBehaviour targetActor;
         DamageDealer damageDealer;
         Collider2D proximityOtherCollider;
+        GameObject detectorContainer;
 
         // state
         bool isThrusting = false;
@@ -127,8 +128,8 @@ namespace Weapons
         void Start() {
             OnLaunch();
             if (targetingEnabled && detector != null) {
-                GameObject go = new GameObject("DetectorContainer");
-                detector.transform.SetParent(go.transform);
+                detectorContainer = new GameObject("DetectorContainer");
+                detector.transform.SetParent(detectorContainer.transform);
                 RocketTargetingSystem targeting = detector.GetComponent<RocketTargetingSystem>();
                 if (targeting != null) targeting.SetRocket(this);
                 detector.SetActive(true);
@@ -257,6 +258,7 @@ namespace Weapons
             }
             Destroy(gameObject);
             if (detector != null) Destroy(detector);
+            if (detectorContainer != null) Destroy(detectorContainer);
         }
 
         IEnumerator IOnDeath(float delay) {

@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9164195204246999770, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: mode
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9164195204246999770, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: accel

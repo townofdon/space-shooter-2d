@@ -832,6 +832,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb3469b1d3761c045ab6545aa6cae912, type: 2}
   timeStartDelay: 3
   showUpgradePanel: 1
+  enemyCountRefreshRate: 5
   loopIndefinitely: 0
   debug: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}

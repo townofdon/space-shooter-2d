@@ -7,6 +7,7 @@ using System.Collections;
 using Core;
 using Weapons;
 using Game;
+using Damage;
 
 namespace Enemies {
 
@@ -156,7 +157,7 @@ namespace Enemies {
             if (moveOnAgro && iAgroMove == null && IsAgro()) iAgroMove = StartCoroutine(IAgro());
         }
 
-        void OnDeath() {
+        void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             if (disableAllSpawners && transform.parent != null) {
                 EntitySpawner[] spawners = transform.parent.GetComponentsInChildren<EntitySpawner>();
                 foreach (var spawner in spawners) {

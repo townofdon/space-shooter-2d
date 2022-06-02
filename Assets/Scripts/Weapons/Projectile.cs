@@ -210,7 +210,7 @@ namespace Weapons
                 if (explosionFX != null) {
                     GameObject instance = Instantiate(explosionFX, transform.position, Quaternion.identity);
                     Explosion splosion = instance.GetComponent<Explosion>();
-                    if (splosion != null) splosion.SetIsDamageByPlayer(damageDealer.GetIsDamageByPlayer());
+                    if (splosion != null && damageDealer != null) splosion.SetIsDamageByPlayer(damageDealer.GetIsDamageByPlayer());
                     Destroy(instance, explosionLifetime);
                 }
             }

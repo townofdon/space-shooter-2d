@@ -46,7 +46,7 @@ namespace UI {
         int num = 0;
         float fNum = 0;
 
-        int totalPoints => debug ? 123456 : GetFinalScore();
+        int totalPoints => debug ? 123456 : gameState.totalPoints;
         int numEnemiesKilled => debug ? 123 : gameState.numEnemiesKilled;
         int numPlayerDeaths => debug ? 42 : playerState.numDeaths;
         float timeElapsed => debug ? 333 : GameManager.current.timeElapsed;
@@ -151,23 +151,23 @@ namespace UI {
             dismiss = false;
         }
 
-        int GetFinalScore() {
-            return (int)(gameState.totalPoints * GetPointsModifier());
-        }
+        // int GetFinalScore() {
+        //     return (int)(gameState.totalPoints * GetPointsModifier());
+        // }
 
-        float GetPointsModifier() {
-            switch (gameState.difficulty) {
-                case GameDifficulty.Insane:
-                    return 5.0f;
-                case GameDifficulty.Hard:
-                    return 2f;
-                case GameDifficulty.Medium:
-                    return 1.2f;
-                case GameDifficulty.Easy:
-                default:
-                    return 1.0f;
-            }
-        }
+        // float GetPointsModifier() {
+        //     switch (gameState.difficulty) {
+        //         case GameDifficulty.Insane:
+        //             return 5.0f;
+        //         case GameDifficulty.Hard:
+        //             return 2f;
+        //         case GameDifficulty.Medium:
+        //             return 1.2f;
+        //         case GameDifficulty.Easy:
+        //         default:
+        //             return 1.0f;
+        //     }
+        // }
 
         int GetStep(int diff) {
             if (diff >= 50000) return 10000;

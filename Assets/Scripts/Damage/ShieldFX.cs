@@ -87,7 +87,7 @@ public class ShieldFX : MonoBehaviour
         shieldSound.Stop();
     }
 
-    void OnDeath() {
+    void OnDeath(DamageType damageType, bool isDamageByPlayer) {
         ShowNoShield();
     }
 }

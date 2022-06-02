@@ -14,6 +14,7 @@ namespace Enemies {
         [SerializeField] DamageClass disruptor;
         [SerializeField][Range(0f, 10f)] float damageMultiplier = 1f;
         [SerializeField][Range(0f, 15f)] float effectiveDistance = 5f;
+        [SerializeField][Range(0f, 5f)] float activationDelay = 1f;
 
         [Space]
 
@@ -49,6 +50,8 @@ namespace Enemies {
         DamageReceiver actor;
         PlayerInputHandler inputHandler;
 
+        float t = 0;
+
         void Start() {
             fieldNoise.Init(this);
             lineA = boltA.GetComponent<LineRenderer>();
@@ -67,6 +70,7 @@ namespace Enemies {
                 TurnOffBeam();
                 KillPoles();
             }
+            t += Time.deltaTime;
         }
 
         void HandleUpdateBox() {
@@ -78,6 +82,7 @@ namespace Enemies {
         }
 
         void HandleBeamIntersection() {
+            if (t < activationDelay) return;
             numHits = 0;
             numResults = box.Cast(Vector2.right, hits, 0f, true);
             for (int i = 0; i < numResults; i++) {
@@ -150,6 +155,7 @@ namespace Enemies {
         }
 
         void TurnOnBeam() {
+            if (t < activationDelay) return;
             boltA.gameObject.SetActive(true);
             boltB.gameObject.SetActive(true);
         }

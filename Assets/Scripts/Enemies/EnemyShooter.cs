@@ -33,6 +33,7 @@ namespace Enemies
         [SerializeField] ParticleSystem muzzleFlashFX;
         [SerializeField] int numUpgrades;
         [SerializeField] List<Transform> guns = new List<Transform>();
+        [SerializeField] bool alternateGuns = false;
         [SerializeField][Range(0f, 3f)] float aimSpeed = 2f;
         [SerializeField][Range(0f, 180f)] float maxAimAngle = 30f;
         [SerializeField][Range(0f, 10f)] float delayStart = 0f;
@@ -235,8 +236,9 @@ namespace Enemies
 
         bool ImperativelyFire() {
             if (!enemy.isAlive) return false;
-            foreach (var gun in guns) {    
-                FireProjectile(weapon.prefab, gun.position, gun.rotation);
+            for (int i = 0; i < guns.Count; i++) {
+                if (alternateGuns && !weapon.IsCycle(i)) continue;
+                FireProjectile(weapon.prefab, guns[i].position, guns[i].rotation);
                 weapon.shotSound.Play();
                 weapon.effectSound.Play();
             }

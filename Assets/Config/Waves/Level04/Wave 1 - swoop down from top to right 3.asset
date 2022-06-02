@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
+  m_Name: Wave 1 - swoop down from top to right 3
+  m_EditorClassIdentifier: 
+  _enemies:
+  - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
+  - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
+  - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
+  - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
+    _spawnLocation: 
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 3
+  _spawnInterval: 0.5
+  _spawnTimeVariance: 0.45
+  _minSpawnInterval: 0.5
+  _numLoops: 1
+  _loopInterval: 0
+  _spawnLocation: N-12-2
+  _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 2
+  launchHeading: {x: 0, y: 0}
+  headingVariance: 0
+  launchVelocity: 0
+  velocityVariance: 0
+  aimTowardsPlayer: 0
+  _path: {fileID: 194344545391958357, guid: 4ba4c7e77d9c79449ad9943dd14d023e, type: 3}
+  _pathfinderLoopMode: 0
+  _flipX: 0
+  _flipY: 0
+  _maxPathLoops: 99
+  _initialState: {fileID: 0}
+  notes: 

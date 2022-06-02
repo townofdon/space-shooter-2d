@@ -91,7 +91,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4480459322842544697}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
   m_Name: 
@@ -99,6 +99,7 @@ MonoBehaviour:
   damageType: 1
   baseDamageMultiplier: 1
   isDamageByPlayer: 0
+  dieOnPlayerCollision: 0
   collisionForceMod: 1.4
   preferCirclecast: 0
   raycast: 0
@@ -109,6 +110,7 @@ MonoBehaviour:
     m_Bits: 0
   ignoreTag: 
   ignoreColliders: []
+  ignoreProjectiles: 0
 --- !u!1 &4480459323776429820
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 4480459323776429820}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4480459324204184453}
@@ -208,6 +210,7 @@ MonoBehaviour:
   damageType: 1
   baseDamageMultiplier: 1
   isDamageByPlayer: 0
+  dieOnPlayerCollision: 0
   collisionForceMod: 1
   preferCirclecast: 0
   raycast: 0
@@ -218,6 +221,7 @@ MonoBehaviour:
     m_Bits: 0
   ignoreTag: 
   ignoreColliders: []
+  ignoreProjectiles: 0
 --- !u!1 &4480459323800503186
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +237,7 @@ GameObject:
   - component: {fileID: 3217440021653718809}
   - component: {fileID: -2426276947871629491}
   - component: {fileID: 6909187305444251660}
+  - component: {fileID: -4310449721687799739}
   m_Layer: 0
   m_Name: Asteroid 2
   m_TagString: Asteroid
@@ -269,11 +274,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 90
+  m_Mass: 400
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 90c5eb569c6ea7243ab50485a7c5b2bf, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -307,6 +312,8 @@ MonoBehaviour:
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
   savingThrow: 0
+  savingThrowUseTime: 2
+  savingThrowCooldownTime: 5
   _maxHealth: 130
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -352,6 +359,7 @@ MonoBehaviour:
     volumeVariance: 0.139
     pitchVariance: 0.32
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 5b8e7481c4fd987479f74f152826e552, type: 3}
     - {fileID: 8300000, guid: 4cd0b25957bfb9d4fa715ba1a60c5f95, type: 3}
@@ -374,6 +382,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.138
     delayVariance: 0.03
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 9d2b06d8049add8478ec94a23ddf5134, type: 3}
     - {fileID: 8300000, guid: 09653370cfcb98040a4d0484d1f758f0, type: 3}
@@ -461,6 +470,22 @@ MonoBehaviour:
   killSouth: 1
   killEast: 1
   killWest: 1
+--- !u!114 &-4310449721687799739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4480459323800503186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d46d8a95e3ffd948ac96ab9b52a5d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsWhenKilledByPlayer: 20
+  pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
+  showPointsToast: 1
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!1 &4480459324204184455
 GameObject:
   m_ObjectHideFlags: 0

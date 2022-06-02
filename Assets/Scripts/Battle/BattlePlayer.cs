@@ -50,7 +50,8 @@ namespace Battle {
             numEnemiesAlive++;
         }
 
-        public void OnEnemyDeath(int instanceId, int points) {
+        public void OnEnemyDeath(int instanceId, int points, bool isCountableEnemy = true) {
+            if (!isCountableEnemy) return;
             numEnemiesAlive = Mathf.Max(0, numEnemiesAlive - 1);
             bossesAliveTemp.Clear();
             foreach (var bossId in bossesAlive) {

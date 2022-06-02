@@ -17,6 +17,7 @@ namespace Damage
         [SerializeField] DamageType damageType = DamageType.Default;
         [SerializeField][Range(0f, 10f)] float baseDamageMultiplier = 1f;
         [SerializeField] bool isDamageByPlayer = false;
+        [SerializeField] bool dieOnPlayerCollision = false;
 
         [Space]
 
@@ -153,8 +154,33 @@ namespace Damage
             prevPosition = transform.position;
         }
 
+        void OnCollisionEnter2D(Collision2D other) {
+            HandleCollision(other);
+
+        }
+
         void OnTriggerEnter2D(Collider2D other) {
             HandleColliderHit(other);
+        }
+
+        void HandleCollision(Collision2D other) {
+            if (!enabled) return;
+            if (damageWaitTime > 0f) return;
+            if (other.collider == null) return;
+            if (damageType != DamageType.Collision) return;
+            if (!passedSafeDistance && hitThisFrame) return;
+            if (!passedSafeDistance && ignoreTag == other.collider.tag) return;
+            if (ULayerUtils.LayerMaskContainsLayer(ignoreLayers, other.gameObject.layer)) return;
+            if (other.collider.tag == UTag.Laser) return;
+            if (other.collider.tag == UTag.Bullet) return;
+            if (other.collider.tag == UTag.Missile) return;
+            if (other.collider.tag == UTag.Nuke) return;
+
+            DamageReceiver actor = other.collider.GetComponent<DamageReceiver>();
+            if (actor == null) return;
+            if (ignoreUUID != null && ignoreUUID == actor.uuid) return;
+
+            HandleJarringCollision(actor, other.relativeVelocity.magnitude);
         }
 
         void HandleColliderHit(Collider2D other, bool makeFramerateIndependent = false) {
@@ -178,7 +204,8 @@ namespace Damage
             } else {
                 if (ignoreUUID != null && ignoreUUID == actor.uuid) return;
                 if (damageType == DamageType.Collision) {
-                    HandleJarringCollision(actor);
+                    // collisions are now handled by actual colliders
+                    // HandleJarringCollision(actor);
                     return;
                 }
                 if (actor != null && actor.TakeDamage(
@@ -227,28 +254,30 @@ namespace Damage
             }
         }
 
-        void HandleJarringCollision(DamageReceiver actor) {
+        void HandleJarringCollision(DamageReceiver actor, float collisionMagnitude = 1f) {
             if (damageType != DamageType.Collision) return;
             if (actor == null) return;
             if (actor.rigidbody == null || !actor.rigidbody.simulated) return;
             if (rb == null) return;
-            float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
-            float collisionMagnitude = (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
-            float canCollideMod = actor.canCollide ? 1f : 0.1f;
-            float mSelf = Mathf.Min(0.8f, rb.mass);
-            float mOther = Mathf.Min(0.8f, actor.rigidbody.mass);
-            // a very inelastic collision
-            Vector3 forceToSelf = (actor.rigidbody.velocity * mOther - Vector2.ClampMagnitude(rb.velocity, 3f) * mSelf) * collisionForceMod * canCollideMod;
-            Vector3 forceToActor = (rb.velocity * mSelf - Vector2.ClampMagnitude(actor.rigidbody.velocity, 3f) * mOther) * collisionForceMod * canCollideMod;
-            rb.AddForce(forceToSelf, ForceMode2D.Impulse);
-            if (!actor.rigidbody.isKinematic) actor.rigidbody.AddForce(forceToActor * damageClass.throwbackForceMultiplier, ForceMode2D.Impulse);
-            float damageToActor = collisionDamage * collisionMagnitude * Mathf.Clamp((rb.mass / actor.rigidbody.mass) * 0.05f, 1f, 10f);
+            // float canCollideMod = actor.canCollide ? 1f : 0.1f;
+            // float mSelf = Mathf.Min(0.8f, rb.mass);
+            // float mOther = Mathf.Min(0.8f, actor.rigidbody.mass);
+            // // a very inelastic collision
+            // Vector3 forceToSelf = (actor.rigidbody.velocity * mOther - Vector2.ClampMagnitude(rb.velocity, 3f) * mSelf) * collisionForceMod * canCollideMod;
+            // Vector3 forceToActor = (rb.velocity * mSelf - Vector2.ClampMagnitude(actor.rigidbody.velocity, 3f) * mOther) * collisionForceMod * canCollideMod;
+            // rb.AddForce(forceToSelf, ForceMode2D.Impulse);
+            // if (!actor.rigidbody.isKinematic) actor.rigidbody.AddForce(forceToActor * damageClass.throwbackForceMultiplier, ForceMode2D.Impulse);
+            // float collisionMagnitude = (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
+            collisionMagnitude += (actor.rigidbody.velocity.magnitude + rb.velocity.magnitude);
+            float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage * baseDamageMultiplier;
+            float damageToActor = collisionDamage * collisionMagnitude * Mathf.Clamp((rb.mass / Mathf.Max(actor.rigidbody.mass, 0.1f)), 0.1f, 10f);
             if (collisionMagnitude < 2f) damageToActor = Mathf.Max(30f, damageToActor);
             if (collisionMagnitude < 1.5f) damageToActor = Mathf.Max(10f, damageToActor);
             if (collisionMagnitude < 1f) damageToActor = Mathf.Max(4f, damageToActor);
             if (collisionMagnitude < 0.5f) damageToActor = Mathf.Max(1f, damageToActor);
             actor.TakeDamage(damageToActor * baseDamageMultiplier, DamageType.Collision, isDamageByPlayer);
             if (actor.tag == UTag.Asteroid) InvokeCallback(onRoidHitRoid);
+            if (dieOnPlayerCollision && actor.tag == UTag.Player && collisionMagnitude > 10f) parentActor.TakeDamage(1000f, DamageType.Collision);
         }
 
         void HandleJarringCollision(Collider2D other) {

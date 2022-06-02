@@ -14686,7 +14686,8 @@ MonoBehaviour:
     dopplerLevel: 0.11
     volumeVariance: 0.1
     pitchVariance: 0.171
-    delayVariance: 0.0235
+    delayVariance: 0.03
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: c77d065e8a880a548b3f15d9a43f32e5, type: 3}
     - {fileID: 8300000, guid: 15c64c1b1f298d74caa2e49d05d35498, type: 3}

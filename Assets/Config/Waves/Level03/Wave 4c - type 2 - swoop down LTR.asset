@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: Wave 4c - type 2 - swoop down LTR
   m_EditorClassIdentifier: 
   _enemies:
-  - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+  - _enemyPrefab: {fileID: 7943253814737313355, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+  - _enemyPrefab: {fileID: 7943253814737313355, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+  - _enemyPrefab: {fileID: 7943253814737313355, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+  - _enemyPrefab: {fileID: 7943253814737313355, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
-  - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+  - _enemyPrefab: {fileID: 7943253814737313355, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0

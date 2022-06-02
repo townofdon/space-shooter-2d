@@ -125,6 +125,7 @@ namespace Enemies {
         }
 
         void HandleSpawnMine() {
+            if (enemy == null || !enemy.isAlive) return;
             PlaySpawnSound();
             instance = Instantiate(minePrefab, transform.position, Quaternion.identity);
             var rb = instance.GetComponent<Rigidbody2D>();

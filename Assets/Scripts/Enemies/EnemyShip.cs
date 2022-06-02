@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -8,6 +9,7 @@ using Audio;
 using UI;
 using Pickups;
 using Event;
+using Game;
 
 namespace Enemies {
 
@@ -28,6 +30,7 @@ namespace Enemies {
         [Space]
         [SerializeField] GameObject deathContainer;
         [SerializeField] GameObject destroyedShip;
+        [SerializeField] List<DamageableBehaviour> killOtherObjects = new List<DamageableBehaviour>();
 
         [Header("Movement")][Space]
         [Header("Audio")][Space]
@@ -108,14 +111,15 @@ namespace Enemies {
 
         void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             RemoveMarker();
-            int points = GetDeathPoints(isDamageByPlayer);
-            if (isCountableEnemy) eventChannel.OnEnemyDeath.Invoke(instanceId, points);
+            int points = (int)(GetDeathPoints(isDamageByPlayer) * GameUtils.GetPointsMod());
+            eventChannel.OnEnemyDeath.Invoke(instanceId, points, isCountableEnemy);
             if (rb != null) rb.drag = originalDrag; // to make it seem like it was there all along
             if (damageType != DamageType.InstakillQuiet) {
                 deathSound.Play();
                 pickups.Spawn(transform.position, rb);
                 SpawnPointsToast(points);
             }
+            foreach (var actor in killOtherObjects) actor.TakeDamage(1000f, DamageType.Instakill);
             StartCoroutine(DeathAnimation());
         }
 

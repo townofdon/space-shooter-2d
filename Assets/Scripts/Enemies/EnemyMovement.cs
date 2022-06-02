@@ -49,6 +49,7 @@ namespace Enemies
         MovementMode modePrev = MovementMode.Default;
         [Tooltip("Only applicable for MovementMode.MoveBetweenPoints")]
         [SerializeField] List<Transform> movePointLocations = new List<Transform>();
+        [SerializeField] float movePointThreshold = 0.25f;
         List<Vector3> movePoints = new List<Vector3>();
 
         [Header("Movement")]
@@ -325,8 +326,8 @@ namespace Enemies
                 targetPosition = moveTarget;
                 engineSound.Play();
                 agroSound.Stop();
-                if (Mathf.Abs(moveTarget.x - transform.position.x) < 0.25f) hasCrossed.x = true;
-                if (Mathf.Abs(moveTarget.y - transform.position.y) < 0.25f) hasCrossed.y = true;
+                if (Mathf.Abs(moveTarget.x - transform.position.x) < movePointThreshold) hasCrossed.x = true;
+                if (Mathf.Abs(moveTarget.y - transform.position.y) < movePointThreshold) hasCrossed.y = true;
                 if (hasCrossed.point) SetMoveTarget();
             } else {
                 SetMoveTarget();

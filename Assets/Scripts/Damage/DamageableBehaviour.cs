@@ -26,6 +26,8 @@ namespace Damage {
         [Space]
         [Tooltip("Probability that actor cheats death")]
         [SerializeField][Range(0f, 1f)] float savingThrow = 0f;
+        [SerializeField][Range(0f, 10f)] float savingThrowUseTime = 2f;
+        [SerializeField][Range(0f, 20f)] float savingThrowCooldownTime = 5f;
 
         [Header("Health Settings")][Space]
         [SerializeField] float _maxHealth = 50f;
@@ -72,8 +74,9 @@ namespace Damage {
         [SerializeField] System.Action _onShieldRechargeStart;
         [SerializeField] System.Action _onShieldRechargeComplete;
 
+        public delegate void DeathAction(DamageType damageType, bool isDamageByPlayer);
+        public event DeathAction OnDeathEvent;
         public delegate void DamageAction();
-        public event DamageAction OnDeathEvent;
         public event DamageAction OnShieldHitEvent;
         public event DamageAction OnShieldDepletedEvent;
 
@@ -91,6 +94,8 @@ namespace Damage {
         float _healthDamageThisFrame = 0f;
         float _shieldDamageThisFrame = 0f;
         Timer _spawnInvulnerable = new Timer();
+        Timer _savingThrowUse = new Timer();
+        Timer _savingThrowCooldown = new Timer();
 
         float _prevShield = 0f;
         float _timeShieldHit = 0f;
@@ -129,6 +134,8 @@ namespace Damage {
             _timeShieldHit = Mathf.Clamp(_timeShieldHit - Time.deltaTime / _shieldWaitTime, 0f, _shieldWaitTime);
             _nukeHit.Tick();
             _spawnInvulnerable.Tick();
+            _savingThrowUse.Tick();
+            _savingThrowCooldown.Tick();
 
             if (!hasShieldCapability) return;
 
@@ -174,6 +181,11 @@ namespace Damage {
             _timeHit = 0f;
             _spawnInvulnerable.SetDuration(_timeInvincibleAfterSpawn);
             _spawnInvulnerable.Start();
+            _savingThrowUse.SetOnEnd(OnEndSavingThrowUse);
+        }
+
+        void OnEndSavingThrowUse(float value) {
+            _savingThrowCooldown.Start();
         }
 
         protected void SetColliders() {
@@ -285,15 +297,20 @@ namespace Damage {
             _prevShield = _shield;
 
             if (_health <= 0f) {
-                if (savingThrow > Mathf.Epsilon && UnityEngine.Random.Range(0f, 1f) <= savingThrow) {
-                    _health = _maxHealth * 0.05f;
-                    return true;
-                }
-
-                // if about to die from collision - give one last save
-                if (savingThrow > Mathf.Epsilon && damageType == DamageType.Collision && UnityEngine.Random.Range(0f, 1f) <= savingThrow) {
-                    _health = _maxHealth * 0.05f;
-                    return true;
+                if (savingThrow > Mathf.Epsilon && !_savingThrowCooldown.active) {
+                    if (!_savingThrowUse.active) {
+                        _savingThrowCooldown.SetDuration(savingThrowCooldownTime);
+                        _savingThrowUse.SetDuration(savingThrowUseTime);
+                        _savingThrowUse.Start();
+                    }
+                    if (UnityEngine.Random.Range(0f, 1f) <= savingThrow) {
+                        _health = _maxHealth * 0.05f;
+                        return true;
+                    }
+                    if (damageType == DamageType.Collision && UnityEngine.Random.Range(0f, 1f) <= savingThrow) {
+                        _health = _maxHealth * 0.05f;
+                        return true;
+                    }
                 }
 
                 if (_isAlive) _Die(damageType, isDamageByPlayer);
@@ -320,7 +337,7 @@ namespace Damage {
             _DisableColliders();
             InvokeCallback(_onDeath, damageType, isDamageByPlayer);
             if (_destroyOnDeath) Destroy(gameObject);
-            if (OnDeathEvent != null) OnDeathEvent();
+            if (OnDeathEvent != null) OnDeathEvent(damageType, isDamageByPlayer);
         }
 
         private void _EnableColliders() {

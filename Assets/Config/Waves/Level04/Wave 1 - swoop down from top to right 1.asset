@@ -16,23 +16,31 @@ MonoBehaviour:
   - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 126420704229484714, guid: 5c57ca68260882d45bac8bbc24321c84, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 2
   _spawnInterval: 0.5
   _spawnTimeVariance: 0.45
   _minSpawnInterval: 0.5
+  _numLoops: 1
+  _loopInterval: 0
   _spawnLocation: N-8-2
   _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 0
   launchHeading: {x: 0, y: 0}
   headingVariance: 0
   launchVelocity: 0
@@ -42,4 +50,6 @@ MonoBehaviour:
   _pathfinderLoopMode: 0
   _flipX: 0
   _flipY: 0
+  _maxPathLoops: 99
   _initialState: {fileID: 0}
+  notes: 

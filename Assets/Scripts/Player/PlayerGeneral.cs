@@ -156,18 +156,18 @@ namespace Player {
                 // ignore - can go through mines
                 return;
             }
-            DamageReceiver actor = other.GetComponent<DamageReceiver>();
-            if (actor == null) return;
-            if (actor.rigidbody == null || !actor.rigidbody.simulated) return;
-            if (!actor.canCollide) return;
-            float selfMagnitude = rb.velocity.magnitude;
-            float otherMagnitude = actor.rigidbody.isKinematic ? 1f : actor.rigidbody.velocity.magnitude;
-            float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
-            float collisionMagnitude = (otherMagnitude + rb.velocity.magnitude);
-            actor.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision, true);
-            this.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision);
-            Vector2 forceToOther = this.rb.velocity * this.rb.mass;
-            Vector2 forceToSelf = actor.rigidbody.velocity * actor.rigidbody.mass;
+            // DamageReceiver actor = other.GetComponent<DamageReceiver>();
+            // if (actor == null) return;
+            // if (actor.rigidbody == null || !actor.rigidbody.simulated) return;
+            // if (!actor.canCollide) return;
+            // float selfMagnitude = rb.velocity.magnitude;
+            // float otherMagnitude = actor.rigidbody.isKinematic ? 1f : actor.rigidbody.velocity.magnitude;
+            // float collisionDamage = GameManager.current.GetDamageClass(DamageType.Collision).baseDamage;
+            // float collisionMagnitude = (otherMagnitude + rb.velocity.magnitude);
+            // actor.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision, true);
+            // this.TakeDamage(collisionDamage * collisionMagnitude, DamageType.Collision);
+            // Vector2 forceToOther = this.rb.velocity * this.rb.mass;
+            // Vector2 forceToSelf = actor.rigidbody.velocity * actor.rigidbody.mass;
             // // move the rigidbodies away from each other
             // this.rb.velocity         = (transform.position - actor.rigidbody.transform.position).normalized * collideThrowback;
             // if (!actor.rigidbody.isKinematic) actor.rigidbody.velocity = -rb.velocity;

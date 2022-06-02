@@ -16,43 +16,43 @@ MonoBehaviour:
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
     _spawnLocation: N-2-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 3
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: N-6-0
+    _spawnLocation: N-4-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 2
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: N-10-0
+    _spawnLocation: N-8-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: N-14-0
+    _spawnLocation: N-12-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: N-18-0
+    _spawnLocation: N-16-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: N-22-0
+    _spawnLocation: N-20-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 3
   _spawnInterval: 0.3
   _spawnTimeVariance: 0.03
   _minSpawnInterval: 0.1
-  _numLoops: 1
-  _loopInterval: 2
+  _numLoops: 5
+  _loopInterval: 0.3
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
-  _spawnDifficulty: 3
+  _spawnDifficulty: 1
   launchHeading: {x: 0, y: -1}
   headingVariance: 35
   launchVelocity: 4
   velocityVariance: 0.6
   aimTowardsPlayer: 0.12
-  _path: {fileID: 1827874083109662934, guid: 025ccde33f5602e4f97a674661668a1b, type: 3}
+  _path: {fileID: 7086845617908564267, guid: a9bdde9589b8b7d40bc592d5eef84331, type: 3}
   _pathfinderLoopMode: 2
-  _flipX: 1
+  _flipX: 0
   _flipY: 0
   _maxPathLoops: 99
   _initialState: {fileID: 0}

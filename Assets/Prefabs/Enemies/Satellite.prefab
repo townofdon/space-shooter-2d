@@ -81,6 +81,8 @@ MonoBehaviour:
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
   savingThrow: 0
+  savingThrowUseTime: 2
+  savingThrowCooldownTime: 5
   _maxHealth: 25
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -103,9 +105,14 @@ MonoBehaviour:
   secondaryDamageSpriteTargets: []
   perishableObjects: []
   isBoss: 0
+  isCountableEnemy: 1
   ship: {fileID: 7531810961871352895}
   explosion: {fileID: 1752549996284259072, guid: 5e1cfffde8f784b47bb66d14cb21163b, type: 3}
+  explosion2: {fileID: 0}
   otherDeathFX: {fileID: 0}
+  deathContainer: {fileID: 0}
+  destroyedShip: {fileID: 0}
+  killOtherObjects: []
   damageSound:
     soundName: 
     volume: 0.7
@@ -120,6 +127,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
   deathSound:
@@ -136,6 +145,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.073
     pitchVariance: 0.3
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
     - {fileID: 8300000, guid: 9110c62ef46cad44db77ae0b96721dbf, type: 3}
@@ -144,9 +155,12 @@ MonoBehaviour:
     - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
     oneShot: 1
   pickups:
-    pickups: []
-  pointsWhenKilledByPlayer: 0
-  pointsWhenWoundedByPlayer: 0
+    pickups:
+    - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
+      numItemsToSpawn: 3
+      spawnLikelihood: 0.7
+  pointsWhenKilledByPlayer: 10
+  pointsWhenWoundedByPlayer: 5
   pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &7531810961699429519
@@ -195,6 +209,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 67d51dc4185a91d44ad731dfb70308d8, type: 3}
     oneShot: 1
@@ -420,6 +436,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7531810962748957901}
   - component: {fileID: 7531810962748957900}
+  - component: {fileID: 2510662059531157436}
+  - component: {fileID: 7433610709557940021}
   m_Layer: 0
   m_Name: circle
   m_TagString: Untagged
@@ -457,7 +475,46 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
+  m_Radius: 0.45
+--- !u!114 &2510662059531157436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531810962748957898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7433610709557940021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531810962748957898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  baseDamageMultiplier: 0.2
+  isDamageByPlayer: 0
+  dieOnPlayerCollision: 0
+  collisionForceMod: 1
+  preferCirclecast: 0
+  raycast: 0
+  minSafeDistance: 2
+  ignoreParentUUID: 1
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ignoreTag: 
+  ignoreColliders: []
+  ignoreProjectiles: 0
 --- !u!1 &7531810963193313249
 GameObject:
   m_ObjectHideFlags: 0

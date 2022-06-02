@@ -259,6 +259,7 @@ MonoBehaviour:
     volumeVariance: 0.115
     pitchVariance: 0.05
     delayVariance: 0.007
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: d05bad851ad028d4096f358e1dae93e8, type: 3}
     oneShot: 1
@@ -276,6 +277,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 055a5ee0ca59f2c4f9bbe8ba438bb790, type: 3}
     oneShot: 1
@@ -293,6 +295,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.05
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: b47d95d26e92bad4398c56c4c9643500, type: 3}
     oneShot: 0
@@ -310,6 +313,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.05
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 04df1df86873cd04eaab103037477873, type: 3}
     - {fileID: 8300000, guid: f805d8fafcf289d4a89ff50837b324e1, type: 3}
@@ -328,6 +332,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.05
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 6f2f12c88f4479944a4c2a253b0832e7, type: 3}
     oneShot: 0
@@ -345,6 +350,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.05
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 7b15c4d77618cc94baa850f5ef3e0bf1, type: 3}
     oneShot: 0
@@ -362,6 +368,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.05
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 467ac5290c8b7ee4687d9c140bd6f140, type: 3}
     oneShot: 0
@@ -379,6 +386,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.05
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 54503a8411277d34d9938feee1694bb9, type: 3}
     oneShot: 0
@@ -396,6 +404,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.05
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 74742596661baf742a8c7d254db08635, type: 3}
     oneShot: 0
@@ -413,6 +422,7 @@ MonoBehaviour:
     volumeVariance: 0.05
     pitchVariance: 0.05
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 716ddc1a95d33ae41b17b49121f15f69, type: 3}
     oneShot: 0
@@ -551,7 +561,7 @@ MonoBehaviour:
     fadeInTime: 0
     fadeOutTime: 0
   - soundName: badass-boss-theme
-    volume: 0.9
+    volume: 1
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
@@ -563,9 +573,9 @@ MonoBehaviour:
     dopplerLevel: 0
     bpm: 150
     beatsPerBar: 4
-    loops: 0
-    clipIntro: {fileID: 8300000, guid: 9cbeab204c965b24c8a992f64963b6ab, type: 3}
-    clipLoop: {fileID: 8300000, guid: 299d0fe83d8fe0543864c24a661b3d3d, type: 3}
+    loops: 1
+    clipIntro: {fileID: 8300000, guid: e47116f1c3be49e4ba8cef5b80d8e3ca, type: 3}
+    clipLoop: {fileID: 8300000, guid: c07b58ffbdb6e5b4daa9811ddcfb9485, type: 3}
     clipOutro: {fileID: 0}
     fadeInTime: 0
     fadeOutTime: 0
@@ -603,6 +613,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 74742596661baf742a8c7d254db08635, type: 3}
     oneShot: 1

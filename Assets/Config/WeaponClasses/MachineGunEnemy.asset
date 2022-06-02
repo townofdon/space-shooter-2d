@@ -30,6 +30,7 @@ MonoBehaviour:
     volumeVariance: 0.053
     pitchVariance: 0.046
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 6bfbff222fd7a994ea5a202a55f4463a, type: 3}
     oneShot: 1
@@ -65,11 +66,12 @@ MonoBehaviour:
     volumeVariance: 0
     pitchVariance: 0
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: c74509568c2031340ae3cb9fe11e5458, type: 3}
     oneShot: 0
   baseSettings:
-    _assetClass: Raptor I
+    _assetClass: XYCRATH I
     _damageMultiplier: 1
     _startingAmmo: 50
     _infiniteAmmo: 1
@@ -139,6 +141,80 @@ MonoBehaviour:
       volumeVariance: 0
       pitchVariance: 0
       delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 0
-  upgrades: []
+  upgrades:
+  - _assetClass: XYCRATH II
+    _damageMultiplier: 2
+    _startingAmmo: 50
+    _infiniteAmmo: 1
+    _cycles: 1
+    _reloads: 0
+    _reloadTime: 1.5
+    _magazineCapacity: 50
+    _firingRate: 0.05
+    _burstMax: 0
+    _burstInterval: 0.05
+    _overheats: 1
+    _overheatTime: 0.6
+    _cooldownTime: 0.6
+    _deploymentTime: 0.5
+    _launchForce: 0
+    _recoil: 1
+    _hasPerfectAccuracy: 0
+    _accuracyAngle: 2
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -0.9952698
+        inSlope: 6.023456
+        outSlope: 6.023456
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.075
+      - serializedVersion: 3
+        time: 0.5
+        value: 0
+        inSlope: 0.0013732786
+        outSlope: 0.0013732786
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.43751827
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 6.2744293
+        outSlope: 6.2744293
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.07500005
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _prefab: {fileID: 2432083304113231777, guid: 032bfdac110164949843ee5096f3609d, type: 3}
+    _shieldDrain: 0
+    _cost: 0
+    _reloadSound:
+      soundName: 
+      volume: 0
+      pitch: 0.1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 0
+      spread: 0
+      minFalloffDistance: 1
+      maxFalloffDistance: 5
+      dopplerLevel: 1
+      volumeVariance: 0
+      pitchVariance: 0
+      delayVariance: 0
+      courseDelayVariance: 0
+      clips: []
+      oneShot: 0

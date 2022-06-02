@@ -30,6 +30,7 @@ MonoBehaviour:
     volumeVariance: 0.151
     pitchVariance: 0.262
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: d00a2e02396e7784d8b6c97526ac0121, type: 3}
     oneShot: 1
@@ -65,6 +66,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
   baseSettings:
@@ -129,6 +131,7 @@ MonoBehaviour:
       volumeVariance: 0.1
       pitchVariance: 0.1
       delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   upgrades:
@@ -175,7 +178,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
+    _prefab: {fileID: 7392478082547423535, guid: 63ff2acdab5a6a74cb9d74d8c82823c2, type: 3}
     _shieldDrain: 0
     _cost: 250
     _reloadSound:
@@ -193,6 +196,7 @@ MonoBehaviour:
       volumeVariance: 0.1
       pitchVariance: 0.1
       delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   - _assetClass: TOMCAT III
@@ -238,7 +242,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _prefab: {fileID: 1916144924080233305, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
+    _prefab: {fileID: 7392478082547423535, guid: 63ff2acdab5a6a74cb9d74d8c82823c2, type: 3}
     _shieldDrain: 0
     _cost: 800
     _reloadSound:
@@ -256,12 +260,13 @@ MonoBehaviour:
       volumeVariance: 0.1
       pitchVariance: 0.1
       delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   - _assetClass: HELLCAT IV
     _damageMultiplier: 2
     _startingAmmo: 100
-    _infiniteAmmo: 1
+    _infiniteAmmo: 0
     _cycles: 0
     _reloads: 1
     _reloadTime: 0
@@ -301,7 +306,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _prefab: {fileID: 1916144924080233305, guid: a839058848a2112428e388b4bf67c001, type: 3}
+    _prefab: {fileID: 2596185426148434120, guid: 2064ea5281a04e44bad1652272e2675a, type: 3}
     _shieldDrain: 0
     _cost: 4200
     _reloadSound:
@@ -319,5 +324,70 @@ MonoBehaviour:
       volumeVariance: 0.1
       pitchVariance: 0.1
       delayVariance: 0
+      courseDelayVariance: 0
+      clips: []
+      oneShot: 1
+  - _assetClass: TIBERIUS X
+    _damageMultiplier: 3
+    _startingAmmo: 100
+    _infiniteAmmo: 0
+    _cycles: 0
+    _reloads: 1
+    _reloadTime: 0
+    _magazineCapacity: 2
+    _firingRate: 0.15
+    _burstMax: 0
+    _burstInterval: 0
+    _overheats: 0
+    _overheatTime: 0
+    _cooldownTime: 0
+    _deploymentTime: 0.2
+    _launchForce: 30
+    _recoil: 3
+    _hasPerfectAccuracy: 1
+    _accuracyAngle: 0
+    _accuracyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _prefab: {fileID: 6423826789097462982, guid: 8d8d3f9c0b3e1df4398b1664b351eeb8, type: 3}
+    _shieldDrain: 0
+    _cost: 6550
+    _reloadSound:
+      soundName: 
+      volume: 0.7
+      pitch: 1
+      ignoreListenerPause: 0
+      realtimeEditorInspect: 0
+      mixerGroup: {fileID: 0}
+      spatialBlend: 1
+      spread: 180
+      minFalloffDistance: 20
+      maxFalloffDistance: 40
+      dopplerLevel: 1
+      volumeVariance: 0.1
+      pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1

@@ -36,7 +36,7 @@ MonoBehaviour:
   _spawnInterval: 0
   _spawnTimeVariance: 0.1
   _minSpawnInterval: 0
-  _numLoops: 3
+  _numLoops: 2
   _loopInterval: 0.8
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}

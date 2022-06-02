@@ -11,7 +11,7 @@ namespace Event {
     public delegate void FloatEvent(float value);
     public delegate void BoolEvent(bool value);
     // enemy-specific
-    public delegate void EnemyDeathEvent(int instanceId, int points);
+    public delegate void EnemyDeathEvent(int instanceId, int points, bool isCountableEnemy = true);
     public delegate void BossSpawnEvent(int instanceId);
     // weapon-specific
     public delegate void WeaponAmmoEvent(WeaponType weaponType, int value);
@@ -52,7 +52,7 @@ namespace Event {
         event EnemyDeathEvent ev;
         public void Subscribe(EnemyDeathEvent action) { ev += action; }
         public void Unsubscribe(EnemyDeathEvent action) { ev -= action; }
-        public void Invoke(int instanceId, int points) { if (ev != null) ev.Invoke(instanceId, points); }
+        public void Invoke(int instanceId, int points, bool isCountableEnemy = true) { if (ev != null) ev.Invoke(instanceId, points, isCountableEnemy); }
     }
 
     public class BossSpawnEventHandler {

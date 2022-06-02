@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 4642657472974251940}
   - component: {fileID: 2649445964044771836}
   - component: {fileID: 1628712030688983979}
+  - component: {fileID: 755431904249907890}
   m_Layer: 9
   m_Name: Mine 0
   m_TagString: Mine
@@ -276,6 +277,9 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0.2
+  savingThrow: 0
+  savingThrowUseTime: 2
+  savingThrowCooldownTime: 5
   _maxHealth: 1
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -356,6 +360,8 @@ MonoBehaviour:
     dopplerLevel: 0
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 6bfbff222fd7a994ea5a202a55f4463a, type: 3}
     oneShot: 1
@@ -427,6 +433,22 @@ MonoBehaviour:
   showSouth: 0
   showEast: 1
   showWest: 1
+--- !u!114 &755431904249907890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4642657472974251929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d46d8a95e3ffd948ac96ab9b52a5d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsWhenKilledByPlayer: 5
+  pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
+  showPointsToast: 1
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!1 &7225357374370844391
 GameObject:
   m_ObjectHideFlags: 0

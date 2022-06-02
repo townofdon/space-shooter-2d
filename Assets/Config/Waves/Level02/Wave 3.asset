@@ -14,28 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemies:
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: E-18-0
+    _spawnLocation: N-24-0
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 2
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: E-14-0
+    _spawnLocation: N-21-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: E-10-0
+    _spawnLocation: N-18-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: E-6-0
+    _spawnLocation: N-15-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 6971141013995441017, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
-    _spawnLocation: E-2-0
+    _spawnLocation: E-12-0
     _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnDifficulty: 2
   _spawnInterval: 0.5
   _spawnTimeVariance: 0.18
   _minSpawnInterval: 0.2
+  _numLoops: 1
+  _loopInterval: 0
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
   _spawnDifficulty: 0
@@ -44,8 +46,8 @@ MonoBehaviour:
   launchVelocity: 3
   velocityVariance: 0
   aimTowardsPlayer: 0
-  _path: {fileID: 6846659157912656610, guid: d8d4bc1f88a57e74b9e18d9900431698, type: 3}
-  _pathfinderLoopMode: 0
+  _path: {fileID: 7689315957036747489, guid: 270f6d1c9c1c4c74b91b00c57ff111ca, type: 3}
+  _pathfinderLoopMode: 2
   _flipX: 1
   _flipY: 0
   _maxPathLoops: 2

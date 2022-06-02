@@ -250,7 +250,7 @@ namespace Game {
             playerState.GainMoney((int)value);
         }
 
-        void OnEnemyDeath(int instanceId, int points) {
+        void OnEnemyDeath(int instanceId, int points, bool isCountableEnemy = true) {
             gameState.IncrementEnemiesKilled();
             gameState.GainPoints(points);
         }

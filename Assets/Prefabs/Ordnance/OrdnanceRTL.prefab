@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 783937458869655120}
   - component: {fileID: 783937458869655121}
   - component: {fileID: 783937458869655134}
+  - component: {fileID: 640750458336092346}
   m_Layer: 0
   m_Name: OrdnanceRTL
   m_TagString: Ordnance
@@ -35,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 783937458923777815}
   - {fileID: 783937460074139872}
+  - {fileID: 8438310888888434735}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58,7 +60,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &783937458869655123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +77,9 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
+  savingThrow: 0
+  savingThrowUseTime: 2
+  savingThrowCooldownTime: 5
   _maxHealth: 1
   _hitRecoveryTime: 0.2
   _nukeRecoveryTime: 0.4
@@ -109,6 +114,7 @@ MonoBehaviour:
     spread: 273
     minFalloffDistance: 2
     maxFalloffDistance: 20
+    dopplerLevel: 1
     pitchVariance: 0.05
     clipHead: {fileID: 0}
     clipLoop: {fileID: 8300000, guid: 71ce22d432d27ff4fb5f2782eded8dd2, type: 3}
@@ -125,8 +131,11 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
     oneShot: 1
@@ -149,10 +158,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   movePointLocations: []
+  movePointThreshold: 0.25
   debug: 0
   turnSpeed: 5
   moveSpeed: 10
   accel: 20
+  initMoveBetweenPoints: 0
   jukes: 0
   jukeTargetedTime: 0
   jukeTargetedVariance: 0
@@ -186,6 +197,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
@@ -202,6 +214,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
+    dopplerLevel: 1
     pitchVariance: 0
     clipHead: {fileID: 0}
     clipLoop: {fileID: 0}
@@ -227,6 +240,7 @@ MonoBehaviour:
   path: {fileID: 6846659157912656610, guid: 9b876d0f187506b46b24f390fbdc894a, type: 3}
   flipX: 1
   flipY: 0
+  maxPathLoops: 99
 --- !u!114 &783937458869655134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +253,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &640750458336092346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783937458869655135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d46d8a95e3ffd948ac96ab9b52a5d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsWhenKilledByPlayer: 10
+  pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
+  showPointsToast: 1
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!1 &783937458923777813
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +365,7 @@ GameObject:
   - component: {fileID: 783937460074139874}
   - component: {fileID: 783937460074139875}
   m_Layer: 0
-  m_Name: collider
+  m_Name: trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,3 +414,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6215865741299167098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8438310888888434735}
+  - component: {fileID: 6019852354855233830}
+  - component: {fileID: 6445068867384444933}
+  - component: {fileID: 5820694581702576108}
+  m_Layer: 0
+  m_Name: collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8438310888888434735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215865741299167098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 783937458869655125}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &6019852354855233830
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215865741299167098}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &6445068867384444933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215865741299167098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5820694581702576108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215865741299167098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  baseDamageMultiplier: 0.05
+  isDamageByPlayer: 0
+  dieOnPlayerCollision: 1
+  collisionForceMod: 1
+  preferCirclecast: 0
+  raycast: 0
+  minSafeDistance: 2
+  ignoreParentUUID: 1
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ignoreTag: 
+  ignoreColliders: []
+  ignoreProjectiles: 0

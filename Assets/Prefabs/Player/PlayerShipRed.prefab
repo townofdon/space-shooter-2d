@@ -5028,6 +5028,8 @@ MonoBehaviour:
   damageType: 6
   baseDamageMultiplier: 1
   isDamageByPlayer: 1
+  dieOnPlayerCollision: 0
+  collisionForceMod: 1
   preferCirclecast: 1
   raycast: 0
   minSafeDistance: 10
@@ -5038,6 +5040,7 @@ MonoBehaviour:
   ignoreTag: Player
   ignoreColliders:
   - {fileID: 5316389521978419157}
+  ignoreProjectiles: 0
 --- !u!1 &570598339
 GameObject:
   m_ObjectHideFlags: 0
@@ -36442,7 +36445,7 @@ Rigidbody2D:
   m_LinearDrag: 2.92
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a5d214d688cee2f4e8e3cf33f75e61b4, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -36541,6 +36544,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.229
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
     - {fileID: 8300000, guid: 9110c62ef46cad44db77ae0b96721dbf, type: 3}
@@ -36563,6 +36567,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 7506493630befce48b1ad9e57294c46a, type: 3}
     - {fileID: 8300000, guid: bf7c6c85221cb3441b871bd5170a0307, type: 3}
@@ -36599,6 +36604,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 67d51dc4185a91d44ad731dfb70308d8, type: 3}
     oneShot: 0
@@ -36634,6 +36640,7 @@ MonoBehaviour:
     volumeVariance: 0
     pitchVariance: 0
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: c7887879df4ee1647b0616c157e63c14, type: 3}
     oneShot: 0
@@ -36715,6 +36722,7 @@ MonoBehaviour:
     volumeVariance: 0.07
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: c60a864f7c9ba2247ba3c002f4d1fb70, type: 3}
     oneShot: 0
@@ -36771,6 +36779,7 @@ MonoBehaviour:
     volumeVariance: 0.113
     pitchVariance: 0.214
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 75bd53d41261cc34f8bca164fb522b72, type: 3}
     oneShot: 0
@@ -36789,6 +36798,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.022
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 30e32a0be02fd4541abaaf79fd097cac, type: 3}
     oneShot: 0
@@ -36807,6 +36817,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: e7d24c5074ff36149be35f614dd991aa, type: 3}
     oneShot: 1
@@ -36825,6 +36836,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.03
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 6c879a32c4ccd6449975eb9354e53a08, type: 3}
     oneShot: 0
@@ -43500,7 +43512,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9063816284739448290}
   - component: {fileID: 7491358581505251025}
+  - component: {fileID: 6527395810092275414}
   - component: {fileID: 4449883374324643654}
+  - component: {fileID: 442629457467042684}
   m_Layer: 7
   m_Name: Collider
   m_TagString: Player
@@ -43530,15 +43544,31 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7499296936792533789}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.03}
+  m_Offset: {x: 0, y: 0.04}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.46
+--- !u!70 &6527395810092275414
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499296936792533789}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a5d214d688cee2f4e8e3cf33f75e61b4, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.07}
+  m_Size: {x: 1.01, y: 0.9}
+  m_Direction: 1
 --- !u!114 &4449883374324643654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43551,6 +43581,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &442629457467042684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499296936792533789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  baseDamageMultiplier: 1
+  isDamageByPlayer: 1
+  dieOnPlayerCollision: 0
+  collisionForceMod: 1
+  preferCirclecast: 0
+  raycast: 0
+  minSafeDistance: 2
+  ignoreParentUUID: 1
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ignoreTag: 
+  ignoreColliders: []
+  ignoreProjectiles: 0
 --- !u!1 &7818966363607592163
 GameObject:
   m_ObjectHideFlags: 0

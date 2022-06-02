@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5484847743466961028}
   - component: {fileID: -9176195106732576791}
   m_Layer: 9
-  m_Name: Bullet Enemy
+  m_Name: Bullet Enemy 0
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916144924080233305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.177, y: -0.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 0.71, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52,7 +52,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.16963053, y: 0.7467263}
+  m_Size: {x: 0.12222749, y: 1.2474433}
   m_Direction: 0
 --- !u!50 &8661837291738327277
 Rigidbody2D:
@@ -189,6 +189,8 @@ MonoBehaviour:
   damageType: 4
   baseDamageMultiplier: 1
   isDamageByPlayer: 0
+  dieOnPlayerCollision: 0
+  collisionForceMod: 1
   preferCirclecast: 0
   raycast: 0
   minSafeDistance: 2
@@ -198,6 +200,7 @@ MonoBehaviour:
     m_Bits: 96
   ignoreTag: 
   ignoreColliders: []
+  ignoreProjectiles: 0
 --- !u!114 &5484847743466961028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +244,7 @@ MonoBehaviour:
     volumeVariance: 0.288
     pitchVariance: 0.055
     delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
   thrustSound:
@@ -275,6 +279,7 @@ MonoBehaviour:
     volumeVariance: 0.167
     pitchVariance: 0.336
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: c7dc102d17e050b4696d09d35fa2cf3b, type: 3}
     - {fileID: 8300000, guid: c66d9363eb3afe640b2734340aeb973f, type: 3}
@@ -294,6 +299,7 @@ MonoBehaviour:
     volumeVariance: 0.164
     pitchVariance: 0.5
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 5e0706d2652922b4c9829e4ac9c80ad2, type: 3}
     oneShot: 1
@@ -312,6 +318,7 @@ MonoBehaviour:
     volumeVariance: 0.122
     pitchVariance: 0.425
     delayVariance: 0.0233
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: f46d122e4b61ba344ad5fd5248018d86, type: 3}
     - {fileID: 8300000, guid: 1b2c1f6a139f49b41b68de88048dec86, type: 3}
@@ -337,6 +344,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
 --- !u!114 &-9176195106732576791
@@ -346,7 +354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916144924080233305}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffab1a11c0b258344b92c0ccfb769d2b, type: 3}
   m_Name: 

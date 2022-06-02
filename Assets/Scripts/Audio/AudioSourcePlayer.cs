@@ -1,9 +1,7 @@
 
 using UnityEngine;
-using UnityEngine.Audio;
 
 namespace Audio {
-
 
     public class AudioSourcePlayer : MonoBehaviour {
         [SerializeField] bool playOnAwake = true;
@@ -14,6 +12,10 @@ namespace Audio {
             if (!playOnAwake) return;
             sound.Init(this, null, source);
             sound.Stop();
+        }
+
+        void Start() {
+            if (!playOnAwake) return;
             sound.Play();
         }
     }

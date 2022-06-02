@@ -10,47 +10,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
-  m_Name: Wave 5 - supplement from left
+  m_Name: Wave 5 - supplement from left 0
   m_EditorClassIdentifier: 
   _enemies:
   - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
-    _spawnLocation: W-0-5
-    _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnLocation: W-6-5
+    _spawnOffset: {x: 0, y: -2}
+    _spawnDifficulty: 3
   - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
-    _spawnLocation: W-2-5
-    _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnLocation: W-8-5
+    _spawnOffset: {x: 0, y: -2}
+    _spawnDifficulty: 2
   - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
-    _spawnLocation: W-4-5
-    _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnLocation: W-10-5
+    _spawnOffset: {x: 0, y: -2}
+    _spawnDifficulty: 1
   - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
     _spawnLocation: W-12-5
-    _spawnOffset: {x: 0, y: 0}
+    _spawnOffset: {x: 0, y: -2}
     _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
     _spawnLocation: W-14-5
-    _spawnOffset: {x: 0, y: 0}
+    _spawnOffset: {x: 0, y: -2}
     _spawnDifficulty: 0
   - _enemyPrefab: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
     _spawnLocation: W-16-5
-    _spawnOffset: {x: 0, y: 0}
-    _spawnDifficulty: 0
+    _spawnOffset: {x: 0, y: -2}
+    _spawnDifficulty: 3
   _spawnInterval: 0.5
   _spawnTimeVariance: 0.45
-  _minSpawnInterval: 0
+  _minSpawnInterval: 0.2
+  _numLoops: 3
+  _loopInterval: 0.5
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
   _spawnDifficulty: 0
   launchHeading: {x: 1, y: 0}
   headingVariance: 3
-  launchVelocity: 4.8
-  velocityVariance: 0
-  aimTowardsPlayer: 0
+  launchVelocity: 4.2
+  velocityVariance: 0.58
+  aimTowardsPlayer: 0.135
   _path: {fileID: 8622307038240250050, guid: 69b745a7e1067da479cbc9cedb17e748, type: 3}
-  _pathfinderLoopMode: 0
+  _pathfinderLoopMode: 2
   _flipX: 0
   _flipY: 0
+  _maxPathLoops: 99
   _initialState: {fileID: 0}
   notes: 

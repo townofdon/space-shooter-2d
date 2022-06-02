@@ -1,5 +1,94 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6810862687824707760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4908066144547838457}
+  - component: {fileID: 8163587626209098152}
+  - component: {fileID: 3128270409723295512}
+  - component: {fileID: 2458133476798553165}
+  m_Layer: 10
+  m_Name: capsule-collider
+  m_TagString: Boss
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4908066144547838457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810862687824707760}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7867457985288966932}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &8163587626209098152
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810862687824707760}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a5d214d688cee2f4e8e3cf33f75e61b4, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.04}
+  m_Size: {x: 2.74, y: 1.88}
+  m_Direction: 1
+--- !u!114 &3128270409723295512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810862687824707760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b64d1327f76bbf4a88ad8074af53650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2458133476798553165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810862687824707760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  baseDamageMultiplier: 2
+  isDamageByPlayer: 0
+  dieOnPlayerCollision: 0
+  collisionForceMod: 1
+  preferCirclecast: 0
+  raycast: 0
+  minSafeDistance: 2
+  ignoreParentUUID: 1
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 1536
+  ignoreTag: 
+  ignoreColliders: []
+  ignoreProjectiles: 0
 --- !u!1 &7867457984719611383
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +275,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7867457985064241831}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1531ab9c760144940b25b0a9d4c97f7e, type: 3}
   m_Name: 
@@ -194,6 +283,7 @@ MonoBehaviour:
   damageType: 1
   baseDamageMultiplier: 2
   isDamageByPlayer: 0
+  dieOnPlayerCollision: 0
   collisionForceMod: 1
   preferCirclecast: 0
   raycast: 0
@@ -204,6 +294,7 @@ MonoBehaviour:
     m_Bits: 1536
   ignoreTag: 
   ignoreColliders: []
+  ignoreProjectiles: 0
 --- !u!1 &7867457985288966935
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +324,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7867457985064241828}
+  - {fileID: 4908066144547838457}
   m_Father: {fileID: 7867457984961899812}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -959,11 +1051,11 @@ Rigidbody2D:
   m_LinearDrag: 0.2
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a5d214d688cee2f4e8e3cf33f75e61b4, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7867457986422667115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1014,6 +1106,8 @@ MonoBehaviour:
   explosion: {fileID: 8618738012250842369, guid: 00c6a1d78ddfa7d4a87dcfb1c6d8d3ee, type: 3}
   explosion2: {fileID: 0}
   otherDeathFX: {fileID: 0}
+  deathContainer: {fileID: 0}
+  destroyedShip: {fileID: 0}
   damageSound:
     soundName: 
     volume: 0.7
@@ -1029,6 +1123,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
   deathSound:
@@ -1046,6 +1141,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0.0163
+    courseDelayVariance: 0
     clips: []
     oneShot: 0
   pickups:
@@ -1079,11 +1175,12 @@ MonoBehaviour:
   - {fileID: 8847485708950757198, guid: 207d23dc21894cf45bdf14dad9cef712, type: 3}
   - {fileID: 999392529896406421, guid: ad0783268f21bf94a82537a6196bfc65, type: 3}
   - {fileID: 6565790201233832973, guid: 53dc2ba56de50be4e902f39c80223b24, type: 3}
+  movePointThreshold: 2
   debug: 0
   turnSpeed: 4
   moveSpeed: 5
   accel: 500
-  initMoveBetweenPoints: 0
+  initMoveBetweenPoints: 1
   jukes: 0
   jukeTargetedTime: 0
   jukeTargetedVariance: 0
@@ -1163,6 +1260,7 @@ MonoBehaviour:
   - {fileID: 7867457986296282187}
   aimSpeed: 2
   maxAimAngle: 30
+  delayStart: 0
   triggerHoldTime: 0.1
   triggerReleaseTime: 1
   triggerTimeVariance: 0.05
@@ -1195,6 +1293,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
 --- !u!114 &7867457986422667110
@@ -1236,6 +1335,7 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.411
     delayVariance: 0.0212
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: a9755c879a79d274588307db81e28e31, type: 3}
     oneShot: 1

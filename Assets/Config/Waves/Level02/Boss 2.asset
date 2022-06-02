@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Boss 2
   m_EditorClassIdentifier: 
   _enemies:
-  - _enemyPrefab: {fileID: 5448723158378592738, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
+  - _enemyPrefab: {fileID: 2547327888903392632, guid: 0d66cd9573f1f484897bb963f49de6f2, type: 3}
     _spawnLocation: 
     _spawnOffset: {x: 0, y: 0}
     _spawnDifficulty: 0
   _spawnInterval: 2
   _spawnTimeVariance: 0.23
   _minSpawnInterval: 0.5
+  _numLoops: 1
+  _loopInterval: 0
   _spawnLocation: N-12-5
   _spawnOffset: {x: 0, y: 0}
   _spawnDifficulty: 0
@@ -32,5 +34,6 @@ MonoBehaviour:
   _pathfinderLoopMode: 0
   _flipX: 0
   _flipY: 0
+  _maxPathLoops: 99
   _initialState: {fileID: 0}
   notes: 

@@ -33,6 +33,9 @@ namespace Core
         bool _continuous = false;
         bool _turnedOn = true; // treat a timer with a duration of zero as turned off
 
+        // action callbacks
+        System.Action<float> _onEnd;
+
         public float value => _value;
         public float duration => _duration;
         public float timeLeft => active ? GetTimeLeft() : 0f;
@@ -42,6 +45,18 @@ namespace Core
         public bool continuous {
             get { return _continuous; }
             set { _continuous = value; }
+        }
+
+        public void SetOnEnd(System.Action<float> OnEnd) {
+            _onEnd = OnEnd;
+        }
+
+        public void TurnOn() {
+            _turnedOn = true;
+        }
+
+        public void TurnOff() {
+            _turnedOn = false;
         }
 
         public void SetDuration(float value) {
@@ -74,13 +89,14 @@ namespace Core
 
         public void Tick() {
             if (!_turnedOn) return;
-            if (_continuous && GetIsAtEnd()) {
-                Start();
+            if (GetIsAtEnd()) {
+                if (_continuous) Start();
                 return;
             }
             _value = _direction == TimerDirection.Increment
                 ? Mathf.Clamp(_value + GetStepValue(), 0f, 1f)
                 : Mathf.Clamp(_value - GetStepValue(), 0f, 1f);
+            if (GetIsAtEnd() && _onEnd != null) _onEnd(_value);
             if (float.IsNaN(_value)) End();
         }
 
