@@ -22,8 +22,12 @@ namespace Game {
         [Space]
         [SerializeField] float respawnWaitTime = 2f;
         [SerializeField] float winLevelWaitTime = 5f;
+        [SerializeField] int levelWonPoints = 10000;
         [SerializeField] EventChannelSO eventChannel;
         [SerializeField] GameStateSO gameState;
+        [SerializeField] LevelManager levelManager;
+        [SerializeField] ParticleSystem starfieldWarp;
+        [SerializeField] GameObject starBG;
 
         [Header("Player")]
         [Space]
@@ -75,6 +79,7 @@ namespace Game {
             timeElapsed = 0f;
             playerState.Init();
             gameState.ResetScores();
+            ResetWeaponUpgrades();
         }
 
         public void SetDifficulty(GameDifficulty difficulty) {
@@ -97,29 +102,48 @@ namespace Game {
             eventChannel.OnShowUpgradePanel.Invoke();
         }
 
-        public void GotoNextLevel(int skip = 0) {
+        public void GotoNextLevel() {
             OnUnpause();
             AudioManager.current.StopTrack();
             foreach (var weapon in _weaponClasses) weapon.SetToStartingAmmo();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + skip);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + skip);
+            HideWarpFX();
+            levelManager.GotoNextLevel();
+        }
+
+        public void GotoWarpScene() {
+            OnUnpause();
+            AudioManager.current.StopTrack();
+            ShowWarpFX();
+            levelManager.GotoWarpScene();
+        }
+
+        public void GotoUpgradeScene() {
+            OnUnpause();
+            AudioManager.current.StopTrack();
+            HideWarpFX();
+            levelManager.GotoUpgradeScene();
         }
 
         public void GotoMainMenu() {
             OnUnpause();
             NewGame();
-            ResetWeaponUpgrades();
             AudioManager.current.StopTrack();
-            SceneManager.LoadScene("MainMenu");
+            // SceneManager.LoadScene("MainMenu");
+            HideWarpFX();
+            levelManager.GotoMainMenu();
         }
 
         public void GotoLevelOne(bool skipToLevel2 = false) {
             OnUnpause();
             NewGame();
+            StartGameTimer();
             AudioManager.current.StopTrack();
+            HideWarpFX();
             if (difficulty == GameDifficulty.Insane || skipToLevel2) {
-                SceneManager.LoadScene("Level02");
+                levelManager.GotoLevelOne();
             } else {
-                SceneManager.LoadScene("Level01");
+                levelManager.GotoTutorialLevel();
             }
         }
 
@@ -259,6 +283,7 @@ namespace Game {
             AudioManager.current.StopTrack();
             AudioManager.current.CueTrack("win-theme");
             StopGameTimer();
+            gameState.GainPoints(levelWonPoints);
             gameState.StorePoints();
             if (ieWin != null) StopCoroutine(ieWin);
             ieWin = StartCoroutine(IWinLevel(showUpgradePanel));
@@ -296,6 +321,17 @@ namespace Game {
 
         void OnDismissDialogue() {
             // playerState.SetInputControlMode(PlayerInputControlMode.Player);
+        }
+
+        void ShowWarpFX() {
+            starfieldWarp.gameObject.SetActive(true);
+            starfieldWarp.Play();
+            starBG.SetActive(false);
+        }
+
+        void HideWarpFX() {
+            starfieldWarp.Stop();
+            starBG.SetActive(true);
         }
 
         void HandleRespawnPlayerShip(Transform respawnTarget) {
@@ -349,7 +385,8 @@ namespace Game {
             player.gameObject.SetActive(false);
 
             if (showUpgradePanel) {
-                ShowUpgradePanel();
+                // ShowUpgradePanel();
+                GotoWarpScene();
             } else {
                 GotoNextLevel();
             }

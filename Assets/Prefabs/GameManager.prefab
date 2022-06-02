@@ -246,7 +246,7 @@ MonoBehaviour:
   soundFXMix: {fileID: 0}
   sounds:
   - soundName: MenuFocus
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     ignoreListenerPause: 1
     realtimeEditorInspect: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
     maxFalloffDistance: 0
     dopplerLevel: 0
     volumeVariance: 0.115
-    pitchVariance: 0.05
+    pitchVariance: 0.016
     delayVariance: 0.007
     courseDelayVariance: 0
     clips:
@@ -751,6 +751,7 @@ Transform:
   - {fileID: 5676628042550478045}
   - {fileID: 6113766315020295640}
   - {fileID: 2087968193343601798}
+  - {fileID: 8464525908150690851}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -770,6 +771,9 @@ MonoBehaviour:
   winLevelWaitTime: 3.5
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   gameState: {fileID: 11400000, guid: 6a03aadd81bb63f4c9f0b480d72a1b9f, type: 2}
+  levelManager: {fileID: 2098540752521301338}
+  starfieldWarp: {fileID: 8265752215700292112}
+  starBG: {fileID: 5676628042550478034}
   playerState: {fileID: 11400000, guid: fa472ff00b3833642af6ce2e7f0e81da, type: 2}
   redShipPrefab: {fileID: 5316389521978419117, guid: 4e300754f9b9aae4e8cf3247ce696f79, type: 3}
   yellowShipPrefab: {fileID: 2910227084380551959, guid: f5ede4c94c87f0b4f9e359729bec80fb, type: 3}
@@ -893,6 +897,52 @@ MonoBehaviour:
   _inspectorBattleEventWait: {r: 0.040628344, g: 0.59967095, b: 0.7830189, a: 1}
   _inspectorBattleEventEvent: {r: 0.990566, g: 0.5898069, b: 0.014017418, a: 1}
   _inspectorBattleEventLabel: {r: 0.65599096, g: 0.631675, b: 0.8018868, a: 1}
+--- !u!1 &7815229041218004658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8464525908150690851}
+  - component: {fileID: 2098540752521301338}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8464525908150690851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815229041218004658}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3488655753409945414}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2098540752521301338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815229041218004658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde4143240a156c4681c991750d976ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 1
+  levelState: {fileID: 11400000, guid: c28df47b4476ec74589455036cc1735f, type: 2}
 --- !u!1 &8492617212075592221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,6 +1148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: {x: 0, y: 0.02}
+--- !u!1 &5676628042550478034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7061719783430060564, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+  m_PrefabInstance: {fileID: 3226595600951443142}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5676628042550478045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7061719783430060571, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
@@ -1236,6 +1291,10 @@ PrefabInstance:
     - target: {fileID: 4282575996372903412, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
       propertyPath: m_SortingLayerID
       value: 578443963
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818825437834719470, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4818825437834719470, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
       propertyPath: ShapeModule.m_Scale.x

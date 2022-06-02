@@ -67,6 +67,7 @@ namespace Game {
         }
 
         public void LosePoints() {
+            // if points gained goes negative, then the bank will need to cover the balance at the end of the level.
             _pointsGained -= GetPointsToLose();
         }
 
@@ -75,7 +76,7 @@ namespace Game {
         }
 
         public int GetPointsToLose() {
-            return (int)(Mathf.Min(_pointsGained * 0.5f, 1000f));
+            return (int)(Mathf.Clamp(_pointsGained * 0.5f, 1000f, 8000f));
         }
     }
 }

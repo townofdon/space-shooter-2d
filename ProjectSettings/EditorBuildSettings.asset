@@ -29,5 +29,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinScreen.unity
     guid: b48e014a6e9be154a9d0f888ed2c5bd4
+  - enabled: 1
+    path: Assets/Scenes/WarpScene.unity
+    guid: faca540fb98df2648b854e9e3022edf7
+  - enabled: 1
+    path: Assets/Scenes/UpgradeScene.unity
+    guid: 8ed6275213201034782c99e4ec031919
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d748a15071d05d4429e3bf6f3eaa7b42, type: 2}
