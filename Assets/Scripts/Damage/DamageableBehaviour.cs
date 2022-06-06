@@ -122,6 +122,11 @@ namespace Damage {
             StartCoroutine(IDeathByGuardians(isQuiet));
         }
 
+        public void PrepareForWarp() {
+            _DisableColliders();
+            SetInvulnerable(true);
+        }
+
         void OnDestroy() {
             foreach (var perishable in perishableObjects) {
                 GameObject.Destroy(perishable);

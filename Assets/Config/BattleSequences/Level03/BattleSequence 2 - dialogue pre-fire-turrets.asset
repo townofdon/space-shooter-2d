@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fba42dbb5f93146b81c33b70407bfc, type: 3}
-  m_Name: BattleSequence 2 - dialogue pre mines
+  m_Name: BattleSequence 2 - dialogue pre-fire-turrets
   m_EditorClassIdentifier: 
   _spawnDifficulty: 0
   battleEvents:

@@ -14,12 +14,14 @@ namespace Game {
         [SerializeField] GameObject transitionCanvas;
         [SerializeField] TextMeshProUGUI levelTitle;
         [SerializeField] bool ShowTitleScreen = true;
+        [SerializeField] LevelStateSO levelState;
 
         Coroutine ieLevelStart;
 
         void Start() {
             if (ieLevelStart != null) StopCoroutine(ieLevelStart);
             StartCoroutine(ILevelStart());
+            levelState.SetAsCurrentLevelIfActive();
         }
 
         IEnumerator ILevelStart() {

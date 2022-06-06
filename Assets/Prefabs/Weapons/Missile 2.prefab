@@ -36,6 +36,10 @@ PrefabInstance:
       value: 0.375
       objectReference: {fileID: 0}
     - target: {fileID: 209167344195218373, guid: 63ff2acdab5a6a74cb9d74d8c82823c2, type: 3}
+      propertyPath: homingAccuracy
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 209167344195218373, guid: 63ff2acdab5a6a74cb9d74d8c82823c2, type: 3}
       propertyPath: turnSpeedPreLaunch
       value: 0.2
       objectReference: {fileID: 0}

@@ -95,10 +95,12 @@ namespace Event {
 
         public BoolEventHandler OnWinLevel = new BoolEventHandler();
         public VoidEventHandler OnPlayerDeath = new VoidEventHandler();
+        public VoidEventHandler OnSpawnXtraLife = new VoidEventHandler();
 
         public FloatEventHandler OnPlayerTakeHealth = new FloatEventHandler();
         public FloatEventHandler OnPlayerTakeMoney = new FloatEventHandler();
         public FloatEventHandler OnScorePoints = new FloatEventHandler();
+        public VoidEventHandler OnXtraLife = new VoidEventHandler();
 
         public WeaponAmmoEventHandler OnTakeAmmo = new WeaponAmmoEventHandler();
         public WeaponUpgradeEventHandler OnUpgradeWeapon = new WeaponUpgradeEventHandler();

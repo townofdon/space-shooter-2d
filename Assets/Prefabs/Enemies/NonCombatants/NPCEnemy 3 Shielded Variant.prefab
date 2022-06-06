@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: pickups.pickups.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1149843110590217603, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4153419946579881017, guid: 5038eb572f9eaff40906a0c61dbabcd0, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -171,8 +171,8 @@ namespace Battle {
                     break;
                 case BattleEventType.ShowDialogue:
                     DisableAllSpawners();
-                    eventChannel.OnShowDialogue.Invoke(battleEvent.dialogueItem);
                     waitingForDialogue = true;
+                    eventChannel.OnShowDialogue.Invoke(battleEvent.dialogueItem);
                     while (waitingForDialogue) yield return null;
                     break;
                 case BattleEventType.ShowHint:
@@ -194,6 +194,9 @@ namespace Battle {
                 case BattleEventType.WinLevel:
                     DisableAllSpawners();
                     eventChannel.OnWinLevel.Invoke(showUpgradePanel);
+                    break;
+                case BattleEventType.XtraLife:
+                    eventChannel.OnSpawnXtraLife.Invoke();
                     break;
                 default:
                     Debug.LogError("Unsupported BattleEventType: " + battleEvent.Type);

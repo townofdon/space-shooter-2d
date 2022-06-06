@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a16fb1dbb4800459b5bfb05b483b66, type: 3}
   m_Name: LevelState
   m_EditorClassIdentifier: 
-  _levels:
+  _campaignLevels:
   - m_SceneAsset: {fileID: 102900000, guid: 6c6d90a6c3513644c978e75cfc7def5c, type: 3}
     m_IsDirty: 0
     m_ScenePath: Assets/Scenes/Level02.unity
@@ -28,9 +28,20 @@ MonoBehaviour:
   - m_SceneAsset: {fileID: 102900000, guid: 3563d9578946063418e43fa5144ad210, type: 3}
     m_IsDirty: 0
     m_ScenePath: Assets/Scenes/Level06.unity
-  - m_SceneAsset: {fileID: 102900000, guid: b48e014a6e9be154a9d0f888ed2c5bd4, type: 3}
+  _arcadeLevels:
+  - m_SceneAsset: {fileID: 102900000, guid: 06f602be04a4cc24a9b80db4a8c8456e, type: 3}
     m_IsDirty: 0
-    m_ScenePath: Assets/Scenes/WinScreen.unity
+    m_ScenePath: Assets/Scenes/Level03.unity
+  - m_SceneAsset: {fileID: 102900000, guid: ba5d2fbf8d05014419b8f5a5a2fd777b, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/Scenes/Level04.unity
+  - m_SceneAsset: {fileID: 102900000, guid: 3563d9578946063418e43fa5144ad210, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/Scenes/Level06.unity
+  _demoLevels:
+  - m_SceneAsset: {fileID: 102900000, guid: 3563d9578946063418e43fa5144ad210, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/Scenes/Level06.unity
   _mainMenu:
     m_SceneAsset: {fileID: 102900000, guid: 603858f6671e9154eb72b9df39b3c67f, type: 3}
     m_IsDirty: 0
@@ -47,3 +58,7 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: 8ed6275213201034782c99e4ec031919, type: 3}
     m_IsDirty: 0
     m_ScenePath: Assets/Scenes/UpgradeScene.unity
+  _winLoseScreen:
+    m_SceneAsset: {fileID: 102900000, guid: b48e014a6e9be154a9d0f888ed2c5bd4, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/Scenes/WinScreen.unity

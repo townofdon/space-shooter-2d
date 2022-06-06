@@ -24,6 +24,7 @@ namespace Battle {
         ShowDialogue,
         ShowHint,
         WinLevel,
+        XtraLife,
     }
 
     [System.Serializable]

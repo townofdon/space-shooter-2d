@@ -38,8 +38,10 @@ namespace Weapons
             _shieldDrain = 0;
         }
 
-        [Header("Damage")][Space]
+        [Header("Class / Descriptino")]
+        [Space]
         [SerializeField] string _assetClass;
+        [SerializeField][TextArea(minLines: 2, maxLines: 6)] string _description;
 
         [Header("Damage")][Space]
         [SerializeField][Range(0f, 10f)] float _damageMultiplier = 1f;
@@ -90,6 +92,7 @@ namespace Weapons
         }
 
         public string assetClass => _assetClass;
+        public string description => _description;
         public float damageMultiplier => _damageMultiplier;
         public int startingAmmo => _startingAmmo;
         public bool infiniteAmmo => _infiniteAmmo;
@@ -121,6 +124,7 @@ namespace Weapons
         [SerializeField] WeaponType _weaponType = WeaponType.Laser;
         [SerializeField] string _weaponName;
         [SerializeField] float _effectiveRange = 10f;
+        [SerializeField] bool replenishAmmoOnInit = true;
 
         [Header("Audio Settings")][Space]
         [SerializeField] Sound _shotSound;
@@ -131,6 +135,7 @@ namespace Weapons
         [SerializeField] List<WeaponSettings> upgrades = new List<WeaponSettings>();
 
         WeaponSettings current => (_upgradeLevel > -1 && _upgradeLevel < upgrades.Count) ? upgrades[_upgradeLevel] : baseSettings;
+        WeaponSettings next => (_upgradeLevel < upgrades.Count - 1) ? upgrades[_upgradeLevel + 1] : null;
         public bool CanUpgrade => _upgradeLevel < upgrades.Count - 1;
         public int CostNextUpgrade => upgrades[Mathf.Min(_upgradeLevel + 1, upgrades.Count - 1)].cost;
         public int CurrentUpgradeLevel => _upgradeLevel + 1;
@@ -143,6 +148,8 @@ namespace Weapons
         public float effectiveRange => _effectiveRange;
         public int upgradeLevel => _upgradeLevel;
         public string assetClass => current.assetClass;
+        public string nextAssetClass => next != null ? next.assetClass : "-";
+        public string nextDescription => next != null ? next.description : "Weapon fully upgraded and ready to kick some alien ass";
         public Sound shotSound => _shotSound;
         public LoopableSound effectSound => _effectSound;
         public Sound reloadSound => current.reloadSound.hasSource ? current.reloadSound : _reloadSound;
@@ -215,7 +222,7 @@ namespace Weapons
                 PopulateUpgradeSounds();
             }
             _equipped = equipped;
-            _ammo = startingAmmo;
+            if (replenishAmmoOnInit) _ammo = startingAmmo;
             _burstStep = 0;
             _firingCycle = 0;
             _ammoInClipDisplayed = GetAmmoLeftInClip();
@@ -236,6 +243,11 @@ namespace Weapons
 
         public void Reset() {
             _upgradeLevel = -1;
+            Init();
+        }
+
+        public void ResetWithMaxUpgrade() {
+            _upgradeLevel = MaxUpgradeLevel - 1;
             Init();
         }
 

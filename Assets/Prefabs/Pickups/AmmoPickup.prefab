@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 7348726175182028148}
   - component: {fileID: 7348726175182028149}
   - component: {fileID: -8280308180682311959}
+  - component: {fileID: -5215505899626536736}
   m_Layer: 13
   m_Name: AmmoPickup
   m_TagString: Pickup
@@ -363,14 +364,15 @@ MonoBehaviour:
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
-    spatialBlend: 0
+    spatialBlend: 0.209
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
-    dopplerLevel: 1
+    dopplerLevel: 0
     volumeVariance: 0.341
     pitchVariance: 0.031
     delayVariance: 0.03
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 9d933d4c696fd4841a923f97d3fadc8b, type: 3}
     oneShot: 0
@@ -393,3 +395,15 @@ MonoBehaviour:
   killSouth: 1
   killEast: 1
   killWest: 1
+--- !u!114 &-5215505899626536736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7348726175182028151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b938032cd28ab47aeaf243debacb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

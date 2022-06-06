@@ -32,6 +32,18 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+      propertyPath: healthModHard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+      propertyPath: healthModInsane
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+      propertyPath: healthModMedium
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 6888855145094194509, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
       propertyPath: pointsWhenKilledByPlayer
       value: 60
       objectReference: {fileID: 0}

@@ -111,7 +111,7 @@ namespace Weapons
 
                 if (actor.tag == UTag.Mine) {
                     // wait a small amount of time in order to create the illusion of chain-reaction explosions
-                    StartCoroutine(WaitFor(0.2f, () => DamageActor(actor, hitDist.magnitude)));
+                    StartCoroutine(WaitFor(UnityEngine.Random.Range(0f, 1f), () => DamageActor(actor, hitDist.magnitude)));
                     return;
                 }
 

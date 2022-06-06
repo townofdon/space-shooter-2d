@@ -29,6 +29,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.106
     pitchVariance: 0.183
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 3e81efa7a91939342b3f5fc7ae29fc77, type: 3}
     oneShot: 0
@@ -63,10 +65,13 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
   baseSettings:
     _assetClass: COBRA I
+    _description: 
     _damageMultiplier: 1
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -126,10 +131,16 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   upgrades:
   - _assetClass: COBRA II
+    _description: '20% damage increase
+
+
+      Use LZR to drain enemy shields'
     _damageMultiplier: 1.2
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -189,9 +200,14 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   - _assetClass: VYPER III
+    _description: '60% damage increase
+
+      10% faster firing rate'
     _damageMultiplier: 2
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -251,9 +267,14 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   - _assetClass: VYPER IV
+    _description: '100% damage increase
+
+      Doubles firing rate'
     _damageMultiplier: 4
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -313,9 +334,19 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   - _assetClass: HYPERION V
+    _description: 'Special issue armament
+
+      Effective multi-purpose weapon
+
+      110%
+      damage increase
+
+      25% faster firing rate'
     _damageMultiplier: 8
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -375,5 +406,7 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1

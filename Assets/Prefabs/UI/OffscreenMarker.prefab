@@ -153,7 +153,12 @@ MonoBehaviour:
   dangerFlag: {r: 1, g: 0.15733539, b: 0.054901958, a: 0.89411765}
   infoFlag: {r: 0, g: 0.58309954, b: 0.7176471, a: 1}
   friendlyFlag: {r: 0.104396604, g: 0.9622642, b: 0.2643309, a: 1}
+  outOfRange: 20
   debug: 0
+  showNorth: 1
+  showSouth: 1
+  showEast: 1
+  showWest: 1
 --- !u!1 &2563741420080685073
 GameObject:
   m_ObjectHideFlags: 0

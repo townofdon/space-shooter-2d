@@ -30,6 +30,8 @@ namespace UI {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI subTitle;
         [SerializeField] GameObject startButton;
+        [SerializeField] GameObject demoButton;
+        [SerializeField] GameObject arcadeButton;
         [SerializeField] GameObject quitButton;
 
         [Header("ChooseDifficulty")]
@@ -69,6 +71,8 @@ namespace UI {
         Color initialSubtitleColor;
 
         UIButton uiButtonStart;
+        UIButton uiButtonDemo;
+        UIButton uiButtonArcade;
         UIButton uiButtonQuit;
 
         UIButton uiButtonEasy;
@@ -87,7 +91,7 @@ namespace UI {
 
         public void OnSelectLevelStart(BaseEventData eventData) {
             OnFocusSound();
-            HandleSelectLevelStart(eventData);
+            // HandleSelectLevelStart(eventData);
         }
 
         public void OnSelectChooseDifficulty(BaseEventData eventData) {
@@ -101,6 +105,17 @@ namespace UI {
         }
 
         public void OnStart() {
+            gameState.SetMode(GameMode.Campaign);
+            GotoChooseDifficultyMenu();
+        }
+
+        public void OnStartArcade() {
+            gameState.SetMode(GameMode.Arcade);
+            GotoChooseDifficultyMenu();
+        }
+
+        public void OnStartDemo() {
+            gameState.SetMode(GameMode.Demo);
             GotoChooseDifficultyMenu();
         }
 
@@ -157,6 +172,8 @@ namespace UI {
             subTitle.color = new Color(0, 0, 0, 0);
 
             uiButtonStart = new UIButton(startButton.GetComponent<Button>());
+            uiButtonDemo = new UIButton(demoButton.GetComponent<Button>());
+            uiButtonArcade = new UIButton(arcadeButton.GetComponent<Button>());
             uiButtonQuit = new UIButton(quitButton.GetComponent<Button>());
             uiButtonEasy = new UIButton(easyButton);
             uiButtonMedium = new UIButton(mediumButton);
@@ -173,6 +190,8 @@ namespace UI {
             GameManager.current.NewGame();
 
             startButton.SetActive(false);
+            demoButton.SetActive(false);
+            arcadeButton.SetActive(false);
             quitButton.SetActive(false);
 
             canvasLevelStart.SetActive(true);
@@ -201,7 +220,7 @@ namespace UI {
         }
 
         void GotoFirstLevel() {
-            AudioManager.current.PlaySound("MenuSelect");
+            AudioManager.current.PlaySound("MenuConfirm");
             canvasChooseShipMenu.SetActive(false);
             EnemySpawner spawner = FindObjectOfType<EnemySpawner>();
             spawner.StopBattle();
@@ -220,9 +239,23 @@ namespace UI {
         void HandleSelectLevelStart(BaseEventData eventData) {
             if (eventData.selectedObject == startButton) {
                 SelectButton(uiButtonStart);
+                DeselectButton(uiButtonDemo);
+                DeselectButton(uiButtonArcade);
+                DeselectButton(uiButtonQuit);
+            } else if (eventData.selectedObject == demoButton) {
+                SelectButton(uiButtonDemo);
+                DeselectButton(uiButtonArcade);
+                DeselectButton(uiButtonStart);
+                DeselectButton(uiButtonQuit);
+            } else if (eventData.selectedObject == arcadeButton) {
+                SelectButton(uiButtonArcade);
+                DeselectButton(uiButtonDemo);
+                DeselectButton(uiButtonStart);
                 DeselectButton(uiButtonQuit);
             } else {
                 SelectButton(uiButtonQuit);
+                DeselectButton(uiButtonDemo);
+                DeselectButton(uiButtonArcade);
                 DeselectButton(uiButtonStart);
             }
         }
@@ -252,6 +285,10 @@ namespace UI {
         }
 
         void HandleSelectChooseShip(BaseEventData eventData) {
+            // possible far better refactor: https://forum.unity.com/threads/accessing-the-selectionstate-of-a-button.992123/#post-6442841
+            // - you would attach this script to each button - each button would manage its own selection state
+            // also, you could add a single caret icon that lives in its own canvas that gets shown/translated to appropriate button
+            // when selected, and hidden when no button is selected
             if (eventData.selectedObject == redShipButton.gameObject) {
                 SelectButton(uiButtonRedShip);
                 DeselectButton(uiButtonYellowShip);
@@ -291,6 +328,7 @@ namespace UI {
             yield return new WaitForSeconds(delayShowButtons);
 
             startButton.SetActive(true);
+            demoButton.SetActive(true);
             quitButton.SetActive(true);
             uiButtonStart.button.Select();
         }

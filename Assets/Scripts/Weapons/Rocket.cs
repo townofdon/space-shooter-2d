@@ -29,6 +29,7 @@ namespace Weapons
         [Space]
         [SerializeField] bool targetingEnabled;
         [SerializeField] GameObject detector;
+        [SerializeField][Range(0f, 1f)] float homingAccuracy = 0f;
 
         [Header("Effects")][Space]
         [SerializeField] ParticleSystem thrustFX;
@@ -74,6 +75,7 @@ namespace Weapons
 
         public void SetTarget(Transform _target) {
             target = _target;
+            if (target == null) return;
             targetActor = target.GetComponent<DamageableBehaviour>();
             if (targetingEnabled) lockSound.Play();
         }
@@ -218,12 +220,21 @@ namespace Weapons
 
         void MoveViaRigidbody() {
             if (!isThrusting || !isAlive) return;
+            if (heading.magnitude < 0.5f) heading = transform.up;
             // rb.velocity = velocity;
             rb.drag = 0f;
             rb.AddForce(heading * accel);
             if (rb.velocity.magnitude > moveSpeed) {
                 // apply drag if over speed limit
                 rb.velocity *= ( 1f - Time.fixedDeltaTime * 1.5f);
+            }
+
+            if (HasTarget()) {
+                rb.velocity = Vector2.Lerp(
+                    rb.velocity,
+                    Vector2.ClampMagnitude(targetHeading * moveSpeed, rb.velocity.magnitude),
+                    homingAccuracy
+                );
             }
         }
 

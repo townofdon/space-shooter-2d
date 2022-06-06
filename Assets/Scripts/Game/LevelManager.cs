@@ -9,7 +9,7 @@ namespace Game {
         [SerializeField] LevelStateSO levelState;
 
         void Start() {
-            levelState.Reset();
+            levelState.Reset(GameManager.current.gameMode);
         }
 
         public void GotoMainMenu() {
@@ -21,11 +21,19 @@ namespace Game {
         }
 
         public void GotoLevelOne() {
-            levelState.Reset();
+            levelState.Reset(GameManager.current.gameMode);
             LoadScene(levelState.currentLevel);
         }
 
-        public void GotoNextLevel() {
+        public void GotoNextLevel(bool loopToLevelOne = false) {
+            if (levelState.isAtLastLevel && loopToLevelOne) {
+                GotoLevelOne();
+                return;
+            }
+            if (levelState.isAtLastLevel) {
+                GotoWinLoseScreen();
+                return;
+            }
             if (SceneManager.GetActiveScene().name != levelState.tutorialLevel) {
                 levelState.IncrementLevelIndex();
             }
@@ -38,6 +46,10 @@ namespace Game {
 
         public void GotoUpgradeScene() {
             LoadScene(levelState.upgradeScene);
+        }
+
+        public void GotoWinLoseScreen() {
+            LoadScene(levelState.winLoseScreen);
         }
 
         void LoadScene(string sceneName) {

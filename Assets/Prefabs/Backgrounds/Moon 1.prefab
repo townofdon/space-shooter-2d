@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4864000521109547171}
   - component: {fileID: 4864000521109547170}
+  - component: {fileID: 7418697505682649695}
   m_Layer: 0
   m_Name: Moon 1
   m_TagString: Planetoid
@@ -49,6 +50,18 @@ MonoBehaviour:
   moveSpeed: 0.5
   speedVariance: 0.2
   accel: 1
+--- !u!114 &7418697505682649695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864000521109547168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b938032cd28ab47aeaf243debacb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4864000522448531245
 GameObject:
   m_ObjectHideFlags: 0

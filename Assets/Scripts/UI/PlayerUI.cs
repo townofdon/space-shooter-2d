@@ -30,6 +30,8 @@ namespace UI {
         [SerializeField] Image healthBarBg;
         [SerializeField] Image healthBarFill;
         [SerializeField] Gradient healthGradient;
+        [SerializeField] GameObject livesContainer;
+        [SerializeField] TextMeshProUGUI livesText;
 
         [Header("Weapon UI")]
         [Space]
@@ -59,6 +61,7 @@ namespace UI {
 
         [Header("Points UI")]
         [Space]
+        [SerializeField] GameObject scoreContainer;
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] TextMeshProUGUI moneyText;
         [SerializeField] Sound scoreSound;
@@ -77,6 +80,7 @@ namespace UI {
         PlayerGeneral player;
         PlayerWeapons weapons;
 
+        int lastLives = 0;
         float lastHealth = 0f;
         float lastShield = 0f;
         int tempPoints = 0;
@@ -98,6 +102,7 @@ namespace UI {
                 canvas.SetActive(true);
                 DrawHealthUI();
                 DrawShieldUI();
+                DrawLivesUI();
                 DrawWeaponsUI();
                 DrawPointsUI();
             }
@@ -139,6 +144,18 @@ namespace UI {
             }
 
             lastShieldState = shieldState;
+        }
+
+        void DrawLivesUI() {
+            if (gameState.mode == GameMode.Arcade) {
+                livesContainer.SetActive(false);
+                return;
+            }
+            livesContainer.SetActive(true);
+            if (gameState.lives != lastLives) {
+                lastLives = gameState.lives;
+                livesText.text = (gameState.lives - 1).ToString();
+            }
         }
 
         void SetHealthColor(float value) {
@@ -229,6 +246,11 @@ namespace UI {
         }
 
         void DrawPointsUI() {
+            if (gameState.mode == GameMode.Arcade) {
+                scoreContainer.SetActive(false);
+                return;
+            }
+            scoreContainer.SetActive(true);
             if (tempPoints < gameState.totalPoints || tempMoney < playerState.totalMoney) {
                 scoreSound.Play();
             }

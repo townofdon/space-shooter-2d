@@ -99,7 +99,7 @@ namespace Player {
             bool hasMoveInput = Mathf.Abs(input.move.x) > Mathf.Epsilon || Mathf.Abs(input.move.y) > Mathf.Epsilon;
             if (player.isAlive && hasMoveInput) {
                 throttle += Time.deltaTime / throttleUpTime;
-                thrustSound.Play();
+                if (playerState.controlMode == PlayerInputControlMode.Player) thrustSound.Play();
             } else {
                 throttle -= Time.deltaTime / throttleDownTime;
                 thrustSound.Stop();
@@ -138,12 +138,10 @@ namespace Player {
 
         void HandleBounds() {
             if (playerState.controlMode == PlayerInputControlMode.GameBrain) return;
-            if (GameManager.current.gameMode == GameMode.Battle) {
-                transform.position = new Vector2(
-                    Mathf.Clamp(transform.position.x, minBounds.x + screenPadLeft, maxBounds.x - screenPadRight),
-                    Mathf.Clamp(transform.position.y, minBounds.y + screenPadBottom, maxBounds.y - screenPadTop)
-                );
-            }
+            transform.position = new Vector2(
+                Mathf.Clamp(transform.position.x, minBounds.x + screenPadLeft, maxBounds.x - screenPadRight),
+                Mathf.Clamp(transform.position.y, minBounds.y + screenPadBottom, maxBounds.y - screenPadTop)
+            );
         }
 
         void HandleBoost() {

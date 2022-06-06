@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144493731028658611, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
       propertyPath: turnSpeed
-      value: 0.06
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9144493731028658611, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
       propertyPath: launchDrag
@@ -150,6 +150,10 @@ PrefabInstance:
     - target: {fileID: 9144493731028658611, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
       propertyPath: startDelay
       value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144493731028658611, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
+      propertyPath: homingAccuracy
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 9144493731028658611, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
       propertyPath: turnSpeedPreLaunch

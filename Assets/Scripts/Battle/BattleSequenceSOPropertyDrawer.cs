@@ -76,6 +76,9 @@ namespace Battle {
                 case BattleEventType.EventLabel:
                     EditorGUI.DrawRect(position, GameColours.inspectorBattleEventLabel);
                     break;
+                case BattleEventType.XtraLife:
+                    EditorGUI.DrawRect(position, GameColours.inspectorBattleEventXtraLife);
+                    break;
                 default:
                     break;
             }

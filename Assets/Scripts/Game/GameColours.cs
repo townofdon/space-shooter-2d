@@ -9,6 +9,7 @@ namespace Game {
         public Color _inspectorBattleEventWait;
         public Color _inspectorBattleEventEvent;
         public Color _inspectorBattleEventLabel;
+        public Color _inspectorBattleEventXtraLife;
 
         public static Color inspectorBattleEventWave;
         public static Color inspectorBattleEventFormation;
@@ -16,6 +17,7 @@ namespace Game {
         public static Color inspectorBattleEventWait;
         public static Color inspectorBattleEventEvent;
         public static Color inspectorBattleEventLabel;
+        public static Color inspectorBattleEventXtraLife;
 
         void ISerializationCallbackReceiver.OnAfterDeserialize() {
             inspectorBattleEventWave = _inspectorBattleEventWave == null ? Color.black : _inspectorBattleEventWave;
@@ -24,6 +26,7 @@ namespace Game {
             inspectorBattleEventWait = _inspectorBattleEventWait == null ? Color.black : _inspectorBattleEventWait;
             inspectorBattleEventEvent = _inspectorBattleEventEvent == null ? Color.black : _inspectorBattleEventEvent;
             inspectorBattleEventLabel = _inspectorBattleEventLabel == null ? Color.black : _inspectorBattleEventLabel;
+            inspectorBattleEventXtraLife = _inspectorBattleEventXtraLife == null ? Color.black : _inspectorBattleEventXtraLife;
         }
 
         void ISerializationCallbackReceiver.OnBeforeSerialize() {

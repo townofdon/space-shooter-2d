@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,6 +15,7 @@ namespace UI {
 
         public Button button => _button;
         public TextMeshProUGUI text => _text;
+        public Color mainColor => _initialButtonColor;
 
         // state
         bool disabled; // note - this only controls the APPEARANCE of being disabled; button is still interactable

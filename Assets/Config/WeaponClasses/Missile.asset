@@ -15,6 +15,7 @@ MonoBehaviour:
   _weaponType: 5
   _weaponName: Missile
   _effectiveRange: 10
+  replenishAmmoOnInit: 0
   _shotSound:
     soundName: 
     volume: 0.36
@@ -71,6 +72,7 @@ MonoBehaviour:
     oneShot: 1
   baseSettings:
     _assetClass: Tomcat I
+    _description: 
     _damageMultiplier: 1
     _startingAmmo: 20
     _infiniteAmmo: 0
@@ -136,6 +138,13 @@ MonoBehaviour:
       oneShot: 1
   upgrades:
   - _assetClass: TOMCAT II
+    _description: 'Advanced guidance system
+
+
+      100% more starting ammo
+
+      12%
+      faster firing rate'
     _damageMultiplier: 1.1
     _startingAmmo: 40
     _infiniteAmmo: 0
@@ -200,6 +209,13 @@ MonoBehaviour:
       clips: []
       oneShot: 1
   - _assetClass: TOMCAT III
+    _description: 'Optimized missile launch system
+
+
+      50% more starting ammo
+
+      42%
+      faster firing rate'
     _damageMultiplier: 1.1
     _startingAmmo: 60
     _infiniteAmmo: 0
@@ -264,6 +280,9 @@ MonoBehaviour:
       clips: []
       oneShot: 1
   - _assetClass: HELLCAT IV
+    _description: '60% larger ammo capacity
+
+      40% faster missile speed'
     _damageMultiplier: 2
     _startingAmmo: 100
     _infiniteAmmo: 0
@@ -328,6 +347,15 @@ MonoBehaviour:
       clips: []
       oneShot: 1
   - _assetClass: TIBERIUS X
+    _description: 'Top-secret prototype
+
+      lightweight polymer casing
+
+
+      60%
+      faster missile speed
+
+      25% faster firing rate'
     _damageMultiplier: 3
     _startingAmmo: 100
     _infiniteAmmo: 0

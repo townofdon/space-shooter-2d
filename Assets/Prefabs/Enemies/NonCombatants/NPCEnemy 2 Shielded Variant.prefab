@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: pickups.pickups.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3050286795294923306, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4785399777791649671, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: m_Enabled
       value: 0

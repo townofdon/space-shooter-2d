@@ -413,6 +413,24 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: ammo
     volume: 0.6
@@ -1213,6 +1231,24 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: ammo
     volume: 0.6
@@ -1566,6 +1602,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -1952,6 +2006,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: powerup
     volume: 0.3
@@ -2319,6 +2391,24 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: ammo
     volume: 0.6
@@ -2610,6 +2700,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -3024,6 +3132,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -3457,7 +3583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &331238596
 Transform:
   m_ObjectHideFlags: 0
@@ -3483,6 +3609,9 @@ Transform:
   - {fileID: 856884359}
   - {fileID: 418377435}
   - {fileID: 1615825335}
+  - {fileID: 2144109125711453359}
+  - {fileID: 963322011}
+  - {fileID: 1340532238}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4093,6 +4222,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -4577,12 +4724,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 331238596}
     m_Modifications:
+    - target: {fileID: 642147672345840123, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
       propertyPath: m_Name
       value: Enemy 4
       objectReference: {fileID: 0}
     - target: {fileID: 2452255395490267044, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439313796277380615, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5779808261268613759, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
@@ -5261,6 +5416,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -5719,6 +5892,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -6065,7 +6256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7020986574376668993, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
@@ -6411,6 +6602,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: powerup
     volume: 0.3
@@ -7321,6 +7530,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -8343,11 +8570,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 331238596}
     m_Modifications:
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8367,15 +8594,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8393,12 +8620,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyField (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2144109125403467771, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2144109126397234546, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalPosition.y
       value: -5.73
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+--- !u!4 &963322011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+  m_PrefabInstance: {fileID: 963322010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &980719708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8406,6 +8642,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 853033352}
     m_Modifications:
+    - target: {fileID: 7867457986422667113, guid: d9a9799eab80007418d6467508ed32f1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7867457986422667115, guid: d9a9799eab80007418d6467508ed32f1, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -8544,6 +8784,24 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: ammo
     volume: 0.6
@@ -9586,6 +9844,24 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: ammo
     volume: 0.6
@@ -10205,11 +10481,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 331238596}
     m_Modifications:
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10229,15 +10505,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10255,12 +10531,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyField (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2144109125403467771, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5936484588763933396, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalPosition.y
       value: -6.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+--- !u!4 &1340532238 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+  m_PrefabInstance: {fileID: 1340532237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1344792952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8416309717947886793, guid: 6ed326618bac5814abb43fa72b604d88, type: 3}
@@ -10330,6 +10615,24 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: missile
     volume: 0.6
@@ -11266,6 +11569,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: powerup
     volume: 0.3
@@ -11569,6 +11890,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1540814277}
+  - component: {fileID: 1540814278}
   m_Layer: 0
   m_Name: Planetoids
   m_TagString: Untagged
@@ -11596,6 +11918,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1540814278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540814276}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ae04ef15b72540b903e1b01accaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  moveSpeed: 25
+  speedVariance: 0
+  accel: 1
 --- !u!1001 &1548479478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12450,6 +12788,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: powerup
     volume: 0.3
@@ -13036,6 +13392,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -13555,6 +13929,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: powerup
     volume: 0.3
@@ -13970,6 +14362,24 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: ammo
     volume: 0.6
@@ -14261,6 +14671,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -14589,6 +15017,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -14941,6 +15387,24 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: missile
     volume: 0.6
@@ -15572,6 +16036,24 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   pickupSound:
     soundName: pickup
     volume: 0.3
@@ -16039,12 +16521,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4962245439288043540, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7943253814737313355, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: m_Name
       value: Enemy 2
       objectReference: {fileID: 0}
     - target: {fileID: 7943253814737313355, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8191958012518123496, guid: af741dfb2ce631e4bb7daed3321776c5, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -16295,7 +16785,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 331238596}
     m_Modifications:
     - target: {fileID: 607544553409227920, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_TagString
@@ -16339,7 +16829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16359,15 +16849,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16384,6 +16874,10 @@ PrefabInstance:
     - target: {fileID: 2144109125403467771, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_Name
       value: EnergyField
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144109125403467771, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2144109125403467771, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
       propertyPath: m_TagString
@@ -16543,6 +17037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+--- !u!4 &2144109125711453359 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2144109125403467768, guid: d3a3d5200527b284397192c3ca9d7cee, type: 3}
+  m_PrefabInstance: {fileID: 2144109125711453358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2190392019221072081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17700,6 +18199,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3686598497130628078, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686598497130628078, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686598497130628078, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686598497130628078, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686598497130628078, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686598497130628078, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3704739336728645311, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -18166,6 +18689,30 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7696712384409607739, guid: 58c87b253d607d841910950664356f45, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265752215700292112, guid: 58c87b253d607d841910950664356f45, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362229980161693215, guid: 58c87b253d607d841910950664356f45, type: 3}
+      propertyPath: debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362229980161693215, guid: 58c87b253d607d841910950664356f45, type: 3}
+      propertyPath: starBackgrounds.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362229980161693215, guid: 58c87b253d607d841910950664356f45, type: 3}
+      propertyPath: starBackgrounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 1424897207}
+    - target: {fileID: 8362229980161693215, guid: 58c87b253d607d841910950664356f45, type: 3}
+      propertyPath: starBackgrounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 1424897208}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58c87b253d607d841910950664356f45, type: 3}
 --- !u!1001 &3523151577012695404
@@ -18882,6 +19429,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 331238596}
     m_Modifications:
+    - target: {fileID: 1264785143375690333, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666037401897883041, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4281832319526276098, guid: 2af59df289c23dc48a849ab14bd938d3, type: 3}
       propertyPath: m_Name
       value: Enemy 0
@@ -19074,6 +19629,14 @@ PrefabInstance:
       propertyPath: mode
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1820572604789324230, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184388689263875642, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3410572513304776403, guid: 915f2a35bbeb5b34bb1d8ffb14869212, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -19135,6 +19698,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 853033352}
     m_Modifications:
+    - target: {fileID: 7867457986422667113, guid: d9a9799eab80007418d6467508ed32f1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7867457986422667115, guid: d9a9799eab80007418d6467508ed32f1, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -19387,6 +19954,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 331238596}
     m_Modifications:
+    - target: {fileID: 685486274648628685, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
       propertyPath: m_Name
       value: Enemy 1
@@ -19394,6 +19965,10 @@ PrefabInstance:
     - target: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391457849889813041, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7218930177387286965, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
       propertyPath: m_RootOrder

@@ -863,7 +863,7 @@ MonoBehaviour:
   savingThrow: 0
   savingThrowUseTime: 2
   savingThrowCooldownTime: 5
-  _maxHealth: 40
+  _maxHealth: 35
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.2
   _destroyOnDeath: 0

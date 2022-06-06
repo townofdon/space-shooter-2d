@@ -15,7 +15,7 @@ MonoBehaviour:
   _damageType: 4
   _baseDamage: 15
   _damageVariance: 4.5
-  _shieldEffectiveness: 0.2
+  _shieldEffectiveness: 0.35
   _shieldedHealthEffectiveness: 0
   _unshieldedHealthEffectiveness: 1
   _playerEffectiveness: 0.9

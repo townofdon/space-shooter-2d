@@ -24,6 +24,8 @@ MonoBehaviour:
   _spawnInterval: 3
   _spawnTimeVariance: 0
   _minSpawnInterval: 0
+  _numLoops: 1
+  _loopInterval: 0
   _spawnLocation: 
   _spawnOffset: {x: 0, y: 0}
   _spawnDifficulty: 0
@@ -36,4 +38,6 @@ MonoBehaviour:
   _pathfinderLoopMode: 0
   _flipX: 0
   _flipY: 0
+  _maxPathLoops: 99
   _initialState: {fileID: 0}
+  notes: 

@@ -37,6 +37,11 @@ namespace UI {
 
         [Space]
 
+        [SerializeField] TextMeshProUGUI titleWin;
+        [SerializeField] TextMeshProUGUI titleLose;
+
+        [Space]
+
         [SerializeField] float timeDelayStats = 0.7f;
         [SerializeField] float timeBetweenStats = 0.7f;
         [SerializeField] float timeDelayPressAnyKey = 0.7f;
@@ -68,9 +73,30 @@ namespace UI {
             rowDeaths.SetActive(false);
             rowTime.SetActive(false);
             textPressAnyKey.SetActive(false);
-            AudioManager.current.CueTrack("starlord-main-theme");
 
-            StartCoroutine(IDialogue());
+            if (gameState.lives > 0) {
+                AudioManager.current.CueTrack("starlord-main-theme");
+                ShowTitleWin();
+                StartCoroutine(IDialogue());
+            } else {
+                AudioManager.current.StopTrack();
+                ShowTitleLose();
+                StartCoroutine(IStats());
+            }
+        }
+
+        void ShowTitleWin() {
+            titleWin.enabled = true;
+            titleWin.gameObject.SetActive(true);
+            titleLose.enabled = false;
+            titleLose.gameObject.SetActive(false);
+        }
+
+        void ShowTitleLose() {
+            titleWin.enabled = false;
+            titleWin.gameObject.SetActive(false);
+            titleLose.enabled = true;
+            titleLose.gameObject.SetActive(true);
         }
 
         void OnAnyKeyPress() {
@@ -82,8 +108,8 @@ namespace UI {
         }
 
         IEnumerator IDialogue() {
-            eventChannel.OnShowDialogue.Invoke(dialogueItem);
             waitingForDialogue = true;
+            eventChannel.OnShowDialogue.Invoke(dialogueItem);
             while (waitingForDialogue) yield return null;
             yield return IStats();
         }
@@ -113,14 +139,16 @@ namespace UI {
 
             yield return new WaitForSeconds(timeDelayPressAnyKey);
 
-            eventChannel.OnShowHint.Invoke(upgradeHint, "Keyboard&Mouse");
+            // eventChannel.OnShowHint.Invoke(upgradeHint, "Keyboard&Mouse");
+            AudioManager.current.PlaySound("show-hint");
 
             AudioManager.current.PlaySound("DialogueChip");
             textPressAnyKey.SetActive(true);
             dismiss = false;
             while (!dismiss) yield return null;
 
-            GameManager.current.GotoLevelOne(true);
+            // GameManager.current.GotoLevelOne(true);
+            GameManager.current.GotoMainMenu();
         }
 
         IEnumerator IShowStat(TextMeshProUGUI field, int value, string append = "") {
@@ -150,24 +178,6 @@ namespace UI {
             field.text = Utils.ToTimeString(value);
             dismiss = false;
         }
-
-        // int GetFinalScore() {
-        //     return (int)(gameState.totalPoints * GetPointsModifier());
-        // }
-
-        // float GetPointsModifier() {
-        //     switch (gameState.difficulty) {
-        //         case GameDifficulty.Insane:
-        //             return 5.0f;
-        //         case GameDifficulty.Hard:
-        //             return 2f;
-        //         case GameDifficulty.Medium:
-        //             return 1.2f;
-        //         case GameDifficulty.Easy:
-        //         default:
-        //             return 1.0f;
-        //     }
-        // }
 
         int GetStep(int diff) {
             if (diff >= 50000) return 10000;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 65550164}
   - component: {fileID: 65550163}
   m_Layer: 0
-  m_Name: starfield (1)
+  m_Name: starfield 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1424897208}
   - component: {fileID: 1424897207}
   m_Layer: 0
-  m_Name: starfield (2)
+  m_Name: starfield 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,6 +246,24 @@ MonoBehaviour:
   soundFXMix: {fileID: 0}
   sounds:
   - soundName: MenuFocus
+    volume: 0.65
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    dopplerLevel: 0
+    volumeVariance: 0.115
+    pitchVariance: 0.016
+    delayVariance: 0.007
+    courseDelayVariance: 0
+    clips:
+    - {fileID: 8300000, guid: b47d95d26e92bad4398c56c4c9643500, type: 3}
+    oneShot: 0
+  - soundName: MenuSwitch
     volume: 0.4
     pitch: 1
     ignoreListenerPause: 1
@@ -261,8 +279,10 @@ MonoBehaviour:
     delayVariance: 0.007
     courseDelayVariance: 0
     clips:
-    - {fileID: 8300000, guid: d05bad851ad028d4096f358e1dae93e8, type: 3}
-    oneShot: 1
+    - {fileID: 8300000, guid: d386f4b911421284592cd23908140e69, type: 3}
+    - {fileID: 8300000, guid: a6eff46452ee7a74d9a67f527cf4bfef, type: 3}
+    - {fileID: 8300000, guid: fe5b604085c767b4b9cd5c3dc9c8e4f0, type: 3}
+    oneShot: 0
   - soundName: MenuSelect
     volume: 0.7
     pitch: 1
@@ -280,7 +300,25 @@ MonoBehaviour:
     courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 055a5ee0ca59f2c4f9bbe8ba438bb790, type: 3}
-    oneShot: 1
+    oneShot: 0
+  - soundName: MenuConfirm
+    volume: 0.6
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    dopplerLevel: 1
+    volumeVariance: 0.05
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips:
+    - {fileID: 8300000, guid: fd970a7bc7d4bc24099ca4398d17aa0f, type: 3}
+    oneShot: 0
   - soundName: DialogueChip
     volume: 0.4
     pitch: 1
@@ -629,7 +667,7 @@ GameObject:
   - component: {fileID: 7461518842748900648}
   - component: {fileID: 5305697854370298139}
   m_Layer: 0
-  m_Name: starfield (1)
+  m_Name: starfield 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -769,11 +807,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnWaitTime: 2
   winLevelWaitTime: 3.5
+  levelWonPoints: 10000
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   gameState: {fileID: 11400000, guid: 6a03aadd81bb63f4c9f0b480d72a1b9f, type: 2}
   levelManager: {fileID: 2098540752521301338}
   starfieldWarp: {fileID: 8265752215700292112}
   starBG: {fileID: 5676628042550478034}
+  gameFX: {fileID: 8362229980161693215}
+  xtraLifeForEnemiesKilled: 1000
+  xtraLifeSpawnPoint: {fileID: 5292296618980531683, guid: d92e477c197357a4ea1e4fa3b4666366, type: 3}
+  xtraLifeRed: {fileID: 6715591441272772755, guid: 55f8c31bd85af064f9c359bae6c6a944, type: 3}
+  xtraLifeYellow: {fileID: 7229412225321012263, guid: e50d4232687018d4db9508a5fceebff4, type: 3}
+  xtraLifeBlue: {fileID: 7620246998462321282, guid: 458f13c8ac0775f438605cbf5058dc44, type: 3}
+  xtraLifeGreen: {fileID: 6948369488510145891, guid: 706686a07ac19ab40885c5fc1d4f323b, type: 3}
   playerState: {fileID: 11400000, guid: fa472ff00b3833642af6ce2e7f0e81da, type: 2}
   redShipPrefab: {fileID: 5316389521978419117, guid: 4e300754f9b9aae4e8cf3247ce696f79, type: 3}
   yellowShipPrefab: {fileID: 2910227084380551959, guid: f5ede4c94c87f0b4f9e359729bec80fb, type: 3}
@@ -843,10 +889,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb7761dee7a01343aef19505d199c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starfield: {fileID: 7244713377456844045}
-  starfieldWarp: {fileID: 8265752215700292112}
-  starfieldWarpSpeed: 100
-  starfieldWarpAccel: 100
+  debug: 0
+  warpFX: {fileID: 8265752215700292112}
+  warpStartSpeed: 0.1
+  warpEndSpeed: 5
+  warpDuration: 2.25
+  timeWaitAfterWarp: 0.5
+  warpSpeedMod:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0.012305168
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.19166666
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.4895731
+      outSlope: 0
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.07916665
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  otherSpeed: 10
+  otherAccelTime: 15
+  starBackgrounds:
+  - {fileID: 497786458}
+  - {fileID: 65550163}
+  - {fileID: 1424897207}
+  - {fileID: 5305697854370298139}
+  - {fileID: 7198836784471696146}
+  bgAccel: 0.6
 --- !u!1 &4880911372342419123
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +978,7 @@ MonoBehaviour:
   _inspectorBattleEventWait: {r: 0.040628344, g: 0.59967095, b: 0.7830189, a: 1}
   _inspectorBattleEventEvent: {r: 0.990566, g: 0.5898069, b: 0.014017418, a: 1}
   _inspectorBattleEventLabel: {r: 0.65599096, g: 0.631675, b: 0.8018868, a: 1}
+  _inspectorBattleEventXtraLife: {r: 0.19223925, g: 0.9056604, b: 0.58222324, a: 0}
 --- !u!1 &7815229041218004658
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde4143240a156c4681c991750d976ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   levelState: {fileID: 11400000, guid: c28df47b4476ec74589455036cc1735f, type: 2}
 --- !u!1 &8492617212075592221
 GameObject:
@@ -955,7 +1037,7 @@ GameObject:
   - component: {fileID: 732083451951522815}
   - component: {fileID: 7198836784471696146}
   m_Layer: 0
-  m_Name: starfield (2)
+  m_Name: starfield 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,6 +1133,10 @@ PrefabInstance:
     - target: {fileID: 7061719783394385040, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.1179
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061719783394385041, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
+      propertyPath: m_Name
+      value: starfield 0
       objectReference: {fileID: 0}
     - target: {fileID: 7061719783394385047, guid: 5e66c344ac7a1fe4aaac6a4a91159781, type: 3}
       propertyPath: m_Size.x
@@ -1268,11 +1354,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2568458371973712781, guid: c563594545caecc488361ac67fcabf51, type: 3}
   m_PrefabInstance: {fileID: 3488655753913648816}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &7244713377456844045 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6115982312572234685, guid: c563594545caecc488361ac67fcabf51, type: 3}
-  m_PrefabInstance: {fileID: 3488655753913648816}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3488655755110249214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1293,8 +1374,12 @@ PrefabInstance:
       value: 578443963
       objectReference: {fileID: 0}
     - target: {fileID: 4818825437834719470, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818825437834719470, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4818825437834719470, guid: 92700dac5c5484f41a8017973f71b44a, type: 3}
       propertyPath: ShapeModule.m_Scale.x

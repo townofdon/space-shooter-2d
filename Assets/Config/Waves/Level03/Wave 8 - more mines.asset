@@ -123,7 +123,7 @@ MonoBehaviour:
   _spawnDifficulty: 0
   launchHeading: {x: 0, y: -1}
   headingVariance: 10
-  launchVelocity: 10
+  launchVelocity: 12
   velocityVariance: 3.6
   aimTowardsPlayer: 0.244
   _path: {fileID: 0}

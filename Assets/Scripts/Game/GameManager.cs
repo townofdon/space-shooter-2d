@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 using Core;
@@ -12,12 +12,11 @@ using Event;
 using Player;
 using Audio;
 using Dialogue;
+using UI;
 
 namespace Game {
 
-    public class GameManager : MonoBehaviour
-
-    {
+    public class GameManager : MonoBehaviour {
         [Header("General")]
         [Space]
         [SerializeField] float respawnWaitTime = 2f;
@@ -28,6 +27,16 @@ namespace Game {
         [SerializeField] LevelManager levelManager;
         [SerializeField] ParticleSystem starfieldWarp;
         [SerializeField] GameObject starBG;
+        [SerializeField] GameFX gameFX;
+
+        [Header("Xtra Life")]
+        [Space]
+        [SerializeField] int xtraLifeForEnemiesKilled = 1000;
+        [SerializeField] Transform xtraLifeSpawnPoint;
+        [SerializeField] GameObject xtraLifeRed;
+        [SerializeField] GameObject xtraLifeYellow;
+        [SerializeField] GameObject xtraLifeBlue;
+        [SerializeField] GameObject xtraLifeGreen;
 
         [Header("Player")]
         [Space]
@@ -49,7 +58,9 @@ namespace Game {
 
         // cached
         PlayerGeneral player;
+        PlayerInputHandler inputHandler;
         Coroutine ieRespawn;
+        Coroutine ieLose;
         Coroutine ieWin;
 
         // state
@@ -78,8 +89,9 @@ namespace Game {
         public void NewGame() {
             timeElapsed = 0f;
             playerState.Init();
-            gameState.ResetScores();
+            gameState.NewGame();
             ResetWeaponUpgrades();
+            foreach (var weapon in _weaponClasses) weapon.SetToStartingAmmo();
         }
 
         public void SetDifficulty(GameDifficulty difficulty) {
@@ -106,16 +118,9 @@ namespace Game {
             OnUnpause();
             AudioManager.current.StopTrack();
             foreach (var weapon in _weaponClasses) weapon.SetToStartingAmmo();
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + skip);
             HideWarpFX();
-            levelManager.GotoNextLevel();
-        }
-
-        public void GotoWarpScene() {
-            OnUnpause();
-            AudioManager.current.StopTrack();
-            ShowWarpFX();
-            levelManager.GotoWarpScene();
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + skip);
+            levelManager.GotoNextLevel(gameMode == GameMode.Arcade);
         }
 
         public void GotoUpgradeScene() {
@@ -129,8 +134,8 @@ namespace Game {
             OnUnpause();
             NewGame();
             AudioManager.current.StopTrack();
-            // SceneManager.LoadScene("MainMenu");
             HideWarpFX();
+            // SceneManager.LoadScene("MainMenu");
             levelManager.GotoMainMenu();
         }
 
@@ -140,7 +145,7 @@ namespace Game {
             StartGameTimer();
             AudioManager.current.StopTrack();
             HideWarpFX();
-            if (difficulty == GameDifficulty.Insane || skipToLevel2) {
+            if (difficulty == GameDifficulty.Insane || skipToLevel2 || gameMode == GameMode.Arcade) {
                 levelManager.GotoLevelOne();
             } else {
                 levelManager.GotoTutorialLevel();
@@ -163,6 +168,7 @@ namespace Game {
         }
 
         void OnEnable() {
+            eventChannel.OnSpawnXtraLife.Subscribe(OnSpawnXtraLife);
             eventChannel.OnPlayerDeath.Subscribe(OnPlayerDeath);
             eventChannel.OnEnemyDeath.Subscribe(OnEnemyDeath);
             eventChannel.OnWinLevel.Subscribe(OnWinLevel);
@@ -173,10 +179,12 @@ namespace Game {
             eventChannel.OnShowDialogue.Subscribe(OnShowDialogue);
             eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
             eventChannel.OnPlayerTakeMoney.Subscribe(OnPlayerTakeMoney);
+            eventChannel.OnXtraLife.Subscribe(OnXtraLife);
             eventChannel.OnGotoMainMenu.Subscribe(OnGotoMainMenu);
         }
 
         void OnDisable() {
+            eventChannel.OnSpawnXtraLife.Unsubscribe(OnSpawnXtraLife);
             eventChannel.OnPlayerDeath.Unsubscribe(OnPlayerDeath);
             eventChannel.OnEnemyDeath.Unsubscribe(OnEnemyDeath);
             eventChannel.OnWinLevel.Unsubscribe(OnWinLevel);
@@ -187,6 +195,7 @@ namespace Game {
             eventChannel.OnShowDialogue.Unsubscribe(OnShowDialogue);
             eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
             eventChannel.OnPlayerTakeMoney.Unsubscribe(OnPlayerTakeMoney);
+            eventChannel.OnXtraLife.Unsubscribe(OnXtraLife);
             eventChannel.OnGotoMainMenu.Unsubscribe(OnGotoMainMenu);
         }
 
@@ -238,8 +247,13 @@ namespace Game {
         }
 
         void ResetWeaponUpgrades() {
-            playerState.ResetGunsUpgrade();
-            foreach (var weapon in _weaponClasses) weapon.Reset();
+            if (gameMode == GameMode.Demo) {
+                playerState.UpgradeGuns();
+                foreach (var weapon in _weaponClasses) weapon.ResetWithMaxUpgrade();
+            } else {
+                playerState.ResetGunsUpgrade();
+                foreach (var weapon in _weaponClasses) weapon.Reset();
+            }
         }
 
         void ImperativelyDestroyAllEnemies(bool isQuiet = false) {
@@ -264,19 +278,37 @@ namespace Game {
         void OnPlayerDeath() {
             playerState.IncrementDeaths();
             gameState.LosePoints();
+            gameState.LoseLife();
             AudioManager.current.PlaySound("ship-death");
             if (ieRespawn != null) StopCoroutine(ieRespawn);
+            if (ieLose != null) StopCoroutine(ieLose);
             if (ieWin != null) StopCoroutine(ieWin);
-            ieRespawn = StartCoroutine(IRespawn());
+            if (gameState.lives <= 0) {
+                ieLose = StartCoroutine(ILoseLevel());
+            } else {
+                ieRespawn = StartCoroutine(IRespawn());
+            }
         }
 
         void OnPlayerTakeMoney(float value) {
             playerState.GainMoney((int)value);
         }
 
+        void OnXtraLife() {
+            gameState.GainLife();
+        }
+
         void OnEnemyDeath(int instanceId, int points, bool isCountableEnemy = true) {
             gameState.IncrementEnemiesKilled();
             gameState.GainPoints(points);
+            // spawn xtra life on each N enemy killed
+            if (gameState.numEnemiesKilled > 0 && gameState.numEnemiesKilled % xtraLifeForEnemiesKilled == 0) {
+                OnSpawnXtraLife();
+            }
+        }
+
+        void OnSpawnXtraLife() {
+            Instantiate(GetXtraLifePrefab(), xtraLifeSpawnPoint.position, Quaternion.identity);
         }
 
         void OnWinLevel(bool showUpgradePanel = true) {
@@ -323,15 +355,10 @@ namespace Game {
             // playerState.SetInputControlMode(PlayerInputControlMode.Player);
         }
 
-        void ShowWarpFX() {
-            starfieldWarp.gameObject.SetActive(true);
-            starfieldWarp.Play();
-            starBG.SetActive(false);
-        }
-
         void HideWarpFX() {
             starfieldWarp.Stop();
             starBG.SetActive(true);
+            foreach (var bg in Object.FindObjectsOfType<BackgroundScroller>()) bg.RestoreScroll();
         }
 
         void HandleRespawnPlayerShip(Transform respawnTarget) {
@@ -341,10 +368,36 @@ namespace Game {
             input.SetAutoMoveTarget(respawnTarget);
         }
 
+        void DisablePlayerInput() {
+            PlayerMovement movement = player.GetComponent<PlayerMovement>();
+            PlayerInput input = player.GetComponent<PlayerInput>();
+            // input.SwitchCurrentActionMap("UI");
+            // Destroy the input handler so that the newly-spawned item will gain control (hopefully)
+            if (movement != null) { movement.enabled = false; }
+            if (input != null) { input.enabled = false; }
+            if (inputHandler != null) { inputHandler.enabled = false; }
+        }
+
+        IEnumerator SetPlayerModeMoveOffscreen() {
+            while (player == null || inputHandler == null || !player.isAlive) {
+                player = PlayerUtils.FindPlayer();
+                if (player != null) inputHandler = player.GetComponent<PlayerInputHandler>();
+                yield return null;
+            }
+
+            inputHandler.SetMode(PlayerInputControlMode.GameBrain);
+            inputHandler.SetAutoMoveTarget(playerExitTarget);
+        }
+
         IEnumerator IRespawn() {
             yield return new WaitForSeconds(respawnWaitTime);
             AudioManager.current.PlaySound("ship-respawn");
             HandleRespawnPlayerShip(playerRespawnTarget);
+        }
+
+        IEnumerator ILoseLevel() {
+            yield return new WaitForSeconds(respawnWaitTime);
+            levelManager.GotoWinLoseScreen();
         }
 
         IEnumerator IWinLevel(bool showUpgradePanel = true) {
@@ -358,35 +411,18 @@ namespace Game {
             yield return new WaitForSeconds(winLevelWaitTime);
             eventChannel.OnHideVictory.Invoke();
             AudioManager.current.PlaySound("ship-whoosh");
+            yield return SetPlayerModeMoveOffscreen();
+            yield return gameFX.Warp();
 
-            // This could DEFINITELY be refactored... basically this covers the edge case where the player dies during the win level event.
-            // We need this coroutine to continually search for the player in this case.
-            PlayerInputHandler inputHandler = player.GetComponent<PlayerInputHandler>();
             while (player == null || !player.isAlive || Utils.IsObjectOnScreen(player.gameObject)) {
-                if (player != null && player.isAlive) {
-                    inputHandler.SetMode(PlayerInputControlMode.GameBrain);
-                    inputHandler.SetAutoMoveTarget(playerExitTarget);
-                    yield return null;
-                } else {
-                    player = PlayerUtils.FindPlayer();
-                    if (player != null) inputHandler = player.GetComponent<PlayerInputHandler>();
-                    yield return null;
-                }
+                yield return SetPlayerModeMoveOffscreen();
             }
 
-            PlayerMovement movement = player.GetComponent<PlayerMovement>();
-            PlayerInput input = player.GetComponent<PlayerInput>();
-            // input.SwitchCurrentActionMap("UI");
-            // Destroy the input handler so that the newly-spawned item will gain control (hopefully)
-            if (movement != null) { movement.enabled = false; }
-            if (input != null) { input.enabled = false; }
-            if (inputHandler != null) { inputHandler.enabled = false; }
-
+            DisablePlayerInput();
             player.gameObject.SetActive(false);
 
-            if (showUpgradePanel) {
-                // ShowUpgradePanel();
-                GotoWarpScene();
+            if (showUpgradePanel && gameState.mode == GameMode.Campaign) {
+                GotoUpgradeScene();
             } else {
                 GotoNextLevel();
             }
@@ -404,6 +440,21 @@ namespace Game {
                     return greenShipPrefab;
                 default:
                     return redShipPrefab;
+            }
+        }
+
+        GameObject GetXtraLifePrefab() {
+            switch (playerState.shipColor) {
+                case PlayerShipColor.Red:
+                    return xtraLifeRed;
+                case PlayerShipColor.Yellow:
+                    return xtraLifeYellow;
+                case PlayerShipColor.Blue:
+                    return xtraLifeBlue;
+                case PlayerShipColor.Green:
+                    return xtraLifeGreen;
+                default:
+                    return xtraLifeRed;
             }
         }
     }

@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7377170679483481029, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7747012708812906119, guid: 0141cbf8bf6574c41baaec6c1b36c51f, type: 3}
       propertyPath: pickups.pickups.Array.size
       value: 0

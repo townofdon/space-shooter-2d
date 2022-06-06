@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace UI {
@@ -14,16 +13,30 @@ namespace UI {
 
         // state
         Vector2 scroll = Vector2.zero;
+        Vector2 scrollDelta = Vector2.zero;
+
+        public void RestoreScroll() {
+            scrollDelta = scrollSpeed;
+        }
+
+        public Vector2 GetScrollDelta() {
+            return scrollDelta;
+        }
+
+        public void SetScrollDelta(Vector2 value) {
+            scrollDelta = value;
+        }
 
         void Start() {
             sr = GetComponent<SpriteRenderer>();
             if (sr != null) mat = sr.material;
             if (mat != null) scroll = mat.mainTextureOffset;
+            scrollDelta = scrollSpeed;
         }
 
         void Update() {
-            scroll.x += scrollSpeed.x * Time.deltaTime;
-            scroll.y += scrollSpeed.y * Time.deltaTime;
+            scroll.x += scrollDelta.x * Time.deltaTime;
+            scroll.y += scrollDelta.y * Time.deltaTime;
             mat.mainTextureOffset = scroll;
         }
     }

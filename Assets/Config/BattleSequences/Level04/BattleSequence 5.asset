@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fba42dbb5f93146b81c33b70407bfc, type: 3}
   m_Name: BattleSequence 5
   m_EditorClassIdentifier: 
+  _spawnDifficulty: 0
   battleEvents:
   - skip: 0
     type: 12
@@ -239,6 +240,20 @@ MonoBehaviour:
     _track: battle-theme
   - skip: 0
     type: 12
+    eventLabel: 
+    wave: {fileID: 11400000, guid: 739e6db76bf696b4baf3990b75902261, type: 2}
+    formation: {fileID: 0}
+    boss: {fileID: 0}
+    arbitraryTime: 3
+    allowableEnemiesLeft: 0
+    arbitraryEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    _dialogueItem: {fileID: 0}
+    _hint: {fileID: 0}
+    _track: battle-theme
+  - skip: 0
+    type: 16
     eventLabel: 
     wave: {fileID: 11400000, guid: 739e6db76bf696b4baf3990b75902261, type: 2}
     formation: {fileID: 0}

@@ -29,6 +29,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
   _effectSound:
@@ -62,10 +64,13 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
   baseSettings:
     _assetClass: Prototype
+    _description: 
     _damageMultiplier: 1
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -125,10 +130,19 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   upgrades:
   - _assetClass: Mark II
+    _description: 'Next-gen xyclon tech
+
+
+      20% damage increase
+
+      43% less
+      energy usage'
     _damageMultiplier: 1.2
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -188,9 +202,14 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   - _assetClass: Mark III
+    _description: '16% damage increase
+
+      11% less energy usage'
     _damageMultiplier: 1.4
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -250,9 +269,14 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   - _assetClass: Mark IV
+    _description: '114% damage increase
+
+      33% less energy usage'
     _damageMultiplier: 3
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -312,9 +336,14 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
   - _assetClass: Mark V
+    _description: '233% damage increase
+
+      60% less energy usage'
     _damageMultiplier: 10
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -374,5 +403,7 @@ MonoBehaviour:
       dopplerLevel: 1
       volumeVariance: 0.1
       pitchVariance: 0.1
+      delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1

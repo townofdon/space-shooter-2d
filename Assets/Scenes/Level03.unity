@@ -1508,6 +1508,30 @@ PrefabInstance:
       propertyPath: musicTrack
       value: fast-theme
       objectReference: {fileID: 0}
+    - target: {fileID: 1813500038, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813500038, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813500038, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813500038, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813500038, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966440279, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2828281068093764110, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1747,22 +1771,6 @@ PrefabInstance:
     - target: {fileID: 2828281070015890150, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202012896949953255, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202012896949953255, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202012897151632656, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202012897151632656, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a942bfe2361ebe4db3fe6a5c6eecc2f, type: 3}

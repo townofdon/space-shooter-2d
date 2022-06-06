@@ -8,6 +8,7 @@ using Event;
 using Dialogue;
 using Core;
 using Audio;
+using Game;
 
 namespace UI {
 
@@ -58,6 +59,10 @@ namespace UI {
         }
 
         void OnShowDialogue(DialogueItemSO dialogueItem) {
+            if (GameManager.current.gameMode == GameMode.Arcade) {
+                eventChannel.OnDismissDialogue.Invoke();
+                return;
+            }
             justAppeared.Start();
             currentItem = dialogueItem;
             ieShowing = StartCoroutine(IShowDialogue());

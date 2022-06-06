@@ -11,6 +11,7 @@ namespace Pickups {
         Health,
         Money,
         Ammo,
+        XtraLife,
     }
 
     public class Pickup : MonoBehaviour {
@@ -40,6 +41,7 @@ namespace Pickups {
 
         [Header("Audio")]
         [Space]
+        [SerializeField] Sound spawnSound;
         [SerializeField] Sound pickupSound;
 
         [Header("Events")]
@@ -47,7 +49,7 @@ namespace Pickups {
         [SerializeField] EventChannelSO eventChannel;
 
         // components
-        SpriteRenderer sr;
+        SpriteRenderer[] sprites;
         TrailRenderer tr;
         Rigidbody2D rb;
         Animator anim;
@@ -60,15 +62,17 @@ namespace Pickups {
         Vector2 velocity;
 
         void Start() {
+            sprites = GetComponentsInChildren<SpriteRenderer>();
             anim = GetComponentInChildren<Animator>();
-            sr = GetComponentInChildren<SpriteRenderer>();
             tr = GetComponentInChildren<TrailRenderer>();
             rb = GetComponent<Rigidbody2D>();
             rb.angularVelocity = (Utils.RandomBool() ? 1 : -1) * UnityEngine.Random.Range(startRotation / 2f, startRotation);
+            spawnSound.Init(this);
             pickupSound.Init(this);
             countdown.SetDuration(lifetime);
             countdown.Start();
             HandleDisperse();
+            spawnSound.Play();
         }
 
         void Update() {
@@ -142,31 +146,29 @@ namespace Pickups {
                 case PickupType.Money:
                     eventChannel.OnPlayerTakeMoney.Invoke(value);
                     break;
+                case PickupType.XtraLife:
+                    eventChannel.OnXtraLife.Invoke();
+                    break;
                 default:
                     break;
             }
         }
 
         IEnumerator IOnPickup() {
-            if (sr != null) sr.enabled = false;
+            if (sprites != null) foreach (var sr in sprites) sr.enabled = false;
             if (tr != null) tr.enabled = false;
             pickupSound.Play();
             while (pickupSound.isPlaying) yield return null;
-            // if (onItemPickup != null) onItemPickup.Raise(type, value);
             Destroy(gameObject);
-            // disable sprite
-            // disable trail
-            // invoke OnItemPickup event
-            // play sound
             yield return null;
         }
 
         IEnumerator IBlink() {
             if (anim != null) anim.speed = 0.1f;
-            while (true && sr != null && !isRemoved && !isPickedUp) {
-                sr.enabled = false;
+            while (true && sprites != null && !isRemoved && !isPickedUp) {
+                foreach (var sr in sprites) sr.enabled = false;
                 yield return new WaitForSecondsRealtime(blinkRate);
-                sr.enabled = true;
+                foreach (var sr in sprites) sr.enabled = true;
                 yield return new WaitForSeconds(blinkRate);
             }
         }
