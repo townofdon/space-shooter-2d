@@ -2412,7 +2412,7 @@ RectTransform:
   - {fileID: 677687085}
   - {fileID: 996409867}
   m_Father: {fileID: 1243962030}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8415,8 +8415,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1934837445}
-  - {fileID: 367600702}
   - {fileID: 2096262541}
+  - {fileID: 367600702}
   m_Father: {fileID: 498880596}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11858,8 +11858,10 @@ GameObject:
   - component: {fileID: 1875986976}
   - component: {fileID: 1875986978}
   - component: {fileID: 1875986977}
+  - component: {fileID: 1875986981}
   - component: {fileID: 1875986979}
   - component: {fileID: 1875986980}
+  - component: {fileID: 1875986982}
   m_Layer: 0
   m_Name: WinScreen
   m_TagString: Untagged
@@ -11925,7 +11927,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875986974}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ede1a5f8579b3014080755d4a133a861, type: 3}
   m_Name: 
@@ -12080,6 +12082,149 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+--- !u!114 &1875986981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875986974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5692771d68d308f42b64fe6f1705a2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+--- !u!114 &1875986982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875986974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac26f09925d0f11449779adc20e6f3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charContainer: {fileID: 367600702}
+  charSelectRate: 15
+  charAccel: 0.7
+  charDecel: 4
+  charAccelCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.020835876
+      value: 0.4091797
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.6168789
+    - serializedVersion: 3
+      time: 0.23895654
+      value: 0.45099878
+      inSlope: 0.49902
+      outSlope: 0.49902
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.578556
+    - serializedVersion: 3
+      time: 0.58912784
+      value: 0.835407
+      inSlope: 0.94780576
+      outSlope: 0.94780576
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28151983
+      outWeight: 0.20899974
+    - serializedVersion: 3
+      time: 1
+      value: 0.9976425
+      inSlope: 0.22101054
+      outSlope: 0.22101054
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4969104
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  charDecelCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2098999
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.25076017
+    - serializedVersion: 3
+      time: 0.2865986
+      value: 0.26525244
+      inSlope: 0.64719605
+      outSlope: 0.64719605
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.43246555
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7975749
+      value: 0.8431878
+      inSlope: 1.6463745
+      outSlope: 1.6463745
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0041809
+      value: 1
+      inSlope: 0.009433447
+      outSlope: 0.009433447
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  deselectedCharColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedCharGradient:
+    serializedVersion: 2
+    key0: {r: 0.08503916, g: 0.8584906, b: 0.7296972, a: 1}
+    key1: {r: 0.8679245, g: 0.5939325, b: 0.020469915, a: 1}
+    key2: {r: 0.8584906, g: 0.13134079, b: 0.10933607, a: 1}
+    key3: {r: 0.8018868, g: 0.1021271, b: 0.42392516, a: 0}
+    key4: {r: 0.15321033, g: 0.071956225, b: 0.46226418, a: 0}
+    key5: {r: 0.02745098, g: 0.5372549, b: 0.49420065, a: 0}
+    key6: {r: 0.12995785, g: 0.84331137, b: 0.6890047, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 23516
+    ctime2: 45489
+    ctime3: 52621
+    ctime4: 58789
+    ctime5: 63222
+    ctime6: 65535
+    ctime7: 0
+    atime0: 0
+    atime1: 60909
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 7
+    m_NumAlphaKeys: 3
 --- !u!1 &1896646832
 GameObject:
   m_ObjectHideFlags: 0
@@ -13426,7 +13571,7 @@ GameObject:
   - component: {fileID: 2096262543}
   - component: {fileID: 2096262542}
   m_Layer: 0
-  m_Name: PressAnyKeyText
+  m_Name: EnterNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13445,7 +13590,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1243962030}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
