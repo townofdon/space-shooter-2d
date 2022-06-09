@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Core {
@@ -219,6 +220,15 @@ namespace Core {
         public static void __NOOP__(float num, Damage.DamageType damageType, bool isDamageByPlayer) { }
         public static void __NOOP__(float num) {}
         public static void __NOOP__() {}
+
+        public static IEnumerator WaitFor(float waitTime, System.Action callback) {
+            yield return new WaitForSeconds(waitTime);
+            if (callback != null) callback();
+        }
+        public static IEnumerator WaitFor(IEnumerator action, System.Action callback) {
+            yield return action;
+            if (callback != null) callback();
+        }
     }
 }
 

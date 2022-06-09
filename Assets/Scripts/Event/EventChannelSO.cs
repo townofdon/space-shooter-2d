@@ -19,6 +19,8 @@ namespace Event {
     // dialogue-specific
     public delegate void DialogueEvent(DialogueItemSO dialogueItem);
     public delegate void HintEvent(HintSO hint, string currentControlScheme);
+    // high-score
+    public delegate void HighScoreEvent(string name, int score);
 
     public class VoidEventHandler {
         event VoidEvent ev;
@@ -90,6 +92,13 @@ namespace Event {
         public void Invoke(HintSO hint, string currentControlScheme = "Keyboard&Mouse") { if (ev != null) ev.Invoke(hint, currentControlScheme); }
     }
 
+    public class HighScoreEventHandler {
+        event HighScoreEvent ev;
+        public void Subscribe(HighScoreEvent action) { ev += action; }
+        public void Unsubscribe(HighScoreEvent action) { ev -= action; }
+        public void Invoke(string name, int score) { if (ev != null) ev.Invoke(name, score); }
+    }
+
     [CreateAssetMenu(fileName = "EventChannel", menuName = "ScriptableObjects/EventChannel")]
     public class EventChannelSO : ScriptableObject {
 
@@ -101,6 +110,7 @@ namespace Event {
         public FloatEventHandler OnPlayerTakeMoney = new FloatEventHandler();
         public FloatEventHandler OnScorePoints = new FloatEventHandler();
         public VoidEventHandler OnXtraLife = new VoidEventHandler();
+        public HighScoreEventHandler OnSubmitHighScore = new HighScoreEventHandler();
 
         public WeaponAmmoEventHandler OnTakeAmmo = new WeaponAmmoEventHandler();
         public WeaponUpgradeEventHandler OnUpgradeWeapon = new WeaponUpgradeEventHandler();
