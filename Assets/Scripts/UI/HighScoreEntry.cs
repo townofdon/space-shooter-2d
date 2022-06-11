@@ -3,10 +3,15 @@ using TMPro;
 
 using Core;
 using Audio;
+using Event;
+using System.Collections.Generic;
 
 namespace UI {
 
     public class HighScoreEntry : MonoBehaviour {
+        [SerializeField] EventChannelSO eventChannel;
+        [Space]
+        [SerializeField] GameObject canvas;
         [SerializeField] Transform charContainer;
         [Space]
         [SerializeField][Range(0f, 60f)] float charSelectRate = 1f;
@@ -14,6 +19,10 @@ namespace UI {
         [SerializeField][Range(0f, 5f)] float charDecel = 2f;
         [SerializeField] AnimationCurve charAccelCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
         [SerializeField] AnimationCurve charDecelCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+        [Space]
+        [SerializeField][Range(0f, 5f)] float fieldSelectTimeThreshold = 0.7f;
+        [SerializeField][Range(0f, 60f)] float fieldSelectRateSlow = 1f;
+        [SerializeField][Range(0f, 60f)] float fieldSelectRateFast = 1f;
         [Space]
         [SerializeField] Color deselectedCharColor;
         [SerializeField] Gradient selectedCharGradient;
@@ -30,9 +39,34 @@ namespace UI {
         float charDelta = 0f;
         float charIndex = 0f;
 
+        bool inputDisabled = true;
         bool isAccelerating = false;
         bool isFirstCharChange = false;
-        bool didSelect = false;
+        bool didSelect = true;
+        bool didSubmit = false;
+        bool didFieldChange = false;
+
+        Timer fieldSpeed = new Timer(TimerDirection.Increment);
+        Timer fieldChangeSlow = new Timer(TimerDirection.Increment);
+        Timer fieldChangeFast = new Timer(TimerDirection.Increment);
+        bool isFieldSelectFast = false;
+
+        public void CancelSubmit() {
+            didSubmit = false;
+            fieldIndex = fields.Length - 1;
+            OnFieldChanged();
+            SetCharIndexFromCurrent();
+            didSelect = true;
+        }
+
+        public void EnableInput() {
+            inputDisabled = false;
+            didFieldChange = false;
+        }
+
+        public void DisableInput() {
+            inputDisabled = true;
+        }
 
         void Start() {
             input = GetComponent<UIInputHandler>();
@@ -41,16 +75,23 @@ namespace UI {
             foreach (var field in fields) field.text = "";
             fields[0].text = "A";
             SetCharIndexFromCurrent();
+            fieldSpeed.SetDuration(fieldSelectTimeThreshold);
+            fieldChangeSlow.SetDuration(fieldSelectRateSlow);
+            fieldChangeFast.SetDuration(fieldSelectRateFast);
+            DisableInput();
         }
 
         void Update() {
+            if (!canvas.activeSelf) { didSelect = true; didFieldChange = false; return; }
             UpdateChar();
             HandleInput();
             HandleSelectedColor();
+            fieldSpeed.Tick();
+            fieldChangeSlow.Tick();
+            fieldChangeFast.Tick();
             charDelta = Mathf.Clamp(charDelta, -1f, 1f);
             colorTime += Time.deltaTime;
             if (colorTime > 1f) colorTime = 0f;
-            fieldIndex = Mathf.Clamp(fieldIndex, 0, fields.Length);
             if (Mathf.Abs(charDelta) > Mathf.Epsilon) {
                 charIndex += Mathf.Sign(charDelta)
                     * (isAccelerating
@@ -72,11 +113,19 @@ namespace UI {
             }
         }
 
-        void OnSubmit() {
-            Debug.Log(GetFullText());
+        void OnSubmitName() {
+            if (!canvas.activeSelf) return;
+            if (didSubmit) return;
+            didFieldChange = false;
+            didSubmit = true;
+            string name = GetFullText();
+            eventChannel.OnSubmitName.Invoke(name);
         }
 
         void HandleInput() {
+            if (!canvas.activeSelf) return;
+            if (inputDisabled) return;
+            if (didSubmit) return;
             if (input.move.y > 0.8f) {
                 if (!isFirstCharChange) {
                     isFirstCharChange = true;
@@ -112,35 +161,81 @@ namespace UI {
                 charDelta = Mathf.Min(charDelta, 0f);
             }
 
-            if (!didSelect && input.isSubmitting && fieldIndex >= fields.Length) {
+            // handle backspace
+            if (!didSelect && (input.backSpace.isPressed || input.isCanceling)) {
                 didSelect = true;
-                OnSubmit();
+                fields[GetFieldIndex()].text = " ";
+                fieldIndex--;
+                currentChar = fields[GetFieldIndex()].text = " ";
+                OnFieldChanged();
+                SetCharIndexFromCurrent();
+                input.backSpace.AcknowledgePress();
                 return;
             }
 
-            if (!didSelect && (input.move.x > 0.9f || input.isSubmitting)) {
-                didSelect = true;
+            // handle keyboard press
+            if (!didSelect && input.keyPress.isPressed && IsValidChar(input.keyPress.text) && fieldIndex < fields.Length) {
+                currentChar = fields[fieldIndex].text = input.keyPress.text;
                 fieldIndex++;
-                charDelta = 0f;
-                prevCharIndex = -1;
-                isFirstCharChange = false;
-                SetCharIndexFromCurrent(currentChar == "" ? "" : "A");
-                PlaySoundCommitChar();
-                return;
-            }
-            if (!didSelect && (input.move.x < -0.9f || input.isCanceling) && fieldIndex > 0) {
-                didSelect = true;
-                fieldIndex--;
-                charDelta = 0f;
-                prevCharIndex = -1;
-                isFirstCharChange = false;
+                OnFieldChanged();
+                // SetCharIndexFromCurrent(currentChar == " " ? " " : "A");
                 SetCharIndexFromCurrent();
-                PlaySoundCommitChar();
+                input.keyPress.AcknowledgePress();
                 return;
             }
+
+            // handle submit
+            if (!didSelect && !didSubmit && input.isSubmitting && didFieldChange) {
+                didSelect = true;
+                OnSubmitName();
+                return;
+            }
+
+            // handle next field
+            if (CanSelect() && input.move.x > 0.9f) {
+                fieldIndex++;
+                OnFieldChanged();
+                // SetCharIndexFromCurrent(currentChar == " " ? " " : "A");
+                SetCharIndexFromCurrent();
+                return;
+            }
+
+            // handle prev field
+            if (CanSelect() && input.move.x < -0.9f && fieldIndex > 0) {
+                fieldIndex--;
+                OnFieldChanged();
+                SetCharIndexFromCurrent();
+                return;
+            }
+
+            // handle no input
             if (Mathf.Abs(input.move.x) <= Mathf.Epsilon && !input.isSubmitting && !input.isCanceling) {
                 didSelect = false;
+                fieldSpeed.Start();
+                fieldChangeSlow.End();
+                fieldChangeFast.End();
                 return;
+            }
+        }
+
+        bool CanSelect() {
+            if (didSelect) return false;
+            if (fieldSpeed.active && fieldChangeSlow.active) return false;
+            if (fieldChangeFast.active) return false;
+            return true;
+        }
+
+        void OnFieldChanged() {
+            didFieldChange = true;
+            charDelta = 0f;
+            prevCharIndex = -1;
+            isFirstCharChange = false;
+            fieldIndex = Mathf.Clamp(fieldIndex, 0, fields.Length);
+            PlaySoundCommitChar();
+            if (fieldSpeed.active) {
+                if (!fieldChangeSlow.active) fieldChangeSlow.Start();
+            } else {
+                if (!fieldChangeFast.active) fieldChangeFast.Start();
             }
         }
 
@@ -153,11 +248,11 @@ namespace UI {
         }
 
         void PlaySoundSelectChar() {
-            AudioManager.current.PlaySound("MenuSwitch");
+            if (canvas.activeSelf) AudioManager.current.PlaySound("MenuSwitch");
         }
 
         void PlaySoundCommitChar() {
-            AudioManager.current.PlaySound("DialogueChip");
+            if (canvas.activeSelf) AudioManager.current.PlaySound("DialogueChip");
         }
 
         void UpdateCharText() {
@@ -165,12 +260,12 @@ namespace UI {
             currentChar = fields[fieldIndex].text = chars[GetCharIndex()];
         }
 
-        void SetCharIndexFromCurrent(string defaultValue = "") {
+        void SetCharIndexFromCurrent(string defaultValue = " ") {
             if (fieldIndex < fields.Length) {
                 currentChar = fields[fieldIndex].text;
-                if (currentChar == "") currentChar = defaultValue;
+                if (currentChar == " ") currentChar = defaultValue;
             } else {
-                currentChar = "";
+                currentChar = " ";
             }
             charIndex = Mathf.Max(FindCharIndex(currentChar), 0) + Mathf.Epsilon;
         }
@@ -182,6 +277,10 @@ namespace UI {
                 charIndex = Mathf.Epsilon;
             }
             return Mathf.Clamp(Mathf.FloorToInt(charIndex % chars.Length), 0, chars.Length - 1);
+        }
+
+        int GetFieldIndex() {
+            return Mathf.Clamp(fieldIndex, 0, fields.Length - 1);
         }
 
         string GetFullText() {
@@ -197,8 +296,71 @@ namespace UI {
             return -1;
         }
 
+        bool IsValidChar(string ch) {
+            for (int i = 0; i < chars.Length; i++) {
+                if (ch == chars[i]) return true;
+            }
+            return false;
+        }
+
+        Dictionary<KeyCode, string> keyCodeLookup = new Dictionary<KeyCode, string>() {
+            { KeyCode.Space, " "},
+            { KeyCode.A, "A"},
+            { KeyCode.B, "B"},
+            { KeyCode.C, "C"},
+            { KeyCode.D, "D"},
+            { KeyCode.E, "E"},
+            { KeyCode.F, "F"},
+            { KeyCode.G, "G"},
+            { KeyCode.H, "H"},
+            { KeyCode.I, "I"},
+            { KeyCode.J, "J"},
+            { KeyCode.K, "K"},
+            { KeyCode.L, "L"},
+            { KeyCode.M, "M"},
+            { KeyCode.N, "N"},
+            { KeyCode.O, "O"},
+            { KeyCode.P, "P"},
+            { KeyCode.Q, "Q"},
+            { KeyCode.R, "R"},
+            { KeyCode.S, "S"},
+            { KeyCode.T, "T"},
+            { KeyCode.U, "U"},
+            { KeyCode.V, "V"},
+            { KeyCode.W, "W"},
+            { KeyCode.X, "X"},
+            { KeyCode.Y, "Y"},
+            { KeyCode.Z, "Z"},
+            { KeyCode.Alpha0, "0"},
+            { KeyCode.Alpha1, "1"},
+            { KeyCode.Alpha2, "2"},
+            { KeyCode.Alpha3, "3"},
+            { KeyCode.Alpha4, "4"},
+            { KeyCode.Alpha5, "5"},
+            { KeyCode.Alpha6, "6"},
+            { KeyCode.Alpha7, "7"},
+            { KeyCode.Alpha8, "8"},
+            { KeyCode.Alpha9, "9"},
+            { KeyCode.Keypad0, "0"},
+            { KeyCode.Keypad1, "1"},
+            { KeyCode.Keypad2, "2"},
+            { KeyCode.Keypad3, "3"},
+            { KeyCode.Keypad4, "4"},
+            { KeyCode.Keypad5, "5"},
+            { KeyCode.Keypad6, "6"},
+            { KeyCode.Keypad7, "7"},
+            { KeyCode.Keypad8, "8"},
+            { KeyCode.Keypad9, "9"},
+            { KeyCode.Minus, "-"},
+            { KeyCode.KeypadMinus, "-"},
+            { KeyCode.Underscore, "_"},
+            { KeyCode.Pipe, "|"},
+            { KeyCode.Slash, "/"},
+            { KeyCode.Backslash, "\\"},
+        };
+
         string[] chars = new string[] {
-            "",
+            " ",
             "A",
             "B",
             "C",

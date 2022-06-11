@@ -1,12 +1,17 @@
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+using Event;
+
 namespace UI {
 
     public class HighScoreDisplay : MonoBehaviour {
+        [SerializeField] EventChannelSO eventChannel;
+
+        [Space]
+
         [SerializeField] HighScoreManager highscoreManager;
         [SerializeField] Transform scoresTable;
         [SerializeField] Transform scoresBGTable;
@@ -15,7 +20,7 @@ namespace UI {
 
         [SerializeField][Range(0f, 30f)] float highlightSpeed = 5f;
         [SerializeField][Range(0, 100)] int highlightCycle = 30;
-        [SerializeField][Range(-1, 10)] int currentPlayerIndex = -1;
+        [SerializeField][Range(-1, 10)] int selectedHighScoreIndex = -1;
         [SerializeField] Color currentPlayerColor;
         [SerializeField] Gradient nameGradient;
         [SerializeField] Gradient scoreGradient;
@@ -28,6 +33,18 @@ namespace UI {
         List<TextMeshProUGUI> scoreFields = new List<TextMeshProUGUI>();
         List<TextMeshProUGUI> scoreBGFields = new List<TextMeshProUGUI>();
         List<TextMeshProUGUI> nameFields = new List<TextMeshProUGUI>();
+
+        public void SetSelectedHighScore(int value) {
+            selectedHighScoreIndex = value;
+        }
+
+        void OnEnable() {
+            eventChannel.OnFetchHighScores.Subscribe(OnHighscoresDownloaded);
+        }
+
+        void OnDisable() {
+            eventChannel.OnFetchHighScores.Unsubscribe(OnHighscoresDownloaded);
+        }
 
         void Start() {
             foreach (Transform row in scoresTable) {
@@ -53,7 +70,6 @@ namespace UI {
                 scoreBGFields[i].color = scoreBGGradient.Evaluate((float)i / (scoreFields.Count - 1));
             }
             highscoreManager = GetComponent<HighScoreManager>();
-            StartCoroutine(RefreshHighscores());
         }
 
         void Update() {
@@ -62,7 +78,7 @@ namespace UI {
 
         void UpdateColours() {
             for (int i = 0; i < scoreFields.Count; i++) {
-                if (i == currentPlayerIndex || i == Mathf.FloorToInt(highlightedIndex) % highlightCycle) {
+                if (i == selectedHighScoreIndex || i == Mathf.FloorToInt(highlightedIndex) % highlightCycle) {
                     rankFields[i].color = currentPlayerColor;
                     nameFields[i].color = currentPlayerColor;
                     scoreFields[i].color = currentPlayerColor;
@@ -75,20 +91,13 @@ namespace UI {
             highlightedIndex += Time.deltaTime * highlightSpeed;
         }
 
-        public void OnHighscoresDownloaded(HighScore[] highScores) {
+        void OnHighscoresDownloaded(HighScore[] highScores) {
             for (int i = 0; i < scoreFields.Count; i++) {
                 if (i < highScores.Length) {
                     nameFields[i].text = Monospace(highScores[i].name);
                     scoreFields[i].text = Monospace(highScores[i].score.ToString());
                     scoreBGFields[i].text = Monospace(highScores[i].score.ToString("00000000"));
                 }
-            }
-        }
-
-        IEnumerator RefreshHighscores() {
-            while (true) {
-                highscoreManager.GetHighScores(OnHighscoresDownloaded);
-                yield return new WaitForSeconds(30);
             }
         }
 

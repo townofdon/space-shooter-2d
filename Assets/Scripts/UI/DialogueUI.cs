@@ -85,7 +85,7 @@ namespace UI {
             textPressAnyKey.enabled = false;
 
             yield return IShowStatements();
-            yield return IHideDialogue();
+            HideDialogue();
         }
 
         IEnumerator IShowStatements() {
@@ -96,6 +96,7 @@ namespace UI {
                 currentStatement = currentItem.GetNextStatement();
                 textStatement.text = currentStatement;
                 textPressAnyKey.enabled = false;
+                yield return null;
 
                 while (!dismiss && textStatement.maxVisibleCharacters < currentStatement.Length) {
                     textStatement.maxVisibleCharacters++;
@@ -106,6 +107,7 @@ namespace UI {
                 dismiss = false;
                 textStatement.maxVisibleCharacters = Mathf.Max(currentStatement.Length, 9999);
                 textPressAnyKey.enabled = true;
+                yield return null;
 
                 while (!dismiss) yield return null;
             }
@@ -113,9 +115,8 @@ namespace UI {
             yield return null;
         }
 
-        IEnumerator IHideDialogue() {
+        void HideDialogue() {
             canvas.SetActive(false);
-            yield return null;
             eventChannel.OnDismissDialogue.Invoke();
         }
 

@@ -319,6 +319,24 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: fd970a7bc7d4bc24099ca4398d17aa0f, type: 3}
     oneShot: 0
+  - soundName: HighScore
+    volume: 0.6
+    pitch: 1
+    ignoreListenerPause: 1
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    dopplerLevel: 1
+    volumeVariance: 0.05
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips:
+    - {fileID: 8300000, guid: ad473b0044e3a6d48bf82c019b443213, type: 3}
+    oneShot: 0
   - soundName: DialogueChip
     volume: 0.4
     pitch: 1

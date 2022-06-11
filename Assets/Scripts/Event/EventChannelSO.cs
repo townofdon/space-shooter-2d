@@ -3,6 +3,7 @@ using UnityEngine;
 
 using Weapons;
 using Dialogue;
+using UI;
 
 namespace Event {
     // delegate types
@@ -10,6 +11,7 @@ namespace Event {
     public delegate void IntEvent(int value);
     public delegate void FloatEvent(float value);
     public delegate void BoolEvent(bool value);
+    public delegate void StringEvent(string value);
     // enemy-specific
     public delegate void EnemyDeathEvent(int instanceId, int points, bool isCountableEnemy = true);
     public delegate void BossSpawnEvent(int instanceId);
@@ -20,7 +22,8 @@ namespace Event {
     public delegate void DialogueEvent(DialogueItemSO dialogueItem);
     public delegate void HintEvent(HintSO hint, string currentControlScheme);
     // high-score
-    public delegate void HighScoreEvent(string name, int score);
+    public delegate void HighScoreSubmitEvent(string name, int score);
+    public delegate void HighScoresFetchEvent(HighScore[] highScores);
 
     public class VoidEventHandler {
         event VoidEvent ev;
@@ -48,6 +51,13 @@ namespace Event {
         public void Subscribe(BoolEvent action) { ev += action; }
         public void Unsubscribe(BoolEvent action) { ev -= action; }
         public void Invoke(bool value) { if (ev != null) ev.Invoke(value); }
+    }
+
+    public class StringEventHandler {
+        event StringEvent ev;
+        public void Subscribe(StringEvent action) { ev += action; }
+        public void Unsubscribe(StringEvent action) { ev -= action; }
+        public void Invoke(string value) { if (ev != null) ev.Invoke(value); }
     }
 
     public class EnemyDeathEventHandler {
@@ -92,11 +102,18 @@ namespace Event {
         public void Invoke(HintSO hint, string currentControlScheme = "Keyboard&Mouse") { if (ev != null) ev.Invoke(hint, currentControlScheme); }
     }
 
-    public class HighScoreEventHandler {
-        event HighScoreEvent ev;
-        public void Subscribe(HighScoreEvent action) { ev += action; }
-        public void Unsubscribe(HighScoreEvent action) { ev -= action; }
+    public class HighScoreSubmitEventHandler {
+        event HighScoreSubmitEvent ev;
+        public void Subscribe(HighScoreSubmitEvent action) { ev += action; }
+        public void Unsubscribe(HighScoreSubmitEvent action) { ev -= action; }
         public void Invoke(string name, int score) { if (ev != null) ev.Invoke(name, score); }
+    }
+
+    public class HighScoresFetchEventHandler {
+        event HighScoresFetchEvent ev;
+        public void Subscribe(HighScoresFetchEvent action) { ev += action; }
+        public void Unsubscribe(HighScoresFetchEvent action) { ev -= action; }
+        public void Invoke(HighScore[] highScores) { if (ev != null) ev.Invoke(highScores); }
     }
 
     [CreateAssetMenu(fileName = "EventChannel", menuName = "ScriptableObjects/EventChannel")]
@@ -110,7 +127,9 @@ namespace Event {
         public FloatEventHandler OnPlayerTakeMoney = new FloatEventHandler();
         public FloatEventHandler OnScorePoints = new FloatEventHandler();
         public VoidEventHandler OnXtraLife = new VoidEventHandler();
-        public HighScoreEventHandler OnSubmitHighScore = new HighScoreEventHandler();
+        public StringEventHandler OnSubmitName = new StringEventHandler();
+        public HighScoreSubmitEventHandler OnSubmitHighScore = new HighScoreSubmitEventHandler();
+        public HighScoresFetchEventHandler OnFetchHighScores = new HighScoresFetchEventHandler();
 
         public WeaponAmmoEventHandler OnTakeAmmo = new WeaponAmmoEventHandler();
         public WeaponUpgradeEventHandler OnUpgradeWeapon = new WeaponUpgradeEventHandler();

@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "8d62f8ef-bb0d-4645-8286-a0b962be44cb",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -25,18 +25,18 @@
                 },
                 {
                     "name": "Fire",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "52efb9bc-99f6-4491-9142-4c8225bd70d7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
                     "name": "FireSecondary",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "fdd03542-99f9-4408-a238-957c3dd09a9c",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -111,7 +111,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "LookLeft",
@@ -672,22 +672,22 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Submit",
-                    "type": "Value",
-                    "id": "e3641dd8-dc7d-4416-a652-69f6ef0b3535",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Submit",
+                    "type": "PassThrough",
+                    "id": "e3641dd8-dc7d-4416-a652-69f6ef0b3535",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Cancel",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "a55c64d1-af19-40bb-8f60-d0421e782b6f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -757,21 +757,21 @@
                 },
                 {
                     "name": "UIStart",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "06e6a869-d4ff-4e30-b385-76d2d3e21aa1",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "UISelect",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "90701903-bdb4-4407-af47-15d5696c74ea",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "UIAnyKey",
@@ -780,7 +780,16 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Backspace",
+                    "type": "PassThrough",
+                    "id": "e8fee7ad-ecf0-47cd-a461-8168c5d4a540",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -1241,7 +1250,7 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1252,7 +1261,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1263,7 +1272,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1274,7 +1283,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1285,7 +1294,7 @@
                     "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "UIAnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1298,6 +1307,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "UISelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "793d07f0-c16d-4160-a9a9-0ec509283266",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Backspace",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

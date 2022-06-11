@@ -665,12 +665,12 @@ MonoBehaviour:
     oneShot: 0
   pickupSound:
     soundName: xtralife
-    volume: 0.9
+    volume: 0.6
     pitch: 1
     ignoreListenerPause: 0
     realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
-    spatialBlend: 0
+    spatialBlend: 0.4
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
@@ -680,7 +680,7 @@ MonoBehaviour:
     delayVariance: 0.03
     courseDelayVariance: 0
     clips:
-    - {fileID: 8300000, guid: 1d0a9999da60059429ffaceead63f3e2, type: 3}
+    - {fileID: 8300000, guid: ad473b0044e3a6d48bf82c019b443213, type: 3}
     oneShot: 0
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &3881846435109016333

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-using Core;
+using Event;
 
 namespace UI {
 
@@ -19,57 +19,65 @@ namespace UI {
     }
 
     public class HighScoreManager : MonoBehaviour {
+        [SerializeField] EventChannelSO eventChannel;
+
         const string fullURL = "http://dreamlo.com/lb/CXtID4nu5E2MCjMOxOdLpwt43bLfU56UmCX1z8Uofb4Q";
         const string privateCode = "CXtID4nu5E2MCjMOxOdLpwt43bLfU56UmCX1z8Uofb4Q";
         const string publicCode = "629feb6d8f40bb11c075f7a9";
         const string webURL = "http://dreamlo.com/lb/";
         const int numHighScores = 10;
 
-        // DisplayHighScores highscoreDisplay;
         HighScore[] highScores = new HighScore[numHighScores];
-        // static HighScores instance;
+        bool _isLoadingHighScores = true;
 
-        void Awake() {
-            // highscoreDisplay = GetComponent<DisplayHighScores>();
+        public bool isLoadingHighScores => _isLoadingHighScores;
 
-            // -----------------------------------
-            // Debug.Log("FETCHING HIGH SCORES...");
-            // GetHighScores((HighScore[] scores) => {
-            //     Debug.Log("------------");
-            //     Debug.Log("HIGH SCORES");
-            //     foreach (var score in scores) {
-            //         Debug.Log(score.name + ": " + score.score);
-            //     }
-            // });
-            // -----------------------------------
-            // Debug.Log("ADDING HIGH SCORES...");
-            // AddHighScore("ARTEMISPRG", 10000, (HighScore[] scores) => { });
-            // AddHighScore("BOSONHIGGS", 20000, (HighScore[] scores) => { });
-            // AddHighScore("CYLONCMNDR", 30000, (HighScore[] scores) => { });
-            // AddHighScore("DEGOBAHDAN", 40000, (HighScore[] scores) => { });
-            // AddHighScore("EPICLYEVAN", 50000, (HighScore[] scores) => { });
-            // AddHighScore("FREDDY_FOX", 60000, (HighScore[] scores) => { });
-            // AddHighScore("GIANTSDERP", 70000, (HighScore[] scores) => { });
-            // AddHighScore("HALLY-8000", 80000, (HighScore[] scores) => { });
-            // AddHighScore("INDIGO_IRE", 90000, (HighScore[] scores) => { });
-            // AddHighScore("JUGGERNAUT", 100000, (HighScore[] scores) => { });
+
+        public bool IsScoreTopTen(int score) {
+            for (int i = 0; i < highScores.Length && i < 10; i++) {
+                if (score > highScores[i].score) return true;
+            }
+            return false;
         }
 
-        public void AddHighScore(string username, int score, System.Action<HighScore[]> OnHighScores) {
-            StartCoroutine(Utils.WaitFor(IAddHighScore(username, score), () => OnHighScores(highScores)));
+        public int GetHighScoreIndex(int score) {
+            for (int i = 0; i < highScores.Length && i < 10; i++) {
+                if (score > highScores[i].score) return i;
+            }
+            return -1;
         }
 
-
-        public void GetHighScores(System.Action<HighScore[]> OnHighScores) {
-            StartCoroutine(Utils.WaitFor(IGetHighScores(), () => OnHighScores(highScores)));
+        public int GetHighScoreIndexByName(string name) {
+            for (int i = 0; i < highScores.Length && i < 10; i++) {
+                if (name == highScores[i].name) return i;
+            }
+            return -1;
         }
 
-        IEnumerator IAddHighScore(string username, int score) {
-            UnityWebRequest www = UnityWebRequest.Get(webURL + privateCode + "/add/" + UnityWebRequest.EscapeURL(username) + "/" + score);
+        void OnEnable() {
+            eventChannel.OnSubmitHighScore.Subscribe(OnSubmitHighScore);
+        }
+
+        void OnDisable() {
+            eventChannel.OnSubmitHighScore.Unsubscribe(OnSubmitHighScore);
+        }
+
+        void Start() {
+            StartCoroutine(IFetchHighScores());
+        }
+
+        void OnSubmitHighScore(string name, int score) {
+            OptimisticallyAddHighScore(name, score);
+            eventChannel.OnFetchHighScores.Invoke(highScores);
+            StartCoroutine(IAddHighScore(name, score));
+        }
+
+        IEnumerator IAddHighScore(string name, int score) {
+            UnityWebRequest www = UnityWebRequest.Get(webURL + privateCode + "/add/" + UnityWebRequest.EscapeURL(name) + "/" + score);
             yield return www.SendWebRequest();
             switch (www.result) {
                 case UnityWebRequest.Result.Success:
-                    yield return IGetHighScores();
+                    yield return IFetchHighScores();
                     break;
                 case UnityWebRequest.Result.ConnectionError:
                 case UnityWebRequest.Result.DataProcessingError:
@@ -80,12 +88,13 @@ namespace UI {
             }
         }
 
-        IEnumerator IGetHighScores() {
+        IEnumerator IFetchHighScores() {
             UnityWebRequest www = UnityWebRequest.Get(webURL + publicCode + "/pipe/");
             yield return www.SendWebRequest();
             switch (www.result) {
                 case UnityWebRequest.Result.Success:
-                    FormatHighScores(www.downloadHandler.text);
+                    ParseHighScores(www.downloadHandler.text);
+                    eventChannel.OnFetchHighScores.Invoke(highScores);
                     break;
                 case UnityWebRequest.Result.ConnectionError:
                 case UnityWebRequest.Result.DataProcessingError:
@@ -94,19 +103,66 @@ namespace UI {
                     Debug.LogWarning("Error downloading: " + www.responseCode + " " + www.error);
                     break;
             }
+            _isLoadingHighScores = false;
         }
 
-        void FormatHighScores(string text) {
+        IEnumerator RefreshHighscores() {
+            while (true) {
+                yield return IFetchHighScores();
+                yield return new WaitForSeconds(30);
+            }
+        }
+
+        void ParseHighScores(string text) {
             string[] entries = text.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
             highScores = new HighScore[Mathf.Min(entries.Length, numHighScores)];
             for (int i = 0; i < Mathf.Min(entries.Length, numHighScores); i++) {
                 string[] entryInfo = entries[i].Split(new char[] { '|' });
-                string username = entryInfo[0];
+                string name = entryInfo[0];
                 int score = int.Parse(entryInfo[1]);
-                highScores[i] = new HighScore(username, score);
+                highScores[i] = new HighScore(name, score);
             }
         }
 
+        void OptimisticallyAddHighScore(string name, int score) {
+            int newIndex = GetHighScoreIndex(score);
+            if (newIndex == -1) return;
+            HighScore[] newHighScores = new HighScore[numHighScores];
+            for (int i = 0; i < highScores.Length; i++) {
+                if (i < newIndex) {
+                    newHighScores[i] = highScores[i];
+                } else if (i == newIndex) {
+                    newHighScores[i] = new HighScore(name, score);
+                } else {
+                    newHighScores[i] = highScores[i - 1];
+                }
+            }
+            highScores = newHighScores;
+        }
+
+        // void Awake() {
+        //     // -----------------------------------
+        //     // Debug.Log("FETCHING HIGH SCORES...");
+        //     // GetHighScores((HighScore[] scores) => {
+        //     //     Debug.Log("------------");
+        //     //     Debug.Log("HIGH SCORES");
+        //     //     foreach (var score in scores) {
+        //     //         Debug.Log(score.name + ": " + score.score);
+        //     //     }
+        //     // });
+        //     // -----------------------------------
+        //     // Debug.Log("ADDING HIGH SCORES...");
+        //     // AddHighScore("ARTEMISPRG", 10000);
+        //     // AddHighScore("BOSONHIGGS", 20000);
+        //     // AddHighScore("CYLONCMNDR", 30000);
+        //     // AddHighScore("DEGOBAHDAN", 40000);
+        //     // AddHighScore("EPICLYEVAN", 50000);
+        //     // AddHighScore("FREDDY_FOX", 60000);
+        //     // AddHighScore("GIANTSDERP", 70000);
+        //     // AddHighScore("HALLY-8000", 80000);
+        //     // AddHighScore("INDIGO_IRE", 90000);
+        //     // AddHighScore("JUGGERNAUT", 100000);
+        // }
     }
 }
 

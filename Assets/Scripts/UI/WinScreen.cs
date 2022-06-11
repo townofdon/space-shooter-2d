@@ -8,6 +8,7 @@ using Player;
 using Event;
 using Core;
 using Dialogue;
+using UnityEngine.UI;
 
 namespace UI {
 
@@ -16,7 +17,7 @@ namespace UI {
         [SerializeField] EventChannelSO eventChannel;
         [SerializeField] GameStateSO gameState;
         [SerializeField] PlayerStateSO playerState;
-        [SerializeField] GameObject canvas;
+        [SerializeField] GameObject canvasStats;
         [SerializeField] GameObject textPressAnyKey;
         [SerializeField] DialogueItemSO dialogueItem;
         [SerializeField] Dialogue.HintSO upgradeHint;
@@ -46,10 +47,30 @@ namespace UI {
         [SerializeField] float timeBetweenStats = 0.7f;
         [SerializeField] float timeDelayPressAnyKey = 0.7f;
 
+        [Space]
+        [Header("Leaderboard")]
+        [SerializeField] UIInputHandler input;
+        [SerializeField] GameObject canvasHighScoreEntry;
+        [SerializeField] GameObject canvasNameConfirm;
+        [SerializeField] GameObject canvasLeaderboard;
+        [SerializeField] HighScoreManager highScoreManager;
+        [SerializeField] HighScoreEntry highScoreEntry;
+        [SerializeField] HighScoreDisplay highScoreDisplay;
+        [SerializeField] Button confirmNameButton;
+        [SerializeField] TextMeshProUGUI textConfirmName;
+        [SerializeField] GameObject highScoreFX;
+        [SerializeField] GameObject highScoreToast;
+        [SerializeField] Vector2 highScoreToastOffset;
+        [SerializeField] Gradient highScoreGradient;
+
         bool dismiss = false;
         bool waitingForDialogue = false;
         int num = 0;
         float fNum = 0;
+
+        int highScoreIndex = -1;
+        string playerName;
+        bool isEnteringName = false;
 
         int totalPoints => debug ? 123456 : gameState.totalPoints;
         int numEnemiesKilled => debug ? 123 : gameState.numEnemiesKilled;
@@ -59,15 +80,17 @@ namespace UI {
         private void OnEnable() {
             eventChannel.OnAnyKeyPress.Subscribe(OnAnyKeyPress);
             eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
+            eventChannel.OnSubmitName.Subscribe(OnSubmitName);
         }
 
         private void OnDisable() {
             eventChannel.OnAnyKeyPress.Unsubscribe(OnAnyKeyPress);
             eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
+            eventChannel.OnSubmitName.Unsubscribe(OnSubmitName);
         }
 
         void Start() {
-            canvas.SetActive(false);
+            canvasStats.SetActive(false);
             rowPoints.SetActive(false);
             rowEnemies.SetActive(false);
             rowDeaths.SetActive(false);
@@ -83,6 +106,30 @@ namespace UI {
                 ShowTitleLose();
                 StartCoroutine(IStats());
             }
+        }
+
+        void OnSubmitName(string name) {
+            if (!canvasHighScoreEntry.activeSelf) return;
+            playerName = name;
+            textConfirmName.text = name;
+            canvasNameConfirm.SetActive(true);
+            confirmNameButton.Select();
+            AudioManager.current.PlaySound("MenuSelect");
+        }
+
+        public void OnConfirmName() {
+            eventChannel.OnSubmitHighScore.Invoke(playerName, gameState.totalPoints);
+            canvasHighScoreEntry.SetActive(false);
+            canvasNameConfirm.SetActive(false);
+            AudioManager.current.PlaySound("MenuConfirm");
+            isEnteringName = false;
+        }
+
+        public void OnSubmitCancel() {
+            canvasHighScoreEntry.SetActive(true);
+            canvasNameConfirm.SetActive(false);
+            highScoreEntry.CancelSubmit();
+            AudioManager.current.PlaySound("MenuSelect");
         }
 
         void ShowTitleWin() {
@@ -115,14 +162,20 @@ namespace UI {
         }
 
         IEnumerator IStats() {
-            canvas.SetActive(true);
+            canvasStats.SetActive(true);
             yield return new WaitForSeconds(timeDelayStats);
 
             rowPoints.SetActive(true);
 
             yield return IShowStat(fieldPoints, totalPoints);
-            yield return new WaitForSeconds(timeBetweenStats);
 
+            if (highScoreManager.IsScoreTopTen(gameState.totalPoints)) {
+                AudioManager.current.PlaySound("HighScore");
+                StartCoroutine(ISpawnHighScoreToasts());
+                StartCoroutine(IColorPointsField());
+            }
+
+            yield return new WaitForSeconds(timeBetweenStats);
             rowEnemies.SetActive(true);
 
             yield return IShowStat(fieldEnemies, numEnemiesKilled);
@@ -147,8 +200,8 @@ namespace UI {
             dismiss = false;
             while (!dismiss) yield return null;
 
-            // GameManager.current.GotoLevelOne(true);
-            GameManager.current.GotoMainMenu();
+            canvasStats.SetActive(false);
+            yield return IHighScores();
         }
 
         IEnumerator IShowStat(TextMeshProUGUI field, int value, string append = "") {
@@ -177,6 +230,51 @@ namespace UI {
             }
             field.text = Utils.ToTimeString(value);
             dismiss = false;
+        }
+
+        IEnumerator IHighScores() {
+            if (highScoreManager.IsScoreTopTen(gameState.totalPoints)) {
+                highScoreIndex = highScoreManager.GetHighScoreIndex(gameState.totalPoints);
+                highScoreDisplay.SetSelectedHighScore(highScoreIndex);
+                canvasHighScoreEntry.SetActive(true);
+                input.ResetInputs();
+                highScoreEntry.EnableInput();
+                while (canvasHighScoreEntry.activeSelf || canvasNameConfirm.activeSelf || isEnteringName) yield return null;
+                highScoreIndex = highScoreManager.GetHighScoreIndexByName(playerName);
+                highScoreDisplay.SetSelectedHighScore(highScoreIndex);
+            } else {
+                AudioManager.current.PlaySound("MenuSelect");
+            }
+
+            canvasHighScoreEntry.SetActive(false);
+            canvasNameConfirm.SetActive(false);
+            canvasLeaderboard.SetActive(true);
+
+            yield return new WaitForSeconds(timeDelayPressAnyKey);
+            dismiss = false;
+            while (!dismiss) yield return null;
+
+            GameManager.current.GotoMainMenu();
+        }
+
+        IEnumerator ISpawnHighScoreToasts() {
+            yield return null;
+            Vector3 pointsPosition = Utils.GetCamera().ScreenToWorldPoint(fieldPoints.rectTransform.position);
+            if (highScoreFX != null) Instantiate(highScoreFX, Vector3.zero, Quaternion.identity);
+            for (int i = 0; i < 10; i++) {
+                if (highScoreToast != null) Instantiate(highScoreToast, pointsPosition + (Vector3)highScoreToastOffset, Quaternion.identity);
+                yield return new WaitForSeconds(.2f);
+            }
+        }
+
+        IEnumerator IColorPointsField() {
+            float t = 0f;
+            while (true) {
+                fieldPoints.color = highScoreGradient.Evaluate(t);
+                t += Time.deltaTime;
+                if (t > 1) t = 0f;
+                yield return null;
+            }
         }
 
         int GetStep(int diff) {
