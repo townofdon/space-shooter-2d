@@ -757,21 +757,21 @@
                 },
                 {
                     "name": "UIStart",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "06e6a869-d4ff-4e30-b385-76d2d3e21aa1",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "UISelect",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "90701903-bdb4-4407-af47-15d5696c74ea",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "UIAnyKey",

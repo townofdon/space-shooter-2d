@@ -8,6 +8,10 @@ namespace Game {
         [SerializeField] bool debug;
         [SerializeField] LevelStateSO levelState;
 
+        public bool IsOnTutorialLevel() {
+            return SceneManager.GetActiveScene().name == levelState.tutorialLevel;
+        }
+
         void Start() {
             levelState.Reset(GameManager.current.gameMode);
         }
@@ -30,11 +34,15 @@ namespace Game {
                 GotoLevelOne();
                 return;
             }
+            if (IsOnTutorialLevel()) {
+                GotoLevelOne();
+                return;
+            }
             if (levelState.isAtLastLevel) {
                 GotoWinLoseScreen();
                 return;
             }
-            if (SceneManager.GetActiveScene().name != levelState.tutorialLevel) {
+            if (!IsOnTutorialLevel()) {
                 levelState.IncrementLevelIndex();
             }
             LoadScene(levelState.currentLevel);
