@@ -134,6 +134,7 @@ namespace Event {
         public WeaponAmmoEventHandler OnTakeAmmo = new WeaponAmmoEventHandler();
         public WeaponUpgradeEventHandler OnUpgradeWeapon = new WeaponUpgradeEventHandler();
 
+        public VoidEventHandler OnDestroyAllEnemies = new VoidEventHandler();
         public EnemyDeathEventHandler OnEnemyDeath = new EnemyDeathEventHandler();
         public VoidEventHandler OnEnemySpawn = new VoidEventHandler();
         public BossSpawnEventHandler OnBossSpawn = new BossSpawnEventHandler();

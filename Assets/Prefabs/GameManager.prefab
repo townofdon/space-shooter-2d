@@ -635,6 +635,25 @@ MonoBehaviour:
     clipOutro: {fileID: 0}
     fadeInTime: 0
     fadeOutTime: 0
+  - soundName: excite-theme
+    volume: 0.8
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    dopplerLevel: 0
+    bpm: 150
+    beatsPerBar: 4
+    loops: 1
+    clipIntro: {fileID: 0}
+    clipLoop: {fileID: 8300000, guid: 0985a7dfed5dcbb43a8e5625f081139e, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
   - soundName: win-theme
     volume: 0.7
     pitch: 1

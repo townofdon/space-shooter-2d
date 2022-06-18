@@ -87,6 +87,7 @@ namespace Battle {
             eventChannel.OnEnemySpawn.Subscribe(OnEnemySpawn);
             eventChannel.OnBossSpawn.Subscribe(OnBossSpawn);
             eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
+            eventChannel.OnDestroyAllEnemies.Subscribe(OnDestroyAllEnemies);
         }
 
         void OnDisable() {
@@ -94,6 +95,7 @@ namespace Battle {
             eventChannel.OnEnemySpawn.Unsubscribe(OnEnemySpawn);
             eventChannel.OnBossSpawn.Unsubscribe(OnBossSpawn);
             eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
+            eventChannel.OnDestroyAllEnemies.Unsubscribe(OnDestroyAllEnemies);
         }
 
         protected void Init() {
@@ -107,6 +109,10 @@ namespace Battle {
 
         protected void AddBattleSequence(BattleSequenceSO sequence) {
             battleSequences.Add(sequence);
+        }
+
+        void OnDestroyAllEnemies() {
+            numEnemiesAlive = 0;
         }
 
         IEnumerator PlayBattle() {

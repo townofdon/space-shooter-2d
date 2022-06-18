@@ -163,6 +163,7 @@ namespace Game {
 
         public void DestroyAllEnemies(bool isQuiet = false) {
             ImperativelyDestroyAllEnemies(isQuiet);
+            eventChannel.OnDestroyAllEnemies.Invoke();
         }
 
         public void OnFocusSound() {

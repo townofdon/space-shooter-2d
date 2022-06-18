@@ -977,7 +977,7 @@ MonoBehaviour:
   - {fileID: 3676972206631351771}
   perishableObjects: []
   isBoss: 0
-  isCountableEnemy: 1
+  isCountableEnemy: 0
   ship: {fileID: 3676972207723964803}
   explosion: {fileID: 8618738012250842369, guid: 00c6a1d78ddfa7d4a87dcfb1c6d8d3ee, type: 3}
   explosion2: {fileID: 0}

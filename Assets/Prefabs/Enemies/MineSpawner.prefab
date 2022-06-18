@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -765428885
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5d5da58f579a9c141b296bcd39004801, type: 3}
   m_Color: {r: 1, g: 0.90439117, b: 0.7688679, a: 1}
@@ -316,6 +316,9 @@ MonoBehaviour:
   debug: 0
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0.5
+  savingThrow: 0
+  savingThrowUseTime: 2
+  savingThrowCooldownTime: 5
   _maxHealth: 2000
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -338,8 +341,14 @@ MonoBehaviour:
   secondaryDamageSpriteTargets: []
   perishableObjects: []
   isBoss: 0
+  isCountableEnemy: 1
   ship: {fileID: 7046249342217826526}
   explosion: {fileID: 8618738012250842369, guid: 00c6a1d78ddfa7d4a87dcfb1c6d8d3ee, type: 3}
+  explosion2: {fileID: 0}
+  otherDeathFX: {fileID: 0}
+  deathContainer: {fileID: 0}
+  destroyedShip: {fileID: 0}
+  killOtherObjects: []
   damageSound:
     soundName: EnemyDamage
     volume: 0
@@ -354,6 +363,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.221
     pitchVariance: 0.389
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 9f9b58c4eaff5fa4a9eb5551104f5afb, type: 3}
     - {fileID: 8300000, guid: 79c1fb287e211164e9e9982a8ec6cb08, type: 3}
@@ -374,6 +385,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.073
     pitchVariance: 0.3
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: ae2b3c82c1c68cb4bad229920a2e07d3, type: 3}
     - {fileID: 8300000, guid: 9110c62ef46cad44db77ae0b96721dbf, type: 3}
@@ -409,6 +422,7 @@ MonoBehaviour:
   movePointLocations:
   - {fileID: 3624353784644607324, guid: 33fe77a403346c44cb81c6c477c2e845, type: 3}
   - {fileID: 6293173977674240957, guid: 8292c1402f4cb7d4faf54baa312b4814, type: 3}
+  movePointThreshold: 0.25
   debug: 0
   turnSpeed: 20
   moveSpeed: 5
@@ -729,6 +743,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 1ed8ce8acc8204949bd34ad21289202d, type: 3}
     oneShot: 1
@@ -746,6 +762,8 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.1
     pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 6bfbff222fd7a994ea5a202a55f4463a, type: 3}
     oneShot: 1
