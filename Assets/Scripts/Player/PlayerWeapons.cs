@@ -161,6 +161,7 @@ namespace Player
             HandleSwitchPrimaryWeapon();
             HandleSwitchSecondaryWeapon();
             HandleReloadPrimary();
+            HandleNotifyDisruptorActive();
         }
 
         void InitSound(WeaponClass weapon) {
@@ -440,6 +441,12 @@ namespace Player
             if (!input.isReloadPressed) { didReloadPrimary = false; return; }
             didReloadPrimary = true;
             primaryWeapon.Reload();
+        }
+
+        void HandleNotifyDisruptorActive() {
+            if (GameManager.isPaused) return;
+            if (!player.isAlive) return;
+            player.SetIsDisruptorActive(_isDisruptorActive);
         }
 
         void OnTakeAmmo(WeaponType weaponType, int ammo) {

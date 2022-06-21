@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d80801ba820b489a42856469747aa, type: 3}
+  m_Name: WaveTrapKami 3
+  m_EditorClassIdentifier: 
+  _enemies:
+  - _enemyPrefab: {fileID: 1590020292933551214, guid: d8beaaae524376f4a97f803329c45c60, type: 3}
+    _spawnLocation: E-2-5
+    _spawnOffset: {x: 0, y: 0}
+    _spawnDifficulty: 0
+  _spawnInterval: 0
+  _spawnTimeVariance: 0
+  _minSpawnInterval: 0
+  _numLoops: 10
+  _loopInterval: 0.2
+  _spawnLocation: 
+  _spawnOffset: {x: 0, y: 0}
+  _spawnDifficulty: 0
+  launchHeading: {x: 1, y: 0}
+  headingVariance: 9.7
+  launchVelocity: 5.9
+  velocityVariance: 0.61
+  aimTowardsPlayer: 0.524
+  _path: {fileID: 0}
+  _pathfinderLoopMode: 2
+  _flipX: 0
+  _flipY: 0
+  _maxPathLoops: 99
+  _initialState: {fileID: 0}
+  notes: 

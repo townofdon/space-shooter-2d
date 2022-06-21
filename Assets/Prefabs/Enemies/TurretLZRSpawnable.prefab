@@ -132,6 +132,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 493096651279442713, guid: 84cd63207082190488796c3cba907258, type: 3}
+      propertyPath: spawnSound.delayVariance
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 493096651279442713, guid: 84cd63207082190488796c3cba907258, type: 3}
       propertyPath: spawnSprites.Array.data[0]
       value: 
       objectReference: {fileID: 3421600022671995241}
@@ -155,6 +159,14 @@ PrefabInstance:
       propertyPath: spawnSound.clips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: a73edd01ab5961640802a2c051499829, type: 3}
+    - target: {fileID: 493096651279442719, guid: 84cd63207082190488796c3cba907258, type: 3}
+      propertyPath: deathSound.oneShot
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 493096651279442719, guid: 84cd63207082190488796c3cba907258, type: 3}
+      propertyPath: deathSound.delayVariance
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 493096651279442719, guid: 84cd63207082190488796c3cba907258, type: 3}
       propertyPath: perishableObjects.Array.size
       value: 1

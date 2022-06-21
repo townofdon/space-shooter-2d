@@ -9,8 +9,12 @@ MonoImporter:
   - damageSpriteTarget: {instanceID: 0}
   - ship: {instanceID: 0}
   - explosion: {instanceID: 0}
+  - explosion2: {instanceID: 0}
+  - otherDeathFX: {instanceID: 0}
+  - deathContainer: {instanceID: 0}
+  - destroyedShip: {instanceID: 0}
   - pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
-  - eventChannel: {instanceID: 0}
+  - eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -101,9 +101,9 @@ namespace Weapons
                 if (hasSingleFrameDamage && actor.uuid != null && hitMap.ContainsKey(actor.uuid) && hitMap[actor.uuid]) return;
 
                 // push the actor away from the center of the blast
-                if (actor.rigidbody) {
+                if (actor.rigidbody && !actor.rigidbody.isKinematic) {
                     blastDirection = (actor.rigidbody.transform.position - transform.position);
-                    actor.rigidbody.AddForce(blastDirection.normalized * (1f / blastDirection.magnitude) * blastForce);
+                    actor.rigidbody.AddForce(blastDirection.normalized * (1f / Mathf.Min(blastDirection.magnitude, 100f)) * blastForce);
                 }
 
                 hitDist = hit.transform.position - transform.position;

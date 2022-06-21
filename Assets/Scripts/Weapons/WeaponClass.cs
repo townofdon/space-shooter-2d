@@ -263,7 +263,6 @@ namespace Weapons
 
         public void Upgrade() {
             if (!CanUpgrade) return;
-            Debug.Log("upgrading_" + _weaponType + " >> " + assetClass);
             _upgradeLevel += 1;
             Init();
         }

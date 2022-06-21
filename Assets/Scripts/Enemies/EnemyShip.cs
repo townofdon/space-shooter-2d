@@ -34,6 +34,7 @@ namespace Enemies {
 
         [Header("Movement")][Space]
         [Header("Audio")][Space]
+        [SerializeField] Sound spawnSound;
         [SerializeField] Sound damageSound;
         [SerializeField] Sound deathSound;
 
@@ -64,16 +65,18 @@ namespace Enemies {
         bool everDamagedByPlayer = false;
         bool didNotifyBossSpawn = false;
         bool didNotifyEnemySpawn = false;
+        bool didNotifyEnemyDeath = false;
+
+        public bool isCountable => isCountableEnemy;
 
         void OnEnable() {
-            if (isAlive && (isBoss || tag == UTag.Boss) && !didNotifyBossSpawn) {
-                didNotifyBossSpawn = true;
-                eventChannel.OnBossSpawn.Invoke(instanceId);
-            }
-            if (isAlive && isCountableEnemy && !didNotifyEnemySpawn) {
-                didNotifyEnemySpawn = true;
-                eventChannel.OnEnemySpawn.Invoke();
-            }
+            OnNotifyEnemySpawn();
+            OnNotifyBossSpawn();
+            spawnSound.Play();
+        }
+
+        void OnDisable() {
+            if (isCountableEnemy) OnNotifyEnemyDeath();
         }
 
         void Awake() {
@@ -82,7 +85,7 @@ namespace Enemies {
         }
 
         void Start() {
-            AppIntegrity.AssertPresent<EventChannelSO>(eventChannel);
+            if (eventChannel == null) Debug.LogError($"eventChannel missing in \"{gameObject.name}\" ({tag})");
 
             rb = GetComponent<Rigidbody2D>();
             if (rb != null) {
@@ -93,12 +96,38 @@ namespace Enemies {
             ResetHealth();
             RegisterHealthCallbacks(OnDeath, OnHealthDamaged, Utils.__NOOP__);
             if (ship != null) ship.SetActive(true);
+            spawnSound.Init(this);
             damageSound.Init(this);
             deathSound.Init(this);
+            OnNotifyEnemySpawn();
+            OnNotifyBossSpawn();
         }
 
         void Update() {
             TickHealth();
+        }
+
+        void OnNotifyEnemySpawn() {
+            if (!isAlive) return;
+            if (!isCountableEnemy) return;
+            if (didNotifyEnemySpawn) return;
+            didNotifyEnemySpawn = true;
+            if (eventChannel != null) eventChannel.OnEnemySpawn.Invoke();
+        }
+
+        void OnNotifyBossSpawn() {
+            if (!isAlive) return;
+            if (!isBoss && tag != UTag.Boss) return;
+            if (didNotifyBossSpawn) return;
+            didNotifyBossSpawn = true;
+            if (eventChannel != null) eventChannel.OnBossSpawn.Invoke(instanceId);
+        }
+
+        void OnNotifyEnemyDeath(bool isDamageByPlayer = false) {
+            if (didNotifyEnemyDeath) return;
+            didNotifyEnemyDeath = true;
+            int points = (int)(GetDeathPoints(isDamageByPlayer) * GameUtils.GetPointsMod());
+            if (eventChannel != null) eventChannel.OnEnemyDeath.Invoke(instanceId, points, isCountableEnemy);
         }
 
         void OnHealthDamaged(float amount, DamageType damageType, bool isDamageByPlayer) {
@@ -112,14 +141,15 @@ namespace Enemies {
         void OnDeath(DamageType damageType, bool isDamageByPlayer) {
             RemoveMarker();
             int points = (int)(GetDeathPoints(isDamageByPlayer) * GameUtils.GetPointsMod());
-            eventChannel.OnEnemyDeath.Invoke(instanceId, points, isCountableEnemy);
+            OnNotifyEnemyDeath(isDamageByPlayer);
             if (rb != null) rb.drag = originalDrag; // to make it seem like it was there all along
             if (damageType != DamageType.InstakillQuiet) {
                 deathSound.Play();
                 pickups.Spawn(transform.position, rb);
                 SpawnPointsToast(points);
+                SpawnExplosions();
             }
-            foreach (var actor in killOtherObjects) actor.TakeDamage(1000f, DamageType.Instakill);
+            foreach (var actor in killOtherObjects) if (actor != null) actor.TakeDamage(1000f, damageType == DamageType.InstakillQuiet ? DamageType.InstakillQuiet : DamageType.Instakill);
             StartCoroutine(DeathAnimation());
         }
 
@@ -142,9 +172,12 @@ namespace Enemies {
             if (marker != null) marker.Disable();
         }
 
-        IEnumerator DeathAnimation() {
+        void SpawnExplosions() {
             if (explosion != null) Instantiate(explosion, transform);
             if (explosion2 != null) Instantiate(explosion2, transform);
+        }
+
+        IEnumerator DeathAnimation() {
             if (otherDeathFX != null) otherDeathFX.SetActive(true);
             if (ship != null) ship.SetActive(false);
             if (destroyedShip != null) {

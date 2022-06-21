@@ -22,6 +22,11 @@ namespace Enemies
         OnlyFireWhenPlayerInLineOfSight,
     }
 
+    public enum EnemyShooterControlMode {
+        Independent,
+        ControlledByParent,
+    }
+
     [RequireComponent(typeof(EnemyShip))]
 
     public class EnemyShooter : MonoBehaviour
@@ -29,6 +34,7 @@ namespace Enemies
         [SerializeField] bool debug = false;
         [SerializeField] EnemyFiringMode firingMode;
         [SerializeField] EnemyAimMode aimMode;
+        [SerializeField] EnemyShooterControlMode controlMode = EnemyShooterControlMode.Independent;
         [SerializeField] WeaponClass weapon;
         [SerializeField] ParticleSystem muzzleFlashFX;
         [SerializeField] int numUpgrades;
@@ -68,6 +74,7 @@ namespace Enemies
         EnemyShip enemy;
         PlayerGeneral player;
         CircleCollider2D circle;
+        EnemyShooterController shooterController;
 
         // state
         Timer triggerHeld = new Timer();
@@ -81,7 +88,7 @@ namespace Enemies
         float shipRadius = 1f;
 
         // state - OnlyFireWhenPlayerInLineOfSight
-        bool isPlayerInScopes = false;
+        bool isTryingToFire = false;
         bool isAnotherEnemyInTheWay = false;
         Vector3 vectorToPlayer;
         Collider2D overlapHit = null;
@@ -103,13 +110,24 @@ namespace Enemies
 
         void OnEnable() {
             StartCoroutine(PressAndReleaseTrigger());
+            if (shooterController != null) shooterController.OnFire.Subscribe(OnParentFire);
+            if (shooterController != null) shooterController.OnCeaseFire.Subscribe(OnParentCeaseFire);
         }
 
-        void Start() {
+        void OnDisable() {
+            if (shooterController != null) shooterController.OnFire.Unsubscribe(OnParentFire);
+            if (shooterController != null) shooterController.OnCeaseFire.Unsubscribe(OnParentCeaseFire);
+        }
+
+        void Awake() {
             rb = GetComponent<Rigidbody2D>();
             circle = GetComponentInChildren<CircleCollider2D>();
             enemy = Utils.GetRequiredComponent<EnemyShip>(gameObject);
             player = PlayerUtils.FindPlayer();
+            shooterController = GetComponentInParent<EnemyShooterController>();
+        }
+
+        void Start() {
             chargeUpSound.Init(this);
             InitWeapon();
             // init
@@ -141,17 +159,28 @@ namespace Enemies
         }
 
         void HandleFiringBehaviour() {
+            if (controlMode == EnemyShooterControlMode.ControlledByParent && shooterController != null) return;
             switch (firingMode)
             {
                 case EnemyFiringMode.OnlyFireWhenPlayerInLineOfSight:
-                    isPlayerInScopes = CheckPlayerWithinScopes();
+                    isTryingToFire = CheckPlayerWithinScopes();
                     break;
                 case EnemyFiringMode.AlwaysFiring:
                 default:
                     // this enemy is just plain dumb, or maybe really upset
-                    isPlayerInScopes = true;
+                    isTryingToFire = true;
                     break;
             }
+        }
+
+        void OnParentFire() {
+            if (controlMode == EnemyShooterControlMode.Independent || shooterController == null) return;
+            isTryingToFire = true;
+        }
+
+        void OnParentCeaseFire() {
+            if (controlMode == EnemyShooterControlMode.Independent || shooterController == null) return;
+            isTryingToFire = false;
         }
 
         bool CheckPlayerWithinScopes() {
@@ -223,7 +252,7 @@ namespace Enemies
         bool DidFire() {
             if (!enemy.isAlive) return false;
             if (!Utils.IsObjectOnScreen(gameObject)) return false;
-            if (!isPlayerInScopes) return false;
+            if (!isTryingToFire) return false;
             if (!weapon.ShouldFire(triggerHeld.active)) return false;
             if (useFireAnimation && anim != null) {
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !anim.GetCurrentAnimatorStateInfo(0).IsTag("Idle")) return false;
@@ -281,9 +310,9 @@ namespace Enemies
                 yield return new WaitForSeconds(Utils.RandomVariance2(delayStart, 1f, delayStart * 0.5f));
             }
             while (true) {
-                while (!isPlayerInScopes) yield return null;
+                while (!isTryingToFire) yield return null;
                 triggerHeld.SetDuration(Mathf.Max(triggerHoldTime * GetTriggerHoldMod() + GetTriggerVariance(), 0.1f));
-                triggerReleased.SetDuration(Mathf.Max(triggerReleaseTime * GetTriggerReleaseMod() + GetTriggerVariance(), triggerReleaseTime / 2f));
+                triggerReleased.SetDuration(Mathf.Max(triggerReleaseTime * GetTriggerReleaseMod() + GetTriggerVariance(), triggerReleaseTime * 0.5f));
                 // NOTE!!! - if weapon burst is set, the weapon will keep firing for full burst even after the trigger is released
                 yield return triggerHeld.StartAndWaitUntilFinished(true);
                 yield return triggerReleased.StartAndWaitUntilFinished(true);
@@ -291,7 +320,7 @@ namespace Enemies
         }
 
         float GetTriggerVariance() {
-            return UnityEngine.Random.Range(-triggerTimeVariance / 2f, triggerTimeVariance / 2f);
+            return UnityEngine.Random.Range(-triggerTimeVariance * 0.5f, triggerTimeVariance * 0.5f);
         }
 
         float GetTriggerHoldMod() {

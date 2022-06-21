@@ -21,6 +21,7 @@ namespace Enemies {
         [Space]
         [SerializeField] bool attackOnStart;
         [SerializeField] bool invulnerableAtStart;
+        [SerializeField] EnemyShooterControlMode controlMode = EnemyShooterControlMode.Independent;
         [SerializeField][Range(0f, 10f)] float delayAtStart = 0.5f;
         [SerializeField][Range(0f, 1f)] float agroThreshold = 0.3f;
         [SerializeField][Range(1f, 5f)] float agroFireSpeedUp = 2f;
@@ -84,6 +85,7 @@ namespace Enemies {
         PlayerGeneral player;
         Rigidbody2D rbOther;
         EnemyShip enemy;
+        EnemyShooterController shooterController;
         CircleCollider2D disruptorRingCollider;
         float disruptorRingRadius = 1f;
         Coroutine iDeactivateDisruptorRing;
@@ -113,6 +115,15 @@ namespace Enemies {
             StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.5f, 0.2f));
         }
 
+        public void ChargeUpAndFire() {
+            if (!IsAlive()) return;
+            if (anim == null || !anim.enabled) return;
+            enemy.SetInvulnerable(false);
+            anim.SetTrigger("ChargeUp");
+            anim.SetFloat("TimeMultiplier", IsAgro() ? agroFireSpeedUp : 1f);
+            // animation calls Fire()
+        }
+
         public void LockTarget() {
             if (beamLaser == null || !beamLaser.isActiveAndEnabled) return;
             beamLaser.SetLocked(true);
@@ -125,14 +136,17 @@ namespace Enemies {
 
         void OnEnable() {
             enemy.OnDeathEvent += OnDeath;
+            if (shooterController != null) shooterController.OnFire.Subscribe(OnParentFire);
         }
 
         void OnDisable() {
             enemy.OnDeathEvent -= OnDeath;
+            if (shooterController != null) shooterController.OnFire.Unsubscribe(OnParentFire);
         }
 
         void Awake() {
             enemy = GetComponent<EnemyShip>();
+            shooterController = GetComponentInParent<EnemyShooterController>();
         }
 
         void Start() {
@@ -155,6 +169,11 @@ namespace Enemies {
             HandleOffscreen();
             disruptorHold.Tick();
             if (moveOnAgro && iAgroMove == null && IsAgro()) iAgroMove = StartCoroutine(IAgro());
+        }
+
+        void OnParentFire() {
+            if (controlMode == EnemyShooterControlMode.Independent || shooterController == null) return;
+            ChargeUpAndFire();
         }
 
         void OnDeath(DamageType damageType, bool isDamageByPlayer) {
@@ -243,13 +262,10 @@ namespace Enemies {
             yield return new WaitForSeconds(delayAtStart);
             while (IsAlive()) {
                 didFire = false;
+                while (controlMode == EnemyShooterControlMode.ControlledByParent && shooterController != null) yield return null;
                 yield return new WaitForSeconds(GetFireInterval());
                 while (isAgroStarting || isOffscreen) yield return null;
-                enemy.SetInvulnerable(false);
-                if (anim != null && anim.enabled) {
-                    anim.SetTrigger("ChargeUp");
-                    anim.SetFloat("TimeMultiplier", IsAgro() ? agroFireSpeedUp : 1f);
-                }
+                ChargeUpAndFire();
                 while (!didFire) yield return null;
             }
         }

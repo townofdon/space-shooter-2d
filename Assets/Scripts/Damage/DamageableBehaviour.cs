@@ -101,6 +101,8 @@ namespace Damage {
         float _timeShieldHit = 0f;
         bool _isRechargingShield = false;
 
+        bool _isDisruptorActive = false;
+
         // getters
         public System.Guid uuid => _uuid;
         public bool isAlive => _isAlive;
@@ -116,6 +118,10 @@ namespace Damage {
 
         public void SetInvulnerable(bool value) {
             _invulnerable = value;
+        }
+
+        public void SetIsDisruptorActive(bool value) {
+            _isDisruptorActive = value;
         }
 
         public void OnDeathByGuardians(bool isQuiet = false) {
@@ -269,13 +275,18 @@ namespace Damage {
                 _healthDamageThisFrame *= damageClass.playerEffectiveness;
                 _shieldDamageThisFrame *= damageClass.playerEffectiveness;
             }
-            if (gameObject.tag == UTag.EnemyShip || gameObject.tag == UTag.EnemyTurret) {
+            if (gameObject.tag == UTag.EnemyShip || gameObject.tag == UTag.EnemyTurret || gameObject.tag == UTag.Boss) {
                 _healthDamageThisFrame *= damageClass.enemyEffectiveness;
                 _shieldDamageThisFrame *= damageClass.enemyEffectiveness;
             }
             if (gameObject.tag == UTag.Asteroid) {
                 _healthDamageThisFrame *= damageClass.environmentEffectiveness;
                 _shieldDamageThisFrame *= damageClass.environmentEffectiveness;
+            }
+
+            if (_isDisruptorActive && _shield > 0f && damageType == DamageType.Collision) {
+                _healthDamageThisFrame *= 0f;
+                _shieldDamageThisFrame *= 0.02f;
             }
 
             if (_healthDamageThisFrame > 0f) {

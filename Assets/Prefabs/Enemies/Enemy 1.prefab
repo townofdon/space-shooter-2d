@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: triggerReleaseInsaneMod
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 5436292977086282879, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
+      propertyPath: offscreenLifetime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6317388715572867300, guid: 0cb8121d44134444b825c3d499960e46, type: 3}
       propertyPath: m_Enabled
       value: 0

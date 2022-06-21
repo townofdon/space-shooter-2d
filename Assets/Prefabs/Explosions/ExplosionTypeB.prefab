@@ -14609,8 +14609,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasSingleFrameDamage: 0
   timeCausingDamage: 2
-  damageBegin: 30
-  damageEnd: 30
+  damageBegin: 1
+  damageEnd: 1
   damageAtEdge: 0.2
   blastForce: 2
   lifetime: 10
@@ -14627,7 +14627,7 @@ MonoBehaviour:
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
-    dopplerLevel: 1
+    dopplerLevel: 0.1
     volumeVariance: 0.1
     pitchVariance: 0.173
     delayVariance: 0.03

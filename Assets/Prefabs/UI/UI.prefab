@@ -738,7 +738,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1110,7 +1110,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1617,8 +1617,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: DISRUPTOR
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 065d629601e6d2f4b83b65f316f78139, type: 2}
-  m_sharedMaterial: {fileID: -4854871384762736841, guid: 065d629601e6d2f4b83b65f316f78139, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
+  m_sharedMaterial: {fileID: 824664045775617660, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7005,7 +7005,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -7903,8 +7903,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 500 CR
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 065d629601e6d2f4b83b65f316f78139, type: 2}
-  m_sharedMaterial: {fileID: -4854871384762736841, guid: 065d629601e6d2f4b83b65f316f78139, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
+  m_sharedMaterial: {fileID: 824664045775617660, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18180,7 +18180,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -18520,7 +18520,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -30618,8 +30618,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: MISSILES
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 065d629601e6d2f4b83b65f316f78139, type: 2}
-  m_sharedMaterial: {fileID: -4854871384762736841, guid: 065d629601e6d2f4b83b65f316f78139, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
+  m_sharedMaterial: {fileID: 824664045775617660, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -36951,8 +36951,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 500 CR
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 065d629601e6d2f4b83b65f316f78139, type: 2}
-  m_sharedMaterial: {fileID: -4854871384762736841, guid: 065d629601e6d2f4b83b65f316f78139, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
+  m_sharedMaterial: {fileID: 824664045775617660, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -50743,7 +50743,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

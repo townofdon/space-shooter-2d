@@ -84,6 +84,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7020986574303224001, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
+      propertyPath: spawnSound.delayVariance
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020986574303224001, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
       propertyPath: spawnSprites.Array.data[0]
       value: 
       objectReference: {fileID: 5379784901638789523}

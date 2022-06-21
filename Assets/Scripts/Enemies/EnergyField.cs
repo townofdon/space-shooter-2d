@@ -184,7 +184,7 @@ namespace Enemies {
 
         void IgnoreColliders() {
             foreach (var ignoreCollider in ignoreColliders) {
-                Physics2D.IgnoreCollision(box, ignoreCollider);
+                if (ignoreCollider != null) Physics2D.IgnoreCollision(box, ignoreCollider);
             }
         }
     }

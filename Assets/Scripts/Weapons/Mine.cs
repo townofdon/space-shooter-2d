@@ -109,6 +109,7 @@ namespace Weapons
         void OnTriggerEnter2D(Collider2D other) {
             if (!isActive || isTripped || isSploded) return;
 
+            if (other.tag == UTag.Boss) return;
             if (other.tag == UTag.Mine) return;
             if (other.tag == UTag.Pickup) return;
             if (!Utils.IsObjectOnScreen(gameObject, Utils.GetCamera(), 0f)) return;

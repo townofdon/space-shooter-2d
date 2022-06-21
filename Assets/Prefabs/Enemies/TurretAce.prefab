@@ -752,7 +752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7020986574376668993, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
       propertyPath: m_Name
-      value: TurretAce Variant
+      value: TurretAce
       objectReference: {fileID: 0}
     - target: {fileID: 7020986574376668993, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
       propertyPath: m_IsActive
@@ -769,6 +769,14 @@ PrefabInstance:
     - target: {fileID: 7020986575337993839, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.178
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542825636139578672, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542825636139578672, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44fbda4d4ff65cd4dacaaf09513d2546, type: 3}

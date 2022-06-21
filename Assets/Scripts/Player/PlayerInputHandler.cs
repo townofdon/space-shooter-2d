@@ -78,7 +78,7 @@ namespace Player {
         void Update() {
             if (playerState.controlMode != PlayerInputControlMode.GameBrain) return;
             _move = (GetMoveTarget() - (Vector2)transform.position).normalized;
-            if (Vector2.Distance(GetMoveTarget(), transform.position) < 0.1f) SetMode(PlayerInputControlMode.Player);
+            if (Vector2.Distance(GetMoveTarget(), transform.position) < 0.2f) SetMode(PlayerInputControlMode.Player);
         }
 
         void OnMove(InputValue value) {

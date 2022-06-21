@@ -288,7 +288,7 @@ namespace Battle {
             if (battle == null) return;
             refreshCount = 0;
             foreach (EnemyShip enemy in FindObjectsOfType<EnemyShip>()) {
-                if (enemy.isAlive && enemy.isActiveAndEnabled) refreshCount++;
+                if (enemy.isAlive && enemy.isActiveAndEnabled && enemy.isCountable) refreshCount++;
             }
             numEnemiesAlive = refreshCount;
         }

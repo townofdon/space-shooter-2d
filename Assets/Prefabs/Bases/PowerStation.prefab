@@ -801,6 +801,24 @@ MonoBehaviour:
   deathContainer: {fileID: 0}
   destroyedShip: {fileID: 0}
   killOtherObjects: []
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
   damageSound:
     soundName: EnemyDamage
     volume: 0
@@ -862,8 +880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b957b42031943f4ca9fb429323b2260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offscreenLifetime: 10
-  outsideBoundsPadding: 5
+  offscreenLifetime: 1
+  outsideBoundsPadding: 3
   killNorth: 0
   killSouth: 1
   killEast: 0

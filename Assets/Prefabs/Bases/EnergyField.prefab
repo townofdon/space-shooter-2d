@@ -111,6 +111,7 @@ MonoBehaviour:
   disruptor: {fileID: 11400000, guid: a3189a7789224464f83d7e72d58f6068, type: 2}
   damageMultiplier: 1
   effectiveDistance: 8
+  activationDelay: 1
   poleA: {fileID: 2144109126397234544}
   poleB: {fileID: 5936484588763933398}
   boltA: {fileID: 2144109124831866496}
@@ -175,9 +176,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  ignoreColliders:
-  - {fileID: 2144109126397234510}
-  - {fileID: 5936484588763933416}
+  ignoreColliders: []
   fieldNoise:
     soundName: QuiteDisruptive
     volume: 0.5
@@ -678,11 +677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300e0f69b5f078a4eac7c5976bb91400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &5936484588763933416 stripped
-CircleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 5738648758350933731, guid: c3e2966fa9033024386aa65cce563a50, type: 3}
-  m_PrefabInstance: {fileID: 2144109125681054731}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5936484589079552941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -824,11 +818,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3e2966fa9033024386aa65cce563a50, type: 3}
---- !u!58 &2144109126397234510 stripped
-CircleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 5738648758350933731, guid: c3e2966fa9033024386aa65cce563a50, type: 3}
-  m_PrefabInstance: {fileID: 5936484589079552941}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2144109126397234544 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5738648758350933725, guid: c3e2966fa9033024386aa65cce563a50, type: 3}
