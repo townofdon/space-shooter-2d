@@ -14617,7 +14617,7 @@ MonoBehaviour:
   shakeScreenMagnitude: 0.05
   shakeScreenDuration: 2
   splosion:
-    soundName: 
+    soundName: explosion-type-b
     volume: 0.6
     pitch: 1
     ignoreListenerPause: 0
@@ -14634,4 +14634,6 @@ MonoBehaviour:
     courseDelayVariance: 0.1
     clips:
     - {fileID: 8300000, guid: 4dbc7606b7d8a9f4586eff61f6a46089, type: 3}
-    oneShot: 1
+    oneShot: 0
+    maxSimultaneousClips: 2
+    simulPlayThreshold: 0.03

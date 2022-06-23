@@ -357,8 +357,28 @@ MonoBehaviour:
   disperseAtStart: 1
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   pickupSound:
-    soundName: ammo
+    soundName: AmmoPickup
     volume: 0.6
     pitch: 1
     ignoreListenerPause: 0
@@ -376,6 +396,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 9d933d4c696fd4841a923f97d3fadc8b, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &-8280308180682311959
 MonoBehaviour:

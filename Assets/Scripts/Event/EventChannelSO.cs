@@ -17,7 +17,7 @@ namespace Event {
     public delegate void BossSpawnEvent(int instanceId);
     // weapon-specific
     public delegate void WeaponAmmoEvent(WeaponType weaponType, int value);
-    public delegate void WeaponUpgradeEvent(WeaponType weaponType);
+    public delegate void WeaponEvent(WeaponType weaponType);
     // dialogue-specific
     public delegate void DialogueEvent(DialogueItemSO dialogueItem);
     public delegate void HintEvent(HintSO hint, string currentControlScheme);
@@ -81,10 +81,10 @@ namespace Event {
         public void Invoke(WeaponType weaponType, int value) { if (ev != null) ev.Invoke(weaponType, value); }
     }
 
-    public class WeaponUpgradeEventHandler {
-        event WeaponUpgradeEvent ev;
-        public void Subscribe(WeaponUpgradeEvent action) { ev += action; }
-        public void Unsubscribe(WeaponUpgradeEvent action) { ev -= action; }
+    public class WeaponEventHandler {
+        event WeaponEvent ev;
+        public void Subscribe(WeaponEvent action) { ev += action; }
+        public void Unsubscribe(WeaponEvent action) { ev -= action; }
         public void Invoke(WeaponType weaponType) { if (ev != null) ev.Invoke(weaponType); }
     }
 
@@ -132,7 +132,8 @@ namespace Event {
         public HighScoresFetchEventHandler OnFetchHighScores = new HighScoresFetchEventHandler();
 
         public WeaponAmmoEventHandler OnTakeAmmo = new WeaponAmmoEventHandler();
-        public WeaponUpgradeEventHandler OnUpgradeWeapon = new WeaponUpgradeEventHandler();
+        public WeaponEventHandler OnUpgradeWeapon = new WeaponEventHandler();
+        public WeaponEventHandler OnOutOfAmmo = new WeaponEventHandler();
 
         public VoidEventHandler OnDestroyAllEnemies = new VoidEventHandler();
         public EnemyDeathEventHandler OnEnemyDeath = new EnemyDeathEventHandler();

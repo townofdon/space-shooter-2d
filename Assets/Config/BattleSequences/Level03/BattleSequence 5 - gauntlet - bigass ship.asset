@@ -41,7 +41,7 @@ MonoBehaviour:
         m_Calls: []
     _dialogueItem: {fileID: 0}
     _hint: {fileID: 0}
-    _track: fast-theme
+    _track: chill-theme
   - skip: 0
     type: 0
     eventLabel: 

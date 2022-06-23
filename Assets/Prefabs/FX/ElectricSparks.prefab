@@ -4944,6 +4944,8 @@ MonoBehaviour:
     courseDelayVariance: 2.04
     clips: []
     oneShot: 0
+    maxSimultaneousClips: 2
+    simulPlayThreshold: 0.02
 --- !u!1 &2344551527997773214
 GameObject:
   m_ObjectHideFlags: 0

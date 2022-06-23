@@ -242,9 +242,12 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0.03
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 66045012dd0ab6b499545258cb856c23, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   fireSound:
     soundName: FireBigAssLaser
     volume: 0.5
@@ -260,9 +263,12 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.244
     delayVariance: 0.03
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: eb4614ed5ffd9794d8faa2fb897d0846, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 2
+    simulPlayThreshold: 0.02
 --- !u!1 &1998003900761703511
 GameObject:
   m_ObjectHideFlags: 0

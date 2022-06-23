@@ -489,6 +489,7 @@ namespace Player
 
         void OnOutOfAmmoAlarm(WeaponType weaponType) {
             outOfAmmoSound.Play();
+            eventChannel.OnOutOfAmmo.Invoke(weaponType);
         }
 
         void OnOutOfAmmoGunClick(WeaponType weaponType) {

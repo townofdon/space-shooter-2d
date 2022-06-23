@@ -1073,6 +1073,8 @@ MonoBehaviour:
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
   savingThrow: 0.5
+  savingThrowUseTime: 2
+  savingThrowCooldownTime: 5
   _maxHealth: 1000
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 1
@@ -1108,6 +1110,27 @@ MonoBehaviour:
   otherDeathFX: {fileID: 0}
   deathContainer: {fileID: 0}
   destroyedShip: {fileID: 0}
+  killOtherObjects: []
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   damageSound:
     soundName: 
     volume: 0.7
@@ -1126,6 +1149,8 @@ MonoBehaviour:
     courseDelayVariance: 0
     clips: []
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   deathSound:
     soundName: 
     volume: 0.7
@@ -1144,6 +1169,8 @@ MonoBehaviour:
     courseDelayVariance: 0
     clips: []
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   pickups:
     pickups:
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
@@ -1252,12 +1279,14 @@ MonoBehaviour:
   debug: 0
   firingMode: 0
   aimMode: 0
+  controlMode: 0
   weapon: {fileID: 11400000, guid: f78c0e63fbd2c97409f395a44445c79d, type: 2}
   muzzleFlashFX: {fileID: 0}
   numUpgrades: 0
   guns:
   - {fileID: 7867457986701016567}
   - {fileID: 7867457986296282187}
+  alternateGuns: 0
   aimSpeed: 2
   maxAimAngle: 30
   delayStart: 0
@@ -1296,6 +1325,8 @@ MonoBehaviour:
     courseDelayVariance: 0
     clips: []
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
 --- !u!114 &7867457986422667110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1339,6 +1370,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: a9755c879a79d274588307db81e28e31, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
 --- !u!114 &6992314488812543253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,7 +1592,7 @@ PrefabInstance:
     - target: {fileID: 7525665314092642454, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0644eb31edf460c4594e5514c324c57b, type: 3}
+      objectReference: {fileID: 21300000, guid: 4d47cf3927835424cab6cf42ac49a42e, type: 3}
     - target: {fileID: 7525665314782927119, guid: 161577006bb0f2343b01e706f7f9b2c9, type: 3}
       propertyPath: m_Name
       value: HealthBarSmall

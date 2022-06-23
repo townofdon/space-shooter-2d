@@ -146,7 +146,7 @@ namespace Game {
             StartGameTimer();
             AudioManager.current.StopTrack();
             HideWarpFX();
-            if (difficulty == GameDifficulty.Insane || skipToLevel2 || gameMode == GameMode.Arcade) {
+            if (difficulty >= GameDifficulty.Hard || skipToLevel2 || gameMode == GameMode.Arcade) {
                 levelManager.GotoLevelOne();
             } else {
                 ResetWeaponUpgrades(true);

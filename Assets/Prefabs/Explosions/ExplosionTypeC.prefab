@@ -14673,7 +14673,7 @@ MonoBehaviour:
   shakeScreenMagnitude: 0.06
   shakeScreenDuration: 0.1
   splosion:
-    soundName: Splode
+    soundName: explosion-type-c
     volume: 0.2
     pitch: 0.89
     ignoreListenerPause: 0
@@ -14687,11 +14687,14 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0.0183
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: c77d065e8a880a548b3f15d9a43f32e5, type: 3}
     - {fileID: 8300000, guid: 15c64c1b1f298d74caa2e49d05d35498, type: 3}
     - {fileID: 8300000, guid: 5099b98965cabed42bbf117dfcbd7e0a, type: 3}
-    oneShot: 1
+    oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
 --- !u!1 &547358974142009884
 GameObject:
   m_ObjectHideFlags: 0

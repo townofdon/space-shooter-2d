@@ -263,6 +263,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: b47d95d26e92bad4398c56c4c9643500, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: MenuSwitch
     volume: 0.4
     pitch: 1
@@ -283,6 +285,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: a6eff46452ee7a74d9a67f527cf4bfef, type: 3}
     - {fileID: 8300000, guid: fe5b604085c767b4b9cd5c3dc9c8e4f0, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: MenuSelect
     volume: 0.7
     pitch: 1
@@ -301,6 +305,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 055a5ee0ca59f2c4f9bbe8ba438bb790, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: MenuConfirm
     volume: 0.6
     pitch: 1
@@ -319,6 +325,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: fd970a7bc7d4bc24099ca4398d17aa0f, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: HighScore
     volume: 0.6
     pitch: 1
@@ -337,6 +345,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: ad473b0044e3a6d48bf82c019b443213, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: DialogueChip
     volume: 0.4
     pitch: 1
@@ -355,6 +365,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: b47d95d26e92bad4398c56c4c9643500, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: ship-death
     volume: 0.5
     pitch: 1
@@ -374,6 +386,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 04df1df86873cd04eaab103037477873, type: 3}
     - {fileID: 8300000, guid: f805d8fafcf289d4a89ff50837b324e1, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: ship-respawn
     volume: 0.5
     pitch: 1
@@ -392,6 +406,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 6f2f12c88f4479944a4c2a253b0832e7, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: ship-whoosh
     volume: 0.5
     pitch: 1
@@ -410,6 +426,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 7b15c4d77618cc94baa850f5ef3e0bf1, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: show-hint
     volume: 0.5
     pitch: 1
@@ -428,6 +446,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 467ac5290c8b7ee4687d9c140bd6f140, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: upgrade-weapon
     volume: 0.3
     pitch: 1
@@ -446,6 +466,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 54503a8411277d34d9938feee1694bb9, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: upgrade-error
     volume: 0.3
     pitch: 1
@@ -464,6 +486,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 74742596661baf742a8c7d254db08635, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   - soundName: upgrade-gun-slots
     volume: 0.3
     pitch: 1
@@ -482,6 +506,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 716ddc1a95d33ae41b17b49121f15f69, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   tracks:
   - soundName: starlord-main-theme
     volume: 0.9
@@ -654,6 +680,25 @@ MonoBehaviour:
     clipOutro: {fileID: 0}
     fadeInTime: 0
     fadeOutTime: 0
+  - soundName: chill-theme
+    volume: 0.9
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 0
+    spread: 0
+    minFalloffDistance: 0
+    maxFalloffDistance: 0
+    dopplerLevel: 0
+    bpm: 150
+    beatsPerBar: 4
+    loops: 1
+    clipIntro: {fileID: 0}
+    clipLoop: {fileID: 8300000, guid: 20ebb245617ecac4db49d661408a77c1, type: 3}
+    clipOutro: {fileID: 0}
+    fadeInTime: 0
+    fadeOutTime: 0
   - soundName: win-theme
     volume: 0.7
     pitch: 1
@@ -692,6 +737,62 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 74742596661baf742a8c7d254db08635, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
+--- !u!1 &852655410783887534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2669531919084314502}
+  - component: {fileID: 9070235346467598602}
+  m_Layer: 0
+  m_Name: ResupplyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2669531919084314502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852655410783887534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3488655753409945414}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9070235346467598602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852655410783887534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a31adf12ed7454cb44964cab47784f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
+  waveAmmoLTR: {fileID: 11400000, guid: 4e784f22881d9f74383a45e9d4111d95, type: 2}
+  waveAmmoRTL: {fileID: 11400000, guid: f79e91c069a5afd4e9d26d88dc3e217a, type: 2}
+  waveNukeLTR: {fileID: 11400000, guid: aca274e500b04da4fabfeeff494729d0, type: 2}
+  waveNukeRTL: {fileID: 11400000, guid: 7e0c063c75a1cf1429489ab767c62248, type: 2}
+  waveMissileLTR: {fileID: 11400000, guid: 59c524eb9db4e7349b868f74ee839ded, type: 2}
+  waveMissileRTL: {fileID: 11400000, guid: 54b43caaf0b41794899a34816aa4bd59, type: 2}
+  waitTimeAmmo: 10
+  waitTimeNuke: 30
+  waitTimeMissile: 15
 --- !u!1 &1673764705415480822
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,6 +928,7 @@ Transform:
   - {fileID: 6113766315020295640}
   - {fileID: 2087968193343601798}
   - {fileID: 8464525908150690851}
+  - {fileID: 2669531919084314502}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -24,18 +24,18 @@ namespace UI {
 
         // cached
         DamageableBehaviour actor;
-        RectTransform healthSliderTransform;
+        // RectTransform healthSliderTransform;
 
         // state
         Timer initFill = new Timer(TimerDirection.Increment);
         HealthBarState state;
-        Vector3 position;
+        // Vector3 position;
         float health;
 
         void Start() {
             actor = GetComponentInParent<DamageableBehaviour>();
             if (actor == null || !actor.isAlive) { Destroy(gameObject); return; }
-            healthSliderTransform = healthSlider.GetComponent<RectTransform>();
+            // healthSliderTransform = healthSlider.GetComponent<RectTransform>();
             SetHealth(0);
             DrawHealth();
             canvas.enabled = true;
@@ -51,8 +51,8 @@ namespace UI {
         }
 
         void DrawHealth() {
-            position = Utils.GetCamera().WorldToScreenPoint(transform.position);
-            healthSliderTransform.position = position;
+            // position = Utils.GetCamera().WorldToScreenPoint(transform.position);
+            // healthSliderTransform.position = position;
             healthSlider.value = health;
         }
 

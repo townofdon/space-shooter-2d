@@ -460,7 +460,7 @@ MonoBehaviour:
     dopplerLevel: 1
     volumeVariance: 0.167
     pitchVariance: 0.225
-    delayVariance: 0
+    delayVariance: 0.03
     courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: 5b8e7481c4fd987479f74f152826e552, type: 3}
@@ -469,6 +469,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0c68e7618f293ea47a59e1174a5f9805, type: 3}
     - {fileID: 8300000, guid: 1722cb2d0843fce4199e46413cd60b60, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   rockHitRockSound:
     soundName: 
     volume: 0.283
@@ -490,6 +492,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 09653370cfcb98040a4d0484d1f758f0, type: 3}
     - {fileID: 8300000, guid: fe1232f10ca67be45a5600cb12e0fb5f, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   pickups:
     pickups:
     - pickupPrefab: {fileID: 7348726175182028151, guid: b638c9b2738a1c54499d272fd277b6f9, type: 3}

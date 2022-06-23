@@ -89,6 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackOnStart: 1
   invulnerableAtStart: 1
+  controlMode: 0
   delayAtStart: 0.5
   agroThreshold: 0.4
   agroFireSpeedUp: 2
@@ -125,8 +126,11 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   moveAngle: 15
   maxMoveSpeed: 10
   throttleUpTime: 3
@@ -177,16 +181,16 @@ MonoBehaviour:
   anim: {fileID: 3306651752485391457}
   disruptorSound:
     soundName: QuiteDisruptive
-    volume: 0.5
+    volume: 0.6
     pitch: 1
     ignoreListenerPause: 0
-    realtimeEditorInspect: 1
+    realtimeEditorInspect: 0
     mixerGroup: {fileID: 0}
     spatialBlend: 0.5
     spread: 180
     minFalloffDistance: 20
     maxFalloffDistance: 40
-    dopplerLevel: 1
+    dopplerLevel: 0
     pitchVariance: 0
     clipHead: {fileID: 8300000, guid: 7fd9c90beaa97644baebd0a1663cf72c, type: 3}
     clipLoop: {fileID: 8300000, guid: adc0c6470bd78c34fb1d1bdf7e4da73a, type: 3}
@@ -209,6 +213,8 @@ MonoBehaviour:
   _invulnerable: 0
   _timeInvincibleAfterSpawn: 0
   savingThrow: 0
+  savingThrowUseTime: 2
+  savingThrowCooldownTime: 5
   _maxHealth: 3000
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
@@ -238,6 +244,27 @@ MonoBehaviour:
   otherDeathFX: {fileID: 0}
   deathContainer: {fileID: 0}
   destroyedShip: {fileID: 0}
+  killOtherObjects: []
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   damageSound:
     soundName: 
     volume: 0.7
@@ -253,8 +280,11 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   deathSound:
     soundName: 
     volume: 1
@@ -270,9 +300,12 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: e014521f70e1fee489c3dceeeeccf5b5, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   pickups:
     pickups:
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}

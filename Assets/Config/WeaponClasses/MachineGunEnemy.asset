@@ -15,6 +15,7 @@ MonoBehaviour:
   _weaponType: 6
   _weaponName: PDCs
   _effectiveRange: 10
+  replenishAmmoOnInit: 1
   _shotSound:
     soundName: MachineGunSingle
     volume: 0.45
@@ -34,6 +35,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 6bfbff222fd7a994ea5a202a55f4463a, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 2
+    simulPlayThreshold: 0.02
   _effectSound:
     soundName: MachineGunLoop
     volume: 0.57
@@ -70,8 +73,11 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: c74509568c2031340ae3cb9fe11e5458, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   baseSettings:
     _assetClass: XYCRATH I
+    _description: 
     _damageMultiplier: 1
     _startingAmmo: 50
     _infiniteAmmo: 1
@@ -144,8 +150,11 @@ MonoBehaviour:
       courseDelayVariance: 0
       clips: []
       oneShot: 0
+      maxSimultaneousClips: 99
+      simulPlayThreshold: 0.05
   upgrades:
   - _assetClass: XYCRATH II
+    _description: 
     _damageMultiplier: 2
     _startingAmmo: 50
     _infiniteAmmo: 1
@@ -218,3 +227,5 @@ MonoBehaviour:
       courseDelayVariance: 0
       clips: []
       oneShot: 0
+      maxSimultaneousClips: 99
+      simulPlayThreshold: 0.05

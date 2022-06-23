@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
+using CandyCoded.env;
 using Event;
 
 namespace UI {
@@ -21,17 +22,16 @@ namespace UI {
     public class HighScoreManager : MonoBehaviour {
         [SerializeField] EventChannelSO eventChannel;
 
-        const string fullURL = "http://dreamlo.com/lb/CXtID4nu5E2MCjMOxOdLpwt43bLfU56UmCX1z8Uofb4Q";
-        const string privateCode = "CXtID4nu5E2MCjMOxOdLpwt43bLfU56UmCX1z8Uofb4Q";
-        const string publicCode = "629feb6d8f40bb11c075f7a9";
-        const string webURL = "http://dreamlo.com/lb/";
+        string fullURL;
+        string privateCode;
+        string publicCode;
+        string webURL = "http://dreamlo.com/lb/";
         const int numHighScores = 10;
 
         HighScore[] highScores = new HighScore[numHighScores];
         bool _isLoadingHighScores = true;
 
         public bool isLoadingHighScores => _isLoadingHighScores;
-
 
         public bool IsScoreTopTen(int score) {
             for (int i = 0; i < highScores.Length && i < 10; i++) {
@@ -60,6 +60,13 @@ namespace UI {
 
         void OnDisable() {
             eventChannel.OnSubmitHighScore.Unsubscribe(OnSubmitHighScore);
+        }
+
+        void Awake() {
+            fullURL = GetEnvValue("DREAMLO_FULL_URL");
+            webURL = GetEnvValue("DREAMLO_URL");
+            privateCode = GetEnvValue("DREAMLO_PRIVATE_CODE");
+            publicCode = GetEnvValue("DREAMLO_PUBLIC_CODE");
         }
 
         void Start() {
@@ -138,6 +145,13 @@ namespace UI {
                 }
             }
             highScores = newHighScores;
+        }
+
+        string GetEnvValue(string envKey) {
+            if (env.TryParseEnvironmentVariable(envKey, out string value)) {
+                return value;
+            }
+            return "";
         }
 
         // void Awake() {

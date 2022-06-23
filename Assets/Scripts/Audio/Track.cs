@@ -149,6 +149,10 @@ namespace Audio {
         }
 
         IEnumerator IPlay(double timeCueWait = 0.0) {
+            while ((clipIntro != null && clipIntro.loadState == AudioDataLoadState.Loading)) yield return null;
+            while ((clipLoop != null && clipLoop.loadState == AudioDataLoadState.Loading)) yield return null;
+            while ((clipOutro != null && clipOutro.loadState == AudioDataLoadState.Loading)) yield return null;
+
             playButtonPressed = true;
             timeStart = timeCueWait > 0
                 ? timeCueWait

@@ -349,6 +349,26 @@ MonoBehaviour:
   deathContainer: {fileID: 0}
   destroyedShip: {fileID: 0}
   killOtherObjects: []
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   damageSound:
     soundName: EnemyDamage
     volume: 0
@@ -371,6 +391,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c7dc102d17e050b4696d09d35fa2cf3b, type: 3}
     - {fileID: 8300000, guid: c66d9363eb3afe640b2734340aeb973f, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   deathSound:
     soundName: EnemyDeath
     volume: 0.801
@@ -394,6 +416,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b8010007e5d50014c9388ab4369d2c33, type: 3}
     - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   pickups:
     pickups:
     - pickupPrefab: {fileID: 8348319779286762641, guid: 8ce580acff1125443b5c561be244579a, type: 3}
@@ -748,6 +772,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 1ed8ce8acc8204949bd34ad21289202d, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   spawnSound:
     soundName: DeployMine
     volume: 0.5
@@ -767,6 +793,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 6bfbff222fd7a994ea5a202a55f4463a, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
 --- !u!1001 &5742297955344527421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -776,16 +804,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6398130783660111566, guid: e6ba666bdb997c4498b45b3a9097a621, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6398130783660111566, guid: e6ba666bdb997c4498b45b3a9097a621, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6398130783826902786, guid: e6ba666bdb997c4498b45b3a9097a621, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f5927c8de989b5a42ba116458c4cfef0, type: 3}
+      objectReference: {fileID: 21300000, guid: 4d47cf3927835424cab6cf42ac49a42e, type: 3}
     - target: {fileID: 6398130784533436037, guid: e6ba666bdb997c4498b45b3a9097a621, type: 3}
       propertyPath: m_RootOrder
       value: 2

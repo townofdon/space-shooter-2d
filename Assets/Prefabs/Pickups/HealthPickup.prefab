@@ -378,8 +378,28 @@ MonoBehaviour:
   disperseAtStart: 0
   disperseMin: 2
   disperseMax: 7
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   pickupSound:
-    soundName: powerup
+    soundName: HealthPickup
     volume: 0.4
     pitch: 1
     ignoreListenerPause: 0
@@ -397,6 +417,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: ad473b0044e3a6d48bf82c019b443213, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   eventChannel: {fileID: 11400000, guid: 683a6556c55ced34487f56fc47ed8339, type: 2}
 --- !u!114 &-1605377199510479926
 MonoBehaviour:

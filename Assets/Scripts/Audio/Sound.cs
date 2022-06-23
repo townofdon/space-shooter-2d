@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
+using System.Collections.Generic;
 using Core;
 
 namespace Audio
@@ -10,12 +11,15 @@ namespace Audio
     [System.Serializable]
     public class Sound : BaseSound
     {
+        [Space]
         [SerializeField][Range(0f, 0.5f)] protected float volumeVariance = 0.1f;
         [SerializeField][Range(0f, 0.5f)] protected float pitchVariance = 0.1f;
         [SerializeField][Range(0f, 0.03f)] protected float delayVariance = 0f;
         [SerializeField][Range(0f, 5f)] protected float courseDelayVariance = 0f;
         [SerializeField] AudioClip[] clips;
         [SerializeField] bool oneShot = true;
+        [SerializeField][Range(1, 99)] int maxSimultaneousClips = 99;
+        [SerializeField][Range(0f, 1f)] float simulPlayThreshold = 0.05f;
 
         [HideInInspector]
         AudioSource source;
@@ -30,6 +34,11 @@ namespace Audio
         float volumeFadeStart = 0f;
         Timer fadeTimer = new Timer();
         int currentClipIndex = 0;
+
+        // simultaneous clips - keep track of timestamps
+        static Dictionary<string, double> simulPlayLookup = new Dictionary<string, double>(100);
+        double simulPlayStepAmount = 0.0;
+        Coroutine iRetryPlay;
 
         public override void Init(MonoBehaviour script, AudioMixerGroup mix = null, AudioSource existingSource = null)
         {
@@ -56,12 +65,18 @@ namespace Audio
             source.minDistance = minFalloffDistance;
             source.maxDistance = maxFalloffDistance;
 
+            // simultaneous play / max voices
+            simulPlayStepAmount = (double)(simulPlayThreshold / maxSimultaneousClips);
+
+            InitSimultaneousSoundLookup();
+
             if (existingSource == null) script.StartCoroutine(RealtimeEditorInspection());
         }
 
         public override void Play()
         {
             if (!ValidateSound()) return;
+            if (!CanPlaySimultaneousSound()) return;
             if (oneShot) {
                 UpdateVariance();
                 source.PlayOneShot(clips[currentClipIndex]);
@@ -86,6 +101,23 @@ namespace Audio
         }
 
         // PRIVATE
+
+        void InitSimultaneousSoundLookup() {
+            if (maxSimultaneousClips >= 99) return;
+            if (!simulPlayLookup.ContainsKey(soundName)) simulPlayLookup[soundName] = 0.0;
+        }
+
+        bool CanPlaySimultaneousSound() {
+            if (maxSimultaneousClips >= 99) return true;
+            InitSimultaneousSoundLookup();
+            if (AudioSettings.dspTime + simulPlayThreshold <= simulPlayLookup[soundName]) return false;
+            if (simulPlayLookup[soundName] < AudioSettings.dspTime) {
+                simulPlayLookup[soundName] = AudioSettings.dspTime;
+            }
+            simulPlayLookup[soundName] += simulPlayStepAmount;
+
+            return true;
+        }
 
         void UpdateVariance()
         {
@@ -116,6 +148,9 @@ namespace Audio
                 source.spatialBlend = spatialBlend;
                 source.minDistance = minFalloffDistance;
                 source.maxDistance = maxFalloffDistance;
+
+                // simultaneous play
+                simulPlayStepAmount = (double)(simulPlayThreshold / maxSimultaneousClips);
             }
         }
 

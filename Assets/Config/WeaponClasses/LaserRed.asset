@@ -15,6 +15,7 @@ MonoBehaviour:
   _weaponType: 1
   _weaponName: Xyclon LZR
   _effectiveRange: 20
+  replenishAmmoOnInit: 1
   _shotSound:
     soundName: LazerRed
     volume: 0.35
@@ -30,10 +31,13 @@ MonoBehaviour:
     volumeVariance: 0.271
     pitchVariance: 0.5
     delayVariance: 0
+    courseDelayVariance: 0
     clips:
     - {fileID: 8300000, guid: f90ce26ad89d58942a072624d8f6004d, type: 3}
     - {fileID: 8300000, guid: e1b93358ad6d73249b888bfb764214f7, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 2
+    simulPlayThreshold: 0.02
   _effectSound:
     soundName: 
     volume: 0.7
@@ -66,10 +70,14 @@ MonoBehaviour:
     volumeVariance: 0.1
     pitchVariance: 0.1
     delayVariance: 0
+    courseDelayVariance: 0
     clips: []
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   baseSettings:
     _assetClass: 
+    _description: 
     _damageMultiplier: 1
     _startingAmmo: 0
     _infiniteAmmo: 1
@@ -139,6 +147,9 @@ MonoBehaviour:
       volumeVariance: 0.1
       pitchVariance: 0.1
       delayVariance: 0
+      courseDelayVariance: 0
       clips: []
       oneShot: 1
+      maxSimultaneousClips: 99
+      simulPlayThreshold: 0.05
   upgrades: []

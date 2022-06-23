@@ -78,3 +78,5 @@ crashlytics-build.properties
 # Lib
 /[Aa]ssets/[Ll]ib/
 /[Aa]ssets/[Au]udio/
+
+.env
