@@ -17,6 +17,6 @@ MonoBehaviour:
   _initialLivesMedium: 5
   _initialLivesHard: 4
   _initialLivesInsane: 3
-  _initialPoints: 210000
+  _initialPoints: 0
   _initialDifficulty: 3
   _difficulty: 3
