@@ -52,11 +52,13 @@ namespace UI {
         [SerializeField] UIInputHandler input;
         [SerializeField] GameObject canvasHighScoreEntry;
         [SerializeField] GameObject canvasNameConfirm;
+        [SerializeField] GameObject canvasNameSkip;
         [SerializeField] GameObject canvasLeaderboard;
         [SerializeField] HighScoreManager highScoreManager;
         [SerializeField] HighScoreEntry highScoreEntry;
         [SerializeField] HighScoreDisplay highScoreDisplay;
         [SerializeField] Button confirmNameButton;
+        [SerializeField] Button skipNameButton;
         [SerializeField] TextMeshProUGUI textConfirmName;
         [SerializeField] GameObject highScoreFX;
         [SerializeField] GameObject highScoreToast;
@@ -81,12 +83,14 @@ namespace UI {
             eventChannel.OnAnyKeyPress.Subscribe(OnAnyKeyPress);
             eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
             eventChannel.OnSubmitName.Subscribe(OnSubmitName);
+            eventChannel.OnSkipName.Subscribe(OnSkipName);
         }
 
         private void OnDisable() {
             eventChannel.OnAnyKeyPress.Unsubscribe(OnAnyKeyPress);
             eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
             eventChannel.OnSubmitName.Unsubscribe(OnSubmitName);
+            eventChannel.OnSkipName.Unsubscribe(OnSkipName);
         }
 
         void Start() {
@@ -117,6 +121,13 @@ namespace UI {
             AudioManager.current.PlaySound("MenuSelect");
         }
 
+        void OnSkipName() {
+            if (!canvasHighScoreEntry.activeSelf) return;
+            canvasNameSkip.SetActive(true);
+            skipNameButton.Select();
+            AudioManager.current.PlaySound("MenuSelect");
+        }
+
         public void OnConfirmName() {
             eventChannel.OnSubmitHighScore.Invoke(playerName, gameState.totalPoints);
             canvasHighScoreEntry.SetActive(false);
@@ -128,8 +139,16 @@ namespace UI {
         public void OnSubmitCancel() {
             canvasHighScoreEntry.SetActive(true);
             canvasNameConfirm.SetActive(false);
+            canvasNameSkip.SetActive(false);
             highScoreEntry.CancelSubmit();
             AudioManager.current.PlaySound("MenuSelect");
+        }
+
+        public void OnConfirmSkip() {
+            canvasHighScoreEntry.SetActive(false);
+            canvasNameSkip.SetActive(false);
+            AudioManager.current.PlaySound("MenuConfirm");
+            isEnteringName = false;
         }
 
         void ShowTitleWin() {

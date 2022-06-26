@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144493731028658611, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
       propertyPath: homingAccuracy
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 9144493731028658611, guid: d85f7d9a00a4aa342b66323cdd2fb201, type: 3}
       propertyPath: lockSound.pitch

@@ -3997,7 +3997,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'CHOOSE
 
-    SHIP'
+    COLOR'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}
   m_sharedMaterial: {fileID: 824664045775617660, guid: 82f969263fdaba14abb8a3f5bf3d1168, type: 2}

@@ -37,6 +37,7 @@ namespace Battle {
         int battleEventIndex = 0;
         BattleEvent currentBattleEvent;
         bool waitingForDialogue = false;
+        bool waitingForBattleTrigger = false;
         WaveConfigSO currentWave;
         Coroutine currentWaveSpawn;
         Coroutine battle;
@@ -88,6 +89,7 @@ namespace Battle {
             eventChannel.OnBossSpawn.Subscribe(OnBossSpawn);
             eventChannel.OnDismissDialogue.Subscribe(OnDismissDialogue);
             eventChannel.OnDestroyAllEnemies.Subscribe(OnDestroyAllEnemies);
+            eventChannel.OnBattleTriggerCrossed.Subscribe(OnBattleTriggerCrossed);
         }
 
         void OnDisable() {
@@ -96,6 +98,7 @@ namespace Battle {
             eventChannel.OnBossSpawn.Unsubscribe(OnBossSpawn);
             eventChannel.OnDismissDialogue.Unsubscribe(OnDismissDialogue);
             eventChannel.OnDestroyAllEnemies.Unsubscribe(OnDestroyAllEnemies);
+            eventChannel.OnBattleTriggerCrossed.Unsubscribe(OnBattleTriggerCrossed);
         }
 
         protected void Init() {
@@ -159,6 +162,10 @@ namespace Battle {
                     break;
                 case BattleEventType.WaitUntilBossDestroyed:
                     if (bossesAlive.Count > 0) yield return null;
+                    break;
+                case BattleEventType.WaitUntilTrigger:
+                    waitingForBattleTrigger = true;
+                    while (waitingForBattleTrigger) yield return null;
                     break;
                 case BattleEventType.ArbitraryEvent:
                     if (battleEvent.ArbitraryEvent != null) {
@@ -274,6 +281,10 @@ namespace Battle {
 
         void OnDismissDialogue() {
             waitingForDialogue = false;
+        }
+
+        void OnBattleTriggerCrossed() {
+            waitingForBattleTrigger = false;
         }
 
         IEnumerator IRefreshEnemyCount() {

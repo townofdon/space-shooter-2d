@@ -147,7 +147,7 @@ namespace UI {
         }
 
         void DrawLivesUI() {
-            if (gameState.mode == GameMode.Arcade) {
+            if (gameState.mode == GameMode.Arcade || gameState.hasInfiniteLives) {
                 livesContainer.SetActive(false);
                 return;
             }

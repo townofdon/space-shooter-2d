@@ -214,7 +214,7 @@ MonoBehaviour:
   cascadeExplodeDelay: 0.6
   targetingEnabled: 1
   detector: {fileID: 8025555420842281396}
-  homingAccuracy: 0
+  homingAccuracy: 0.05
   thrustFX: {fileID: 1329884247295841544}
   explosion: {fileID: 547358973900262000, guid: 1191d5bf8165270409cce2311db38d77, type: 3}
   explosionLifetime: 5
@@ -237,6 +237,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: c9ffcc8a6cc88d14ba1626c801dae214, type: 3}
     oneShot: 0
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   impulseSound:
     soundName: 
     volume: 0.7
@@ -255,6 +257,8 @@ MonoBehaviour:
     courseDelayVariance: 0
     clips: []
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   thrustSound:
     soundName: RocketThrust
     volume: 0.4

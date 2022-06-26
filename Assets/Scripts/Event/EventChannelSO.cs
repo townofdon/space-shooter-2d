@@ -128,6 +128,7 @@ namespace Event {
         public FloatEventHandler OnScorePoints = new FloatEventHandler();
         public VoidEventHandler OnXtraLife = new VoidEventHandler();
         public StringEventHandler OnSubmitName = new StringEventHandler();
+        public VoidEventHandler OnSkipName = new VoidEventHandler();
         public HighScoreSubmitEventHandler OnSubmitHighScore = new HighScoreSubmitEventHandler();
         public HighScoresFetchEventHandler OnFetchHighScores = new HighScoresFetchEventHandler();
 
@@ -135,6 +136,7 @@ namespace Event {
         public WeaponEventHandler OnUpgradeWeapon = new WeaponEventHandler();
         public WeaponEventHandler OnOutOfAmmo = new WeaponEventHandler();
 
+        public VoidEventHandler OnBattleTriggerCrossed = new VoidEventHandler();
         public VoidEventHandler OnDestroyAllEnemies = new VoidEventHandler();
         public EnemyDeathEventHandler OnEnemyDeath = new EnemyDeathEventHandler();
         public VoidEventHandler OnEnemySpawn = new VoidEventHandler();

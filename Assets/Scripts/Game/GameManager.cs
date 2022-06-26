@@ -120,6 +120,7 @@ namespace Game {
             foreach (var weapon in _weaponClasses) weapon.SetToStartingAmmo();
             HideWarpFX();
             if (levelManager.IsOnTutorialLevel() && gameMode == GameMode.Campaign) ResetWeaponUpgrades();
+            gameState.SetHasInfiniteLives(false);
             // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + skip);
             levelManager.GotoNextLevel(gameMode == GameMode.Arcade);
         }
@@ -147,9 +148,10 @@ namespace Game {
             AudioManager.current.StopTrack();
             HideWarpFX();
             if (difficulty >= GameDifficulty.Hard || skipToLevel2 || gameMode == GameMode.Arcade) {
+                gameState.SetHasInfiniteLives(false);
                 levelManager.GotoLevelOne();
             } else {
-                ResetWeaponUpgrades(true);
+                gameState.SetHasInfiniteLives(true);
                 levelManager.GotoTutorialLevel();
             }
         }
@@ -214,6 +216,7 @@ namespace Game {
             playerState.Init();
             gameState.Init();
             ResetWeaponUpgrades();
+            NewGame();
         }
 
         void Update() {
@@ -424,7 +427,7 @@ namespace Game {
             DisablePlayerInput();
             player.gameObject.SetActive(false);
 
-            if (showUpgradePanel && gameState.mode == GameMode.Campaign && !levelManager.IsOnTutorialLevel()) {
+            if (showUpgradePanel && gameState.mode == GameMode.Campaign) {
                 GotoUpgradeScene();
             } else {
                 GotoNextLevel();

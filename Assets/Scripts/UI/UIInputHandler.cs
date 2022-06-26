@@ -39,6 +39,7 @@ namespace UI {
         BackSpace _backSpace = new BackSpace();
 
         // public
+        public string controlScheme => input.currentControlScheme;
         public Vector2 move => _move;
         public bool isSubmitting => _isSubmitting;
         public bool isCanceling => _isCanceling;

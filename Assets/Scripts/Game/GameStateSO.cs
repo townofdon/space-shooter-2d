@@ -25,6 +25,7 @@ namespace Game {
     [CreateAssetMenu(fileName = "GameState", menuName = "ScriptableObjects/GameState", order = 0)]
     public class GameStateSO : ScriptableObject {
 
+        [SerializeField] bool _hasInfiniteLives = false;
         [SerializeField] int _initialLivesEasy = 5;
         [SerializeField] int _initialLivesMedium = 5;
         [SerializeField] int _initialLivesHard = 4;
@@ -45,6 +46,7 @@ namespace Game {
         int _pointsGained; // points accumulated since round start - when player dies the number goes to zero
         int _numEnemiesKilled = 0;
 
+        public bool hasInfiniteLives => _hasInfiniteLives;
         public int lives => _lives;
         public int totalPoints => _pointsInBank + _pointsGained;
         public int pointsGained => _pointsGained;
@@ -62,7 +64,12 @@ namespace Game {
             _pointsInBank = _initialPoints;
             _pointsGained = 0;
             _numEnemiesKilled = 0;
+            _hasInfiniteLives = false;
             _lives = GetInitialLives();
+        }
+
+        public void SetHasInfiniteLives(bool value) {
+            _hasInfiniteLives = value;
         }
 
         public void GainLife() {
@@ -70,7 +77,7 @@ namespace Game {
         }
 
         public void LoseLife() {
-            if (_mode == GameMode.Arcade) return;
+            if (_mode == GameMode.Arcade || _hasInfiniteLives) return;
             _lives--;
             _lives = Mathf.Max(_lives, 0);
         }

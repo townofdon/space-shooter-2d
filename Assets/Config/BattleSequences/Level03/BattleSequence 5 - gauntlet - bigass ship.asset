@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fba42dbb5f93146b81c33b70407bfc, type: 3}
   m_Name: BattleSequence 5 - gauntlet - bigass ship
   m_EditorClassIdentifier: 
-  _spawnDifficulty: 2
+  _spawnDifficulty: 0
   battleEvents:
   - skip: 0
     type: 16

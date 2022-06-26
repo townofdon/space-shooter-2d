@@ -25,6 +25,7 @@ namespace Battle {
         ShowHint,
         WinLevel,
         XtraLife,
+        WaitUntilTrigger,
     }
 
     [System.Serializable]

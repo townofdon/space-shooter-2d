@@ -13,6 +13,8 @@ namespace UI {
         [Space]
         [SerializeField] GameObject canvas;
         [SerializeField] Transform charContainer;
+        [SerializeField] GameObject keyboardInstructions;
+        [SerializeField] GameObject gamepadInstructions;
         [Space]
         [SerializeField][Range(0f, 60f)] float charSelectRate = 1f;
         [SerializeField][Range(0f, 5f)] float charAccel = 1f;
@@ -86,6 +88,7 @@ namespace UI {
             UpdateChar();
             HandleInput();
             HandleSelectedColor();
+            HandleInstructions();
             fieldSpeed.Tick();
             fieldChangeSlow.Tick();
             fieldChangeFast.Tick();
@@ -99,6 +102,7 @@ namespace UI {
                         : charDecelCurve.Evaluate(Mathf.Abs(charDelta)))
                     * charSelectRate * Time.deltaTime;
             }
+
         }
 
         void HandleSelectedColor() {
@@ -113,6 +117,16 @@ namespace UI {
             }
         }
 
+        void HandleInstructions() {
+            if (input.controlScheme == "Gamepad") {
+                gamepadInstructions.SetActive(true);
+                keyboardInstructions.SetActive(false);
+            } else {
+                gamepadInstructions.SetActive(false);
+                keyboardInstructions.SetActive(true);
+            }
+        }
+
         void OnSubmitName() {
             if (!canvas.activeSelf) return;
             if (didSubmit) return;
@@ -120,6 +134,14 @@ namespace UI {
             didSubmit = true;
             string name = GetFullText();
             eventChannel.OnSubmitName.Invoke(name);
+        }
+
+        void OnSkipName() {
+            if (!canvas.activeSelf) return;
+            if (didSubmit) return;
+            didFieldChange = false;
+            didSubmit = true;
+            eventChannel.OnSkipName.Invoke();
         }
 
         void HandleInput() {
@@ -162,7 +184,7 @@ namespace UI {
             }
 
             // handle backspace
-            if (!didSelect && (input.backSpace.isPressed || input.isCanceling)) {
+            if (!didSelect && (input.backSpace.isPressed)) {
                 didSelect = true;
                 fields[GetFieldIndex()].text = " ";
                 fieldIndex--;
@@ -188,6 +210,13 @@ namespace UI {
             if (!didSelect && !didSubmit && input.isSubmitting && didFieldChange) {
                 didSelect = true;
                 OnSubmitName();
+                return;
+            }
+
+            // handle skip
+            if (!didSelect && !didSubmit && input.isCanceling) {
+                didSelect = true;
+                OnSkipName();
                 return;
             }
 

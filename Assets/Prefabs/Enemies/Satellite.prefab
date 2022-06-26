@@ -83,13 +83,13 @@ MonoBehaviour:
   savingThrow: 0
   savingThrowUseTime: 2
   savingThrowCooldownTime: 5
-  _maxHealth: 25
+  _maxHealth: 5
   _hitRecoveryTime: 0
   _nukeRecoveryTime: 0.4
   _destroyOnDeath: 0
-  _maxShield: 75
-  _shieldWaitTime: 3
-  _shieldRechargeTime: 1
+  _maxShield: 50
+  _shieldWaitTime: 4
+  _shieldRechargeTime: 10
   healthModEasy: 0.25
   healthModMedium: 0.5
   healthModHard: 1
@@ -113,6 +113,26 @@ MonoBehaviour:
   deathContainer: {fileID: 0}
   destroyedShip: {fileID: 0}
   killOtherObjects: []
+  spawnSound:
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    ignoreListenerPause: 0
+    realtimeEditorInspect: 0
+    mixerGroup: {fileID: 0}
+    spatialBlend: 1
+    spread: 180
+    minFalloffDistance: 20
+    maxFalloffDistance: 40
+    dopplerLevel: 1
+    volumeVariance: 0.1
+    pitchVariance: 0.1
+    delayVariance: 0
+    courseDelayVariance: 0
+    clips: []
+    oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   damageSound:
     soundName: 
     volume: 0.7
@@ -131,6 +151,8 @@ MonoBehaviour:
     courseDelayVariance: 0
     clips: []
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   deathSound:
     soundName: EnemyDeath
     volume: 0.801
@@ -154,11 +176,13 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b8010007e5d50014c9388ab4369d2c33, type: 3}
     - {fileID: 8300000, guid: fc9ee2eee9d51e84e9a2e5e20ae899e0, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   pickups:
     pickups:
     - pickupPrefab: {fileID: 5322709981639709628, guid: 9f6f3d0797bfe354f8e37f5ee8f4f1b4, type: 3}
       numItemsToSpawn: 3
-      spawnLikelihood: 0.7
+      spawnLikelihood: 0.6
   pointsWhenKilledByPlayer: 10
   pointsWhenWoundedByPlayer: 5
   pointsToastPrefab: {fileID: 7024823198070568947, guid: c6fbbc34fe07aeb4bb91b7d6bff4e972, type: 3}
@@ -214,6 +238,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 67d51dc4185a91d44ad731dfb70308d8, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
 --- !u!114 &7531810961699429521
 MonoBehaviour:
   m_ObjectHideFlags: 0
