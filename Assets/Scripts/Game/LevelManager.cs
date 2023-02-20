@@ -8,6 +8,8 @@ namespace Game {
         [SerializeField] bool debug;
         [SerializeField] LevelStateSO levelState;
 
+        public string currentScene => SceneManager.GetActiveScene().name;
+
         public bool IsOnTutorialLevel() {
             return SceneManager.GetActiveScene().name == levelState.tutorialLevel;
         }

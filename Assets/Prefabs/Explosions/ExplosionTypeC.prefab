@@ -14693,8 +14693,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 15c64c1b1f298d74caa2e49d05d35498, type: 3}
     - {fileID: 8300000, guid: 5099b98965cabed42bbf117dfcbd7e0a, type: 3}
     oneShot: 0
-    maxSimultaneousClips: 99
-    simulPlayThreshold: 0.05
+    maxSimultaneousClips: 2
+    simulPlayThreshold: 0.03
 --- !u!1 &547358974142009884
 GameObject:
   m_ObjectHideFlags: 0

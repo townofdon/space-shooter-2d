@@ -66,7 +66,8 @@ namespace Weapons
             splosion.Init(this);
             splosion.Play();
             StartCoroutine(GameFeel.ShakeGamepad(0.25f, 0.25f, 0.25f));
-            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), shakeScreenDuration, shakeScreenMagnitude));
+            // StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), shakeScreenDuration, shakeScreenMagnitude));
+            GameFeel.ShakeScreen(shakeScreenDuration, shakeScreenMagnitude);
             Destroy(gameObject, lifetime);
         }
 

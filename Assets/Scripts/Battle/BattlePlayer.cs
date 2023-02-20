@@ -9,6 +9,7 @@ using NPCs;
 using Game;
 using Audio;
 using Enemies;
+using Core;
 
 namespace Battle {
 
@@ -247,12 +248,17 @@ namespace Battle {
         GameObject SpawnObject(WaveEnemy enemy, WaveConfigSO wave) {
             return Instantiate(
                 enemy.prefab,
-                (enemy.hasSpawnLocation
+                GetSpawnPositionWithCameraOffset(enemy.hasSpawnLocation
                     ? wave.ParseSpawnLocation(enemy.spawnLocation) + (Vector2)enemy.spawnOffset
                     : wave.GetSpawnPosition() + enemy.spawnOffset
                 ),
                 Quaternion.identity
             );
+        }
+
+        Vector3 GetSpawnPositionWithCameraOffset(Vector3 spawnPosition) {
+            if (spawnPosition == Vector3.zero) return spawnPosition;
+            return spawnPosition + Utils.GetCameraPosition();
         }
 
         void SetEnemyPathfollow(GameObject enemy, List<Transform> waypoints, PathfinderLoopMode loopMode, bool flipX, bool flipY, int maxPathLoops) {

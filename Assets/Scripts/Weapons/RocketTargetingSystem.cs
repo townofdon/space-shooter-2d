@@ -65,6 +65,10 @@ namespace Weapons {
                 if (target.tag == UTag.EnemyShip && other.tag != UTag.EnemyShip) return;
                 if (target.tag == UTag.EnemyTurret && other.tag != UTag.EnemyTurret) return;
                 if (target.tag == UTag.Ordnance && other.tag != UTag.Ordnance) return;
+                // keep if target is more directly ahead of player
+                float aheadnessThis = Vector2.Dot(transform.up, (transform.position - target.position).normalized);
+                float aheadnessOther = Vector2.Dot(transform.up, (transform.position - other.transform.position).normalized);
+                if (aheadnessThis > aheadnessOther) return;
                 // keep target if closer
                 if (Vector2.Distance(target.position, transform.position) <= Vector2.Distance(other.transform.position, transform.position)) return;
             }

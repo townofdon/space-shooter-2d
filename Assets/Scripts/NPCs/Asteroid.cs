@@ -32,6 +32,7 @@ namespace NPCs
         // cached
         SpriteRenderer sr;
         Rigidbody2D rb;
+        Vector2 velocity;
 
         void Start() {
             sr = GetComponentInChildren<SpriteRenderer>();
@@ -39,8 +40,14 @@ namespace NPCs
             rb.angularVelocity = UnityEngine.Random.Range(-startRotation, startRotation);
 
             if (rb.velocity == Vector2.zero) {
-                rb.velocity = GetHeadingVariance() * startHeading.normalized * Utils.RandomVariance2(startSpeed, speedVariance, startSpeed / 2f);
+                rb.velocity = GetInitialVelocity();
             }
+
+            // if (rb.simulated && !rb.isKinematic && rb.velocity == Vector2.zero) {
+            //     rb.velocity = GetInitialVelocity();
+            // } else if (!rb.simulated || rb.isKinematic) {
+            //     velocity = GetInitialVelocity();
+            // }
 
             ResetHealth();
             SetColliders();
@@ -52,6 +59,13 @@ namespace NPCs
 
         void Update() {
             TickHealth();
+            // if (!rb.simulated || rb.isKinematic) {
+            //     transform.position += (Vector3)velocity * Time.deltaTime;
+            // }
+        }
+
+        Vector2 GetInitialVelocity() {
+            return GetHeadingVariance() * startHeading.normalized * Utils.RandomVariance2(startSpeed, speedVariance, startSpeed / 2f);
         }
 
         void InitRoidCollisionCallback() {

@@ -139,6 +139,7 @@ namespace Weapons
         }
 
         void Update() {
+            CalcTargetHeading();
             RotateTowardsTarget();
             UpdateHeading();
             HandleDetector();
@@ -152,6 +153,11 @@ namespace Weapons
         void FixedUpdate() {
             if (rb != null) MoveViaRigidbody();
             HandleProximityDetonation();
+        }
+
+        void CalcTargetHeading() {
+            if (target == null) return;
+            targetHeading = (target.position - transform.position).normalized;
         }
 
         void HandleDetector() {
@@ -180,8 +186,7 @@ namespace Weapons
         void RotateTowardsTarget() {
             if (!HasTarget()) return;
             if (!isAlive) return;
-
-            targetHeading = (target.position - transform.position).normalized;
+            
             heading = Vector3.RotateTowards(
                 heading,
                 // adjusted heading - factors in rocket's own velocity
@@ -230,6 +235,8 @@ namespace Weapons
             }
 
             if (HasTarget()) {
+                // distance mod: 2 => 1, 10 => 0
+                float distanceMod = 1 - Mathf.InverseLerp(2, 10, Vector2.Distance(target.position, transform.position));
                 rb.velocity = Vector2.Lerp(
                     rb.velocity,
                     Vector2.ClampMagnitude(targetHeading * moveSpeed, rb.velocity.magnitude),
@@ -280,6 +287,7 @@ namespace Weapons
         bool HasTarget() {
             if (target == null) return false;
             if (targetActor != null && !targetActor.isAlive) return false;
+            if (Vector2.Dot(transform.up, targetHeading) < 0.25) return false;
             return true;
         }
 

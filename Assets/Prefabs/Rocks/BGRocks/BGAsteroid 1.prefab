@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BGAsteroid 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3526694645234146256, guid: 183d0a4728a03384da921fca2976089c, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3526694645234146257, guid: 183d0a4728a03384da921fca2976089c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -97,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3526694645234146257, guid: 183d0a4728a03384da921fca2976089c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 3526694645234146257, guid: 183d0a4728a03384da921fca2976089c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -157,3 +161,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 183d0a4728a03384da921fca2976089c, type: 3}
+--- !u!1 &3486533761286796765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3526694645234146253, guid: 183d0a4728a03384da921fca2976089c, type: 3}
+  m_PrefabInstance: {fileID: 41642783040335376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7068441686685564330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3486533761286796765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39536b10eaad3a0479f6a3189415b46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxMod: 1

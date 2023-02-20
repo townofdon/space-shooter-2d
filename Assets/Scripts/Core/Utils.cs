@@ -1,4 +1,5 @@
 using System.Collections;
+using CameraFX;
 using UnityEngine;
 
 namespace Core {
@@ -158,6 +159,7 @@ namespace Core {
         // cached state
         static bool hasInitializedBounds = false;
         static Camera cachedCamera;
+        static CameraPosition cameraPosition;
         static Vector2 minScreenBoundsWorld;
         static Vector2 maxScreenBoundsWorld;
 
@@ -165,6 +167,10 @@ namespace Core {
             if (camera != null) return camera;
             if (cachedCamera == null) cachedCamera = Camera.main;
             return cachedCamera;
+        }
+        public static Vector3 GetCameraPosition() {
+            if (cachedCamera == null || cameraPosition == null) cameraPosition = GetCamera().GetComponent<CameraPosition>();
+            return cameraPosition.position;
         }
 
         public static (Vector2, Vector2) GetScreenBounds(Camera camera = null, float offscreenPadding = 1f, bool forceCalc = false) {

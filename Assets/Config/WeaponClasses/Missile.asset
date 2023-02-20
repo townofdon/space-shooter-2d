@@ -35,6 +35,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: d00a2e02396e7784d8b6c97526ac0121, type: 3}
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   _effectSound:
     soundName: 
     volume: 0.906
@@ -70,6 +72,8 @@ MonoBehaviour:
     courseDelayVariance: 0
     clips: []
     oneShot: 1
+    maxSimultaneousClips: 99
+    simulPlayThreshold: 0.05
   baseSettings:
     _assetClass: Tomcat I
     _description: 
@@ -136,6 +140,8 @@ MonoBehaviour:
       courseDelayVariance: 0
       clips: []
       oneShot: 1
+      maxSimultaneousClips: 99
+      simulPlayThreshold: 0.05
   upgrades:
   - _assetClass: TOMCAT II
     _description: 'Advanced guidance system
@@ -208,6 +214,8 @@ MonoBehaviour:
       courseDelayVariance: 0
       clips: []
       oneShot: 1
+      maxSimultaneousClips: 99
+      simulPlayThreshold: 0.05
   - _assetClass: TOMCAT III
     _description: 'Optimized missile launch system
 
@@ -279,6 +287,8 @@ MonoBehaviour:
       courseDelayVariance: 0
       clips: []
       oneShot: 1
+      maxSimultaneousClips: 99
+      simulPlayThreshold: 0.05
   - _assetClass: HELLCAT IV
     _description: '60% larger ammo capacity
 
@@ -346,6 +356,8 @@ MonoBehaviour:
       courseDelayVariance: 0
       clips: []
       oneShot: 1
+      maxSimultaneousClips: 99
+      simulPlayThreshold: 0.05
   - _assetClass: TIBERIUS X
     _description: 'Top-secret prototype
 
@@ -358,7 +370,7 @@ MonoBehaviour:
       25% faster firing rate'
     _damageMultiplier: 3
     _startingAmmo: 100
-    _infiniteAmmo: 0
+    _infiniteAmmo: 1
     _cycles: 0
     _reloads: 1
     _reloadTime: 0
@@ -419,3 +431,5 @@ MonoBehaviour:
       courseDelayVariance: 0
       clips: []
       oneShot: 1
+      maxSimultaneousClips: 99
+      simulPlayThreshold: 0.05

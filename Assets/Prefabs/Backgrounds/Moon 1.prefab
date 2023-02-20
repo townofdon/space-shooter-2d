@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4864000521109547171}
   - component: {fileID: 4864000521109547170}
   - component: {fileID: 7418697505682649695}
+  - component: {fileID: 3582479883944847913}
   m_Layer: 0
   m_Name: Moon 1
   m_TagString: Planetoid
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4864000521109547168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -62,6 +63,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b938032cd28ab47aeaf243debacb84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3582479883944847913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864000521109547168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39536b10eaad3a0479f6a3189415b46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxMod: 1
 --- !u!1 &4864000522448531245
 GameObject:
   m_ObjectHideFlags: 0

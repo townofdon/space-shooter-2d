@@ -267,7 +267,7 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: eb4614ed5ffd9794d8faa2fb897d0846, type: 3}
     oneShot: 0
-    maxSimultaneousClips: 2
+    maxSimultaneousClips: 1
     simulPlayThreshold: 0.02
 --- !u!1 &1998003900761703511
 GameObject:

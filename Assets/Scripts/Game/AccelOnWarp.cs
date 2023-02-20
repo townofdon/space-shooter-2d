@@ -58,10 +58,10 @@ namespace Game {
         }
 
         float GetZMod() {
-            // if z === -10 => return 0
+            // if z === 10 => return 0
             // if z === 0 => return 1
-            // if z === 10 => return 2
-            return Mathf.Clamp(1 + transform.position.z * 0.1f, 0f, 2f);
+            // if z === -10 => return 2
+            return Mathf.Clamp((10f - transform.position.z) * 0.1f, 0f, 2f);
         }
     }
 }

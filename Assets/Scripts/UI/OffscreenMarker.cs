@@ -150,7 +150,7 @@ namespace UI
                 float b = (a * target.position.x) / target.position.y;
                 markerPositionWorld = new Vector2(b, a);
             }
-            markerPosition = Utils.GetCamera().WorldToScreenPoint(markerPositionWorld);
+            markerPosition = Utils.GetCamera().WorldToScreenPoint(markerPositionWorld + Utils.GetCameraPosition());
             marker.rectTransform.position = markerPosition;
             marker.rectTransform.rotation = GetMarkerRotation();
         }

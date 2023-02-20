@@ -21,7 +21,7 @@ namespace Game
 
         [Space]
         [Header("Warp - other objects")]
-        [SerializeField][Range(0f, 20f)] float otherSpeed = 20f;
+        [SerializeField][Range(0f, 100f)] float otherSpeed = 20f;
         [SerializeField][Range(0f, 20f)] float otherAccelTime = 1f;
 
         [Space]

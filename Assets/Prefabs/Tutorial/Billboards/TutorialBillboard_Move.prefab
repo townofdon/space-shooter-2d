@@ -1120,6 +1120,7 @@ GameObject:
   - component: {fileID: 294953683972032580}
   - component: {fileID: 294953683972032579}
   - component: {fileID: 294953683972032578}
+  - component: {fileID: -3143992054685388468}
   m_Layer: 0
   m_Name: TutorialBillboard_Move
   m_TagString: Untagged
@@ -1135,7 +1136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294953683972032582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1200,6 +1201,19 @@ MonoBehaviour:
   keyboardKeys: {fileID: 9178173060607346277}
   schemeGamepad: {fileID: 7580714541348389024}
   schemeKeyboard: {fileID: 5696259668512469450}
+--- !u!114 &-3143992054685388468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294953683972032582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39536b10eaad3a0479f6a3189415b46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxMod: 1
 --- !u!1 &294953684214140997
 GameObject:
   m_ObjectHideFlags: 0

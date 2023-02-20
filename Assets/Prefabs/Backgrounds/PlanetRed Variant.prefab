@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4864000521109547168, guid: c81c40942ebbbb543bb5368c256e338c, type: 3}
       propertyPath: m_Name
-      value: PlanetRed
+      value: PlanetRed Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4864000521109547170, guid: c81c40942ebbbb543bb5368c256e338c, type: 3}
       propertyPath: moveSpeed
@@ -29,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4864000521109547171, guid: c81c40942ebbbb543bb5368c256e338c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4864000521109547171, guid: c81c40942ebbbb543bb5368c256e338c, type: 3}
       propertyPath: m_LocalRotation.w

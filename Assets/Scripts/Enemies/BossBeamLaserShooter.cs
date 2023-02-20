@@ -112,7 +112,7 @@ namespace Enemies {
             disruptorHold.Start();
             ActivateDisruptorRing();
             if (beamLaser != null && beamLaser.isActiveAndEnabled) beamLaser.Fire();
-            StartCoroutine(GameFeel.ShakeScreen(Utils.GetCamera(), 0.5f, 0.2f));
+            GameFeel.ShakeScreen(0.5f, 0.2f);
         }
 
         public void ChargeUpAndFire() {
